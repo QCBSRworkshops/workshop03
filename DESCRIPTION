@@ -1,0 +1,28 @@
+Package: placeholder
+Type: Tutorial
+Title: Workshop 01
+Version: 0.0.1
+Authors@R: c(
+  person("Team", "QCBS", role = c("aut", "cre"), email = "kevin.cazelles@gmail.com")
+  )
+Imports:
+  DiagrammeR,
+  ggplot2,
+  ggpubr,
+  ggsignif,
+  grid,
+  gridBase,
+  gridExtra,
+  kableExtra,
+  knitr,
+  magrittr,
+  maps,
+  qcbsRworkshops,
+  RColorBrewer,
+  tidyverse,
+  vegan,
+  widgetframe,
+  xaringan
+Remotes:
+  QCBSRworkshops/qcbsRworkshops,
+  inSileco/graphicsutils

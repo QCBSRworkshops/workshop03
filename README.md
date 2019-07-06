@@ -17,4 +17,23 @@ In this workshop, you will improve your data manipulation and visualization skil
 
 # Atelier 3: Introduction à `ggplot2`
 
-Pendant cet atelier, vous perfectionnerez vos compétences en visualisation et manipulation de jeux de données à l'aide de la bibliothèque `ggplot2`. Nous explorerons toute la richesse de `ggplot2`, qui peut être utilisé comme alternative aux outils graphiques de base dans R. Nous apprendrons comment exploiter cette bibliothèque à la fois pour explorer des données visuellement et pour produire des figures dignes de publications scientifiques. 
+Pendant cet atelier, vous perfectionnerez vos compétences en visualisation et manipulation de jeux de données à l'aide de la bibliothèque `ggplot2`. Nous explorerons toute la richesse de `ggplot2`, qui peut être utilisé comme alternative aux outils graphiques de base dans R. Nous apprendrons comment exploiter cette bibliothèque à la fois pour explorer des données visuellement et pour produire des figures dignes de publications scientifiques.
+
+
+# Links
+
+#### [English](https://qcbsrworkshops.github.io/workshop03/workshop03-en/workshop03-en.html)
+
+#### [Français](https://qcbsrworkshops.github.io/workshop03/workshop03-fr/workshop03-fr.html)
+
+# Developers
+
+1. Set the working directory set to this folder.
+2. then use:
+
+``` r
+install.packages("remotes")
+remotes::install_github("QCBSRworkshops/qcbsRworkshops")
+library("qcbsRworkshops")
+build_workshops()
+```
