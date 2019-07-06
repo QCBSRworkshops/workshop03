@@ -1,0 +1,13 @@
+cran_pkgs:
+    - tidyverse
+    - magrittr
+    - knitr
+    - grid
+    - gridExtra
+    - RColorBrewer
+    - kableExtra
+    - gridBase
+    - vegan
+    - ggpubr
+    - ggsignif
+    - maps
