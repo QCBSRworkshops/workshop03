@@ -11,3 +11,6 @@ cran_pkgs:
     - ggpubr
     - ggsignif
     - maps
+
+github_pkgs:
+  - inSileco/graphicsutils
