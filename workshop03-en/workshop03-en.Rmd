@@ -13,7 +13,8 @@ output:
       beforeInit: "qcbsR-macros.js"
 ---
 
-```{r setup, echo = F}
+
+```{r setup, echo = FALSE}
 knitr::opts_chunk$set(
   comment = "#",
   collapse = TRUE,
@@ -24,123 +25,73 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, echo = F}
+```{r, echo = FALSE}
 options(repos=structure(c(CRAN="http://cran.r-project.org")))
 ```
 
 ```{r, include = FALSE}
-if(!require(ggplot2)) install.packages("ggplot2")
-if(!require(ggplot2)) library(ggplot2)
+qcbs_install <- function(pkg) {
+  if (!requireNamespace(pkg, quietly = TRUE)) install.packages(pkg)
+  invisible(NULL)
+}
 
-if(!require(knitr)) install.packages("knitr")
-if(!require(knitr)) library(knitr)
+vc_pkg <- c("knitr", "tidyverse", "vegan", "vioplot", "ggpubr", "ggsignif",
+  "ggvegan", "ggpmisc", "ggdendro", "rworldmap", "maps", "mapproj", "grid",
+  "gridExtra", "RColorBrewer", "gridBase")
 
-if(!require(extrafont)) install.packages("extrafont")
-if(!require(extrafont)) library(extrafont)
+lapply(vc_pkg, qcbs_install)
 
-if(!require(tidyr)) install.packages("tidyr")
-if(!require(tidyr)) library(tidyr)
-
-if(!require(dplyr)) install.packages("dplyr")
-if(!require(dplyr)) library(dplyr)
-
-if(!require(ggpmisc)) install.packages("ggpmisc")
-if(!require(ggpmisc)) library(ggpmisc)
-
-if(!require(magrittr)) install.packages("magrittr")
-if(!require(magrittr)) library(magrittr)
-
-if(!require(grid)) install.packages("grid")
-if(!require(grid)) library(grid)
-
-if(!require(tibble)) install.packages("tibble")
-if(!require(tibble)) library(tibble)
-
-if(!require(gridExtra)) install.packages("gridExtra")
-if(!require(gridExtra)) require(gridExtra)
-
-if(!require(RColorBrewer)) install.packages("RColorBrewer")
-if(!require(RColorBrewer)) library(RColorBrewer)
-
-if(!require(kableExtra)) install.packages("kableExtra")
-if(!require(kableExtra)) library(kableExtra)
-
-if(!require(gridBase)) install.packages("gridBase")
-if(!require(gridBase))library(gridBase)
-
-if(!require(vegan)) install.packages("vegan")
-if(!require(vegan)) library(vegan)
-
-if(!require(vioplot)) install.packages("vioplot")
-if(!require(vioplot)) library(vioplot)
-
-if(!require(ggpubr)) install.packages("ggpubr")
-if(!require(ggpubr)) library(ggpubr)
-
-if(!require(ggsignif))install.packages("ggsignif")
-if(!require(ggpubr)) library(ggpubr)
-
-if(!require(ggvegan)) install.packages("ggvegan")
-if(!require(ggpubr)) library(ggpubr)
-                              
-if(!require(ggdendro)) install.packages("ggdendro")
-if(!require(ggdendro)) library(ggdendro)
-
-if(!require(rworldmap)) install.packages("rworldmap")
-if(!require(rworldmap)) library(rworldmap)
-
-if(!require(maps)) install.packages("maps")
-if(!require(maps)) library(maps)
-
-if(!require(mapproj)) install.packages("mapproj")
-if(!require(mapproj)) library(mapproj)
-
-if(!require(reshape2)) install.packages("reshape2")
-if(!require(reshape2)) library(reshape2)
 
 source(file="./scripts/multiplot.R")
 ```
 
 # Introduction
 
-- To follow along:
+#### To follow along:
 
 Code and .HTML available at http://qcbs.ca/wiki/r/workshop3
 
-- Recommendation:
-      * create your own new script
-      * refer to provided code only if needed
-      * avoid copy pasting or running the code directly from script
 
-- ggplot2 is also hosted on Github: https://github.com/hadley/ggplot2
+#### Recommendations:
+
+  1. create your own new script;
+  2. refer to provided code only if needed;
+  3. avoid copy pasting or running the code directly from script.
+
+##### NB [ggplot2](https://ggplot2.tidyverse.org/) is also on GitHub: https://github.com/tidyverse/ggplot2
+
 
 ---
 # Outline
-1. ggplot mechanics
+
+##### 1. ggplot mechanics
+
 <div style="text-align:center">
-<img src="images/Layers_ggplot.png" height=40% width=40%>
+<img src="images/Layers_ggplot.png" width=55%>
 </div>
 
-2. Advanced visualization 
-  * point, line, Histogram, box plot
-  * Error bar, significant value & linear regression
 
-3. Fine-tuning
-<div style="text-align:center">
-<img src="images/ggplot functions geoms (cheatsheet) scale.png" height=10% width=10%>
-</div>
 
-4. Saving plots
+##### 2. Advanced visualization
 
-5. Conclusion
+![:faic](arrow-right)  point, line, Histogram, box plot, error bar, significant value & linear regression
+
+##### 3. Fine-tuning
+
+##### 4. Saving plots
+
+##### 5. Conclusion
+
 
 ---
 # Learning objectives
 
-- Our aim is to teach the basics of visualization of data using R 
-- Keep in mind that representing your science visually might be unique and that no single function or package might solve your data vizualisation problems
-- Creativity is important for scientists! 
-- A basic understanding of design to communicate effectively with graphs 
+<br>
+
+- Teach the basics of data visualization using R;
+- Representing your science visually might be unique and thus no single function or package might solve your data visualization problems;
+- Creativity is important for scientists!
+- A basic understanding of design to communicate effectively with graphs.
 
 ---
 class: inverse, center, middle
@@ -150,11 +101,11 @@ class: inverse, center, middle
 ---
 ## Visualization in science
 
-Why are we using data visualization? 
+Why are we using data visualization?
 
-What makes an effective visualization? 
+What makes an effective visualization?
 
-```{r , eval=TRUE, echo=FALSE, fig.width=10, fig.height=7}
+```{r ,eval=TRUE, echo=FALSE, fig.width=10, fig.height=7}
 # source(file="./scripts/uglyy.ggplot.graph.R")
 ```
 <!-- maybe worse to pinpoint all ugly stuff on the graph  -->
@@ -162,57 +113,56 @@ What makes an effective visualization?
 ---
 ## Visualization in science
 
-1. Represent data analyses with statistical analysis 
+1. Represent data analyses with statistical analysis
 2. Research and discuss (preliminary data from the literature, summaries, formulate hypotheses)
 3. Explore your own data (exploratory data analysis, outlier detection)
-4. Communicate and report 
+4. Communicate and report
   - Clearly (design principles)
-  - Precisely and accurately 
-  - Effectively and efficiently 
+  - Precisely and accurately
+  - Effectively and efficiently
 
-Important questions: 
-- What do you want to communicate? 
-- To who? 
+Important questions:
+- What do you want to communicate?
+- To who?
 - How to do it? (data type, data preparation)
 
 <div style="text-align:center">
-A rule of thumb: think simple — use less ink! 
+A rule of thumb: think simple — use less ink!
 </div>
 
 
 ---
-## WARNING! 
-<div style="text-align:center">
-<img src="images/warning sign.png" height=25% width=25%>
-</div>
+# WARNING!
 
-R is not made for drawings. Other drawing softwares are probably more interesting options such as GIMP or Inkscape. It is important to get the right tool for the right task! 
+<br>
 
-<div style="text-align:center">
-<img src="images/inkscape_owler.png" height=35% width=35%>
-<img src="images/The_GIMP.png" height=25% width=25%>
-</div>
+.alert[
+### &#x26A0; R is not made for drawings.
+]
+
+Other drawing softwares are probably more interesting options such as [GIMP](https://www.gimp.org/) or [Inkscape](https://inkscape.org/). It is important to get the right tool for the right task!
 
 ---
 ## Why use R for plotting?
 <div style="text-align:center">
-<img src="images/Divided_reproducible workflow.png" height=85% width=85%>
+<img src="images/Divided_reproducible workflow.png" height=80% width=85%>
 </div>
 
 ---
-## Why use R for plotting? Reproducibility
+# Why use R for plotting? Reproducibility
+
 <div style="text-align:center">
-<img src="images/Divided_reproducible workflow2.png" height=85% width=85%>
+<img src="images/Divided_reproducible workflow2.png" height=80% width=85%>
 </div>
 
-Be careful: reproducible science comes with effort: 
-- comment the script 
-- add relevnt information in the figures (titles, lables, captions)
+.alert[Reproducible science comes with effort]:
+- comment the script
+- add relevant information in the figures (titles, labels, captions)
 
 ---
 ## Why R for graphs? Beautiful and flexible
 
-Multiple packages and functions that help achieve great visualization ("base R", lattice, plotly, rgl, plot3d, maps, etc.). We focus only on `ggplot2`. Here is an example: 
+Multiple packages and functions that help achieve great visualization ("base R", lattice, plotly, rgl, plot3d, maps, etc.). We focus only on `ggplot2`. Here is an example:
 
 <div style="text-align:center">
 <img src="images/graph.png" height=65% width=65%>
@@ -227,7 +177,7 @@ source(file="./scripts/multiExamplePlot.R")
 ---
 ## ggplot2 is versatile
 
-The `ggplot2` package lets you make beautiful and customizable plots of your data. It implements the grammar of graphics, an easy to use system for building plots. But it is usually slower to graph and has a different way of writing the functions: the grammar of graphics. 
+The `ggplot2` package lets you make beautiful and customizable plots of your data. It implements the grammar of graphics, an easy to use system for building plots. But it is usually slower to graph and has a different way of writing the functions: the grammar of graphics.
 
 <div style="text-align:center">
 <img src="images/ggplot2_logo.png" height=40% width=40%>
@@ -254,11 +204,11 @@ A graphic is made of different layers:
 <img src="images/Layers_ggplot.png" height=90% width=90%>
 </div>
 
-We will learn how to build graphs iteratively to make it look like we want. 
+We will learn how to build graphs iteratively to make it look like we want.
 
 ---
 ## Grammar of Graphics (GG) basics
-These layers have specific names that you will see throughout the presentation: 
+These layers have specific names that you will see throughout the presentation:
 
 Element | Description
 :-------------:|:-------------:
@@ -275,7 +225,7 @@ labels, legends, themes, zoom, and facets (panels) | Other modifications
 
 ---
 ## Grammar of Graphics (GG) basics
-But here are the basic requirements to draw the simplest ggplot: 
+But here are the basic requirements to draw the simplest ggplot:
 
 <div style="text-align:center">
 <img src="images/ggplot basics.png" height=80% width=80%>
@@ -318,8 +268,8 @@ A graphic is made of elements (layers)
 2. Add graphical layers:
   * `plot.object <- plot.object + layer()`
 
-3. Repeat step 2 until statisfied, then print:
-  * `plot.object` or `print(plot.object)`  
+3. Repeat step 2 until satisfied, then print:
+  * `plot.object` or `print(plot.object)`
 
 ---
 ## Prepare data for ggplot
@@ -327,7 +277,8 @@ A graphic is made of elements (layers)
 The package `ggplot2` requires you to prepare the data in the class `data.frame` or a format common in the `tidyverse` like a class `tibble`.
 
 ```{r eval=TRUE, echo=TRUE}
-class(iris) # all set! 
+library(tibble)
+class(iris) # all set!
 
 ir = as.tibble(iris) # acceptable
 class(ir)
@@ -341,7 +292,7 @@ class(ir)
 ?iris
 ```
 
-5 Variables : 
+5 Variables :
 
 |Sepal length | Sepal Width | Petal Length | Petal with | 5 Species
 :-------------:|:-------------:
@@ -381,12 +332,12 @@ panel.cor <- function(x, y, digits=2, prefix="", cex.cor)
 }
 betterPairs <- function(YourData, col = c("black"))
   {
-  return(pairs(YourData, 
+  return(pairs(YourData,
                lower.panel=function(...) {
                  par(new=TRUE);
                  panel.smooth(col=col,
                               col.smooth = "gold",...)},
-               diag.panel=panel.hist, 
+               diag.panel=panel.hist,
                upper.panel=panel.cor))
 }
 ```
@@ -401,7 +352,9 @@ betterPairs(iris)
 .alert[
 - Is there a relation between the **length & the width** of the iris **Sepal** ?
 ]
+
 ```{r, eval = FALSE}
+library(ggplot2)
 ggplot(data = iris,             # Data
        aes(x = Sepal.Length,    # Your X-value
            y = Sepal.Width,     # Your Y-value
@@ -412,6 +365,7 @@ ggplot(data = iris,             # Data
   theme(plot.title= element_text(color="black", size=14, face="bold")) #| Theme
 ```
 ```{r, echo = FALSE, fig.height=3.9, fig.width=5, fig.align='center'}
+library(ggplot2)
 ggplot(data = iris,             # Data
        aes(x = Sepal.Length,    # Your X-value
            y = Sepal.Width,     # Your Y-value
@@ -502,9 +456,9 @@ Remember: a graphic is made of different layers:
 ---
 ## GGplot dynamics: base layer
 ```{r, fig.height=4, fig.width=5}
-ggplot() + 
+ggplot() +
 scale_x_continuous() +
-scale_y_continuous() 
+scale_y_continuous()
 ```
 
 ---
@@ -521,7 +475,7 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 ## GGplot dynamics: geometric Layer
 ```{r, fig.height=4, fig.width=5}
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-  xlab("x = Sepal Lenght") + ylab("y = Sepal Width") + 
+  xlab("x = Sepal Lenght") + ylab("y = Sepal Width") +
   geom_point()
 ```
 
@@ -559,8 +513,9 @@ class: inverse, center, middle
 
 ## Aesthetic
   * Different aesthetic are available to help you distinguish different class, group & structure within your data:
-  
+
 ```{r echo=FALSE, fig.width=8, fig.height=7}
+library(gridExtra)
 source(file="./scripts/4plot_aesthetic.R")
 ```
 
@@ -568,7 +523,7 @@ source(file="./scripts/4plot_aesthetic.R")
 
 ## Color : make your points talk
 
-Color may be usefull to differentiate between variables
+Color may be useful to differentiate between variables
 
 Variable|color
 :-------------:|:-------------:
@@ -584,27 +539,27 @@ Numeric|gradient
 .small[
 .pull-left[
 ```{r, eval=FALSE}
-ggplot(data = iris, aes(x = Sepal.Length, 
+ggplot(data = iris, aes(x = Sepal.Length,
                         y = Sepal.Width)) +
   geom_point()
 #Without Color
 ```
 ```{r, echo=FALSE}
-ggplot(data = iris, aes(x = Sepal.Length, 
+ggplot(data = iris, aes(x = Sepal.Length,
                         y = Sepal.Width)) +
-  geom_point() 
+  geom_point()
 ```
 ]
 .pull-right[
 ```{r, eval=FALSE}
-ggplot(data = iris, aes(x = Sepal.Length, 
-                        y = Sepal.Width, 
+ggplot(data = iris, aes(x = Sepal.Length,
+                        y = Sepal.Width,
                         color = Species)) +
   geom_point()
 ```
 ```{r, echo=FALSE, fig.width=6, fig.height=6}
-ggplot(data = iris, aes(x = Sepal.Length, 
-                        y = Sepal.Width, 
+ggplot(data = iris, aes(x = Sepal.Length,
+                        y = Sepal.Width,
                         color = Species)) +
   geom_point() + theme(legend.position = 'bottom')
 ```
@@ -618,30 +573,30 @@ ggplot(data = iris, aes(x = Sepal.Length,
 ```{r, eval=FALSE}
 iris.plot <- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
             geom_point()
-iris.plot + scale_colour_manual(values = c("setosa" = "red", 
+iris.plot + scale_colour_manual(values = c("setosa" = "red",
                                            "versicolor" = "darkgreen",
                                            "virginica"="blue"))
-```  
+```
 ]
 .pull-left[
 **Classic**
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
-iris.plot <- ggplot(data = iris, 
-                    aes(x = Sepal.Length, 
-                        y = Sepal.Width, 
+iris.plot <- ggplot(data = iris,
+                    aes(x = Sepal.Length,
+                        y = Sepal.Width,
                         color = Species)) +
             geom_point()
 iris.plot
-```  
+```
 ]
 .pull-right[
 **Manual**
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
 iris.plot +
-scale_colour_manual(values = c("setosa" = "red", 
+scale_colour_manual(values = c("setosa" = "red",
                                "versicolor" = "darkgreen",
                                "virginica"="blue"))
-```  
+```
 ]
 
 ---
@@ -650,26 +605,26 @@ scale_colour_manual(values = c("setosa" = "red",
 *quantitavie variable: Petal.Length*
 ```{r, echo=TRUE, eval=FALSE}
 iris.plot.petal <- ggplot(data=iris, aes(..., color = Petal.Length))
-``` 
+```
 .pull-left[
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
-iris.plot.petal <- ggplot(data = iris, 
-                    aes(x = Sepal.Length, 
-                        y = Sepal.Width, 
+iris.plot.petal <- ggplot(data = iris,
+                    aes(x = Sepal.Length,
+                        y = Sepal.Width,
                         color = Petal.Length)) +
             geom_point()
 iris.plot.petal
-```  
+```
 ]
 .pull-right[
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
-iris.plot.petal <- ggplot(data = iris, 
-                    aes(x = Sepal.Length, 
-                        y = Sepal.Width, 
+iris.plot.petal <- ggplot(data = iris,
+                    aes(x = Sepal.Length,
+                        y = Sepal.Width,
                         color = Petal.Length)) +
             geom_point()
 iris.plot.petal + scale_color_gradient(low="blue", high="red")
-```  
+```
 ]
 
 ---
@@ -698,13 +653,13 @@ iris.plot + scale_color_brewer(palette = "Dark2")
 **Classic**
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
 iris.plot
-```  
+```
 ]
 .pull-right[
 **Dark2**
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
 iris.plot + scale_color_brewer(palette = "Dark2")
-```  
+```
 ]
 
 ---
@@ -712,7 +667,7 @@ iris.plot + scale_color_brewer(palette = "Dark2")
 ## Fine-tuning: Colour
 * Blind color friendly: presentation purpose
 ```{r}
-cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", 
+cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
                 "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 ```
 
@@ -726,7 +681,7 @@ show_col(cbbPalette)
 ## Fine-tuning: Colour
   * Blind color friendly: presentation purpose
 ```{r, eval=FALSE}
-cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", 
+cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
                 "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 iris.plot + scale_color_manual(values=cbbPalette)
 ```
@@ -735,15 +690,15 @@ iris.plot + scale_color_manual(values=cbbPalette)
 **Classic**
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
 iris.plot
-```  
+```
 ]
 .pull-right[
 **Blind color friendly**
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
-cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", 
+cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
                 "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 iris.plot + scale_color_manual(values=cbbPalette)
-```  
+```
 ]
 
 ---
@@ -757,13 +712,13 @@ iris.plot + scale_color_grey()
 **Defaut**
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
 iris.plot
-```  
+```
 ]
 .pull-right[
 **Grey scale**
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
 iris.plot + scale_color_grey()
-```  
+```
 ]
 
 
@@ -851,13 +806,13 @@ iris.plot + scale_color_grey() + theme_classic()
 **Defaut**
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
 iris.plot+ scale_color_grey()
-```  
+```
 ]
 .pull-right[
 **Classic**
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
 iris.plot + scale_color_grey() + theme_classic()
-```  
+```
 ]
 
 ---
@@ -873,10 +828,10 @@ class: inverse, center, middle
 ---
 ## Facet: Iris
 ```{r, fig.align="center", fig.width=8, fig.height=6}
-ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, 
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width,
                         color = Species)) +
-  geom_point() + 
-  facet_grid(~Species, scales = "free") 
+  geom_point() +
+  facet_grid(~Species, scales = "free")
 ```
 
 ---
@@ -885,7 +840,7 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width,
 CO2.plot.nofacet <- ggplot(data = CO2, aes(x = conc, y = uptake, colour = Treatment)) +
     geom_point() +
     xlab("CO2 Concentration (mL/L)") +
-    ylab("CO2 Uptake (umol/m^2 sec)") +    
+    ylab("CO2 Uptake (umol/m^2 sec)") +
     ggtitle("Without Facet")
 CO2.plot.facet <- CO2.plot + facet_grid(~ Type) + ggtitle("Facet")
 multiplot(CO2.plot.nofacet, CO2.plot.facet)
@@ -906,15 +861,15 @@ multiplot(CO2.plot.nofacet, CO2.plot.facet)
 .pull-left[
 **Default**
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
-iris.plot 
+iris.plot
 ```
 ]
 .pull-right[
 **Axis & Title tunning**
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
-iris.plot + 
+iris.plot +
   ggtitle("Relation between Sepal Lenght & Width") +
-  xlab("Sepal length (cm)") + 
+  xlab("Sepal length (cm)") +
   ylab("Sepal Width (cm)") +
   theme(axis.title.x = element_text(size = 16, colour = cbbPalette[6]),
         axis.title.y = element_text(size = 16, colour = cbbPalette[6]),
@@ -935,8 +890,8 @@ iris.plot +
 library(reshape2)
 tips.gg <- ggplot(tips, aes(x = total_bill,
                             y = tip/total_bill,
-                            shape = smoker, 
-                            color = sex, 
+                            shape = smoker,
+                            color = sex,
                             size = size))
 tips.gg <- tips.gg + geom_point()
 tips.gg <- tips.gg + facet_grid( ~ time)
@@ -957,8 +912,8 @@ tips.gg
 ```{r, eval=FALSE}
 tips.gg <- ggplot(tips, aes(x = total_bill,
                             y = tip/total_bill,
-                            shape = smoker, 
-                            color = sex, 
+                            shape = smoker,
+                            color = sex,
                             size = size))
 tips.gg <- tips.gg + geom_point()
 tips.gg <- tips.gg + facet_grid( ~ time)
@@ -981,8 +936,8 @@ tips.gg
 ```{r}
 tips.gg <- ggplot(tips, aes(x = total_bill,
                             y = tip/total_bill,
-                            shape = smoker, 
-                            color = sex, 
+                            shape = smoker,
+                            color = sex,
                             size = size))
 tips.gg + geom_point()
 ```
@@ -1067,7 +1022,7 @@ gblank <- ggplot(mtcars, aes(wt, mpg))
 
 ```{r, echo=FALSE}
 gblank <- ggplot(mtcars, aes(wt, mpg))
-gblank <- gblank + theme(plot.subtitle = element_text(vjust = 1), 
+gblank <- gblank + theme(plot.subtitle = element_text(vjust = 1),
                         plot.caption = element_text(vjust = 1)) +
   labs(title = "Blank plot")
 gblank
@@ -1088,13 +1043,13 @@ An histogram is an accurate graphical representation of the distribution of nume
 .pull-left[
 ```{r}
 ggplot(iris, aes(Sepal.Length)) +
-  geom_histogram() + ggtitle("Histogram of sepal length ") 
+  geom_histogram() + ggtitle("Histogram of sepal length ")
 ```
 ]
 .pull-right[
 ```{r}
 ggplot(cars, aes(dist)) +
-  geom_histogram() + ggtitle("Histogram of car distance taken to stop ") 
+  geom_histogram() + ggtitle("Histogram of car distance taken to stop ")
 ```
 ]
 
@@ -1145,38 +1100,40 @@ barplot(table(mpg$class))
 .pull-left[
 *GGplot2*
 ```{r, eval=FALSE}
-ggplot(mpg, aes(class)) + 
-  geom_bar() + 
+ggplot(mpg, aes(class)) +
+  geom_bar() +
   geom_signif()
 ```
 
 ```{r, echo=FALSE}
-ir.s=iris %>% 
-  group_by(Species) %>% 
+library(dplyr)
+library(ggsignif)
+ir.s=iris %>%
+  group_by(Species) %>%
   summarise(mean.sp = mean(Sepal.Length))
-#iris %>% 
-#  group_by(Species) %>% 
-#  summarise(pval = t.test(Sepal.Length, 
+#iris %>%
+#  group_by(Species) %>%
+#  summarise(pval = t.test(Sepal.Length,
 #                          var.equal = TRUE)$p.value)
 
 dat <- data.frame(Group = c("S1", "S1", "S2", "S2"),
                   Sub   = c("A", "B", "A", "B"),
                   Value = c(3,5,7,8),
                   low = c(2.5,4.5,6,7.5),
-                  high = c(3.5,5.5,7,8.5))  
+                  high = c(3.5,5.5,7,8.5))
 
 gbar2 = ggplot(data = dat, aes(x = Group, y = Value,fill = Sub)) +
-  geom_bar(#aes(fill = Sub), 
-    stat="identity", 
-    position="dodge", 
+  geom_bar(#aes(fill = Sub),
+    stat="identity",
+    position="dodge",
     width=.5) +
-  geom_errorbar(aes(ymin=low, 
+  geom_errorbar(aes(ymin=low,
                     ymax=high),
                 width = 0.1,
                 position =  position_dodge(.5), colour="black") +
   labs(title = "Barplot") +
-  scale_fill_manual(values = c("grey80", 
-                               "grey20")) + 
+  scale_fill_manual(values = c("grey80",
+                               "grey20")) +
   geom_signif(stat="identity",
               data=data.frame(x=c(0.875, 1.875),
                               xend=c(1.125, 2.125),
@@ -1200,7 +1157,7 @@ gbar2
 Manual function
 ```{r, eval=FALSE}
 barplot()
-sign.bar() 
+sign.bar()
 ```
 
 ```{r, echo=FALSE}
@@ -1212,8 +1169,8 @@ my.bp =barplot(as.matrix(df),
                main = "Barplot",
                ylim = c(0,12),
                legend = rownames(df),
-               args.legend = list(x = "topright", 
-                                  bty = "n", 
+               args.legend = list(x = "topright",
+                                  bty = "n",
                                   inset=c(-0.07, 0))
                # args.legend=list(
                #   x=ncol(df)+4,
@@ -1252,7 +1209,7 @@ sign.bar = function(pos,select.pair, y, offset = 0.2, label, mid = FALSE) {
   }
   # draw asterics
   text(pos[select.pair[1]]+((pos[select.pair[2]]-pos[select.pair[1]])/2),y+offset*2,
-       labels = label) 
+       labels = label)
 }
 sign.bar(my.bp, select.pair = c(1,2),y =6,label = "**")
 sign.bar(my.bp, select.pair = c(3,4),y =8.8,label = "NS")
@@ -1267,8 +1224,8 @@ sign.bar(my.bp, select.pair = c(2,3),y =10,label = "***",mid = TRUE)
 .pull-left[
 *GGplot2*
 ```{r, eval=FALSE}
-ggplot(mpg, aes(displ, hwy)) + 
-  geom_point() + 
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
   geom_smooth(method = lm)
 ```
 ```{r, echo=FALSE}
@@ -1288,11 +1245,11 @@ abline(lm.out)
 ```{r, echo=FALSE}
 lm.out  <- lm(hwy~displ, data = mpg)
 newx <- seq(min(mpg$displ), max(mpg$displ), length.out=100)
-preds <- predict(lm.out, newdata = data.frame(displ=newx), 
+preds <- predict(lm.out, newdata = data.frame(displ=newx),
                  interval = 'confidence')
 plot(hwy~displ, data = mpg, bg = "black", col = "black", pch =21)
-polygon(c(rev(newx), newx), 
-        c(rev(preds[ ,3]), preds[ ,2]), 
+polygon(c(rev(newx), newx),
+        c(rev(preds[ ,3]), preds[ ,2]),
         col = 'grey80', border = NA)
 abline(lm.out)
 lines(newx, preds[ ,3], lty = 'dashed', col = 'red')
@@ -1309,7 +1266,7 @@ lines(newx, preds[ ,2], lty = 'dashed', col = 'red')
 </div>
 
 ```{r, echo=FALSE, fig.align="center", fig.width=3, fig.height=3}
-ggplot(data = iris, aes(Species, Sepal.Length, fill=Species)) + 
+ggplot(data = iris, aes(Species, Sepal.Length, fill=Species)) +
   geom_boxplot()+ labs(title = "Boxplot")
 ```
 
@@ -1320,14 +1277,14 @@ ggplot(data = iris, aes(Species, Sepal.Length, fill=Species)) +
 .pull-left[
 *GGplot2*
 ```{r, eval=FALSE}
-ggplot(data = iris, aes(Species, Sepal.Length)) + 
-  geom_boxplot()  
+ggplot(data = iris, aes(Species, Sepal.Length)) +
+  geom_boxplot()
 ```
 
 ```{r, echo=FALSE}
-ggplot(data = iris, aes(Species, Sepal.Length)) + 
-  geom_boxplot()+ labs(title = "Boxplot")+  
-  geom_signif(comparisons = list(c("versicolor", "virginica")), 
+ggplot(data = iris, aes(Species, Sepal.Length)) +
+  geom_boxplot()+ labs(title = "Boxplot")+
+  geom_signif(comparisons = list(c("versicolor", "virginica")),
               map_signif_level=TRUE)
 ```
 ]
@@ -1340,7 +1297,7 @@ boxplot(iris$Sepal.Length ~ iris$Species)
 ```
 
 ```{r, echo=FALSE}
-boxplot(iris$Sepal.Length ~ iris$Species) # For analysis of variance 
+boxplot(iris$Sepal.Length ~ iris$Species) # For analysis of variance
 ```
 ]
 
@@ -1348,18 +1305,18 @@ boxplot(iris$Sepal.Length ~ iris$Species) # For analysis of variance
 
 # Violin plot
 
-Violin plots allow to visualize the distribution of a numeric variable for one or several groups. 
+Violin plots allow to visualize the distribution of a numeric variable for one or several groups.
 
 Close from a boxplot, it allows a deeper understanding of the density and are particularly adapted when the amount of data is huge.
 
 .pull-left[
 ```{r, echo=FALSE}
-# Data 
+# Data
 names=c(rep("A", 80) , rep("B", 50) , rep("C", 70))
-value=c( sample(2:5, 80 , replace=T) , sample(4:10, 50 , replace=T), 
+value=c( sample(2:5, 80 , replace=T) , sample(4:10, 50 , replace=T),
        sample(1:7, 70 , replace=T) )
 data=data.frame(names,value)
- 
+
 #Graph
 qplot( x=names , y=value , data=data , geom=c("boxplot","jitter") , fill=names)
 ```
@@ -1377,8 +1334,8 @@ ggplot(data = data, aes(names, value, fill=names)) + geom_violin()
 .pull-left[
 *GGplot2*
 ```{r, eval=FALSE}
-ggplot(data = iris, aes(Species, 
-                        Sepal.Length)) + 
+ggplot(data = iris, aes(Species,
+                        Sepal.Length)) +
   geom_violin()
 ```
 ```{r, echo=FALSE}
@@ -1390,13 +1347,16 @@ violP.gg
 .pull-right[
 *Base Plot*
 ```{r, eval=FALSE}
+library(vioplot)
 vioplot(iris$Sepal.Length[iris$Species == "setosa"],
         iris$Sepal.Length[iris$Species == "versicolor"],
         iris$Sepal.Length[iris$Species == "virginica"],
         col = "lightblue")
 
 ```
+
 ```{r, echo=FALSE}
+library(vioplot)
 vioplot(iris$Sepal.Length[iris$Species == "setosa"],
         iris$Sepal.Length[iris$Species == "versicolor"],
         iris$Sepal.Length[iris$Species == "virginica"],
@@ -1413,7 +1373,7 @@ vioplot(iris$Sepal.Length[iris$Species == "setosa"],
 ```{r, eval=FALSE}
 ggplot(df, aes(trt, resp, colour = group)) +
   geom_pointrange()+
-  geom_errorbar() + 
+  geom_errorbar() +
 ```
 ```{r, echo=FALSE}
 df <- data.frame(
@@ -1426,7 +1386,7 @@ df <- data.frame(
 
 ggplot(df, aes(trt, resp, colour = group)) +
   geom_pointrange(aes(ymin = lower, ymax = upper))+
-  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.2) + 
+  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.2) +
   labs(title = "Plot with error bars")
 ```
 ]
@@ -1457,8 +1417,8 @@ axis(side = 1, at = c(1,2), labels = levels(c("yo","man")), cex.lab =1, cex.axis
 
 error.bar <- function(x,
                       y,
-                      epsilon = NULL, 
-                      se = NULL, 
+                      epsilon = NULL,
+                      se = NULL,
                       se.mul = 1,
                       col = "black") {
   x = as.numeric(x)
@@ -1466,7 +1426,7 @@ error.bar <- function(x,
     stderr <- function(x) sqrt(var(x,na.rm=TRUE)/length(na.omit(x)))
     se = se.mul*stderr(y)
   } else {se = se.mul*se}
-  
+
   segments(x, y-se,x, y+se,col = col)
   if(is.null(epsilon)){
     epsilon = 0.02} else {epsilon = epsilon}
@@ -1528,7 +1488,7 @@ A density plot shows the distribution of a numerical variable and it takes only 
 .pull-left[
 ```{r, echo=FALSE}
 ggplot(iris, aes(Sepal.Length)) +
-  geom_density() + ggtitle("Distribution of sepal length ") 
+  geom_density() + ggtitle("Distribution of sepal length ")
 ```
 ]
 
@@ -1546,7 +1506,7 @@ ggplot(cars, aes(dist)) +
 *GGplot2*
 ```{r, eval=FALSE}
 ggplot(diamonds, aes(carat)) +
-  geom_density() 
+  geom_density()
 ```
 ```{r, echo=FALSE}
 density.gg <- ggplot(diamonds, aes(carat)) +geom_density()+ labs(title = "Density graph")
@@ -1557,7 +1517,7 @@ density.gg
 .pull-right[
 *Base Plot*
 ```{r, eval=FALSE}
-plot(density(c(-20, rep(0,98), 20)), 
+plot(density(c(-20, rep(0,98), 20)),
      xlim = c(-4, 4))
 ```
 ```{r, echo=FALSE}
@@ -1573,12 +1533,14 @@ plot(density(c(-20, rep(0,98), 20)), xlim = c(-4, 4),
 .pull-left[
 *GGplot2*
 ```{r, eval=FALSE}
+library(ggdendro)
 ggdendrogram(hc)
 ```
-```{r, echo=FALSE}
+```{r, echo = FALSE}
+library(ggdendro)
 USArrests.short = USArrests[1:10,]
 hc <- hclust(dist(USArrests.short), "ave")
-ggdendrogram(hc, rotate = TRUE, theme_dendro = FALSE) + 
+ggdendrogram(hc, rotate = TRUE, theme_dendro = FALSE) +
   labs(title = "Dendrogram")
 ```
 ]
@@ -1610,12 +1572,12 @@ multiplot(density.gg, map.gg, violP.gg, lm.gg, cols = 2)
 data(msleep) ; data(mtcars) ; data(OrchardSprays)
 ```
 ```{r, echo=FALSE, fig.height=6, fig.width=8, fig.align='center'}
-msleep.challenge4 <- ggplot(msleep, aes(vore, log10(brainwt), fill=vore))  
+msleep.challenge4 <- ggplot(msleep, aes(vore, log10(brainwt), fill=vore))
 msleep.challenge4 <- msleep.challenge4 + geom_violin()
 msleep.challenge4 <- msleep.challenge4 + geom_signif(comparisons = list(c("herbi", "insecti")))
 msleep.challenge4 <- msleep.challenge4 + ggtitle("Brain weight among different vore")
 msleep.challenge4 <- msleep.challenge4 + ylab("Brain weight (log10(Kg))")
-msleep.challenge4 <- msleep.challenge4 + scale_fill_grey() 
+msleep.challenge4 <- msleep.challenge4 + scale_fill_grey()
 msleep.challenge4 <- msleep.challenge4 + theme_classic()
 msleep.challenge4 <- msleep.challenge4 + theme(axis.title.x = element_text(size = 16),
                                                axis.title.y = element_text(size = 16),
@@ -1624,9 +1586,9 @@ msleep.challenge4 <- msleep.challenge4 + theme(axis.title.x = element_text(size 
                                                plot.title = element_text(size = 16, face="bold"),
                                                legend.title = element_text(size=14, face="bold"),
                                                legend.text = element_text(size=12))
-#msleep.challenge4         
+#msleep.challenge4
 
-brain_body.challenge4 <- ggplot(msleep, aes(log10(bodywt), log10(brainwt))) 
+brain_body.challenge4 <- ggplot(msleep, aes(log10(bodywt), log10(brainwt)))
 brain_body.challenge4 <- brain_body.challenge4 + geom_point()
 brain_body.challenge4 <- brain_body.challenge4 + geom_smooth(method = lm)
 brain_body.challenge4 <- brain_body.challenge4 + ggtitle("Linear regression on bodywt ~ brainwt")
@@ -1638,7 +1600,7 @@ brain_body.challenge4 <- brain_body.challenge4 + theme(axis.title.x = element_te
                                                        plot.title = element_text(size = 14, face="bold"),
                                                        legend.title = element_text(size=14, face="bold"),
                                                        legend.text = element_text(size=12))
-#brain_body.challenge4 
+#brain_body.challenge4
 
 
 mtcars.short <- mtcars[1:20,]
@@ -1651,7 +1613,7 @@ dendro.challenge4 <- dendro.challenge4 + theme(axis.title.y = element_text(size 
                                                axis.text.x = element_blank(),
                                                axis.text.y = element_text(size = 12),
                                                plot.title = element_text(size = 14, face="bold"))
-#dendro.challenge4 
+#dendro.challenge4
 
 data(OrchardSprays)
 Orchard.challenge4 <- ggplot(data = OrchardSprays, aes(x=treatment, y=decrease)) + geom_boxplot()
@@ -1675,12 +1637,12 @@ multiplot(msleep.challenge4,dendro.challenge4, brain_body.challenge4, Orchard.ch
 
 .small[
 ```{r, eval=FALSE}
-msleep.challenge4 <- ggplot(msleep, aes(vore, log10(brainwt), fill=vore))  
+msleep.challenge4 <- ggplot(msleep, aes(vore, log10(brainwt), fill=vore))
 msleep.challenge4 <- msleep.challenge4 + geom_violin()
 msleep.challenge4 <- msleep.challenge4 + geom_signif(comparisons = list(c("herbi", "insecti")))
 msleep.challenge4 <- msleep.challenge4 + ggtitle("Brain weight among different vore")
 msleep.challenge4 <- msleep.challenge4 + ylab("Brain weight (log10(Kg))")
-msleep.challenge4 <- msleep.challenge4 + scale_fill_grey() 
+msleep.challenge4 <- msleep.challenge4 + scale_fill_grey()
 msleep.challenge4 <- msleep.challenge4 + theme_classic()
 msleep.challenge4 <- msleep.challenge4 + theme(axis.title.x = element_text(size = 16),
                                                axis.title.y = element_text(size = 16),
@@ -1692,7 +1654,7 @@ msleep.challenge4 <- msleep.challenge4 + theme(axis.title.x = element_text(size 
 
 ```
 ```{r, fig.align='center', echo=FALSE, fig.height=4, fig.width=6}
-msleep.challenge4 
+msleep.challenge4
 ```
 ]
 
@@ -1700,7 +1662,7 @@ msleep.challenge4
 
 .small[
 ```{r, eval=FALSE}
-brain_body.challenge4 <- ggplot(msleep, aes(log10(bodywt), log10(brainwt))) 
+brain_body.challenge4 <- ggplot(msleep, aes(log10(bodywt), log10(brainwt)))
 brain_body.challenge4 <- brain_body.challenge4 + geom_point()
 brain_body.challenge4 <- brain_body.challenge4 + geom_smooth(method = lm)
 brain_body.challenge4 <- brain_body.challenge4 + ggtitle("Linear regression on bodywt ~ brainwt")
@@ -1734,7 +1696,7 @@ dendro.challenge4 <- dendro.challenge4 + theme(axis.title.y = element_text(size 
                                                axis.text.x = element_blank(),
                                                axis.text.y = element_text(size = 12),
                                                plot.title = element_text(size = 14, face="bold"))
-dendro.challenge4 
+dendro.challenge4
 ```
 ]
 
@@ -1773,8 +1735,8 @@ if (!require(plotly)) install.packages("plotly")
 library(plotly)
 
 # Scatterplot
-p=ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width, color=Species, shape=Species)) + 
-    geom_point(size=6, alpha=0.6) 
+p=ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width, color=Species, shape=Species)) +
+    geom_point(size=6, alpha=0.6)
 
 ggplotly(p)
 ```
@@ -1793,7 +1755,7 @@ class: inverse, center, middle
 <img src="images/save_image.png" height=70% width=70%>
 </div>
 
-Think about the margin of the document you are using. If you resize the image after saving it, the labels and text will change size as well which could be hard to read. 
+Think about the margin of the document you are using. If you resize the image after saving it, the labels and text will change size as well which could be hard to read.
 
 ---
 ## Saving plots in code
@@ -1801,17 +1763,17 @@ Think about the margin of the document you are using. If you resize the image af
 ggsave() will write directly to your working directory all in one line of code and you can specify the name of the file and the dimensions of the plot:
 
 ```{r, eval=FALSE}
-my1rstPlot <- ggplot(data = iris, 
-                     aes(x = Petal.Length, 
-                         y = Petal.Width)) + 
+my1rstPlot <- ggplot(data = iris,
+                     aes(x = Petal.Length,
+                         y = Petal.Width)) +
   geom_point()
-ggsave("my1rstPlot.pdf", 
-       my1rstPlot, 
-       height = 8.5, 
-       width = 11, 
+ggsave("my1rstPlot.pdf",
+       my1rstPlot,
+       height = 8.5,
+       width = 11,
        units = "in")
 ```
-Note that vector format (e.g., pdf, svg) are often preferable choice compared to raster format (jpeg, png, ...). Vectors format will be more flexible if the image needs modification after saving it. 
+Note that vector format (e.g., pdf, svg) are often preferable choice compared to raster format (jpeg, png, ...). Vectors format will be more flexible if the image needs modification after saving it.
 
 Other methods to save image
 `?pdf`
@@ -1860,7 +1822,7 @@ Now that you understand the ggplot basics, you can learn more about about design
 
 
 There might be other useful packages that can be used in conjunction with `ggplot2` that we haven't covered (e.g. ggbio, ggpmisc, geomnet, gganimate, ggnetwork, ggtree, and more!).
-https://www.ggplot2-exts.org/ggrepel.html 
+https://www.ggplot2-exts.org/ggrepel.html
 
 ---
 class: inverse, center, bottom
