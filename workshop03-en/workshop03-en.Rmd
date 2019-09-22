@@ -31,19 +31,13 @@ options(repos=structure(c(CRAN="http://cran.r-project.org")))
 ```
 
 ```{r, include = FALSE}
-qcbs_install <- function(pkg) {
-  if (!requireNamespace(pkg, quietly = TRUE)) install.packages(pkg)
-  invisible(NULL)
-}
-
 vc_pkg <- c("knitr", "tidyverse", "vegan", "vioplot", "ggpubr", "ggsignif",
-  "ggvegan", "ggpmisc", "ggdendro", "rworldmap", "maps", "mapproj", "grid",
+  "ggpmisc", "ggdendro", "rworldmap", "maps", "mapproj", "grid",
   "gridExtra", "RColorBrewer", "gridBase")
 
-lapply(vc_pkg, qcbs_install)
+lapply(vc_pkg, qcbsRworkshops::install_cran_pkgs)
 
-
-source(file="./scripts/multiplot.R")
+source("scripts/multiplot.R")
 ```
 
 # Introduction
@@ -287,7 +281,7 @@ A graphic is made of elements (layers)
 ---
 # Prepare data for ggplot
 
-The package `ggplot2` requires you to prepare the data in the class `data.frame` or a format common in the `tidyverse` like a class `tibble`.
+`ggplot2` requires you to prepare the data as an object of class `data.frame` or `tibble` (common in the `tidyverse`).
 
 ```{r eval=TRUE, echo=TRUE}
 library(tibble)
@@ -362,11 +356,8 @@ See [www.sthda.com/](http://www.sthda.com/english/wiki/scatter-plot-matrices-r-b
 
 
 ---
-# Example with the Iris database
+# Length vs width of the iris sepals
 
-.alert[
-- Is there a relation between the **length & the width** of the iris **Sepal** ?
-]
 
 ```{r, eval = FALSE}
 library(ggplot2)
@@ -398,7 +389,7 @@ ggplot(data = iris,             # Data
 
 # Data structure is important
 
-How to clean up your data set was cover in the previous workshop *Loading and manipulating data* see http://qcbs.ca/wiki/r_workshop2.
+&#x267B; Cleaning up your dataset was covered in the previous workshop *Loading and manipulating data* see http://qcbs.ca/wiki/r_workshop2.
 
 <!-- Explain the databases before the examples  -->
 .pull-left[
@@ -406,6 +397,8 @@ How to clean up your data set was cover in the previous workshop *Loading and ma
 head(iris[,c("Sepal.Length","Sepal.Width","Species")], n = 5)
 ```
 ]
+
+<br>
 
 .pull-right[
 ```{r, echo = FALSE, fig.height=4, fig.width=5, fig.align='center'}

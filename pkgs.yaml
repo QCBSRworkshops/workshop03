@@ -1,16 +1,23 @@
 cran_pkgs:
-    - tidyverse
-    - magrittr
-    - knitr
-    - grid
-    - gridExtra
-    - RColorBrewer
     - kableExtra
-    - gridBase
-    - vegan
+    - knitr
+    - ggdendro
+    - ggpmisc
     - ggpubr
     - ggsignif
+    - grid
+    - gridBase
+    - gridExtra
+    - magrittr
     - maps
+    - mapproj
+    - RColorBrewer
+    - rworldmap
+    - tidyverse
+    - vegan
+    - vioplot
 
 github_pkgs:
   - inSileco/graphicsutils
+  - gavinsimpson/ggvegan
+  - QCBSRworkshops/qcbsRworkshops
