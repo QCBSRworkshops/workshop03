@@ -49,7 +49,7 @@ Code and .HTML available at http://qcbs.ca/wiki/r/workshop3
   2. refer to provided code only if needed;
   3. avoid copy pasting or running the code directly from script.
 
-##### NB [ggplot2](https://ggplot2.tidyverse.org/) is also on GitHub: https://github.com/tidyverse/ggplot2
+###### NB [ggplot2](https://ggplot2.tidyverse.org/) is also on GitHub: https://github.com/tidyverse/ggplot2
 
 
 ---
@@ -219,9 +219,8 @@ labels, legends, themes, zoom, and facets (panels) | Other modifications
 ---
 # Grammar of Graphics (GG) basics
 
-&lt;div style="text-align:center"&gt;
-&lt;img src="images/ggplot functions geoms (cheatsheet).png" height=80% width=80%&gt;
-&lt;/div&gt;
+.center[![:scale 80%](images/ggplot functions geoms (cheatsheet).png)]
+
 
 ---
 # Grammar of Graphics (GG) basics
@@ -230,6 +229,7 @@ But here are the basic requirements to draw the simplest ggplot:
 &lt;div style="text-align:center"&gt;
 &lt;img src="images/ggplot basics.png" height=80% width=80%&gt;
 &lt;/div&gt;
+
 
 ---
 # Grammar of Graphics (GG)
@@ -320,7 +320,7 @@ See [www.sthda.com/](http://www.sthda.com/english/wiki/scatter-plot-matrices-r-b
 
 
 ---
-# Length vs width of the iris sepals
+# Length vs width of iris' sepals
 
 
 
@@ -528,16 +528,15 @@ ggplot(data = iris, aes(x = Sepal.Length,
 ]
 
 ---
-## Fine-tuning: Manually increasing colour contrast
-  * Colour: Manual_colour
+# Manually increasing colour contrast
+
 .small[
 
 ```r
-iris.plot &lt;- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
-            geom_point()
+iris.plot &lt;- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width,
+  color = Species)) + geom_point()
 iris.plot + scale_colour_manual(values = c("setosa" = "red",
-                                           "versicolor" = "darkgreen",
-                                           "virginica"="blue"))
+  "versicolor" = "darkgreen", "virginica" = "blue"))
 ```
 ]
 .pull-left[
@@ -550,9 +549,8 @@ iris.plot + scale_colour_manual(values = c("setosa" = "red",
 ]
 
 ---
+# Gradient colours
 
-## Fine-tuning: Gradient colours for quantitative variable
-*quantitavie variable: Petal.Length*
 
 ```r
 iris.plot.petal &lt;- ggplot(data=iris, aes(..., color = Petal.Length))
@@ -565,9 +563,9 @@ iris.plot.petal &lt;- ggplot(data=iris, aes(..., color = Petal.Length))
 ]
 
 ---
+# Colours theme
 
-## Fine-tuning: colours
-  * Coulours theme
+
 
 ```r
 install.packages("RColorBrewer")
@@ -576,14 +574,12 @@ require(RColorBrewer)
 display.brewer.all()
 ```
 
-&lt;div style="text-align:center"&gt;
-&lt;img src="images/Rcolour Brewers palette prez.png" height=100% width=100%&gt;
-&lt;/div&gt;
+![:scale 100%](images/Rcolour Brewers palette prez.png)
+
 
 ---
+# Colours theme with RColorBrewer
 
-## Fine-tuning: colours
-  * Coulours theme: RColorBrewer
 
 ```r
 iris.plot + scale_color_brewer(palette = "Dark2")
@@ -599,7 +595,7 @@ iris.plot + scale_color_brewer(palette = "Dark2")
 
 ---
 
-## Fine-tuning: Colour
+# Colour
 * Blind color friendly: presentation purpose
 
 ```r
@@ -611,12 +607,10 @@ cbbPalette &lt;- c("#000000", "#E69F00", "#56B4E9", "#009E73",
 
 ---
 
-## Fine-tuning: Colour
+# Colour
   * Blind color friendly: presentation purpose
 
 ```r
-cbbPalette &lt;- c("#000000", "#E69F00", "#56B4E9", "#009E73",
-                "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 iris.plot + scale_color_manual(values=cbbPalette)
 ```
 
@@ -630,8 +624,7 @@ iris.plot + scale_color_manual(values=cbbPalette)
 ]
 
 ---
-
-## Fine-tuning: Colour
+# Colour
   * black &amp; white: grey scale for publication purpose
 
 ```r
@@ -648,9 +641,11 @@ iris.plot + scale_color_grey()
 
 
 ---
-# Challenge #2
+# Challenge #2 ![:cube]()
 
-Produce a colourful plot from built in data such as the , Iris, CO2 or the msleep dataset
+Produce a colourful plot from built-in datasets such as `Iris`, `CO2` or `msleep`
+
+&lt;br&gt;
 
 Data|x value|y value| Aesthetic
 :-------------:|:-------------:|:-------------:|:-------------:
@@ -658,23 +653,23 @@ iris|Petal.Length|Petal.Width|Species
 CO2|conc|uptake|Treatment &amp; Type
 msleep|log10(bodywt)|awake| vore &amp; conservation
 
----
 
-## Solution to challenge #2
+---
+# Solution to challenge #2
 
 Example using iris database
 
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-43-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
 ---
-## Solution to challenge #2
+# Solution to challenge #2
 
 Example using CO2 database
 
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-44-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
 ---
-## Solution to challenge #2
+# Solution to challenge #2
 
 Example using msleep database
 
@@ -682,40 +677,45 @@ Example using msleep database
 
 
 ---
-## Changing the coordinate system or axis type
+# Changing the axis type
 
 &lt;!-- change this example... --&gt;
 
 ```r
 d &lt;- subset(diamonds, carat &gt; 0.5)
-
-ggplot(d, aes(carat, price)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
+ggplot(d, aes(carat, price)) + geom_point() + geom_smooth(method = "lm") +
   scale_x_log10() +
   scale_y_log10()
 ```
 
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-46-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
-```r
 
+---
+# Changing the coordinate system
+
+
+```r
 ggplot(d, aes(carat, price)) +
   geom_point() +
   geom_smooth(method = "lm") +
   coord_trans(x = "log10", y = "log10")
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-46-2.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-47-1.png" width="360" style="display: block; margin: auto;" /&gt;
+
+
 
 
 ---
 class: inverse, center, middle
 
-# Fine-tuning your plots (theme): make it look good!
+# Fine-tuning your plots (theme)
+
+## make it look good!
 
 ---
-## Fine-tuning: Theme
+# Theme
   * Theme: classic for publication purpose
 
 ```r
@@ -723,15 +723,15 @@ iris.plot + scale_color_grey() + theme_classic()
 ```
 .pull-left[
 **Defaut**
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-48-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-49-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 **Classic**
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-49-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-50-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
-## Theme assist: RStudio addin for ggGplot2
+## Theme assist: RStudio addin
 
 ![](./images/ggThemeAssist2.gif)
 
@@ -741,7 +741,7 @@ class: inverse, center, middle
 # Fine-tuning your plots (facets): arrangement of plots
 
 ---
-## Facet: Iris
+# Facet: Iris
 
 ```r
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width,
@@ -750,43 +750,45 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width,
   facet_grid(~Species, scales = "free")
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-50-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-51-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 ---
-## Facet: CO2
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-51-1.png" width="576" style="display: block; margin: auto;" /&gt;
+# Facet: CO2
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-52-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 
 &lt;!-- relabeling ticks --&gt;
 
 ---
-## Fine-tuning: Title &amp; Axis size, color, face
-&lt;div style="text-align:center"&gt;
-&lt;img src="images/theme_iris_annotated.png" height=80% width=80%&gt;
-&lt;/div&gt;
+# Title &amp; Axis size, color, face
+
+.center[![:scale 80%](images/theme_iris_annotated.png)]
+
 
 ---
-## Fine-tuning: Title &amp; Axis size, color, face
+# Title &amp; Axis size, color, face
 
 .pull-left[
 **Default**
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-52-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-53-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
-**Axis &amp; Title tunning**
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-53-1.png" width="432" style="display: block; margin: auto;" /&gt;
+**Axis &amp; Title tuning**
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-54-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ]
 
 ---
 
-# Challenge #3
-* Voici un graphique issu du set de données « tips » inclu avec la librarie "reshape2"
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-54-1.png" width="432" style="display: block; margin: auto;" /&gt;
+# Challenge #3 ![:cube]()
+
+##### Use the `tips` dataset found in `reshape2` &amp;#x1F4E6; to reproduce the plot below
+
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-55-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Result Challenge #3
+# Result Challenge #3
 
 ```r
 tips.gg &lt;- ggplot(tips, aes(x = total_bill,
@@ -810,64 +812,59 @@ tips.gg
 
 ---
 
-## Result Challenge #3: step by step
+# Result Challenge #3: step by step
 *Aesthetic*
 
 ```r
-tips.gg &lt;- ggplot(tips, aes(x = total_bill,
-                            y = tip/total_bill,
-                            shape = smoker,
-                            color = sex,
-                            size = size))
+tips.gg &lt;- ggplot(tips,
+  aes(x = total_bill, y = tip/total_bill,
+    shape = smoker, color = sex, size = size))
 tips.gg + geom_point()
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-56-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-57-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 
 
 ---
-
-## Result Challenge #3: step by step
+# Result Challenge #3: step by step
 *Facet*
 
 ```r
 tips.gg + facet_grid( ~ time)
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-58-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-59-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 
 
 ---
-
-## Result Challenge #3: step by step
+# Result Challenge #3: step by step
 *Blind color palette*
 
 ```r
 tips.gg + scale_color_manual(values=cbbPalette)
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-60-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-61-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 
 
 ---
-
-## Result Challenge #3: step by step
+# Result Challenge #3: step by step
 *Plot Title*
 
 ```r
 tips.gg + ggtitle("Tips per total bill at Lunch and Dinner")
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-62-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-63-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 
 
 ---
 
-## Result Challenge #3: step by step
+# Result Challenge #3: step by step
 *Theme tunning: Plot &amp; Axis Title*
 .small[
 
@@ -880,26 +877,26 @@ tips.gg + theme(axis.title.x = element_text(size = 16, colour = cbbPalette[6]),
                            strip.text.x = element_text(size = 14, face="bold"))
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-64-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-65-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-#Geom: ggplot
+# Geom: ggplot
 &lt;div style="text-align:center"&gt;
 &lt;img src="images/plots_in_various_contexts.png" height=85% width=85%&gt;
 &lt;/div&gt;
 
 ---
 
-#Base plot
+# Base plot
 &lt;div style="text-align:center"&gt;
 &lt;img src="images/plots_in_various_contexts_baseplot.png" height=85% width=85%&gt;
 &lt;/div&gt;
 
 ---
 
-##Blank plot
+## Blank plot
 .pull-left[
 *ggplot2*
 
@@ -907,7 +904,7 @@ tips.gg + theme(axis.title.x = element_text(size = 16, colour = cbbPalette[6]),
 gblank &lt;- ggplot(mtcars, aes(wt, mpg))
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-66-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-67-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -917,12 +914,12 @@ gblank &lt;- ggplot(mtcars, aes(wt, mpg))
 plot(mpg~wt, data = mtcars, type = "n")
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-67-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-68-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-#Histogram
+# Histogram
 An histogram is an accurate graphical representation of the distribution of numeric data
 .pull-left[
 
@@ -931,7 +928,7 @@ ggplot(iris, aes(Sepal.Length)) +
   geom_histogram() + ggtitle("Histogram of sepal length ")
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-68-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-69-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -940,12 +937,12 @@ ggplot(cars, aes(dist)) +
   geom_histogram() + ggtitle("Histogram of car distance taken to stop ")
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-69-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-70-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-#Histogram
+# Histogram
 
 .pull-left[
 *ggplot2*
@@ -953,7 +950,7 @@ ggplot(cars, aes(dist)) +
 ```r
 ggplot(diamonds, aes(carat)) + geom_histogram()
 ```
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-71-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-72-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -963,7 +960,7 @@ ggplot(diamonds, aes(carat)) + geom_histogram()
 hist(diamonds$carat)
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-72-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-73-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -975,7 +972,7 @@ hist(diamonds$carat)
 ```r
 ggplot(mpg, aes(class)) + geom_bar()
 ```
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-74-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-75-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -985,7 +982,7 @@ ggplot(mpg, aes(class)) + geom_bar()
 barplot(table(mpg$class))
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-75-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-76-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1000,7 +997,7 @@ ggplot(mpg, aes(class)) +
   geom_signif()
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-77-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-78-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -1012,7 +1009,7 @@ barplot()
 sign.bar()
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-79-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-80-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1027,7 +1024,7 @@ ggplot(mpg, aes(displ, hwy)) +
   geom_point() +
   geom_smooth(method = lm)
 ```
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-81-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-82-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -1039,7 +1036,7 @@ plot(hwy~displ, data = mpg)
 abline(lm.out)
 
 ```
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-83-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-84-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1050,7 +1047,7 @@ abline(lm.out)
 &lt;img src="images/boxplot_explain.png" height=85% width=85%&gt;
 &lt;/div&gt;
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-84-1.png" width="216" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-85-1.png" width="216" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -1064,7 +1061,7 @@ ggplot(data = iris, aes(Species, Sepal.Length)) +
   geom_boxplot()
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-86-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-87-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -1075,22 +1072,22 @@ boxplot(iris$Sepal.Length ~ iris$Species)
 
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-88-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-89-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
 # Violin plot
 
-Violin plots allow to visualize the distribution of a numeric variable for one or several groups.
+As explained on https://www.data-to-viz.com/graph/violin.html
 
-Close from a boxplot, it allows a deeper understanding of the density and are particularly adapted when the amount of data is huge.
+&gt; Violin plot allows to visualize the distribution of a numeric variable for one or several groups. [...] It is really close to a boxplot, but allows a deeper understanding of the distribution.
 
 .pull-left[
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-89-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-90-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-90-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-91-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1104,7 +1101,7 @@ ggplot(data = iris, aes(Species,
                         Sepal.Length)) +
   geom_violin()
 ```
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-92-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-93-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -1124,7 +1121,7 @@ vioplot(iris$Sepal.Length[iris$Species == "setosa"],
 # [1] 4.3 7.9
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-94-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-95-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1139,7 +1136,7 @@ ggplot(df, aes(trt, resp, colour = group)) +
   geom_pointrange()+
   geom_errorbar() +
 ```
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-96-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-97-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -1150,13 +1147,13 @@ plot(y~x)
 error.bar &lt;- function(...)
 error.bar(x,y)
 ```
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-98-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-99-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 ]
 
 ---
 
-#Map
+# Map
 
 .pull-left[
 *ggplot2*
@@ -1167,7 +1164,7 @@ states_map &lt;- map_data("state")
 ggplot(crimes, aes(map_id = state)) +
   geom_map() + coord_map()
 ```
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-100-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-101-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -1179,24 +1176,24 @@ library(mapproj)
 newmap &lt;- rworldmap::getMap(resolution = "high")
 plot(newmap)
 ```
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-102-1.png" width="360" style="display: block; margin: auto;" /&gt;
-]
-
----
-
-#Density Graph
-
-A density plot shows the distribution of a numerical variable and it takes only set of numeric values as input
-.pull-left[
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-103-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
-.pull-right[
+---
+
+# Density plot
+
+A density plot shows the distribution of a numerical variable and it takes only set of numeric values as input
+.pull-left[
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-104-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
+.pull-right[
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-105-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
 ---
-#Density Graph
+# Density plot
 
 .pull-left[
 *ggplot2*
@@ -1205,7 +1202,7 @@ A density plot shows the distribution of a numerical variable and it takes only 
 ggplot(diamonds, aes(carat)) +
   geom_density()
 ```
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-106-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-107-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -1215,12 +1212,12 @@ ggplot(diamonds, aes(carat)) +
 plot(density(c(-20, rep(0,98), 20)),
      xlim = c(-4, 4))
 ```
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-108-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-109-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-#Dendogram
+# Dendogram
 
 .pull-left[
 *ggplot2*
@@ -1229,7 +1226,7 @@ plot(density(c(-20, rep(0,98), 20)),
 library(ggdendro)
 ggdendrogram(hc)
 ```
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-110-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-111-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -1238,30 +1235,32 @@ ggdendrogram(hc)
 ```r
 plot(hc, hang = -1, main = "Dendrogram")
 ```
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-112-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-113-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 ]
 
 ---
 
 # Multiplot
+
 **A function to add multiple graph on the same plot**
+
 
 ```r
 multiplot(density.gg, map.gg, violP.gg, lm.gg, cols = 2)
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-113-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-114-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 ---
 
-# Final Challenge
+# Final Challenge ![:cube]()
   * Dataset: any (recommanded: use your dataset)
 
 ```r
 data(msleep) ; data(mtcars) ; data(OrchardSprays)
 ```
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-115-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-116-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1285,7 +1284,7 @@ msleep.challenge4 &lt;- msleep.challenge4 + theme(axis.title.x = element_text(si
                                                legend.text = element_text(size=12))
 
 ```
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-117-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-118-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1307,7 +1306,7 @@ brain_body.challenge4 &lt;- brain_body.challenge4 + theme(axis.title.x = element
                                                        legend.text = element_text(size=12))
 
 ```
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-119-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-120-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1329,7 +1328,7 @@ dendro.challenge4 &lt;- dendro.challenge4 + theme(axis.title.y = element_text(si
 dendro.challenge4
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-120-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-121-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1348,7 +1347,7 @@ Orchard.challenge4 &lt;- Orchard.challenge4 + theme(axis.title.y = element_text(
 Orchard.challenge4
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-121-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-122-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1360,13 +1359,15 @@ Orchard.challenge4
 multiplot(msleep.challenge4,dendro.challenge4, brain_body.challenge4, Orchard.challenge4, cols = 2)
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-122-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-123-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 ---
-# Miscellaneous: Dynamics plots
+# Miscellaneous: interactive plots
+&lt;br&gt;
+
 .alert[**Select the Species data to display directly From the legend**]
-<div id="htmlwidget-a84310b1ea36c8dfeb1b" style="width:792px;height:540px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a84310b1ea36c8dfeb1b">{"x":{"data":[{"x":[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5],"y":[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3],"text":["Sepal.Length: 5.1<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.9<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.7<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.6<br />Sepal.Width: 3.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.6<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.9<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.6<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.4<br />Sepal.Width: 2.9<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.9<br />Sepal.Width: 3.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.7<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.3<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.8<br />Sepal.Width: 4.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.7<br />Sepal.Width: 4.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.9<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.7<br />Sepal.Width: 3.8<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.8<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.7<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.6<br />Sepal.Width: 3.6<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.3<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.2<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.2<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.7<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.2<br />Sepal.Width: 4.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.5<br />Sepal.Width: 4.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.9<br />Sepal.Width: 3.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.5<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.9<br />Sepal.Width: 3.6<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.4<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.5<br />Sepal.Width: 2.3<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.4<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.8<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.8<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.6<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.3<br />Sepal.Width: 3.7<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.3<br />Species: setosa<br />Species: setosa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":0.6,"size":22.6771653543307,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"setosa","legendgroup":"setosa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7],"y":[3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8],"text":["Sepal.Length: 7.0<br />Sepal.Width: 3.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.4<br />Sepal.Width: 3.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.9<br />Sepal.Width: 3.1<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.3<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.5<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.3<br />Sepal.Width: 3.3<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 4.9<br />Sepal.Width: 2.4<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.6<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.2<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.0<br />Sepal.Width: 2.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.9<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.0<br />Sepal.Width: 2.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.1<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.7<br />Sepal.Width: 3.1<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.8<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.2<br />Sepal.Width: 2.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 2.5<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.9<br />Sepal.Width: 3.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.1<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.3<br />Sepal.Width: 2.5<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.1<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.4<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.6<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.8<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.7<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.0<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 2.6<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.4<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.4<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.8<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.0<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.4<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.0<br />Sepal.Width: 3.4<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.7<br />Sepal.Width: 3.1<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.3<br />Sepal.Width: 2.3<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.5<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.6<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.1<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.8<br />Sepal.Width: 2.6<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.0<br />Sepal.Width: 2.3<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.2<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.1<br />Sepal.Width: 2.5<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":0.6,"size":22.6771653543307,"symbol":"triangle-up","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"versicolor","legendgroup":"versicolor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],"y":[3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3],"text":["Sepal.Length: 6.3<br />Sepal.Width: 3.3<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.8<br />Sepal.Width: 2.7<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.1<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 2.9<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.5<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.6<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 4.9<br />Sepal.Width: 2.5<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.3<br />Sepal.Width: 2.9<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 2.5<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.2<br />Sepal.Width: 3.6<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.5<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 2.7<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.8<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.7<br />Sepal.Width: 2.5<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.8<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.5<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.7<br />Sepal.Width: 3.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.7<br />Sepal.Width: 2.6<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.0<br />Sepal.Width: 2.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.9<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.6<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.7<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 2.7<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 3.3<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.2<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.2<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.1<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.2<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.4<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.9<br />Sepal.Width: 3.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.1<br />Sepal.Width: 2.6<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.7<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 3.4<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 3.1<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.0<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.9<br />Sepal.Width: 3.1<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 3.1<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.9<br />Sepal.Width: 3.1<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.8<br />Sepal.Width: 2.7<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.8<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 3.3<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 2.5<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.5<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.2<br />Sepal.Width: 3.4<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.9<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":0.6,"size":22.6771653543307,"symbol":"square","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"virginica","legendgroup":"virginica","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.7153729071537,"r":7.30593607305936,"b":40.6697108066971,"l":43.1050228310502},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[4.12,8.08],"tickmode":"array","ticktext":["5","6","7","8"],"tickvals":[5,6,7,8],"categoryorder":"array","categoryarray":["5","6","7","8"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Sepal.Length","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1.88,4.52],"tickmode":"array","ticktext":["2.0","2.5","3.0","3.5","4.0","4.5"],"tickvals":[2,2.5,3,3.5,4,4.5],"categoryorder":"array","categoryarray":["2.0","2.5","3.0","3.5","4.0","4.5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Sepal.Width","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.980752405949256},"annotations":[{"text":"Species","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"2ac88927bb8":{"x":{},"y":{},"colour":{},"shape":{},"type":"scatter"}},"cur_data":"2ac88927bb8","visdat":{"2ac88927bb8":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-651a4f1df6f537834bd8" style="width:792px;height:540px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-651a4f1df6f537834bd8">{"x":{"data":[{"x":[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5],"y":[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3],"text":["Sepal.Length: 5.1<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.9<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.7<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.6<br />Sepal.Width: 3.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.6<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.9<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.6<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.4<br />Sepal.Width: 2.9<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.9<br />Sepal.Width: 3.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.7<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.3<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.8<br />Sepal.Width: 4.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.7<br />Sepal.Width: 4.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.9<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.7<br />Sepal.Width: 3.8<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.8<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.7<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.6<br />Sepal.Width: 3.6<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.3<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.2<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.2<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.7<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.2<br />Sepal.Width: 4.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.5<br />Sepal.Width: 4.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.9<br />Sepal.Width: 3.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.5<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.9<br />Sepal.Width: 3.6<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.4<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.5<br />Sepal.Width: 2.3<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.4<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.8<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.8<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.6<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.3<br />Sepal.Width: 3.7<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.3<br />Species: setosa<br />Species: setosa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":0.6,"size":22.6771653543307,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"setosa","legendgroup":"setosa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7],"y":[3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8],"text":["Sepal.Length: 7.0<br />Sepal.Width: 3.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.4<br />Sepal.Width: 3.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.9<br />Sepal.Width: 3.1<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.3<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.5<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.3<br />Sepal.Width: 3.3<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 4.9<br />Sepal.Width: 2.4<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.6<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.2<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.0<br />Sepal.Width: 2.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.9<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.0<br />Sepal.Width: 2.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.1<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.7<br />Sepal.Width: 3.1<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.8<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.2<br />Sepal.Width: 2.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 2.5<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.9<br />Sepal.Width: 3.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.1<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.3<br />Sepal.Width: 2.5<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.1<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.4<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.6<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.8<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.7<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.0<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 2.6<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.4<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.4<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.8<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.0<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.4<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.0<br />Sepal.Width: 3.4<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.7<br />Sepal.Width: 3.1<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.3<br />Sepal.Width: 2.3<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.5<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.6<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.1<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.8<br />Sepal.Width: 2.6<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.0<br />Sepal.Width: 2.3<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.2<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.1<br />Sepal.Width: 2.5<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":0.6,"size":22.6771653543307,"symbol":"triangle-up","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"versicolor","legendgroup":"versicolor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],"y":[3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3],"text":["Sepal.Length: 6.3<br />Sepal.Width: 3.3<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.8<br />Sepal.Width: 2.7<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.1<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 2.9<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.5<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.6<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 4.9<br />Sepal.Width: 2.5<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.3<br />Sepal.Width: 2.9<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 2.5<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.2<br />Sepal.Width: 3.6<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.5<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 2.7<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.8<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.7<br />Sepal.Width: 2.5<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.8<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.5<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.7<br />Sepal.Width: 3.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.7<br />Sepal.Width: 2.6<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.0<br />Sepal.Width: 2.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.9<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.6<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.7<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 2.7<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 3.3<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.2<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.2<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.1<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.2<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.4<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.9<br />Sepal.Width: 3.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.1<br />Sepal.Width: 2.6<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.7<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 3.4<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 3.1<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.0<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.9<br />Sepal.Width: 3.1<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 3.1<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.9<br />Sepal.Width: 3.1<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.8<br />Sepal.Width: 2.7<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.8<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 3.3<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 2.5<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.5<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.2<br />Sepal.Width: 3.4<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.9<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":0.6,"size":22.6771653543307,"symbol":"square","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"virginica","legendgroup":"virginica","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.7153729071537,"r":7.30593607305936,"b":40.6697108066971,"l":43.1050228310502},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[4.12,8.08],"tickmode":"array","ticktext":["5","6","7","8"],"tickvals":[5,6,7,8],"categoryorder":"array","categoryarray":["5","6","7","8"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Sepal.Length","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1.88,4.52],"tickmode":"array","ticktext":["2.0","2.5","3.0","3.5","4.0","4.5"],"tickvals":[2,2.5,3,3.5,4,4.5],"categoryorder":"array","categoryarray":["2.0","2.5","3.0","3.5","4.0","4.5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Sepal.Width","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.980752405949256},"annotations":[{"text":"Species","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"2a2158d8e702":{"x":{},"y":{},"colour":{},"shape":{},"type":"scatter"}},"cur_data":"2a2158d8e702","visdat":{"2a2158d8e702":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 
 
 ---
@@ -1376,18 +1377,18 @@ class: inverse, center, middle
 
 ---
 
-## Saving plots in RStudio
+# Saving plots in RStudio
 
 &lt;div style="text-align:center"&gt;
 &lt;img src="images/save_image.png" height=70% width=70%&gt;
 &lt;/div&gt;
 
-Think about the margin of the document you are using. If you resize the image after saving it, the labels and text will change size as well which could be hard to read.
+.alert[Think about the margin of the document you are using. If you resize the image after saving it, the labels and text will change size as well which could be hard to read.]
 
 ---
-## Saving plots in code
+# Saving plots in code
 
-ggsave() will write directly to your working directory all in one line of code and you can specify the name of the file and the dimensions of the plot:
+`ggsave()` writes directly to your working directory and allows you to specify the name of the file, the dimensions of the plot, the resolution, etc.
 
 
 ```r
@@ -1397,21 +1398,26 @@ my1rstPlot &lt;- ggplot(data = iris,
   geom_point()
 ggsave("my1rstPlot.pdf",
        my1rstPlot,
-       height = 8.5,
-       width = 11,
-       units = "in")
+       height = 8.5, width = 11, units = "in", res = 300)
 ```
-Note that vector format (e.g., pdf, svg) are often preferable choice compared to raster format (jpeg, png, ...). Vectors format will be more flexible if the image needs modification after saving it.
 
-Other methods to save image
-`?pdf`
-`?jpeg`
+NB: Vectors (e.g., pdf, svg) format are more flexible than raster format (jpeg,
+png, ...) if the image needs modification afterwards.
+
+---
+# Saving plots in code
+&lt;br&gt;
+
+Other methods to save image: see `?pdf` `?jpeg`
+
 
 ```r
 pdf("./graph_du_jour.pdf")
   print(my1rstPlot) # print function is necessary
 graphics.off()
 ```
+
+
 
 
 
@@ -1422,36 +1428,34 @@ class: inverse, center, middle
 
 
 ---
-## Available elements
+# Available elements
+
 
 [Data Visualization with ggplot2 Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
 
-&lt;div style="text-align:center"&gt;
-&lt;img src="images/available_geom.png" height=55% width=55%&gt;
-&lt;/div&gt;
+.center[![:scale 55%](images/available_geom.png)]
 
 https://www.rstudio.com/resources/cheatsheets
 
 ---
-## Additional resources
+# Additional resources
 
-`help(package = ggplot)`
+* `help(package = ggplot)`
+* http://ggplot2.tidyverse.org/reference/
+* Fundamentals of Data Visualization https://serialmentor.com/dataviz/
 
-http://ggplot2.tidyverse.org/reference/
-
-&lt;div&gt;
-  &lt;img src="images/ggplot_book.jpg"/&gt;
-  &lt;img src="images/grammar_of_graphics.jpg"/&gt;
-&lt;/div&gt;
+.center[![:scale 65%](images/ggplot_book.png)]
 
 ---
-# Conclusion
+# Concluding remarks
+&lt;br&gt;
 
-Now that you understand the ggplot basics, you can learn more about about design and image manipulation with the "Introduction to graphic design and image manipulation with open source tools": https://qcbs.ca/wiki/graphics \s\s
+1. There are other useful packages that can be used with `ggplot2`! To name a few: ggbio, ggpmisc, geomnet, gganimate, ggnetwork, ggtree. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) that list extensions.
 
 
-There might be other useful packages that can be used in conjunction with `ggplot2` that we haven't covered (e.g. ggbio, ggpmisc, geomnet, gganimate, ggnetwork, ggtree, and more!).
-https://www.ggplot2-exts.org/ggrepel.html
+2. Note that you can learn more about design and image manipulation with the "Introduction to graphic design and image manipulation with open source tools": https://qcbs.ca/wiki/graphics
+
+
 
 ---
 class: inverse, center, bottom
