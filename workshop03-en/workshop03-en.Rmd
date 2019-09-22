@@ -21,7 +21,8 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE,
   fig.width=5, fig.height=5,
-  fig.align = 'center'
+  fig.align = 'center',
+  fig.retina = 3
 )
 ```
 
@@ -30,19 +31,13 @@ options(repos=structure(c(CRAN="http://cran.r-project.org")))
 ```
 
 ```{r, include = FALSE}
-qcbs_install <- function(pkg) {
-  if (!requireNamespace(pkg, quietly = TRUE)) install.packages(pkg)
-  invisible(NULL)
-}
-
 vc_pkg <- c("knitr", "tidyverse", "vegan", "vioplot", "ggpubr", "ggsignif",
-  "ggvegan", "ggpmisc", "ggdendro", "rworldmap", "maps", "mapproj", "grid",
+  "ggpmisc", "ggdendro", "rworldmap", "maps", "mapproj", "grid",
   "gridExtra", "RColorBrewer", "gridBase")
 
-lapply(vc_pkg, qcbs_install)
+lapply(vc_pkg, qcbsRworkshops::install_cran_pkgs)
 
-
-source(file="./scripts/multiplot.R")
+source("scripts/multiplot.R")
 ```
 
 # Introduction
@@ -99,19 +94,22 @@ class: inverse, center, middle
 # Visualization in science
 
 ---
-## Visualization in science
+# Visualization in science
+<br>
 
-Why are we using data visualization?
+#### Why are we using data visualization?
 
-What makes an effective visualization?
+#### What makes an effective visualization?
 
-```{r ,eval=TRUE, echo=FALSE, fig.width=10, fig.height=7}
-# source(file="./scripts/uglyy.ggplot.graph.R")
-```
-<!-- maybe worse to pinpoint all ugly stuff on the graph  -->
+<br>
+
+.center[![:scale 65%](images/piechart3d.png)]
+
+What do you thing about this one ![:faic](arrow-up)?
 
 ---
-## Visualization in science
+# Visualization in science
+<br>
 
 1. Represent data analyses with statistical analysis
 2. Research and discuss (preliminary data from the literature, summaries, formulate hypotheses)
@@ -121,13 +119,17 @@ What makes an effective visualization?
   - Precisely and accurately
   - Effectively and efficiently
 
+---
+# Visualization in science
+<br>
+
 Important questions:
 - What do you want to communicate?
 - To who?
 - How to do it? (data type, data preparation)
 
 <div style="text-align:center">
-A rule of thumb: think simple — use less ink!
+.alert[A rule of thumb: think simple — use less ink!]
 </div>
 
 
@@ -144,44 +146,43 @@ Other drawing softwares are probably more interesting options such as [GIMP](htt
 
 ---
 ## Why use R for plotting?
-<div style="text-align:center">
-<img src="images/Divided_reproducible workflow.png" height=80% width=85%>
-</div>
+
+.center[![:scale 80%](images/Divided_reproducible workflow.png)]
 
 ---
 # Why use R for plotting? Reproducibility
 
-<div style="text-align:center">
-<img src="images/Divided_reproducible workflow2.png" height=80% width=85%>
-</div>
+.center[![:scale 80%](images/Divided_reproducible workflow2.png)]
+
 
 .alert[Reproducible science comes with effort]:
 - comment the script
 - add relevant information in the figures (titles, labels, captions)
 
 ---
-## Why R for graphs? Beautiful and flexible
+# Why R for graphs?
 
-Multiple packages and functions that help achieve great visualization ("base R", lattice, plotly, rgl, plot3d, maps, etc.). We focus only on `ggplot2`. Here is an example:
+#### .alert[ Because of its powerful features!]
 
-<div style="text-align:center">
-<img src="images/graph.png" height=65% width=65%>
-</div>
+[Multiple packages and functions](https://insileco.github.io/wiki/rgraphpkgs/) to achieve great visualization ("base R", lattice, plotly, rgl, plot3d, maps, etc.). We focus only on `ggplot2`. Here is an example:
 
-```{r, eval=FALSE, echo=FALSE, fig.width=10, fig.height=7}
+
+```{r, echo=FALSE, fig.width=10, fig.height=5.8}
 source(file="./scripts/multiExamplePlot.R")
 ```
 
 
 
 ---
-## ggplot2 is versatile
+# ggplot2 is versatile
 
-The `ggplot2` package lets you make beautiful and customizable plots of your data. It implements the grammar of graphics, an easy to use system for building plots. But it is usually slower to graph and has a different way of writing the functions: the grammar of graphics.
+1. [`ggplot2`](https://ggplot2.tidyverse.org/) package lets you make beautiful and customizable plots;
+2. it implements the grammar of graphics, an easy to use system for building plots;
+3. it [has many extensions](https://insileco.github.io/wiki/rgraphpkgs/#ggplot2andextensions).
 
-<div style="text-align:center">
-<img src="images/ggplot2_logo.png" height=40% width=40%>
-</div>
+
+.center[![:scale 35%](images/ggplot2_logo.png)]
+
 
 ---
 class: inverse, center, middle
@@ -190,11 +191,14 @@ class: inverse, center, middle
 
 ---
 
-## Grammar of Graphics (GG) basics
+# Grammar of Graphics (GG) basics
 
-Required packages
 ```{r, eval = FALSE}
-install.packages("ggplot2")
+install.packages("ggplot2") # if not already installed
+library(ggplot2)
+```
+
+```{r, echo = FALSE}
 library(ggplot2)
 ```
 
@@ -207,7 +211,7 @@ A graphic is made of different layers:
 We will learn how to build graphs iteratively to make it look like we want.
 
 ---
-## Grammar of Graphics (GG) basics
+# Grammar of Graphics (GG) basics
 These layers have specific names that you will see throughout the presentation:
 
 Element | Description
@@ -219,12 +223,15 @@ stats | transform the raw data (~similar to geoms)
 scales | fine-tune how "aes" is represented
 labels, legends, themes, zoom, and facets (panels) | Other modifications
 
+---
+# Grammar of Graphics (GG) basics
+
 <div style="text-align:center">
 <img src="images/ggplot functions geoms (cheatsheet).png" height=80% width=80%>
 </div>
 
 ---
-## Grammar of Graphics (GG) basics
+# Grammar of Graphics (GG) basics
 But here are the basic requirements to draw the simplest ggplot:
 
 <div style="text-align:center">
@@ -232,7 +239,7 @@ But here are the basic requirements to draw the simplest ggplot:
 </div>
 
 ---
-## Grammar of Graphics (GG)
+# Grammar of Graphics (GG)
 A graphic is made of elements (layers)
 
 - Data
@@ -246,7 +253,7 @@ A graphic is made of elements (layers)
     * *alpha*: the transparency of the point
 
 ---
-## Grammar of Graphics (GG)
+# Grammar of Graphics (GG)
 A graphic is made of elements (layers)
 
 - Data
@@ -260,7 +267,7 @@ A graphic is made of elements (layers)
     * `geom_histogram()`: histogram for continuous x axis
 
 ---
-## How layer in ggplot works
+# How layer in ggplot works
 
 1. Create a simple plot object:
   * `plot.object <- ggplot()`
@@ -272,9 +279,9 @@ A graphic is made of elements (layers)
   * `plot.object` or `print(plot.object)`
 
 ---
-## Prepare data for ggplot
+# Prepare data for ggplot
 
-The package `ggplot2` requires you to prepare the data in the class `data.frame` or a format common in the `tidyverse` like a class `tibble`.
+`ggplot2` requires you to prepare the data as an object of class `data.frame` or `tibble` (common in the `tidyverse`).
 
 ```{r eval=TRUE, echo=TRUE}
 library(tibble)
@@ -285,8 +292,7 @@ class(ir)
 ```
 
 ---
-
-## Iris database
+# Iris database
 
 ```{r, eval=FALSE}
 ?iris
@@ -308,8 +314,9 @@ Type|Numeric|Numeric|Numeric|Numeric|Categoric
 
 ---
 
-## Exploring your data structure
-```{r, echo=FALSE, eval=T}
+# Exploring your data structure
+
+```{r, echo=FALSE}
 panel.hist <- function(x, ...)
 {
   usr <- par("usr"); on.exit(par(usr))
@@ -342,16 +349,15 @@ betterPairs <- function(YourData, col = c("black"))
 }
 ```
 
-```{r, echo=F}
+```{r, echo = FALSE, fig.width = 7, fig.height = 7}
 betterPairs(iris)
 ```
+See [www.sthda.com/](http://www.sthda.com/english/wiki/scatter-plot-matrices-r-base-graphs) for further examples.
+
 
 ---
+# Length vs width of the iris sepals
 
-## Example with the Iris database
-.alert[
-- Is there a relation between the **length & the width** of the iris **Sepal** ?
-]
 
 ```{r, eval = FALSE}
 library(ggplot2)
@@ -381,8 +387,9 @@ ggplot(data = iris,             # Data
 
 ---
 
-## Data structure is important
-Here we assume that the databases were all cleaned up and that they are ready to be used for graphing. Our second workshop "Loading and manipulating data" summarise best practices: http://qcbs.ca/wiki/r_workshop2
+# Data structure is important
+
+&#x267B; Cleaning up your dataset was covered in the previous workshop *Loading and manipulating data* see http://qcbs.ca/wiki/r_workshop2.
 
 <!-- Explain the databases before the examples  -->
 .pull-left[
@@ -390,6 +397,8 @@ Here we assume that the databases were all cleaned up and that they are ready to
 head(iris[,c("Sepal.Length","Sepal.Width","Species")], n = 5)
 ```
 ]
+
+<br>
 
 .pull-right[
 ```{r, echo = FALSE, fig.height=4, fig.width=5, fig.align='center'}
@@ -413,7 +422,7 @@ ggplot(data = iris,             # Data
 
 ---
 
-## Inheritance: applies to different layer or not
+# Inheritance: applies to different layer or not
 
 .small[
 
@@ -445,7 +454,7 @@ s
 ]
 
 ---
-## Grammar of Graphics [recall]
+# Grammar of Graphics [recall]
 
 Remember: a graphic is made of different layers:
 
@@ -454,7 +463,7 @@ Remember: a graphic is made of different layers:
 </div>
 
 ---
-## GGplot dynamics: base layer
+# ggplot dynamics: base layer
 ```{r, fig.height=4, fig.width=5}
 ggplot() +
 scale_x_continuous() +
@@ -462,7 +471,7 @@ scale_y_continuous()
 ```
 
 ---
-## GGplot dynamics: data layer
+# ggplot dynamics: data layer
 
 ```{r, fig.height=4, fig.width=5}
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
@@ -472,7 +481,8 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 
 ---
 
-## GGplot dynamics: geometric Layer
+# ggplot dynamics: geometric Layer
+
 ```{r, fig.height=4, fig.width=5}
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
   xlab("x = Sepal Lenght") + ylab("y = Sepal Width") +
@@ -481,9 +491,9 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 
 ---
 
-# Challenge #1 (5min)
+# Challenge #1 (5min) ![:cube]()
 
-  .center[**Draw your 1rst GGplot**]
+  .center[**Draw your 1rst ggplot**]
 
   * .alert[Question] : Is there a relation between the **length & the width** of the iris **Petal** ?
 
@@ -507,12 +517,15 @@ ggplot(data = iris, aes(x = Petal.Length, y = Petal.Width)) +
 
 class: inverse, center, middle
 
-# Fine-tuning your plots (aes, scales): colour, shape, sizes, etc.
+# Fine-tuning your plots (aes, scales)
+
+## colour, shape, sizes, etc.
 
 ---
 
-## Aesthetic
-  * Different aesthetic are available to help you distinguish different class, group & structure within your data:
+# Aesthetic
+
+##### Use aesthetics to distinguish class, group & structure
 
 ```{r echo=FALSE, fig.width=8, fig.height=7}
 library(gridExtra)
@@ -521,7 +534,7 @@ source(file="./scripts/4plot_aesthetic.R")
 
 ---
 
-## Color : make your points talk
+# Color : make your points talk
 
 Color may be useful to differentiate between variables
 
@@ -532,7 +545,7 @@ Numeric|gradient
 
 ---
 
-## Example of aesthetic color with our Iris plot
+# Example of aesthetic color
 
 * Do the size and width of the sepals vary differently between species?
 
@@ -999,7 +1012,7 @@ tips.gg + theme(axis.title.x = element_text(size = 16, colour = cbbPalette[6]),
 
 ---
 
-#Geom: GGplot
+#Geom: ggplot
 <div style="text-align:center">
 <img src="images/plots_in_various_contexts.png" height=85% width=85%>
 </div>
@@ -1015,7 +1028,7 @@ tips.gg + theme(axis.title.x = element_text(size = 16, colour = cbbPalette[6]),
 
 ##Blank plot
 .pull-left[
-*GGplot2*
+*ggplot2*
 ```{r, eval=FALSE}
 gblank <- ggplot(mtcars, aes(wt, mpg))
 ```
@@ -1058,7 +1071,7 @@ ggplot(cars, aes(dist)) +
 #Histogram
 
 .pull-left[
-*GGplot2*
+*ggplot2*
 ```{r, eval=FALSE}
 ggplot(diamonds, aes(carat)) + geom_histogram()
 ```
@@ -1078,7 +1091,7 @@ hist(diamonds$carat)
 
 #Barplot
 .pull-left[
-*GGplot2*
+*ggplot2*
 ```{r, eval=FALSE}
 ggplot(mpg, aes(class)) + geom_bar()
 ```
@@ -1098,7 +1111,7 @@ barplot(table(mpg$class))
 
 # Significant values
 .pull-left[
-*GGplot2*
+*ggplot2*
 ```{r, eval=FALSE}
 ggplot(mpg, aes(class)) +
   geom_bar() +
@@ -1222,7 +1235,7 @@ sign.bar(my.bp, select.pair = c(2,3),y =10,label = "***",mid = TRUE)
 #Plot: linear reagression
 
 .pull-left[
-*GGplot2*
+*ggplot2*
 ```{r, eval=FALSE}
 ggplot(mpg, aes(displ, hwy)) +
   geom_point() +
@@ -1275,7 +1288,7 @@ ggplot(data = iris, aes(Species, Sepal.Length, fill=Species)) +
 #Boxplot with significant value
 
 .pull-left[
-*GGplot2*
+*ggplot2*
 ```{r, eval=FALSE}
 ggplot(data = iris, aes(Species, Sepal.Length)) +
   geom_boxplot()
@@ -1332,7 +1345,7 @@ ggplot(data = data, aes(names, value, fill=names)) + geom_violin()
 # Violin plot
 
 .pull-left[
-*GGplot2*
+*ggplot2*
 ```{r, eval=FALSE}
 ggplot(data = iris, aes(Species,
                         Sepal.Length)) +
@@ -1369,7 +1382,7 @@ vioplot(iris$Sepal.Length[iris$Species == "setosa"],
 #Plot with errors bars
 
 .pull-left[
-*GGplot2*
+*ggplot2*
 ```{r, eval=FALSE}
 ggplot(df, aes(trt, resp, colour = group)) +
   geom_pointrange()+
@@ -1443,7 +1456,7 @@ error.bar(x,y)
 #Map
 
 .pull-left[
-*GGplot2*
+*ggplot2*
 ```{r, eval=FALSE}
 library(maps)
 states_map <- map_data("state")
@@ -1503,7 +1516,7 @@ ggplot(cars, aes(dist)) +
 #Density Graph
 
 .pull-left[
-*GGplot2*
+*ggplot2*
 ```{r, eval=FALSE}
 ggplot(diamonds, aes(carat)) +
   geom_density()
@@ -1531,7 +1544,7 @@ plot(density(c(-20, rep(0,98), 20)), xlim = c(-4, 4),
 #Dendogram
 
 .pull-left[
-*GGplot2*
+*ggplot2*
 ```{r, eval=FALSE}
 library(ggdendro)
 ggdendrogram(hc)

@@ -1,4 +1,6 @@
 # create an apporpriate viewport.  Modify the dimensions and coordinates as needed
+library(grid)
+library(ggplot2)
 commm.h = .39 # This will change the "Height" of the ggplot graphs
 y = 0.42 # This will change the relative position on the "y" axis of the graph output
 vp.BottomRight <- viewport(height= unit(commm.h, "npc"),
