@@ -13,7 +13,7 @@ if(!require(ggsignif)) library(ggsignif)
 if(!require(rworldmap)) install.packages("rworldmap")
 if(!require(rworldmap)) library(rworldmap)
 
-if(!require(maps)) install.packages("maps")
+if(!require(maps)) install.packages("mapsv")
 if(!require(maps)) library(maps)
 
 if(!require(vioplot)) install.packages("vioplot")
@@ -29,7 +29,7 @@ if(!require(ggvegan)) library(ggvegan)
 
 # Blank -------------------------------------------------------------------
 gblank <- ggplot(mtcars, aes(wt, mpg))
-gblank <- gblank + theme(plot.subtitle = element_text(vjust = 1), 
+gblank <- gblank + theme(plot.subtitle = element_text(vjust = 1),
                         plot.caption = element_text(vjust = 1)) +
   labs(title = "Blank plot")
 plot(mpg~wt, data = mtcars, type = "n")
@@ -64,12 +64,12 @@ panel.cor <- function(x, y, digits=2, prefix="", cex.cor)
 }
 
 betterPairs <- function(YourData, col = c("black")){
-  return(pairs(YourData, 
+  return(pairs(YourData,
                lower.panel=function(...) {
                  par(new=TRUE);
                  panel.smooth(col=col,
                               col.smooth = "gold",...)},
-               diag.panel=panel.hist, 
+               diag.panel=panel.hist,
                upper.panel=panel.cor))
 }
 
@@ -83,16 +83,16 @@ hist(diamonds$carat)
 
 # Barplot  --------------------------------------------------------------------
 gbar = ggplot(mpg, aes(class)) + geom_bar()+ labs(title = "Barplot")
-gbar = gbar + theme(plot.subtitle = element_text(vjust = 1), 
-                    plot.caption = element_text(vjust = 1), 
+gbar = gbar + theme(plot.subtitle = element_text(vjust = 1),
+                    plot.caption = element_text(vjust = 1),
                     axis.text.x = element_text(angle = 90))
 barplot(table(mpg$class))
-ir.s=iris %>% 
-  group_by(Species) %>% 
+ir.s=iris %>%
+  group_by(Species) %>%
   summarise(mean.sp = mean(Sepal.Length))
-iris %>% 
-  group_by(Species) %>% 
-  summarise(pval = t.test(Sepal.Length, 
+iris %>%
+  group_by(Species) %>%
+  summarise(pval = t.test(Sepal.Length,
                           var.equal = TRUE)$p.value)
 
 
@@ -101,22 +101,22 @@ dat <- data.frame(Group = c("S1", "S1", "S2", "S2"),
                   Sub   = c("A", "B", "A", "B"),
                   Value = c(3,5,7,8),
                   low = c(2.5,4.5,6,7.5),
-                  high = c(3.5,5.5,7,8.5))  
+                  high = c(3.5,5.5,7,8.5))
 
 
 
 gbar2 = ggplot(data = dat, aes(x = Group, y = Value,fill = Sub)) +
-  geom_bar(#aes(fill = Sub), 
-    stat="identity", 
-    position="dodge", 
+  geom_bar(#aes(fill = Sub),
+    stat="identity",
+    position="dodge",
     width=.5) +
-  geom_errorbar(aes(ymin=low, 
+  geom_errorbar(aes(ymin=low,
                     ymax=high),
                 width = 0.1,
                 position =  position_dodge(.5), colour="black") +
   labs(title = "Barplot") +
-  scale_fill_manual(values = c("grey80", 
-                               "grey20")) + 
+  scale_fill_manual(values = c("grey80",
+                               "grey20")) +
   geom_signif(stat="identity",
               data=data.frame(x=c(0.875, 1.875),
                               xend=c(1.125, 2.125),
@@ -141,8 +141,8 @@ my.bp =barplot(as.matrix(df),
                main = "Barplot",
                ylim = c(0,12),
                legend = rownames(df),
-               args.legend = list(x = "topright", 
-                                  bty = "n", 
+               args.legend = list(x = "topright",
+                                  bty = "n",
                                   inset=c(-0.07, 0))
                # args.legend=list(
                #   x=ncol(df)+4,
@@ -181,7 +181,7 @@ sign.bar = function(pos,select.pair, y, offset = 0.2, label, mid = FALSE) {
   }
   # draw asterics
   text(pos[select.pair[1]]+((pos[select.pair[2]]-pos[select.pair[1]])/2),y+offset*2,
-       labels = label) 
+       labels = label)
 }
 sign.bar(my.bp, select.pair = c(1,2),y =6,label = "**")
 sign.bar(my.bp, select.pair = c(3,4),y =8.8,label = "NS")
@@ -194,11 +194,11 @@ gsmooth <- ggplot(mpg, aes(displ, hwy)) + geom_point() + geom_smooth(method = lm
 # predicts + interval
 lm.out  <- lm(hwy~displ, data = mpg)
 newx <- seq(min(mpg$displ), max(mpg$displ), length.out=100)
-preds <- predict(lm.out, newdata = data.frame(displ=newx), 
+preds <- predict(lm.out, newdata = data.frame(displ=newx),
                  interval = 'confidence')
 plot(hwy~displ, data = mpg, bg = "black", col = "black", pch =21)
-polygon(c(rev(newx), newx), 
-        c(rev(preds[ ,3]), preds[ ,2]), 
+polygon(c(rev(newx), newx),
+        c(rev(preds[ ,3]), preds[ ,2]),
         col = 'grey80', border = NA)
 abline(lm.out)
 lines(newx, preds[ ,3], lty = 'dashed', col = 'red')
@@ -208,15 +208,15 @@ lines(newx, preds[ ,2], lty = 'dashed', col = 'red')
 glinear.iris <- ggplot(data = iris,aes(x = Sepal.Length, y = Sepal.Width, col = Species)) + geom_point() + geom_smooth(method = "lm")+ labs(title = "Plot with categories")
 glinear.iris
 # Boxplot -----------------------------------------------------------------
-gbox = ggplot(data = iris, aes(Species, Sepal.Length)) + 
-  geom_boxplot()+ 
-  labs(title = "Boxplot")+  
-  geom_signif(comparisons = list(c("versicolor", "virginica")), 
+gbox = ggplot(data = iris, aes(Species, Sepal.Length)) +
+  geom_boxplot()+
+  labs(title = "Boxplot")+
+  geom_signif(comparisons = list(c("versicolor", "virginica")),
               map_signif_level=TRUE)
 gviolin = ggplot(data = iris, aes(Species, Sepal.Length)) + geom_violin()+ labs(title = "Violin plot")
 
 
-boxplot(iris$Sepal.Length ~ iris$Species) # For analysis of variance 
+boxplot(iris$Sepal.Length ~ iris$Species) # For analysis of variance
 library(vioplot)
 vioplot(iris$Sepal.Length[iris$Species == "setosa"],
         iris$Sepal.Length[iris$Species == "versicolor"],
@@ -238,8 +238,8 @@ p <- ggplot(df, aes(trt, resp, colour = group))
 p + geom_linerange(aes(ymin = lower, ymax = upper))
 p + geom_pointrange(aes(ymin = lower, ymax = upper))
 p + geom_crossbar(aes(ymin = lower, ymax = upper), width = 0.2)
-gerror =p + geom_errorbar(aes(ymin = lower, 
-                              ymax = upper), 
+gerror =p + geom_errorbar(aes(ymin = lower,
+                              ymax = upper),
                           width = 0.2) + labs(title = "Plot with error bars")
 
 
@@ -269,8 +269,8 @@ mean = mean(y)
 
 error.bar <- function(x,
                       y,
-                      epsilon = NULL, 
-                      se = NULL, 
+                      epsilon = NULL,
+                      se = NULL,
                       se.mul = 1,
                       col = "black") {
   x = as.numeric(x)
@@ -278,7 +278,7 @@ error.bar <- function(x,
     stderr <- function(x) sqrt(var(x,na.rm=TRUE)/length(na.omit(x)))
     se = se.mul*stderr(y)
   } else {se = se.mul*se}
-  
+
   segments(x, y-se,x, y+se,col = col)
   if(is.null(epsilon)){
     epsilon = 0.02} else {epsilon = epsilon}
@@ -357,8 +357,8 @@ my.bp =barplot(as.matrix(df),
                main = "Barplot",
                ylim = c(0,12)#,
                # legend = rownames(df),
-               # args.legend = list(x = "topright", 
-               #                    bty = "n", 
+               # args.legend = list(x = "topright",
+               #                    bty = "n",
                #                    inset=c(-0.07, 0))
                # args.legend=list(
                #   x=ncol(df)+4,
@@ -382,21 +382,21 @@ sign.bar(my.bp, select.pair = c(2,3),y =11,label = "***",mid = TRUE)
 
 plot(hwy~displ, data = mpg, main = "Plot",
      bg = "black", col = "black", pch =21)
-polygon(c(rev(newx), newx), 
-        c(rev(preds[ ,3]), preds[ ,2]), 
+polygon(c(rev(newx), newx),
+        c(rev(preds[ ,3]), preds[ ,2]),
         col = 'grey80', border = NA)
 abline(lm.out)
 lines(newx, preds[ ,3], lty = 'dashed', col = 'red')
 lines(newx, preds[ ,2], lty = 'dashed', col = 'red')
 
 
-c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width", 
+c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width",
   "Species")
 plot(Sepal.Width~ Sepal.Length,
-     data = iris, 
-     pch = 21, 
+     data = iris,
+     pch = 21,
      main = "Plot with categories",
-     col = iris$Species, 
+     col = iris$Species,
      bg = iris$Species) # lm
 sp.names=unique(iris$Species)
 color = c("black","red","green")
@@ -406,9 +406,9 @@ for (i in 1:length(unique(iris$Species))) {
   abline(tplm,col = color[i])
 }
 
-bp1 =boxplot(iris$Sepal.Length ~ iris$Species, 
+bp1 =boxplot(iris$Sepal.Length ~ iris$Species,
              main = "Boxplot",ylim = c(min(iris$Sepal.Length)-.5,
-                                       max(iris$Sepal.Length)+.5)) # For analysis of variance 
+                                       max(iris$Sepal.Length)+.5)) # For analysis of variance
 sign.bar(pos = 2:3,y = 8.3,offset = .1, select.pair = c(1,2),label = "***")
 
 
@@ -435,8 +435,8 @@ plot(y~x,
      main = "Plot with error bars",
      xlab = "Site Category",
      ylab = "Mean")
-axis(side = 1, at = c(1,2), 
-     cex.lab =1, 
+axis(side = 1, at = c(1,2),
+     cex.lab =1,
      cex.axis =1)
 error.bar(x,y)
 
@@ -459,10 +459,10 @@ plot(hc, hang = -1, main = "Dendrogram")
 # x.dat = car.x[1:10,]
 # # rc <- rainbow(nrow(x), start = 0, end = .3)
 # # cc <- rainbow(ncol(x), start = 0, end = .3)
-# hd=heatmap(x.dat, 
-#         # col = cm.colors(256), 
+# hd=heatmap(x.dat,
+#         # col = cm.colors(256),
 #         scale = "column",
-#         # RowSideColors = rc, 
+#         # RowSideColors = rc,
 #         # ColSideColors = cc, margins = c(5,10),
 #         xlab = "Specification variables",
 #         # ylab =  "Car Models",
@@ -472,7 +472,7 @@ library(vegan)
 data(dune)
 data(dune.env)
 dune.Manure <- rda(dune ~ Manure, dune.env)
-plot(dune.Manure, main = "PCA") 
+plot(dune.Manure, main = "PCA")
 
 
 library(grid)

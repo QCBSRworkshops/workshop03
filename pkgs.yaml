@@ -15,9 +15,11 @@ cran_pkgs:
     - rworldmap
     - tidyverse
     - vegan
-    - vioplot
+    - psych
+    - remotes
 
 github_pkgs:
   - inSileco/graphicsutils
   - gavinsimpson/ggvegan
   - QCBSRworkshops/qcbsRworkshops
+  - clauswilke/colorblindr
