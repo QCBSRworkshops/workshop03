@@ -13,6 +13,25 @@ output:
       beforeInit: "qcbsR-macros.js"
 ---
 
+```{r, include = FALSE}
+vc_pkg <- c("knitr", "tidyverse", "vegan", "ggpubr", "ggsignif",
+  "ggpmisc", "ggdendro", "rworldmap", "maps", "mapproj", "grid",
+  "gridExtra", "RColorBrewer", "gridBase", "psych", "remotes")
+
+lapply(vc_pkg, qcbsRworkshops::install_cran_pkgs)
+
+if (!require(colorblindr)) remotes::install_github("clauswilke/colorblindr")
+
+#source("scripts/multiplot.R")
+
+```
+
+```{r theme, include = FALSE, cache=FALSE}
+library(ggplot2)
+theme_set(theme_gray(base_size = 12))
+update_geom_defaults("point", list(size = 2))
+```
+
 
 ```{r setup, echo = FALSE}
 knitr::opts_chunk$set(
@@ -23,25 +42,13 @@ knitr::opts_chunk$set(
   cache = TRUE,
   fig.width=5, fig.height=5,
   fig.align = 'center',
-  fig.retina = 3
+  fig.retina = 3,
+  fig.show = "hold"
 )
 ```
 
-```{r, echo = FALSE}
-options(repos=structure(c(CRAN="http://cran.r-project.org")))
-```
 
-```{r, include = FALSE}
-vc_pkg <- c("knitr", "tidyverse", "vegan", "ggpubr", "ggsignif",
-  "ggpmisc", "ggdendro", "rworldmap", "maps", "mapproj", "grid",
-  "gridExtra", "RColorBrewer", "gridBase", "psych", "remotes")
 
-lapply(vc_pkg, qcbsRworkshops::install_cran_pkgs)
-
-if (!require(colorblindr)) remotes::install_github("clauswilke/colorblindr")
-
-source("scripts/multiplot.R")
-```
 
 # Introduction
 
@@ -434,15 +441,16 @@ ggplot(data = iris, aes(x = Petal.Length, y = Petal.Width)) +
 
 class: inverse, center, middle
 
-# Fine-tuning your plots (aes, scales)
+# Aesthetic mappings
 
-## colour, shape, sizes, etc.
+## color, shape, size, etc.
 
 ---
 
 # Aesthetic
 
 ##### Use aesthetics to distinguish class, group & structure
+
 
 ```{r echo=FALSE, fig.width=8, fig.height=7}
 library(gridExtra)
@@ -491,76 +499,49 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width))+
 
 * Do the sepal length and width vary differently between species?
 
-.small[
-.pull-left[
-```{r}
-ggplot(data = iris, aes(x = Sepal.Length,
-                        y = Sepal.Width)) +
-  geom_point()
+```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
+# No color mapping
+ggplot(data = iris) +
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width)) + 
+  labs(title = "No color mapping")
+# With color mapping
+ggplot(data = iris) +
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + 
+  labs(title = "With color mapping")
 ```
-]
-.pull-right[
-```{r, eval=FALSE}
-ggplot(data = iris, aes(x = Sepal.Length,
-                        y = Sepal.Width,
-                        color = Species)) +
-  geom_point()
-```
-```{r, echo=FALSE, fig.width=6, fig.height=6}
-ggplot(data = iris, aes(x = Sepal.Length,
-                        y = Sepal.Width,
-                        color = Species)) +
-  geom_point() + theme(legend.position = 'bottom')
-```
-]
-]
+
+
+
 
 ---
 # Change color manually
 
-.pull-left[
-**Default**
-```{r, fig.width=6, fig.height=5}
-pp <- ggplot(data = iris,
-                    aes(x = Sepal.Length,
-                        y = Sepal.Width,
-                        color = Species)) +
-  geom_point()
-pp 
-```
-]
-.pull-right[
-**Manual**
-```{r, fig.width=6, fig.height=5}
+
+```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
+# Default
+pp <- ggplot(data = iris) +
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Species))
+pp + labs(title = "Default")
+# Manual
 pp +
-  scale_colour_manual(values = c("grey55",
-                                 "orange",
-                                 "skyblue"))
+  scale_colour_manual(values = c("grey55", "orange", "skyblue")) + 
+  labs(title = "Manual")
 ```
-]
+
 
 ---
 # Color gradient
 
-.pull-left[
-**Default**
-```{r, fig.width=6, fig.height=5}
-pp2 <- ggplot(data = iris,
-             aes(x = Sepal.Length,
-                 y = Sepal.Width,
-                 color = Petal.Length)) +
-  geom_point()
-pp2
+```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
+# Default
+pp2 <- ggplot(data = iris) +
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Petal.Length)) 
+pp2 + labs(title = "Default")
+# Manual
+pp2 + scale_color_gradient(low = "blue", high = "red") + 
+  labs(title = "Manual")
 ```
-]
-.pull-right[
-**Manual**
-```{r, fig.width=6, fig.height=5}
-pp2 + 
-  scale_color_gradient(low = "blue", 
-                       high = "red")
-```
-]
+
 
 
 ---
@@ -578,45 +559,30 @@ display.brewer.all()
 ---
 # Use predefined color palette
 
-.pull-left[
-**Palette for groups**
-.small[
-```{r, fig.width=6, fig.height=5}
-pp + 
-  scale_color_brewer(palette = "Dark2")
+```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
+# Palette for groups
+pp + scale_color_brewer(palette = "Dark2") +
+  labs(title = "Palette for groups")
+# Palette for continuous values
+pp2 + scale_color_gradientn(colours = rainbow(5)) +
+  labs(title = "Palette for continuous values")
 ```
-]
-]
-.pull-right[
-**Palette for continuous values**
-.small[
-```{r, fig.width=6, fig.height=5}
-pp2 + 
-  scale_color_gradientn(colours = rainbow(5))
-```
-]
-]
+
 
 ---
 # Use predefined color palette
 
 Grey scale for publication purpose
 
-.pull-left[
-**Palette for groups**
-```{r, fig.width=6, fig.height=5}
-pp + 
-  scale_color_grey()
+```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
+# Palette for groups
+pp + scale_color_grey() +
+  labs(title = "Palette for groups")
+# Palette for continuous values
+pp2 + scale_colour_gradient(low = "grey85", high = "black") +
+  labs(title = "Palette for continuous values")
 ```
-]
-.pull-right[
-**Palette for values**
-```{r, fig.width=6, fig.height=5}
-pp2 + 
-  scale_colour_gradient(low = "grey85",
-                        high = "black")
-```
-]
+
 
 ---
 # Use color blind friendly palette
@@ -631,89 +597,102 @@ cvd_grid(pp)
 ---
 # Use color blind friendly palette
 
-.pull-left[
-**Viridis palette for groups**
-```{r, fig.width=6, fig.height=5}
-pp + 
-  scale_color_viridis_d()
+```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
+# Palette for groups
+pp + scale_color_viridis_d() +
+  labs(title = "Viridis palette for groups")
+# Palette for continuous values
+pp2 + scale_color_viridis_c() +
+  labs(title = "Viridis palette for continuous values")
 ```
-]
-.pull-right[
-**Viridis palette for values**
-```{r, fig.width=6, fig.height=5}
-pp2 + 
-  scale_color_viridis_c()
+
+
+---
+# Aesthetic shape, size and alpha
+
+```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
+# Shape for groups
+ggplot(data = iris) +
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, shape = Species)) +
+  labs(title = "Shape for groups")
+# Size for continuous values
+ggplot(data = iris) +
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, 
+                           size = Petal.Length, alpha = Petal.Length)) +
+  labs(title = "Size and alpha for continuous values")
 ```
-]
 
 
 ---
 # Challenge #2 ![:cube]()
 
-Produce a colourful plot from built-in datasets such as `mtcars`, `CO2` or `msleep`
+- Produce a informative plot from built-in datasets such as `mtcars`, `CO2` or `msleep`. 
+
+- Use appropriate aesthetic mappings for different data type
+
 
 <br>
 
-Data|x value|y value| Aesthetic
+Data| x | y | Aesthetic
 :-------------:|:-------------:|:-------------:|:-------------:
-mtcars |wt |mpg |cyl
-CO2 |conc |uptake |Treatment & Type
+mtcars |wt |mpg | disp & hp
+CO2 |conc |uptake | Treatment & Type
 msleep |log10(bodywt) |awake | vore & conservation
 
-
+<br>
+.center[.alert[
+![:faic](exclamation-triangle) Pay attention to data type!
+]
+]
 ---
-# Challenge #2 - solution ![:cube]()
+# Challenge #2 - solution 
 
-```{r, fig.height=5.5, fig.width=7}
+```{r, fig.height=5.2, fig.width=6.8}
 data(mtcars)
-ggplot(data = mtcars, 
-       aes(x = wt, y = mpg, color = cyl)) + 
-  geom_point(size = 5)
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = wt, y = mpg, 
+                           color = disp, alpha = hp))
 ```
+
+.comment[Could you use `size` intead of `alpha`? What about `shape`?]
 
 ---
-# Challenge #2 - solution ![:cube]()
+# Challenge #2 - solution 
 
-```{r, fig.height=5.5, fig.width=7}
+```{r, fig.height=5.2, fig.width=6.8}
 data(CO2)
-ggplot(data = CO2, 
-       aes(x = conc, y = uptake, colour = Treatment)) +
-    geom_point(size = 5)
+ggplot(data = CO2) +
+    geom_point(mapping = aes(x = conc, y = uptake, 
+                             color = Treatment, shape = Type))
 ```
+
+.comment[Why not use `size = Type`?]
 
 ---
 # Challenge #2 - solution
 
-```{r, fig.height=5.5, fig.width=7}
+```{r, fig.height=5.2, fig.width=6.8}
 data(msleep)
-ggplot(data = msleep, 
-       aes(x = log10(bodywt), y = awake, colour = vore, shape= conservation)) +
-    geom_point(size = 5)
+ggplot(data = msleep) +
+    geom_point(mapping = aes(x = log10(bodywt), y = awake, 
+                             color = vore, shape = conservation))
 ```
 
+.comment[Why not use `size = Type`?]
 
 ---
 # Transformation axis scale
 
-.pull-left[
-**x axis in regular scale**
-```{r, fig.height=5}
-ggplot(diamonds, aes(carat, price)) + 
-  geom_point()
+```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
+# x axis in regular scale
+ggplot(diamonds) + geom_point(mapping = aes(x = carat, y = price)) +
+  labs(title = "x axis in regular scale")
+# x axis in log10 scale
+ggplot(diamonds) + geom_point(mapping = aes(x = carat, y = price)) +
+  scale_x_log10() + scale_y_log10() + labs(title = "x axis in log10 scale")
 ```
-]
 
-.pull-right[
-**x axis in log10 scale**
-```{r, fig.height=5}
-ggplot(diamonds, aes(carat, price)) +
-  geom_point() +
-  scale_x_log10() +
-  scale_y_log10()
-```
-]
-
-NB: It is also possible to transform the coordinate system using `coord_trans(x = "log10", y = "log10")`
+.small[NB: It is also possible to transform the coordinate system using `coord_trans(x = "log10", y = "log10")`]
 
 <!-- explain the difference -->
 
@@ -727,22 +706,17 @@ class: inverse, center, middle
 
 ---
 # Theme
-  * Theme: classic for publication purpose
-```{r, eval=FALSE}
-pp + scale_color_grey() + theme_classic()
+
+```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
+# Theme classic
+pp + scale_color_grey() + theme_classic() +
+  labs(title = "Theme classic")
+# Theme minimal
+pp + scale_color_grey() + theme_minimal() +
+  labs(title = "Theme minimal")
 ```
-.pull-left[
-**Defaut**
-```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
-pp + scale_color_grey()
-```
-]
-.pull-right[
-**Classic**
-```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
-pp + scale_color_grey() + theme_classic()
-```
-]
+
+NB: Good choices for publication purpose!
 
 ---
 ## Theme assist: RStudio addin
@@ -772,7 +746,7 @@ CO2.plot.nofacet <- ggplot(data = CO2, aes(x = conc, y = uptake, colour = Treatm
     ylab("CO2 Uptake (umol/m^2 sec)") +
     ggtitle("Without Facet")
 CO2.plot.facet <- CO2.plot.nofacet + facet_grid(~ Type) + ggtitle("Facet")
-multiplot(CO2.plot.nofacet, CO2.plot.facet)
+#multiplot(CO2.plot.nofacet, CO2.plot.facet)
 ```
 
 
@@ -1405,12 +1379,12 @@ map.gg
 ```{r, eval=FALSE}
 library(rworldmap)
 library(mapproj)
-newmap <- rworldmap::getMap(resolution = "high")
+newmap <- rworldmap::getMap(resolution = "low")
 plot(newmap)
 ```
 ```{r, echo=FALSE}
 library(rworldmap)
-newmap <- rworldmap::getMap(resolution = "high")
+newmap <- rworldmap::getMap(resolution = "low")
 plot(newmap, xlim = c(-92, -89)
      , ylim = c(-1.5, 0.5)
      , asp = 1
@@ -1501,7 +1475,7 @@ plot(hc, hang = -1, main = "Dendrogram")
 **A function to add multiple graph on the same plot**
 
 ```{r}
-multiplot(density.gg, map.gg, violP.gg, lm.gg, cols = 2)
+#multiplot(density.gg, map.gg, violP.gg, lm.gg, cols = 2)
 ```
 
 ---
@@ -1567,7 +1541,7 @@ Orchard.challenge4 <- Orchard.challenge4 + theme(axis.title.y = element_text(siz
 #Orchard.challenge4
 
 
-multiplot(msleep.challenge4,dendro.challenge4, brain_body.challenge4, Orchard.challenge4, cols = 2)
+#multiplot(msleep.challenge4,dendro.challenge4, brain_body.challenge4, Orchard.challenge4, cols = 2)
 
 ```
 
@@ -1660,7 +1634,7 @@ Orchard.challenge4
 # Solution to final challenge
 
 ```{r, fig.align='center', fig.height=6, fig.width=8}
-multiplot(msleep.challenge4,dendro.challenge4, brain_body.challenge4, Orchard.challenge4, cols = 2)
+#multiplot(msleep.challenge4,dendro.challenge4, brain_body.challenge4, Orchard.challenge4, cols = 2)
 ```
 
 ---
