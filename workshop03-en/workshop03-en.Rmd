@@ -739,23 +739,19 @@ class: inverse, center, middle
 
 ---
 # Facet: Iris
-```{r, fig.align="center", fig.width=8, fig.height=6}
-ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width,
-                        color = Species)) +
-  geom_point() +
-  facet_grid(~Species, scales = "free")
+```{r, fig.align="center", fig.width=10, fig.height=6}
+ggplot(data = iris) +
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  facet_grid(~ Species, scales = "free")
 ```
 
 ---
 # Facet: CO2
-```{r, echo=F, fig.align="center", fig.width=8, fig.height=8}
-CO2.plot.nofacet <- ggplot(data = CO2, aes(x = conc, y = uptake, colour = Treatment)) +
-    geom_point() +
-    xlab("CO2 Concentration (mL/L)") +
-    ylab("CO2 Uptake (umol/m^2 sec)") +
-    ggtitle("Without Facet")
-CO2.plot.facet <- CO2.plot.nofacet + facet_grid(~ Type) + ggtitle("Facet")
-#multiplot(CO2.plot.nofacet, CO2.plot.facet)
+```{r, fig.align="center", fig.width=10, fig.height=5.5}
+ggplot(data = CO2) +
+  geom_point(mapping = aes(x = conc, y = uptake, colour = Treatment)) +
+  xlab("CO2 Concentration (mL/L)") + ylab("CO2 Uptake (umol/m^2 sec)") + 
+  facet_grid(~ Type)
 ```
 
 
@@ -827,12 +823,9 @@ tips.gg
 # Challenge - solution #3 ![:cube]()
 
 ```{r, eval=FALSE}
-tips.gg <- ggplot(tips, aes(x = total_bill,
-                            y = tip/total_bill,
-                            shape = smoker,
-                            color = sex,
-                            size = size)) +
-  geom_point() +
+tips.gg <- ggplot(tips) +
+  geom_point(aes(x = total_bill, y = tip/total_bill,
+                 shape = smoker, color = sex, size = size)) +
   facet_grid( ~ time) +
   scale_color_grey() +
   labs(title = "Tips per total bill at Lunch and Dinner",
@@ -855,10 +848,9 @@ tips.gg
 #### Aesthetic
 
 ```{r, fig.width=7}
-tips.gg <- ggplot(tips,
-                  aes(x = total_bill, y = tip/total_bill,
-                      shape = smoker, color = sex, size = size)) +
-  geom_point()
+tips.gg <- ggplot(tips) +
+  geom_point(mapping = aes(x = total_bill, y = tip/total_bill,
+                      shape = smoker, color = sex, size = size))
 tips.gg
 ```
 
@@ -918,16 +910,19 @@ tips.gg
 ---
 
 # Geom: ggplot
-<div style="text-align:center">
-<img src="images/plots_in_various_contexts.png" height=85% width=85%>
-</div>
+
+.center[
+![:scale 85%](images/plots_in_various_contexts.png)
+]
 
 ---
 
 # Base plot
-<div style="text-align:center">
-<img src="images/plots_in_various_contexts_baseplot.png" height=85% width=85%>
-</div>
+
+.center[
+![:scale 85%](images/plots_in_various_contexts_baseplot.png)
+]
+
 
 ---
 
@@ -1001,7 +996,7 @@ hist(diamonds$carat)
 ggplot(mpg, aes(class)) + geom_bar()
 ```
 ```{r, echo=FALSE}
-ggplot(mpg, aes(class)) + geom_bar()+ labs(title = "Barplot")
+ggplot(mpg, aes(class)) + geom_bar() + labs(title = "Barplot")
 ```
 ]
 
