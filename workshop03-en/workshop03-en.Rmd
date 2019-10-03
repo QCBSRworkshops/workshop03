@@ -13,6 +13,10 @@ output:
       beforeInit: "qcbsR-macros.js"
 ---
 
+```{r, echo =F}
+options(repos=structure(c(CRAN="http://cran.r-project.org")))
+```
+
 ```{r, include = FALSE}
 vc_pkg <- c("knitr", "tidyverse", "vegan", "ggpubr", "ggsignif",
   "ggpmisc", "ggdendro", "rworldmap", "maps", "mapproj", "grid",
@@ -138,9 +142,11 @@ Important questions:
 - To who?
 - How to do it? (data type, data preparation)
 
-<div style="text-align:center">
+.center[
 .alert[A rule of thumb: think simple — use less ink!]
-</div>
+]
+
+
 
 
 ---
@@ -174,7 +180,7 @@ Other drawing softwares are probably more interesting options such as [GIMP](htt
 
 #### .alert[ Because of its powerful features!]
 
-In this workshop, we focus only on `ggplot2`, but [multiple packages and functions](https://insileco.github.io/wiki/rgraphpkgs/) can be used for great visualization (e.g., ["base R"](https://bookdown.org/rdpeng/exdata/the-base-plotting-system-1.html), [plotly](https://plot.ly/r/), [sjPlot](http://www.strengejacke.de/sjPlot/), [mapview](https://r-spatial.github.io/mapview/), [igraph](https://igraph.org/r/)). 
+In this workshop, we focus only on `ggplot2`, but [multiple packages and functions](https://insileco.github.io/wiki/rgraphpkgs/) can be used for great visualization (e.g., ["base R"](https://bookdown.org/rdpeng/exdata/the-base-plotting-system-1.html), [plotly](https://plot.ly/r/), [sjPlot](http://www.strengejacke.de/sjPlot/), [mapview](https://r-spatial.github.io/mapview/), [igraph](https://igraph.org/r/)).
 
 ```{r, echo=FALSE, fig.width=9, fig.height=5.7}
 source(file="./scripts/multiExamplePlot.R")
@@ -214,9 +220,9 @@ library(ggplot2)
 
 A graphic is made of different layers:
 
-<div style="text-align:center">
-<img src="images/Layers_ggplot.png" height=90% width=90%>
-</div>
+.center[
+![:scale 90%](images/Layers_ggplot.png)
+]
 
 We will learn how to build graphs step by step to make it look like we want.
 
@@ -232,7 +238,9 @@ These layers have specific names that you will see throughout the presentation:
 ---
 # Grammar of Graphics (GG) basics
 
-.center[![:scale 80%](images/ggplot functions geoms (cheatsheet).png)]
+.center[
+![:scale 40%](images/ggplot_scale_geoms.png)
+]
 
 
 ---
@@ -240,9 +248,10 @@ These layers have specific names that you will see throughout the presentation:
 
 But here are the basic requirements to draw the simplest ggplot:
 
-<div style="text-align:center">
-<img src="images/ggplot basics.png" height=80% width=80%>
-</div>
+.center[
+![:scale 80%](images/ggplot_basics.png)
+]
+
 
 
 ---
@@ -405,7 +414,7 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 
 ```{r, fig.height=4, fig.width=5}
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-  xlab("x = Sepal lenght") + 
+  xlab("x = Sepal lenght") +
   ylab("y = Sepal width") +
   geom_point()
 ```
@@ -415,7 +424,7 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 
 #### Draw your 1rst ggplot!
 
-.alert[Question] 
+.alert[Question]
 
 >Is there a relation between the **length** & the **width** of the iris **Petal** ?
 
@@ -472,10 +481,10 @@ source(file="./scripts/4plot_aesthetic.R")
 .pull-left[
 ```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
 ggplot(iris, aes(Sepal.Length, Sepal.Width))+
-  geom_point(aes(color = Species)) + 
-  labs(title = "Qualitative color for groups") + 
+  geom_point(aes(color = Species)) +
+  labs(title = "Qualitative color for groups") +
   theme(title = element_text(size = 16, face = "bold"),
-        legend.title = element_text(size = 14), 
+        legend.title = element_text(size = 14),
         legend.position = 'bottom')
 ```
 ]
@@ -483,10 +492,10 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width))+
 .pull-right[
 ```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
 ggplot(iris, aes(Sepal.Length, Sepal.Width))+
-  geom_point(aes(color = Sepal.Length)) + 
-  labs(title = "Sequential color for values") + 
+  geom_point(aes(color = Sepal.Length)) +
+  labs(title = "Sequential color for values") +
   theme(title = element_text(size = 16, face = "bold"),
-        legend.title = element_text(size = 14), 
+        legend.title = element_text(size = 14),
         legend.position = 'bottom')
 ```
 ]
@@ -502,11 +511,11 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width))+
 ```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
 # No color mapping
 ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width)) + 
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
   labs(title = "No color mapping")
 # With color mapping
 ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + 
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
   labs(title = "With color mapping")
 ```
 
@@ -524,7 +533,7 @@ pp <- ggplot(data = iris) +
 pp + labs(title = "Default")
 # Manual
 pp +
-  scale_colour_manual(values = c("grey55", "orange", "skyblue")) + 
+  scale_colour_manual(values = c("grey55", "orange", "skyblue")) +
   labs(title = "Manual")
 ```
 
@@ -535,10 +544,10 @@ pp +
 ```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
 # Default
 pp2 <- ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Petal.Length)) 
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Petal.Length))
 pp2 + labs(title = "Default")
 # Manual
-pp2 + scale_color_gradient(low = "blue", high = "red") + 
+pp2 + scale_color_gradient(low = "blue", high = "red") +
   labs(title = "Manual")
 ```
 
@@ -617,7 +626,7 @@ ggplot(data = iris) +
   labs(title = "Shape for groups")
 # Size for continuous values
 ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, 
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width,
                            size = Petal.Length, alpha = Petal.Length)) +
   labs(title = "Size and alpha for continuous values")
 ```
@@ -626,7 +635,7 @@ ggplot(data = iris) +
 ---
 # Challenge #2 ![:cube]()
 
-- Produce a informative plot from built-in datasets such as `mtcars`, `CO2` or `msleep`. 
+- Produce a informative plot from built-in datasets such as `mtcars`, `CO2` or `msleep`.
 
 - Use appropriate aesthetic mappings for different data type
 
@@ -645,24 +654,24 @@ msleep |log10(bodywt) |awake | vore & conservation
 ]
 ]
 ---
-# Challenge #2 - solution 
+# Challenge #2 - solution
 
 ```{r, fig.height=5.2, fig.width=6.8}
 data(mtcars)
-ggplot(data = mtcars) + 
-  geom_point(mapping = aes(x = wt, y = mpg, 
+ggplot(data = mtcars) +
+  geom_point(mapping = aes(x = wt, y = mpg,
                            color = disp, alpha = hp))
 ```
 
 .comment[Could you use `size` intead of `alpha`? What about `shape`?]
 
 ---
-# Challenge #2 - solution 
+# Challenge #2 - solution
 
 ```{r, fig.height=5.2, fig.width=6.8}
 data(CO2)
 ggplot(data = CO2) +
-    geom_point(mapping = aes(x = conc, y = uptake, 
+    geom_point(mapping = aes(x = conc, y = uptake,
                              color = Treatment, shape = Type))
 ```
 
@@ -674,7 +683,7 @@ ggplot(data = CO2) +
 ```{r, fig.height=5.2, fig.width=6.8}
 data(msleep)
 ggplot(data = msleep) +
-    geom_point(mapping = aes(x = log10(bodywt), y = awake, 
+    geom_point(mapping = aes(x = log10(bodywt), y = awake,
                              color = vore, shape = conservation))
 ```
 
@@ -797,17 +806,17 @@ tips.gg <- ggplot(tips, aes(x = total_bill,
                             y = tip/total_bill,
                             shape = smoker,
                             color = sex,
-                            size = size)) + 
-  geom_point() + 
-  facet_grid( ~ time) + 
-  scale_color_grey() + 
-  labs(title = "Tips per total bill at Lunch and Dinner", 
-       x = "Total bill", y = "Tips/total bill") + 
-  theme(axis.title = element_text(size = 16, 
+                            size = size)) +
+  geom_point() +
+  facet_grid( ~ time) +
+  scale_color_grey() +
+  labs(title = "Tips per total bill at Lunch and Dinner",
+       x = "Total bill", y = "Tips/total bill") +
+  theme(axis.title = element_text(size = 16,
                                   colour = "navy"),
         axis.text = element_text(size = 12),
-        plot.title = element_text(size = 16, 
-                                  colour = "orange3", 
+        plot.title = element_text(size = 16,
+                                  colour = "orange3",
                                   face = "bold"),
         strip.text.x = element_text(size = 14, face="bold"))
 tips.gg
@@ -822,17 +831,17 @@ tips.gg <- ggplot(tips, aes(x = total_bill,
                             y = tip/total_bill,
                             shape = smoker,
                             color = sex,
-                            size = size)) + 
-  geom_point() + 
-  facet_grid( ~ time) + 
-  scale_color_grey() + 
-  labs(title = "Tips per total bill at Lunch and Dinner", 
-       x = "Total bill", y = "Tips/total bill") + 
-  theme(axis.title = element_text(size = 16, 
+                            size = size)) +
+  geom_point() +
+  facet_grid( ~ time) +
+  scale_color_grey() +
+  labs(title = "Tips per total bill at Lunch and Dinner",
+       x = "Total bill", y = "Tips/total bill") +
+  theme(axis.title = element_text(size = 16,
                                   colour = "navy"),
         axis.text = element_text(size = 12),
-        plot.title = element_text(size = 16, 
-                                  colour = "orange3", 
+        plot.title = element_text(size = 16,
+                                  colour = "orange3",
                                   face = "bold"),
         strip.text.x = element_text(size = 14, face="bold"))
 tips.gg
@@ -841,49 +850,49 @@ tips.gg
 
 ---
 
-# Challenge #3 - step by step solution 
+# Challenge #3 - step by step solution
 
 #### Aesthetic
 
 ```{r, fig.width=7}
 tips.gg <- ggplot(tips,
                   aes(x = total_bill, y = tip/total_bill,
-                      shape = smoker, color = sex, size = size)) + 
+                      shape = smoker, color = sex, size = size)) +
   geom_point()
 tips.gg
 ```
 
 
 ---
-# Challenge #3 - step by step solution 
+# Challenge #3 - step by step solution
 
 #### Facet
 
 ```{r, fig.width=7}
-tips.gg <- tips.gg + 
+tips.gg <- tips.gg +
   facet_grid( ~ time)
 tips.gg
 ```
 
 
 ---
-# Challenge #3 - step by step solution 
+# Challenge #3 - step by step solution
 
 #### Grey color palette
 
 ```{r, fig.width=7}
-tips.gg <- tips.gg + 
+tips.gg <- tips.gg +
   scale_color_grey()
 tips.gg
 ```
 
 ---
-# Challenge #3 - step by step solution 
+# Challenge #3 - step by step solution
 
 #### Plot Title
 
 ```{r, fig.width=7}
-tips.gg <- tips.gg + 
+tips.gg <- tips.gg +
   labs(title = "Tips per total bill at Lunch and Dinner")
 tips.gg
 ```
@@ -891,13 +900,13 @@ tips.gg
 
 ---
 
-# Challenge #3 - step by step solution 
+# Challenge #3 - step by step solution
 
 #### Theme tunning: Plot & Axis Title
 
 .small[
 ```{r, fig.width=6, fig.height=4}
-tips.gg <- tips.gg + 
+tips.gg <- tips.gg +
   theme(axis.title = element_text(size = 16, colour = "navy"),
         axis.text = element_text(size = 12),
         plot.title = element_text(size = 16, colour = "orange3", face = "bold"),
@@ -1170,9 +1179,10 @@ lines(newx, preds[ ,2], lty = 'dashed', col = 'red')
 
 # Boxplot
 
-<div style="text-align:center">
-<img src="images/boxplot_explain.png" height=85% width=85%>
-</div>
+.center[
+![:scale 85%](images/boxplot_explain.png)
+]
+
 
 ```{r, echo=FALSE, fig.align="center", fig.width=3, fig.height=3}
 ggplot(data = iris, aes(Species, Sepal.Length, fill=Species)) +
@@ -1181,7 +1191,7 @@ ggplot(data = iris, aes(Species, Sepal.Length, fill=Species)) +
 
 ---
 
-#Boxplot with significant value
+# Boxplot with significant value
 
 .pull-left[
 *ggplot2*
