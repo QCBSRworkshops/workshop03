@@ -1,5 +1,5 @@
 ---
-title: "Workshop 3: Introduction to ggplot2"
+title: "Workshop 3: Introduction to `ggplot2`"
 subtitle: "QCBS R Workshop Series"
 author: "Québec Centre for Biodiversity Science"
 output:
@@ -18,11 +18,25 @@ options(repos=structure(c(CRAN="http://cran.r-project.org")))
 ```
 
 ```{r, include = FALSE}
-vc_pkg <- c("knitr", "tidyverse", "vegan", "ggpubr", "ggsignif",
-  "ggpmisc", "ggdendro", "rworldmap", "maps", "mapproj", "grid",
-  "gridExtra", "RColorBrewer", "gridBase", "psych", "remotes")
+required.libraries <- c("knitr", 
+                        "tidyverse", 
+                        "vegan", 
+                        "ggpubr", 
+                        "ggsignif",
+                        "ggpmisc", 
+                        "ggdendro", 
+                        "rworldmap", 
+                        "maps", 
+                        "mapproj", 
+                        "grid",
+                        "gridExtra", 
+                        "RColorBrewer", 
+                        "gridBase", 
+                        "psych", 
+                        "remotes")
 
-lapply(vc_pkg, qcbsRworkshops::install_cran_pkgs)
+needed.libraries <- required.libraries[!(required.libraries %in% installed.packages()[,"Package"])]
+if(length(needed.libraries)) install.packages(needed.libraries)
 
 if (!require(colorblindr)) remotes::install_github("clauswilke/colorblindr")
 
@@ -52,28 +66,25 @@ knitr::opts_chunk$set(
 ```
 
 
-
-
 # Introduction
 
 #### To follow along:
 
 Code and .HTML available at http://qcbs.ca/wiki/r/workshop3
 
-
 #### Recommendations:
 
   1. create your own new script;
   2. refer to provided code only if needed;
-  3. avoid copy pasting or running the code directly from script.
+  3. avoid copy-pasting or running the code directly from the script.
 
-###### NB [ggplot2](https://ggplot2.tidyverse.org/) is also on GitHub: https://github.com/tidyverse/ggplot2
+###### [ggplot2](https://ggplot2.tidyverse.org/) is also on GitHub: https://github.com/tidyverse/ggplot2
 
 
 ---
 # Outline
 
-##### 1. ggplot mechanics
+##### 1. `ggplot2` mechanics
 
 <div style="text-align:center">
 <img src="images/Layers_ggplot.png" width=55%>
@@ -83,7 +94,7 @@ Code and .HTML available at http://qcbs.ca/wiki/r/workshop3
 
 ##### 2. Advanced visualization
 
-![:faic](arrow-right)  point, line, histogram, box plot, error bar, significant value & linear regression
+![:faic](arrow-right)  point, line, histogram, box plot, error bar, significant value and linear regression
 
 ##### 3. Fine-tuning
 
@@ -91,15 +102,14 @@ Code and .HTML available at http://qcbs.ca/wiki/r/workshop3
 
 ##### 5. Conclusion
 
-
 ---
 # Learning objectives
 
 <br>
 
-- Teach the basics of data visualization using R;
-- A good representation of one's data can be unique and thus no single function or package can meet everyone's needs;
-- Creativity is important for scientists!
+- Teach the basics of data visualization using R.
+- A good representation of one's data can be unique and thus no single function or package can meet everyone's needs.
+- Creativity is important to scientists!
 - A basic understanding of design to communicate effectively with graphs.
 
 ---
@@ -139,8 +149,8 @@ What do you thing about this one ![:faic](arrow-up)?
 
 Important questions:
 - What do you want to communicate?
-- To who?
-- How to do it? (data type, data preparation)
+- What is your public?
+- What is the best way to do it?
 
 .center[
 .alert[A rule of thumb: think simple — use less ink!]
@@ -155,7 +165,7 @@ Important questions:
 <br>
 
 .alert[
-### &#x26A0; R is not made for drawings.
+### &#x26A0; `R` is not made for drawings.
 ]
 
 Other drawing softwares are probably more interesting options such as [GIMP](https://www.gimp.org/) or [Inkscape](https://inkscape.org/). It is important to get the right tool for the right task!
@@ -187,8 +197,6 @@ source(file="./scripts/multiExamplePlot.R")
 ```
 
 
-
-
 ---
 # `ggplot2` is versatile
 
@@ -203,7 +211,7 @@ source(file="./scripts/multiExamplePlot.R")
 ---
 class: inverse, center, middle
 
-# `ggplot` mechanics: the basics
+# `ggplot2` mechanics: the basics
 
 ---
 
@@ -224,7 +232,7 @@ A graphic is made of different layers:
 ![:scale 90%](images/Layers_ggplot.png)
 ]
 
-We will learn how to build graphs step by step to make it look like we want.
+We will learn how to build graphs step by step to make it look as we desire.
 
 ---
 # Grammar of Graphics (GG) basics
@@ -246,7 +254,7 @@ These layers have specific names that you will see throughout the presentation:
 ---
 # Grammar of Graphics (GG) basics
 
-But here are the basic requirements to draw the simplest ggplot:
+Here are the basic requirements to draw the simplest ``ggplot`:
 
 .center[
 ![:scale 80%](images/ggplot_basics.png)
@@ -404,7 +412,7 @@ ggplot()
 
 ```{r, fig.height=4, fig.width=5}
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-  xlab("x = Sepal lenght") +
+  xlab("x = Sepal length") +
   ylab("y = Sepal width")
 ```
 
@@ -414,7 +422,7 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 
 ```{r, fig.height=4, fig.width=5}
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-  xlab("x = Sepal lenght") +
+  xlab("x = Sepal length") +
   ylab("y = Sepal width") +
   geom_point()
 ```
@@ -422,14 +430,13 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 ---
 # Challenge #1 (5min) ![:cube]()
 
-#### Draw your 1rst ggplot!
+#### Draw your 1st ggplot!
 
 .alert[Question]
 
->Is there a relation between the **length** & the **width** of the iris **Petal** ?
+> Is there a relation between the **length** & the **width** of the iris **petal** ?
 
-> Does the *width* of the Petal increase with its *length* ?
-
+> Does the *width* of the petal increase with its *length* ?
 
 .center[Parameters to consider when addressing this question:]
 
@@ -442,7 +449,8 @@ iris|geom_point|Petal length|Petal width
 # Challenge 1# - Solution ![:cube]()
 
 ```{r}
-ggplot(data = iris, aes(x = Petal.Length, y = Petal.Width)) +
+ggplot(data = iris, aes(x = Petal.Length, 
+                        y = Petal.Width)) +
   geom_point()
 ```
 
@@ -452,27 +460,27 @@ class: inverse, center, middle
 
 # Aesthetic mappings
 
-## color, shape, size, etc.
+## colour, shape, size, etc.
 
 ---
 
 # Aesthetic
 
-##### Use aesthetics to distinguish class, group & structure
+##### Use aesthetics (`aes()`) to distinguish classes, groups and structure
 
 
-```{r echo=FALSE, fig.width=8, fig.height=7}
+```{r echo = FALSE, fig.width = 8, fig.height = 7}
 library(gridExtra)
 source(file="./scripts/4plot_aesthetic.R")
 ```
 
 ---
 
-# Color : make your points talk
+# Colouring: make your points talk
 
-**Color to**
+Change **colour** to
 
-&nbsp; ![:faic](arrow-right) differentiate groups
+&nbsp; ![:faic](arrow-right) differentiate between groups
 
 &nbsp; ![:faic](arrow-right) represent data values
 
@@ -481,8 +489,8 @@ source(file="./scripts/4plot_aesthetic.R")
 .pull-left[
 ```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
 ggplot(iris, aes(Sepal.Length, Sepal.Width))+
-  geom_point(aes(color = Species)) +
-  labs(title = "Qualitative color for groups") +
+  geom_point(aes(colour = Species)) +
+  labs(title = "Qualitative colour for groups") +
   theme(title = element_text(size = 16, face = "bold"),
         legend.title = element_text(size = 14),
         legend.position = 'bottom')
@@ -492,44 +500,40 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width))+
 .pull-right[
 ```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
 ggplot(iris, aes(Sepal.Length, Sepal.Width))+
-  geom_point(aes(color = Sepal.Length)) +
-  labs(title = "Sequential color for values") +
+  geom_point(aes(colour = Sepal.Length)) +
+  labs(title = "Gradient colouring for values") +
   theme(title = element_text(size = 16, face = "bold"),
         legend.title = element_text(size = 14),
         legend.position = 'bottom')
 ```
 ]
 
-.small[See [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/color-basics.html)]
+.small[See [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/colour-basics.html)]
 
 ---
 
-# Example of aesthetic color
+# Using `aes()` use to change colour
 
-* Do the sepal length and width vary differently between species?
+* Do the sepal length and width vary differently across species?
 
 ```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
-# No color mapping
+# No colour mapping
 ggplot(data = iris) +
   geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
-  labs(title = "No color mapping")
-# With color mapping
+  labs(title = "No colour mapping")
+# With colour mapping
 ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
-  labs(title = "With color mapping")
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
+  labs(title = "With colour mapping")
 ```
 
-
-
-
 ---
-# Change color manually
-
+# Change colour manually
 
 ```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
 # Default
 pp <- ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Species))
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, colour = Species))
 pp + labs(title = "Default")
 # Manual
 pp +
@@ -539,22 +543,21 @@ pp +
 
 
 ---
-# Color gradient
+# Colour gradient
 
 ```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
 # Default
 pp2 <- ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Petal.Length))
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, 
+                           colour = Petal.Length))
 pp2 + labs(title = "Default")
 # Manual
-pp2 + scale_color_gradient(low = "blue", high = "red") +
+pp2 + scale_colour_gradient(low = "blue", high = "red") +
   labs(title = "Manual")
 ```
 
-
-
 ---
-# Use predefined color palette
+# Use a predefined colour palette
 
 ```{r, eval = FALSE}
 install.packages("RColorBrewer")
@@ -566,26 +569,26 @@ display.brewer.all()
 
 
 ---
-# Use predefined color palette
+# Use a predefined colour palette
 
 ```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
 # Palette for groups
-pp + scale_color_brewer(palette = "Dark2") +
+pp + scale_colour_brewer(palette = "Dark2") +
   labs(title = "Palette for groups")
 # Palette for continuous values
-pp2 + scale_color_gradientn(colours = rainbow(5)) +
+pp2 + scale_colour_gradientn(colours = rainbow(5)) +
   labs(title = "Palette for continuous values")
 ```
 
 
 ---
-# Use predefined color palette
+# Use a predefined colour palette
 
-Grey scale for publication purpose
+Grey-scale palette for publication purposes
 
 ```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
 # Palette for groups
-pp + scale_color_grey() +
+pp + scale_colour_grey() +
   labs(title = "Palette for groups")
 # Palette for continuous values
 pp2 + scale_colour_gradient(low = "grey85", high = "black") +
@@ -594,9 +597,9 @@ pp2 + scale_colour_gradient(low = "grey85", high = "black") +
 
 
 ---
-# Use color blind friendly palette
+# Use colourblind-friendly palettes
 
-How your figure might appear under various forms of colorblindness?
+How your figure might appear under various forms of colourblindness?
 
 ```{r, echo=FALSE, fig.width=10, fig.height=7.5}
 library(colorblindr)
@@ -604,131 +607,140 @@ cvd_grid(pp)
 ```
 
 ---
-# Use color blind friendly palette
+# Use colourblind-friendly palettes
 
 ```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
 # Palette for groups
-pp + scale_color_viridis_d() +
-  labs(title = "Viridis palette for groups")
+pp + scale_colour_viridis_d() +
+  labs(title = "viridis palette for groups")
 # Palette for continuous values
-pp2 + scale_color_viridis_c() +
-  labs(title = "Viridis palette for continuous values")
+pp2 + scale_colour_viridis_c() +
+  labs(title = "viridis palette for continuous values")
 ```
 
 
 ---
-# Aesthetic shape, size and alpha
+# Changing `shape`, `size` and `alpha`
 
 ```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
-# Shape for groups
+# shape for groups
 ggplot(data = iris) +
   geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, shape = Species)) +
-  labs(title = "Shape for groups")
-# Size for continuous values
+  labs(title = "shape for groups")
+
+# size and alpha for continuous values
 ggplot(data = iris) +
   geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width,
                            size = Petal.Length, alpha = Petal.Length)) +
-  labs(title = "Size and alpha for continuous values")
+  labs(title = "size and alpha for continuous values")
 ```
 
 
 ---
 # Challenge #2 ![:cube]()
 
-- Produce a informative plot from built-in datasets such as `mtcars`, `CO2` or `msleep`.
+- Produce an informative plot from built-in datasets such as `mtcars`, `CO2` or `msleep`.
 
-- Use appropriate aesthetic mappings for different data type
+- Use appropriate aesthetic mappings for different data types
 
 
 <br>
 
-Data| x | y | Aesthetic
+Data| x | y | Aesthetics
 :-------------:|:-------------:|:-------------:|:-------------:
-mtcars |wt |mpg | disp & hp
-CO2 |conc |uptake | Treatment & Type
-msleep |log10(bodywt) |awake | vore & conservation
+mtcars |*wt* |*mpg* | *disp* and *hp*
+CO2 |*conc* |*uptake* | *Treatment* and *Type*
+msleep |log10(*bodywt*) |*awake* | *vore* and *conservation*
 
 <br>
 .center[.alert[
-![:faic](exclamation-triangle) Pay attention to data type!
+![:faic](exclamation-triangle) Pay attention to the data types!
 ]
 ]
 ---
-# Challenge #2 - solution
+# Challenge #2 - Solution example #1
 
-```{r, fig.height=5.2, fig.width=6.8}
+```{r, fig.height=5, fig.width=6.2}
 data(mtcars)
 ggplot(data = mtcars) +
   geom_point(mapping = aes(x = wt, y = mpg,
-                           color = disp, alpha = hp))
+                           colour = disp, 
+                           alpha = hp))
 ```
 
 .comment[Could you use `size` intead of `alpha`? What about `shape`?]
 
 ---
-# Challenge #2 - solution
+# Challenge #2 - Solution example #2
 
-```{r, fig.height=5.2, fig.width=6.8}
+```{r, fig.height=5, fig.width=6.2}
 data(CO2)
 ggplot(data = CO2) +
     geom_point(mapping = aes(x = conc, y = uptake,
-                             color = Treatment, shape = Type))
+                             colour = Treatment, shape = Type))
 ```
 
 .comment[Why not use `size = Type`?]
 
 ---
-# Challenge #2 - solution
+# Challenge #2 - Solution example #3
 
-```{r, fig.height=5.2, fig.width=6.8}
+```{r, fig.height=5, fig.width=6.2}
 data(msleep)
 ggplot(data = msleep) +
     geom_point(mapping = aes(x = log10(bodywt), y = awake,
-                             color = vore, shape = conservation))
+                             colour = vore, shape = conservation))
 ```
 
 .comment[Why not use `size = Type`?]
 
 ---
-# Transformation axis scale
-
+# Changing the scale of the axes
+.small[
 ```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
 # x axis in regular scale
-ggplot(diamonds) + geom_point(mapping = aes(x = carat, y = price)) +
-  labs(title = "x axis in regular scale")
-# x axis in log10 scale
-ggplot(diamonds) + geom_point(mapping = aes(x = carat, y = price)) +
-  scale_x_log10() + scale_y_log10() + labs(title = "x axis in log10 scale")
-```
+ggplot(diamonds) + 
+  geom_point(mapping = aes(x = carat, y = price)) +
+  labs(title = "x-axis in regular scale")
 
-.small[NB: It is also possible to transform the coordinate system using `coord_trans(x = "log10", y = "log10")`]
+# x-axis and y-axis in log10() scale
+ggplot(diamonds) + geom_point(mapping = aes(x = carat, y = price)) +
+  scale_x_log10() + 
+  scale_y_log10() + 
+  labs(title = "x- and y-axes in log10 scale")
+```
+]
+
+.small[It is also possible to transform the coordinate system using `coord_trans(x = "log10", y = "log10")`]
 
 <!-- explain the difference -->
-
 
 ---
 class: inverse, center, middle
 
-# Fine-tuning your plots (theme)
+# Fine-tuning your plots
 
-## make it look good!
+## Using `theme()` to make it look good!
 
 ---
-# Theme
+# theme()
 
 ```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
 # Theme classic
-pp + scale_color_grey() + theme_classic() +
+pp + scale_colour_grey() + 
+  theme_classic() +
   labs(title = "Theme classic")
+
 # Theme minimal
-pp + scale_color_grey() + theme_minimal() +
+pp + scale_colour_grey() + 
+  theme_minimal() +
   labs(title = "Theme minimal")
 ```
 
 NB: Good choices for publication purpose!
 
 ---
-## Theme assist: RStudio addin
+## Theme assist: RStudio-addin
 
 ![](./images/ggThemeAssist2.gif)
 
@@ -741,7 +753,7 @@ class: inverse, center, middle
 # Facet: Iris
 ```{r, fig.align="center", fig.width=10, fig.height=6}
 ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
   facet_grid(~ Species, scales = "free")
 ```
 
@@ -758,13 +770,13 @@ ggplot(data = CO2) +
 <!-- relabeling ticks -->
 
 ---
-# Title & Axis size, color, face
+# Title & Axis size, colour, face
 
 .center[![:scale 80%](images/theme_iris_annotated.png)]
 
 
 ---
-# Title & Axis size, color, face
+# Title & Axis size, colour, face
 
 .pull-left[
 **Default**
@@ -776,7 +788,7 @@ pp
 **Axis & Title tuning**
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
 pp +
-  ggtitle("Relation between Sepal Lenght & Width") +
+  ggtitle("Relation between Sepal Length & Width") +
   xlab("Sepal length (cm)") +
   ylab("Sepal Width (cm)") +
   theme(axis.title.x = element_text(size = 16),
@@ -801,11 +813,11 @@ library(reshape2)
 tips.gg <- ggplot(tips, aes(x = total_bill,
                             y = tip/total_bill,
                             shape = smoker,
-                            color = sex,
+                            colour = sex,
                             size = size)) +
   geom_point() +
   facet_grid( ~ time) +
-  scale_color_grey() +
+  scale_colour_grey() +
   labs(title = "Tips per total bill at Lunch and Dinner",
        x = "Total bill", y = "Tips/total bill") +
   theme(axis.title = element_text(size = 16,
@@ -825,9 +837,9 @@ tips.gg
 ```{r, eval=FALSE}
 tips.gg <- ggplot(tips) +
   geom_point(aes(x = total_bill, y = tip/total_bill,
-                 shape = smoker, color = sex, size = size)) +
+                 shape = smoker, colour = sex, size = size)) +
   facet_grid( ~ time) +
-  scale_color_grey() +
+  scale_colour_grey() +
   labs(title = "Tips per total bill at Lunch and Dinner",
        x = "Total bill", y = "Tips/total bill") +
   theme(axis.title = element_text(size = 16,
@@ -850,7 +862,7 @@ tips.gg
 ```{r, fig.width=7}
 tips.gg <- ggplot(tips) +
   geom_point(mapping = aes(x = total_bill, y = tip/total_bill,
-                      shape = smoker, color = sex, size = size))
+                      shape = smoker, colour = sex, size = size))
 tips.gg
 ```
 
@@ -870,11 +882,11 @@ tips.gg
 ---
 # Challenge #3 - step by step solution
 
-#### Grey color palette
+#### Grey colour palette
 
 ```{r, fig.width=7}
 tips.gg <- tips.gg +
-  scale_color_grey()
+  scale_colour_grey()
 tips.gg
 ```
 
@@ -1651,7 +1663,8 @@ Orchard.challenge4
 library(tidyverse)
 library(plotly)
 # Scatterplot
-p=ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width, color=Species, shape=Species)) +
+p = ggplot(iris, 
+           aes(x=Sepal.Length, y=Sepal.Width, colour=Species, shape=Species)) +
     geom_point(size=6, alpha=0.6)
 
 ggplotly(p)
@@ -1683,7 +1696,7 @@ my1rstPlot <- ggplot(data = iris,
                      aes(x = Petal.Length,
                          y = Petal.Width)) +
   geom_point()
-ggsave("my1rstPlot.pdf",
+ggsave("my1stPlot.pdf",
        my1rstPlot,
        height = 8.5, width = 11, units = "in", res = 300)
 ```
@@ -1726,7 +1739,7 @@ https://www.rstudio.com/resources/cheatsheets
 ---
 # Additional resources
 
-* `help(package = ggplot)`
+* `help(package = ggplot2)`
 * http://ggplot2.tidyverse.org/reference/
 * Fundamentals of Data Visualization https://serialmentor.com/dataviz/
 
@@ -1736,7 +1749,7 @@ https://www.rstudio.com/resources/cheatsheets
 # Concluding remarks
 <br>
 
-1. There are other useful packages that can be used with `ggplot2`! To name a few: ggbio, ggpmisc, geomnet, gganimate, ggnetwork, ggtree. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) that list extensions.
+1. There are other useful packages that can be used with `ggplot2`! To name a few: `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` and `ggtree`. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) for other `ggplot2` extensions.
 
 
 2. Note that you can learn more about design and image manipulation with the "Introduction to graphic design and image manipulation with open source tools": https://qcbs.ca/wiki/graphics

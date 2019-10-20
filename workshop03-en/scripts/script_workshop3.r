@@ -3,11 +3,14 @@
 ## ggplot2 // tidyr // dplyr ##
 
 ## Author: Quebec Center for Biodiversity Science
-## Materials Generated & Amalgamated by: 
+## Developed and reviewed by: 
 ## Xavier Giroux-Bougard, Monica Granados,
 ## Maxwell Farrell, Etienne Low-Decarie
-## Last updated: November 2018
-## Built under R version 3.3.3 
+## Pedro Henrique Pereira Braga
+## Last updated: October 2019
+##
+## Built under R version 3.6.1
+##
 
 #### 0. Housekeeping ####
 
@@ -16,24 +19,29 @@ rm(list=ls())
 
 # Install and/or load required packages
 
-if(!require(ggplot2)){install.packages("ggplot2")}
-require(ggplot2)
+required.libraries <- c("knitr", 
+                        "tidyverse", 
+                        "vegan", 
+                        "ggpubr", 
+                        "ggsignif",
+                        "ggpmisc", 
+                        "ggdendro", 
+                        "rworldmap", 
+                        "maps", 
+                        "mapproj", 
+                        "grid",
+                        "gridExtra", 
+                        "RColorBrewer", 
+                        "gridBase", 
+                        "psych", 
+                        "remotes")
 
-if(!require(tidyr)){install.packages("tidyr")}
-require(tidyr)
+needed.libraries <- required.libraries[!(required.libraries %in% installed.packages()[,"Package"])]
+if(length(needed.libraries)) install.packages(needed.libraries)
 
-if(!require(dplyr)){install.packages("dplyr")}
-require(dplyr)
+if (!require(colorblindr)) remotes::install_github("clauswilke/colorblindr")
 
-if(!require(magrittr)){install.packages("magrittr")}
-require(magrittr)
-
-if(!require(gridExtra)){install.packages("gridExtra")}
-require(gridExtra)
-
-if(!require(devtools)){install.packages("devtools")}
-require(devtools)
-
+source(file="/scripts/4plot_aesthetic.R")
 
 #------------------------------------------------------------#
 #### 1. Plotting in R using grammar of graphics (ggplot2) ####
@@ -41,10 +49,7 @@ require(devtools)
 
 #### 1.1 Intro to ggplot2 ####
 
-#### 1.2 Simple plots using qplot() ####
-
-# Explore the qplot help file
-?qplot
+## Preparing data to be used by ggplot2
 
 # Explore the Iris dataset
 data(iris)
@@ -52,6 +57,24 @@ data(iris)
 head(iris)
 str(iris)
 names(iris)
+
+class(iris) # We are all set and good to go!
+
+# `ggplot2` requires you to prepare the data as an object of 
+# class `data.frame` or `tibble` (common in the `tidyverse`)
+# one can coerce a dataset to a tibble class by doing as follows
+
+ir <- tibble::as_tibble(iris) # acceptable
+class(ir)
+
+# Explain the databases before the examples
+
+psych::pairs.panels(iris)
+
+#### 1.2 Simple plots using qplot() ####
+
+# Explore the qplot help file
+?qplot
 
 # Most basic scatter plot
 qplot(data = iris,
@@ -71,6 +94,190 @@ qplot(data = iris,
       ylab = "Sepal Width (mm)",
       main = "Sepal dimensions")
 
+
+#### Drawing your first ggplot!
+
+# To create our ggplot, we have to assign and execute it from an object
+# You may take two different paths with respect to which arguments you will call,
+# both brining to the same end: the graphical representation of your data.
+
+
+# You can, for instance, include your arguments inside the ggplot():
+
+p <- ggplot(data = iris,
+            aes(x = Sepal.Length,
+                y = Sepal.Width))
+p <- p + geom_point()
+p
+
+# Or, create an empty layer and the additional parts as follows:
+
+s <- ggplot()
+s <- s + geom_point(data = iris,
+                    aes(x = Sepal.Length,
+                        y = Sepal.Width))
+s
+
+# You can also add labels with the xlab and ylab functions:
+
+ggplot(data = iris, 
+       aes(x = Sepal.Length, y = Sepal.Width)) +
+  xlab("x = Sepal length") +
+  ylab("y = Sepal width") +
+  geom_point()
+
+#------------------------------------------------------------------------------#
+#-----------------------------#
+#### ggplot2 - Challenge 1 #### 
+#-----------------------------#
+# Is there a relation between the **length** & the **width** of the iris **petal** ?
+# Does the *width* of the petal increase with its *length* ?
+
+# head(iris)
+
+### Solution:
+
+ggplot(data = iris, 
+       aes(x = Petal.Length, 
+           y = Petal.Width)) +
+  geom_point()
+
+#### 1.3 aes() ####
+
+# We can use aesthetics to distinguish class, group and structure
+
+## No colour mapping
+ggplot(data = iris) +
+  geom_point(mapping = aes(x = Sepal.Length, 
+                           y = Sepal.Width)) +
+  labs(title = "No colour mapping")
+
+## With colour mapping
+ggplot(data = iris) +
+  geom_point(mapping = aes(x = Sepal.Length, 
+                           y = Sepal.Width,
+                           colour = Species)) +
+  labs(title = "With colour mapping")
+
+# We can also manually change colour
+
+## Default
+pp <- ggplot(data = iris) +
+  geom_point(mapping = aes(x = Sepal.Length, 
+                           y = Sepal.Width, 
+                           colour = Species))
+pp + labs(title = "Default")
+
+## Manual colouring
+pp +
+  scale_colour_manual(values = c("grey55", 
+                                 "orange", 
+                                 "skyblue")) +
+  labs(title = "Manual")
+
+# Finally, we can define colour gradients:
+
+# Default
+pp2 <- ggplot(data = iris) +
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, 
+                           colour = Petal.Length))
+pp2 + labs(title = "Default")
+
+# Manual colour gradients!
+pp2 + scale_colour_gradient(low = "blue", high = "red") +
+  labs(title = "Manual")
+
+
+# We can use a predefined colour palette
+
+require(RColorBrewer)
+display.brewer.all()
+
+# Palette for groups
+pp + scale_colour_brewer(palette = "Dark2") +
+  labs(title = "Palette for groups")
+
+# Palette for continuous values
+pp2 + scale_colour_gradientn(colours = rainbow(5)) +
+  labs(title = "Palette for continuous values")
+
+# Grey scale for publication purpose
+pp + scale_colour_grey() +
+  labs(title = "Palette for groups")
+
+# Palette for continuous values
+pp2 + scale_colour_gradient(low = "grey85", high = "black") +
+  labs(title = "Palette for continuous values")
+
+# Use colourblind-friendly palette
+
+# Palette for groups
+pp + scale_colour_viridis_d() +
+  labs(title = "viridis palette for groups")
+
+# Palette for continuous values
+pp2 + scale_colour_viridis_c() +
+  labs(title = "viridis palette for continuous values")
+
+# Shape for groups
+ggplot(data = iris) +
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, shape = Species)) +
+  labs(title = "Shape for groups")
+
+# Size for continuous values
+ggplot(data = iris) +
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width,
+                           size = Petal.Length, alpha = Petal.Length)) +
+  labs(title = "Size and alpha for continuous values")
+
+#------------------------------------------------------------------------------#
+#-----------------------------#
+#### ggplot2 - Challenge 2 #### 
+#-----------------------------#
+
+# Produce an informative plot from built-in datasets such as `mtcars`, `CO2` or
+# `msleep`. Use appropriate aesthetic mappings for different data types.
+
+# Solution example:
+
+data(mtcars)
+ggplot(data = mtcars) +
+  geom_point(mapping = aes(x = wt, y = mpg,
+                           colour = disp, alpha = hp))
+
+
+# Challenge #2 - Solution example #1
+
+data(mtcars)
+
+ggplot(data = mtcars) +
+  geom_point(mapping = aes(x = wt, y = mpg,
+                           colour = disp, 
+                           alpha = hp))
+
+# Could you use `size` intead of `alpha`? What about `shape`?
+
+# Challenge #2 - Solution example #2
+
+data(CO2)
+
+ggplot(data = CO2) +
+  geom_point(mapping = aes(x = conc, y = uptake,
+                           colour = Treatment, shape = Type))
+
+# Why not use `size = Type`?
+
+# Challenge #2 - Solution example #3
+
+data(msleep)
+
+ggplot(data = msleep) +
+  geom_point(mapping = aes(x = log10(bodywt), y = awake,
+                           colour = vore, shape = conservation))
+
+# Why not use `size = Type`?
+
+#------------------------------------------------------------------------------#
 
 #------------------------------------------------------------------------------#
 #-----------------------------#
