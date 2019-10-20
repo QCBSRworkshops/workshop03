@@ -57,7 +57,7 @@ Code and .HTML available at http://qcbs.ca/wiki/r/workshop3
 ---
 # Outline
 
-##### 1. `ggplot2` mechanics
+###### 1. `ggplot2` mechanics
 
 &lt;div style="text-align:center"&gt;
 &lt;img src="images/Layers_ggplot.png" width=55%&gt;
@@ -65,15 +65,13 @@ Code and .HTML available at http://qcbs.ca/wiki/r/workshop3
 
 
 
-##### 2. Advanced visualization
+###### 2. Advanced visualization
 
-![:faic](arrow-right)  point, line, histogram, box plot, error bar, significant value and linear regression
+###### 3. Fine-tuning
 
-##### 3. Fine-tuning
+###### 4. Saving plots
 
-##### 4. Saving plots
-
-##### 5. Conclusion
+###### 5. Conclusion
 
 ---
 # Learning objectives
@@ -275,7 +273,7 @@ A graphic is made of elements (layers)
   * `plot.object` or `print(plot.object)`
 
 ---
-# Prepare data for ggplot
+# Prepare data for `ggplot2` 
 
 `ggplot2` requires you to prepare the data as an object of class `data.frame` or `tibble` (common in the `tidyverse`).
 
@@ -291,7 +289,7 @@ class(ir)
 ```
 
 ---
-# Iris database
+# iris dataset
 
 
 ```r
@@ -336,7 +334,7 @@ pairs.panels(iris)
 
 ---
 
-# Inheritance in `ggplot`
+# Inheritance in `ggplot2`
 
 .small[
 
@@ -371,7 +369,7 @@ s # Print your final plot
 ]
 
 ---
-# Grammar of Graphics - *recall*
+# Grammar of Graphics: *recall*
 
 &lt;br&gt;
 
@@ -380,7 +378,7 @@ Remember: a graphic is made of different layers:
 ![](images/Layers_ggplot.png)
 
 ---
-# `ggplot` dynamics: base layer
+# `ggplot()` dynamics: base layer
 
 
 ```r
@@ -390,7 +388,7 @@ ggplot()
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-12-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 ---
-# `ggplot` dynamics: data layer
+# `ggplot()` dynamics: data layer
 
 
 ```r
@@ -403,7 +401,7 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 
 ---
 
-# `ggplot` dynamics: geometric Layer
+# `ggplot()` dynamics: geometric Layer
 
 
 ```r
@@ -434,7 +432,7 @@ iris|geom_point|Petal length|Petal width
 
 
 ---
-# Challenge 1# - Solution ![:cube]()
+# Challenge 1#: Solution ![:cube]()
 
 
 ```r
@@ -449,9 +447,9 @@ ggplot(data = iris, aes(x = Petal.Length,
 
 class: inverse, center, middle
 
-# Aesthetic mappings
+# Aesthetic mapping
 
-## colour, shape, size, etc.
+## colour, shape, size, labels and transparency
 
 ---
 
@@ -728,34 +726,36 @@ class: inverse, center, middle
 ## Using `theme()` to make it look good!
 
 ---
-# theme()
+# `theme()`
 
 
 ```r
 # Theme classic
 pp + scale_colour_grey() + 
   theme_classic() +
-  labs(title = "Theme classic")
+  labs(title = "Classic")
 
 # Theme minimal
 pp + scale_colour_grey() + 
   theme_minimal() +
-  labs(title = "Theme minimal")
+  labs(title = "Minimal")
 ```
 
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-32-1.png" width="50%" /&gt;&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-32-2.png" width="50%" /&gt;
 
-NB: Good choices for publication purpose!
+NB: Good choices for publication purposes!
 
 ---
 ## ggThemeAssist: RStudio-addin
 
-![](https://github.com/calligross/ggthemeassist/blob/master/examples/ggThemeAssist2.gif)
+![](https://raw.githubusercontent.com/calligross/ggthemeassist/master/examples/ggThemeAssist2.gif)
 
 ---
 class: inverse, center, middle
 
-# Fine-tuning your plots: `facet_grid()` and `facet_warp()` to change the arrangement of plots
+# Fine-tuning your plots
+
+## Using `facet_grid()` to change the arrangement of plots
 
 ---
 # iris dataset: per-species facets
@@ -780,11 +780,10 @@ ggplot(data = CO2) +
 
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-34-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
-
 &lt;!-- relabeling ticks --&gt;
 
 ---
-# Title and axes components: size, colour and face
+# Title and axes components: changing size, colour and face
 
 .center[![:scale 80%](images/theme_iris_annotated.png)]
 
@@ -797,7 +796,7 @@ ggplot(data = CO2) +
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-35-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
-**Axis and title tuning**
+**Axes and title tuning**
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-36-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ]
@@ -806,23 +805,30 @@ ggplot(data = CO2) +
 
 # Challenge #3 ![:cube]()
 
-##### Use the `tips` dataset found in `reshape2` &amp;#x1F4E6; to reproduce the plot below
+Use the `tips` dataset found in `reshape2` &amp;#x1F4E6; to reproduce the plot below.
+
+Our tip: start from `theme_classic()` and add `theme()` to make your additional changes.
 
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-37-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
 ---
 
-# Challenge - solution #3 ![:cube]()
+# Challenge #3: Solution![:cube]()
 
 
 ```r
-tips.gg &lt;- ggplot(tips) +
-  geom_point(aes(x = total_bill, y = tip/total_bill,
-                 shape = smoker, colour = sex, size = size)) +
+library(reshape2)
+tips.gg &lt;- ggplot(tips, aes(x = total_bill,
+                            y = tip/total_bill,
+                            shape = smoker,
+                            colour = sex,
+                            size = size)) +
+  geom_point() +
   facet_grid( ~ time) +
   scale_colour_grey() +
-  labs(title = "Tips per total bill at Lunch and Dinner",
-       x = "Total bill", y = "Tips/total bill") +
+  labs(title = "Relation between total bill and tips during lunch and dinner",
+       x = "Total bill ($)", y = "Ratio between tips and total bill") +
+  theme_classic() +
   theme(axis.title = element_text(size = 16,
                                   colour = "navy"),
         axis.text = element_text(size = 12),
@@ -831,14 +837,13 @@ tips.gg &lt;- ggplot(tips) +
                                   face = "bold"),
         strip.text.x = element_text(size = 14, face="bold"))
 tips.gg
-
 ```
 
 ---
 
-# Challenge #3 - step by step solution
+# Challenge #3: step-by-step solution
 
-#### Aesthetic
+#### `aes()`
 
 
 ```r
@@ -852,9 +857,9 @@ tips.gg
 
 
 ---
-# Challenge #3 - step by step solution
+# Challenge #3: step-by-step solution
 
-#### Facet
+#### `facet_grid()`
 
 
 ```r
@@ -867,9 +872,9 @@ tips.gg
 
 
 ---
-# Challenge #3 - step by step solution
+# Challenge #3: step-by-step solution
 
-#### Grey colour palette
+#### Grey-scale palette
 
 
 ```r
@@ -881,30 +886,31 @@ tips.gg
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-41-1.png" width="504" style="display: block; margin: auto;" /&gt;
 
 ---
-# Challenge #3 - step by step solution
+# Challenge #3: step-by-step solution
 
-#### Plot Title
+#### Adding plot title and labels
 
 
 ```r
 tips.gg &lt;- tips.gg +
-  labs(title = "Tips per total bill at Lunch and Dinner")
+  labs(title = "Relation between total bill and tips during lunch and dinner",
+       x = "Total bill ($)", y = "Ratio between tips and total bill")
 tips.gg
 ```
 
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-42-1.png" width="504" style="display: block; margin: auto;" /&gt;
 
-
 ---
 
-# Challenge #3 - step by step solution
+# Challenge #3: step-by-step solution
 
-#### Theme tunning: Plot &amp; Axis Title
+#### Adding a theme and fine tuning it
 
 .small[
 
 ```r
 tips.gg &lt;- tips.gg +
+  theme_classic() +
   theme(axis.title = element_text(size = 16, colour = "navy"),
         axis.text = element_text(size = 12),
         plot.title = element_text(size = 16, colour = "orange3", face = "bold"),
@@ -917,7 +923,7 @@ tips.gg
 
 ---
 
-# Geom: ggplot
+# `ggplot2::geom_*()`
 
 .center[
 ![:scale 85%](images/plots_in_various_contexts.png)
@@ -925,7 +931,7 @@ tips.gg
 
 ---
 
-# Base plot
+# `base::plot()`
 
 .center[
 ![:scale 85%](images/plots_in_various_contexts_baseplot.png)
@@ -934,36 +940,36 @@ tips.gg
 
 ---
 
-## Blank plot
+## `ggplot2::ggplot()` *versus* `base::plot()`
 .pull-left[
-*ggplot2*
 
 ```r
-gblank &lt;- ggplot(mtcars, aes(wt, mpg))
+ggplot(mtcars, aes(wt, mpg))
 ```
 
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-45-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
-*Base Plot*
 
 ```r
 plot(mpg~wt, data = mtcars, type = "n")
 ```
 
-&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-46-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-46-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-# Histogram
-An histogram is an accurate graphical representation of the distribution of numeric data
+# Histograms: `geom_histogram()`
+.small[
+A **histogram** is an accurate graphical representation of the distribution of numeric data
 .pull-left[
 
 ```r
 ggplot(iris, aes(Sepal.Length)) +
-  geom_histogram() + ggtitle("Histogram of sepal length ")
+  geom_histogram() + 
+  ggtitle("Histogram of sepal length ")
 ```
 
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-47-1.png" width="360" style="display: block; margin: auto;" /&gt;
@@ -972,49 +978,48 @@ ggplot(iris, aes(Sepal.Length)) +
 
 ```r
 ggplot(cars, aes(dist)) +
-  geom_histogram() + ggtitle("Histogram of car distance taken to stop ")
+  geom_histogram() + 
+  ggtitle("Histogram of distance done before stopping")
 ```
 
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-48-1.png" width="360" style="display: block; margin: auto;" /&gt;
-]
+]]
 
 ---
 
-# Histogram
-
+# `geom_histogram()` *versus* `graphics::hist()`
+.small[
 .pull-left[
-*ggplot2*
 
 ```r
-ggplot(diamonds, aes(carat)) + geom_histogram()
+ggplot(diamonds, aes(carat)) + 
+  geom_histogram()
 ```
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-50-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
-
 .pull-right[
-*Base Plot*
 
 ```r
 hist(diamonds$carat)
 ```
 
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-51-1.png" width="360" style="display: block; margin: auto;" /&gt;
-]
+]]
 
 ---
 
-#Barplot
+#### #Barplot: `geom_bar()` *versus* `graphics::barplot()`
+
 .pull-left[
-*ggplot2*
 
 ```r
-ggplot(mpg, aes(class)) + geom_bar()
+ggplot(mpg, aes(class)) + 
+  geom_bar()
 ```
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-53-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
-*Base Plot*
 
 ```r
 barplot(table(mpg$class))
@@ -1025,9 +1030,8 @@ barplot(table(mpg$class))
 
 ---
 
-# Significant values
+#### Annotating significant differences: `geom_signif()`
 .pull-left[
-*ggplot2*
 
 ```r
 ggplot(mpg, aes(class)) +
@@ -1039,8 +1043,6 @@ ggplot(mpg, aes(class)) +
 ]
 
 .pull-right[
-*Base Plot*
-Manual function
 
 ```r
 barplot()
@@ -1052,10 +1054,9 @@ sign.bar()
 
 ---
 
-#Plot: linear reagression
+##### Scatterplot and linear-fit: `geom_point()` and `geom_smooth()`
 
 .pull-left[
-*ggplot2*
 
 ```r
 ggplot(mpg, aes(displ, hwy)) +
@@ -1066,11 +1067,10 @@ ggplot(mpg, aes(displ, hwy)) +
 ]
 
 .pull-right[
-*Base Plot*
 
 ```r
-lm.out  &lt;- lm(hwy~displ, data = mpg)
-plot(hwy~displ, data = mpg)
+lm.out  &lt;- lm(hwy ~ displ, data = mpg)
+plot(hwy ~ displ, data = mpg)
 abline(lm.out)
 
 ```
@@ -1079,32 +1079,30 @@ abline(lm.out)
 
 ---
 
-# Boxplot
-
-.center[
-![:scale 85%](images/boxplot_explain.png)
-]
-
+# Boxplot: `geom_boxplot()`
 
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-63-1.png" width="216" style="display: block; margin: auto;" /&gt;
 
+.center[
+![:scale 75%](images/boxplot_explain.png)
+]
+
 ---
 
-# Boxplot with significant value
+##### Boxplot with annotations: `geom_boxplot()` and `geom_signif()`
 
 .pull-left[
-*ggplot2*
 
 ```r
 ggplot(data = iris, aes(Species, Sepal.Length)) +
-  geom_boxplot()
+  geom_boxplot() +
+  geom_signif()
 ```
 
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-65-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
-*Base Plot*
 
 ```r
 boxplot(iris$Sepal.Length ~ iris$Species)
@@ -1116,7 +1114,7 @@ boxplot(iris$Sepal.Length ~ iris$Species)
 
 ---
 
-# Violin plot
+# Violin plot: `geom_violin()`
 
 As explained on https://www.data-to-viz.com/graph/violin.html
 
@@ -1130,10 +1128,9 @@ As explained on https://www.data-to-viz.com/graph/violin.html
 ]
 
 ---
-# Violin plot
-
+# Violin plot: `geom_violin()`
+.small[
 .pull-left[
-*ggplot2*
 
 ```r
 ggplot(data = iris, aes(Species,
@@ -1142,21 +1139,7 @@ ggplot(data = iris, aes(Species,
 ```
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-71-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
-
 .pull-right[
-*Base Plot*
-
-
-```r
-library(vioplot)
-vioplot(iris$Sepal.Length[iris$Species == "setosa"],
-        iris$Sepal.Length[iris$Species == "versicolor"],
-        iris$Sepal.Length[iris$Species == "virginica"],
-        col = "lightblue")
-
-```
-
-
 
 ```r
 library(vioplot)
@@ -1165,15 +1148,21 @@ vioplot(iris$Sepal.Length[iris$Species == "setosa"],
         iris$Sepal.Length[iris$Species == "virginica"],
         col = "lightblue")
 ```
+
+
+```
+# [1] 4.3 7.9
+```
+
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-73-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
-
+]
 
 ---
 
-#Plot with errors bars
+### Error bars: `geom_pointrange()` and `geom_errorbar()`
 
 .pull-left[
-*ggplot2*
 
 ```r
 ggplot(df, aes(trt, resp, colour = group)) +
@@ -1184,12 +1173,11 @@ ggplot(df, aes(trt, resp, colour = group)) +
 ]
 
 .pull-right[
-*Base Plot*
 
 ```r
-plot(y~x)
+plot(y ~ x)
 error.bar &lt;- function(...)
-error.bar(x,y)
+error.bar(x, y)
 ```
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-77-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
@@ -1197,22 +1185,22 @@ error.bar(x,y)
 
 ---
 
-# Map
-
+# Representing maps: `geom_map()`
+.small[
 .pull-left[
-*ggplot2*
 
 ```r
 library(maps)
 states_map &lt;- map_data("state")
-ggplot(crimes, aes(map_id = state)) +
-  geom_map() + coord_map()
+ggplot(crimes, 
+       aes(map_id = state)) +
+  geom_map() + 
+  coord_map()
 ```
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-79-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
-*Base Plot*
 
 ```r
 library(rworldmap)
@@ -1222,12 +1210,12 @@ plot(newmap)
 ```
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-81-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
-
+]
 ---
 
-# Density plot
+# Density plots: `geom_density()`
 
-A density plot shows the distribution of a numerical variable and it takes only set of numeric values as input
+.small[A density plot shows the distribution of a numerical variable and it takes only set of numeric values as input.]
 .pull-left[
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-82-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
@@ -1237,10 +1225,9 @@ A density plot shows the distribution of a numerical variable and it takes only 
 ]
 
 ---
-# Density plot
+# Density plots: `geom_density()`
 
 .pull-left[
-*ggplot2*
 
 ```r
 ggplot(diamonds, aes(carat)) +
@@ -1250,10 +1237,10 @@ ggplot(diamonds, aes(carat)) +
 ]
 
 .pull-right[
-*Base Plot*
 
 ```r
-plot(density(c(-20, rep(0,98), 20)),
+plot(density(c(-20, 
+               rep(0, 98), 20)),
      xlim = c(-4, 4))
 ```
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-87-1.png" width="360" style="display: block; margin: auto;" /&gt;
@@ -1261,43 +1248,47 @@ plot(density(c(-20, rep(0,98), 20)),
 
 ---
 
-# Dendogram
-
+# Dendogram: `ggdendrogram()`
+.small[
 .pull-left[
-*ggplot2*
 
 ```r
 library(ggdendro)
-ggdendrogram(hc)
+ggdendrogram() + 
+  theme_classic()
 ```
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-89-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
-*Base Plot*
 
 ```r
-plot(hc, hang = -1, main = "Dendrogram")
+par(mar=c(3,3,4,4))
+plot(as.dendrogram(hc), horiz = TRUE,
+     main = "Dendrogram")
 ```
 &lt;img src="workshop03-en_files/figure-html/unnamed-chunk-91-1.png" width="360" style="display: block; margin: auto;" /&gt;
-
+]
 ]
 
 ---
 
 # Multiplot
 
-**A function to add multiple graph on the same plot**
+**A function to add multiple graphs on the same plot**
 
 
 ```r
+plot.new()
 #multiplot(density.gg, map.gg, violP.gg, lm.gg, cols = 2)
 ```
+
+&lt;img src="workshop03-en_files/figure-html/unnamed-chunk-92-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # Final Challenge ![:cube]()
-  * Dataset: any (recommanded: use your dataset)
+  * Dataset: any (recommended: use your dataset)
 
 ```r
 data(msleep) ; data(mtcars) ; data(OrchardSprays)
@@ -1406,8 +1397,8 @@ Orchard.challenge4
 &lt;br&gt;
 
 .alert[**Select the Species data to display directly From the legend**]
-<div id="htmlwidget-82da125103bfece075cd" style="width:792px;height:540px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-82da125103bfece075cd">{"x":{"data":[{"x":[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5],"y":[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3],"text":["Sepal.Length: 5.1<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.9<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.7<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.6<br />Sepal.Width: 3.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.6<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.9<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.6<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.4<br />Sepal.Width: 2.9<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.9<br />Sepal.Width: 3.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.7<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.3<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.8<br />Sepal.Width: 4.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.7<br />Sepal.Width: 4.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.9<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.7<br />Sepal.Width: 3.8<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.8<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.7<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.6<br />Sepal.Width: 3.6<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.3<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.2<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.2<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.7<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.2<br />Sepal.Width: 4.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.5<br />Sepal.Width: 4.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.9<br />Sepal.Width: 3.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.5<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.9<br />Sepal.Width: 3.6<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.4<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.5<br />Sepal.Width: 2.3<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.4<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.8<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.8<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.6<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.3<br />Sepal.Width: 3.7<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.3<br />Species: setosa<br />Species: setosa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":0.6,"size":22.6771653543307,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"setosa","legendgroup":"setosa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7],"y":[3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8],"text":["Sepal.Length: 7.0<br />Sepal.Width: 3.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.4<br />Sepal.Width: 3.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.9<br />Sepal.Width: 3.1<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.3<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.5<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.3<br />Sepal.Width: 3.3<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 4.9<br />Sepal.Width: 2.4<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.6<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.2<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.0<br />Sepal.Width: 2.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.9<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.0<br />Sepal.Width: 2.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.1<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.7<br />Sepal.Width: 3.1<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.8<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.2<br />Sepal.Width: 2.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 2.5<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.9<br />Sepal.Width: 3.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.1<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.3<br />Sepal.Width: 2.5<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.1<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.4<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.6<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.8<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.7<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.0<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 2.6<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.4<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.4<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.8<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.0<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.4<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.0<br />Sepal.Width: 3.4<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.7<br />Sepal.Width: 3.1<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.3<br />Sepal.Width: 2.3<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.5<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.6<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.1<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.8<br />Sepal.Width: 2.6<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.0<br />Sepal.Width: 2.3<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.2<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.1<br />Sepal.Width: 2.5<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":0.6,"size":22.6771653543307,"symbol":"triangle-up","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"versicolor","legendgroup":"versicolor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],"y":[3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3],"text":["Sepal.Length: 6.3<br />Sepal.Width: 3.3<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.8<br />Sepal.Width: 2.7<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.1<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 2.9<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.5<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.6<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 4.9<br />Sepal.Width: 2.5<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.3<br />Sepal.Width: 2.9<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 2.5<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.2<br />Sepal.Width: 3.6<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.5<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 2.7<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.8<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.7<br />Sepal.Width: 2.5<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.8<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.5<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.7<br />Sepal.Width: 3.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.7<br />Sepal.Width: 2.6<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.0<br />Sepal.Width: 2.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.9<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.6<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.7<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 2.7<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 3.3<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.2<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.2<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.1<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.2<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.4<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.9<br />Sepal.Width: 3.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.1<br />Sepal.Width: 2.6<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.7<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 3.4<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 3.1<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.0<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.9<br />Sepal.Width: 3.1<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 3.1<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.9<br />Sepal.Width: 3.1<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.8<br />Sepal.Width: 2.7<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.8<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 3.3<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 2.5<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.5<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.2<br />Sepal.Width: 3.4<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.9<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":0.6,"size":22.6771653543307,"symbol":"square","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"virginica","legendgroup":"virginica","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":27.689497716895,"r":7.97011207970112,"b":44.3669572436696,"l":47.0236612702366},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":15.9402241594022},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[4.12,8.08],"tickmode":"array","ticktext":["5","6","7","8"],"tickvals":[5,6,7,8],"categoryorder":"array","categoryarray":["5","6","7","8"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.98505603985056,"tickwidth":0.724555643609193,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.724555643609193,"zeroline":false,"anchor":"y","title":{"text":"Sepal.Length","font":{"color":"rgba(0,0,0,1)","family":"","size":15.9402241594022}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1.88,4.52],"tickmode":"array","ticktext":["2.0","2.5","3.0","3.5","4.0","4.5"],"tickvals":[2,2.5,3,3.5,4,4.5],"categoryorder":"array","categoryarray":["2.0","2.5","3.0","3.5","4.0","4.5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.98505603985056,"tickwidth":0.724555643609193,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.724555643609193,"zeroline":false,"anchor":"x","title":{"text":"Sepal.Width","font":{"color":"rgba(0,0,0,1)","family":"","size":15.9402241594022}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":2.06156048675734,"font":{"color":"rgba(0,0,0,1)","family":"","size":12.7521793275218},"y":0.979002624671916},"annotations":[{"text":"Species","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":15.9402241594022},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"2ac6619d4863":{"x":{},"y":{},"colour":{},"shape":{},"type":"scatter"}},"cur_data":"2ac6619d4863","visdat":{"2ac6619d4863":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-6c1da19780b92f277b7c" style="width:792px;height:540px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6c1da19780b92f277b7c">{"x":{"data":[{"x":[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5],"y":[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3],"text":["Sepal.Length: 5.1<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.9<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.7<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.6<br />Sepal.Width: 3.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.6<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.9<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.6<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.4<br />Sepal.Width: 2.9<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.9<br />Sepal.Width: 3.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.7<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.3<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.8<br />Sepal.Width: 4.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.7<br />Sepal.Width: 4.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.9<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.7<br />Sepal.Width: 3.8<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.8<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.7<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.6<br />Sepal.Width: 3.6<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.3<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.2<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.2<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.7<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.4<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.2<br />Sepal.Width: 4.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.5<br />Sepal.Width: 4.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.9<br />Sepal.Width: 3.1<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.5<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.9<br />Sepal.Width: 3.6<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.4<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.4<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.5<br />Sepal.Width: 2.3<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.4<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.5<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.8<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.8<br />Sepal.Width: 3.0<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.1<br />Sepal.Width: 3.8<br />Species: setosa<br />Species: setosa","Sepal.Length: 4.6<br />Sepal.Width: 3.2<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.3<br />Sepal.Width: 3.7<br />Species: setosa<br />Species: setosa","Sepal.Length: 5.0<br />Sepal.Width: 3.3<br />Species: setosa<br />Species: setosa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":0.6,"size":22.6771653543307,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"setosa","legendgroup":"setosa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7],"y":[3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8],"text":["Sepal.Length: 7.0<br />Sepal.Width: 3.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.4<br />Sepal.Width: 3.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.9<br />Sepal.Width: 3.1<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.3<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.5<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.3<br />Sepal.Width: 3.3<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 4.9<br />Sepal.Width: 2.4<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.6<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.2<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.0<br />Sepal.Width: 2.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.9<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.0<br />Sepal.Width: 2.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.1<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.7<br />Sepal.Width: 3.1<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.8<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.2<br />Sepal.Width: 2.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 2.5<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.9<br />Sepal.Width: 3.2<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.1<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.3<br />Sepal.Width: 2.5<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.1<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.4<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.6<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.8<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.7<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.0<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 2.6<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.4<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.4<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.8<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.0<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.4<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.0<br />Sepal.Width: 3.4<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.7<br />Sepal.Width: 3.1<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.3<br />Sepal.Width: 2.3<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.5<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.5<br />Sepal.Width: 2.6<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.1<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.8<br />Sepal.Width: 2.6<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.0<br />Sepal.Width: 2.3<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.6<br />Sepal.Width: 2.7<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 3.0<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 6.2<br />Sepal.Width: 2.9<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.1<br />Sepal.Width: 2.5<br />Species: versicolor<br />Species: versicolor","Sepal.Length: 5.7<br />Sepal.Width: 2.8<br />Species: versicolor<br />Species: versicolor"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":0.6,"size":22.6771653543307,"symbol":"triangle-up","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"versicolor","legendgroup":"versicolor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],"y":[3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3],"text":["Sepal.Length: 6.3<br />Sepal.Width: 3.3<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.8<br />Sepal.Width: 2.7<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.1<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 2.9<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.5<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.6<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 4.9<br />Sepal.Width: 2.5<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.3<br />Sepal.Width: 2.9<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 2.5<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.2<br />Sepal.Width: 3.6<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.5<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 2.7<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.8<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.7<br />Sepal.Width: 2.5<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.8<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.5<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.7<br />Sepal.Width: 3.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.7<br />Sepal.Width: 2.6<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.0<br />Sepal.Width: 2.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.9<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.6<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.7<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 2.7<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 3.3<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.2<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.2<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.1<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.2<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.4<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.9<br />Sepal.Width: 3.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 2.8<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.1<br />Sepal.Width: 2.6<br />Species: virginica<br />Species: virginica","Sepal.Length: 7.7<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 3.4<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.4<br />Sepal.Width: 3.1<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.0<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.9<br />Sepal.Width: 3.1<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 3.1<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.9<br />Sepal.Width: 3.1<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.8<br />Sepal.Width: 2.7<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.8<br />Sepal.Width: 3.2<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 3.3<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.7<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.3<br />Sepal.Width: 2.5<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.5<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica","Sepal.Length: 6.2<br />Sepal.Width: 3.4<br />Species: virginica<br />Species: virginica","Sepal.Length: 5.9<br />Sepal.Width: 3.0<br />Species: virginica<br />Species: virginica"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":0.6,"size":22.6771653543307,"symbol":"square","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"virginica","legendgroup":"virginica","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":27.689497716895,"r":7.97011207970112,"b":44.3669572436696,"l":47.0236612702366},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":15.9402241594022},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[4.12,8.08],"tickmode":"array","ticktext":["5","6","7","8"],"tickvals":[5,6,7,8],"categoryorder":"array","categoryarray":["5","6","7","8"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.98505603985056,"tickwidth":0.724555643609193,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.724555643609193,"zeroline":false,"anchor":"y","title":{"text":"Sepal.Length","font":{"color":"rgba(0,0,0,1)","family":"","size":15.9402241594022}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1.88,4.52],"tickmode":"array","ticktext":["2.0","2.5","3.0","3.5","4.0","4.5"],"tickvals":[2,2.5,3,3.5,4,4.5],"categoryorder":"array","categoryarray":["2.0","2.5","3.0","3.5","4.0","4.5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.98505603985056,"tickwidth":0.724555643609193,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.724555643609193,"zeroline":false,"anchor":"x","title":{"text":"Sepal.Width","font":{"color":"rgba(0,0,0,1)","family":"","size":15.9402241594022}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":2.06156048675734,"font":{"color":"rgba(0,0,0,1)","family":"","size":12.7521793275218},"y":0.979002624671916},"annotations":[{"text":"Species","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":15.9402241594022},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"2a734d8c2238":{"x":{},"y":{},"colour":{},"shape":{},"type":"scatter"}},"cur_data":"2a734d8c2238","visdat":{"2a734d8c2238":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 
 
 ---
