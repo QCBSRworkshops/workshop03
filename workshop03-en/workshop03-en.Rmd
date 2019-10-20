@@ -40,6 +40,9 @@ if(length(needed.libraries)) install.packages(needed.libraries)
 
 if (!require(colorblindr)) remotes::install_github("clauswilke/colorblindr")
 
+# Load all required libraries at once
+lapply(required.libraries, require, character.only = TRUE)
+
 #source("scripts/multiplot.R")
 
 ```
@@ -740,17 +743,17 @@ pp + scale_colour_grey() +
 NB: Good choices for publication purpose!
 
 ---
-## Theme assist: RStudio-addin
+## ggThemeAssist: RStudio-addin
 
-![](./images/ggThemeAssist2.gif)
+![](https://github.com/calligross/ggthemeassist/blob/master/examples/ggThemeAssist2.gif)
 
 ---
 class: inverse, center, middle
 
-# Fine-tuning your plots (facets): arrangement of plots
+# Fine-tuning your plots: `facet_grid()` and `facet_warp()` to change the arrangement of plots
 
 ---
-# Facet: Iris
+# iris dataset: per-species facets
 ```{r, fig.align="center", fig.width=10, fig.height=6}
 ggplot(data = iris) +
   geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
@@ -758,7 +761,7 @@ ggplot(data = iris) +
 ```
 
 ---
-# Facet: CO2
+# CO2 dataset: per-type facets
 ```{r, fig.align="center", fig.width=10, fig.height=5.5}
 ggplot(data = CO2) +
   geom_point(mapping = aes(x = conc, y = uptake, colour = Treatment)) +
@@ -770,13 +773,13 @@ ggplot(data = CO2) +
 <!-- relabeling ticks -->
 
 ---
-# Title & Axis size, colour, face
+# Title and axes components: size, colour and face
 
 .center[![:scale 80%](images/theme_iris_annotated.png)]
 
 
 ---
-# Title & Axis size, colour, face
+# Title and axes components: size, colour and face
 
 .pull-left[
 **Default**
@@ -785,7 +788,7 @@ pp
 ```
 ]
 .pull-right[
-**Axis & Title tuning**
+**Axis and title tuning**
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
 pp +
   ggtitle("Relation between Sepal Length & Width") +

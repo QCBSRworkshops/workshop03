@@ -39,6 +39,9 @@ required.libraries <- c("knitr",
 needed.libraries <- required.libraries[!(required.libraries %in% installed.packages()[,"Package"])]
 if(length(needed.libraries)) install.packages(needed.libraries)
 
+# Load all required libraries at once
+lapply(required.libraries, require, character.only = TRUE)
+
 if (!require(colorblindr)) remotes::install_github("clauswilke/colorblindr")
 
 source(file="/scripts/4plot_aesthetic.R")
