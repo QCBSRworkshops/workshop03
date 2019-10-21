@@ -948,243 +948,69 @@ tips.gg
 
 ---
 
-## `ggplot2::ggplot()` *versus* `base::plot()`
-.pull-left[
-```{r, eval=FALSE}
-ggplot(mtcars, aes(wt, mpg))
+## `ggplot2::ggplot()`
+```{r, fig.align="center"}
+ggplot(iris, aes(Sepal.Length))
 ```
-
-```{r, echo=FALSE}
-gblank <- ggplot(mtcars, aes(wt, mpg))
-gblank <- gblank + theme(plot.subtitle = element_text(vjust = 1),
-                        plot.caption = element_text(vjust = 1)) +
-  labs(title = "Blank plot")
-gblank
-```
-]
-
-.pull-right[
-```{r, fig.height = 7, fig.width= 6}
-plot(mpg~wt, data = mtcars, type = "n")
-```
-]
 
 ---
 
 # Histograms: `geom_histogram()`
 .small[
 A **histogram** is an accurate graphical representation of the distribution of numeric data
-.pull-left[
-```{r}
+```{r, fig.align="center"}
 ggplot(iris, aes(Sepal.Length)) +
   geom_histogram() + 
   ggtitle("Histogram of sepal length ")
 ```
-]
-.pull-right[
-```{r}
-ggplot(cars, aes(dist)) +
-  geom_histogram() + 
-  ggtitle("Histogram of distance done before stopping")
-```
-]]
 
 ---
 
 # `geom_histogram()` *versus* `graphics::hist()`
-.small[
 .pull-left[
-```{r, eval=FALSE}
-ggplot(diamonds, aes(carat)) + 
-  geom_histogram()
-```
-```{r, echo=FALSE}
-ggplot(diamonds, aes(carat)) + geom_histogram(binwidth = .5) + labs(title = "Histogram")
+```{r}
+ggplot(iris, aes(Sepal.Length)) +
+  geom_histogram() + 
+  ggtitle("Histogram of sepal length")
 ```
 ]
 .pull-right[
 ```{r}
-hist(diamonds$carat)
+hist(iris$Sepal.Length,
+     main = "Histogram of sepal length")
 ```
 ]]
 
 ---
 
-#### #Barplot: `geom_bar()` *versus* `graphics::barplot()`
+##### Scatter plot and linear-fit: `geom_point()` and `geom_smooth()`
 
 .pull-left[
-```{r, eval=FALSE}
-ggplot(mpg, aes(class)) + 
-  geom_bar()
-```
-```{r, echo=FALSE}
-ggplot(mpg, aes(class)) + geom_bar() + labs(title = "Barplot")
+```{r}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point() +
+  labs(title = "Scatter plot")
 ```
 ]
 
 .pull-right[
 ```{r}
-barplot(table(mpg$class))
-```
-]
-
----
-
-#### Annotating significant differences: `geom_signif()`
-.pull-left[
-```{r, eval=FALSE}
-ggplot(mpg, aes(class)) +
-  geom_bar() +
-  geom_signif()
-```
-
-```{r, echo=FALSE}
-library(dplyr)
-library(ggsignif)
-ir.s=iris %>%
-  group_by(Species) %>%
-  summarise(mean.sp = mean(Sepal.Length))
-#iris %>%
-#  group_by(Species) %>%
-#  summarise(pval = t.test(Sepal.Length,
-#                          var.equal = TRUE)$p.value)
-
-dat <- data.frame(Group = c("S1", "S1", "S2", "S2"),
-                  Sub   = c("A", "B", "A", "B"),
-                  Value = c(3,5,7,8),
-                  low = c(2.5,4.5,6,7.5),
-                  high = c(3.5,5.5,7,8.5))
-
-gbar2 = ggplot(data = dat, aes(x = Group, y = Value,fill = Sub)) +
-  geom_bar(#aes(fill = Sub),
-    stat="identity",
-    position="dodge",
-    width=.5) +
-  geom_errorbar(aes(ymin=low,
-                    ymax=high),
-                width = 0.1,
-                position =  position_dodge(.5), colour="black") +
-  labs(title = "Barplot") +
-  scale_fill_manual(values = c("grey80",
-                               "grey20")) +
-  geom_signif(stat="identity",
-              data=data.frame(x=c(0.875, 1.875),
-                              xend=c(1.125, 2.125),
-                              y=c(5.8, 8.8),
-                              Sub=c("A","B"),
-                              annotation=c("**", "NS")),
-              aes(x=x,xend=xend, y=y, yend=y,
-                  annotation=annotation)) +
-  geom_signif(comparisons=list(c("S1", "S2")),
-              annotations="***",
-              y_position = 9.3,
-              tip_length = 0,
-              vjust=0.4)
-
-gbar2
-```
-]
-
-.pull-right[
-```{r, eval=FALSE}
-barplot()
-sign.bar()
-```
-
-```{r, echo=FALSE}
-df=data.frame(S1 = c(3,5), S2=c(7,8))
-my.bp = barplot(as.matrix(df),
-               beside = TRUE,
-               xlab = "Group",
-               ylab = "Value",
-               main = "Barplot",
-               ylim = c(0,12),
-               legend = rownames(df),
-               args.legend = list(x = "topright",
-                                  bty = "n",
-                                  inset=c(-0.07, 0))
-               # args.legend=list(
-               #   x=ncol(df)+4,
-               #   y=min(colSums(df)),
-               #   bty = "n"
-               # )
-)
-sign.bar = function(pos,select.pair, y, offset = 0.2, label, mid = FALSE) {
-  # create the y coordinate of the line
-  y <- y
-  # set an offset for tick lengths
-  offset <- offset
-  # draw first horizontal line
-  if (!mid) {
-    lines(pos[select.pair],c(y, y))
-    # draw ticks
-    lines(pos[c(select.pair[1],select.pair[1])],c(y, y-offset))
-    lines(pos[c(select.pair[2],select.pair[2])],c(y, y-offset))
-  } else {
-    lines(x = c(c(pos[select.pair[1]-1]+
-                    pos[select.pair[1]])/2,
-                c(pos[select.pair[2]]+
-                    pos[select.pair[2]+1])/2),
-          c(y, y))
-    # draw ticks
-    lines(c(c(pos[select.pair[1]-1]+
-                pos[select.pair[1]])/2,
-            c(pos[select.pair[1]-1]+
-                pos[select.pair[1]])/2),
-          c(y, y-offset))
-    lines(c(c(pos[select.pair[2]]+
-                pos[select.pair[2]+1])/2,
-            c(pos[select.pair[2]]+
-                pos[select.pair[2]+1])/2),
-          c(y, y-offset))
-  }
-  # draw asterics
-  text(pos[select.pair[1]]+((pos[select.pair[2]]-pos[select.pair[1]])/2),y+offset*2,
-       labels = label)
-}
-sign.bar(my.bp, select.pair = c(1,2),y =6,label = "**")
-sign.bar(my.bp, select.pair = c(3,4),y =8.8,label = "NS")
-sign.bar(my.bp, select.pair = c(2,3),y =10,label = "***", mid = TRUE)
-```
-]
-
----
-
-##### Scatterplot and linear-fit: `geom_point()` and `geom_smooth()`
-
-.pull-left[
-```{r, eval=FALSE}
-ggplot(mpg, aes(displ, hwy)) +
-  geom_point() +
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point() + 
+  labs(title = "Linear Regression Plot") +
   geom_smooth(method = lm)
 ```
-```{r, echo=FALSE}
-lm.gg <- ggplot(mpg, aes(displ, hwy)) + geom_point() + geom_smooth(method = lm)+ labs(title = "Linear Regression Plot")
-lm.gg
-```
 ]
 
-.pull-right[
-```{r, eval=FALSE}
-lm.out  <- lm(hwy ~ displ, data = mpg)
-plot(hwy ~ displ, data = mpg)
-abline(lm.out)
+---
 
+# Boxplot: `geom_boxplot()`
+
+```{r, fig.align="center"}
+ggplot(data = iris, aes(Species, Sepal.Length, fill = Species)) +
+  geom_boxplot() + 
+  labs(title = "Boxplot")
 ```
-```{r, echo=FALSE}
-lm.out  <- lm(hwy~displ, data = mpg)
-newx <- seq(min(mpg$displ), max(mpg$displ), length.out=100)
-preds <- predict(lm.out, newdata = data.frame(displ=newx),
-                 interval = 'confidence')
-plot(hwy~displ, data = mpg, bg = "black", col = "black", pch =21)
-polygon(c(rev(newx), newx),
-        c(rev(preds[ ,3]), preds[ ,2]),
-        col = 'grey80', border = NA)
-abline(lm.out)
-lines(newx, preds[ ,3], lty = 'dashed', col = 'red')
-lines(newx, preds[ ,2], lty = 'dashed', col = 'red')
-```
-]
 
 ---
 
@@ -1204,31 +1030,12 @@ ggplot(data = iris, aes(Species, Sepal.Length, fill = Species)) +
 
 ##### Boxplot with annotations: `geom_boxplot()` and `geom_signif()`
 
-.pull-left[
-```{r, eval=FALSE}
+```{r, fig.align="center"}
 ggplot(data = iris, aes(Species, Sepal.Length)) +
   geom_boxplot() +
-  geom_signif()
-```
-
-```{r, echo=FALSE}
-ggplot(data = iris, aes(Species, Sepal.Length)) +
-  geom_boxplot()+ labs(title = "Boxplot")+
   geom_signif(comparisons = list(c("versicolor", "virginica")),
               map_signif_level=TRUE)
 ```
-]
-
-.pull-right[
-```{r, eval=FALSE}
-boxplot(iris$Sepal.Length ~ iris$Species)
-
-```
-
-```{r, echo=FALSE}
-boxplot(iris$Sepal.Length ~ iris$Species) # For analysis of variance
-```
-]
 
 ---
 
@@ -1259,402 +1066,144 @@ ggplot(data = data, aes(names, value, fill=names)) + geom_violin()
 
 ---
 # Violin plot: `geom_violin()`
-.small[
-.pull-left[
-```{r, eval=FALSE}
-ggplot(data = iris, aes(Species,
-                        Sepal.Length)) +
-  geom_violin()
-```
-```{r, echo=FALSE}
-violP.gg <- ggplot(data = iris, aes(Species, Sepal.Length)) + geom_violin()+ labs(title = "Violin plot")
-violP.gg
-```
-]
-.pull-right[
-```{r, eval=FALSE}
-library(vioplot)
-vioplot(iris$Sepal.Length[iris$Species == "setosa"],
-        iris$Sepal.Length[iris$Species == "versicolor"],
-        iris$Sepal.Length[iris$Species == "virginica"],
-        col = "lightblue")
+
+```{r, fig.align="center"}
+ggplot(data = iris, aes(Species, Sepal.Length)) + 
+  geom_violin() + 
+  labs(title = "Violin plot")
 ```
 
-```{r echo=FALSE}
-library(vioplot)
-vioplot(iris$Sepal.Length[iris$Species == "setosa"],
-        iris$Sepal.Length[iris$Species == "versicolor"],
-        iris$Sepal.Length[iris$Species == "virginica"],
-        col = "lightblue")
+---
+
+# Summarise y values: `stat_summary()`
+
+.pull-left[
+```{r}
+ggplot(mtcars, aes(cyl, mpg)) + 
+  geom_point() +
+  stat_summary(fun.y = "median", 
+               colour = "red", 
+               geom = "point") +
+  labs(title = "Means")
 ```
 ]
+
+.pull-right[
+```{r}
+ggplot(mtcars, aes(cyl, mpg)) + 
+  geom_point() +
+  stat_summary(fun.data = "mean_cl_boot", 
+               colour = "red") +
+  labs(title = "Means and 
+       confidence intervals")
+```
 ]
 
 ---
 
-### Error bars: `geom_pointrange()` and `geom_errorbar()`
+# Summarise values  
 
-.pull-left[
-```{r, eval=FALSE}
-ggplot(df, aes(trt, resp, colour = group)) +
-  geom_pointrange()+
-  geom_errorbar() +
-```
-```{r, echo=FALSE}
-df <- data.frame(
-  trt = factor(c(1, 1, 2, 2)),
-  resp = c(1, 5, 3, 4),
-  group = factor(c(1, 2, 1, 2)),
-  upper = c(1.1, 5.3, 3.3, 4.2),
-  lower = c(0.8, 4.6, 2.4, 3.6)
-)
-
-ggplot(df, aes(trt, resp, colour = group)) +
-  geom_pointrange(aes(ymin = lower, ymax = upper))+
-  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.2) +
-  labs(title = "Plot with error bars")
-```
-]
-
-.pull-right[
-```{r, eval=FALSE}
-plot(y ~ x)
-error.bar <- function(...)
-error.bar(x, y)
-```
-```{r, echo=FALSE}
-x = as.numeric(c(1,2))
-y = c(2,3)
-mean = mean(y)
-plot(y~x,
-     type = "p",
-     pch =21,
-     bg = "black",
-     col = "black",
-     ylim = c(0,4),
-     xlim = c(0,3),
-     xaxt="n",
-     #main = "My graph",
-     xlab = "Site Category",
-     ylab = "Mean")
-axis(side = 1, at = c(1,2), labels = levels(c("yo","man")), cex.lab =1, cex.axis =1)
-
-error.bar <- function(x,
-                      y,
-                      epsilon = NULL,
-                      se = NULL,
-                      se.mul = 1,
-                      col = "black") {
-  x = as.numeric(x)
-  if(is.null(se)){
-    stderr <- function(x) sqrt(var(x,na.rm=TRUE)/length(na.omit(x)))
-    se = se.mul*stderr(y)
-  } else {se = se.mul*se}
-
-  segments(x, y-se,x, y+se,col = col)
-  if(is.null(epsilon)){
-    epsilon = 0.02} else {epsilon = epsilon}
-  segments(x-epsilon,y-se,x+epsilon,y-se,col = col)
-  segments(x-epsilon,y+se,x+epsilon,y+se,col = col)
-}
-error.bar(x,y)
-```
-
-]
+See also `geom_errorbar()`, `geom_pointrange()`, `geom_linerange()`, `geom_crossbar()` for geoms to display summarised data
 
 ---
 
 # Representing maps: `geom_map()`
-.small[
-.pull-left[
-```{r, eval=FALSE}
-library(maps)
-states_map <- map_data("state")
-ggplot(crimes, 
-       aes(map_id = state)) +
-  geom_map() + 
-  coord_map()
-```
-```{r, echo=FALSE}
+
+```{r}
 crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
 crimesm <- reshape2::melt(crimes, id = 1)
 library(maps)
 states_map <- map_data("state")
-map.gg <- ggplot(crimes, aes(map_id = state)) +
-  geom_map(aes(fill = Murder), map = states_map) +
-  expand_limits(x = states_map$long, y = states_map$lat) + coord_map()+ labs(title = "Map")
-map.gg
-```
-]
 
-.pull-right[
-```{r, eval=FALSE}
-library(rworldmap)
-library(mapproj)
-newmap <- rworldmap::getMap(resolution = "low")
-plot(newmap)
+ggplot(crimes, aes(map_id = state)) +
+  geom_map(aes(fill = Murder), map = states_map) +
+  expand_limits(x = states_map$long, y = states_map$lat) + 
+  coord_map()
 ```
-```{r, echo=FALSE}
-library(rworldmap)
-newmap <- rworldmap::getMap(resolution = "low")
-plot(newmap, xlim = c(-92, -89)
-     , ylim = c(-1.5, 0.5)
-     , asp = 1
-     , main = "Galapagos islands")
-```
-]
-]
 ---
+
 
 # Density plots: `geom_density()`
 
 .small[A density plot shows the distribution of a numerical variable and it takes only set of numeric values as input.]
 .pull-left[
 ```{r, echo=FALSE}
-ggplot(iris, aes(Sepal.Length)) +
-  geom_density() + 
-  ggtitle("Distribution of sepal length ")
+iris.dens <- ggplot(iris, aes(Sepal.Length)) +
+  geom_density() 
+iris.dens
 ```
 ]
 
 .pull-right[
 ```{r, echo=FALSE}
-ggplot(cars, aes(dist)) +
-  geom_density() + ggtitle("Distribution of car distance taken to stop ")
-```
-]
-
----
-# Density plots: `geom_density()`
-
-.pull-left[
-```{r, eval=FALSE}
-ggplot(diamonds, aes(carat)) +
+cars.dens <- ggplot(cars, aes(dist)) +
   geom_density()
-```
-```{r, echo=FALSE}
-density.gg <- ggplot(diamonds, aes(carat)) +geom_density()+ labs(title = "Density graph")
-density.gg
-```
-]
-
-.pull-right[
-```{r, eval=FALSE}
-plot(density(c(-20, 
-               rep(0, 98), 20)),
-     xlim = c(-4, 4))
-```
-```{r, echo=FALSE}
-plot(density(c(-20, rep(0,98), 20)), xlim = c(-4, 4),
-     main = "Density graph")
+cars.dens
 ```
 ]
 
 ---
 
 # Dendogram: `ggdendrogram()`
-.small[
-.pull-left[
-```{r, eval=FALSE}
-library(ggdendro)
-ggdendrogram() + 
-  theme_classic()
-```
-```{r, echo = FALSE}
+
+```{r}
 library(ggdendro)
 USArrests.short = USArrests[1:10,]
 hc <- hclust(dist(USArrests.short), "ave")
-ggdendrogram(hc, rotate = TRUE, theme_dendro = FALSE) +
-  labs(title = "Dendrogram") + 
-  theme_classic()
-```
-]
 
-.pull-right[
-```{r, eval=FALSE}
-par(mar=c(3,3,4,4))
-plot(as.dendrogram(hc), horiz = TRUE,
-     main = "Dendrogram")
+ggdendrogram(hc, rotate = TRUE, theme_dendro = FALSE)
 ```
-```{r, echo=FALSE}
-par(mar=c(3,3,4,4))
-plot(as.dendrogram(hc), horiz = TRUE,
-     main = "Dendrogram")
-```
-]
-]
+
 
 ---
 
-# Multiplot
+# Arrange plots: `ggarrange()`
 
-**A function to add multiple graphs on the same plot**
+**Add multiple graphs on the same plot**
 
 ```{r}
-plot.new()
-#multiplot(density.gg, map.gg, violP.gg, lm.gg, cols = 2)
+ggarrange(iris.dens, cars.dens, labels = c('a)','b)'))
 ```
 
 ---
 
 # Final Challenge ![:cube]()
   * Dataset: any (recommended: use your dataset)
-```{r, eval=FALSE}
-data(msleep) ; data(mtcars) ; data(OrchardSprays)
-```
-```{r, echo=FALSE, fig.height=6, fig.width=8, fig.align='center'}
+  * Explore a new geom and other plot elements  
+https://ggplot2.tidyverse.org/reference/index.html
+http://shinyapps.stat.ubc.ca/r-graph-catalog/
+
+---
+
+```{r, fig.align='center'}
+data(msleep)
 msleep.challenge4 <- ggplot(msleep, aes(vore, log10(brainwt), fill=vore))
-msleep.challenge4 <- msleep.challenge4 + geom_violin()
-msleep.challenge4 <- msleep.challenge4 + geom_signif(comparisons = list(c("herbi", "insecti")))
-msleep.challenge4 <- msleep.challenge4 + ggtitle("Brain weight among different vore")
-msleep.challenge4 <- msleep.challenge4 + ylab("Brain weight (log10(Kg))")
-msleep.challenge4 <- msleep.challenge4 + scale_fill_grey()
-msleep.challenge4 <- msleep.challenge4 + theme_classic()
-msleep.challenge4 <- msleep.challenge4 + theme(axis.title.x = element_text(size = 16),
-                                               axis.title.y = element_text(size = 16),
-                                               axis.text.x = element_text(size = 12),
-                                               axis.text.y = element_text(size = 12),
-                                               plot.title = element_text(size = 16, face="bold"),
-                                               legend.title = element_text(size=14, face="bold"),
-                                               legend.text = element_text(size=12))
-#msleep.challenge4
+msleep.challenge4 + geom_violin() +
+  geom_signif(comparisons = list(c("herbi", "insecti"))) + 
+  labs(main = "Brain weight among different vore", y = "Brain weight (log10(Kg))") + 
+  scale_fill_grey() + 
+  theme_classic()
+```
 
-brain_body.challenge4 <- ggplot(msleep, aes(log10(bodywt), log10(brainwt)))
-brain_body.challenge4 <- brain_body.challenge4 + geom_point()
-brain_body.challenge4 <- brain_body.challenge4 + geom_smooth(method = lm)
-brain_body.challenge4 <- brain_body.challenge4 + ggtitle("Linear regression on bodywt ~ brainwt")
-brain_body.challenge4 <- brain_body.challenge4 + ylab("Brain weight log10(Kg)") + xlab("Body weight log10(Kg)")
-brain_body.challenge4 <- brain_body.challenge4 + theme(axis.title.x = element_text(size = 16),
-                                                       axis.title.y = element_text(size = 16),
-                                                       axis.text.x = element_text(size = 12),
-                                                       axis.text.y = element_text(size = 12),
-                                                       plot.title = element_text(size = 14, face="bold"),
-                                                       legend.title = element_text(size=14, face="bold"),
-                                                       legend.text = element_text(size=12))
-#brain_body.challenge4
+---
 
-
+```{r, fig.align='center'}
+data(mtcars)
 mtcars.short <- mtcars[1:20,]
 mtcars.short.hc <- hclust(dist(mtcars.short), "complete")
 dendro.challenge4 <- ggdendrogram(mtcars.short.hc, rotate = TRUE, theme_dendro = FALSE)
-dendro.challenge4 <- dendro.challenge4 + ggtitle("Car dendro from motor spec")
-dendro.challenge4 <- dendro.challenge4 + xlab("Cars")
-dendro.challenge4 <- dendro.challenge4 + theme(axis.title.y = element_text(size = 16),
-                                               axis.title.x = element_blank(),
-                                               axis.text.x = element_blank(),
-                                               axis.text.y = element_text(size = 12),
-                                               plot.title = element_text(size = 14, face="bold"))
-#dendro.challenge4
-
-data(OrchardSprays)
-Orchard.challenge4 <- ggplot(data = OrchardSprays, aes(x=treatment, y=decrease)) + geom_boxplot()
-Orchard.challenge4 <- Orchard.challenge4 + ggtitle("Decrease of Orchad bees with different treatments")
-Orchard.challenge4 <- Orchard.challenge4 + ylab("Orchad bees decrese")
-Orchard.challenge4 <- Orchard.challenge4 + theme(axis.title.y = element_text(size = 14),
-                                                 axis.title.x = element_text(size = 14),
-                                                 axis.text.x = element_text(size = 12),
-                                                 axis.text.y = element_text(size = 12),
-                                                 plot.title = element_text(size = 14, face="bold"))
-#Orchard.challenge4
-
-
-#multiplot(msleep.challenge4,dendro.challenge4, brain_body.challenge4, Orchard.challenge4, cols = 2)
-
+dendro.challenge4 + ggtitle("Car dendro from motor spec") +
+  xlab("Cars") +
+  theme(axis.title.y = element_text(size = 16),
+        axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_text(size = 12),
+        plot.title = element_text(size = 14, face="bold"))
 ```
 
 
 ---
 
-.small[
-```{r, eval=FALSE}
-msleep.challenge4 <- ggplot(msleep, aes(vore, log10(brainwt), fill=vore))
-msleep.challenge4 <- msleep.challenge4 + geom_violin()
-msleep.challenge4 <- msleep.challenge4 + geom_signif(comparisons = list(c("herbi", "insecti")))
-msleep.challenge4 <- msleep.challenge4 + ggtitle("Brain weight among different vore")
-msleep.challenge4 <- msleep.challenge4 + ylab("Brain weight (log10(Kg))")
-msleep.challenge4 <- msleep.challenge4 + scale_fill_grey()
-msleep.challenge4 <- msleep.challenge4 + theme_classic()
-msleep.challenge4 <- msleep.challenge4 + theme(axis.title.x = element_text(size = 16),
-                                               axis.title.y = element_text(size = 16),
-                                               axis.text.x = element_text(size = 12),
-                                               axis.text.y = element_text(size = 12),
-                                               plot.title = element_text(size = 16, face="bold"),
-                                               legend.title = element_text(size=14, face="bold"),
-                                               legend.text = element_text(size=12))
-
-```
-```{r, fig.align='center', echo=FALSE, fig.height=4, fig.width=6}
-msleep.challenge4
-```
-]
-
----
-
-.small[
-```{r, eval=FALSE}
-brain_body.challenge4 <- ggplot(msleep, aes(log10(bodywt), log10(brainwt)))
-brain_body.challenge4 <- brain_body.challenge4 + geom_point()
-brain_body.challenge4 <- brain_body.challenge4 + geom_smooth(method = lm)
-brain_body.challenge4 <- brain_body.challenge4 + ggtitle("Linear regression on bodywt ~ brainwt")
-brain_body.challenge4 <- brain_body.challenge4 + ylab("Brain weight log10(Kg)") + xlab("Body weight log10(Kg)")
-brain_body.challenge4 <- brain_body.challenge4 + theme(axis.title.x = element_text(size = 16),
-                                                       axis.title.y = element_text(size = 16),
-                                                       axis.text.x = element_text(size = 12),
-                                                       axis.text.y = element_text(size = 12),
-                                                       plot.title = element_text(size = 14, face="bold"),
-                                                       legend.title = element_text(size=14, face="bold"),
-                                                       legend.text = element_text(size=12))
-
-```
-```{r, fig.align='center', echo=FALSE, fig.height=4, fig.width=6}
-brain_body.challenge4
-```
-
-]
-
----
-
-.small[
-```{r, fig.align='center'}
-mtcars.short <- mtcars[1:20,]
-mtcars.short.hc <- hclust(dist(mtcars.short), "complete")
-dendro.challenge4 <- ggdendrogram(mtcars.short.hc, rotate = TRUE, theme_dendro = FALSE)
-dendro.challenge4 <- dendro.challenge4 + ggtitle("Car dendro from motor spec")
-dendro.challenge4 <- dendro.challenge4 + xlab("Cars")
-dendro.challenge4 <- dendro.challenge4 + theme(axis.title.y = element_text(size = 16),
-                                               axis.title.x = element_blank(),
-                                               axis.text.x = element_blank(),
-                                               axis.text.y = element_text(size = 12),
-                                               plot.title = element_text(size = 14, face="bold"))
-dendro.challenge4
-```
-]
-
----
-
-.small[
-```{r, fig.align='center'}
-Orchard.challenge4 <- ggplot(data = OrchardSprays, aes(x=treatment, y=decrease)) + geom_boxplot()
-Orchard.challenge4 <- Orchard.challenge4 + ggtitle("Decrease of Orchad bees with different treatments")
-Orchard.challenge4 <- Orchard.challenge4 + ylab("Orchad bees decrese")
-Orchard.challenge4 <- Orchard.challenge4 + theme(axis.title.y = element_text(size = 14),
-                                                 axis.title.x = element_text(size = 14),
-                                                 axis.text.x = element_text(size = 12),
-                                                 axis.text.y = element_text(size = 12),
-                                                 plot.title = element_text(size = 14, face="bold"))
-Orchard.challenge4
-```
-]
-
----
-
-# Solution to final challenge
-
-```{r, fig.align='center', fig.height=6, fig.width=8}
-#multiplot(msleep.challenge4,dendro.challenge4, brain_body.challenge4, Orchard.challenge4, cols = 2)
-```
-
----
 # Miscellaneous: interactive plots
 <br>
 
@@ -1692,10 +1241,9 @@ class: inverse, center, middle
 `ggsave()` writes directly to your working directory and allows you to specify the name of the file, the dimensions of the plot, the resolution, etc.
 
 ```{r, eval=FALSE}
-my1rstPlot <- ggplot(data = iris,
-                     aes(x = Petal.Length,
-                         y = Petal.Width)) +
+my1rstPlot <- ggplot(iris, aes(Petal.Length, Petal.Width)) +
   geom_point()
+
 ggsave("my1stPlot.pdf",
        my1rstPlot,
        height = 8.5, width = 11, units = "in", res = 300)
