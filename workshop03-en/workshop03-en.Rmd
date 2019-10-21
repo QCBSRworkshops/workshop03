@@ -956,7 +956,6 @@ ggplot(iris, aes(Sepal.Length))
 ---
 
 # Histograms: `geom_histogram()`
-.small[
 A **histogram** is an accurate graphical representation of the distribution of numeric data
 ```{r, fig.align="center"}
 ggplot(iris, aes(Sepal.Length)) +
@@ -1081,9 +1080,8 @@ ggplot(data = iris, aes(Species, Sepal.Length)) +
 ```{r}
 ggplot(mtcars, aes(cyl, mpg)) + 
   geom_point() +
-  stat_summary(fun.y = "median", 
-               colour = "red", 
-               geom = "point") +
+  stat_summary(fun.y = "median", geom = "point",
+               colour = "red") +
   labs(title = "Means")
 ```
 ]
@@ -1094,8 +1092,7 @@ ggplot(mtcars, aes(cyl, mpg)) +
   geom_point() +
   stat_summary(fun.data = "mean_cl_boot", 
                colour = "red") +
-  labs(title = "Means and 
-       confidence intervals")
+  labs(title = "Means and confidence intervals")
 ```
 ]
 

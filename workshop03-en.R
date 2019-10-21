@@ -479,9 +479,8 @@ ggplot(data = iris, aes(Species, Sepal.Length)) +
 ## ------------------------------------------------------------------------
 ggplot(mtcars, aes(cyl, mpg)) + 
   geom_point() +
-  stat_summary(fun.y = "median", 
-               colour = "red", 
-               geom = "point") +
+  stat_summary(fun.y = "median", geom = "point",
+               colour = "red") +
   labs(title = "Means")
 
 
@@ -490,8 +489,7 @@ ggplot(mtcars, aes(cyl, mpg)) +
   geom_point() +
   stat_summary(fun.data = "mean_cl_boot", 
                colour = "red") +
-  labs(title = "Means and 
-       confidence intervals")
+  labs(title = "Means and confidence intervals")
 
 
 ## ------------------------------------------------------------------------
