@@ -930,6 +930,13 @@ tips.gg
 ]
 
 ---
+class: inverse, center, middle
+
+# Fine-tuning your plots
+
+### Using `geom_*()` to create different plots
+
+---
 
 # `ggplot2::geom_*()`
 
@@ -982,13 +989,13 @@ hist(iris$Sepal.Length,
 
 ---
 
-##### Scatter plot and linear-fit: `geom_point()` and `geom_smooth()`
-
+##### Scatterplot and linear-fit: `geom_point()` and `geom_smooth()`
+.small[
 .pull-left[
 ```{r}
 ggplot(mpg, aes(displ, hwy)) + 
   geom_point() +
-  labs(title = "Scatter plot")
+  labs(title = "Scatterplot")
 ```
 ]
 
@@ -996,17 +1003,18 @@ ggplot(mpg, aes(displ, hwy)) +
 ```{r}
 ggplot(mpg, aes(displ, hwy)) + 
   geom_point() + 
-  labs(title = "Linear Regression Plot") +
+  labs(title = "Linear Regression") +
   geom_smooth(method = lm)
 ```
 ]
-
+]
 ---
 
 # Boxplot: `geom_boxplot()`
 
 ```{r, fig.align="center"}
-ggplot(data = iris, aes(Species, Sepal.Length, fill = Species)) +
+ggplot(data = iris, aes(Species, Sepal.Length, 
+                        fill = Species)) +
   geom_boxplot() + 
   labs(title = "Boxplot")
 ```
@@ -1015,7 +1023,7 @@ ggplot(data = iris, aes(Species, Sepal.Length, fill = Species)) +
 
 # Boxplot: `geom_boxplot()`
 
-```{r, echo=FALSE, fig.align="center", fig.width=3, fig.height=3}
+```{r, echo=FALSE, fig.align="center", fig.width = 7, fig.height = 5}
 ggplot(data = iris, aes(Species, Sepal.Length, fill = Species)) +
   geom_boxplot() + 
   labs(title = "Boxplot")
@@ -1100,15 +1108,20 @@ ggplot(mtcars, aes(cyl, mpg)) +
 
 # Summarise values  
 
-See also `geom_errorbar()`, `geom_pointrange()`, `geom_linerange()`, `geom_crossbar()` for geoms to display summarised data
+See also `geom_errorbar()`, `geom_pointrange()`, `geom_linerange()`, `geom_crossbar()` for geoms to display summarised data.
+
+
+
+
 
 ---
 
 # Representing maps: `geom_map()`
-
+.small[
 ```{r}
 crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
 crimesm <- reshape2::melt(crimes, id = 1)
+
 library(maps)
 states_map <- map_data("state")
 
@@ -1117,6 +1130,7 @@ ggplot(crimes, aes(map_id = state)) +
   expand_limits(x = states_map$long, y = states_map$lat) + 
   coord_map()
 ```
+]
 ---
 
 
@@ -1124,7 +1138,7 @@ ggplot(crimes, aes(map_id = state)) +
 
 .small[A density plot shows the distribution of a numerical variable and it takes only set of numeric values as input.]
 .pull-left[
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 iris.dens <- ggplot(iris, aes(Sepal.Length)) +
   geom_density() 
 iris.dens
@@ -1132,7 +1146,7 @@ iris.dens
 ]
 
 .pull-right[
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 cars.dens <- ggplot(cars, aes(dist)) +
   geom_density()
 cars.dens
@@ -1164,26 +1178,32 @@ ggarrange(iris.dens, cars.dens, labels = c('a)','b)'))
 
 ---
 
-# Final Challenge ![:cube]()
+# Final Challenge![:cube]()
+
+Create your own graph and follow these recommendations:
   * Dataset: any (recommended: use your dataset)
-  * Explore a new geom and other plot elements  
+  * Explore a new geom_* and other plot elements
+  
+Use the following links for tips:
 https://ggplot2.tidyverse.org/reference/index.html
 http://shinyapps.stat.ubc.ca/r-graph-catalog/
 
 ---
-
+## Final Challenge: Solution example #1
+.small[
 ```{r, fig.align='center'}
 data(msleep)
 msleep.challenge4 <- ggplot(msleep, aes(vore, log10(brainwt), fill=vore))
 msleep.challenge4 + geom_violin() +
   geom_signif(comparisons = list(c("herbi", "insecti"))) + 
-  labs(main = "Brain weight among different vore", y = "Brain weight (log10(Kg))") + 
+  labs(main = "Brain weight among different vore", y = "log10(Brain weight (Kg))") + 
   scale_fill_grey() + 
   theme_classic()
 ```
-
+]
 ---
-
+## Final Challenge: Solution example #2
+.small[
 ```{r, fig.align='center'}
 data(mtcars)
 mtcars.short <- mtcars[1:20,]
@@ -1197,25 +1217,21 @@ dendro.challenge4 + ggtitle("Car dendro from motor spec") +
         axis.text.y = element_text(size = 12),
         plot.title = element_text(size = 14, face="bold"))
 ```
-
+]
 
 ---
 
-# Miscellaneous: interactive plots
-<br>
-
-.alert[**Select the Species data to display directly From the legend**]
-```{r, echo=FALSE, fig.align='center', fig.width=11, fig.height=7.5}
-library(tidyverse)
-library(plotly)
-# Scatterplot
+### Miscellaneous: interactive plots using `plotly()`
+.small[
+.alert[**Select the species data to display directly from the legend**]
+```{r, echo = TRUE, fig.align='center', fig.width=9, fig.height=5.5}
 p = ggplot(iris, 
            aes(x=Sepal.Length, y=Sepal.Width, colour=Species, shape=Species)) +
     geom_point(size=6, alpha=0.6)
 
-ggplotly(p)
+plotly::ggplotly(p)
 ```
-
+]
 
 ---
 class: inverse, center, middle
@@ -1227,11 +1243,11 @@ class: inverse, center, middle
 # Saving plots in RStudio
 
 <div style="text-align:center">
-<img src="images/save_image.png" height=70% width=70%>
+<img src="images/save_image.png" height=60% width=60%>
 </div>
-
+.small[
 .alert[Think about the margin of the document you are using. If you resize the image after saving it, the labels and text will change size as well which could be hard to read.]
-
+]
 ---
 # Saving plots in code
 
@@ -1294,10 +1310,10 @@ https://www.rstudio.com/resources/cheatsheets
 # Concluding remarks
 <br>
 
-1. There are other useful packages that can be used with `ggplot2`! To name a few: `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` and `ggtree`. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) for other `ggplot2` extensions.
+  1. There are other useful packages that can be used with `ggplot2`! To name a few: `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` and `ggtree`. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) for other `ggplot2` extensions.
 
 
-2. Note that you can learn more about design and image manipulation with the "Introduction to graphic design and image manipulation with open source tools": https://qcbs.ca/wiki/graphics
+  2. Note that you can learn more about design and image manipulation with the "Introduction to graphic design and image manipulation with open source tools": https://qcbs.ca/wiki/graphics
 
 
 
