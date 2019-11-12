@@ -18,21 +18,21 @@ options(repos=structure(c(CRAN="http://cran.r-project.org")))
 ```
 
 ```{r, include = FALSE}
-required.libraries <- c("knitr", 
-                        "tidyverse", 
-                        "vegan", 
-                        "ggpubr", 
+required.libraries <- c("knitr",
+                        "tidyverse",
+                        "vegan",
+                        "ggpubr",
                         "ggsignif",
-                        "ggpmisc", 
-                        "ggdendro", 
-                        "rworldmap", 
-                        "maps", 
-                        "mapproj", 
+                        "ggpmisc",
+                        "ggdendro",
+                        "rworldmap",
+                        "maps",
+                        "mapproj",
                         "grid",
-                        "gridExtra", 
-                        "RColorBrewer", 
-                        "gridBase", 
-                        "psych", 
+                        "gridExtra",
+                        "RColorBrewer",
+                        "gridBase",
+                        "psych",
                         "remotes")
 
 needed.libraries <- required.libraries[!(required.libraries %in% installed.packages()[,"Package"])]
@@ -157,8 +157,12 @@ Important questions:
 .alert[A rule of thumb: think simple — use less ink!]
 ]
 
+--
 
+#### Additional resources
 
+- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/) (ggplot)
+- [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base plot)
 
 ---
 ## WARNING!
@@ -201,7 +205,7 @@ source(file="./scripts/multiExamplePlot.R")
 ---
 ## `ggplot2` is versatile
 
-1. [`ggplot2`](https://ggplot2.tidyverse.org/) package lets you make beautiful and customizable plots;
+1. [`ggplot2`](https://ggplot2.tidyverse.org/) package lets you make *beautiful* and customizable plots;
 2. it implements the grammar of graphics, an easy to use system for building plots;
 3. it [has many extensions](https://insileco.github.io/wiki/rgraphpkgs/#ggplot2andextensions).
 
@@ -306,6 +310,7 @@ A graphic is made of elements (layers)
   * `plot.object` or `print(plot.object)`
 
 ---
+
 ## Prepare data for `ggplot2` 
 
 `ggplot2` requires you to prepare the data as an object of class `data.frame` or `tibble` (common in the `tidyverse`).
@@ -318,6 +323,10 @@ ir <- as_tibble(iris) # acceptable
 class(ir)
 ```
 
+**&#x267B; Recall from the [*Loading and manipulating data*](http://qcbs.ca/wiki/r_workshop2) workshop**:
+
+More complex plots in `ggplot` require the long data frame format
+
 ---
 ## iris dataset
 
@@ -328,9 +337,8 @@ str(iris)
 
 .center[**Scientific questions**]
 - Is there a relation between the **length** & the **width** of the iris **Sepal** ?
-- Is there a relation between the **length** & the **width** of the iris **Pepal** ?
 - Does the size of the **Petal & Sepal** vary together ?
-- How are these measures distributed among the **5 Iris species** ?
+- How are these measures distributed among the **3 Iris species** ?
 
 .center[.alert[How to graphically address these questions with ggplot ?]]
 
@@ -375,7 +383,7 @@ p <- ggplot(data = iris,
             aes(x = Sepal.Length,
                 y = Sepal.Width))
 p <- p + geom_point()
-p   
+p
 ```
 ]
 
@@ -450,7 +458,7 @@ iris|geom_point|Petal length|Petal width
 ## Challenge 1#: Solution ![:cube]()
 
 ```{r}
-ggplot(data = iris, aes(x = Petal.Length, 
+ggplot(data = iris, aes(x = Petal.Length,
                         y = Petal.Width)) +
   geom_point()
 ```
@@ -467,7 +475,7 @@ class: inverse, center, middle
 
 ## Aesthetic
 
-##### Use aesthetics (`aes()`) to distinguish classes, groups and structure
+**Use aesthetics (`aes()`) to distinguish classes, groups and structure**
 
 
 ```{r echo = FALSE, fig.width = 8, fig.height = 6.5}
@@ -501,7 +509,7 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width))+
 .pull-right[
 ```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
 ggplot(iris, aes(Sepal.Length, Sepal.Width))+
-  geom_point(aes(colour = Sepal.Length)) +
+  geom_point(aes(colour = Petal.Length)) +
   labs(title = "Gradient colouring for values") +
   theme(title = element_text(size = 16, face = "bold"),
         legend.title = element_text(size = 14),
@@ -515,7 +523,7 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width))+
 
 ## Using `aes()` use to change colour
 
-* Do the sepal length and width vary differently across species?
+Do the sepal length and width vary differently across species?
 
 ```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
 # No colour mapping
@@ -549,7 +557,7 @@ pp +
 ```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
 # Default
 pp2 <- ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, 
+  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width,
                            colour = Petal.Length))
 pp2 + labs(title = "Default")
 # Manual
@@ -602,7 +610,7 @@ pp2 + scale_colour_gradient(low = "grey85", high = "black") +
 
 How your figure might appear under various forms of colourblindness?
 
-```{r, echo=FALSE, fig.width=10, fig.height=7.5}
+```{r, echo=FALSE, fig.width=11, fig.height=7.5}
 library(colorblindr)
 cvd_grid(pp)
 ```
@@ -658,23 +666,40 @@ msleep |log10(*bodywt*) |*awake* | *vore* and *conservation*
 ![:faic](exclamation-triangle) Pay attention to the data types!
 ]
 ]
+
 ---
 ## Challenge #2 - Solution example #1
 
-```{r, fig.height=4.7, fig.width=6.2}
+.small[
+
+Data| x | y | Aesthetics
+:-------------:|:-------------:|:-------------:|:-------------:
+mtcars |*wt* |*mpg* | *disp* and *hp*
+
+]
+
+```{r, fig.height=3.5, fig.width=6}
 data(mtcars)
 ggplot(data = mtcars) +
   geom_point(mapping = aes(x = wt, y = mpg,
-                           colour = disp, 
+                           colour = disp,
                            alpha = hp))
 ```
 
-.comment[Could you use `size` intead of `alpha`? What about `shape`?]
+.comment[Could you use `size` instead of `alpha`? What about `shape`?]
 
 ---
 ## Challenge #2 - Solution example #2
 
-```{r, fig.height=5, fig.width=6.2}
+.small[
+
+Data| x | y | Aesthetics
+:-------------:|:-------------:|:-------------:|:-------------:
+CO2 |*conc* |*uptake* | *Treatment* and *Type*
+
+]
+
+```{r, fig.height=3.5, fig.width=6}
 data(CO2)
 ggplot(data = CO2) +
     geom_point(mapping = aes(x = conc, y = uptake,
@@ -686,28 +711,34 @@ ggplot(data = CO2) +
 ---
 ## Challenge #2 - Solution example #3
 
-```{r, fig.height=5, fig.width=6.2}
+.small[
+
+Data| x | y | Aesthetics
+:-------------:|:-------------:|:-------------:|:-------------:
+msleep |log10(*bodywt*) |*awake* | *vore* and *conservation*
+
+]
+
+```{r, fig.height=3.5, fig.width=6}
 data(msleep)
 ggplot(data = msleep) +
     geom_point(mapping = aes(x = log10(bodywt), y = awake,
                              colour = vore, shape = conservation))
 ```
 
-.comment[Why not use `size = Type`?]
-
 ---
 ## Changing the scale of the axes
 .small[
 ```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
 # x axis in regular scale
-ggplot(diamonds) + 
+ggplot(diamonds) +
   geom_point(mapping = aes(x = carat, y = price)) +
   labs(title = "x-axis in regular scale")
 
 # x-axis and y-axis in log10() scale
 ggplot(diamonds) + geom_point(mapping = aes(x = carat, y = price)) +
-  scale_x_log10() + 
-  scale_y_log10() + 
+  scale_x_log10() +
+  scale_y_log10() +
   labs(title = "x- and y-axes in log10 scale")
 ```
 ]
@@ -728,12 +759,12 @@ class: inverse, center, middle
 
 ```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
 # Theme classic
-pp + scale_colour_grey() + 
+pp + scale_colour_grey() +
   theme_classic() +
   labs(title = "Classic")
 
 # Theme minimal
-pp + scale_colour_grey() + 
+pp + scale_colour_grey() +
   theme_minimal() +
   labs(title = "Minimal")
 ```
@@ -765,7 +796,7 @@ ggplot(data = iris) +
 ```{r, fig.align="center", fig.width=10, fig.height=5.5}
 ggplot(data = CO2) +
   geom_point(mapping = aes(x = conc, y = uptake, colour = Treatment)) +
-  xlab("CO2 Concentration (mL/L)") + ylab("CO2 Uptake (umol/m^2 sec)") + 
+  xlab("CO2 Concentration (mL/L)") + ylab("CO2 Uptake (umol/m^2 sec)") +
   facet_grid(~ Type)
 ```
 
@@ -774,7 +805,7 @@ ggplot(data = CO2) +
 ---
 ## Title and axes components: changing size, colour and face
 
-.center[![:scale 80%](images/theme_iris_annotated.png)]
+.center[![:scale 90%](images/theme_iris_annotated.png)]
 
 
 ---
@@ -966,17 +997,18 @@ ggplot(iris, aes(Sepal.Length))
 A **histogram** is an accurate graphical representation of the distribution of numeric data
 ```{r, fig.align="center"}
 ggplot(iris, aes(Sepal.Length)) +
-  geom_histogram() + 
+  geom_histogram() +
   ggtitle("Histogram of sepal length ")
 ```
 
 ---
 
 ## `geom_histogram()` *versus* `graphics::hist()`
+
 .pull-left[
 ```{r}
 ggplot(iris, aes(Sepal.Length)) +
-  geom_histogram() + 
+  geom_histogram() +
   ggtitle("Histogram of sepal length")
 ```
 ]
@@ -985,7 +1017,7 @@ ggplot(iris, aes(Sepal.Length)) +
 hist(iris$Sepal.Length,
      main = "Histogram of sepal length")
 ```
-]]
+]
 
 ---
 
@@ -993,7 +1025,7 @@ hist(iris$Sepal.Length,
 .small[
 .pull-left[
 ```{r}
-ggplot(mpg, aes(displ, hwy)) + 
+ggplot(mpg, aes(displ, hwy)) +
   geom_point() +
   labs(title = "Scatterplot")
 ```
@@ -1001,8 +1033,8 @@ ggplot(mpg, aes(displ, hwy)) +
 
 .pull-right[
 ```{r}
-ggplot(mpg, aes(displ, hwy)) + 
-  geom_point() + 
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
   labs(title = "Linear Regression") +
   geom_smooth(method = lm)
 ```
@@ -1013,9 +1045,9 @@ ggplot(mpg, aes(displ, hwy)) +
 ## Boxplot: `geom_boxplot()`
 
 ```{r, fig.align="center"}
-ggplot(data = iris, aes(Species, Sepal.Length, 
+ggplot(data = iris, aes(Species, Sepal.Length,
                         fill = Species)) +
-  geom_boxplot() + 
+  geom_boxplot() +
   labs(title = "Boxplot")
 ```
 
@@ -1023,14 +1055,14 @@ ggplot(data = iris, aes(Species, Sepal.Length,
 
 ## Boxplot: `geom_boxplot()`
 
-```{r, echo=FALSE, fig.align="center", fig.width = 7, fig.height = 5}
+```{r, echo=FALSE, fig.align="center", fig.width = 7, fig.height = 3.7}
 ggplot(data = iris, aes(Species, Sepal.Length, fill = Species)) +
-  geom_boxplot() + 
+  geom_boxplot() +
   labs(title = "Boxplot")
 ```
 
 .center[
-![:scale 75%](images/boxplot_explain.png)
+![:scale 80%](images/boxplot_explain.png)
 ]
 
 ---
@@ -1075,8 +1107,8 @@ ggplot(data = data, aes(names, value, fill=names)) + geom_violin()
 ## Violin plot: `geom_violin()`
 
 ```{r, fig.align="center"}
-ggplot(data = iris, aes(Species, Sepal.Length)) + 
-  geom_violin() + 
+ggplot(data = iris, aes(Species, Sepal.Length)) +
+  geom_violin() +
   labs(title = "Violin plot")
 ```
 
@@ -1086,7 +1118,7 @@ ggplot(data = iris, aes(Species, Sepal.Length)) +
 
 .pull-left[
 ```{r}
-ggplot(mtcars, aes(cyl, mpg)) + 
+ggplot(mtcars, aes(cyl, mpg)) +
   geom_point() +
   stat_summary(fun.y = "median", geom = "point",
                colour = "red") +
@@ -1096,9 +1128,9 @@ ggplot(mtcars, aes(cyl, mpg)) +
 
 .pull-right[
 ```{r}
-ggplot(mtcars, aes(cyl, mpg)) + 
+ggplot(mtcars, aes(cyl, mpg)) +
   geom_point() +
-  stat_summary(fun.data = "mean_cl_boot", 
+  stat_summary(fun.data = "mean_cl_boot",
                colour = "red") +
   labs(title = "Means and confidence intervals")
 ```
@@ -1127,7 +1159,7 @@ states_map <- map_data("state")
 
 ggplot(crimes, aes(map_id = state)) +
   geom_map(aes(fill = Murder), map = states_map) +
-  expand_limits(x = states_map$long, y = states_map$lat) + 
+  expand_limits(x = states_map$long, y = states_map$lat) +
   coord_map()
 ```
 ]
@@ -1138,15 +1170,15 @@ ggplot(crimes, aes(map_id = state)) +
 
 .small[A density plot shows the distribution of a numerical variable and it takes only set of numeric values as input.]
 .pull-left[
-```{r, echo=TRUE, fig.height = 4.5}
+```{r, echo=TRUE, fig.width=5, fig.height=4.4}
 iris.dens <- ggplot(iris, aes(Sepal.Length)) +
-  geom_density() 
+  geom_density()
 iris.dens
 ```
 ]
 
 .pull-right[
-```{r, echo=TRUE, fig.height = 4.5}
+```{r, echo=TRUE, fig.width=5, fig.height=4.4}
 cars.dens <- ggplot(cars, aes(dist)) +
   geom_density()
 cars.dens
@@ -1172,7 +1204,7 @@ ggdendrogram(hc, rotate = TRUE, theme_dendro = FALSE)
 
 **Add multiple graphs on the same plot**
 
-```{r}
+```{r, fig.width=9, fig.height=5}
 ggarrange(iris.dens, cars.dens, labels = c('a)','b)'))
 ```
 
@@ -1183,7 +1215,7 @@ ggarrange(iris.dens, cars.dens, labels = c('a)','b)'))
 Create your own graph and follow these recommendations:
   * Dataset: any (recommended: use your dataset)
   * Explore a new geom_* and other plot elements
-  
+
 Use the following links for tips:
 https://ggplot2.tidyverse.org/reference/index.html
 http://shinyapps.stat.ubc.ca/r-graph-catalog/
@@ -1195,16 +1227,16 @@ http://shinyapps.stat.ubc.ca/r-graph-catalog/
 data(msleep)
 msleep.challenge4 <- ggplot(msleep, aes(vore, log10(brainwt), fill=vore))
 msleep.challenge4 + geom_violin() +
-  geom_signif(comparisons = list(c("herbi", "insecti"))) + 
-  labs(main = "Brain weight among different vore", y = "log10(Brain weight (Kg))") + 
-  scale_fill_grey() + 
+  geom_signif(comparisons = list(c("herbi", "insecti"))) +
+  labs(main = "Brain weight among different vore", y = "log10(Brain weight (Kg))") +
+  scale_fill_grey() +
   theme_classic()
 ```
 ]
 ---
 ## Final Challenge: Solution example #2
 .small[
-```{r, fig.align='center'}
+```{r, fig.align='center', fig.width=5, fig.height=4}
 data(mtcars)
 mtcars.short <- mtcars[1:20,]
 mtcars.short.hc <- hclust(dist(mtcars.short), "complete")
@@ -1224,8 +1256,9 @@ dendro.challenge4 + ggtitle("Car dendro from motor spec") +
 ### Miscellaneous: interactive plots using `plotly()`
 .small[
 .alert[**Select the species data to display directly from the legend**]
-```{r, echo = TRUE, fig.align='center', fig.width=9, fig.height=5.5}
-p = ggplot(iris, 
+
+```{r, echo = TRUE, fig.width=10, fig.height=5}
+p = ggplot(iris,
            aes(x=Sepal.Length, y=Sepal.Width, colour=Species, shape=Species)) +
     geom_point(size=6, alpha=0.6)
 
