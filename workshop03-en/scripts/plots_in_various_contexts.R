@@ -1,30 +1,3 @@
-library(ggpubr)
-
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-
-if(!require(ggpubr)) install.packages("ggpubr")
-if(!require(ggpubr)) library(ggpubr)
-
-if(!require(ggsignif)) install.packages("ggsignif")
-if(!require(ggsignif)) library(ggsignif)
-
-if(!require(rworldmap)) install.packages("rworldmap")
-if(!require(rworldmap)) library(rworldmap)
-
-if(!require(maps)) install.packages("mapsv")
-if(!require(maps)) library(maps)
-
-if(!require(vioplot)) install.packages("vioplot")
-if(!require(vioplot)) library(vioplot)
-
-if(!require(ggdendro)) install.packages("ggdendro")
-if(!require(ggdendro)) library(ggdendro)
-
-if(!require(ggvegan)) devtools::install_github("gavinsimpson/ggvegan")
-if(!require(ggvegan)) library(ggvegan)
-
 # GGplot assumes that your data is recorded in a database properly (the categories are well defined)
 
 # Blank -------------------------------------------------------------------
