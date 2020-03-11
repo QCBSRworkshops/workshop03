@@ -24,6 +24,7 @@ Imports:
   maps,
   qcbsRworkshops,
   psych,
+  plotly,
   RColorBrewer,
   rworldmap,
   tidyverse,

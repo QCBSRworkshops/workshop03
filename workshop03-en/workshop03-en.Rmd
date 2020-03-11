@@ -31,7 +31,7 @@ class: inverse, center, middle
 
 ```{R install_pkgs, echo = FALSE, results = "asis"}
 cat(
-  qcbsRworkshops::first_slides(6, c('grid', 'gridExtra', 'ggplot2', 'ggpubr', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'psych'), lang = "fr")
+  qcbsRworkshops::first_slides(6, c('grid', 'gridExtra', 'ggplot2', 'ggpubr', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'psych','plotly'), lang = "fr")
 )
 ```
 
