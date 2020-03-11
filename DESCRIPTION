@@ -22,6 +22,7 @@ Imports:
   magrittr,
   maps,
   qcbsRworkshops,
+  psych,
   RColorBrewer,
   rworldmap,
   tidyverse,
