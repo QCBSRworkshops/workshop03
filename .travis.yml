@@ -14,8 +14,8 @@ cache:
   directories:
     - $HOME/bin
 
-before_install:
-  - sudo apt-get update && sudo apt-get -y install tcl8.6-dev tk8.6-dev
+apt_packages:
+  - r-cran-sm
 
 script:
   - Rscript -e "qcbsRworkshops::build_workshops(update_template = TRUE, pdf = TRUE, script = TRUE)"
