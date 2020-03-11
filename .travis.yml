@@ -14,8 +14,9 @@ cache:
   directories:
     - $HOME/bin
 
-apt_packages:
-  - r-cran-sm
+before_install:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 
 script:
   - Rscript -e "qcbsRworkshops::build_workshops(update_template = TRUE, pdf = TRUE, script = TRUE)"
