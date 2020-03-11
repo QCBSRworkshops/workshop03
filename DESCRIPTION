@@ -1,15 +1,19 @@
 Package: placeholder
 Type: Tutorial
-Title: Workshop 01
-Version: 0.0.1
+Title: QCBS R Workshop 03
+Version: 0.0.2
 Authors@R: c(
   person("Team", "QCBS", role = c("aut", "cre"), email = "kevin.cazelles@gmail.com")
   )
 Imports:
+  colorblindr,
   DiagrammeR,
+  ggdendro,
   ggplot2,
   ggpubr,
   ggsignif,
+  ggvegan,
+  graphicsutils,
   grid,
   gridBase,
   gridExtra,
@@ -19,10 +23,13 @@ Imports:
   maps,
   qcbsRworkshops,
   RColorBrewer,
+  rworldmap,
   tidyverse,
-  vegan,
+  vioplot,
   widgetframe,
   xaringan
 Remotes:
   QCBSRworkshops/qcbsRworkshops,
-  inSileco/graphicsutils
+  inSileco/graphicsutils,
+  gavinsimpson/ggvegan,
+  clauswilke/colorblindr

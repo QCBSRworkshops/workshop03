@@ -1,6 +1,6 @@
 language: r
 pandoc_version: 2.2.1
-dist: xenial
+dist: bionic
 sudo: required
 
 branches:
@@ -14,7 +14,7 @@ cache:
     - $HOME/bin
 
 script:
-  - Rscript -e "qcbsRworkshops::build_workshops(update_template = TRUE)"
+  - Rscript -e "qcbsRworkshops::build_workshops(update_template = TRUE, pdf = TRUE, script = TRUE)"
 
 before_deploy:
   - mkdir public
