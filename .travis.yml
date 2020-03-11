@@ -14,6 +14,9 @@ cache:
   directories:
     - $HOME/bin
 
+before_install:
+  - sudo apt-get install tcl8.5-dev tk8.5-dev
+
 script:
   - Rscript -e "qcbsRworkshops::build_workshops(update_template = TRUE, pdf = TRUE, script = TRUE)"
 
