@@ -162,26 +162,32 @@ pp2 + scale_colour_gradient(low = "blue", high = "red") +
 ## display.brewer.all()
 
 
-## ---- out.width = "50%", fig.align = 'default', fig.asp=2/3-------------------
+## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
 # Palette for groups
 pp + scale_colour_brewer(palette = "Dark2") +
   labs(title = "Palette for groups")
+
+
+## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
 # Palette for continuous values
 pp2 + scale_colour_gradientn(colours = rainbow(5)) +
   labs(title = "Palette for continuous values")
 
 
-## ---- out.width = "50%", fig.align = 'default', fig.asp=2/3-------------------
+## ----  fig.align = 'default', fig.asp=2/3-------------------------------------
 # Palette for groups
 pp + scale_colour_grey() +
   labs(title = "Palette for groups")
+
+
+## ----  fig.align = 'default', fig.asp=2/3-------------------------------------
 # Palette for continuous values
 pp2 + scale_colour_gradient(low = "grey85", high = "black") +
   labs(title = "Palette for continuous values")
 
 
-## ----colorblindr_install------------------------------------------------------
-remotes::install_github("clauswilke/colorblindr")
+## ----colorblindr_install, message = FALSE-------------------------------------
+remotes::install_github("clauswilke/colorblindr", quiet = TRUE)
 library(colorblindr)
 
 

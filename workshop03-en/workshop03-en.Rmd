@@ -41,6 +41,8 @@ cat(
 ##### 1. Use R to do various plots
 
 
+---
+
 class: inverse, center, middle
 
 # Introduction
@@ -66,9 +68,9 @@ Code and .HTML available at http://qcbs.ca/wiki/r/workshop3
 
 ###### 1. `ggplot2` mechanics
 
-<div style="text-align:center">
-<img src="images/Layers_ggplot.png" width=55%>
-</div>
+.center[
+![:scale 80%](images/Layers_ggplot.png)
+]
 
 
 
@@ -550,10 +552,16 @@ display.brewer.all()
 ---
 # Use a predefined colour palette
 
-```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
+```{r, fig.align = 'default', fig.asp=2/3}
 # Palette for groups
 pp + scale_colour_brewer(palette = "Dark2") +
   labs(title = "Palette for groups")
+```
+
+---
+# Use a predefined colour palette
+
+```{r, fig.align = 'default', fig.asp=2/3}
 # Palette for continuous values
 pp2 + scale_colour_gradientn(colours = rainbow(5)) +
   labs(title = "Palette for continuous values")
@@ -565,10 +573,16 @@ pp2 + scale_colour_gradientn(colours = rainbow(5)) +
 
 Grey-scale palette for publication purposes
 
-```{r, out.width = "50%", fig.align = 'default', fig.asp=2/3}
+```{r,  fig.align = 'default', fig.asp=2/3}
 # Palette for groups
 pp + scale_colour_grey() +
   labs(title = "Palette for groups")
+```
+
+---
+# Use a predefined colour palette
+
+```{r,  fig.align = 'default', fig.asp=2/3}
 # Palette for continuous values
 pp2 + scale_colour_gradient(low = "grey85", high = "black") +
   labs(title = "Palette for continuous values")
@@ -581,8 +595,8 @@ pp2 + scale_colour_gradient(low = "grey85", high = "black") +
 How your figure might appear under various forms of colourblindness?
 We can use [colorblindr](https://github.com/clauswilke/colorblindr) that is not currently on CRAN, so we install it with the packages [remotes](https://cran.r-project.org/web/packages/remotes/index.html).
 
-```{R colorblindr_install}
-remotes::install_github("clauswilke/colorblindr")
+```{R colorblindr_install, message = FALSE}
+remotes::install_github("clauswilke/colorblindr", quiet = TRUE)
 library(colorblindr)
 ```
 
