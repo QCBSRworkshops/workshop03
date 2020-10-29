@@ -3,7 +3,7 @@ Type: Tutorial
 Title: QCBS R Workshop 03
 Version: 0.0.2
 Authors@R: c(
-  person("Team", "QCBS", role = c("aut", "cre"), email = "kevin.cazelles@gmail.com")
+  person("Team", "QCBS", role = c("aut", "cre"), email = "qcbs.csbq.r@gmail.com")
   )
 Imports:
   colorblindr,
@@ -26,6 +26,7 @@ Imports:
   psych,
   plotly,
   RColorBrewer,
+  reshape2,
   rworldmap,
   tidyverse,
   vioplot,
