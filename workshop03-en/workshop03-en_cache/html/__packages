@@ -1,7 +1,7 @@
 base
 ggplot2
 tibble
-psych
+GGally
 gridExtra
 colorspace
 colorblindr
@@ -9,4 +9,4 @@ reshape2
 ggsignif
 maps
 ggdendro
-ggpubr
+patchwork

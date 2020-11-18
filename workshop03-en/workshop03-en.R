@@ -14,7 +14,7 @@ options(repos=structure(c(CRAN="http://cran.r-project.org")))
 
 ## ----install_pkgs, echo = FALSE, results = "asis"-----------------------------
 cat(
-  qcbsRworkshops::first_slides(6, c('grid', 'gridExtra', 'ggplot2', 'ggpubr', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'psych','plotly'), lang = "fr")
+  qcbsRworkshops::first_slides(6, c('grid', 'gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'GGally','patchwork','plotly'), lang = "en")
 )
 
 
@@ -44,9 +44,10 @@ class(ir)
 str(iris)
 
 
-## ---- fig.width = 6.5, fig.height = 6.5---------------------------------------
-library(psych)
-pairs.panels(iris)
+## ---- fig.width = 10.25, fig.height = 6.5-------------------------------------
+install.packages("GGally")
+library(GGally)
+ggpairs(iris,aes(colour=Species)) + theme_bw()
 
 
 ## ---- echo = FALSE, fig.height=7, fig.width=9---------------------------------
@@ -56,7 +57,7 @@ ggplot(data = iris,             # Data
            col = Species)) +    # Aesthtics
   geom_point(size = 5, alpha = 0.8) + # Point
   geom_smooth(method = "lm") +  # Linear regression
-  labs(title = "Relation between sepal length and width\n for different iris species") + # Title
+  labs(title = "Relation between sepal length and width\n for different iris species?") + # Title
   theme(title = element_text(size = 18, face="bold"),
       text = element_text(size = 14))
 
@@ -78,19 +79,29 @@ s # Print your final plot
 
 
 ## ---- fig.height=4, fig.width=5-----------------------------------------------
-ggplot()
+ggplot(data = iris)
+
+
+## ---- fig.height=4, fig.width=5-----------------------------------------------
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) 
 
 
 ## ---- fig.height=4, fig.width=5-----------------------------------------------
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-  xlab("x = Sepal length") +
-  ylab("y = Sepal width")
+  geom_point()
 
 
-## ---- fig.height=4, fig.width=5-----------------------------------------------
+## ----fig.height=4.5-----------------------------------------------------------
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-  xlab("x = Sepal length") +
-  ylab("y = Sepal width") +
+  geom_point() + 
+  facet_wrap(~Species) +
+  coord_trans(x = "log10",
+              y = "log10")
+
+
+## -----------------------------------------------------------------------------
+ggplot(data = iris, aes(x = Petal.Length,
+                        y = Petal.Width)) +
   geom_point()
 
 
@@ -98,6 +109,12 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 ggplot(data = iris, aes(x = Petal.Length,
                         y = Petal.Width)) +
   geom_point()
+
+
+## -----------------------------------------------------------------------------
+ggplot(data = iris, aes(x = Petal.Length,
+                        y = Petal.Width)) +
+  geom_point(shape = 2, color="blue")
 
 
 ## ----echo = FALSE, fig.width = 8, fig.height = 6.5----------------------------
@@ -123,34 +140,45 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width))+
         legend.position = 'bottom')
 
 
-## ---- out.width = "50%", fig.align = 'default', fig.asp=2/3-------------------
+## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
 # No colour mapping
-ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
+ggplot(data = iris,aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_point() +
+  geom_smooth(method=lm)+
   labs(title = "No colour mapping")
+
+
+## ----  fig.align = 'default', fig.asp=2/3-------------------------------------
 # With colour mapping
-ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
+  geom_point() +
+  geom_smooth(method=lm) +
   labs(title = "With colour mapping")
 
 
-## ---- out.width = "50%", fig.align = 'default', fig.asp=2/3-------------------
+## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
 # Default
 pp <- ggplot(data = iris) +
   geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, colour = Species))
 pp + labs(title = "Default")
+
+
+## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
 # Manual
 pp +
   scale_colour_manual(values = c("grey55", "orange", "skyblue")) +
   labs(title = "Manual")
 
 
-## ---- out.width = "50%", fig.align = 'default', fig.asp=2/3-------------------
+## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
 # Default
 pp2 <- ggplot(data = iris) +
   geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width,
                            colour = Petal.Length))
 pp2 + labs(title = "Default")
+
+
+## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
 # Manual
 pp2 + scale_colour_gradient(low = "blue", high = "red") +
   labs(title = "Manual")
@@ -170,7 +198,7 @@ pp + scale_colour_brewer(palette = "Dark2") +
 
 ## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
 # Palette for continuous values
-pp2 + scale_colour_gradientn(colours = rainbow(5)) +
+pp2 + scale_color_viridis_c()+
   labs(title = "Palette for continuous values")
 
 
@@ -191,29 +219,35 @@ remotes::install_github("clauswilke/colorblindr", quiet = TRUE)
 library(colorblindr)
 
 
-## ---- echo = FALSE, fig.width = 11, fig.height = 7.5--------------------------
+
+## ---- fig.width = 11, fig.height = 7------------------------------------------
 cvd_grid(pp)
 
 
-## ---- out.width = "50%", fig.align = 'default', fig.asp=2/3-------------------
+## ---- fig.height = 5----------------------------------------------------------
 # Palette for groups
 pp + scale_colour_viridis_d() +
   labs(title = "viridis palette for groups")
+
+
+## ---- fig.height = 5----------------------------------------------------------
 # Palette for continuous values
 pp2 + scale_colour_viridis_c() +
   labs(title = "viridis palette for continuous values")
 
 
-## ---- out.width = "50%", fig.align = 'default', fig.asp=2/3-------------------
+## ---- fig.height = 5----------------------------------------------------------
 # shape for groups
 ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, shape = Species)) +
+  geom_point(aes(x = Sepal.Length, y = Sepal.Width, shape = Species)) +
   labs(title = "shape for groups")
 
+
+## ---- fig.height = 5----------------------------------------------------------
 # size and alpha for continuous values
 ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width,
-                           size = Petal.Length, alpha = Petal.Length)) +
+  geom_point(aes(x = Sepal.Length, y = Sepal.Width,
+                 size = Petal.Length, alpha = Petal.Length)) +
   labs(title = "size and alpha for continuous values")
 
 
@@ -239,29 +273,55 @@ ggplot(data = msleep) +
                              colour = vore, shape = conservation))
 
 
-## ---- out.width = "50%", fig.align = 'default', fig.asp=2/3-------------------
-# x axis in regular scale
+## ---- fig.height=3.5, fig.width=6---------------------------------------------
+data(ToothGrowth)
+ggplot(ToothGrowth, aes(x=dose,y=len,color=supp)) +
+  geom_point() + 
+  geom_smooth(method = lm, formula='y~x')
+
+
+## ----fig.height=4-------------------------------------------------------------
 ggplot(diamonds) +
   geom_point(mapping = aes(x = carat, y = price)) +
   labs(title = "x-axis in regular scale")
 
-# x-axis and y-axis in log10() scale
+
+## ----fig.height=4-------------------------------------------------------------
 ggplot(diamonds) + geom_point(mapping = aes(x = carat, y = price)) +
-  scale_x_log10() +
-  scale_y_log10() +
+  coord_trans(x = "log10",
+              y = "log10") +
   labs(title = "x- and y-axes in log10 scale")
 
 
-## ---- out.width = "50%", fig.align = 'default', fig.asp=2/3-------------------
+## ---- fig.height = 5----------------------------------------------------------
 # Theme classic
 pp + scale_colour_grey() +
   theme_classic() +
   labs(title = "Classic")
 
-# Theme minimal
+
+## ---- fig.height = 5----------------------------------------------------------
 pp + scale_colour_grey() +
   theme_minimal() +
   labs(title = "Minimal")
+
+
+## ---- fig.height = 5----------------------------------------------------------
+# Set Classic as default
+theme_set(theme_bw())
+pp
+
+
+## ---- fig.height = 5----------------------------------------------------------
+# remove minor gridlines 
+theme_update(panel.grid.minor = element_blank())
+pp
+
+
+## ---- include=FALSE-----------------------------------------------------------
+theme_set(theme_bw())
+theme_update(panel.grid.minor = element_blank())
+
 
 
 ## ---- fig.align="center", fig.width=10, fig.height=6--------------------------
@@ -341,26 +401,31 @@ tips.gg
 ## tips.gg
 
 
-## ---- fig.width = 7-----------------------------------------------------------
+## ---- fig.width = 7, fig.height=5---------------------------------------------
+theme_set(theme_classic())
 tips.gg <- ggplot(tips) +
   geom_point(mapping = aes(x = total_bill, y = tip/total_bill,
                       shape = smoker, colour = sex, size = size))
 tips.gg
 
+## ---- include=FALSE-----------------------------------------------------------
+theme_set(theme_classic())
 
-## ---- fig.width=7-------------------------------------------------------------
+
+
+## ---- fig.width=7, fig.height=5-----------------------------------------------
 tips.gg <- tips.gg +
   facet_grid( ~ time)
 tips.gg
 
 
-## ---- fig.width=7-------------------------------------------------------------
+## ---- fig.width=7,fig.height=5------------------------------------------------
 tips.gg <- tips.gg +
   scale_colour_grey()
 tips.gg
 
 
-## ---- fig.width=7-------------------------------------------------------------
+## ---- fig.width=7,fig.height=5------------------------------------------------
 tips.gg <- tips.gg +
   labs(title = "Relation between total bill and tips during lunch and dinner",
        x = "Total bill ($)", y = "Ratio between tips and total bill")
@@ -381,7 +446,7 @@ tips.gg
 ggplot(iris, aes(Sepal.Length))
 
 
-## ---- fig.align="center"------------------------------------------------------
+## ---- fig.align="center",fig.height=5.5---------------------------------------
 ggplot(iris, aes(Sepal.Length)) +
   geom_histogram() +
   ggtitle("Histogram of sepal length ")
@@ -418,13 +483,13 @@ ggplot(data = iris, aes(Species, Sepal.Length,
   labs(title = "Boxplot")
 
 
-## ---- echo=FALSE, fig.align="center", fig.width = 7, fig.height = 3.7---------
+## ---- echo=FALSE, fig.align="center", fig.width = 7, fig.height = 3.2---------
 ggplot(data = iris, aes(Species, Sepal.Length, fill = Species)) +
   geom_boxplot() +
   labs(title = "Boxplot")
 
 
-## ---- fig.align="center"------------------------------------------------------
+## ---- fig.align="center",fig.height=5.5---------------------------------------
 library(ggsignif)
 ggplot(data = iris, aes(Species, Sepal.Length)) +
   geom_boxplot() +
@@ -432,7 +497,7 @@ ggplot(data = iris, aes(Species, Sepal.Length)) +
               map_signif_level=TRUE)
 
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ---- echo=FALSE, fig.height=4.5----------------------------------------------
 # Data
 names <- c(rep("A", 80) , rep("B", 50) , rep("C", 70))
 value <- c(sample(2:5, 80 ,replace=TRUE), sample(4:10, 50 , replace=TRUE),
@@ -443,30 +508,38 @@ data <- data.frame(names,value)
 qplot(x=names ,y=value ,data=data ,geom=c("boxplot","jitter") ,fill=names)
 
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ---- echo=FALSE, fig.height=4.5----------------------------------------------
 ggplot(data = data, aes(names, value, fill=names)) + geom_violin()
 
 
 
 ## ---- fig.align="center"------------------------------------------------------
-ggplot(data = iris, aes(Species, Sepal.Length)) +
-  geom_violin() +
+violin <- ggplot(data = iris, aes(x=Species, y=Sepal.Length)) +
+  geom_violin(trim=F,fill="grey70",alpha=.5) +
   labs(title = "Violin plot")
+violin
 
 
-## -----------------------------------------------------------------------------
+## ---- fig.align="center"------------------------------------------------------
+violin + 
+    geom_jitter(shape=16, position=position_jitter(0.2),
+              alpha=.3)+
+  geom_boxplot(width=.05)
+
+
+## ---- fig.height=5, fig.width=4-----------------------------------------------
 ggplot(mtcars, aes(cyl, mpg)) +
   geom_point() +
   stat_summary(fun.y = "median", geom = "point",
-               colour = "red") +
+               colour = "red",size=5) +
   labs(title = "Means")
 
 
-## -----------------------------------------------------------------------------
+## ---- fig.height=5, fig.width=4-----------------------------------------------
 ggplot(mtcars, aes(cyl, mpg)) +
   geom_point() +
   stat_summary(fun.data = "mean_cl_boot",
-               colour = "red") +
+               colour = "red",size=2) +
   labs(title = "Means and confidence intervals")
 
 
@@ -504,11 +577,13 @@ ggdendrogram(hc, rotate = TRUE, theme_dendro = FALSE)
 
 
 ## ---- fig.width=9, fig.height=5-----------------------------------------------
-library(ggpubr)
-ggarrange(iris.dens, cars.dens, labels = c('a)','b)'))
+install.packages("patchwork")
+library(patchwork)
+iris.dens + cars.dens +
+  plot_annotation(tag_levels = 'a')
 
 
-## ---- fig.align='center'------------------------------------------------------
+## ---- fig.align='center',fig.height=4-----------------------------------------
 data(msleep)
 msleep.challenge4 <- ggplot(msleep, aes(vore, log10(brainwt), fill=vore))
 msleep.challenge4 + geom_violin() +
