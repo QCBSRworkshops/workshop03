@@ -181,16 +181,25 @@ a:hover {
   font-size: .75em;
 }
 
-.tiny {
-  font-size: .6em;
-  font-weight: 200;
+
+.small-code pre code {
+  font-size: 1em;
 }
+
+
+.tiny {
+  font-size: .75rem;
+  color:#295896;
+}
+
+
+
 
 .footnote {
   position: absolute;
   bottom: 3em;
   padding-right: 4em;
-  font-size: 60%;
+  font-size: 80%;
 }
 
 /* help style */
