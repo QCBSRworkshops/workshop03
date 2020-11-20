@@ -26,5 +26,12 @@ In this workshop, you will improve your data manipulation and visualization skil
 
 # Atelier 3: Introduction à `ggplot2`
 
+[![Build Status](https://img.shields.io/travis/QCBSRworkshops/workshop03/dev?style=flat-square&logo=travis)](https://travis-ci.org/QCBSRworkshops/workshop03)
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop03)
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=wiki&message=03&logo=wikipedia)](https://wiki.qcbs.ca/r_atelier3)
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=Diapos&message=03&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop03/workshop03-fr/workshop03-fr.html)
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=Diapos&message=03&color=red&logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop03/workshop03-fr/workshop03-fr.pdf)
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=script&message=03&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop03/workshop03-fr/workshop03-fr.R)
+
 Pendant cet atelier, vous perfectionnerez vos compétences en visualisation et manipulation de jeux de données à l'aide de la bibliothèque `ggplot2`. Nous explorerons toute la richesse de `ggplot2`, qui peut être utilisé comme alternative aux outils graphiques de base dans R. Nous apprendrons comment exploiter cette bibliothèque à la fois pour explorer des données visuellement et pour produire des figures dignes de publications scientifiques.
 
