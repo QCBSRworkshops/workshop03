@@ -299,7 +299,7 @@ Un graphique est constitué d'éléments (couches):
     
 --
 
-.alert [note: l'esthétique est basée sur les quantités dans vos données, mais les graphiques peuvent également avoir certaines de ces qualités qui ne sont pas fonction des données (p. ex. la coloration basée sur un groupe de données est une esthétique, mais les points peuvent avoir une couleur qui n'est pas fonction des données)].
+.alert[note: l'esthétique est basée sur les quantités dans vos données, mais les graphiques peuvent également avoir certaines de ces qualités qui ne sont pas fonction des données (p. ex. la coloration basée sur un groupe de données est une esthétique, mais les points peuvent avoir une couleur qui n'est pas fonction des données)].
 
 ---
 # La grammaire des graphiques (GG)
@@ -556,9 +556,9 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 
 .alert[Question]
 
-> Y a-t-il une relation entre la **longueur** et la **largeur** des **pétales** des iris ?
+> Y a-t-il une relation entre la **longueur** et la **largeur** des **pétales** des iris?
 
-> La *largeur* des pétales augmente-t-elle avec leur *longueur* ?
+> La **largeur** des pétales augmente-t-elle avec leur **longueur**?
 
 .center[Paramètres à prendre en compte pour répondre à cette question :]
 
@@ -646,8 +646,10 @@ Changez la **couleur** pour
 ```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
 ggplot(iris, aes(Sepal.Length, Sepal.Width))+
   geom_point(aes(colour = Species)) +
-  labs(title = "Couleurs qualitatives pour des groupes") +
-  theme(title = element_text(size = 16, face = "bold"),
+  labs(title = "Couleurs qualitatives pour des groupes",
+       x = "Longeur des sépales",
+       y = "Largeur des sépales") +
+  theme(title = element_text(size = 14, face = "bold"),
         legend.title = element_text(size = 14),
         legend.position = 'bottom')
 ```
@@ -657,8 +659,10 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width))+
 ```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
 ggplot(iris, aes(Sepal.Length, Sepal.Width))+
   geom_point(aes(colour = Petal.Length)) +
-  labs(title = "Gradient de couleurs pour des valeurs") +
-  theme(title = element_text(size = 16, face = "bold"),
+  labs(title = "Gradient de couleurs pour des valeurs",
+       x = "Longeur des sépales",
+       y = "Largeur des sépales") +
+  theme(title = element_text(size = 14, face = "bold"),
         legend.title = element_text(size = 14),
         legend.position = 'bottom')
 ```
@@ -678,7 +682,8 @@ note: _hard to get caption in the right place with these css commands... Used fo
 La longueur et la largeur des sépales varient-elles selon les espèces ?
 .pull-left[
 ```{r, fig.align = 'default', fig.asp=2/3}
-ggplot(data = iris,aes(x = Sepal.Length, y = Sepal.Width)) +
+ggplot(data = iris,
+       aes(x = Sepal.Length, y = Sepal.Width)) +
   geom_point() +
   geom_smooth(method = lm)+
   labs(title = "Avec code de couleur")
@@ -687,7 +692,8 @@ ggplot(data = iris,aes(x = Sepal.Length, y = Sepal.Width)) +
 
 .pull-right[
 ```{r,  fig.align = 'default', fig.asp=2/3}
-ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
+ggplot(data = iris, 
+       aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
   geom_point() +
   geom_smooth(method = lm) +
   labs(title = "Sans code de couleur")
@@ -700,14 +706,18 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
 .pull-left[
 ```{r, fig.align = 'default', fig.asp=2/3}
 pp <- ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, colour = Species))
+  geom_point(aes(x = Sepal.Length, 
+                 y = Sepal.Width, 
+                 colour = Species))
 pp + labs(title = "Défaut")
 ```
 ]
 .pull-right[
 ```{r, fig.align = 'default', fig.asp=2/3}
 pp +
-  scale_colour_manual(values = c("grey55", "orange", "skyblue")) +
+  scale_colour_manual(values = c("grey55", 
+                                 "orange", 
+                                 "skyblue")) +
   labs(title = "Personnalisé")
 ```
 ]
@@ -721,14 +731,17 @@ note: _changed to left/right because cut off_
 .pull-left[
 ```{r, fig.align = 'default', fig.asp=2/3}
 pp2 <- ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width,
-                           colour = Petal.Length))
+  geom_point(aes(x = Sepal.Length, 
+                 y = Sepal.Width,
+                 colour = Petal.Length))
 pp2 + labs(title = "Défaut")
 ```
 ]
 .pull-right[
 ```{r, fig.align = 'default', fig.asp=2/3}
-pp2 + scale_colour_gradient(low = "blue", high = "red") +
+pp2 + 
+  scale_colour_gradient(low = "blue", 
+                        high = "red") +
   labs(title = "Personnalisé")
 ```
 ]
@@ -751,7 +764,7 @@ display.brewer.all()
 ---
 # Utiliser une palette de couleurs prédéfinie
 
-```{r, fig.align = 'default', fig.asp=2/3}
+```{r, fig.align = 'center', fig.asp=2/3}
 pp + scale_colour_brewer(palette = "Dark2") +
   labs(title = "Palette pour des groupes")
 ```
@@ -759,7 +772,7 @@ pp + scale_colour_brewer(palette = "Dark2") +
 ---
 # Utiliser une palette de couleurs prédéfinie
 
-```{r, fig.align = 'default', fig.asp=2/3}
+```{r, fig.align = 'center', fig.asp=2/3}
 pp2 + scale_color_viridis_c()+
   labs(title = "Palette pour des variables continues")
 ```
@@ -770,7 +783,7 @@ pp2 + scale_color_viridis_c()+
 
 Palette de gris pour la publication
 
-```{r,  fig.align = 'default', fig.asp=2/3}
+```{r,  fig.align = 'center', fig.asp=2/3}
 pp + scale_colour_grey() +
   labs(title = "Palette pour des groupes")
 ```
@@ -778,7 +791,7 @@ pp + scale_colour_grey() +
 ---
 # Utiliser une palette de couleurs prédéfinie
 
-```{r,  fig.align = 'default', fig.asp=2/3}
+```{r,  fig.align = 'center', fig.asp=2/3}
 pp2 + scale_colour_gradient(low = "grey85", high = "black") +
   labs(title = "Palette pour des variables continues")
 ```
@@ -823,21 +836,25 @@ pp2 + scale_colour_viridis_c() +
 
 
 ---
-# Changer la forme (`shape`), la taille (`size`) et la transparence (`alpha`)
+# Changer la forme, la taille et la transparence
 
 .pull-left[
-```{r, fig.height = 5}
+```{r, fig.height = 4.5, fig.width = 5.5}
 ggplot(data = iris) +
-  geom_point(aes(x = Sepal.Length, y = Sepal.Width, shape = Species)) +
+  geom_point(aes(x = Sepal.Length, 
+                 y = Sepal.Width, 
+                 shape = Species)) +
   labs(title = "Formes pour des groupes")
 ```
 ]
 
 .pull-right[
-```{r, fig.height = 5}
+```{r, fig.height = 4.5, fig.width = 5.5}
 ggplot(data = iris) +
-  geom_point(aes(x = Sepal.Length, y = Sepal.Width,
-                 size = Petal.Length, alpha = Petal.Length)) +
+  geom_point(aes(x = Sepal.Length, 
+                 y = Sepal.Width,
+                 size = Petal.Length, 
+                 alpha = Petal.Length)) +
   labs(title = "Taille et transparence pour des variables continues")
 ```
 ]
@@ -870,11 +887,14 @@ ToothGrowth | *dose* | *len* | *supp*
 # Défi #2 ![:cube]()
 
 #### .alert[Salles de réunion ! - 15 min]
-<br> créez un graphique à partager avec le groupe
+<br> 
+
+Créez un graphique à partager avec le groupe
 
 
 ???
 note: _assign each group a dataset to make a plot from: mtcars, CO2, msleep, and ToothGrowth to make exploratory plots_
+
 ---
 # Défi #2 - Solution exemple #1
 
@@ -959,7 +979,7 @@ class: small-code
 .pull-left[
 ```{r,fig.height=4}
 ggplot(diamonds) +
-  geom_point(mapping = aes(x = carat, y = price)) +
+  geom_point(aes(x = carat, y = price)) +
   labs(title = "Axe des x à l'échelle normale")
 ```
 ]
@@ -967,7 +987,7 @@ ggplot(diamonds) +
 .pull-right[
 ```{r,fig.height=4}
 ggplot(diamonds) + 
-  geom_point(mapping = aes(x = carat, y = price)) +
+  geom_point(aes(x = carat, y = price)) +
   coord_trans(x = "log10",
               y = "log10") +
   labs(title = "Axes x et y sur une échelle log10")
@@ -1032,7 +1052,7 @@ pp
 ]
 
 .pull-right[
-**Mettre à jour le thàme**
+**Mettre à jour le thème**
 ```{r, fig.height = 5}
 # supprimer la grille mineure
 theme_update(panel.grid.minor = element_blank())
@@ -1101,13 +1121,13 @@ ggplot(data = CO2) +
 
 .pull-left[
 **Défaut**
-```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
+```{r, echo=FALSE, fig.align="center", fig.width=5.5, fig.height=5}
 pp
 ```
 ]
 .pull-right[
 **Ajustement des axes et du titre**
-```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=6}
+```{r, echo=FALSE, fig.align="center", fig.width=5.5, fig.height=5}
 pp +
   ggtitle("Relation entre longueur et largeur des sépales") +
   xlab("Longueur des sépales (cm)") +
@@ -1301,32 +1321,13 @@ ggplot(iris, aes(Sepal.Length)) +
   ggtitle("Histogramme de la longueur des longueurs")
 ```
 
----
-# `geom_histogram()` *versus* `graphics::hist()`
-
-.pull-left[
-```{r}
-ggplot(iris, aes(Sepal.Length)) +
-  geom_histogram() +
-  ggtitle("Histogramme de la longueur des sépales")
-```
-]
-.pull-right[
-```{r}
-hist(iris$Sepal.Length,
-     main = "Histogramme de la longueur des sépales")
-```
-]
-
-???
-note: _explain why these are different_
 
 ---
 # Nuage de points et régression linéaire: `geom_point()` et `geom_smooth()`
 
 .small[
 .pull-left[
-```{r}
+```{r, fig.width=5.5, fig.height=5.5}
 ggplot(mpg, aes(displ, hwy)) +
   geom_point() +
   labs(title = "Nuage de points")
@@ -1334,7 +1335,7 @@ ggplot(mpg, aes(displ, hwy)) +
 ]
 
 .pull-right[
-```{r}
+```{r, fig.width=5.5, fig.height=5.5}
 ggplot(mpg, aes(displ, hwy)) +
   geom_point() +
   labs(title = "Régression linéaire") +
@@ -1366,7 +1367,7 @@ ggplot(data = iris, aes(Species, Sepal.Length, fill = Species)) +
 ]
 
 ---
-#### Diagramme en boîte avec annotations: `geom_boxplot()` et `geom_signif()`
+# Diagramme en boîte avec annotations: `geom_boxplot()` et `geom_signif()`
 
 ```{r, fig.align="center",fig.height=5.5}
 library(ggsignif)
@@ -1417,8 +1418,7 @@ violin
 
 ```{r, fig.align="center"}
 violin + 
-  geom_jitter(shape = 16, position = position_jitter(0.2),
-              alpha = .3) +
+  geom_jitter(shape = 16, position = position_jitter(0.2), alpha = .3) +
   geom_boxplot(width = .05)
 ```
 
@@ -1474,7 +1474,7 @@ ggplot(crimes, aes(map_id = state)) +
 ]
 
 ---
-## Graphique de densité: `geom_density()`
+# Graphique de densité: `geom_density()`
 
 .small[Un graphique de densité montre la distribution d'une variable numérique et il ne prend qu'un ensemble de valeurs numériques comme entrée.]
 .pull-left[
@@ -1571,7 +1571,7 @@ dendro.defi4 + ggtitle("Dendrogramme des voitures selon les spécifications du m
 library(plotly)
 p <- ggplot(iris,
             aes(x = Sepal.Length, y = Sepal.Width, colour = Species, shape = Species)) +
-  geom_point(size=6, alpha=0.6)
+  geom_point(size = 6, alpha = 0.6)
 
 ggplotly(p)
 ```
