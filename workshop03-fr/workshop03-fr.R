@@ -125,8 +125,10 @@ source(file="./scripts/4plot_aesthetic.R")
 ## ---- echo = FALSE, fig.height=4.8, fig.width = 5-----------------------------
 ggplot(iris, aes(Sepal.Length, Sepal.Width))+
   geom_point(aes(colour = Species)) +
-  labs(title = "Couleurs qualitatives pour des groupes") +
-  theme(title = element_text(size = 16, face = "bold"),
+  labs(title = "Couleurs qualitatives pour des groupes",
+       x = "Longeur des sépales",
+       y = "Largeur des sépales") +
+  theme(title = element_text(size = 14, face = "bold"),
         legend.title = element_text(size = 14),
         legend.position = 'bottom')
 
@@ -134,21 +136,25 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width))+
 ## ---- echo = FALSE, fig.height=4.8, fig.width = 5-----------------------------
 ggplot(iris, aes(Sepal.Length, Sepal.Width))+
   geom_point(aes(colour = Petal.Length)) +
-  labs(title = "Gradient de couleurs pour des valeurs") +
-  theme(title = element_text(size = 16, face = "bold"),
+  labs(title = "Gradient de couleurs pour des valeurs",
+       x = "Longeur des sépales",
+       y = "Largeur des sépales") +
+  theme(title = element_text(size = 14, face = "bold"),
         legend.title = element_text(size = 14),
         legend.position = 'bottom')
 
 
 ## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
-ggplot(data = iris,aes(x = Sepal.Length, y = Sepal.Width)) +
+ggplot(data = iris,
+       aes(x = Sepal.Length, y = Sepal.Width)) +
   geom_point() +
   geom_smooth(method = lm)+
   labs(title = "Avec code de couleur")
 
 
 ## ----  fig.align = 'default', fig.asp=2/3-------------------------------------
-ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
+ggplot(data = iris, 
+       aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
   geom_point() +
   geom_smooth(method = lm) +
   labs(title = "Sans code de couleur")
@@ -156,25 +162,32 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
 
 ## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
 pp <- ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, colour = Species))
+  geom_point(aes(x = Sepal.Length, 
+                 y = Sepal.Width, 
+                 colour = Species))
 pp + labs(title = "Défaut")
 
 
 ## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
 pp +
-  scale_colour_manual(values = c("grey55", "orange", "skyblue")) +
+  scale_colour_manual(values = c("grey55", 
+                                 "orange", 
+                                 "skyblue")) +
   labs(title = "Personnalisé")
 
 
 ## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
 pp2 <- ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width,
-                           colour = Petal.Length))
+  geom_point(aes(x = Sepal.Length, 
+                 y = Sepal.Width,
+                 colour = Petal.Length))
 pp2 + labs(title = "Défaut")
 
 
 ## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
-pp2 + scale_colour_gradient(low = "blue", high = "red") +
+pp2 + 
+  scale_colour_gradient(low = "blue", 
+                        high = "red") +
   labs(title = "Personnalisé")
 
 
@@ -184,22 +197,22 @@ pp2 + scale_colour_gradient(low = "blue", high = "red") +
 ## display.brewer.all()
 
 
-## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
+## ---- fig.align = 'center', fig.asp=2/3---------------------------------------
 pp + scale_colour_brewer(palette = "Dark2") +
   labs(title = "Palette pour des groupes")
 
 
-## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
+## ---- fig.align = 'center', fig.asp=2/3---------------------------------------
 pp2 + scale_color_viridis_c()+
   labs(title = "Palette pour des variables continues")
 
 
-## ----  fig.align = 'default', fig.asp=2/3-------------------------------------
+## ----  fig.align = 'center', fig.asp=2/3--------------------------------------
 pp + scale_colour_grey() +
   labs(title = "Palette pour des groupes")
 
 
-## ----  fig.align = 'default', fig.asp=2/3-------------------------------------
+## ----  fig.align = 'center', fig.asp=2/3--------------------------------------
 pp2 + scale_colour_gradient(low = "grey85", high = "black") +
   labs(title = "Palette pour des variables continues")
 
@@ -224,16 +237,20 @@ pp2 + scale_colour_viridis_c() +
   labs(title = "Palette viridis pour des variables continues")
 
 
-## ---- fig.height = 5----------------------------------------------------------
+## ---- fig.height = 4.5, fig.width = 5.5---------------------------------------
 ggplot(data = iris) +
-  geom_point(aes(x = Sepal.Length, y = Sepal.Width, shape = Species)) +
+  geom_point(aes(x = Sepal.Length, 
+                 y = Sepal.Width, 
+                 shape = Species)) +
   labs(title = "Formes pour des groupes")
 
 
-## ---- fig.height = 5----------------------------------------------------------
+## ---- fig.height = 4.5, fig.width = 5.5---------------------------------------
 ggplot(data = iris) +
-  geom_point(aes(x = Sepal.Length, y = Sepal.Width,
-                 size = Petal.Length, alpha = Petal.Length)) +
+  geom_point(aes(x = Sepal.Length, 
+                 y = Sepal.Width,
+                 size = Petal.Length, 
+                 alpha = Petal.Length)) +
   labs(title = "Taille et transparence pour des variables continues")
 
 
@@ -268,13 +285,13 @@ ggplot(ToothGrowth, aes(x = dose, y = len, color = supp)) +
 
 ## ----fig.height=4-------------------------------------------------------------
 ggplot(diamonds) +
-  geom_point(mapping = aes(x = carat, y = price)) +
+  geom_point(aes(x = carat, y = price)) +
   labs(title = "Axe des x à l'échelle normale")
 
 
 ## ----fig.height=4-------------------------------------------------------------
 ggplot(diamonds) + 
-  geom_point(mapping = aes(x = carat, y = price)) +
+  geom_point(aes(x = carat, y = price)) +
   coord_trans(x = "log10",
               y = "log10") +
   labs(title = "Axes x et y sur une échelle log10")
@@ -322,11 +339,11 @@ ggplot(data = CO2) +
   facet_grid(~ Type)
 
 
-## ---- echo=FALSE, fig.align="center", fig.width=6, fig.height=6---------------
+## ---- echo=FALSE, fig.align="center", fig.width=5.5, fig.height=5-------------
 pp
 
 
-## ---- echo=FALSE, fig.align="center", fig.width=6, fig.height=6---------------
+## ---- echo=FALSE, fig.align="center", fig.width=5.5, fig.height=5-------------
 pp +
   ggtitle("Relation entre longueur et largeur des sépales") +
   xlab("Longueur des sépales (cm)") +
@@ -437,24 +454,13 @@ ggplot(iris, aes(Sepal.Length)) +
   ggtitle("Histogramme de la longueur des longueurs")
 
 
-## -----------------------------------------------------------------------------
-ggplot(iris, aes(Sepal.Length)) +
-  geom_histogram() +
-  ggtitle("Histogramme de la longueur des sépales")
-
-
-## -----------------------------------------------------------------------------
-hist(iris$Sepal.Length,
-     main = "Histogramme de la longueur des sépales")
-
-
-## -----------------------------------------------------------------------------
+## ---- fig.width=5.5, fig.height=5.5-------------------------------------------
 ggplot(mpg, aes(displ, hwy)) +
   geom_point() +
   labs(title = "Nuage de points")
 
 
-## -----------------------------------------------------------------------------
+## ---- fig.width=5.5, fig.height=5.5-------------------------------------------
 ggplot(mpg, aes(displ, hwy)) +
   geom_point() +
   labs(title = "Régression linéaire") +
@@ -507,8 +513,7 @@ violin
 
 ## ---- fig.align="center"------------------------------------------------------
 violin + 
-  geom_jitter(shape = 16, position = position_jitter(0.2),
-              alpha = .3) +
+  geom_jitter(shape = 16, position = position_jitter(0.2), alpha = .3) +
   geom_boxplot(width = .05)
 
 
@@ -594,7 +599,7 @@ dendro.defi4 + ggtitle("Dendrogramme des voitures selon les spécifications du m
 library(plotly)
 p <- ggplot(iris,
             aes(x = Sepal.Length, y = Sepal.Width, colour = Species, shape = Species)) +
-  geom_point(size=6, alpha=0.6)
+  geom_point(size = 6, alpha = 0.6)
 
 ggplotly(p)
 
