@@ -31,7 +31,7 @@ class: inverse, center, middle
 
 ```{R install_pkgs, echo = FALSE, results = "asis"}
 cat(
-  qcbsRworkshops::first_slides(6, c('grid', 'gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'GGally','patchwork','plotly'), lang = "fr")
+  qcbsRworkshops::first_slides(3, c('grid', 'gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'GGally','patchwork','plotly'), lang = "fr")
 )
 ```
 
@@ -59,7 +59,7 @@ Code et .HTML sont disponibles à l'adresse suivante: http://qcbs.ca/wiki/r/work
   1. créez votre propre script R ;
   2. référez-vous au script R fourni uniquement si nécessaire ;
   3. évitez de copier-coller ou d'exécuter le code directement à partir du script.
-  
+
 
 ###### [ggplot2](https://ggplot2.tidyverse.org/) est aussi sur GitHub: https://github.com/tidyverse/ggplot2
 
@@ -168,7 +168,7 @@ D'autres logiciels de dessin sont probablement de meilleures options comme [GIMP
 .center[![:scale 80%](images/Divided_reproducible workflow.png)]
 
 ---
-# Pourquoi utiliser R pour les graphiques ? 
+# Pourquoi utiliser R pour les graphiques ?
 
 #### .alert[Reproductibilité]
 
@@ -228,7 +228,7 @@ Un graphique est construit à partir de différente couches:
 ![:scale 90%](images/Layers_ggplot.png)
 ]
 
-En utilisant le système GG, nous pouvons construire des graphiques étape par étape pour des résultats personnalisables. 
+En utilisant le système GG, nous pouvons construire des graphiques étape par étape pour des résultats personnalisables.
 
 ---
 # Les bases de la grammaire des graphiques (GG)
@@ -296,7 +296,7 @@ Un graphique est constitué d'éléments (couches):
     - `linetype`: le type de ligne utilisé (pleine, pointillée, etc.)
     - `size`: la taille des points ou des lignes
     - `alpha`: la transparence des géométries
-    
+
 --
 
 .alert[note: l'esthétique est basée sur les quantités dans vos données, mais les graphiques peuvent également avoir certaines de ces qualités qui ne sont pas fonction des données (p. ex. la coloration basée sur un groupe de données est une esthétique, mais les points peuvent avoir une couleur qui n'est pas fonction des données)].
@@ -315,10 +315,10 @@ Un graphique est constitué d'éléments (couches):
     * `geom_boxplot()` : diagramme en boîte (boxplot) pour les variables catégoriques
     * `geom_bar()` : diagrammes à barres pour un axe des x catégorique
     * `geom_histogram()` : histogramme pour l'axe des x continu
-    * `geom_violin()` : kernel de distribution de la dispersion des données 
+    * `geom_violin()` : kernel de distribution de la dispersion des données
     * `geom_smooth()` : ligne de lissage en fonction des données
 
-    
+
 
 ---
 # La grammaire des graphiques (GG)
@@ -330,7 +330,7 @@ Un graphique est constitué d'éléments (couches):
 - Objets géométriques (geoms)
 - Facettes
     * `facet_wrap()` ou `facet_grid()` pour de petits multiples
-    
+
 ???
 
 note: _descriptions of scales to talk about more layers_
@@ -347,8 +347,8 @@ Un graphique est constitué d'éléments (couches):
 - Statistiques
     * similaire aux géométries, mais issue de calcul sur les données
     * indique les moyennes, les comptages et autres résumés statistiques des données
-    
-    
+
+
 ???
 
 note: _descriptions of themes to talk about more  layers_
@@ -367,8 +367,8 @@ Un graphique est constitué d'éléments (couches):
     * `coord_cartesian` pour fixer des limites
     * `coord_polar` pour les graphiques circulaires
     * `coord_map` pour différentes projections cartographiques
-    
-    
+
+
 ???
 
 note: _descriptions of other layerss_
@@ -384,11 +384,11 @@ Un graphique est constitué d'éléments (couches):
 - Objets géométriques (geoms)
 - Facettes
 - Statistiques
-- Coordonnées 
+- Coordonnées
 - Thèmes
     * Effets visuels globaux par défaut
     * polices, couleurs, formes, contours
-    
+
 ???
 
 note: _descriptions of other layerss_
@@ -401,7 +401,7 @@ note: _descriptions of other layerss_
 
 2. Ajouter des couches géométriques :
   * `plot.object <- plot.object + geom_*()`
-  
+
 3. Ajouter des couches d'apparence :
   * `plot.object <- plot.object + coord_*() + theme()`
 
@@ -505,7 +505,7 @@ s # Imprimer le graphique final
 
 ]
 
-??? 
+???
 
 note: _removed this slide because it felt random, but is maybe worth going over at some point - edit. moved to challenge 1 answer_
 
@@ -527,7 +527,7 @@ ggplot(data = iris)
 # La dynamique `ggplot()` : la couche d'esthétiques
 
 ```{r, fig.height=4, fig.width=5}
-ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) 
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width))
 ```
 
 ---
@@ -543,7 +543,7 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 
 ```{r,fig.height=4.5}
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-  geom_point() + 
+  geom_point() +
   facet_wrap(~Species) +
   coord_trans(x = "log10",
               y = "log10")
@@ -562,7 +562,7 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 
 .center[Paramètres à prendre en compte pour répondre à cette question :]
 
- données | géométrie | valeurs x | valeurs y 
+ données | géométrie | valeurs x | valeurs y
 :-------------:|:-------------:|:-------------:|:-------------:
 iris | geom_point | longueur des pétales | largeur des pétales
 
@@ -692,7 +692,7 @@ ggplot(data = iris,
 
 .pull-right[
 ```{r,  fig.align = 'default', fig.asp=2/3}
-ggplot(data = iris, 
+ggplot(data = iris,
        aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
   geom_point() +
   geom_smooth(method = lm) +
@@ -706,8 +706,8 @@ ggplot(data = iris,
 .pull-left[
 ```{r, fig.align = 'default', fig.asp=2/3}
 pp <- ggplot(data = iris) +
-  geom_point(aes(x = Sepal.Length, 
-                 y = Sepal.Width, 
+  geom_point(aes(x = Sepal.Length,
+                 y = Sepal.Width,
                  colour = Species))
 pp + labs(title = "Défaut")
 ```
@@ -715,8 +715,8 @@ pp + labs(title = "Défaut")
 .pull-right[
 ```{r, fig.align = 'default', fig.asp=2/3}
 pp +
-  scale_colour_manual(values = c("grey55", 
-                                 "orange", 
+  scale_colour_manual(values = c("grey55",
+                                 "orange",
                                  "skyblue")) +
   labs(title = "Personnalisé")
 ```
@@ -731,7 +731,7 @@ note: _changed to left/right because cut off_
 .pull-left[
 ```{r, fig.align = 'default', fig.asp=2/3}
 pp2 <- ggplot(data = iris) +
-  geom_point(aes(x = Sepal.Length, 
+  geom_point(aes(x = Sepal.Length,
                  y = Sepal.Width,
                  colour = Petal.Length))
 pp2 + labs(title = "Défaut")
@@ -739,8 +739,8 @@ pp2 + labs(title = "Défaut")
 ]
 .pull-right[
 ```{r, fig.align = 'default', fig.asp=2/3}
-pp2 + 
-  scale_colour_gradient(low = "blue", 
+pp2 +
+  scale_colour_gradient(low = "blue",
                         high = "red") +
   labs(title = "Personnalisé")
 ```
@@ -841,8 +841,8 @@ pp2 + scale_colour_viridis_c() +
 .pull-left[
 ```{r, fig.height = 4.5, fig.width = 5.5}
 ggplot(data = iris) +
-  geom_point(aes(x = Sepal.Length, 
-                 y = Sepal.Width, 
+  geom_point(aes(x = Sepal.Length,
+                 y = Sepal.Width,
                  shape = Species)) +
   labs(title = "Formes pour des groupes")
 ```
@@ -851,9 +851,9 @@ ggplot(data = iris) +
 .pull-right[
 ```{r, fig.height = 4.5, fig.width = 5.5}
 ggplot(data = iris) +
-  geom_point(aes(x = Sepal.Length, 
+  geom_point(aes(x = Sepal.Length,
                  y = Sepal.Width,
-                 size = Petal.Length, 
+                 size = Petal.Length,
                  alpha = Petal.Length)) +
   labs(title = "Taille et transparence pour des variables continues")
 ```
@@ -875,7 +875,7 @@ Données | x | y | Esthétiques
 mtcars |*wt* |*mpg* | *disp* et *hp*
 CO2 |*conc* |*uptake* | *Treatment* et *Type*
 msleep |log10(*bodywt*) |*awake* | *vore* et *conservation*
-ToothGrowth | *dose* | *len* | *supp* 
+ToothGrowth | *dose* | *len* | *supp*
 
 <br>
 .center[.alert[
@@ -887,7 +887,7 @@ ToothGrowth | *dose* | *len* | *supp*
 # Défi #2 ![:cube]()
 
 #### .alert[Salles de réunion ! - 15 min]
-<br> 
+<br>
 
 Créez un graphique à partager avec le groupe
 
@@ -961,14 +961,14 @@ ggplot(data = msleep) +
 
 Données | x | y | Esthétiques
 :-------------:|:-------------:|:-------------:|:-------------:
-ToothGrowth | *dose* | *len* | *supp* 
+ToothGrowth | *dose* | *len* | *supp*
 
 ]
 
 ```{r, fig.height=3.5, fig.width=6}
 data(ToothGrowth)
 ggplot(ToothGrowth, aes(x = dose, y = len, color = supp)) +
-  geom_point() + 
+  geom_point() +
   geom_smooth(method = lm, formula = 'y~x')
 ```
 
@@ -986,7 +986,7 @@ ggplot(diamonds) +
 ]
 .pull-right[
 ```{r,fig.height=4}
-ggplot(diamonds) + 
+ggplot(diamonds) +
   geom_point(aes(x = carat, y = price)) +
   coord_trans(x = "log10",
               y = "log10") +
@@ -1037,8 +1037,8 @@ pp + scale_colour_grey() +
 ---
 # `theme()`
 
-Utiliser `theme_set()` pour changer le thème pour tous vos prochains graphiques, 
-ou `theme_update()` pour modifier certains aspects d'un thème. 
+Utiliser `theme_set()` pour changer le thème pour tous vos prochains graphiques,
+ou `theme_update()` pour modifier certains aspects d'un thème.
 
 
 
@@ -1300,7 +1300,7 @@ exclude: true
 ]
 
 ???
-note: removed this slide. Not sure why it's here. 
+note: removed this slide. Not sure why it's here.
 
 ---
 # `ggplot2::ggplot()`
@@ -1388,7 +1388,7 @@ Comme expliqué sur le site [from Data to Viz](https://www.data-to-viz.com/graph
 ```{r, echo=FALSE, fig.height=4.4}
 # Data
 names <- c(rep("A", 80), rep("B", 50), rep("C", 70))
-value <- c(sample(2:5, 80, replace = TRUE), 
+value <- c(sample(2:5, 80, replace = TRUE),
            sample(4:10, 50, replace = TRUE),
            sample(1:7, 70, replace = TRUE))
 data <- data.frame(names, value)
@@ -1417,7 +1417,7 @@ violin
 # Graphique en violon: `geom_violin()` + `_boxplot()` + `_jitter()`
 
 ```{r, fig.align="center"}
-violin + 
+violin +
   geom_jitter(shape = 16, position = position_jitter(0.2), alpha = .3) +
   geom_boxplot(width = .05)
 ```
@@ -1442,7 +1442,7 @@ ggplot(mtcars, aes(cyl, mpg)) +
 ```{r, fig.height=5, fig.width=4}
 ggplot(mtcars, aes(cyl, mpg)) +
   geom_point() +
-  stat_summary(fun.data = "mean_cl_boot", 
+  stat_summary(fun.data = "mean_cl_boot",
                colour = "red", size = 2) +
   labs(title = "Moyenne et intervalle de confiance")
 ```
@@ -1673,6 +1673,6 @@ https://www.rstudio.com/resources/cheatsheets
 ---
 class: inverse, center, bottom
 
-# Merci d'avoir participé!!
+# Merci d'avoir participé !
 
 ![:scale 50%](images/QCBS_logo.png)
