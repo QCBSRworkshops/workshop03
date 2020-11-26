@@ -14,7 +14,7 @@ options(repos=structure(c(CRAN="http://cran.r-project.org")))
 
 ## ----install_pkgs, echo = FALSE, results = "asis"-----------------------------
 cat(
-  qcbsRworkshops::first_slides(6, c('grid', 'gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'GGally','patchwork','plotly'), lang = "en")
+  qcbsRworkshops::first_slides(6, c('grid', 'gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'GGally','patchwork','plotly'), lang = "fr")
 )
 
 
