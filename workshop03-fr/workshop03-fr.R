@@ -14,7 +14,7 @@ options(repos=structure(c(CRAN="http://cran.r-project.org")))
 
 ## ----install_pkgs, echo = FALSE, results = "asis"-----------------------------
 cat(
-  qcbsRworkshops::first_slides(6, c('grid', 'gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'GGally','patchwork','plotly'), lang = "fr")
+  qcbsRworkshops::first_slides(3, c('grid', 'gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'GGally','patchwork','plotly'), lang = "fr")
 )
 
 
@@ -83,7 +83,7 @@ ggplot(data = iris)
 
 
 ## ---- fig.height=4, fig.width=5-----------------------------------------------
-ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) 
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width))
 
 
 ## ---- fig.height=4, fig.width=5-----------------------------------------------
@@ -93,7 +93,7 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 
 ## ----fig.height=4.5-----------------------------------------------------------
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-  geom_point() + 
+  geom_point() +
   facet_wrap(~Species) +
   coord_trans(x = "log10",
               y = "log10")
@@ -153,7 +153,7 @@ ggplot(data = iris,
 
 
 ## ----  fig.align = 'default', fig.asp=2/3-------------------------------------
-ggplot(data = iris, 
+ggplot(data = iris,
        aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
   geom_point() +
   geom_smooth(method = lm) +
@@ -162,31 +162,31 @@ ggplot(data = iris,
 
 ## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
 pp <- ggplot(data = iris) +
-  geom_point(aes(x = Sepal.Length, 
-                 y = Sepal.Width, 
+  geom_point(aes(x = Sepal.Length,
+                 y = Sepal.Width,
                  colour = Species))
 pp + labs(title = "Défaut")
 
 
 ## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
 pp +
-  scale_colour_manual(values = c("grey55", 
-                                 "orange", 
+  scale_colour_manual(values = c("grey55",
+                                 "orange",
                                  "skyblue")) +
   labs(title = "Personnalisé")
 
 
 ## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
 pp2 <- ggplot(data = iris) +
-  geom_point(aes(x = Sepal.Length, 
+  geom_point(aes(x = Sepal.Length,
                  y = Sepal.Width,
                  colour = Petal.Length))
 pp2 + labs(title = "Défaut")
 
 
 ## ---- fig.align = 'default', fig.asp=2/3--------------------------------------
-pp2 + 
-  scale_colour_gradient(low = "blue", 
+pp2 +
+  scale_colour_gradient(low = "blue",
                         high = "red") +
   labs(title = "Personnalisé")
 
@@ -239,17 +239,17 @@ pp2 + scale_colour_viridis_c() +
 
 ## ---- fig.height = 4.5, fig.width = 5.5---------------------------------------
 ggplot(data = iris) +
-  geom_point(aes(x = Sepal.Length, 
-                 y = Sepal.Width, 
+  geom_point(aes(x = Sepal.Length,
+                 y = Sepal.Width,
                  shape = Species)) +
   labs(title = "Formes pour des groupes")
 
 
 ## ---- fig.height = 4.5, fig.width = 5.5---------------------------------------
 ggplot(data = iris) +
-  geom_point(aes(x = Sepal.Length, 
+  geom_point(aes(x = Sepal.Length,
                  y = Sepal.Width,
-                 size = Petal.Length, 
+                 size = Petal.Length,
                  alpha = Petal.Length)) +
   labs(title = "Taille et transparence pour des variables continues")
 
@@ -279,7 +279,7 @@ ggplot(data = msleep) +
 ## ---- fig.height=3.5, fig.width=6---------------------------------------------
 data(ToothGrowth)
 ggplot(ToothGrowth, aes(x = dose, y = len, color = supp)) +
-  geom_point() + 
+  geom_point() +
   geom_smooth(method = lm, formula = 'y~x')
 
 
@@ -290,7 +290,7 @@ ggplot(diamonds) +
 
 
 ## ----fig.height=4-------------------------------------------------------------
-ggplot(diamonds) + 
+ggplot(diamonds) +
   geom_point(aes(x = carat, y = price)) +
   coord_trans(x = "log10",
               y = "log10") +
@@ -491,7 +491,7 @@ ggplot(data = iris, aes(Species, Sepal.Length)) +
 ## ---- echo=FALSE, fig.height=4.4----------------------------------------------
 # Data
 names <- c(rep("A", 80), rep("B", 50), rep("C", 70))
-value <- c(sample(2:5, 80, replace = TRUE), 
+value <- c(sample(2:5, 80, replace = TRUE),
            sample(4:10, 50, replace = TRUE),
            sample(1:7, 70, replace = TRUE))
 data <- data.frame(names, value)
@@ -512,7 +512,7 @@ violin
 
 
 ## ---- fig.align="center"------------------------------------------------------
-violin + 
+violin +
   geom_jitter(shape = 16, position = position_jitter(0.2), alpha = .3) +
   geom_boxplot(width = .05)
 
@@ -528,7 +528,7 @@ ggplot(mtcars, aes(cyl, mpg)) +
 ## ---- fig.height=5, fig.width=4-----------------------------------------------
 ggplot(mtcars, aes(cyl, mpg)) +
   geom_point() +
-  stat_summary(fun.data = "mean_cl_boot", 
+  stat_summary(fun.data = "mean_cl_boot",
                colour = "red", size = 2) +
   labs(title = "Moyenne et intervalle de confiance")
 
