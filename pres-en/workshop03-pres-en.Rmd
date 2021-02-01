@@ -29,10 +29,50 @@ options(repos=structure(c(CRAN="http://cran.r-project.org")))
 
 class: inverse, center, middle
 
-```{R install_pkgs, echo = FALSE, results = "asis"}
-cat(
-  qcbsRworkshops::first_slides(3, c('grid', 'gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'GGally','patchwork','plotly'), lang = "en")
-)
+```{r install_pkgs, message=FALSE, warning=FALSE, include=FALSE, results=0}
+# Standard procedure to check and install packages and their dependencies, if needed.
+
+list.of.packages <- c('grid', 'gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 
+                      'RColorBrewer','GGally','patchwork','plotly')
+
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+
+if(length(new.packages) > 0) {
+  install.packages(new.packages, dependencies = TRUE) 
+  print(paste0("The following package was installed:", new.packages)) 
+} else if(length(new.packages) == 0) {
+    print("All packages were already installed previously")
+  }
+```
+
+
+# About this workshop
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop03)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=wiki&message=03&logo=wikipedia)](https://wiki.qcbs.ca/r_workshop3)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Slides&message=03&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop03/workshop03-en/workshop03-en.html)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Slides&message=03&color=red&logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop03/workshop03-en/workshop03-en.pdf)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=script&message=03&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop03/workshop03-en/workshop03-en.R)
+
+---
+
+# Required packages
+
+* [grid](https://cran.r-project.org/package=grid)
+* [gridExtra](https://cran.r-project.org/package=gridExtra)
+* [ggplot2](https://cran.r-project.org/package=ggplot2)
+* [ggsignif](https://cran.r-project.org/package=ggsignif)
+* [ggdendro](https://cran.r-project.org/package=ggdendro)
+* [maps](https://cran.r-project.org/package=maps)
+* [mapproj](https://cran.r-project.org/package=mapproj)
+* [RColorBrewer](https://cran.r-project.org/package=RColorBrewer)
+* [GGally](https://cran.r-project.org/package=GGally)
+* [patchwork](https://cran.r-project.org/package=patchwork)
+* [plotly](https://cran.r-project.org/package=plotly)
+
+<br>
+
+```R
+install.packages(c('grid', 'gridExtra', 'ggplot2', 'ggsignif', 'ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'GGally', 'patchwork', 'plotly'))
 ```
 
 ---
