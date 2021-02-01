@@ -33,7 +33,7 @@ class: inverse, center, middle
 # Standard procedure to check and install packages and their dependencies, if needed.
 
 list.of.packages <- c('grid', 'gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 
-                      'RColorBrewer','GGally','patchwork','plotly')
+                      'RColorBrewer','GGally','patchwork','plotly', 'reshape2')
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
