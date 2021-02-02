@@ -1,0 +1,13 @@
+base
+ggplot2
+tibble
+GGally
+gridExtra
+colorspace
+colorblindr
+reshape2
+ggsignif
+maps
+ggdendro
+patchwork
+plotly
