@@ -8,9 +8,10 @@ output:
       in_header: qcbsR-header.html
     lib_dir: assets
     seal: true
-    css: ["qcbsR.css", "qcbsR-fonts.css"]
+    css: ["default", "qcbsR.css", "qcbsR-fonts.css"]
     nature:
       beforeInit: "qcbsR-macros.js"
+      highlightLines: true
 ---
 
 ```{r setup, echo = FALSE}
