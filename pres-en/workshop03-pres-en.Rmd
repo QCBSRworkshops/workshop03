@@ -81,7 +81,6 @@ install.packages(c('grid', 'gridExtra', 'ggplot2', 'ggsignif', 'ggdendro', 'maps
 
 ##### 1. Use R to create various plots
 
-
 ---
 
 class: inverse, center, middle
