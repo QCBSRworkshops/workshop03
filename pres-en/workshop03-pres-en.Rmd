@@ -1,7 +1,7 @@
 ---
 title: "Workshop 3: Introduction to `ggplot2`"
 subtitle: "QCBS R Workshop Series"
-author: "QuÃ©bec Centre for Biodiversity Science"
+author: "Québec Centre for Biodiversity Science"
 output:
   xaringan::moon_reader:
     includes:
@@ -11,6 +11,7 @@ output:
     css: ["qcbsR.css", "qcbsR-fonts.css"]
     nature:
       beforeInit: "qcbsR-macros.js"
+      highlightLines: true
 ---
 
 ```{r setup, echo = FALSE}
