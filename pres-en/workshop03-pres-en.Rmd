@@ -1,7 +1,7 @@
 ---
 title: "Workshop 3: Introduction to `ggplot2`"
 subtitle: "QCBS R Workshop Series"
-author: "QuÃ©bec Centre for Biodiversity Science"
+author: "Québec Centre for Biodiversity Science"
 output:
   xaringan::moon_reader:
     includes:

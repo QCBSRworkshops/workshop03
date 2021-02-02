@@ -11,6 +11,7 @@ output:
     css: ["qcbsR.css", "qcbsR-fonts.css"]
     nature:
       beforeInit: "qcbsR-macros.js"
+      highlightLines: true
 ---
 
 ```{r setup, echo = FALSE}
