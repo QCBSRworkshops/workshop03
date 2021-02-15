@@ -1,7 +1,7 @@
 ---
 title: "Workshop 3: Introduction to `ggplot2`"
 subtitle: "QCBS R Workshop Series"
-author: "Qu�bec Centre for Biodiversity Science"
+author: "Québec Centre for Biodiversity Science"
 output:
   xaringan::moon_reader:
     includes:
@@ -13,6 +13,7 @@ output:
       beforeInit: "qcbsR-macros.js"
       highlightLines: true
 ---
+class: inverse, center, middle
 
 ```{r setup, echo = FALSE}
 knitr::opts_chunk$set(
@@ -27,8 +28,6 @@ knitr::opts_chunk$set(
 )
 options(repos=structure(c(CRAN="http://cran.r-project.org")))
 ```
-
-class: inverse, center, middle
 
 ```{r install_pkgs, message=FALSE, warning=FALSE, include=FALSE, results=0}
 # Standard procedure to check and install packages and their dependencies, if needed.
@@ -45,7 +44,6 @@ if(length(new.packages) > 0) {
     print("All packages were already installed previously")
   }
 ```
-
 
 # About this workshop
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop03)
@@ -72,7 +70,7 @@ if(length(new.packages) > 0) {
 
 <br>
 
-```R
+```r
 install.packages(c('grid', 'gridExtra', 'ggplot2', 'ggsignif', 'ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'GGally', 'patchwork', 'plotly'))
 ```
 
@@ -82,12 +80,11 @@ install.packages(c('grid', 'gridExtra', 'ggplot2', 'ggsignif', 'ggdendro', 'maps
 ##### 1. Use R to create various plots
 
 ---
-
 class: inverse, center, middle
 
 # Introduction
 
----
+--
 # Introduction
 
 ##### To follow along:
@@ -111,7 +108,6 @@ Code and .HTML available at http://qcbs.ca/wiki/r/workshop3
 .center[
 ![:scale 80%](images/Layers_ggplot.png)
 ]
-
 
 
 ###### 2. Advanced visualization
@@ -176,7 +172,7 @@ Important questions:
 - What is the best way to do it?
 
 .center[
-.alert[A rule of thumb: think simple — use less ink!]
+.alert[A rule of thumb: think simple â€” use less ink!]
 ]
 
 --
