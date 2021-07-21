@@ -34,7 +34,7 @@ class: inverse, center, middle
 # Standard procedure to check and install packages and their dependencies, if needed.
 
 list.of.packages <- c('grid', 'gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 
-                      'RColorBrewer','GGally','patchwork','plotly', 'reshape2')
+                      'RColorBrewer','GGally','patchwork','plotly', 'reshape2', 'palmerpenguins')
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
@@ -43,10 +43,18 @@ if(length(new.packages) > 0) {
   print(paste0("The following package was installed:", new.packages)) 
 } else if(length(new.packages) == 0) {
     print("All packages were already installed previously")
-  }
+}
+
+# load all packages
+invisible(lapply(list.of.packages, library, character.only = TRUE))
 ```
 
-# � propos de cet atelier
+```{r, echo = FALSE}
+# set theme so the axis labels are bigger
+theme_set(theme_classic())
+```
+
+# À propos de cet atelier
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop03)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=wiki&message=03&logo=wikipedia)](https://wiki.qcbs.ca/r_atelier3)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Diapos&message=03&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop03/workshop03-fr/workshop03-fr.html)
@@ -67,12 +75,13 @@ if(length(new.packages) > 0) {
 * [RColorBrewer](https://cran.r-project.org/package=RColorBrewer)
 * [GGally](https://cran.r-project.org/package=GGally)
 * [patchwork](https://cran.r-project.org/package=patchwork)
+* [palmerpenguins](https://cran.r-project.org/package=palmerpenguins)
 * [plotly](https://cran.r-project.org/package=plotly)
 
 <br>
 
 ```R
-install.packages(c('grid', 'gridExtra', 'ggplot2', 'ggsignif', 'ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'GGally', 'patchwork', 'plotly'))
+install.packages(c('grid', 'gridExtra', 'ggplot2', 'ggsignif', 'ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'GGally', 'patchwork', 'plotly', 'palmerpenguins'))
 ```
 
 ---
@@ -163,11 +172,6 @@ Que pensez-vous de celle-ci ![:faic](arrow-up)?
   - Clairement (en utilisant de bons principes de conception)
   - De manière précise et exacte (un bon graphique vaut 1000 mots)
   - De manière effective et efficace
-
-
-???
-
-note: _changed points here as answers from previous slide question_
 
 ---
 # Visualisation en science
@@ -318,9 +322,6 @@ Un graphique est constitué d'éléments (couches):
     - en général, une ligne pour chaque observation que vous voulez représenter
 
 
-???
-
-note: _included subpoints for data since other bullets had subpoints_
 ---
 # La grammaire des graphiques (GG)
 
@@ -449,6 +450,53 @@ note: _descriptions of other layerss_
   * `plot.object` ou `print(plot.object)`.
 
 
+---
+# Le jeu de données: palmerpenguins
+
+.pull-right2[
+![:scale 80%](images/palmerpenguins.png)
+]
+
+.pull-left2[
+Nous allons utiliser le jeu de données `palmerpenguins`.
+
+```{r, eval=FALSE}
+install.packages("palmerpenguins")
+library(palmerpenguins)
+```
+
+.small[Ce jeu de données contient des mesures morphologiques pour trois espèces de pingouins observées sur trois îles de l'archipel Palmer, en Antarctique: ]
+
+]
+
+![:scale 55%](images/penguins.png)
+.center[.xsmall[Artwork by [@allison_horst](https://twitter.com/allison_horst).]]
+
+
+???
+
+Ces données ont été recueillies de 2007 à 2009 par la Dre Kristen Gorman dans le cadre du programme de recherche écologique à long terme de la station Palmer, qui fait partie du réseau américain de recherche écologique à long terme.
+
+Cet ensemble de données est souvent utilisé pour remplacer l'ensemble de données iris, qui pose certains problèmes pour l'enseignement de la science des données, notamment ses liens avec l'eugénisme (plus d'informations à ce sujet sur https://armchairecology.blog/iris-dataset/).
+
+Cet ensemble de données a également été utilisé pour un défi TidyTuesday, montrant les nombreuses possibilités de visualisation créative de l'ensemble de données. Par exemple : [this](https://twitter.com/LauraNavarroSol/status/1289216490307063814?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1289216490307063814%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F), and [this](https://twitter.com/CedScherer/status/1288181995714093057?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1288181995714093057%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F).
+
+---
+# Le jeu de données: palmerpenguins
+
+Regardons les variables de l'ensemble de données des pingouins :
+
+```{r}
+str(penguins)
+```
+
+.center[
+![:scale 50%](images/culmen_depth.png)
+]
+
+???
+
+Notez que l'espèce, l'île et le sexe sont des facteurs, qui seront importantes pour regrouper les données avec des couleurs, des formes, etc. dans ggplot2. Il y a ensuite 2 variables numériques (mesures du bec représentées dans l'image), et deux variables entières (longueur des nageoires et masse corporelle). Les données ont également une petite composante temporelle, s'étendant de 2007 à 2009.
 
 ---
 # Préparer les données pour `ggplot2`
@@ -457,30 +505,30 @@ La librairie `ggplot2` requiert de préparer les données comme un objet de la c
 
 ```{r eval=TRUE, echo=TRUE}
 library(tibble)
-class(iris) # Tout est prêt !
+class(penguins) # Tout est prêt !
 
-ir <- as_tibble(iris) # acceptable
-class(ir)
+peng <- as_tibble(penguins) # acceptable
+class(peng)
 ```
 
-**&#x267B; Rappel de l'atelier [*Charger et manipuler des données*](https://wiki.qcbs.ca/r_atelier2)**:
+**&#x267B; Rappel de l'atelier [*Charger et manipuler des données*](https://qcbsrworkshops.github.io/workshop02/pres-fr/workshop02-pres-fr.html#1)**:
 
-Les graphiques plus complexes dans les `ggplot2` nécessitent que les données soient en format long
+Les graphiques plus complexes dans les `ggplot2` nécessitent que les données soient en format long.
 
 ---
-# Le jeu de données iris
+# Questions scientifiques à propos des pingouins
 
-```{r, eval=-1}
-?iris
-str(iris)
-```
+.center[
+![:scale 50%](images/culmen_depth.png)
+]
 
 .center[**Questions scientifiques**]
-- Y a-t-il une relation entre la **longueur** et la **largeur** des **sépales** des iris ?
-- Est-ce que la taille des **pétales** et des **sépales** varie ensemble ?
-- Comment ces mesures sont-elles réparties entre les 3 espèces d'iris ?
+<br>
+- Y a-t-il une relation entre la **longueur** et la **profondeur** des **becs** ?
+- Est-ce que la taille des **becs** et des **nageoires** varient ensemble ?
+- Comment ces mesures sont-elles réparties entre les **3 espèces** ?
 
-.center[.alert[Comment pouvons-nous répondre graphiquement à ces questions avec `ggplot`?]]
+.center[.alert[Comment pouvons-nous répondre graphiquement à ces questions avec `ggplot2`?]]
 
 ---
 # Explorer la structure des données
@@ -488,32 +536,70 @@ str(iris)
 <!-- Explain the databases before the examples  -->
 
 ```{r, fig.width = 10.25, fig.height = 6.5}
-install.packages("GGally")
 library(GGally)
-ggpairs(iris, aes(colour = Species)) + theme_bw()
+ggpairs(penguins, aes(colour = species)) + theme_bw()
 ```
 
 ???
+ggpairs est dans la librairie GGally (chargée et installée au début de l'atelier). ggpairs (version ggplot du paquet psych) nous permet d'explorer les corrélations dans les données.
 
-note: _ggpairs (ggplot version of psych package) allows us to explore correlations in data_
+On peut déjà voir certains regroupements d'espèces entre la longueur et la profondeur du bec, la longueur des nageoires et la masse corporelle. Lors de la visualisation, il faudra garder à l'esprit que la différenciation des espèces peut être importante.
 
 ---
 # Explorer la structure des données
 
-```{r, echo = FALSE, fig.height=7, fig.width=9}
-ggplot(data = iris,             # Données
-       aes(x = Sepal.Length,    # Valeurs en X
-           y = Sepal.Width,     # Valeurs en Y
-           col = Species)) +    # Esthétiques
+Explorons comment ces données sont structurées par espèce:
+
+```{r, echo = TRUE, fig.height=6, fig.width=8, eval = FALSE}
+ggplot(data = penguins,               # Data
+       aes(x = bill_length_mm,        # Your X-value
+           y = bill_depth_mm,         # Your Y-value
+           col = species)) +          # Aesthetics
   geom_point(size = 5, alpha = 0.8) + # Point
-  geom_smooth(method = "lm") +  # Régression linéaire
-  labs(title = "Relation entre la longueur et la largeur\ndes sépales pour différentes espèces d'iris") + # Title
+  geom_smooth(method = "lm") +        # Linear regression
+  labs(title = "Relationship between bill length and depth\nfor different penguin species", # Title
+       x = "Bill length (mm)",
+       y = "Bill depth (mm)",
+       col = "Species") + 
+  theme_classic() + # apply a clean theme
   theme(title = element_text(size = 18, face = "bold"),
-      text = element_text(size = 14))
+      text = element_text(size = 16))
 ```
 
-.small[&#x267B; Voir l'atelier [*Charger et manipuler des données*](https://wiki.qcbs.ca/r_atelier2) pour apprendre comment nettoyer vos données.]
+.small[&#x267B; Voir l'atelier [*Charger et manipuler des données*](https://qcbsrworkshops.github.io/workshop02/pres-fr/workshop02-pres-fr.html#1) pour apprendre comment nettoyer vos données.]
 
+???
+
+Prenez le temps d'expliquer chaque ligne de code (surtout l'esthétique et les géomètres), et ce qu'elle nous dit.
+Par exemple, en différenciant les espèces, on peut voir qu'il existe une relation assez cohérente entre la longueur et la profondeur du bec entre les espèces (pentes similaires), mais que les gammes de ces variables sont différentes (les regroupements sont clairement indiqués par les couleurs). Les pingouins Adélie ont tendance à avoir une longueur de bec plus petite mais une profondeur de bec assez grande, alors que l'inverse est vrai pour les pingouins Gentoo.
+
+---
+# Explorer la structure des données
+
+Explorons comment ces données sont structurées par espèce:
+
+```{r, echo = FALSE, fig.height=6, fig.width=8}
+ggplot(data = penguins,               # Data
+       aes(x = bill_length_mm,        # Your X-value
+           y = bill_depth_mm,         # Your Y-value
+           col = species)) +          # Aesthetics
+  geom_point(size = 5, alpha = 0.8) + # Point
+  geom_smooth(method = "lm") +        # Linear regression
+  labs(title = "Relationship between bill length and depth\nfor different penguin species", # Title
+       x = "Bill length (mm)",
+       y = "Bill depth (mm)",
+       col = "Species") + 
+  theme_classic() + # apply a clean theme
+  theme(title = element_text(size = 18, face = "bold"),
+      text = element_text(size = 16))
+```
+
+.small[&#x267B; Voir l'atelier [*Charger et manipuler des données*](https://qcbsrworkshops.github.io/workshop02/pres-fr/workshop02-pres-fr.html#1) pour apprendre comment nettoyer vos données.]
+
+???
+
+Prenez le temps d'expliquer chaque ligne de code (surtout l'esthétique et les géomètres), et ce qu'elle nous dit.
+Par exemple, en différenciant les espèces, on peut voir qu'il existe une relation assez cohérente entre la longueur et la profondeur du bec entre les espèces (pentes similaires), mais que les gammes de ces variables sont différentes (les regroupements sont clairement indiqués par les couleurs). Les pingouins Adélie ont tendance à avoir une longueur de bec plus petite mais une profondeur de bec assez grande, alors que l'inverse est vrai pour les pingouins Gentoo.
 
 ---
 exclude: true
@@ -524,11 +610,11 @@ exclude: true
 .pull-left[
 **avec héritage**
 ```{r, fig.height = 5}
-p <- ggplot(data = iris,
-            aes(x = Sepal.Length,
-                y = Sepal.Width))
+p <- ggplot(data = penguins,
+            aes(x = bill_length_mm,
+                y = bill_depth_mm))
 p <- p + geom_point()
-p # Imprimer le graphique final
+p
 ```
 ]
 
@@ -536,10 +622,10 @@ p # Imprimer le graphique final
 **sans héritage**
 ```{r, fig.height = 5}
 s <- ggplot()
-s <- s + geom_point(data = iris,
-                    aes(x = Sepal.Length,
-                        y = Sepal.Width))
-s # Imprimer le graphique final
+s <- s + geom_point(data = penguins,
+                    aes(x = bill_length_mm,
+                        y = bill_depth_mm))
+s # Print your final plot
 ```
 ]
 
@@ -559,34 +645,50 @@ Un graphique est constitué de différentes couches :
 ---
 # La dynamique `ggplot()` : la couche de données
 
-```{r, fig.height=4, fig.width=5}
-ggplot(data = iris)
+```{r, echo = FALSE, results=0}
+theme_update(axis.text = element_text(size = 16),
+             axis.title = element_text(size = 18))
 ```
+
+
+```{r, fig.height=5, fig.width=6}
+ggplot(data = penguins)
+```
+
+???
+
+theme_classic() a été appliqué à tous les graphiques de la présentation pour aider à la clarté en utilisant theme_set au début de ce diaporama, donc ces graphiques n'ont pas le fond gris de base de ggplot2. Il y a une section sur les thèmes plus loin dans la présentation, mais c'est une bonne idée de mentionner qu'un thème a été appliqué pour supprimer le fond gris par défaut, ce que les participants pourraient voir s'ils exécutent les morceaux de code eux-mêmes en suivant la présentation.
 
 ---
 # La dynamique `ggplot()` : la couche d'esthétiques
 
-```{r, fig.height=4, fig.width=5}
-ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width))
+```{r, fig.height=5, fig.width=6}
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, y = bill_depth_mm)) 
 ```
 
 ---
 # La dynamique `ggplot()` : la couche de géométries
 
-```{r, fig.height=4, fig.width=5}
-ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+```{r, fig.height=5, fig.width=6}
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, y = bill_depth_mm)) +
   geom_point()
 ```
+
+???
+
+Noter que le code ggplot2 est plus facile à lire si chaque ligne représente un nouvel élément. Ce style est généralement favorisé pour le code ggplot2 dans la communauté R.
 
 ---
 # # La dynamique `ggplot()` : les couches extras - facette, stats, coordonnées
 
-```{r,fig.height=4.5}
-ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-  geom_point() +
-  facet_wrap(~Species) +
-  coord_trans(x = "log10",
-              y = "log10")
+```{r,fig.height=5, fig.width=6}
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point() + 
+  facet_wrap(~species) +
+  coord_trans(x = "log10", y = "log10")
 ```
 
 ---
@@ -596,23 +698,24 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 
 .alert[Question]
 
-> Y a-t-il une relation entre la **longueur** et la **largeur** des **pétales** des iris?
+> Y a-t-il une relation entre la **longueur des becs** et la **longueur des nageoires** des pingouins?
 
-> La **largeur** des pétales augmente-t-elle avec leur **longueur**?
+> La **longueur** des becs augmente-t-elle avec celle des **nageoires**?
 
 .center[Paramètres à prendre en compte pour répondre à cette question :]
 
  données | géométrie | valeurs x | valeurs y
 :-------------:|:-------------:|:-------------:|:-------------:
-iris | geom_point | longueur des pétales | largeur des pétales
+penguins | geom_point | bill_length_mm | flipper_length_mm
 
 
 ---
 # Défi 1#: Solution ![:cube]()
 
 ```{r}
-ggplot(data = iris, aes(x = Petal.Length,
-                        y = Petal.Width)) +
+ggplot(data = penguins, 
+       aes(x = bill_length_mm,
+           y = flipper_length_mm)) +
   geom_point()
 ```
 
@@ -620,30 +723,32 @@ ggplot(data = iris, aes(x = Petal.Length,
 ---
 # Défi 1#: Solution ![:cube]()
 
-.pull-left[
+.pull-left2[
 ```{r}
-ggplot(data = iris, aes(x = Petal.Length,
-                        y = Petal.Width)) +
+ggplot(data = penguins, 
+       aes(x = bill_length_mm,
+           y = flipper_length_mm)) +
   geom_point()
 ```
 ]
 
-.pull-right[
+.pull-right2[
 **note**: L'esthétique peut être soit dans la ligne `ggplot()`, et sera héritée par chaque géométrie, soit dans la ligne `geom_*()` à appliquer à cette géométrie seulement !
 ]
 
 ---
 # Défi 1#: Solution ![:cube]()
 
-.pull-left[
+.pull-left2[
 ```{r}
-ggplot(data = iris, aes(x = Petal.Length,
-                        y = Petal.Width)) +
+ggplot(data = penguins,
+       aes(x = bill_length_mm,
+           y = flipper_length_mm)) +
   geom_point(shape = 2, color = "blue")
 ```
 ]
 
-.pull-right[
+.pull-right2[
 **note**: L'esthétique peut être soit dans la ligne `ggplot()`, et sera héritée par chaque géométrie, soit dans la ligne `geom_*()` à appliquer à cette géométrie seulement !
 
 <br>
@@ -681,62 +786,68 @@ Changez la **couleur** pour
 
 &nbsp; ![:faic](arrow-right) mettre en évidence des éléments spécifiques
 
-
 .pull-left[
 ```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
-ggplot(iris, aes(Sepal.Length, Sepal.Width))+
-  geom_point(aes(colour = Species)) +
-  labs(title = "Couleurs qualitatives pour des groupes",
-       x = "Longeur des sépales",
-       y = "Largeur des sépales") +
-  theme(title = element_text(size = 14, face = "bold"),
+ggplot(penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) +
+  geom_point(aes(colour = species)) +
+  labs(title = "Couleurs qualitatives \npour des groupes",
+       x = "Longueur du bec (mm)",
+       y = "Profondeur du bec (mm)",
+       col = "Species") +
+  theme(title = element_text(size = 16, face = "bold"),
         legend.title = element_text(size = 14),
+        legend.text = element_text(size = 14),
         legend.position = 'bottom')
 ```
 ]
 
 .pull-right[
 ```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
-ggplot(iris, aes(Sepal.Length, Sepal.Width))+
-  geom_point(aes(colour = Petal.Length)) +
-  labs(title = "Gradient de couleurs pour des valeurs",
-       x = "Longeur des sépales",
-       y = "Largeur des sépales") +
-  theme(title = element_text(size = 14, face = "bold"),
+ggplot(penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) +
+  geom_point(aes(colour = body_mass_g)) +
+  labs(title = "Gradient de couleurs \npour des valeurs",
+       x = "Longueur du bec (mm)",
+       y = "Profondeur du bec (mm)",
+       col = "Masse corporelle (g)") +
+  theme(title = element_text(size = 16, face = "bold"),
         legend.title = element_text(size = 14),
+        legend.text = element_text(size = 12, angle = 35),
         legend.position = 'bottom')
 ```
 ]
 
-.center[
 .footnote[Voir [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/colour-basics.html)]
-]
-
-???
-
-note: _hard to get caption in the right place with these css commands... Used footnote here for best results, but there is probably a better way_
 
 ---
 # Utiliser `aes()` pour changer les couleurs
 
-La longueur et la largeur des sépales varient-elles selon les espèces ?
+La longueur des becs et des nageoires varient-elles selon les espèces ?
 .pull-left[
 ```{r, fig.align = 'default', fig.asp=2/3}
-ggplot(data = iris,
-       aes(x = Sepal.Length, y = Sepal.Width)) +
+# No colour mapping
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = flipper_length_mm)) +
   geom_point() +
   geom_smooth(method = lm)+
-  labs(title = "Avec code de couleur")
+  labs(title = "Sans code de couleur")
 ```
 ]
 
 .pull-right[
 ```{r,  fig.align = 'default', fig.asp=2/3}
-ggplot(data = iris,
-       aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
+# With colour mapping
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = flipper_length_mm,
+           col = species)) +
   geom_point() +
-  geom_smooth(method = lm) +
-  labs(title = "Sans code de couleur")
+  geom_smooth(method=lm) +
+  labs(title = "Avec code de couleur")
 ```
 ]
 
@@ -745,35 +856,37 @@ ggplot(data = iris,
 
 .pull-left[
 ```{r, fig.align = 'default', fig.asp=2/3}
-pp <- ggplot(data = iris) +
-  geom_point(aes(x = Sepal.Length,
-                 y = Sepal.Width,
-                 colour = Species))
+# Défaut
+pp <- ggplot(data = penguins) +
+  geom_point(aes(x = bill_length_mm, 
+                 y = bill_depth_mm, 
+                 colour = species))
 pp + labs(title = "Défaut")
 ```
 ]
 .pull-right[
 ```{r, fig.align = 'default', fig.asp=2/3}
-pp +
-  scale_colour_manual(values = c("grey55",
-                                 "orange",
-                                 "skyblue")) +
+# Personnalisé
+pp + 
+scale_colour_manual(
+  values = c("grey55", "orange", 
+             "skyblue")) +
   labs(title = "Personnalisé")
 ```
 ]
 
 ???
-note: _changed to left/right because cut off_
+scale_colour_manual() et scale_fill_manual() permettent de choisir des colours, mais c'est important de s'assurer que les couleurs choisies sont un bon choix pour la visualisation (claires, assez de contraste, etc.). Plus sur ceci dans quelques diapos!
 
 ---
 # Gradient de couleurs
 
 .pull-left[
 ```{r, fig.align = 'default', fig.asp=2/3}
-pp2 <- ggplot(data = iris) +
-  geom_point(aes(x = Sepal.Length,
-                 y = Sepal.Width,
-                 colour = Petal.Length))
+pp2 <- ggplot(data = penguins) +
+  geom_point(aes(x = bill_length_mm, 
+                 y = bill_depth_mm,
+                 colour = body_mass_g))
 pp2 + labs(title = "Défaut")
 ```
 ]
@@ -787,7 +900,7 @@ pp2 +
 ]
 
 ???
-note: _changed to left/right because cut off_
+Il y a aussi scale_colour_gradient2() pour créer un gradient avec une valeur 'midpoint' pour un gradient qui diverge.
 
 ---
 # Utiliser une palette de couleurs prédéfinie
@@ -804,16 +917,18 @@ display.brewer.all()
 ---
 # Utiliser une palette de couleurs prédéfinie
 
-```{r, fig.align = 'center', fig.asp=2/3}
-pp + scale_colour_brewer(palette = "Dark2") +
+```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
+pp + 
+  scale_colour_brewer(palette = "Dark2") +
   labs(title = "Palette pour des groupes")
 ```
 
 ---
 # Utiliser une palette de couleurs prédéfinie
 
-```{r, fig.align = 'center', fig.asp=2/3}
-pp2 + scale_color_viridis_c()+
+```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
+pp2 + 
+  scale_color_viridis_c()+
   labs(title = "Palette pour des variables continues")
 ```
 
@@ -823,16 +938,18 @@ pp2 + scale_color_viridis_c()+
 
 Palette de gris pour la publication
 
-```{r,  fig.align = 'center', fig.asp=2/3}
-pp + scale_colour_grey() +
+```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
+pp + 
+  scale_colour_grey() +
   labs(title = "Palette pour des groupes")
 ```
 
 ---
 # Utiliser une palette de couleurs prédéfinie
 
-```{r,  fig.align = 'center', fig.asp=2/3}
-pp2 + scale_colour_gradient(low = "grey85", high = "black") +
+```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
+pp2 + 
+  scale_colour_gradient(low = "grey85", high = "black") +
   labs(title = "Palette pour des variables continues")
 ```
 
@@ -852,7 +969,7 @@ library(colorblindr)
 ---
 # Utiliser des palettes de couleurs visibles pour les daltoniens
 
-```{r, fig.width = 11, fig.height = 7}
+```{r, fig.width = 11, fig.height = 6.5}
 cvd_grid(pp)
 ```
 
@@ -862,14 +979,16 @@ cvd_grid(pp)
 
 .pull-left[
 ```{r, fig.height = 5}
-pp + scale_colour_viridis_d() +
+pp + 
+  scale_colour_viridis_d() +
   labs(title = "Palette viridis pour des groupes")
 ```
 ]
 
 .pull-right[
 ```{r, fig.height = 5}
-pp2 + scale_colour_viridis_c() +
+pp2 + 
+  scale_colour_viridis_c() +
   labs(title = "Palette viridis pour des variables continues")
 ```
 ]
@@ -879,26 +998,28 @@ pp2 + scale_colour_viridis_c() +
 # Changer la forme, la taille et la transparence
 
 .pull-left[
-```{r, fig.height = 4.5, fig.width = 5.5}
-ggplot(data = iris) +
-  geom_point(aes(x = Sepal.Length,
-                 y = Sepal.Width,
-                 shape = Species)) +
+```{r, fig.height = 5}
+ggplot(data = penguins) +
+  geom_point(aes(x = bill_length_mm, 
+                 y = bill_depth_mm, 
+                 shape = species)) +
   labs(title = "Formes pour des groupes")
 ```
 ]
 
 .pull-right[
-```{r, fig.height = 4.5, fig.width = 5.5}
-ggplot(data = iris) +
-  geom_point(aes(x = Sepal.Length,
-                 y = Sepal.Width,
-                 size = Petal.Length,
-                 alpha = Petal.Length)) +
+```{r, fig.height = 5}
+ggplot(data = penguins) +
+  geom_point(aes(x = bill_length_mm, 
+                 y = bill_depth_mm, 
+                 size = body_mass_g,
+                 alpha = flipper_length_mm)) +
   labs(title = "Taille et transparence pour des variables continues")
 ```
 ]
 
+???
+Notez que le fait de définir simultanément de nombreuses variables pour les repères visuels tels que la couleur, la forme, la taille et l'alpha a tendance à être excessif pour le lecteur. L'ajout de quatre niveaux de complexité à la représentation en 2D des points peut être trop important pour être bien interprété. Il est préférable de choisir les indices visuels et les variables clés pour le message souhaité plutôt que de surcharger un graphique avec toutes les possibilités de la fonction aes().
 
 ---
 # Défi #2 ![:cube]()
@@ -970,8 +1091,10 @@ CO2 |*conc* |*uptake* | *Treatment* et *Type*
 ```{r, fig.height=3.5, fig.width=6}
 data(CO2)
 ggplot(data = CO2) +
-    geom_point(mapping = aes(x = conc, y = uptake,
-                             colour = Treatment, shape = Type))
+  geom_point(mapping = aes(x = conc, 
+                           y = uptake,
+                           colour = Treatment, 
+                           shape = Type))
 ```
 
 .comment[Pourquoi ne pas utiliser `size = Type`?]
@@ -990,8 +1113,10 @@ msleep |log10(*bodywt*) |*awake* | *vore* et *conservation*
 ```{r, fig.height=3.5, fig.width=6}
 data(msleep)
 ggplot(data = msleep) +
-    geom_point(mapping = aes(x = log10(bodywt), y = awake,
-                             colour = vore, shape = conservation))
+  geom_point(mapping = aes(x = log10(bodywt), 
+                           y = awake,
+                           colour = vore, 
+                           shape = conservation))
 ```
 
 ---
@@ -1007,7 +1132,9 @@ ToothGrowth | *dose* | *len* | *supp*
 
 ```{r, fig.height=3.5, fig.width=6}
 data(ToothGrowth)
-ggplot(ToothGrowth, aes(x = dose, y = len, color = supp)) +
+ggplot(ToothGrowth, aes(x = dose, 
+                        y = len, 
+                        color = supp)) +
   geom_point() +
   geom_smooth(method = lm, formula = 'y~x')
 ```
@@ -1019,29 +1146,30 @@ class: small-code
 .pull-left[
 ```{r,fig.height=4}
 ggplot(diamonds) +
-  geom_point(aes(x = carat, y = price)) +
-  labs(title = "Axe des x à l'échelle normale")
+  geom_point(aes(x = carat, 
+                 y = price)) +
+  labs(title = "Échelle originale")
 ```
 ]
 ]
 .pull-right[
 ```{r,fig.height=4}
 ggplot(diamonds) +
-  geom_point(aes(x = carat, y = price)) +
+  geom_point(aes(x = carat, 
+                 y = price)) +
   coord_trans(x = "log10",
               y = "log10") +
-  labs(title = "Axes x et y sur une échelle log10")
+  labs(title = "Échelle log10")
 ```
 ]
 
 <br>
-.footnote[Il est également possible de transformer le système de coordonnées en utilisant <br>
-`scale_x_log10()` et `scale_y_log10()`]
+.small[Il est également possible de transformer le système de coordonnées en utilisant `scale_x_log10()` et `scale_y_log10()`.]
 
 <!-- explain the difference -->
 
 ???
-note: _changed to coord_trans because that's what we indroduced earlier as a layer_
+Expliquer la différence et pourquoi la transformation peut être utile pour la visualisation. Par exemple, la masse corporelle est souvent transformée avec log10.
 
 ---
 class: inverse, center, middle
@@ -1049,6 +1177,17 @@ class: inverse, center, middle
 # Perfectionner vos graphiques
 
 # Utiliser le `theme()` pour faire bonne figure!
+
+---
+# `theme()`
+
+**Default: theme_grey()**
+```{r, fig.height = 5, fig.align='center'}
+# Theme grey
+pp + scale_colour_grey() +
+  theme_grey() +
+  labs(title = "Défaut: Thème gris")
+```
 
 ---
 # `theme()`
@@ -1072,7 +1211,9 @@ pp + scale_colour_grey() +
 
 .footnote[NB: De bons choix pour la publication !]
 
+???
 
+Cette présentation a utilisé theme_classic() pour les figures, puisque le fond gris rend certaines couleurs difficiles à voir. Ces thèmes sont des bonnes options pour publier des figures. 
 
 ---
 # `theme()`
@@ -1084,8 +1225,8 @@ ou `theme_update()` pour modifier certains aspects d'un thème.
 
 .pull-left[
 **Choisir le thème**
-```{r, fig.height = 5}
-# Choisir le thème classic par défaut
+```{r, fig.height = 5, fig.width = 6.5}
+# Choisir le thème par défaut
 theme_set(theme_bw())
 pp
 ```
@@ -1093,7 +1234,7 @@ pp
 
 .pull-right[
 **Mettre à jour le thème**
-```{r, fig.height = 5}
+```{r, fig.height = 4.5, fig.width = 6.5}
 # supprimer la grille mineure
 theme_update(panel.grid.minor = element_blank())
 pp
@@ -1103,7 +1244,9 @@ pp
 
 ```{r, include=FALSE}
 theme_set(theme_bw())
-theme_update(panel.grid.minor = element_blank())
+theme_update(panel.grid.minor = element_blank(),
+             axis.text = element_text(size = 16),
+             axis.title = element_text(size = 18))
 ```
 
 ---
@@ -1132,46 +1275,60 @@ class: inverse, center, middle
 # Utiliser `facet_grid()` pour changer la disposition des graphiques
 
 ---
-# iris: facettes par espèce
-```{r, fig.align="center", fig.width=10, fig.height=6}
-ggplot(data = iris) +
-  geom_point(mapping = aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
-  facet_grid(~ Species, scales = "free")
+# penguins dataset: facettes par espèce
+
+```{r, fig.align="center", fig.width=10, fig.height=5.5}
+ggplot(data = penguins) +
+  geom_point(mapping = aes(x = bill_length_mm, 
+                           y = bill_depth_mm, 
+                           colour = species)) +
+  facet_grid(~ species, scales = "free")
 ```
+
 
 ---
 # CO2: facettes par type
-```{r, fig.align="center", fig.width=10, fig.height=5.5}
+
+```{r, fig.align="center", fig.width=10, fig.height=5}
 ggplot(data = CO2) +
-  geom_point(mapping = aes(x = conc, y = uptake, colour = Treatment)) +
-  xlab("Concentration du CO2 (mL/L)") + ylab("Absorption du CO2 (umol/m^2 sec)") +
+  geom_point(mapping = aes(x = conc, 
+                           y = uptake, 
+                           colour = Treatment)) +
+  xlab("Concentration du CO2 (mL/L)") + 
+  ylab("Absorption du CO2 (umol/m^2 sec)") +
   facet_grid(~ Type)
 ```
 
 <!-- relabeling ticks -->
 
 ---
+exclude: true
+
 # Titre et axes: changer la taille, la couleur et l'apparence
 
 .center[![:scale 90%](images/theme_iris_annotated.png)]
 
+???
+This is redundant with the elements of a theme figure from slide 74, and now out of date due to the removal of iris.
 
 ---
 # Titre et axes: changer la taille, la couleur et l'apparence
 
 .pull-left[
 **Défaut**
+<br><br>
 ```{r, echo=FALSE, fig.align="center", fig.width=5.5, fig.height=5}
 pp
 ```
 ]
 .pull-right[
 **Ajustement des axes et du titre**
+<br><br>
 ```{r, echo=FALSE, fig.align="center", fig.width=5.5, fig.height=5}
 pp +
-  ggtitle("Relation entre longueur et largeur des sépales") +
-  xlab("Longueur des sépales (cm)") +
-  ylab("Largeur des sépales (cm)") +
+  ggtitle("Relation entre longueur \net profondeur des becs") +
+  xlab("Longueur des becs (mm)") +
+  ylab("Profondeur des sépales (mm)") +
   theme(axis.title.x = element_text(size = 16),
         axis.title.y = element_text(size = 16),
         axis.text.x = element_text(size = 12),
@@ -1254,14 +1411,14 @@ tips.gg
 #### `aes()`
 
 ```{r, fig.width = 7, fig.height=5}
-theme_set(theme_classic())
 tips.gg <- ggplot(tips) +
   geom_point(mapping = aes(x = total_bill, y = tip/total_bill,
-                      shape = smoker, colour = sex, size = size))
+                           shape = smoker, colour = sex, size = size)) +
+  theme_classic()
 tips.gg
 ```
 
-```{r, include=FALSE}
+```{r, include=FALSE, eval = FALSE}
 theme_set(theme_classic())
 ```
 
@@ -1345,20 +1502,23 @@ note: removed this slide. Not sure why it's here.
 ---
 # `ggplot2::ggplot()`
 
-```{r, fig.align="center"}
-ggplot(iris, aes(Sepal.Length))
+Sans `geom_*` pour représenter des variables, on a une figure vide:
+
+```{r, fig.align="center",fig.height=5}
+ggplot(penguins)
 ```
 
 
 ---
 # Histogrammes: `geom_histogram()`
 
-Un **histogramme** est une représentation graphique précise de la répartition des données numériques - une seule esthétique requise
+Un **histogramme** est une représentation graphique précise de la répartition des données numériques - une seule esthétique requise: la variable `x`.
 
-```{r, fig.align="center",fig.height=5.5}
-ggplot(iris, aes(Sepal.Length)) +
+```{r, fig.align="center", fig.height=5}
+ggplot(penguins, 
+       aes(x = bill_length_mm)) +
   geom_histogram() +
-  ggtitle("Histogramme de la longueur des longueurs")
+  ggtitle("Histogramme de la longeur des becs")
 ```
 
 
@@ -1384,22 +1544,27 @@ ggplot(mpg, aes(displ, hwy)) +
 ]
 ]
 ---
-# Diagramme en boîte: `geom_boxplot()`
+# Boxplot: `geom_boxplot()`
 
-```{r, fig.align="center"}
-ggplot(data = iris, aes(Species, Sepal.Length,
-                        fill = Species)) +
+```{r, fig.align="center", fig.height=5}
+ggplot(data = penguins, 
+       aes(x = species, 
+           y = bill_length_mm,
+           fill = species)) +
   geom_boxplot() +
-  labs(title = "Diagramme en boîte")
+  labs(title = "Boxplot")
 ```
 
 ---
 # Boxplot: `geom_boxplot()`
 
-```{r, echo=FALSE, fig.align="center", fig.width = 7, fig.height = 3.2}
-ggplot(data = iris, aes(Species, Sepal.Length, fill = Species)) +
+```{r, echo=FALSE, fig.align="center", fig.width = 5, fig.height = 3.2}
+ggplot(data = penguins, 
+       aes(x = species, 
+           y = bill_length_mm,
+           fill = species)) +
   geom_boxplot() +
-  labs(title = "Diagramme en boîte")
+  labs(title = "Boxplot")
 ```
 
 .center[
@@ -1409,13 +1574,37 @@ ggplot(data = iris, aes(Species, Sepal.Length, fill = Species)) +
 ---
 # Diagramme en boîte avec annotations: `geom_boxplot()` et `geom_signif()`
 
-```{r, fig.align="center",fig.height=5.5}
+.pull-left3[
+```{r, fig.align="center",fig.height=5.5, eval = FALSE}
 library(ggsignif)
-ggplot(data = iris, aes(Species, Sepal.Length)) +
+ggplot(data = penguins, 
+       aes(x = species, 
+           y= bill_length_mm,
+           fill = species)) +
   geom_boxplot() +
-  geom_signif(comparisons = list(c("versicolor", "virginica")),
-              map_signif_level = TRUE)
+  geom_signif(comparisons = 
+                list(c("Adelie", "Gentoo")),
+              map_signif_level=TRUE)
 ```
+]
+.pull-right3[
+```{r, fig.align="center",fig.height=5.5, echo = FALSE}
+library(ggsignif)
+ggplot(data = penguins, 
+       aes(x = species, 
+           y= bill_length_mm,
+           fill = species)) +
+  geom_boxplot() +
+  # spécifie la comparaison qu'on veut faire
+  geom_signif(comparisons = 
+                list(c("Adelie", "Gentoo")),
+              map_signif_level=TRUE)
+```
+]
+
+???
+
+geom_signif calcule la significativité de la différence entre groupes et note le résultat sur la figure.
 
 ---
 # Graphique en violon: `geom_violin()`
@@ -1447,9 +1636,10 @@ ggplot(data = data, aes(names, value, fill = names)) + geom_violin()
 # Graphique en violon: `geom_violin()`
 
 ```{r, fig.align="center"}
-violin <- ggplot(data = iris, aes(x = Species, y = Sepal.Length)) +
+violin <- ggplot(data = penguins, 
+                 aes(x = species, y = bill_length_mm)) +
   geom_violin(trim = FALSE, fill = "grey70", alpha = .5) +
-  labs(title = "Graphique en forme de violon")
+  labs(title = "Violin plot")
 violin
 ```
 
@@ -1463,7 +1653,8 @@ violin +
 ```
 
 ???
-note: _added this plot to show how multiple geoms can be used together_
+
+Plusieurs geoms peuvent être utilisés en même temps! L'ordre des geoms dans le code détermine comment ils se superposent.
 
 ---
 # Résumer des valeurs: `stat_summary()`
@@ -1519,17 +1710,19 @@ ggplot(crimes, aes(map_id = state)) +
 .small[Un graphique de densité montre la distribution d'une variable numérique et il ne prend qu'un ensemble de valeurs numériques comme entrée.]
 .pull-left[
 ```{r, echo=TRUE, fig.width=5, fig.height=4.4}
-iris.dens <- ggplot(iris, aes(Sepal.Length)) +
-  geom_density()
-iris.dens
+(peng.dens <- 
+   ggplot(penguins, 
+          aes(x = bill_length_mm)) +
+   geom_density())
 ```
 ]
 
 .pull-right[
 ```{r, echo=TRUE, fig.width=5, fig.height=4.4}
-cars.dens <- ggplot(cars, aes(dist)) +
-  geom_density()
-cars.dens
+(cars.dens <- 
+   ggplot(cars, 
+          aes(x = dist)) +
+   geom_density())
 ```
 ]
 
@@ -1553,7 +1746,7 @@ ggdendrogram(hc, rotate = TRUE, theme_dendro = FALSE)
 ```{r, fig.width=9, fig.height=5}
 # install.packages("patchwork")
 library(patchwork)
-iris.dens + cars.dens +
+peng.dens + cars.dens +
   plot_annotation(tag_levels = 'a')
 ```
 
@@ -1576,8 +1769,10 @@ Utilisez les liens suivants pour obtenir des conseils :
 .small[
 ```{r, fig.align='center',fig.height=4}
 data(msleep)
-msleep.defi4 <- ggplot(msleep, aes(vore, log10(brainwt), fill = vore))
-msleep.defi4 + geom_violin() +
+msleep.defi4 <- ggplot(data = msleep, 
+                       aes(x = vore, y = log10(brainwt), fill = vore))
+msleep.defi4 + 
+  geom_violin() +
   geom_signif(comparisons = list(c("herbi", "insecti"))) +
   labs(main = "Poids du cerveau pour les différents -vores", y = "log10(Poids du cerveau (Kg))") +
   scale_fill_grey() +
@@ -1607,16 +1802,19 @@ dendro.defi4 + ggtitle("Dendrogramme des voitures selon les spécifications du m
 .small[
 .alert[**Sélectionnez les données sur les espèces à afficher directement dans la légende**]
 
-```{r, echo = TRUE, fig.width=8, fig.height=5}
-library(plotly)
-p <- ggplot(iris,
-            aes(x = Sepal.Length, y = Sepal.Width, colour = Species, shape = Species)) +
-  geom_point(size = 6, alpha = 0.6)
-
-ggplotly(p)
+```{r, echo = TRUE, fig.width=10, fig.height=4.5}
+p <- ggplot(penguins,
+           aes(x = bill_length_mm, y = bill_depth_mm, 
+               colour = species, shape = species)) +
+    geom_point(size=6, alpha=0.6)
+# convertir en objet plotly
+plotly::ggplotly(p)
 ```
 ]
 
+???
+
+On peut cliquer sur les espèces dans la légende pour ajouter/supprimer des espèces. On peut également voir les valeurs en passant la souris sur les points.
 ---
 class: inverse, center, middle
 
@@ -1639,7 +1837,9 @@ class: inverse, center, middle
 `ggsave()` écrit directement dans votre répertoire de travail et vous permet de spécifier le nom du fichier, les dimensions du graphique, la résolution, etc.
 
 ```{r, eval=FALSE}
-mon_1er_graph <- ggplot(iris, aes(Petal.Length, Petal.Width)) +
+mon_1er_graph <- ggplot(penguins, 
+         aes(x = bill_length_mm, 
+             y = bill_depth_mm)) +
   geom_point()
 
 ggsave("mon_1er_graph.pdf",
