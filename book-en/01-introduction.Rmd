@@ -6,6 +6,8 @@ Whether you are calculating summary statistics (e.g. Excel), performing more adv
 
 `Ggplot2` is the most flexible and complete package available for advanced data visualization in `R`. This package was created for R by Hadley Wickham based on the Grammar of Graphics by Leland Wilkinson. The source code is hosted on github: https://github.com/hadley/ggplot2.
 
+![](images/ggplot2_logo.png){width="200"}
+
 Today we will walk you through the basics of ggplot2 so that you have the necessary tools to explore its use for your own projects. Here is an outline of the workshop:
 
 **1.** Visualization in science
