@@ -88,15 +88,16 @@ install.packages(c('grid',
 To load these packages, run:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
-library(lme4)
-library(AICcmodavg)
-library(MASS)
-library(vcdExtra)
-library(bbmle)
-library(MuMIn)
-library(ggplot2)
-library(DescTools)
-library(remotes)
+library(grid)
 library(gridExtra)
-library(lattice)
+library(ggplot2)
+library(ggsignif)
+library(ggdendro)
+library(maps)
+library(mapproj)
+library(RColorBrewer)
+library(GGally)
+library(patchwork)
+library(plotly)
+library(palmerpenguins)
 ```
