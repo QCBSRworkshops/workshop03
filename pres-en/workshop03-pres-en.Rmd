@@ -423,7 +423,7 @@ GG layers:
 note: _descriptions of other layerss_
 
 ---
-# How layer in ggplot works
+# How layers in `ggplot2` works
 
 1. Create a simple plot object:
   * `plot.object <- ggplot()`
@@ -796,9 +796,7 @@ ggplot(penguins,
 ```
 ]
 
-.right[
 .footnote[See [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/colour-basics.html)]
-]
 
 ---
 # Using `aes()` use to change colour
@@ -944,8 +942,8 @@ pp2 +
 ---
 # Use colourblind-friendly palettes
 
-How your figure might appear under various forms of colourblindness?
-We can use [colorblindr](https://github.com/clauswilke/colorblindr) that is not currently on CRAN, so we install it with the packages [remotes](https://cran.r-project.org/web/packages/remotes/index.html).
+Have you ever considered how your figure might appear under various forms of colourblindness?
+We can use the package [colorblindr](https://github.com/clauswilke/colorblindr) to consider this. This package is not currently on CRAN, so we install it with the packages [remotes](https://cran.r-project.org/web/packages/remotes/index.html).
 
 ```{R colorblindr_install, message = FALSE}
 remotes::install_github("clauswilke/colorblindr", quiet = TRUE)
