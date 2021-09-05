@@ -13,6 +13,7 @@ output:
       beforeInit: "qcbsR-macros.js"
       highlightLines: true
 ---
+
 class: inverse, center, middle
 
 ```{r setup, echo = FALSE}
@@ -78,21 +79,16 @@ theme_set(theme_classic())
 
 <br>
 
-```r
+```{r}
 install.packages(c('grid', 'gridExtra', 'ggplot2', 'ggsignif', 'ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'GGally', 'patchwork', 'plotly', 'palmerpenguins'))
 ```
-
----
-# Leaning objectives
-
-##### 1. Use R to create various plots
 
 ---
 class: inverse, center, middle
 
 # Introduction
 
---
+---
 # Introduction
 
 ##### To follow along:
@@ -111,25 +107,25 @@ Code and .HTML available at http://qcbs.ca/wiki/r/workshop3
 ---
 # Outline
 
-###### 1. `ggplot2` mechanics
+###### 1. Visualization in science
+
+###### 2. `ggplot2` mechanics
 
 .center[
 ![:scale 80%](images/Layers_ggplot.png)
 ]
 
 
-###### 2. Advanced visualization
+###### 3. Advanced visualization
 
-###### 3. Fine-tuning
+###### 4. Fine-tuning
 
-###### 4. Saving plots
+###### 5. Saving plots
 
-###### 5. Conclusion
+###### 6. Conclusion
 
 ---
 # Learning objectives
-
-<br>
 
 - Teach the basics of data visualization using R.
 - Find packages and resources to meet your needs.
@@ -143,7 +139,6 @@ class: inverse, center, middle
 
 ---
 # Visualization in science
-<br>
 
 #### Why are we using data visualization?
 
@@ -174,7 +169,8 @@ note: _changed points here as answers from previous slide question_
 # Visualization in science
 <br>
 
-Important questions:
+#### Important questions:
+
 - What do you want to communicate?
 - Who is your audience?
 - What is the best way to do it?
