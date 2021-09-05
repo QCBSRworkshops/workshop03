@@ -239,7 +239,7 @@ ggplot(data = penguins,
 
 **Note**: aesthetics can either be in the `ggplot()` line, and will be inherited by every geom, or in the `geom_()` line to apply to that geom only! Here is an example: 
 
-```{r, challenge-1-solution}
+```{r, challenge-1-solution2}
 ggplot(data = penguins,
        aes(x = bill_length_mm,
            y = flipper_length_mm)) +
