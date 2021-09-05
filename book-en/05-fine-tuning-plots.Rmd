@@ -1,13 +1,10 @@
 # (PART\*) Fine-tuning your plots {-}
 
-
-
-# Fine-tuning your plots
-
 # Using `theme()` to make it look good!
 
----
-# `theme()`
+## Introduction to themes
+
+This presentation has been using theme_classic() for the plots, because the grey background can make certain colours harder to see. These are good options for publishing figures.
 
 **Default: theme_grey()**
 ```{r, fig.height = 5, fig.align='center'}
@@ -17,8 +14,6 @@ pp + scale_colour_grey() +
   labs(title = "Default: Grey")
 ```
 
----
-# `theme()`
 
 .pull-left[
 **Theme Classic**
@@ -38,18 +33,8 @@ pp + scale_colour_grey() +
 ```
 ]
 
-.footnote[NB: Good choices for publication purposes!]
 
-???
-
-This presentation has been using theme_classic() for the plots, because the grey background can make certain colours harder to see. These are good options for publishing figures.
-
----
-# `theme()`
-
-Use `theme_set()` to change theme for all your future plots, 
-or `theme_update()` to edit aspects of a theme setting. 
-
+Use `theme_set()` to change theme for all your future plots, or `theme_update()` to edit aspects of a theme setting. 
 
 
 .pull-left[
@@ -79,34 +64,14 @@ theme_update(panel.grid.minor = element_blank(),
              axis.title = element_text(size = 18))
 ```
 
----
-exclude: true
-# ggThemeAssist: RStudio-addin
 
-![!scale: 50%](https://raw.githubusercontent.com/calligross/ggthemeassist/master/examples/ggThemeAssist2.gif)
-
-???
-
-note: _removed this slide to add theme image instead_
-
-
----
-# `theme()`
-
-Elements of a theme
+## Elements of a theme
 
 ![:scale 90%](images/ggthemes.png)
 
+## Using `facet_grid()` to change the arrangement of plots
 
----
-class: inverse, center, middle
-
-# Fine-tuning your plots
-
-# Using `facet_grid()` to change the arrangement of plots
-
----
-# penguins dataset: per-species facets
+penguins dataset: per-species facets
 ```{r, fig.align="center", fig.width=10, fig.height=5.5}
 ggplot(data = penguins) +
   geom_point(mapping = aes(x = bill_length_mm, 
@@ -115,8 +80,8 @@ ggplot(data = penguins) +
   facet_grid(~ species, scales = "free")
 ```
 
----
-# CO2 dataset: per-type facets
+
+CO2 dataset: per-type facets
 ```{r, fig.align="center", fig.width=9, fig.height=5}
 ggplot(data = CO2) +
   geom_point(mapping = aes(x = conc, 
@@ -127,20 +92,8 @@ ggplot(data = CO2) +
   facet_grid(~ Type)
 ```
 
-<!-- relabeling ticks -->
 
----
-exclude: true
-
-# Title and axes components: changing size, colour and face
-
-.center[![:scale 90%](images/theme_iris_annotated.png)]
-
-???
-This is redundant with the elements of a theme figure from slide 74, and now out of date due to the removal of iris.
-
----
-# Title and axes components: size, colour and face
+## Title and axes components: size, colour and face
 
 .pull-left[
 **Default**
@@ -170,8 +123,7 @@ pp +
 
 ]
 
----
-# Challenge #3 ![:cube]()
+## Challenge #3
 
 Use the `tips` dataset found in `reshape2` &#x1F4E6; to reproduce the plot below.
 
@@ -201,15 +153,8 @@ tips.gg
 ```
 
 ---
-# Challenge #3 ![:cube]()
 
-#### .alert[Breakout rooms! - 15 min]
-
-???
-note: _give teams time to work together to recreate this plot. Refer to theme elements slide_
-
----
-# Challenge #3: Solution![:cube]()
+**Challenge #3: Solution**
 
 ```{r, eval=FALSE}
 library(reshape2)
@@ -234,10 +179,9 @@ tips.gg <- ggplot(tips, aes(x = total_bill,
 tips.gg
 ```
 
----
-# Challenge #3: step-by-step solution
+Step-by-step solution
 
-#### `aes()`
+`aes()`
 
 ```{r, fig.width = 6, fig.height=4}
 tips.gg <- ggplot(tips) +
@@ -254,10 +198,8 @@ tips.gg
 theme_set(theme_classic())
 ```
 
----
-# Challenge #3: step-by-step solution
 
-#### `facet_grid()`
+ `facet_grid()`
 
 ```{r, fig.width=7, fig.height=5}
 tips.gg <- tips.gg +
@@ -266,10 +208,7 @@ tips.gg
 ```
 
 
----
-# Challenge #3: step-by-step solution
-
-#### Grey-scale palette
+Grey-scale palette
 
 ```{r, fig.width=7,fig.height=5}
 tips.gg <- tips.gg +
@@ -277,10 +216,8 @@ tips.gg <- tips.gg +
 tips.gg
 ```
 
----
-# Challenge #3: step-by-step solution
 
-#### Adding plot title and labels
+Adding plot title and labels
 
 ```{r, fig.width=7,fig.height=5}
 tips.gg <- tips.gg +
@@ -289,10 +226,8 @@ tips.gg <- tips.gg +
 tips.gg
 ```
 
----
-# Challenge #3: step-by-step solution
 
-#### Adding a theme and fine tuning it
+Adding a theme and fine tuning it
 
 .small[
 ```{r, fig.width=6, fig.height=4}
@@ -306,33 +241,17 @@ tips.gg
 ```
 ]
 
----
-class: inverse, center, middle
-
-# Fine-tuning your plots
 
 # Using `geom_*()` to create different plots
 
----
-# `ggplot2::geom_*()`
+## `ggplot2::geom_*()`
+
+note: Multiple geoms can be used together! The order determines how they overlap.
 
 .center[
 ![:scale 85%](images/plots_in_various_contexts.png)
 ]
 
----
-exclude: true
-# `base::plot()`
-
-.center[
-![:scale 85%](images/plots_in_various_contexts_baseplot.png)
-]
-
-???
-note: removed this slide. Not sure why it's here. 
-
----
-# `ggplot2::ggplot()`
 
 ```{r, include=FALSE}
 theme_set(theme_bw())
@@ -341,15 +260,13 @@ theme_update(panel.grid.minor = element_blank(),
              axis.title = element_text(size = 18))
 ```
 
-
 This is a blank plot, before we add any `geom_*` to represent variables in the dataset.
 
 ```{r, fig.align="center",fig.height=5}
 ggplot(penguins)
 ```
 
----
-# Histograms: `geom_histogram()`
+## Histograms: `geom_histogram()`
 
 A **histogram** is an accurate graphical representation of the distribution of numeric data. There is only one aesthetic required: the `x` variable.
 
@@ -360,8 +277,8 @@ ggplot(penguins,
   ggtitle("Histogram of penguin bill length ")
 ```
 
----
-# Scatterplot and linear-fit: `geom_point()` and `geom_smooth()`
+## Scatterplot and linear-fit: `geom_point()` and `geom_smooth()`
+
 .small[
 .pull-left[
 ```{r, fig.height=5}
@@ -380,8 +297,7 @@ ggplot(mpg, aes(displ, hwy)) +
 ```
 ]
 ]
----
-# Boxplot: `geom_boxplot()`
+## Boxplot: `geom_boxplot()`
 
 ```{r, fig.align="center", fig.height=5}
 ggplot(data = penguins, 
@@ -392,8 +308,6 @@ ggplot(data = penguins,
   labs(title = "Boxplot")
 ```
 
----
-# Boxplot: `geom_boxplot()`
 
 ```{r, echo=FALSE, fig.align="center", fig.width = 5, fig.height = 3.2}
 ggplot(data = penguins, 
@@ -408,8 +322,9 @@ ggplot(data = penguins,
 ![:scale 75%](images/boxplot_explain.png)
 ]
 
----
-## Boxplot with annotations: `geom_boxplot()` and `geom_signif()`
+Boxplot with annotations: `geom_boxplot()` and `geom_signif()`
+
+geom_signif calculates the significance of a difference between groups and adds the annotation to the plot in a single line.
 
 .pull-left3[
 ```{r, fig.align="center",fig.height=5.5, eval = FALSE}
@@ -439,12 +354,8 @@ ggplot(data = penguins,
 ```
 ]
 
-???
 
-geom_signif calculates the significance of a difference between groups and adds the annotation to the plot in a single line.
-
----
-# Violin plot: `geom_violin()`
+## Violin plot: `geom_violin()`
 
 As explained on https://www.data-to-viz.com/graph/violin.html
 
@@ -469,9 +380,6 @@ ggplot(data = data, aes(names, value, fill=names)) + geom_violin()
 ```
 ]
 
----
-# Violin plot: `geom_violin()`
-
 ```{r, fig.align="center"}
 violin <- ggplot(data = penguins, 
                  aes(x = species, y = bill_length_mm)) +
@@ -480,8 +388,7 @@ violin <- ggplot(data = penguins,
 violin
 ```
 
----
-# Violin plot: `geom_violin()` + `_boxplot()` + `_jitter()`
+Violin plot: `geom_violin()` + `_boxplot()` + `_jitter()`
 
 ```{r, fig.align="center"}
 violin + 
@@ -490,10 +397,7 @@ violin +
   geom_boxplot(width = .05)
 ```
 
-???
-note: Multiple geoms can be used together! The order determines how they overlap.
----
-# Summarise y values: `stat_summary()`
+## Summarise y values: `stat_summary()`
 
 .pull-left[
 ```{r, fig.height=5, fig.width=4}
@@ -520,17 +424,11 @@ ggplot(mtcars,
 ```
 ]
 
----
-# Summarise values
-
 See also `geom_errorbar()`, `geom_pointrange()`, `geom_linerange()`, `geom_crossbar()` for geoms to display summarised data.
 
 
+## Representing maps: `geom_map()`
 
-
-
----
-# Representing maps: `geom_map()`
 .small[
 ```{r}
 crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
@@ -545,8 +443,6 @@ ggplot(crimes, aes(map_id = state)) +
   coord_map()
 ```
 ]
----
-
 
 ## Density plots: `geom_density()`
 
@@ -568,8 +464,7 @@ ggplot(crimes, aes(map_id = state)) +
 ```
 ]
 
----
-# Dendogram: `ggdendrogram()`
+## Dendogram: `ggdendrogram()`
 
 ```{r}
 library(ggdendro)
@@ -580,8 +475,7 @@ ggdendrogram(hc, rotate = TRUE, theme_dendro = FALSE)
 ```
 
 
----
-# Arrange plots: `patchwork`
+## Arrange plots: `patchwork`
 
 **Add multiple graphs on the same plot**
 
@@ -591,8 +485,7 @@ peng.dens + cars.dens +
   plot_annotation(tag_levels = 'a')
 ```
 
----
-# Final Challenge![:cube]()
+## Final Challenge
 
 Create your own graph and follow these recommendations:
   * Dataset: any (recommended: use your dataset)
@@ -603,7 +496,9 @@ https://ggplot2.tidyverse.org/reference/index.html
 http://shinyapps.stat.ubc.ca/r-graph-catalog/
 
 ---
-# Final Challenge: Solution example #1
+
+**Final Challenge: Solution**
+
 .small[
 ```{r, fig.align='center',fig.height=4}
 data(msleep)
@@ -618,8 +513,9 @@ msleep.challenge4 +
   theme_classic()
 ```
 ]
----
-# Final Challenge: Solution example #2
+
+Solution example #2
+
 .small[
 ```{r, fig.align='center', fig.width=5, fig.height=4}
 data(mtcars)
@@ -636,10 +532,12 @@ dendro.challenge4 +
 ```
 ]
 
----
 ## Miscellaneous: interactive plots using `plotly()`
+
 .small[
 .alert[**Select the species data to display directly from the legend**]
+
+You can click on the species in the legend to add/remove species. You can also see values while hovering over points.
 
 ```{r, echo = TRUE, fig.width=10, fig.height=5}
 p <- ggplot(penguins,
@@ -651,7 +549,6 @@ plotly::ggplotly(p)
 ```
 ]
 
-???
 
-You can click on the species in the legend to add/remove species. You can also see values while hovering over points.
+
 
