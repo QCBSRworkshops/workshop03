@@ -1,3 +1,250 @@
+# (PART\*) `ggplot2` mechanics: the basics {-}
 
-`ggplot2` mechanics: the basics
+# Grammar of Graphics (GG) basics
 
+## What is the Grammar of Graphics?
+
+Let's start with the basics! The package `ggplot2` is based on the Grammar of Graphics (GG), a layered framework for data visualization. In this framework a graphic is made of different layers. Using the GG system, we can build graphs step-by-step for customizable results. 
+
+.center[
+![:scale 90%](images/Layers_ggplot.png)
+]
+
+GG layers have specific names that you will see throughout the workshop:
+
+![:scale 70%](images/gglayers.png)
+
+.small[image adapted from [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447)]
+
+
+Here are the basic requirements to draw the simplest `ggplot`:
+
+.center[
+![:scale 80%](images/ggplot_basics.png)
+]
+
+## GG layer breakdown
+
+Here is a breakdown of each GG layer and common arguments for each that can be used as a reference:
+
+- **Data**
+    - your data, in tidy format, will provide ingredients for your plot
+    - use `dplyr` techniques to prep data for optimal plotting format
+    - usually, one row for every observation that you want to plot
+- **Aesthetics** (aes), to make data visible
+    - `x`, `y`: variable along the x and y axis
+    - `colour`: color of geoms according to data
+    - `fill`: the inside color of the geom
+    - `group`: what group a geom belongs to
+    - `shape`: the figure used to plot a point
+    - `linetype`: the type of line used (solid, dashed, etc)
+    - `size`: size scaling for an extra dimension
+    - `alpha`: the transparency of the geom
+- **Geometric objects** (geoms - determines the type of plot)
+    * `geom_point()`: scatterplot
+    * `geom_line()`: lines connecting points by increasing value of x
+    * `geom_path()`: lines connecting points in sequence of appearance
+    * `geom_boxplot()`: box and whiskers plot for categorical variables
+    * `geom_bar()`: bar charts for categorical x axis
+    * `geom_histogram()`: histogram for continuous x axis
+    * `geom_violin()`: distribution kernel of data dispersion 
+    * `geom_smooth()`: function line based on data
+- **Facets**
+    * `facet_wrap()` or `facet_grid()` for small multiples
+- **Statistics**
+    * similar to geoms, but computed
+    * show means, counts, and other statistical summaries of data
+- **Coordinates** - fitting data onto a page
+    * `coord_cartesian` to set limits
+    * `coord_polar` for circular plots
+    * `coord_map` for different map projections
+- **Themes**
+    * overall visual defaults
+    * fonts, colors, shapes, outlines
+    
+# How layers in `ggplot` works
+
+Let's try it out! Here are the basic steps to building a plot:
+
+1. Create a simple plot object:
+  * `plot.object <- ggplot()`
+
+2. Add geometric layers:
+  * `plot.object <- plot.object + geom_*()`
+  
+3. Add appearance layers:
+  * `plot.object <- plot.object + coord_*() + theme()`
+
+3. Repeat step 2-3 until satisfied, then print:
+  * `plot.object` or `print(plot.object)
+
+# Plotting basics with data
+
+## Prepare data for `ggplot2`
+
+Now let's actually try plotting some data! This workshop will be using the dataset from the `palmerpenguins` package.
+
+![:scale 80%](images/palmerpenguins.png)
+
+This dataset contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica. These data were collected from 2007 - 2009 by Dr. Kristen Gorman with the Palmer Station Long Term Ecological Research Program, part of the US Long Term Ecological Research Network.
+
+
+![:scale 60%](images/penguins.png)
+[.xsmall[Artwork by [@allison_horst](https://twitter.com/allison_horst).]]
+
+
+Let's take a look at the variables in the penguins dataset:
+
+```{r}
+str(penguins) # let's have a look at some penguin data!
+```
+
+![:scale 50%](images/culmen_depth.png)
+
+Note that species, island, and sex are factor variables, which will be important for grouping the data with colour, shapes, etc. in ggplot2. There are then 2 numeric variables (bill measurements depicted in the image), and two integer variables (flipper length and body mass). The data also has a small temporal component, spanning from 2007 to 2009.
+
+`ggplot2` requires you to prepare the data as an object of class `data.frame` or `tibble` (common in the `tidyverse`).
+
+```{r eval=TRUE, echo=TRUE}
+class(penguins) # check the class of the data to ensure it is either a data.frame or tibble for ggplot2
+
+peng <- as_tibble(penguins) # you can transform a dataset into a tibble using the as_tibble() function if need be
+class(peng)
+```
+
+**&#x267B; Recall from the [*Loading and manipulating data*](https://qcbsrworkshops.github.io/workshop02/book-en/) workshop:**
+
+More complex plots in `ggplot2` require the long data frame format.
+
+## Asking questions
+
+What are some of the scientific questions we may want to answer with this data-set? Here are some examples:
+
+- Is there a relationship between the **length** & the **depth** of bills?
+- Does the size of the **bill & flipper** vary together ?
+- How are these measures distributed among the **3 penguin species** ?
+
+![:scale 50%](images/culmen_depth.png)
+
+How can we graphically address these questions with `ggplot2`?
+
+## Exploring data structure
+
+If we want a general overview of our data, we can start by using the ggpairs() function from the `GGally` package (loaded and installed in the beginning of the workshop). This will allow us to look at initial relationships and then explore them in more detail.
+
+```{r, fig.width = 10.25, fig.height = 6.5}
+# Let's explore our data
+ggpairs(penguins, aes(colour = species)) + theme_bw() # Get a general overview of the data with multiple plot types
+```
+
+We can already see some species groupings between bill length and bill depth, flipper length, and body mass. When plotting, it will be important to keep in mind that differentiating species might be important.
+
+Let's explore how some of this data is structured by species!
+
+By differentiating species, we can see that there is a pretty consistent relationship between bill length and depth across species (similar slopes), but that the ranges of these variables is different (the groupings are clearly shown by the colours). Adelie penguins tend to have smaller bill length but fairly large bill depth, while the inverse is true for Gentoo penguins.
+
+
+```{r, echo = TRUE, fig.height=7, fig.width=9}
+# Let's explore how some of this data is structured by species
+ggplot(data = penguins,               # Data
+       aes(x = bill_length_mm,        # Your X-value
+           y = bill_depth_mm,         # Your Y-value
+           col = species)) +          # Aesthetics
+  geom_point(size = 5, alpha = 0.8) + # Point
+  geom_smooth(method = "lm") +        # Linear regression
+  labs(title = "Relationship between bill length and depth\nfor different penguin species", # Title
+       x = "Bill length (mm)", # X-axis title
+       y = "Bill depth (mm)", # Y-axis title
+       col = "Species") +  # Colour data point by species (also creates legend)
+  theme_classic() + # Apply a clean theme
+  theme(title = element_text(size = 18, face = "bold"),
+      text = element_text(size = 16))
+```
+
+.small[&#x267B; See [*Loading and manipulating data workshop*](https://qcbsrworkshops.github.io/workshop02/pres-en/workshop02-pres-en.html#1) to learn how to clean your dataset.]
+
+
+## Working through the layers 
+
+Recall: a graphic is made of different layers. Let's work through each layer to see how they can be combined.
+
+![:scale 75%](images/gglayers.png)
+
+**Data layer**
+
+```{r, echo = FALSE, results=0}
+theme_update(axis.text = element_text(size = 16),
+             axis.title = element_text(size = 18))
+```
+
+```{r, fig.height=5, fig.width=6}
+ggplot(data = penguins) # Without any other information, your data will not form a plot
+```
+
+*Note: theme_classic() was applied to all plots in the presentation to help with clarity using theme_set at the beginning of this slide deck. Therefore, these plots do not have the ggplot2 default grey background. There is a section about themes later in the presentation - but we wanted to mention this here in case participants see a different background when they run the code chunks on their own computers.*
+
+**Aesthetics layer**
+
+`ggplot2` code is easier to read if each line represents a new element. This style is generally favored for `ggplot2` code in the R community. This means that as you add each layer, you should start a new line.
+
+```{r, fig.height=5, fig.width=6}
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, y = bill_depth_mm)) # This layer adds axis titles
+```
+
+**Geometric layer**
+
+```{r, fig.height=5, fig.width=6}
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, y = bill_depth_mm)) + # Use the plus sign to add each additional layer
+  geom_point() # The geom layer determines what style of plot we are using, this is a scatter plot
+```
+
+**Extras- facet, stats, coordination layers**
+
+```{r,fig.height=5, fig.width=6}
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point() + 
+  facet_wrap(~species) + # This tells gpplot() to group by species into three separate 
+  coord_trans(x = "log10", y = "log10")
+```
+
+## Challenge #1
+
+Now it's time to try it on your own. Make your own plot in order to answer the following questions:
+
+**1.** Is there a relationship between **bill length** & **flipper length**?
+
+**2.** Does *bill length* increase with flipper *length*?
+
+Here are some parameters to consider when addressing this question:
+
+ data | geom | x value | y value
+:-------------:|:-------------:|:-------------:|:-------------:
+penguins|geom_point|bill_length_mm|flipper_length_mm
+
+---
+
+**Challenge 1#: Solution**
+
+In order to answer the first question '*Is there a relationship between bill length & flipper length?* Let's create a scatter plot with bill length on the x-axis and flipper length on the y-axis.
+
+```{r, challenge-1-solution}
+ggplot(data = penguins, 
+       aes(x = bill_length_mm,
+           y = flipper_length_mm)) +
+  geom_point()
+```
+
+**Note**: aesthetics can either be in the `ggplot()` line, and will be inherited by every geom, or in the `geom_()` line to apply to that geom only! Here is an example: 
+
+```{r, challenge-1-solution}
+ggplot(data = penguins,
+       aes(x = bill_length_mm,
+           y = flipper_length_mm)) +
+  geom_point(shape = 2, color = "blue") # If we want, We can change the colour and shape of the data points using aesthetics arguments within the geom later
+```
+
+
+**Note 2**: colour, alpha, shape, and size commands can be set outside of `aes()` values, and will be static, not data-dependent. 

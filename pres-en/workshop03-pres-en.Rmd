@@ -155,7 +155,7 @@ What do you think about this one ![:faic](arrow-up)?
 <br>
 
 1. To represent results of statistical analyses
-2. To formulate hypotheses and understand summarize theory
+2. To formulate hypotheses and summarize theory
 3. To explore your own data (exploratory analysis, outlier detection)
 4. To communicate and report
   - Clearly (using good design principles)
@@ -229,7 +229,7 @@ source(file="./scripts/multiExamplePlot.R")
 # `ggplot2` is versatile
 
 1. [`ggplot2`](https://ggplot2.tidyverse.org/) package lets you make *beautiful* and customizable plots;
-2. it implements the grammar of graphics, an reliable system for building plots.
+2. it implements the grammar of graphics, a reliable system for building plots.
 3. it [has many extensions](https://exts.ggplot2.tidyverse.org/gallery/).
 
 
@@ -336,7 +336,7 @@ GG layers:
     - `size`: size scaling for an extra dimension
     - `alpha`: the transparency of the geom
 
-.alert[note: aesthetics are based on quantities in your data, but plots may have some of these qualities not based in data as well. (ie, colouring based on a data group is an aesthetic, but points will always have a colour even if not based on data.)]
+.alert[note: aesthetics are based on qualities in your data, but plots may have some of these qualities not based in data as well. (ie, colouring based on a data group is an aesthetic, but points will always have a colour even if not based on data).]
 ---
 # Grammar of Graphics (GG)
 

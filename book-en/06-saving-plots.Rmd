@@ -1,0 +1,95 @@
+# (PART\*) Saving your plots {-}
+
+---
+class: inverse, center, middle
+
+# Saving your plots with ggplot2
+
+---
+# Saving plots in RStudio
+
+<div style="text-align:center">
+<img src="images/save_image.png" height=60% width=60%>
+</div>
+.small[
+.alert[Think about the margin of the document you are using. If you resize the image after saving it, the labels and text will change size as well which could be hard to read.]
+]
+---
+# Saving plots in code
+
+`ggsave()` writes directly to your working directory and allows you to specify the name of the file, the dimensions of the plot, the resolution, etc.
+
+```{r, eval=FALSE}
+my1rstPlot <- 
+  ggplot(penguins, 
+         aes(x = bill_length_mm, 
+             y = bill_depth_mm)) +
+  geom_point()
+
+ggsave("my1stPlot.pdf",
+       my1rstPlot,
+       height = 8.5, width = 11, units = "in", res = 300)
+```
+
+NB: Vectors (e.g., pdf, svg) format are more flexible than raster format (jpeg,
+png, ...) if the image needs modification afterwards.
+
+---
+# Saving plots in code
+<br>
+
+Other methods to save image: see `?pdf` `?jpeg`
+
+```{r, eval=FALSE}
+pdf("./graph_du_jour.pdf")
+  print(my1rstPlot) # print function is necessary
+graphics.off()
+```
+
+
+---
+# Saving plots in code
+<br>
+
+**Tip:** `quartz()` (mac) or `window()` (pc) functions make sizing easier before `ggsave()`!
+
+???
+
+note: _this function allows to resize plot live, then use ggsave without specifying plot._
+```
+
+
+---
+class: inverse, center, middle
+
+# Going further
+
+
+---
+# Available elements
+
+
+[Data Visualization with ggplot2 Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+
+.center[![:scale 55%](images/available_geom.png)]
+
+https://www.rstudio.com/resources/cheatsheets
+
+---
+# Additional resources
+
+* `help(package = ggplot2)`
+* http://ggplot2.tidyverse.org/reference/
+* Fundamentals of Data Visualization https://serialmentor.com/dataviz/
+
+.center[![:scale 65%](images/ggplot_book.png)]
+
+---
+# Concluding remarks
+<br>
+
+  1. There are other useful packages that can be used with `ggplot2`! To name a few: `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` and `ggtree`. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) for other `ggplot2` extensions.
+
+
+  2. Note that you can learn more about design and image manipulation with the "Introduction to graphic design and image manipulation with open source tools": https://qcbs.ca/wiki/graphics
+

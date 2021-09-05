@@ -1,0 +1,657 @@
+# (PART\*) Fine-tuning your plots {-}
+
+
+
+# Fine-tuning your plots
+
+# Using `theme()` to make it look good!
+
+---
+# `theme()`
+
+**Default: theme_grey()**
+```{r, fig.height = 5, fig.align='center'}
+# Theme grey
+pp + scale_colour_grey() +
+  theme_grey() +
+  labs(title = "Default: Grey")
+```
+
+---
+# `theme()`
+
+.pull-left[
+**Theme Classic**
+```{r, fig.height = 5}
+pp + scale_colour_grey() +
+  theme_classic() +
+  labs(title = "Classic")
+```
+]
+
+.pull-right[
+**Theme Minimal**
+```{r, fig.height = 5}
+pp + scale_colour_grey() +
+  theme_minimal() +
+  labs(title = "Minimal")
+```
+]
+
+.footnote[NB: Good choices for publication purposes!]
+
+???
+
+This presentation has been using theme_classic() for the plots, because the grey background can make certain colours harder to see. These are good options for publishing figures.
+
+---
+# `theme()`
+
+Use `theme_set()` to change theme for all your future plots, 
+or `theme_update()` to edit aspects of a theme setting. 
+
+
+
+.pull-left[
+**Set theme**
+```{r, fig.height = 4.5}
+# Set black & white theme as default
+theme_set(theme_bw())
+pp
+```
+]
+
+.pull-right[
+**Update theme**
+```{r, fig.height = 4.5}
+# remove minor gridlines 
+theme_update(
+  panel.grid.minor = element_blank())
+pp
+```
+]
+
+
+```{r, include=FALSE}
+theme_set(theme_bw())
+theme_update(panel.grid.minor = element_blank(),
+             axis.text = element_text(size = 16),
+             axis.title = element_text(size = 18))
+```
+
+---
+exclude: true
+# ggThemeAssist: RStudio-addin
+
+![!scale: 50%](https://raw.githubusercontent.com/calligross/ggthemeassist/master/examples/ggThemeAssist2.gif)
+
+???
+
+note: _removed this slide to add theme image instead_
+
+
+---
+# `theme()`
+
+Elements of a theme
+
+![:scale 90%](images/ggthemes.png)
+
+
+---
+class: inverse, center, middle
+
+# Fine-tuning your plots
+
+# Using `facet_grid()` to change the arrangement of plots
+
+---
+# penguins dataset: per-species facets
+```{r, fig.align="center", fig.width=10, fig.height=5.5}
+ggplot(data = penguins) +
+  geom_point(mapping = aes(x = bill_length_mm, 
+                           y = bill_depth_mm, 
+                           colour = species)) +
+  facet_grid(~ species, scales = "free")
+```
+
+---
+# CO2 dataset: per-type facets
+```{r, fig.align="center", fig.width=9, fig.height=5}
+ggplot(data = CO2) +
+  geom_point(mapping = aes(x = conc, 
+                           y = uptake, 
+                           colour = Treatment)) +
+  xlab("CO2 Concentration (mL/L)") + 
+  ylab("CO2 Uptake (umol/m^2 sec)") +
+  facet_grid(~ Type)
+```
+
+<!-- relabeling ticks -->
+
+---
+exclude: true
+
+# Title and axes components: changing size, colour and face
+
+.center[![:scale 90%](images/theme_iris_annotated.png)]
+
+???
+This is redundant with the elements of a theme figure from slide 74, and now out of date due to the removal of iris.
+
+---
+# Title and axes components: size, colour and face
+
+.pull-left[
+**Default**
+<br><br>
+```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=7}
+pp
+```
+
+
+.pull-right[
+**Axes and title tuning**
+<br><br>
+```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=7,message=FALSE}
+pp +
+  labs(title = "Relationship between Bill Length & Depth",
+       x = "Bill Length (mm)",
+       y = "Bill Depth (mm)",
+       col = "Species") +
+  theme(axis.title.x = element_text(size = 16),
+        axis.title.y = element_text(size = 16),
+        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 12),
+        plot.title = element_text(size = 16, face="bold"),
+        legend.title = element_text(size=14, face="bold"),
+        legend.text = element_text(size=12))
+```
+
+]
+
+---
+# Challenge #3 ![:cube]()
+
+Use the `tips` dataset found in `reshape2` &#x1F4E6; to reproduce the plot below.
+
+Our tip: start from `theme_classic()` and add `theme()` to make your additional changes.
+
+```{r, echo=FALSE, fig.width=10, fig.height=5}
+library(reshape2)
+tips.gg <- ggplot(tips, aes(x = total_bill,
+                            y = tip/total_bill,
+                            shape = smoker,
+                            colour = sex,
+                            size = size)) +
+  geom_point() +
+  facet_grid( ~ time) +
+  scale_colour_grey() +
+  labs(title = "Relation between total bill and tips during lunch and dinner",
+       x = "Total bill ($)", y = "Ratio between tips and total bill") +
+  theme_classic() +
+  theme(axis.title = element_text(size = 16,
+                                  colour = "navy"),
+        axis.text = element_text(size = 12),
+        plot.title = element_text(size = 16,
+                                  colour = "orange3",
+                                  face = "bold"),
+        strip.text.x = element_text(size = 14, face="bold"))
+tips.gg
+```
+
+---
+# Challenge #3 ![:cube]()
+
+#### .alert[Breakout rooms! - 15 min]
+
+???
+note: _give teams time to work together to recreate this plot. Refer to theme elements slide_
+
+---
+# Challenge #3: Solution![:cube]()
+
+```{r, eval=FALSE}
+library(reshape2)
+tips.gg <- ggplot(tips, aes(x = total_bill,
+                            y = tip/total_bill,
+                            shape = smoker,
+                            colour = sex,
+                            size = size)) +
+  geom_point() +
+  facet_grid( ~ time) +
+  scale_colour_grey() +
+  labs(title = "Relation between total bill and tips during lunch and dinner",
+       x = "Total bill ($)", y = "Ratio between tips and total bill") +
+  theme_classic() +
+  theme(axis.title = element_text(size = 16,
+                                  colour = "navy"),
+        axis.text = element_text(size = 12),
+        plot.title = element_text(size = 16,
+                                  colour = "orange3",
+                                  face = "bold"),
+        strip.text.x = element_text(size = 14, face="bold"))
+tips.gg
+```
+
+---
+# Challenge #3: step-by-step solution
+
+#### `aes()`
+
+```{r, fig.width = 6, fig.height=4}
+tips.gg <- ggplot(tips) +
+  geom_point(mapping = aes(x = total_bill, 
+                           y = tip/total_bill,
+                           shape = smoker, 
+                           colour = sex, 
+                           size = size)) +
+  theme_classic()
+tips.gg
+```
+
+```{r, include=FALSE, eval = FALSE}
+theme_set(theme_classic())
+```
+
+---
+# Challenge #3: step-by-step solution
+
+#### `facet_grid()`
+
+```{r, fig.width=7, fig.height=5}
+tips.gg <- tips.gg +
+  facet_grid(~ time)
+tips.gg
+```
+
+
+---
+# Challenge #3: step-by-step solution
+
+#### Grey-scale palette
+
+```{r, fig.width=7,fig.height=5}
+tips.gg <- tips.gg +
+  scale_colour_grey()
+tips.gg
+```
+
+---
+# Challenge #3: step-by-step solution
+
+#### Adding plot title and labels
+
+```{r, fig.width=7,fig.height=5}
+tips.gg <- tips.gg +
+  labs(title = "Relation between total bill and tips during lunch and dinner",
+       x = "Total bill ($)", y = "Ratio between tips and total bill")
+tips.gg
+```
+
+---
+# Challenge #3: step-by-step solution
+
+#### Adding a theme and fine tuning it
+
+.small[
+```{r, fig.width=6, fig.height=4}
+tips.gg <- tips.gg +
+  theme_classic() +
+  theme(axis.title = element_text(size = 16, colour = "navy"),
+        axis.text = element_text(size = 12),
+        plot.title = element_text(size = 16, colour = "orange3", face = "bold"),
+        strip.text.x = element_text(size = 14, face = "bold"))
+tips.gg
+```
+]
+
+---
+class: inverse, center, middle
+
+# Fine-tuning your plots
+
+# Using `geom_*()` to create different plots
+
+---
+# `ggplot2::geom_*()`
+
+.center[
+![:scale 85%](images/plots_in_various_contexts.png)
+]
+
+---
+exclude: true
+# `base::plot()`
+
+.center[
+![:scale 85%](images/plots_in_various_contexts_baseplot.png)
+]
+
+???
+note: removed this slide. Not sure why it's here. 
+
+---
+# `ggplot2::ggplot()`
+
+```{r, include=FALSE}
+theme_set(theme_bw())
+theme_update(panel.grid.minor = element_blank(),
+             axis.text = element_text(size = 16),
+             axis.title = element_text(size = 18))
+```
+
+
+This is a blank plot, before we add any `geom_*` to represent variables in the dataset.
+
+```{r, fig.align="center",fig.height=5}
+ggplot(penguins)
+```
+
+---
+# Histograms: `geom_histogram()`
+
+A **histogram** is an accurate graphical representation of the distribution of numeric data. There is only one aesthetic required: the `x` variable.
+
+```{r, fig.align="center", fig.height=5}
+ggplot(penguins, 
+       aes(x = bill_length_mm)) +
+  geom_histogram() +
+  ggtitle("Histogram of penguin bill length ")
+```
+
+---
+# Scatterplot and linear-fit: `geom_point()` and `geom_smooth()`
+.small[
+.pull-left[
+```{r, fig.height=5}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  labs(title = "Scatterplot")
+```
+]
+
+.pull-right[
+```{r, fig.height=4.5}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  labs(title = "Linear Regression") +
+  geom_smooth(method = lm)
+```
+]
+]
+---
+# Boxplot: `geom_boxplot()`
+
+```{r, fig.align="center", fig.height=5}
+ggplot(data = penguins, 
+       aes(x = species, 
+           y = bill_length_mm,
+           fill = species)) +
+  geom_boxplot() +
+  labs(title = "Boxplot")
+```
+
+---
+# Boxplot: `geom_boxplot()`
+
+```{r, echo=FALSE, fig.align="center", fig.width = 5, fig.height = 3.2}
+ggplot(data = penguins, 
+       aes(x = species, 
+           y = bill_length_mm,
+           fill = species)) +
+  geom_boxplot() +
+  labs(title = "Boxplot")
+```
+
+.center[
+![:scale 75%](images/boxplot_explain.png)
+]
+
+---
+## Boxplot with annotations: `geom_boxplot()` and `geom_signif()`
+
+.pull-left3[
+```{r, fig.align="center",fig.height=5.5, eval = FALSE}
+library(ggsignif)
+ggplot(data = penguins, 
+       aes(x = species, 
+           y= bill_length_mm,
+           fill = species)) +
+  geom_boxplot() +
+  geom_signif(comparisons = 
+                list(c("Adelie", "Gentoo")),
+              map_signif_level=TRUE)
+```
+]
+.pull-right3[
+```{r, fig.align="center",fig.height=5.5, echo = FALSE}
+library(ggsignif)
+ggplot(data = penguins, 
+       aes(x = species, 
+           y= bill_length_mm,
+           fill = species)) +
+  geom_boxplot() +
+  # specify the comparison we are interested in
+  geom_signif(comparisons = 
+                list(c("Adelie", "Gentoo")),
+              map_signif_level=TRUE)
+```
+]
+
+???
+
+geom_signif calculates the significance of a difference between groups and adds the annotation to the plot in a single line.
+
+---
+# Violin plot: `geom_violin()`
+
+As explained on https://www.data-to-viz.com/graph/violin.html
+
+> Violin plot allows to visualize the distribution of a numeric variable for one or several groups. [...] It is really close to a boxplot, but allows a deeper understanding of the distribution.
+
+.pull-left[
+```{r, echo=FALSE, fig.height=4.5}
+# Data
+names <- c(rep("A", 80) , rep("B", 50) , rep("C", 70))
+value <- c(sample(2:5, 80 ,replace=TRUE), sample(4:10, 50 , replace=TRUE),
+       sample(1:7, 70 , replace=TRUE))
+data <- data.frame(names,value)
+
+#Graph
+qplot(x=names ,y=value ,data=data ,geom=c("boxplot","jitter") ,fill=names)
+```
+]
+.pull-right[
+```{r, echo=FALSE, fig.height=4.5}
+ggplot(data = data, aes(names, value, fill=names)) + geom_violin()
+
+```
+]
+
+---
+# Violin plot: `geom_violin()`
+
+```{r, fig.align="center"}
+violin <- ggplot(data = penguins, 
+                 aes(x = species, y = bill_length_mm)) +
+  geom_violin(trim = FALSE, fill = "grey70", alpha = .5) +
+  labs(title = "Violin plot")
+violin
+```
+
+---
+# Violin plot: `geom_violin()` + `_boxplot()` + `_jitter()`
+
+```{r, fig.align="center"}
+violin + 
+    geom_jitter(shape = 16, position = position_jitter(0.2),
+              alpha = .3)+
+  geom_boxplot(width = .05)
+```
+
+???
+note: Multiple geoms can be used together! The order determines how they overlap.
+---
+# Summarise y values: `stat_summary()`
+
+.pull-left[
+```{r, fig.height=5, fig.width=4}
+ggplot(mtcars, 
+       aes(cyl, mpg)) +
+  geom_point() +
+  stat_summary(fun.y = "median", 
+               geom = "point",
+               colour = "red",
+               size = 6) +
+  labs(title = "Means")
+```
+]
+
+.pull-right[
+```{r, fig.height=5, fig.width=4}
+ggplot(mtcars, 
+       aes(cyl, mpg)) +
+  geom_point() +
+  stat_summary(fun.data = "mean_cl_boot",
+               colour = "red",
+               size = 1.6) +
+  labs(title = "Means and confidence intervals")
+```
+]
+
+---
+# Summarise values
+
+See also `geom_errorbar()`, `geom_pointrange()`, `geom_linerange()`, `geom_crossbar()` for geoms to display summarised data.
+
+
+
+
+
+---
+# Representing maps: `geom_map()`
+.small[
+```{r}
+crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
+crimesm <- reshape2::melt(crimes, id = 1)
+
+library(maps)
+states_map <- map_data("state")
+
+ggplot(crimes, aes(map_id = state)) +
+  geom_map(aes(fill = Murder), map = states_map) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  coord_map()
+```
+]
+---
+
+
+## Density plots: `geom_density()`
+
+.small[A density plot shows the distribution of a numerical variable and it takes only set of numeric values as input.]
+.pull-left[
+```{r, echo=TRUE, fig.width=5, fig.height=4.4}
+(peng.dens <- 
+   ggplot(penguins, 
+          aes(bill_length_mm)) +
+   geom_density())
+```
+]
+
+.pull-right[
+```{r, echo=TRUE, fig.width=5, fig.height=4.4}
+(cars.dens <- 
+   ggplot(cars, aes(dist)) +
+   geom_density())
+```
+]
+
+---
+# Dendogram: `ggdendrogram()`
+
+```{r}
+library(ggdendro)
+USArrests.short = USArrests[1:10,]
+hc <- hclust(dist(USArrests.short), "ave")
+
+ggdendrogram(hc, rotate = TRUE, theme_dendro = FALSE)
+```
+
+
+---
+# Arrange plots: `patchwork`
+
+**Add multiple graphs on the same plot**
+
+```{r, fig.width=9, fig.height=5, message=FALSE, warning=FALSE}
+library(patchwork)
+peng.dens + cars.dens +
+  plot_annotation(tag_levels = 'a')
+```
+
+---
+# Final Challenge![:cube]()
+
+Create your own graph and follow these recommendations:
+  * Dataset: any (recommended: use your dataset)
+  * Explore a new geom_* and other plot elements
+
+Use the following links for tips:
+https://ggplot2.tidyverse.org/reference/index.html
+http://shinyapps.stat.ubc.ca/r-graph-catalog/
+
+---
+# Final Challenge: Solution example #1
+.small[
+```{r, fig.align='center',fig.height=4}
+data(msleep)
+msleep.challenge4 <- ggplot(msleep, 
+                            aes(x = vore, y = log10(brainwt), fill = vore))
+msleep.challenge4 + 
+  geom_violin() +
+  geom_signif(comparisons = list(c("herbi", "insecti"))) +
+  labs(main = "Brain weight among different vore", 
+       y = "log10(Brain weight (Kg))") +
+  scale_fill_grey() +
+  theme_classic()
+```
+]
+---
+# Final Challenge: Solution example #2
+.small[
+```{r, fig.align='center', fig.width=5, fig.height=4}
+data(mtcars)
+mtcars.short <- mtcars[1:20,]
+mtcars.short.hc <- hclust(dist(mtcars.short), "complete")
+dendro.challenge4 <- ggdendrogram(mtcars.short.hc, 
+                                  rotate = TRUE, theme_dendro = FALSE)
+dendro.challenge4 + 
+  labs(title = "Car dendro from motor spec", y ="Cars") +
+  theme(axis.title.y = element_text(size = 16),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(), axis.text.x = element_blank(),
+        plot.title = element_text(size = 14, face="bold"))
+```
+]
+
+---
+## Miscellaneous: interactive plots using `plotly()`
+.small[
+.alert[**Select the species data to display directly from the legend**]
+
+```{r, echo = TRUE, fig.width=10, fig.height=5}
+p <- ggplot(penguins,
+           aes(x = bill_length_mm, y = bill_depth_mm, 
+               colour = species, shape = species)) +
+    geom_point(size=6, alpha=0.6)
+# convert to a plotly object!
+plotly::ggplotly(p)
+```
+]
+
+???
+
+You can click on the species in the legend to add/remove species. You can also see values while hovering over points.
+

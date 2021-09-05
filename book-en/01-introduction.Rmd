@@ -20,13 +20,13 @@ Today we will walk you through the basics of ggplot2 so that you have the necess
 
 **1.** Visualization in science
 
-**2.** `ggplot2` mechanics
+**2.** `ggplot2` mechanics: the basics
 
-**3 ** Advanced visualization
+**3 ** Aesthetic mapping
 
 **4.** Fine-tuning
 
-**5.** Saving plots
+**5.** Saving your plots
 
 **6.** Conclusion
 

@@ -1,0 +1,423 @@
+# (PART\*) Aesthetic mapping {-}
+
+
+---
+
+class: inverse, center, middle
+
+# Aesthetic mapping
+
+## colour, shape, size, labels and transparency
+
+---
+# Aesthetic
+
+**Use aesthetics (`aes()`) to distinguish classes, groups and structure**
+
+
+```{r echo = FALSE, fig.width = 8, fig.height = 6.5}
+library(gridExtra)
+source(file="./scripts/4plot_aesthetic.R")
+```
+
+---
+# Colours: make your points talk
+
+Change **colour** to
+
+&nbsp; ![:faic](arrow-right) differentiate between groups
+
+&nbsp; ![:faic](arrow-right) represent data values
+
+&nbsp; ![:faic](arrow-right) highlight specific elements
+
+.pull-left[
+```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
+ggplot(penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) +
+  geom_point(aes(colour = species)) +
+  labs(title = "Qualitative colour for groups") +
+  theme(title = element_text(size = 16, face = "bold"),
+        legend.title = element_text(size = 14),
+        legend.position = 'bottom')
+```
+]
+
+.pull-right[
+```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
+ggplot(penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) +
+  geom_point(aes(colour = body_mass_g)) +
+  labs(title = "Gradient colour for values") +
+  theme(title = element_text(size = 16, face = "bold"),
+        legend.title = element_text(size = 14),
+        legend.position = 'bottom')
+```
+]
+
+.right[
+.footnote[See [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/colour-basics.html)]
+]
+
+---
+# Using `aes()` use to change colour
+
+Does bill length and flipper length vary differently across species?
+
+.pull-left[
+```{r, fig.align = 'default', fig.asp=2/3}
+# No colour mapping
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = flipper_length_mm)) +
+  geom_point() +
+  geom_smooth(method = lm)+
+  labs(title = "No colour mapping")
+```
+]
+
+.pull-right[
+```{r,  fig.align = 'default', fig.asp=2/3}
+# With colour mapping
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = flipper_length_mm,
+           col = species)) +
+  geom_point() +
+  geom_smooth(method=lm) +
+  labs(title = "With colour mapping")
+```
+]
+
+---
+# Change colour manually
+.pull-left[
+```{r, fig.align = 'default', fig.asp=2/3}
+# Default
+pp <- ggplot(data = penguins) +
+  geom_point(aes(x = bill_length_mm, 
+                 y = bill_depth_mm, 
+                 colour = species))
+pp + labs(title = "Default")
+```
+]
+.pull-right[
+```{r, fig.align = 'default', fig.asp=2/3}
+# Manual
+pp + 
+scale_colour_manual(
+  values = c("grey55", "orange", 
+             "skyblue")) +
+  labs(title = "Manual")
+```
+]
+
+???
+scale_colour_manual() and scale_fill_manual() allow you to choose your own colour values, but it's important to still make sure these colours are a good choice (clarity, colorblind-friendly, etc.). More on this in a few slides!
+
+---
+# Colour gradients
+
+.pull-left[
+```{r, fig.align = 'default', fig.asp=2/3}
+# Default
+pp2 <- ggplot(data = penguins) +
+  geom_point(aes(x = bill_length_mm, 
+                 y = bill_depth_mm,
+                 colour = body_mass_g))
+pp2 + labs(title = "Default")
+```
+]
+.pull-right[
+```{r, fig.align = 'default', fig.asp=2/3}
+# Manual
+pp2 + 
+  scale_colour_gradient(low = "blue", 
+                        high = "red") +
+  labs(title = "Manual")
+
+```
+]
+
+???
+There is also scale_colour_gradient2() to create a gradient with a midpoint value, for diverging palettes.
+
+---
+# Use a predefined colour palette
+
+```{r, eval = FALSE}
+install.packages("RColorBrewer")
+require(RColorBrewer)
+display.brewer.all()
+```
+
+![:scale 100%](images/rcolorbrewer_palette.png)
+
+
+---
+# Use a predefined colour palette
+
+```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
+# Palette for groups
+pp + 
+  scale_colour_brewer(palette = "Dark2") +
+  labs(title = "Palette for groups")
+```
+
+---
+# Use a predefined colour palette
+
+```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
+# Palette for continuous values
+pp2 + 
+  scale_color_viridis_c()+
+  labs(title = "Palette for continuous values")
+```
+
+
+---
+# Use a predefined colour palette
+
+Grey-scale palette for publication purposes
+
+```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
+# Palette for groups
+pp + 
+  scale_colour_grey() +
+  labs(title = "Palette for groups")
+```
+
+---
+# Use a predefined colour palette
+
+Grey-scale palette for publication purposes
+
+```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
+# Palette for continuous values
+pp2 + 
+  scale_colour_gradient(low = "grey85", high = "black") +
+  labs(title = "Palette for continuous values")
+```
+
+
+---
+# Use colourblind-friendly palettes
+
+How your figure might appear under various forms of colourblindness?
+We can use [colorblindr](https://github.com/clauswilke/colorblindr) that is not currently on CRAN, so we install it with the packages [remotes](https://cran.r-project.org/web/packages/remotes/index.html).
+
+```{R colorblindr_install, message = FALSE}
+remotes::install_github("clauswilke/colorblindr", quiet = TRUE)
+library(colorblindr)
+```
+
+---
+# Use colourblind-friendly palettes
+
+```{r, fig.width = 11, fig.height = 7}
+cvd_grid(pp)
+```
+
+---
+# Use colourblind-friendly palettes
+
+
+.pull-left[
+```{r, fig.height = 5}
+# Palette for groups
+pp + 
+  scale_colour_viridis_d() +
+  labs(title = "Viridis palette for groups")
+```
+]
+
+.pull-right[
+```{r, fig.height = 5}
+# Palette for continuous values
+pp2 + 
+  scale_colour_viridis_c() +
+  labs(title = "Viridis palette for continuous values")
+```
+]
+
+
+---
+# Changing `shape`, `size` and `alpha`
+
+.pull-left[
+```{r, fig.height = 5}
+# shape for groups
+ggplot(data = penguins) +
+  geom_point(aes(x = bill_length_mm, 
+                 y = bill_depth_mm, 
+                 shape = species)) +
+  labs(title = "Shapes for groups")
+```
+]
+
+.pull-right[
+```{r, fig.height = 5}
+# size and alpha for continuous values
+ggplot(data = penguins) +
+  geom_point(aes(x = bill_length_mm, 
+                 y = bill_depth_mm, 
+                 size = body_mass_g,
+                 alpha = flipper_length_mm)) +
+  labs(title = "Size and alpha for continuous values")
+```
+]
+
+???
+
+Note that setting many variables to visual cues like color, shape, size, and alpha at once tends to be overwhelming for the viewer. Adding 4 levels of complexity on top of the 2-dimensional representation of points can be too much to process properly. It is better to choose the visual cues and key variables for the desired message than to overload a plot with every possibility in the aes() function.
+---
+# Challenge #2 ![:cube]()
+
+- Produce an informative plot from built-in datasets such as `mtcars`, `CO2` or `msleep`.
+
+- Use appropriate aesthetic mappings for different data types
+
+
+<br>
+
+Data| x | y | Aesthetics
+:-------------:|:-------------:|:-------------:|:-------------:
+mtcars |*wt* |*mpg* | *disp* and *hp*
+CO2 |*conc* |*uptake* | *Treatment* and *Type*
+msleep |log10(*bodywt*) |*awake* | *vore* and *conservation*
+ToothGrowth | *dose* | *len* | *supp* 
+
+<br>
+.center[.alert[
+![:faic](exclamation-triangle) Pay attention to the data types!
+]
+]
+
+---
+# Challenge #2 ![:cube]()
+
+#### .alert[Breakout rooms! - 15 min]
+<br> make a plot to share with the group
+
+
+???
+note: _assign each group a dataset to make a plot from: mtcars, CO2, msleep, and ToothGrowth to make exploratory plots_
+---
+# Challenge #2 - Solution example #1
+
+.small[
+
+Data| x | y | Aesthetics
+:-------------:|:-------------:|:-------------:|:-------------:
+mtcars |*wt* |*mpg* | *disp* and *hp*
+
+]
+
+```{r, fig.height=3.5, fig.width=6}
+data(mtcars)
+ggplot(data = mtcars) +
+  geom_point(mapping = aes(x = wt, y = mpg,
+                           colour = disp,
+                           alpha = hp))
+```
+
+.comment[Could you use `size` instead of `alpha`? What about `shape`?]
+
+---
+# Challenge #2 - Solution example #2
+
+.small[
+
+Data| x | y | Aesthetics
+:-------------:|:-------------:|:-------------:|:-------------:
+CO2 |*conc* |*uptake* | *Treatment* and *Type*
+
+]
+
+```{r, fig.height=3.5, fig.width=6}
+data(CO2)
+ggplot(data = CO2) +
+    geom_point(mapping = aes(x = conc, 
+                             y = uptake,
+                             colour = Treatment, 
+                             shape = Type))
+```
+
+.comment[Why not use `size = Type`?]
+
+---
+# Challenge #2 - Solution example #3
+
+.small[
+
+Data| x | y | Aesthetics
+:-------------:|:-------------:|:-------------:|:-------------:
+msleep |log10(*bodywt*) |*awake* | *vore* and *conservation*
+
+]
+
+```{r, fig.height=3.5, fig.width=6}
+data(msleep)
+ggplot(data = msleep) +
+    geom_point(mapping = aes(x = log10(bodywt), 
+                             y = awake,
+                             colour = vore, 
+                             shape = conservation))
+```
+
+---
+# Challenge #2 - Solution example #4
+
+.small[
+
+Data| x | y | Aesthetics
+:-------------:|:-------------:|:-------------:|:-------------:
+ToothGrowth | *dose* | *len* | *supp* 
+
+]
+
+```{r, fig.height=3.5, fig.width=6}
+data(ToothGrowth)
+ggplot(ToothGrowth, aes(x = dose,
+                        y = len,
+                        color = supp)) +
+  geom_point() + 
+  geom_smooth(method = lm, formula = 'y~x')
+```
+
+---
+class: small-code
+# Changing the scale of the axes
+.tiny[
+.pull-left[
+x axis in regular scale
+```{r,fig.height=4}
+ggplot(diamonds) +
+  geom_point(mapping = aes(x = carat, y = price)) +
+  labs(title = "Original scale")
+```
+]
+]
+.pull-right[
+x-axis and y-axis in log10() scale
+```{r,fig.height=4}
+ggplot(diamonds) + geom_point(mapping = aes(x = carat, y = price)) +
+  coord_trans(x = "log10",
+              y = "log10") +
+  labs(title = "log10 scale")
+```
+]
+
+<br>
+.small[It is also possible to transform the coordinate system using `scale_x_log10()` and `scale_y_log10()`.]
+
+<!-- explain the difference -->
+
+???
+Explain the difference and why the transformation can be useful for visualization. For example, body mass is often transformed with log10.
+
+---
+class: inverse, center, middle
+
