@@ -4,6 +4,14 @@
 
 Whether you are calculating summary statistics (e.g. Excel), performing more advanced statistical analysis (e.g. JMP, SAS, SPSS), or producing figures and tables (e.g. Sigmaplot, Excel), it is easy to get lost in a workflow when you are using a variety of software. This can become especially problematic when you import and export your dataset to accomplish a downstream task. With each operation, you increase the risk of introducing errors into your data or losing track of the correct version of your data. `R` provides a solution to this by unifying all of the tools you need for advanced data manipulation, statistical analysis, and powerful graphical engines in a single programming language. By unifying your workflow with `R`, you can reduce the chance of making mistakes and ensure your work is reproducible. Believe us, the future "you" will not regret it!
 
+Instead of using a suite of various software tools...
+
+.center[![:scale 80%](images/Divided_reproducible workflow.png)]
+
+You can use `R` to generate reproducible data visualizations all within a single program, `R` Studio. 
+
+.center[![:scale 80%](images/Divided_reproducible workflow2.png)]
+
 `Ggplot2` is the most flexible and complete package available for advanced data visualization in `R`. This package was created for R by Hadley Wickham based on the Grammar of Graphics by Leland Wilkinson. The source code is hosted on github: https://github.com/hadley/ggplot2.
 
 ![](images/ggplot2_logo.png){width="200"}
