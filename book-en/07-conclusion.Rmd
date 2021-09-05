@@ -1,0 +1,29 @@
+# (PART\*) Conclusion {-}
+
+# Concluding remarks
+
+  1. There are other useful packages that can be used with `ggplot2`! To name a few: `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` and `ggtree`. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) for other `ggplot2` extensions.
+
+
+  2. Note that you can learn more about design and image manipulation with the "Introduction to graphic design and image manipulation with open source tools": https://qcbs.ca/wiki/graphics
+
+# Additional resources
+
+- [Data Visualization with ggplot2 Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+
+- https://www.rstudio.com/resources/cheatsheets
+
+* `help(package = ggplot2)`
+* http://ggplot2.tidyverse.org/reference/
+* Fundamentals of Data Visualization https://serialmentor.com/dataviz/
+
+.center[![:scale 65%](images/ggplot_book.png)]
+
+  
+# References {-}
+
+- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/) (ggplot)
+
+- [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base plot)
+
+- [Graphics Principles](https://graphicsprinciples.github.io/) (design tips)
