@@ -1,37 +1,23 @@
 # (PART\*) Aesthetic mapping {-}
 
+# Aesthetics
 
----
+Let's talk more about the aesthetic layer, this is where we can get really creative with our data! We can use aesthetics (`aes()`) to distinguish classes, groups and structure. 
 
-class: inverse, center, middle
-
-# Aesthetic mapping
-
-## colour, shape, size, labels and transparency
-
----
-# Aesthetic
-
-**Use aesthetics (`aes()`) to distinguish classes, groups and structure**
-
+In this section, we will talk about colour, shape, size, labels and transparency so that you can make your plots look exactly how you imagined them.
 
 ```{r echo = FALSE, fig.width = 8, fig.height = 6.5}
-library(gridExtra)
-source(file="./scripts/4plot_aesthetic.R")
+source(file="./scripts/4plot_aesthetic.R") 
 ```
 
----
 # Colours: make your points talk
 
-Change **colour** to
+When we are designed plots, we may want to change the colour of our data points in order to communicate different parts of the data. We may want to: 
 
-&nbsp; ![:faic](arrow-right) differentiate between groups
+-   Differentiate between groups
+-   Represent data values
+-   Highlight specific elements of the data
 
-&nbsp; ![:faic](arrow-right) represent data values
-
-&nbsp; ![:faic](arrow-right) highlight specific elements
-
-.pull-left[
 ```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
 ggplot(penguins, 
        aes(x = bill_length_mm, 
@@ -42,9 +28,8 @@ ggplot(penguins,
         legend.title = element_text(size = 14),
         legend.position = 'bottom')
 ```
-]
 
-.pull-right[
+
 ```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
 ggplot(penguins, 
        aes(x = bill_length_mm, 
@@ -55,16 +40,12 @@ ggplot(penguins,
         legend.title = element_text(size = 14),
         legend.position = 'bottom')
 ```
-]
 
-.right[
-.footnote[See [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/colour-basics.html)]
-]
+*Reference: [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/colour-basics.html)*
 
----
-# Using `aes()` use to change colour
+## Using `aes()` use to change colour
 
-Does bill length and flipper length vary differently across species?
+We can use the aesthetic layer `aes()` in order to make colour changes to our plots. This will allow us to clearly communicate specific messages about our data. For instance, if we want to know whether bill length and flipper length vary differently across species, which of these plots allows us to answer that question?
 
 .pull-left[
 ```{r, fig.align = 'default', fig.asp=2/3}
@@ -84,15 +65,17 @@ ggplot(data = penguins,
 ggplot(data = penguins, 
        aes(x = bill_length_mm, 
            y = flipper_length_mm,
-           col = species)) +
+           col = species)) + # Using the col argument, we can colour by species
   geom_point() +
   geom_smooth(method=lm) +
   labs(title = "With colour mapping")
 ```
 ]
 
----
-# Change colour manually
+## Manual colour change
+
+In the above example, we used the `col` argument within `aes()` in order to colour our data points by species automatically. This is possible because `aes()` can call our data variables. However, this method will use a default colour palette. If we want to add specific colours to our plots, we can do it manually using `scale_colour_manual()` or `scale_fill_manual()`.  
+
 .pull-left[
 ```{r, fig.align = 'default', fig.asp=2/3}
 # Default
@@ -107,18 +90,14 @@ pp + labs(title = "Default")
 ```{r, fig.align = 'default', fig.asp=2/3}
 # Manual
 pp + 
-scale_colour_manual(
-  values = c("grey55", "orange", 
+scale_colour_manual( # By using scale_colour_manual(), we are able to specify the exact colours we want to use
+  values = c("grey55", "orange", # Note that the colour order will correspond to the order of the species given in the legend
              "skyblue")) +
   labs(title = "Manual")
 ```
 ]
 
-???
-scale_colour_manual() and scale_fill_manual() allow you to choose your own colour values, but it's important to still make sure these colours are a good choice (clarity, colorblind-friendly, etc.). More on this in a few slides!
-
----
-# Colour gradients
+We can do the same thing with colour gradients using `scale_colour_gradient()` if we want to communicate something different about our data. In this example, we are colouring our data points by body mass using a gradient. 
 
 .pull-left[
 ```{r, fig.align = 'default', fig.asp=2/3}
@@ -126,38 +105,37 @@ scale_colour_manual() and scale_fill_manual() allow you to choose your own colou
 pp2 <- ggplot(data = penguins) +
   geom_point(aes(x = bill_length_mm, 
                  y = bill_depth_mm,
-                 colour = body_mass_g))
-pp2 + labs(title = "Default")
+                 colour = body_mass_g)) # Using the colour argument within aes() will use a default colour palette to make our gradient  
+pp2 + labs(title = "Default") 
 ```
 ]
 .pull-right[
 ```{r, fig.align = 'default', fig.asp=2/3}
 # Manual
 pp2 + 
-  scale_colour_gradient(low = "blue", 
-                        high = "red") +
+  scale_colour_gradient(low = "blue", # By using scale_colour_graduent, we can set our colour gradient manually
+                        high = "red") + 
   labs(title = "Manual")
-
+# Note: there is also scale_colour_gradient2() to create a gradient with a midpoint value, for diverging palettes
 ```
 ]
 
-???
-There is also scale_colour_gradient2() to create a gradient with a midpoint value, for diverging palettes.
+## Use a new colour palette
 
----
-# Use a predefined colour palette
+If you prefer to use a pre-set colour palette rather than setting your colours manually, but you do not want to use the default palette - don't worry! There are a lot of options for you. 
+
+There are many `R` colour packages specifically designed to provide you with a range of colour palette options that all strike a different mood! For example, the `RColorBrewer` package have 35 palettes to choose from! 
+
+Here you can see they are organized into different groups depending on whether the colours are sequential, diverging or a mixture of the two. You can imagine that different palettes are better for different data types.
 
 ```{r, eval = FALSE}
-install.packages("RColorBrewer")
 require(RColorBrewer)
-display.brewer.all()
+display.brewer.all() 
 ```
 
 ![:scale 100%](images/rcolorbrewer_palette.png)
 
-
----
-# Use a predefined colour palette
+Want to see these palettes in action? Here is an example of the Dark2 palette being used to group data points with the `scale_colour_brewer()` function and the `palette` arguemnt.
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
 # Palette for groups
@@ -166,8 +144,7 @@ pp +
   labs(title = "Palette for groups")
 ```
 
----
-# Use a predefined colour palette
+There are other functions within the `RColorBrewer` package as well. By using `scale_color_viridis()`, we can use a default package that will translate from colour to gray scale without losing information. (Note that this is also an important consideration for colourblindness, which we will discuss soon).
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
 # Palette for continuous values
@@ -177,10 +154,7 @@ pp2 +
 ```
 
 
----
-# Use a predefined colour palette
-
-Grey-scale palette for publication purposes
+Now what if we want to use just gray-scale palette for publication purposes? We can use the `scale_colour_grey()` function to colour our grouped data points. 
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
 # Palette for groups
@@ -189,10 +163,7 @@ pp +
   labs(title = "Palette for groups")
 ```
 
----
-# Use a predefined colour palette
-
-Grey-scale palette for publication purposes
+Or we can use the `scale_colour_gradient()` function for continuous data, and set our low and high gradient points to black and light gray.
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
 # Palette for continuous values
@@ -202,49 +173,70 @@ pp2 +
 ```
 
 
----
-# Use colourblind-friendly palettes
+## Colourblind-friendly palettes!
 
-How your figure might appear under various forms of colourblindness?
-We can use [colorblindr](https://github.com/clauswilke/colorblindr) that is not currently on CRAN, so we install it with the packages [remotes](https://cran.r-project.org/web/packages/remotes/index.html).
+Have you ever considered how your figure might appear under various forms of colourblindness?
+We can use the package [colorblindr](https://github.com/clauswilke/colorblindr) to consider this. This package is not currently on CRAN, so we install it with the packages [remotes](https://cran.r-project.org/web/packages/remotes/index.html).
 
 ```{R colorblindr_install, message = FALSE}
-remotes::install_github("clauswilke/colorblindr", quiet = TRUE)
+# Let's install the colorblindr package from GitHub using remotes
+remotes::install_github("clauswilke/colorblindr", quiet = TRUE) 
+# Now load the package into your R session
 library(colorblindr)
 ```
 
----
-# Use colourblind-friendly palettes
+Let's start by testing out some colours using the `cvd_grid()` function. This will show us how our current plot looks for different forms of colourblindness.
 
 ```{r, fig.width = 11, fig.height = 7}
-cvd_grid(pp)
+cvd_grid(pp) # Let's check how our plot looks with different forms of colourblindness
 ```
 
----
-# Use colourblind-friendly palettes
+As you can see, our current colour palette is not accessible! By using viridis palettes, we can gurantee our plots always communicate the same information no matter who the audience is. 
 
+An example with grouped data points:
 
 .pull-left[
 ```{r, fig.height = 5}
-# Palette for groups
-pp + 
-  scale_colour_viridis_d() +
-  labs(title = "Viridis palette for groups")
+# Let's use a viridis palette to make our plot more accessible
+pp_viridis <- pp + 
+      scale_colour_viridis_d() +
+      labs(title = "Viridis palette for groups")
+pp_viridis
 ```
 ]
 
 .pull-right[
 ```{r, fig.height = 5}
-# Palette for continuous values
-pp2 + 
-  scale_colour_viridis_c() +
-  labs(title = "Viridis palette for continuous values")
+# Did we succeed? Let'd use cvd_grid() to check again
+cvd_grid(pp_viridis)
+# We succeeded!
 ```
 ]
 
+An example with continous data:
 
----
+Note that we are using slightly different functions for different colours (ex. `scale_colour_viridis_c()`, `scale_colour_viridis_d()`)
+
+.pull-left[
+```{r, fig.height = 5}
+pp2_viridis <- pp2 + 
+        scale_colour_viridis_c() +
+        labs(title = "Viridis palette for continuous values")
+pp2_viridis
+```
+]
+
+.pull-right[
+```{r, fig.height = 5}
+cvd_grid(pp2_viridis)
+```
+]
+
 # Changing `shape`, `size` and `alpha`
+
+Now let's look beyond colour! If we want to change the shape of our data points, we can start by using the `shape` argument within the `aes()` layer just like we did with colour. This will group our data points by the variable we provide using different shapes (here we are using the variable species).
+
+If we want to adjust the size of the data points instead, we can use the `size` argument in the same spot. We can also use the `alpha` argument if we want to play with transparency. Both of these are good options for continuous data.
 
 .pull-left[
 ```{r, fig.height = 5}
@@ -252,7 +244,7 @@ pp2 +
 ggplot(data = penguins) +
   geom_point(aes(x = bill_length_mm, 
                  y = bill_depth_mm, 
-                 shape = species)) +
+                 shape = species)) + # Group data with data point shape
   labs(title = "Shapes for groups")
 ```
 ]
@@ -263,24 +255,21 @@ ggplot(data = penguins) +
 ggplot(data = penguins) +
   geom_point(aes(x = bill_length_mm, 
                  y = bill_depth_mm, 
-                 size = body_mass_g,
-                 alpha = flipper_length_mm)) +
+                 size = body_mass_g,# Group data using point size
+                 alpha = flipper_length_mm)) + # Group data using transparency
   labs(title = "Size and alpha for continuous values")
 ```
 ]
 
-???
-
-Note that setting many variables to visual cues like color, shape, size, and alpha at once tends to be overwhelming for the viewer. Adding 4 levels of complexity on top of the 2-dimensional representation of points can be too much to process properly. It is better to choose the visual cues and key variables for the desired message than to overload a plot with every possibility in the aes() function.
----
-# Challenge #2 ![:cube]()
-
-- Produce an informative plot from built-in datasets such as `mtcars`, `CO2` or `msleep`.
-
-- Use appropriate aesthetic mappings for different data types
+You may have noted in the plot on the right that you can even combine multiple of these options at once! But, note that setting many variables to visual cues like color, shape, size, and alpha at once tends to be overwhelming for the viewer. Adding 4 levels of complexity on top of the 2-dimensional representation of points can be too much to process properly. It is better to choose the visual cues and key variables for the desired message than to overload a plot with every possibility in the `aes()` function.
 
 
-<br>
+## Challenge #2
+
+- Produce an **informative plot** from built-in datasets such as `mtcars`, `CO2` or `msleep`.
+
+- Use appropriate aesthetic mappings for different data types!
+
 
 Data| x | y | Aesthetics
 :-------------:|:-------------:|:-------------:|:-------------:
@@ -289,31 +278,19 @@ CO2 |*conc* |*uptake* | *Treatment* and *Type*
 msleep |log10(*bodywt*) |*awake* | *vore* and *conservation*
 ToothGrowth | *dose* | *len* | *supp* 
 
-<br>
-.center[.alert[
+
 ![:faic](exclamation-triangle) Pay attention to the data types!
-]
-]
 
 ---
-# Challenge #2 ![:cube]()
 
-#### .alert[Breakout rooms! - 15 min]
-<br> make a plot to share with the group
+**Challenge #2: Solution** 
 
-
-???
-note: _assign each group a dataset to make a plot from: mtcars, CO2, msleep, and ToothGrowth to make exploratory plots_
----
-# Challenge #2 - Solution example #1
-
-.small[
+There are multiple ways to respond to this challenge. Here is one example using the `mtcars` dataset: .
 
 Data| x | y | Aesthetics
 :-------------:|:-------------:|:-------------:|:-------------:
 mtcars |*wt* |*mpg* | *disp* and *hp*
 
-]
 
 ```{r, fig.height=3.5, fig.width=6}
 data(mtcars)
@@ -323,18 +300,17 @@ ggplot(data = mtcars) +
                            alpha = hp))
 ```
 
-.comment[Could you use `size` instead of `alpha`? What about `shape`?]
+Could you use `size` instead of `alpha`? What about `shape`?
 
----
-# Challenge #2 - Solution example #2
 
-.small[
+
+Here is a second example using the `CO2` dataset: 
 
 Data| x | y | Aesthetics
 :-------------:|:-------------:|:-------------:|:-------------:
 CO2 |*conc* |*uptake* | *Treatment* and *Type*
 
-]
+
 
 ```{r, fig.height=3.5, fig.width=6}
 data(CO2)
@@ -345,18 +321,14 @@ ggplot(data = CO2) +
                              shape = Type))
 ```
 
-.comment[Why not use `size = Type`?]
 
----
-# Challenge #2 - Solution example #3
+Here is a third example using the `msleep` dataset: 
 
-.small[
 
 Data| x | y | Aesthetics
 :-------------:|:-------------:|:-------------:|:-------------:
 msleep |log10(*bodywt*) |*awake* | *vore* and *conservation*
 
-]
 
 ```{r, fig.height=3.5, fig.width=6}
 data(msleep)
@@ -367,16 +339,12 @@ ggplot(data = msleep) +
                              shape = conservation))
 ```
 
----
-# Challenge #2 - Solution example #4
-
-.small[
+Here is a final example using the `ToothGrowth` dataset:
 
 Data| x | y | Aesthetics
 :-------------:|:-------------:|:-------------:|:-------------:
 ToothGrowth | *dose* | *len* | *supp* 
 
-]
 
 ```{r, fig.height=3.5, fig.width=6}
 data(ToothGrowth)
@@ -387,10 +355,15 @@ ggplot(ToothGrowth, aes(x = dose,
   geom_smooth(method = lm, formula = 'y~x')
 ```
 
----
-class: small-code
 # Changing the scale of the axes
-.tiny[
+
+We can also adjust the scale of our axes using the `coord_trans()` function. 
+
+Sometimes transforming our axes is necessary to show certain relationships within our data. A common example is a log transformation with log10. 
+
+Here is an example with an untransformed axes (left), followed by log10 transformed axes (right).
+
+
 .pull-left[
 x axis in regular scale
 ```{r,fig.height=4}
@@ -399,7 +372,7 @@ ggplot(diamonds) +
   labs(title = "Original scale")
 ```
 ]
-]
+
 .pull-right[
 x-axis and y-axis in log10() scale
 ```{r,fig.height=4}
@@ -410,14 +383,6 @@ ggplot(diamonds) + geom_point(mapping = aes(x = carat, y = price)) +
 ```
 ]
 
-<br>
-.small[It is also possible to transform the coordinate system using `scale_x_log10()` and `scale_y_log10()`.]
+It is also possible to transform the coordinate system using `scale_x_log10()` and `scale_y_log10()`.
 
-<!-- explain the difference -->
-
-???
-Explain the difference and why the transformation can be useful for visualization. For example, body mass is often transformed with log10.
-
----
-class: inverse, center, middle
 
