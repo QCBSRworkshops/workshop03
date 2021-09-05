@@ -1,7 +1,11 @@
-# Additional references {-}
+# (PART\*) Additional resources {-}
+
+# Additional resources {-}
 '`
 Additional resources:
 
 - [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/) (ggplot)
 - [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base plot)
 - [Graphics Principles](https://graphicsprinciples.github.io/) (design tips)
+
+# References {-}
