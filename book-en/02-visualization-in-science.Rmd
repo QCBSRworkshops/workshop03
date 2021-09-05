@@ -56,6 +56,3 @@ The reason that we focus on `ggplot2` is due to its **versatility**.
 
 **3.** It [has many extensions](https://exts.ggplot2.tidyverse.org/gallery/), allowing for a wealth of applications.
 
-
-
-
