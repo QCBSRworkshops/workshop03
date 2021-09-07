@@ -2,10 +2,11 @@
 
 # Concluding remarks
 
-  1. There are other useful packages that can be used with `ggplot2`! To name a few: `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` and `ggtree`. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) for other `ggplot2` extensions.
+There are other useful packages that can be used with `ggplot2`! 
 
+To name a few: `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` and `ggtree`. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) for other `ggplot2` extensions.
 
-  2. Note that you can learn more about design and image manipulation with the "Introduction to graphic design and image manipulation with open source tools": https://qcbs.ca/wiki/graphics
+Note that you can learn more about design and image manipulation with the QCBS workshop "Introduction to graphic design and image manipulation with open source tools": https://qcbs.ca/wiki/graphics
 
 # Additional resources
 
@@ -17,7 +18,18 @@
 * http://ggplot2.tidyverse.org/reference/
 * Fundamentals of Data Visualization https://serialmentor.com/dataviz/
 
-.center[![:scale 65%](images/ggplot_book.png)]
+![](images/ggplot_book.png)
+
+Lecture notes from Hadley's course Stat 405 (the other lessons are
+awesome too!)
+
+-   <http://stat405.had.co.nz/lectures/11-adv-data-manip.pdf>
+-   <http://stat405.had.co.nz/lectures/19-tables.pdf>
+
+**BONUS!** Check out R style guides to help format your scripts for easy
+reading:
+
+-   <http://adv-r.had.co.nz/Style.html>
 
   
 # References {-}
@@ -27,3 +39,11 @@
 - [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base plot)
 
 - [Graphics Principles](https://graphicsprinciples.github.io/) (design tips)
+
+- [The R Graph gallery](https://www.r-graph-gallery.com)
+
+- [The R Graph Catalog](http://shinyapps.stat.ubc.ca/r-graph-catalog/)
+
+
+
+

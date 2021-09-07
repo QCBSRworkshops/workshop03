@@ -2,46 +2,47 @@
 
 # Saving your plots with `ggplot2`
 
-## Saving plots in RStudio
-
-<div style="text-align:center">
-<img src="images/save_image.png" height=60% width=60%>
-</div>
-.small[
-.alert[Think about the margin of the document you are using. If you resize the image after saving it, the labels and text will change size as well which could be hard to read.]
-]
-
 ## Saving plots in code
 
-`ggsave()` writes directly to your working directory and allows you to specify the name of the file, the dimensions of the plot, the resolution, etc.
+In RStudio, there are many options available to you to save your figures. You could copy them to the clipboard, but it is preferable to export them as a file type of your choice (or export them as any file type (png, jpg, emf, tiff, pdf, metafile, etc).
+
+
+`ggsave()` is a useful command that saves directly to your working directory and allows you to specify the name of your new file, the dimensions of the plot, the resolution, etc.
 
 ```{r, eval=FALSE}
-my1rstPlot <- 
+my1stPlot <-  # Create a plot to practice saving
   ggplot(penguins, 
          aes(x = bill_length_mm, 
              y = bill_depth_mm)) +
   geom_point()
 
-ggsave("my1stPlot.pdf",
-       my1rstPlot,
-       height = 8.5, width = 11, units = "in", res = 300)
+ggsave(filename = "my1stPlot.pdf", # Name the file you want to save to, add extension of the file format you want to use (ex. pdf)
+       plot = my1stPlot, # Provide the name of the plot object in RStudio
+       height = 8.5, # Provide any addition information
+       width = 11, 
+       units = "in") 
+
+## Tip:`quartz()` (mac) or `window()` (pc) functions make sizing easier before `ggsave()`!
 ```
 
-NB: Vectors (e.g., pdf, svg) format are more flexible than raster format (jpeg,
-png, ...) if the image needs modification afterwards.
+*Note*: Think about the margin of the document you are using. If you resize the image after saving it, the labels and text will change size as well which could be hard to read. Also not that vector format (e.g., pdf, svg) is more flexible than raster format (jpeg, png, ...) if the image needs modification afterwards. 
 
+If you prefer raster format, you can check out other methods to save image using `?pdf` `?jpeg`.
 
-Other methods to save image: see `?pdf` `?jpeg`
+In instances where you are producing many plots (e.g. during long programs that produces many plots automatically while performing analysis), it is useful to save many plots in one file as a pdf. This can be accomplished as follows:
 
 ```{r, eval=FALSE}
+my2ndPlot <-  # Create a 2nd plot to practice saving
+  ggplot(penguins, 
+         aes(x = bill_length_mm, 
+             y = bill_depth_mm)) +
+  geom_point()
+
 pdf("./graph_du_jour.pdf")
-  print(my1rstPlot) # print function is necessary
+  print(my1stPlot) # print function is necessary
+  print(my2ndPlot)
 graphics.off()
 ```
 
 
-**Tip:** `quartz()` (mac) or `window()` (pc) functions make sizing easier before `ggsave()`!
-
-note: _this function allows to resize plot live, then use ggsave without specifying plot._
-```
 

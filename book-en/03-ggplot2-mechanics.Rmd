@@ -4,7 +4,7 @@
 
 ## What is the Grammar of Graphics?
 
-Let's start with the basics! The package `ggplot2` is based on the Grammar of Graphics (GG), a layered framework for data visualization. In this framework a graphic is made of different layers. Using the GG system, we can build graphs step-by-step for customizable results. 
+Let's start with the basics! The package `ggplot2` is based on the Grammar of Graphics (GG), which is a framework for data visualization that dissects each component of a graph into individual components, creating distinct layers. Using the GG system, we can build graphs step-by-step for flexible, customizable results. 
 
 .center[
 ![:scale 90%](images/Layers_ggplot.png)
@@ -64,7 +64,7 @@ Here is a breakdown of each GG layer and common arguments for each that can be u
     
 # How layers in `ggplot` works
 
-Let's try it out! Here are the basic steps to building a plot:
+Let's try it out! Here are the basic steps to building a plot. You can refer back to this throughout the workshop if you need help!
 
 1. Create a simple plot object:
   * `plot.object <- ggplot()`
@@ -185,6 +185,9 @@ ggplot(data = penguins) # Without any other information, your data will not form
 
 **Aesthetics layer**
 
+In ggplot2, aesthetics are a group of parameters that specify what and
+how data is displayed.
+
 `ggplot2` code is easier to read if each line represents a new element. This style is generally favored for `ggplot2` code in the R community. This means that as you add each layer, you should start a new line.
 
 ```{r, fig.height=5, fig.width=6}
@@ -194,6 +197,9 @@ ggplot(data = penguins,
 
 **Geometric layer**
 
+Geometric objects, or `geoms`, determine the visual representation of
+your data.
+
 ```{r, fig.height=5, fig.width=6}
 ggplot(data = penguins, 
        aes(x = bill_length_mm, y = bill_depth_mm)) + # Use the plus sign to add each additional layer
@@ -201,6 +207,8 @@ ggplot(data = penguins,
 ```
 
 **Extras- facet, stats, coordination layers**
+
+
 
 ```{r,fig.height=5, fig.width=6}
 ggplot(data = penguins, 

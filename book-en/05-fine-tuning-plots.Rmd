@@ -6,21 +6,26 @@
 
 This presentation has been using theme_classic() for the plots, because the grey background can make certain colours harder to see. These are good options for publishing figures.
 
+But, like every other part of the grammar of graphics, we can modify the theme of the plot to suit our needs, or higher sense of style! 
+
+There are way too many theme elements built into the ggplot2 package to mention here, but you can find a complete list in the ggplot [theme vignette](http://docs.ggplot2.org/dev/vignettes/themes.html). Instead of
+modifying the many elements contained in `theme()`, you can start from theme functions, which contain a specific set of elements from which to start. Here are some examples:
+
 **Default: theme_grey()**
 ```{r, fig.height = 5, fig.align='center'}
 # Theme grey
-pp + scale_colour_grey() +
-  theme_grey() +
-  labs(title = "Default: Grey")
+pp + scale_colour_grey() + # Make data points gray
+  theme_grey() + # Make background gray
+  labs(title = "Default: Grey") # Title plot
 ```
 
 
 .pull-left[
 **Theme Classic**
 ```{r, fig.height = 5}
-pp + scale_colour_grey() +
-  theme_classic() +
-  labs(title = "Classic")
+pp + scale_colour_grey() +# Make data points gray
+  theme_classic() + # Make background white
+  labs(title = "Classic") # Title plot
 ```
 ]
 
@@ -28,11 +33,10 @@ pp + scale_colour_grey() +
 **Theme Minimal**
 ```{r, fig.height = 5}
 pp + scale_colour_grey() +
-  theme_minimal() +
+  theme_minimal() + # Make backgorund white with gray gridlines 
   labs(title = "Minimal")
 ```
 ]
-
 
 Use `theme_set()` to change theme for all your future plots, or `theme_update()` to edit aspects of a theme setting. 
 
@@ -41,7 +45,7 @@ Use `theme_set()` to change theme for all your future plots, or `theme_update()`
 **Set theme**
 ```{r, fig.height = 4.5}
 # Set black & white theme as default
-theme_set(theme_bw())
+theme_set(theme_bw()) # Note the background is white with a black frame
 pp
 ```
 ]
@@ -51,7 +55,7 @@ pp
 ```{r, fig.height = 4.5}
 # remove minor gridlines 
 theme_update(
-  panel.grid.minor = element_blank())
+  panel.grid.minor = element_blank()) # Adjust gridline scale
 pp
 ```
 ]
@@ -67,7 +71,19 @@ theme_update(panel.grid.minor = element_blank(),
 
 ## Elements of a theme
 
+Here is a helpful infographic so you can customize your theme to your exact needs!
+
 ![:scale 90%](images/ggthemes.png)
+
+If you want, you can even build your own theme and then apply it to all your figures to make them match. Here is an example:
+
+```{r, echo = TRUE, eval = FALSE}
+mytheme <- theme_bw() + # Create an object with all your theme settings
+           theme(plot.title = element_text(colour = "red")) +
+           theme(legend.position = c(0.9, 0.9))
+pp + mytheme # Apply it to your plot!
+```
+
 
 ## Using `facet_grid()` to change the arrangement of plots
 
