@@ -33,7 +33,6 @@ pp + scale_colour_grey() +
 ```
 ]
 
-
 Use `theme_set()` to change theme for all your future plots, or `theme_update()` to edit aspects of a theme setting. 
 
 
