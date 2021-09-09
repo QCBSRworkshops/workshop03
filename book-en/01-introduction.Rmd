@@ -70,8 +70,8 @@ You can save these files by clicking on the links above, and right click + save 
 
 To install them from CRAN, run:
 
-```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
-install.packages(c('grid', 
+```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE, results = 'hide'}
+install.packages(c('grid',
                    'gridExtra', 
                    'ggplot2', 
                    'ggsignif', 
@@ -82,7 +82,9 @@ install.packages(c('grid',
                    'GGally', 
                    'patchwork', 
                    'plotly', 
-                   'palmerpenguins'))
+                   'palmerpenguins',
+                   'tibble'),
+                 repos = "http://cran.us.r-project.org")
 ```
 
 To load these packages, run:
@@ -100,4 +102,5 @@ library(GGally)
 library(patchwork)
 library(plotly)
 library(palmerpenguins)
+library(tibble)
 ```
