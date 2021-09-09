@@ -33,7 +33,7 @@ options(repos=structure(c(CRAN="http://cran.r-project.org")))
 ```{r install_pkgs, message=FALSE, warning=FALSE, include=FALSE, results=0}
 # Standard procedure to check and install packages and their dependencies, if needed.
 
-list.of.packages <- c('gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer','GGally','patchwork','plotly', 'palmerpenguins', 'tibble')
+list.of.packages <- c('gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer','GGally','patchwork','plotly', 'palmerpenguins')
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
@@ -76,7 +76,6 @@ theme_set(theme_classic())
 * [patchwork](https://cran.r-project.org/package=patchwork)
 * [palmerpenguins](https://cran.r-project.org/package=palmerpenguins)
 * [plotly](https://cran.r-project.org/package=plotly)
-* [tibble](https://cran.r-project.org/package=tibble)
 ]
 
 .pull-right4[
@@ -95,7 +94,6 @@ install.packages("GGally")
 install.packages("patchwork")
 install.packages("plotly")
 install.packages("palmerpenguins")
-install.packages("tibble")
 ```
 
 ]
