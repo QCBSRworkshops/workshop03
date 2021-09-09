@@ -71,26 +71,25 @@ You can save these files by clicking on the links above, and right click + save 
 To install them from CRAN, run:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE, results = 'hide'}
-install.packages(c('grid',
-                   'gridExtra', 
-                   'ggplot2', 
-                   'ggsignif', 
-                   'ggdendro', 
-                   'maps', 
-                   'mapproj', 
-                   'RColorBrewer', 
-                   'GGally', 
-                   'patchwork', 
-                   'plotly', 
-                   'palmerpenguins',
-                   'tibble'),
+install.packages(c("gridExtra", 
+                   "ggplot2", 
+                   "ggsignif", 
+                   "ggdendro", 
+                   "maps", 
+                   "mapproj", 
+                   "RColorBrewer", 
+                   "GGally", 
+                   "patchwork", 
+                   "plotly", 
+                   "palmerpenguins",
+                   "tibble"),
                  repos = "http://cran.us.r-project.org")
 ```
 
 To load these packages, run:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
-library(grid)
+library(grid) # grid is a base package, so we did not need to install it.
 library(gridExtra)
 library(ggplot2)
 library(ggsignif)
