@@ -33,7 +33,7 @@ options(repos=structure(c(CRAN="http://cran.r-project.org")))
 ```{r install_pkgs, message=FALSE, warning=FALSE, include=FALSE, results=0}
 # Standard procedure to check and install packages and their dependencies, if needed.
 
-list.of.packages <- c('grid', 'gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer','GGally','patchwork','plotly', 'reshape2', 'palmerpenguins')
+list.of.packages <- c('gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer','GGally','patchwork','plotly', 'palmerpenguins', 'tibble')
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
@@ -64,7 +64,7 @@ theme_set(theme_classic())
 
 # Required packages
 
-* [grid](https://cran.r-project.org/package=grid)
+.pull-left4[
 * [gridExtra](https://cran.r-project.org/package=gridExtra)
 * [ggplot2](https://cran.r-project.org/package=ggplot2)
 * [ggsignif](https://cran.r-project.org/package=ggsignif)
@@ -76,12 +76,29 @@ theme_set(theme_classic())
 * [patchwork](https://cran.r-project.org/package=patchwork)
 * [palmerpenguins](https://cran.r-project.org/package=palmerpenguins)
 * [plotly](https://cran.r-project.org/package=plotly)
+* [tibble](https://cran.r-project.org/package=tibble)
+]
 
-<br>
+.pull-right4[
 
-```{r}
-install.packages(c('grid', 'gridExtra', 'ggplot2', 'ggsignif', 'ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'GGally', 'patchwork', 'plotly', 'palmerpenguins'))
+Install the required packages:
+
+```{r, eval = FALSE}
+install.packages("gridExtra")
+install.packages("ggplot2")
+install.packages("ggsignif")
+install.packages("ggdendro")
+install.packages("maps")
+install.packages("mapproj")
+install.packages("RColorBrewer")
+install.packages("GGally")
+install.packages("patchwork")
+install.packages("plotly")
+install.packages("palmerpenguins")
+install.packages("tibble")
 ```
+
+]
 
 ---
 class: inverse, center, middle
