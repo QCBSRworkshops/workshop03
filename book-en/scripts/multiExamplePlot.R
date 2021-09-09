@@ -1,52 +1,56 @@
-# create an apporpriate viewport.  Modify the dimensions and coordinates as needed
-library(grid)
+# Script to demo various plots in base R and ggplot
+
+# load packageslibrary(palmerpenguins)
 library(ggplot2)
-commm.h = .39 # This will change the "Height" of the ggplot graphs
-y = 0.42 # This will change the relative position on the "y" axis of the graph output
-vp.BottomRight <- viewport(height= unit(commm.h, "npc"),
-                           width = unit(0.333, "npc"),
-                           just  = c("left","top"),
-                           y = y, x = .333)
+library(cowplot)
+library(ggplotify)
+library(here)
 
-vp.bbright <- viewport(height= unit(commm.h, "npc"),
-                       width = unit(0.333, "npc"),
-                       just  = c("left","top"),
-                       y = y, x = .666)
+# load penguin data
+data("penguins") 
+penguins$body_mass_g_log10 <- log10(penguins$body_mass_g)
+penguins <- na.omit(penguins)
 
-# plot your base graphics
-par(mfrow=c(2,3))
-plot(iris[,c("Sepal.Length","Sepal.Width")], main = "Density plot",
-     pch = 21, col = iris$Species,
-     bg = iris$Species)
-abline(lm(iris[iris$Species =="setosa",c("Sepal.Width","Sepal.Length")]),    col = "black")
-abline(lm(iris[iris$Species =="versicolor",c("Sepal.Width","Sepal.Length")]),col = "red" )
-abline(lm(iris[iris$Species =="virginica",c("Sepal.Width","Sepal.Length")]), col = "green" )
+# scatter plot
+a <- as_grob(~plot(penguins[,c("bill_length_mm","bill_depth_mm")], 
+                   main = "Scatter plot",
+                   xlab = "Bill length (mm)", ylab = "Bill depth (mm)",
+     pch = 16, col = penguins$species))
 
-plot(density(iris[,c("Sepal.Length"),]), main = "Density plot")
-hist(iris[,c("Sepal.Length")],
+# density plot
+b <- as_grob(~plot(density(penguins$bill_length_mm), main = "Density plot"))
+
+# histogram
+d <- as_grob(~hist(penguins$bill_length_mm,
      main = "Histogram",
-     xlab = "Sepal.Length",
-     breaks = 12)
-boxplot(iris[,c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")],
-        main = "Boxplot",
-        xlab = "Traits",
-        breaks = 12)
+     xlab = "Bill length (mm)",
+     breaks = 10))
 
 #create your ggplot object
-p <- ggplot(data = iris,aes(x = Sepal.Length,
-                            y = Sepal.Width,
-                            col = Species)) +
+e <- ggplot(data = penguins,aes(x = bill_length_mm,
+                            y = bill_depth_mm,
+                            col = species)) +
   geom_point() +
-  geom_smooth(method = "lm") +
+  geom_smooth(method = "lm", formula = 'y ~ x') +
+  labs(title = "Smoothed scatter plot", x = "Bill length (mm)", y = "Bill depth (mm)") +
   theme(legend.position="none")
 
-q <- ggplot(data = iris,aes(x = Species,
-                            y = Sepal.Width,
-                            col = Species,
-                            fill = Species)) +
+f <- ggplot(data = penguins,aes(x = island,
+                                y = body_mass_g_log10,
+                                fill = island)) +
+  geom_boxplot() + 
+  labs(title = "Boxplot", x = "", y = "Body mass (log10 g)") +
+  theme(legend.position="none")
+
+g <- ggplot(data = penguins,aes(x = species,
+                            y = bill_depth_mm,
+                            fill = species)) +
   geom_violin() +
+  labs(title = "Violin plot", x = "", y = "Bill depth (mm)") +
   theme(legend.position="none")
 
 # plot the ggplot using the print command
-print(p, vp=vp.BottomRight)
-print(q, vp=vp.bbright)
+plot_grid(a, b, d, e, f, g)
+
+# save plot
+ggsave("images/multiExamplePlot.png", width = 12, height = 7)
