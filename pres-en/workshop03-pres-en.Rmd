@@ -165,7 +165,17 @@ class: inverse, center, middle
 
 .center[![:scale 65%](images/piechart3d.png)]
 
-What do you think about this one ![:faic](arrow-up)?
+How could we improve this figure ![:faic](arrow-up)?
+
+
+???
+
+Plotting this in 3D is not adding information, it is distorting the proportions of each category so the ones in the foreground look more important than those in the back. 
+
+The text labels are also not clear enough to be useful: they are small, overlap with the pie chart, and also include a percentage that should be communicated by the plot itself. 
+
+Pie charts are also not recommended because they rely on angles to represent the difference between parts, but the human eye is not very good at reading/interpreting angles. We are much better at reading differences in area! There is a good demonstration of the pie chart problem here: https://www.data-to-viz.com/caveat/pie.html.
+
 
 ---
 # Visualization in science
@@ -237,10 +247,7 @@ Other drawing softwares are probably better options such as [GIMP](https://www.g
 
 In this workshop, we focus only on `ggplot2`, but [multiple packages and functions](https://insileco.github.io/wiki/rgraphpkgs/) can be used for great visualization (e.g., [`base R`](https://bookdown.org/rdpeng/exdata/the-base-plotting-system-1.html), [`plotly`](https://plot.ly/r/), [`sjPlot`](http://www.strengejacke.de/sjPlot/), [`mapview`](https://r-spatial.github.io/mapview/), [`igraph`](https://igraph.org/r/)).
 
-```{r, echo=FALSE, fig.width=9, fig.height=5.7}
-source(file="./scripts/multiExamplePlot.R")
-```
-
+.center[![:scale 80%](images/multiExamplePlot.png)]
 
 ---
 # `ggplot2` is versatile
@@ -964,9 +971,14 @@ We can use the package [colorblindr](https://github.com/clauswilke/colorblindr) 
 
 ```{R colorblindr_install, message = FALSE}
 install.packages("remotes", quiet = TRUE)
-remotes::install_github("clauswilke/colorblindr", quiet = TRUE)
+remotes::install_github("clauswilke/colorblindr@1d0d5afef105df0f97715fcdd67f3203a383a2dc", quiet = TRUE)
 library(colorblindr)
 ```
+
+
+???
+
+The long string of numbers are letters are the GitHub SHA code for a specific version of this package, because recent commits have broken the installation. This is not important for the participants to know, but might be worth explaning briefly to avoid confusion about this installation.
 
 ---
 # Use colourblind-friendly palettes
