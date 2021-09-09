@@ -1,60 +1,84 @@
 # (PART\*) Visualization in science {-}
 
-# Why visualize?
+# Why do we visualize data?
 
-Before we start looking at *how* we can visualize our data, let's first answer *why* data visualization is important. Here is a non-exhaustive list of reasons to visualize your data:
+Before we start looking at *how* we can visualize our data, let's first answer *why* data visualization is important. Visualization can be helpful (or even *essential*) to represent results of statistical analyses, to formulate hypotheses and summarize theory, to explore your data so that you understand it better via exploratory analysis or outlier detection, and more. 
+Most importantly, visualization is most useful to communicate and report your findings to others when it is done:
 
-**1.** To represent results of statistical analyses 
-
-**2.** To formulate hypotheses and summarize theory
-
-**3.** To explore your data so that you understand it better (exploratory analysis, outlier detection)
-
-**4.** To communicate and report your findings to others
-  - Clearly (using good design principles)
-  - Precisely and accurately (a plot is worth 1000 words)
-  - Effectively and efficiently
+  - Clearly (using good design principles);
+  - Precisely and accurately (a plot is worth 1000 words);
+  - Effectively and efficiently.
   
-  
+:::noway
+
 Here is an example of an *ineffective* visualization:
 
-.center[![:scale 65%](images/piechart3d.png)]
+```{r, echo=FALSE, out.width="100%", fig.align="center", fig.cap = "An example of an *ineffective* visualization.", purl = FALSE}
+knitr::include_graphics("images/piechart3d.png")
+```
+
 
 What is wrong with this image? Try to answer for yourself what you think this figure is trying to communicate and whether it is successful. How could this image be improved?
 
-To ensure you are communicating effectively, here are some important questions to ask yourself while visualizing your data:
+*Hints:* Why is this in [**3D**](https://www.data-to-viz.com/caveat/3d.html)? What do your eyes [**focus on**](https://www.data-to-viz.com/caveat/declutter.html) first? How does a [**pie chart**](https://www.data-to-viz.com/caveat/pie.html) visually communicate the information?
+:::
 
--     What do you want to communicate?
--     Who is your audience?
--     What is the best way to do it?
+To ensure you are communicating effectively, here are some important questions to ask yourself when visualizing your data:
 
+- What do you want to communicate?
+- Who is your audience?
+- What is the best way to visualize your message?
+
+:::explanation
 **A good rule of thumb: think simple! use less ink!**
+:::
 
 # Why use `R`?
+
+Whether you are calculating summary statistics (e.g. Excel), performing more advanced statistical analysis (e.g. JMP, SAS, SPSS), or producing figures and tables (e.g. Sigmaplot, Excel), it is easy to get lost in a workflow when you are using a variety of software. This can become especially problematic when you import and export your dataset to accomplish a downstream task. With each operation, you increase the risk of introducing errors into your data or losing track of the correct version of your data. `R` provides a solution to this by unifying all of the tools you need for advanced data manipulation, statistical analysis, and powerful graphical engines in a single programming language. By unifying your workflow with `R`, you can reduce the chance of making mistakes and ensure your work is reproducible. Believe us, the future "you" will not regret it!
+
+Instead of using a suite of software tools...
+
+```{r, echo=FALSE, out.width="70%", fig.align="center", purl = FALSE}
+knitr::include_graphics("images/Divided_reproducible workflow.png")
+```
+
+You can use `R` to generate reproducible data visualizations all within a single program, `R` Studio. 
+
+```{r, echo=FALSE, out.width="70%", fig.align="center", purl = FALSE}
+knitr::include_graphics("images/Divided_reproducible workflow2.png")
+```
+
 
 What is the advantage to using `R` for data visualization?
 
 ## Reproducibility
 
-One of the main reasons to use  `R` for plotting is that it makes your visualization entirely reprocible. You can annotate your script, add additional information (ex. titles, labels, captions, etc), and maintain the code for all versions of your figures so you always know how it was produced. 
+One of the main reasons to use  `R` for plotting is that it makes your visualization entirely reproducible. You can annotate your script, add additional information (ex. titles, labels, captions, etc), and maintain the code for all versions of your figures so you always know how it was produced. 
 
 Reproducible science comes with effort, but it is quickly becoming an **industry standard** and is an investment that will save you and your collaborators a lot of time in the long run!
 
 ## Powerful features
 
-Another reason to use `R` is its powerful features. 
+Another reason to use `R` is its powerful features, like `ggplot2`. 
 
-In this workshop, we focus only on `ggplot2`, but there are many other [packages and functions](https://insileco.github.io/wiki/rgraphpkgs/) that can be used for great visualization (e.g., [`base R`](https://bookdown.org/rdpeng/exdata/the-base-plotting-system-1.html), [`plotly`](https://plot.ly/r/), [`sjPlot`](http://www.strengejacke.de/sjPlot/), [`mapview`](https://r-spatial.github.io/mapview/), [`igraph`](https://igraph.org/r/)).
+The `ggplot2` package is the most flexible and complete package available for advanced data visualization in `R`. This package was created for `R` by Hadley Wickham based on the Grammar of Graphics by Leland Wilkinson. 
 
-```{r, echo=FALSE, fig.width=9, fig.height=5.7}
-source(file="./scripts/multiExamplePlot.R")
+```{r, echo=FALSE, out.width="50%", fig.cap="The source code for the `ggplot2` package is hosted on GitHub: [github.com/hadley/ggplot2](https://github.com/hadley/ggplot2).", fig.align="center", purl = FALSE}
+knitr::include_graphics("images/ggplot2_logo.png")
+```
+
+
+In this workshop, we focus only on `ggplot2`, but there are many other [packages and functions](https://insileco.github.io/wiki/rgraphpkgs/) that can be used for great visualization (e.g., [`base R`](https://bookdown.org/rdpeng/exdata/the-base-plotting-system-1.html), [`plotly`](https://plot.ly/r/), [`sjPlot`](http://www.strengejacke.de/sjPlot/), [`mapview`](https://r-spatial.github.io/mapview/), [`igraph`](https://igraph.org/r/)). Here are some examples of the plots you can make with base `R`, or with `ggplot2`.
+
+```{r, echo=FALSE, fig.cap="A small sample of plots you can make with `base R` (row 1) and `ggplot2` (row 2), based on the [`palmerpenguins`](http://cran.r-project.org/web/packages/palmerpenguins/index.html) data package.", fig.align="center", purl = FALSE}
+knitr::include_graphics("images/multiExamplePlot.png")
 ```
 
 The reason that we focus on `ggplot2` is due to its **versatility**.
 
 **1.** The [`ggplot2`](https://ggplot2.tidyverse.org/) package lets you make *beautiful* and customizable plots;
 
-**2.** It implements the grammar of graphics, a reliable system for building plots.
+**2.** It implements the grammar of graphics, which is a reliable system for building plots.
 
-**3.** It [has many extensions](https://exts.ggplot2.tidyverse.org/gallery/), allowing for a wealth of applications.
-
+**3.** There are [many extensions](https://exts.ggplot2.tidyverse.org/gallery/) available to add even more features to `ggplot2`, allowing for a wealth of applications.
