@@ -189,9 +189,7 @@ Pie charts are also not recommended because they rely on angles to represent the
   - Precisely and accurately (a plot is worth 1000 words)
   - Effectively and efficiently
 
-???
 
-note: _changed points here as answers from previous slide question_
 ---
 # Visualization in science
 <br>
@@ -200,7 +198,7 @@ note: _changed points here as answers from previous slide question_
 
 - What do you want to communicate?
 - Who is your audience?
-- What is the best way to do it?
+- What is the best way to visualize your message?
 
 .center[
 .alert[A rule of thumb: think simple! use less ink!]
@@ -241,7 +239,7 @@ Other drawing softwares are probably better options such as [GIMP](https://www.g
 - add information in the figures (titles, labels, captions, annotations)
 
 ---
-# Why R for graphs?
+# Why use R for graphs?
 
 #### .alert[ Because of its powerful features!]
 
@@ -254,7 +252,7 @@ In this workshop, we focus only on `ggplot2`, but [multiple packages and functio
 
 1. [`ggplot2`](https://ggplot2.tidyverse.org/) package lets you make *beautiful* and customizable plots;
 2. it implements the grammar of graphics, a reliable system for building plots.
-3. it [has many extensions](https://exts.ggplot2.tidyverse.org/gallery/).
+3. there are [many extensions](https://exts.ggplot2.tidyverse.org/gallery/).
 
 
 .center[![:scale 35%](images/ggplot2_logo.png)]
@@ -387,10 +385,6 @@ GG layers:
 - Facets
     * `facet_wrap()` or `facet_grid()` for small multiples
     
-???
-
-note: _descriptions of scales to talk about more layers_
-
 ---
 # Grammar of Graphics (GG)
 
@@ -403,10 +397,6 @@ GG layers:
     * similar to geoms, but computed
     * show means, counts, and other statistical summaries of data
     
-    
-???
-
-note: _descriptions of themes to talk about more  layers_
 
 ---
 # Grammar of Graphics (GG)
@@ -423,11 +413,6 @@ GG layers:
     * `coord_map` for different map projections
     
     
-???
-
-note: _descriptions of other layerss_
-
-
 ---
 # Grammar of Graphics (GG)
 
@@ -442,12 +427,9 @@ GG layers:
     * overall visual defaults
     * fonts, colors, shapes, outlines
     
-???
-
-note: _descriptions of other layerss_
 
 ---
-# How layers in `ggplot2` works
+# How to assemble layers in `ggplot2`
 
 1. Create a simple plot object:
   * `plot.object <- ggplot()`
@@ -460,10 +442,6 @@ note: _descriptions of other layerss_
 
 3. Repeat step 2-3 until satisfied, then print:
   * `plot.object` or `print(plot.object)`
-
-???
-
-note: _changed to +geom because it implied that layer() was a function to be used_
 
 ---
 # Today's dataset: palmerpenguins
@@ -492,7 +470,7 @@ library(palmerpenguins)
 
 These data were collected from 2007 - 2009 by Dr. Kristen Gorman with the Palmer Station Long Term Ecological Research Program, part of the US Long Term Ecological Research Network.
 
-This dataset is often being used to replace the iris dataset, which has some problems for teaching data science, including its ties to eugenics (more on this at https://armchairecology.blog/iris-dataset/).
+This dataset is often used to replace the iris dataset, which has some problems for teaching data science, including its ties to eugenics (more on this at https://armchairecology.blog/iris-dataset/).
 
 This dataset was also used for a TidyTuesday challenge, showing the many possibilities of visualising the dataset creatively. For example: [this](https://twitter.com/LauraNavarroSol/status/1289216490307063814?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1289216490307063814%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F), and [this](https://twitter.com/CedScherer/status/1288181995714093057?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1288181995714093057%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F).
 
@@ -700,7 +678,7 @@ ggplot(data = penguins,
 ```
 
 ---
-# Challenge #1 (5min) ![:cube]()
+# Challenge 1 (5min) ![:cube]()
 
 #### Draw your 1st ggplot!
 
@@ -718,7 +696,7 @@ penguins|geom_point|bill_length_mm|flipper_length_mm
 
 
 ---
-# Challenge 1#: Solution ![:cube]()
+# Challenge 1: Solution ![:cube]()
 
 ```{r}
 ggplot(data = penguins, 
@@ -729,7 +707,7 @@ ggplot(data = penguins,
 
 
 ---
-# Challenge 1#: Solution ![:cube]()
+# Challenge 1: Solution ![:cube]()
 
 .pull-left2[
 ```{r}
@@ -745,7 +723,7 @@ ggplot(data = penguins,
 ]
 
 ---
-# Challenge 1#: Solution ![:cube]()
+# Challenge 1: Solution ![:cube]()
 
 .pull-left2[
 ```{r}
@@ -777,12 +755,7 @@ class: inverse, center, middle
 
 **Use aesthetics (`aes()`) to distinguish classes, groups and structure**
 
-
-```{r echo = FALSE, fig.width = 8, fig.height = 6.5}
-library(gridExtra)
-source(file="./scripts/4plot_aesthetic.R")
-```
-
+![](images/4plot_aesthetic.png) 
 ---
 # Colours: make your points talk
 
@@ -800,7 +773,9 @@ ggplot(penguins,
        aes(x = bill_length_mm, 
            y = bill_depth_mm)) +
   geom_point(aes(colour = species)) +
-  labs(title = "Qualitative colour for groups") +
+  labs(title = "Qualitative colour for groups", 
+       x = "Bill length (mm)", 
+       y = "Bill depth (mm)") +  
   theme(title = element_text(size = 16, face = "bold"),
         legend.title = element_text(size = 14),
         legend.position = 'bottom')
@@ -812,8 +787,11 @@ ggplot(penguins,
 ggplot(penguins, 
        aes(x = bill_length_mm, 
            y = bill_depth_mm)) +
-  geom_point(aes(colour = body_mass_g)) +
-  labs(title = "Gradient colour for values") +
+  geom_point(aes(colour = log10(body_mass_g))) +
+  labs(title = "Gradient colour for values", 
+       x = "Bill length (mm)", 
+       y = "Bill depth (mm)", 
+       col = "Body mass (log10 g)") + 
   theme(title = element_text(size = 16, face = "bold"),
         legend.title = element_text(size = 14),
         legend.position = 'bottom')

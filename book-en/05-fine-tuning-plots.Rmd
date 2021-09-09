@@ -1,6 +1,6 @@
 # (PART\*) Fine-tuning your plots {-}
 
-# Using `theme()` to make it look good!
+# Using `theme()` to make it look good! {#theme}
 
 ## Introduction to themes
 
@@ -11,8 +11,9 @@ But, like every other part of the grammar of graphics, we can modify the theme o
 There are way too many theme elements built into the ggplot2 package to mention here, but you can find a complete list in the ggplot [theme vignette](http://docs.ggplot2.org/dev/vignettes/themes.html). Instead of
 modifying the many elements contained in `theme()`, you can start from theme functions, which contain a specific set of elements from which to start. Here are some examples:
 
-**Default: theme_grey()**
-```{r, fig.height = 5, fig.align='center'}
+### Default: Grey
+
+```{r, fig.align='center'}
 # Theme grey
 pp + scale_colour_grey() + # Make data points gray
   theme_grey() + # Make background gray
@@ -20,48 +21,44 @@ pp + scale_colour_grey() + # Make data points gray
 ```
 
 
-.pull-left[
-**Theme Classic**
-```{r, fig.height = 5}
+### Theme Classic
+
+```{r, fig.align='center'}
 pp + scale_colour_grey() +# Make data points gray
   theme_classic() + # Make background white
   labs(title = "Classic") # Title plot
 ```
-]
 
-.pull-right[
-**Theme Minimal**
-```{r, fig.height = 5}
+### Theme Minimal
+```{r, fig.align='center'}
 pp + scale_colour_grey() +
-  theme_minimal() + # Make backgorund white with gray gridlines 
+  theme_minimal() + # Make background white with gray gridlines 
   labs(title = "Minimal")
 ```
-]
+
+### Setting the theme across all plots
 
 Use `theme_set()` to change theme for all your future plots, or `theme_update()` to edit aspects of a theme setting. 
 
+#### Set theme
 
-.pull-left[
-**Set theme**
-```{r, fig.height = 4.5}
+```{r, fig.align='center'}
 # Set black & white theme as default
 theme_set(theme_bw()) # Note the background is white with a black frame
 pp
 ```
-]
 
-.pull-right[
-**Update theme**
-```{r, fig.height = 4.5}
+#### Update theme
+
+```{r, fig.align='center'}
 # remove minor gridlines 
 theme_update(
   panel.grid.minor = element_blank()) # Adjust gridline scale
 pp
 ```
-]
 
 
-```{r, include=FALSE}
+```{r, include=FALSE, purl = FALSE}
 theme_set(theme_bw())
 theme_update(panel.grid.minor = element_blank(),
              axis.text = element_text(size = 16),

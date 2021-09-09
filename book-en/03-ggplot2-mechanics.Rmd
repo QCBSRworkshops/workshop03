@@ -6,31 +6,35 @@
 
 Let's start with the basics! The package `ggplot2` is based on the Grammar of Graphics (GG), which is a framework for data visualization that dissects each component of a graph into individual components, creating distinct layers. Using the GG system, we can build graphs step-by-step for flexible, customizable results. 
 
-.center[
-![:scale 90%](images/Layers_ggplot.png)
-]
+```{r, echo=FALSE, fig.align="center", purl = FALSE}
+knitr::include_graphics("images/Layers_ggplot.png")
+```
 
 GG layers have specific names that you will see throughout the workshop:
 
-![:scale 70%](images/gglayers.png)
+```{r, echo=FALSE, fig.align="center", fig.cap = "Image adapted from [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447).", purl = FALSE}
+knitr::include_graphics("images/gglayers.png")
+```
 
-.small[image adapted from [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447)]
+:::explanation
+To make a `ggplot`, the data and mapping layers are basic **requirements**, while the other layers are for additional customization. *The layers that are "not required" are still important to think about, but you will be able to generate a basic plot without them.*
 
+```{r, echo=FALSE, fig.align="center", fig.cap = "Basic requirements to generate a `ggplot`.", purl = FALSE}
+knitr::include_graphics("images/ggplot_basics.png")
+```
+:::
 
-Here are the basic requirements to draw the simplest `ggplot`:
+## Grammar of Graphics layers
 
-.center[
-![:scale 80%](images/ggplot_basics.png)
-]
+### A breakdown of common layers
 
-## GG layer breakdown
+Here is a breakdown of each Grammar of Graphics layer and common arguments for each that can be used as a reference:
 
-Here is a breakdown of each GG layer and common arguments for each that can be used as a reference:
-
-- **Data**
+- **Data**:
     - your data, in tidy format, will provide ingredients for your plot
-    - use `dplyr` techniques to prep data for optimal plotting format
-    - usually, one row for every observation that you want to plot
+    - use `dplyr` techniques to prepare data for optimal plotting format
+    - usually, this means you should have one row for every observation that you want to plot
+    
 - **Aesthetics** (aes), to make data visible
     - `x`, `y`: variable along the x and y axis
     - `colour`: color of geoms according to data
@@ -40,6 +44,7 @@ Here is a breakdown of each GG layer and common arguments for each that can be u
     - `linetype`: the type of line used (solid, dashed, etc)
     - `size`: size scaling for an extra dimension
     - `alpha`: the transparency of the geom
+    
 - **Geometric objects** (geoms - determines the type of plot)
     * `geom_point()`: scatterplot
     * `geom_line()`: lines connecting points by increasing value of x
@@ -49,22 +54,26 @@ Here is a breakdown of each GG layer and common arguments for each that can be u
     * `geom_histogram()`: histogram for continuous x axis
     * `geom_violin()`: distribution kernel of data dispersion 
     * `geom_smooth()`: function line based on data
+    
 - **Facets**
     * `facet_wrap()` or `facet_grid()` for small multiples
+    
 - **Statistics**
     * similar to geoms, but computed
     * show means, counts, and other statistical summaries of data
+    
 - **Coordinates** - fitting data onto a page
     * `coord_cartesian` to set limits
     * `coord_polar` for circular plots
     * `coord_map` for different map projections
+    
 - **Themes**
     * overall visual defaults
     * fonts, colors, shapes, outlines
     
-# How layers in `ggplot` works
+### Putting these layers together
 
-Let's try it out! Here are the basic steps to building a plot. You can refer back to this throughout the workshop if you need help!
+Let's try it out! Here are the basic steps to build a plot. You can refer back to these steps throughout the workshop if you need help!
 
 1. Create a simple plot object:
   * `plot.object <- ggplot()`
@@ -76,22 +85,32 @@ Let's try it out! Here are the basic steps to building a plot. You can refer bac
   * `plot.object <- plot.object + coord_*() + theme()`
 
 3. Repeat step 2-3 until satisfied, then print:
-  * `plot.object` or `print(plot.object)
+  * `plot.object` or `print(plot.object)`
+
+We will come back to this syntax in Chapter \@ref(working-through-layers), where we work through the layers in greater depth!
 
 # Plotting basics with data
 
-## Prepare data for `ggplot2`
+## Today's dataset: `palmerpenguins`
 
-Now let's actually try plotting some data! This workshop will be using the dataset from the `palmerpenguins` package.
+Now let's actually try plotting some data! This workshop will be using the dataset from the `palmerpenguins` [@palmerpenguins] package.
 
-![:scale 80%](images/palmerpenguins.png)
+```{r, echo=FALSE, out.width = "30%", fig.align="center", fig.cap = "Artwork by [Allison Horst](https://twitter.com/allison_horst).", purl = FALSE}
+knitr::include_graphics("images/palmerpenguins.png")
+```
 
 This dataset contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica. These data were collected from 2007 - 2009 by Dr. Kristen Gorman with the Palmer Station Long Term Ecological Research Program, part of the US Long Term Ecological Research Network.
 
+```{r, echo=FALSE, out.width = "100%", fig.align="center", fig.cap = "Artwork by [Allison Horst](https://twitter.com/allison_horst).", purl = FALSE}
+knitr::include_graphics("images/penguins.png")
+```
 
-![:scale 60%](images/penguins.png)
-[.xsmall[Artwork by [@allison_horst](https://twitter.com/allison_horst).]]
+:::explanation
 
+This dataset is often used to replace the `iris` dataset, which has some problems for teaching data science, including its ties to eugenics (more on this at [armchairecology.blog/iris-dataset](https://armchairecology.blog/iris-dataset/)).
+
+This dataset was also used for a [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge, showing the many possibilities of visualising the dataset creatively. For example: [this](https://twitter.com/LauraNavarroSol/status/1289216490307063814?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1289216490307063814%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F), and [this](https://twitter.com/CedScherer/status/1288181995714093057?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1288181995714093057%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F).
+:::
 
 Let's take a look at the variables in the penguins dataset:
 
@@ -99,17 +118,21 @@ Let's take a look at the variables in the penguins dataset:
 str(penguins) # let's have a look at some penguin data!
 ```
 
-![:scale 50%](images/culmen_depth.png)
+```{r, echo=FALSE, out.width = "100%", fig.align="center", fig.cap = "Artwork by [Allison Horst](https://twitter.com/allison_horst).", purl = FALSE}
+knitr::include_graphics("images/culmen_depth.png")
+```
 
-Note that species, island, and sex are factor variables, which will be important for grouping the data with colour, shapes, etc. in ggplot2. There are then 2 numeric variables (bill measurements depicted in the image), and two integer variables (flipper length and body mass). The data also has a small temporal component, spanning from 2007 to 2009.
+
+Note that `species`, `island`, and `sex` are factor variables, which will be important for grouping the data with colour, shapes, and other aesthetics in `ggplot2`. There are then two numeric variables (bill measurements depicted in the image), and two integer variables (flipper length and body mass). The data also has a small temporal component (`year`), spanning the years from 2007 to 2009.
 
 `ggplot2` requires you to prepare the data as an object of class `data.frame` or `tibble` (common in the `tidyverse`).
 
 ```{r eval=TRUE, echo=TRUE}
 class(penguins) # check the class of the data to ensure it is either a data.frame or tibble for ggplot2
 
-peng <- as_tibble(penguins) # you can transform a dataset into a tibble using the as_tibble() function if need be
-class(peng)
+# you can transform a dataset into a tibble using the as_tibble() function if need be
+# peng <- tibble::as_tibble(penguins) 
+# class(peng)
 ```
 
 **&#x267B; Recall from the [*Loading and manipulating data*](https://qcbsrworkshops.github.io/workshop02/book-en/) workshop:**
@@ -124,27 +147,28 @@ What are some of the scientific questions we may want to answer with this data-s
 - Does the size of the **bill & flipper** vary together ?
 - How are these measures distributed among the **3 penguin species** ?
 
-![:scale 50%](images/culmen_depth.png)
-
 How can we graphically address these questions with `ggplot2`?
 
 ## Exploring data structure
 
-If we want a general overview of our data, we can start by using the ggpairs() function from the `GGally` package (loaded and installed in the beginning of the workshop). This will allow us to look at initial relationships and then explore them in more detail.
+If we want a general overview of our data, we can start by using the `ggpairs()` function from the `GGally` package (which we loaded and installed in the beginning of the workshop). This will allow us to look at initial relationships and then explore them in more detail.
 
-```{r, fig.width = 10.25, fig.height = 6.5}
-# Let's explore our data
-ggpairs(penguins, aes(colour = species)) + theme_bw() # Get a general overview of the data with multiple plot types
+```{r, fig.width = 10.25, fig.height = 6.5, results = 0, warning=FALSE, message=FALSE}
+## Get a general overview of the data with multiple plot types
+ggpairs(penguins, 
+        aes(colour = species),
+        progress = FALSE) + 
+  theme_bw() 
 ```
 
+:::puzzle
 We can already see some species groupings between bill length and bill depth, flipper length, and body mass. When plotting, it will be important to keep in mind that differentiating species might be important.
+:::
 
-Let's explore how some of this data is structured by species!
-
-By differentiating species, we can see that there is a pretty consistent relationship between bill length and depth across species (similar slopes), but that the ranges of these variables is different (the groupings are clearly shown by the colours). Adelie penguins tend to have smaller bill length but fairly large bill depth, while the inverse is true for Gentoo penguins.
+Do you see those groupings? We should explore how some of this data is structured by species!
 
 
-```{r, echo = TRUE, fig.height=7, fig.width=9}
+```{r, echo = TRUE, fig.height=7, fig.width=9, results='hide', message=FALSE, warning=FALSE}
 # Let's explore how some of this data is structured by species
 ggplot(data = penguins,               # Data
        aes(x = bill_length_mm,        # Your X-value
@@ -161,66 +185,118 @@ ggplot(data = penguins,               # Data
       text = element_text(size = 16))
 ```
 
-.small[&#x267B; See [*Loading and manipulating data workshop*](https://qcbsrworkshops.github.io/workshop02/pres-en/workshop02-pres-en.html#1) to learn how to clean your dataset.]
+:::puzzle
+By differentiating species, we can see that there is a pretty consistent relationship between bill length and depth across species (similar slopes), but that the ranges of these variables is different (the groupings are clearly shown by the colours). Adelie penguins tend to have smaller bill length but fairly large bill depth, while the inverse is true for Gentoo penguins.
+:::
+
+## Working through the layers {#working-through-layers}
+
+As we have discussed, a graphic is made of different layers, combined together to visually communicate information in our data. Let us build a `ggplot` graphic step by step by adding one layer at a time.
+
+`ggplot2` code is easier to read if each line represents a new element. This style is generally favoured for `ggplot2` code in the R community. This means that as you add each layer, you should start a new line.
+
+```{r, echo=FALSE, fig.align="center", fig.cap = "Image adapted from [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447).", purl = FALSE}
+knitr::include_graphics("images/gglayers.png")
+```
+
+### Data layer
+
+```{r, echo = FALSE, results=0, purl = FALSE}
+theme_set(theme_gray())
+```
+
+```{r, fig.height=5, fig.width=6}
+# Layer 1: Data
+ggplot(data = penguins) 
+# Without any other information, your data will not be visualised.
+```
+
+### Aesthetics layer
+
+In `ggplot2`, aesthetics are a group of parameters that specify what and
+how data is displayed. Here, we are telling `R` to plot `bill_length_mm` on the `x` axis and `bill_depth_mm` on the `y` axis. We have not yet told `R` *how* we want to represent the data though, so our data will not yet be plotted.
+
+```{r, fig.height=5, fig.width=6}
+# Next layer: aesthetics.
+# Here, we tell R to plot length on the x axis, and depth on the y axis
+# but we still haven't told R how we want these data to be represented...
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) 
+# See? Our variables are now assigned to the x and y axes, 
+# but nothing is plotted yet.
+```
+
+### Geometric layer
+
+Geometric objects, or `geoms`, determine the visual representation of your data. We can begin by plotting our data points as a scatter plot, to see how bill depth and bill length relate to each other.
+
+```{r, fig.height=5, fig.width=6}
+# Next layer(s): geometric object(s)
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) + # Use the plus sign to add each additional layer
+  geom_point() # The geom layer determines what style of plot we are using.
+               # geom_point() plots the data as points!
+```
+
+Note that you can add several `geoms` in one plot. For example, we could add a line on this plot to show a threshold value, or add a linear regression. For now, let us keep it simple!
+
+### Facets, coordinates, and themes
+
+Now that the dataset is plotted, we can customize the plot to clarify the message, or to add more information. Facets are a popular way of dividing a plot into several windows according to some category in the data, to visually differentiate groupings. We can explore this plot differently if we use `facet_wrap()` to create separate "facets" according to our species groupings:
+
+```{r,fig.height=5, fig.width=6}
+# Next layer(s): customizations!
+# Facets split a plot into separate windows according to some category in the data.
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) +
+  geom_point() + 
+  facet_wrap(~species) # This splits the plot into three windows: one per species
+```
+
+:::explanation
+Note: You could also use `facet_grid()` if you wanted to facet according to two variables.
+:::
+
+We can also adjust the scale of our axes in the plot itself, rather than transforming the data. Let us assume we are interested in looking at the relationship between the bill measurements on a $log_{10}$ scale.
+
+```{r,fig.height=5, fig.width=6}
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) +
+  geom_point() + 
+  facet_wrap(~species) +
+  # this transforms the axes' coordinates using log10()
+  coord_trans(x = "log10", y = "log10")
+```
+
+As a final touch, we can also customise the plot's theme, which includes its background, gridlines, and other visual characteristics of the plot. Let us assume we do not like the default grey background from ggplot2 (we would not be alone in this!). We can use `theme_bw()` to produce a more visually appealing plot. We will discuss themes in Chapter @ref/(theme)!
+
+```{r,fig.height=5, fig.width=6}
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) +
+  geom_point() + 
+  facet_wrap(~species) +
+  coord_trans(x = "log10", y = "log10") +
+  # this uses a nicer theme for our final plot
+  theme_bw()
+```
 
 
-## Working through the layers 
-
-Recall: a graphic is made of different layers. Let's work through each layer to see how they can be combined.
-
-![:scale 75%](images/gglayers.png)
-
-**Data layer**
-
-```{r, echo = FALSE, results=0}
+```{r, echo = FALSE, results=0, purl = FALSE}
+# reset the plot themes
+theme_set(theme_classic())
 theme_update(axis.text = element_text(size = 16),
              axis.title = element_text(size = 18))
 ```
 
-```{r, fig.height=5, fig.width=6}
-ggplot(data = penguins) # Without any other information, your data will not form a plot
-```
 
-*Note: theme_classic() was applied to all plots in the presentation to help with clarity using theme_set at the beginning of this slide deck. Therefore, these plots do not have the ggplot2 default grey background. There is a section about themes later in the presentation - but we wanted to mention this here in case participants see a different background when they run the code chunks on their own computers.*
+## Challenge 1
 
-**Aesthetics layer**
-
-In ggplot2, aesthetics are a group of parameters that specify what and
-how data is displayed.
-
-`ggplot2` code is easier to read if each line represents a new element. This style is generally favored for `ggplot2` code in the R community. This means that as you add each layer, you should start a new line.
-
-```{r, fig.height=5, fig.width=6}
-ggplot(data = penguins, 
-       aes(x = bill_length_mm, y = bill_depth_mm)) # This layer adds axis titles
-```
-
-**Geometric layer**
-
-Geometric objects, or `geoms`, determine the visual representation of
-your data.
-
-```{r, fig.height=5, fig.width=6}
-ggplot(data = penguins, 
-       aes(x = bill_length_mm, y = bill_depth_mm)) + # Use the plus sign to add each additional layer
-  geom_point() # The geom layer determines what style of plot we are using, this is a scatter plot
-```
-
-**Extras- facet, stats, coordination layers**
-
-
-
-```{r,fig.height=5, fig.width=6}
-ggplot(data = penguins, 
-       aes(x = bill_length_mm, y = bill_depth_mm)) +
-  geom_point() + 
-  facet_wrap(~species) + # This tells gpplot() to group by species into three separate 
-  coord_trans(x = "log10", y = "log10")
-```
-
-## Challenge #1
-
-Now it's time to try it on your own. Make your own plot in order to answer the following questions:
+Now it's time to try to build your own plot! Make a ggplot to answer the following questions:
 
 **1.** Is there a relationship between **bill length** & **flipper length**?
 
@@ -234,25 +310,42 @@ penguins|geom_point|bill_length_mm|flipper_length_mm
 
 ---
 
-**Challenge 1#: Solution**
+```{r, echo = FALSE, include = FALSE}
+# Challenge 1 ----
+# 
+# Make a ggplot to answer the following questions:
+# 1. Is there a relationship between **bill length** & **flipper length**?
+# 2. Does *bill length* increase with flipper *length*?
+```
 
-In order to answer the first question '*Is there a relationship between bill length & flipper length?* Let's create a scatter plot with bill length on the x-axis and flipper length on the y-axis.
+### Challenge 1: Solution
+
+Let's create a scatter plot with bill length on the x-axis and flipper length on the y-axis, to visualize the relationship between these two variables.
 
 ```{r, challenge-1-solution}
+# Make a scatter plot to visualize the variables
 ggplot(data = penguins, 
        aes(x = bill_length_mm,
            y = flipper_length_mm)) +
   geom_point()
 ```
 
-**Note**: aesthetics can either be in the `ggplot()` line, and will be inherited by every geom, or in the `geom_()` line to apply to that geom only! Here is an example: 
+Aesthetics can either be in the `ggplot()` line, and will be inherited by every geom, or in the `geom_()` line to apply to that geom only. Here is an example.
+
 
 ```{r, challenge-1-solution2}
+# Customize the points' shape and colour 
 ggplot(data = penguins,
        aes(x = bill_length_mm,
            y = flipper_length_mm)) +
-  geom_point(shape = 2, color = "blue") # If we want, We can change the colour and shape of the data points using aesthetics arguments within the geom later
+  geom_point(shape = 2, color = "blue") 
 ```
 
 
-**Note 2**: colour, alpha, shape, and size commands can be set outside of `aes()` values, and will be static, not data-dependent. 
+:::explanation
+Colour, alpha (transparency), shape, and size commands can be set outside of `aes()` values, and will be static, not data-dependent. Here, blue is not conveying any information in the data - it is just a choice we have made to make a prettier plot.
+:::
+
+:::puzzle
+This plot does appear to show a positive relationship between bill length and flipper length across all the measured individuals in the dataset. So, penguins with longer bills tend to have longer flippers too. We can keep digging into this relationship by building on this plot!
+:::
