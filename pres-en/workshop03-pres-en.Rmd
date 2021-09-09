@@ -949,7 +949,7 @@ We can use the package [colorblindr](https://github.com/clauswilke/colorblindr) 
 
 ```{R colorblindr_install, message = FALSE}
 install.packages("remotes", quiet = TRUE)
-remotes::install_github("clauswilke/colorblindr@1d0d5afef105df0f97715fcdd67f3203a383a2dc", quiet = TRUE)
+remotes::install_github("clauswilke/colorblindr@cc54c8a35f8e7689ef4cc128b0da3af92f8cd540", quiet = TRUE)
 library(colorblindr)
 ```
 
