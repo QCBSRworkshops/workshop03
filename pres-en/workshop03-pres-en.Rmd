@@ -108,7 +108,7 @@ class: inverse, center, middle
 
 ##### To follow along:
 
-Code and .HTML available at http://qcbs.ca/wiki/r/workshop3
+All workshop materials are found at [github.com/QCBSRworkshops/workshop03](https://github.com/QCBSRworkshops/workshop03). This includes an [R script](https://qcbsrworkshops.github.io/workshop03/book-en/workshop03-script-en.R) the code in this presentation.
 
 ##### Recommendations:
 
@@ -142,10 +142,12 @@ Code and .HTML available at http://qcbs.ca/wiki/r/workshop3
 ---
 # Learning objectives
 
-- Teach the basics of data visualization using R.
-- Find packages and resources to meet your needs.
+In this workshop, we will:
+
+- Learn the basics of data visualization using R.
+- Learn how to find packages and resources to meet your needs.
 - Inspire creativity in science!
-- Develop understanding of design for effective graphical communication.
+- Develop an understanding of design for effective visual communication.
 
 ---
 class: inverse, center, middle
@@ -961,6 +963,7 @@ Have you ever considered how your figure might appear under various forms of col
 We can use the package [colorblindr](https://github.com/clauswilke/colorblindr) to consider this. This package is not currently on CRAN, so we install it with the packages [remotes](https://cran.r-project.org/web/packages/remotes/index.html).
 
 ```{R colorblindr_install, message = FALSE}
+install.packages("remotes", quiet = TRUE)
 remotes::install_github("clauswilke/colorblindr", quiet = TRUE)
 library(colorblindr)
 ```
