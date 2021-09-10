@@ -316,6 +316,11 @@ penguins|geom_point|bill_length_mm|flipper_length_mm
 # Make a ggplot to answer the following questions:
 # 1. Is there a relationship between **bill length** & **flipper length**?
 # 2. Does *bill length* increase with flipper *length*?
+
+
+
+
+# SOLUTION # -----
 ```
 
 ### Challenge 1: Solution
