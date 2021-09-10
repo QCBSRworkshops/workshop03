@@ -20,7 +20,7 @@ When we are designed plots, we may want to change the colour of our data points 
 
 <div class = "split">
 <div class = "split-left">
-```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
+```{r, echo = FALSE, fig.height=4.8, fig.width = 5, warning=FALSE}
 ggplot(penguins,
        aes(x = bill_length_mm,
            y = bill_depth_mm)) +
@@ -34,11 +34,11 @@ ggplot(penguins,
 ```
 </div>
 <div class = "split-right">
-```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
+```{r, echo = FALSE, fig.height=4.8, fig.width = 5, warning = FALSE}
 ggplot(penguins,
        aes(x = bill_length_mm,
            y = bill_depth_mm)) +
-  geom_point(aes(colour = body_mass_g_log10)) +
+  geom_point(aes(colour = log10(body_mass_g))) +
   labs(title = "Gradient colour for values",
        x = "Bill length (mm)",
        y = "Bill depth (mm)",
@@ -50,7 +50,7 @@ ggplot(penguins,
 </div>
 </div>
 
-*Reference: [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/colour-basics.html)*
+*Reference: Fundamentals of Data Visualization [@wilke2019fundamentals].*
 
 ## Using `aes()` use to change colour
 
@@ -87,7 +87,7 @@ ggplot(data = penguins,
 In the above example, we used the `col` argument within `aes()` in order to colour our data points by species automatically. This is possible because `aes()` can call our data variables. However, this method will use a default colour palette. If we want to add specific colours to our plots, we can do it manually using `scale_colour_manual()` or `scale_fill_manual()`.
 
 
-```{r, fig.align = 'default', fig.asp=2/3}
+```{r, fig.align = 'default', fig.asp=2/3, warning = FALSE, message = FALSE}
 # Default
 
 # Let ggplot assign colours to species
@@ -102,7 +102,7 @@ pp
 ```
 
 
-```{r, fig.align = 'default', fig.asp=2/3}
+```{r, fig.align = 'default', fig.asp=2/3, warning = FALSE, message = FALSE}
 # Manual colour change
 
 # By using scale_colour_manual(),
@@ -122,7 +122,7 @@ Here, we are saving our plot as an object (`pp`), and adding elements to this ob
 
 We can do the same thing with colour gradients using `scale_colour_gradient()` if we want to communicate something different about our data. In this example, we are colouring our data points by body mass using a gradient.
 
-```{r, fig.align = 'default', fig.asp=2/3}
+```{r, fig.align = 'default', fig.asp=2/3, warning = FALSE, message = FALSE}
 # Default
 
 # Using the colour argument within aes() will use a
@@ -138,7 +138,7 @@ pp2
 ```
 
 
-```{r, fig.align = 'default', fig.asp=2/3}
+```{r, fig.align = 'default', fig.asp=2/3, warning = FALSE, message = FALSE}
 # Manual
 
 # By using scale_colour_graduent,
@@ -173,7 +173,7 @@ knitr::include_graphics("images/rcolorbrewer_palette.png")
 
 Want to see these palettes in action? Here is an example of the Dark2 palette being used to group data points with the `scale_colour_brewer()` function and the `palette` arguemnt.
 
-```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
+```{r, fig.align = 'center', fig.height = 5, fig.width=6.5, warning = FALSE, message = FALSE}
 # Palette for groups
 pp +
   scale_colour_brewer(palette = "Dark2") +
@@ -182,7 +182,7 @@ pp +
 
 There are other functions within the `RColorBrewer` package as well. By using `scale_color_viridis()`, we can use a default package that will translate from colour to gray scale without losing information. (Note that this is also an important consideration for colourblindness, which we will discuss soon).
 
-```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
+```{r, fig.align = 'center', fig.height = 5, fig.width=6.5, warning = FALSE, message = FALSE}
 # Palette for continuous values
 pp2 +
   scale_color_viridis_c()+
@@ -192,7 +192,7 @@ pp2 +
 
 Now what if we want to use just gray-scale palette for publication purposes? We can use the `scale_colour_grey()` function to colour our grouped data points.
 
-```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
+```{r, fig.align = 'center', fig.height = 5, fig.width=6.5, warning = FALSE, message = FALSE}
 # Palette for groups
 pp +
   scale_colour_grey() +
@@ -201,7 +201,7 @@ pp +
 
 Or we can use the `scale_colour_gradient()` function for continuous data, and set our low and high gradient points to black and light gray.
 
-```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
+```{r, fig.align = 'center', fig.height = 5, fig.width=6.5, warning = FALSE, message = FALSE}
 # Palette for continuous values
 pp2 +
   scale_colour_gradient(low = "grey85", high = "black") +
@@ -209,7 +209,7 @@ pp2 +
 ```
 
 
-## Colourblind-friendly palettes!
+## Colourblind-friendly palettes
 
 Have you ever considered how your figure might appear under various forms of colourblindness?
 We can use the package [colorblindr](https://github.com/clauswilke/colorblindr) to consider this. This package is not currently on CRAN, so we install it with the packages [remotes](https://cran.r-project.org/web/packages/remotes/index.html).
@@ -223,8 +223,8 @@ library(colorblindr)
 
 Let's start by testing out some colours using the `cvd_grid()` function. This will show us how our current plot looks for different forms of colourblindness.
 
-```{r}
-cvd_grid(pp) # Let's check how our plot looks with different forms of colourblindness
+```{r, warning = FALSE, message = FALSE, out.width="150%"}
+cvd_grid(pp)  # Let's check how our plot looks with different forms of colourblindness
 ```
 
 As you can see, our current colour palette is not accessible! By using [`viridis`](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html) palettes, we can guarantee our plots always communicate the same information no matter who the audience is.
@@ -233,7 +233,7 @@ As you can see, our current colour palette is not accessible! By using [`viridis
 
 Here is an example with grouped data points:
 
-```{r, fig.height = 5}
+```{r, fig.height = 5, warning = FALSE, message = FALSE}
 # Let's use a viridis palette to make our plot more accessible
 pp_viridis <- pp +
       scale_colour_viridis_d() +
@@ -242,7 +242,7 @@ pp_viridis
 ```
 
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 # Did we succeed? Let'd use cvd_grid() to check again
 cvd_grid(pp_viridis)
 # We succeeded!
@@ -254,7 +254,7 @@ cvd_grid(pp_viridis)
 Note that we are using slightly different functions for different colours (ex. `scale_colour_viridis_c()`, `scale_colour_viridis_d()`)
 
 
-```{r, fig.height = 5}
+```{r, fig.height = 5, warning = FALSE, message = FALSE}
 pp2_viridis <- pp2 +
         scale_colour_viridis_c() +
         labs(title = "Viridis palette for continuous values")
@@ -262,7 +262,7 @@ pp2_viridis
 ```
 
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 cvd_grid(pp2_viridis)
 ```
 
@@ -273,7 +273,7 @@ Now let's look beyond colour! If we want to change the shape of our data points,
 
 If we want to adjust the size of the data points instead, we can use the `size` argument in the same spot. We can also use the `alpha` argument if we want to play with transparency. Both of these are good options for continuous data.
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 # shape for groups
 ggplot(data = penguins) +
   geom_point(aes(x = bill_length_mm,
@@ -283,7 +283,7 @@ ggplot(data = penguins) +
 ```
 
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 # size and alpha for continuous values
 ggplot(data = penguins) +
   geom_point(aes(x = bill_length_mm,
@@ -342,10 +342,10 @@ mtcars |*wt* |*mpg* | *disp* and *hp*
 # One of many solutions: mtcars
 data(mtcars)
 ggplot(data = mtcars) +
-  geom_point(mapping = aes(x = wt,
-                           y = mpg,
-                           colour = disp,
-                           alpha = hp))
+  geom_point(aes(x = wt,
+                 y = mpg,
+                 colour = disp,
+                 alpha = hp))
 ```
 
 Could you use `size` instead of `alpha`? What about `shape`?
@@ -363,10 +363,11 @@ CO2 |*conc* |*uptake* | *Treatment* and *Type*
 # Another possible solution
 data(CO2)
 ggplot(data = CO2) +
-    geom_point(mapping = aes(x = conc,
-                             y = uptake,
-                             colour = Treatment,
-                             shape = Type))
+  geom_point(
+    aes(x = conc,
+        y = uptake,
+        colour = Treatment,
+        shape = Type))
 ```
 
 
@@ -379,14 +380,15 @@ Data| x | y | Aesthetics
 msleep |log10(*bodywt*) |*awake* | *vore* and *conservation*
 
 
-```{r, fig.height=3.5, fig.width=6}
+```{r, fig.height=3.5, fig.width=6, warning = FALSE, message = FALSE}
 # Another possible solution
 data(msleep)
 ggplot(data = msleep) +
-    geom_point(mapping = aes(x = log10(bodywt),
-                             y = awake,
-                             colour = vore,
-                             shape = conservation))
+  geom_point(
+    aes(x = log10(bodywt),
+        y = awake,
+        colour = vore,
+        shape = conservation))
 ```
 
 
@@ -401,11 +403,12 @@ ToothGrowth | *dose* | *len* | *supp*
 
 ```{r, message = FALSE, warning = FALSE}
 data(ToothGrowth)
-ggplot(ToothGrowth, aes(x = dose,
-                        y = len,
-                        color = supp)) +
+ggplot(ToothGrowth, 
+       aes(x = dose,
+           y = len,
+           color = supp)) +
   geom_point() +
-  geom_smooth(method = lm, formula = 'y~x')
+  geom_smooth(method = lm, formula = 'y ~ x')
 ```
 
 
@@ -421,7 +424,8 @@ Example A: x axis on the original (untransformed) scale
 
 ```{r,fig.height=4}
 ggplot(diamonds) +
-  geom_point(mapping = aes(x = carat, y = price)) +
+  geom_point(aes(x = carat, 
+                           y = price)) +
   labs(title = "Original scale")
 ```
 

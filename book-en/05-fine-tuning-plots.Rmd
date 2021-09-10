@@ -13,7 +13,7 @@ modifying the many elements contained in `theme()`, you can start from theme fun
 
 ### Default: Grey
 
-```{r, fig.align='center'}
+```{r, fig.align='center', warning = FALSE, message = FALSE}
 # Theme grey
 pp + scale_colour_grey() + # Make data points gray
   theme_grey() + # Make background gray
@@ -23,14 +23,14 @@ pp + scale_colour_grey() + # Make data points gray
 
 ### Theme Classic
 
-```{r, fig.align='center'}
+```{r, fig.align='center', warning = FALSE, message = FALSE}
 pp + scale_colour_grey() +# Make data points gray
   theme_classic() + # Make background white
   labs(title = "Classic") # Title plot
 ```
 
 ### Theme Minimal
-```{r, fig.align='center'}
+```{r, fig.align='center', warning = FALSE, message = FALSE}
 pp + scale_colour_grey() +
   theme_minimal() + # Make background white with gray gridlines 
   labs(title = "Minimal")
@@ -42,7 +42,7 @@ As you may have noticed, `ggplot` code can quickly become long when you constant
 
 #### Setting a theme
 
-```{r, fig.align='center'}
+```{r, fig.align='center', warning = FALSE, message = FALSE}
 # Set black & white theme as default
 theme_set(theme_bw()) # Note the background is white with a black frame
 pp
@@ -54,7 +54,7 @@ After using `theme_set()`, our `pp` plot is generated with the black & white the
 
 Perhaps the minor gridlines are not necessary for this plot, though we like everything else about our theme. Rather than rewriting several lines of code to respecify the theme, we can simply use `theme_update()` to adjust a specific element of our theme.
 
-```{r, fig.align='center'}
+```{r, fig.align='center', warning = FALSE, message = FALSE}
 # remove minor gridlines 
 theme_update(
   panel.grid.minor = element_blank()) # Adjust gridline scale
@@ -64,7 +64,7 @@ pp
 There! Much better!
 
 ```{r, include=FALSE, purl = FALSE}
-# quickly reset the theme for the rest of the book
+# set the theme for the rest of the book
 theme_set(theme_bw())
 theme_update(panel.grid.minor = element_blank(),
              axis.text = element_text(size = 16),
@@ -86,7 +86,7 @@ Once you become more comfortable with customizing existing ggplot [themes](http:
 
 Here is an example:
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = TRUE, eval = FALSE, warning = FALSE, message = FALSE}
 mytheme <- theme_bw() + # You can start from an existing theme to get some of the basic elements set up
            theme(plot.title = element_text(colour = "red")) +
            theme(legend.position = c(0.9, 0.9))
@@ -107,14 +107,14 @@ library(ggthemes)
 
 We can then apply some of these themes (and more) to our plot!
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 # Let's use the FiveThirtyEight blog's theme, and Tableau's color palette
 pp + 
   theme_fivethirtyeight() + 
   scale_color_tableau()
 ```
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 # Let's use Tufte's "Maximal Data, Minimal Ink" theme
 pp + 
   theme_tufte()
@@ -125,7 +125,7 @@ pp +
 
 ## Facetting by one variable
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 ggplot(data = penguins) +
   geom_point(mapping = aes(x = bill_length_mm, 
                            y = bill_depth_mm, 
@@ -138,7 +138,7 @@ ggplot(data = penguins) +
 
 ## Facetting by two variables
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 ggplot(data = penguins) +
   geom_point(mapping = aes(x = bill_length_mm, 
                            y = bill_depth_mm, 
@@ -152,14 +152,14 @@ ggplot(data = penguins) +
 
 Let us come back to our default plot that we have been building on.
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 # our default plot from before
 pp
 ```
 
 We can tune the axes and titles to make the information clearer, so the plot can speak for itself.
 
-```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=7,message=FALSE}
+```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=7,warning = FALSE, message = FALSE}
 # Tuning axes and titles to make the plot speak for itself
 pp +
   # Label the title, axes, and color legend
@@ -236,7 +236,6 @@ tips.gg
 ```{r, eval=FALSE}
 # Build the plot
 tips.gg <- ggplot(tips, 
-                  
                   # Step 1. Specify the aesthetic mapping from the axes and the legends
                   aes(x = total_bill,
                       y = tip/total_bill,
@@ -286,7 +285,7 @@ theme_update(panel.grid.minor = element_blank(),
 
 This is a blank plot, before we add any `geom_*` to represent variables in the dataset.
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 ggplot(penguins)
 ```
 
@@ -294,7 +293,7 @@ ggplot(penguins)
 
 A **histogram** is an accurate graphical representation of the distribution of numeric data. There is only one aesthetic required: the `x` variable.
 
-```{r, fig.align="center"}
+```{r, fig.align="center", warning = FALSE, message = FALSE}
 ggplot(penguins, 
        aes(x = bill_length_mm)) +
   geom_histogram() +
@@ -305,7 +304,7 @@ ggplot(penguins,
 
 A scatter plot is a great way to visualize data points for two variables. Two aesthetics are required in `geom_point()`: the `x` and `y` variables.
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 ggplot(mpg, 
        aes(x = displ, 
            y = hwy)) +
@@ -315,7 +314,7 @@ ggplot(mpg,
 
 It can, however, be difficult to discern any potential relationship in a scatter plot. You can use `geom_smooth()` to fit a line through your data with a variety of methods. Here, we will add a linear fit to the scatter plot.
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 ggplot(mpg, 
        aes(x = displ, 
            y = hwy)) +
@@ -328,7 +327,7 @@ ggplot(mpg,
 
 Boxplots are a popular way to plot the distribution of data across some grouping variable, like species. You can specify this grouping variable in  `aes()` using `group =`, or the aesthetics used to represent the data (`fill =`, `col = `, `shape = `) to generate the boxplot.
 
-```{r, fig.align="center"}
+```{r, fig.align="center", warning = FALSE, message = FALSE}
 ggplot(data = penguins, 
        aes(x = species, 
            y = bill_length_mm,
@@ -345,94 +344,104 @@ knitr::include_graphics("images/boxplot_explain.png")
 ```
 :::
 
+## Annotated boxplot: `geom_boxplot()` and `geom_signif()`
 
-Boxplot with annotations: `geom_boxplot()` and `geom_signif()`
+To help boxplots speak for themselves, we can add annotations with `geom_signif()`. The function `geom_signif()` calculates the significance of a difference between groups and adds the annotation to the plot in a single line.
 
-geom_signif calculates the significance of a difference between groups and adds the annotation to the plot in a single line.
-
-```{r, fig.align="center",fig.height=5.5, eval = FALSE}
+```{r, fig.align="center", warning = FALSE, message = FALSE}
 library(ggsignif)
 ggplot(data = penguins, 
        aes(x = species, 
            y= bill_length_mm,
            fill = species)) +
   geom_boxplot() +
-  geom_signif(comparisons = 
-                list(c("Adelie", "Gentoo")),
-              map_signif_level=TRUE)
-```
-
-
-```{r, fig.align="center",fig.height=5.5, echo = FALSE}
-library(ggsignif)
-ggplot(data = penguins, 
-       aes(x = species, 
-           y= bill_length_mm,
-           fill = species)) +
-  geom_boxplot() +
-  # specify the comparison we are interested in
-  geom_signif(comparisons = 
-                list(c("Adelie", "Gentoo")),
-              map_signif_level=TRUE)
+  geom_signif(
+    # which groups should be compared?
+    comparisons = list(c("Adelie", "Gentoo")), 
+    map_signif_level=TRUE)
 ```
 
 
 ## Violin plot: `geom_violin()`
 
-As explained on https://www.data-to-viz.com/graph/violin.html
+Like boxplots, violin plots visualise the distribution of a numeric variable for one or several groups. However, a violin's shape represents the distribution of points that is obscured in a boxplot's summarisation, allowing for a more accurate representation of the data ([Data-to-Viz)](https://www.data-to-viz.com/graph/violin.html)).
 
-> Violin plot allows to visualize the distribution of a numeric variable for one or several groups. [...] It is really close to a boxplot, but allows a deeper understanding of the distribution.
+:::explanation
+Let us compare a boxplot and a violin plot on some generated data. Notice how the violin plot *shows* us the range **and** the variability in our data, while the boxplot cannot communicate these two things as intuitively.
 
-.pull-left[
-```{r, echo=FALSE, fig.height=4.5}
-# Data
+<div class = "split">
+<div class = "split-left">
+```{r, echo=FALSE, purl = FALSE}
+# Generate some data
 names <- c(rep("A", 80) , rep("B", 50) , rep("C", 70))
 value <- c(sample(2:5, 80 ,replace=TRUE), sample(4:10, 50 , replace=TRUE),
        sample(1:7, 70 , replace=TRUE))
 data <- data.frame(names,value)
 
-#Graph
-qplot(x=names ,y=value ,data=data ,geom=c("boxplot","jitter") ,fill=names)
+# Plot it as a boxplot with the data points jittered on top
+qplot(x = names, y = value, data = data, geom = c("boxplot","jitter"), fill = names)
 ```
 
-```{r, echo=FALSE, fig.height=4.5}
+</div>
+<div class = "split-right">
+```{r, echo=FALSE, purl = FALSE}
+# plot the data as a violin plot
 ggplot(data = data, aes(names, value, fill=names)) + geom_violin()
-
 ```
+</div>
+</div>
+:::
 
 
-```{r, fig.align="center"}
+We can make a violin plot with our `penguins` data:
+
+```{r, fig.align="center", warning = FALSE, message = FALSE}
 violin <- ggplot(data = penguins, 
-                 aes(x = species, y = bill_length_mm)) +
-  geom_violin(trim = FALSE, fill = "grey70", alpha = .5) +
+                 aes(x = species, 
+                     y = bill_length_mm)) +
+  geom_violin(trim = FALSE, # do not trim the violins' tips if there are outliers
+              fill = "grey70", # set all the violins to grey
+              alpha = .5) + # transparency of the fill colour
   labs(title = "Violin plot")
 violin
 ```
 
-Violin plot: `geom_violin()` + `_boxplot()` + `_jitter()`
 
-```{r, fig.align="center"}
+Although we have a good idea of how the data is distributed, we can enhance the plot by visualising some summary statistics and the data points. Let us plot a boxplot and the data points *on top* of our violin plot with `geom_violin()` + `geom_boxplot()` + `geom_jitter()`.
+
+```{r, fig.align="center", warning = FALSE, message = FALSE}
 violin + 
-    geom_jitter(shape = 16, position = position_jitter(0.2),
-              alpha = .3)+
+  # this plots the data points with some additional (horizontal) noise
+  # to see overlapping points
+    geom_jitter(shape = 16, 
+                position = position_jitter(0.2),
+              alpha = .3) +
   geom_boxplot(width = .05)
 ```
 
-## Summarise y values: `stat_summary()`
 
-```{r, fig.height=5, fig.width=4}
+## Summarise `y` values: `stat_summary()`
+
+Adding summary statistics to your plot can help to highlight the key message in your plot. The function `stat_summary()` can run the summary statistic of your choice using the argument `fun = `, and add it to your plot according to the `geom = ` you have set in the function.
+
+For example, if we wanted to plot the median of the number of cylinders (`cyl`) in the `mtcars` dataset, we would use `stat_summary()` in the following way:
+
+```{r}
+# plot the median of the number of cylinders
 ggplot(mtcars, 
-       aes(cyl, mpg)) +
+       aes(x = cyl, y = mpg)) +
   geom_point() +
-  stat_summary(fun.y = "median", 
+  stat_summary(fun = "median", 
                geom = "point",
                colour = "red",
                size = 6) +
-  labs(title = "Means")
+  labs(title = "Medians")
 ```
 
+Though the median is a helpful summary statistics, it does not inform us about the uncertainty behind it. If we wanted to instead plot the mean of each group with bootstrapped confidence intervals, we could just switch the `fun.y = ` argument:
 
-```{r, fig.height=5, fig.width=4}
+```{r}
+# plot the mean of each group with bootstrapped confidence intervals
 ggplot(mtcars, 
        aes(cyl, mpg)) +
   geom_point() +
@@ -443,23 +452,31 @@ ggplot(mtcars,
 ```
 
 
-See also `geom_errorbar()`, `geom_pointrange()`, `geom_linerange()`, `geom_crossbar()` for geoms to display summarised data.
+For more summary statistics, see `geom_errorbar()`, `geom_pointrange()`, `geom_linerange()`, `geom_crossbar()`.
 
 
 ## Representing maps: `geom_map()`
 
+We will visualize arrests per 100,000 residents for murder in each of the 50 US states in 1973 from the `USArrests` dataset as a map using `geom_map()`.
 
 ```{r}
-crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
-crimesm <- reshape2::melt(crimes, id = 1)
-
+# load maps library
 library(maps)
-states_map <- map_data("state")
+states_map <- map_data("state") # get a state-level map of the US
 
-ggplot(crimes, aes(map_id = state)) +
-  geom_map(aes(fill = Murder), map = states_map) +
-  expand_limits(x = states_map$long, y = states_map$lat) +
-  coord_map()
+# State name is set as rownames. Let's make a new column for these
+# that matches the column of state names in our states_map
+USArrests$region <- tolower(rownames(USArrests))
+
+# Build our map
+ggplot(USArrests, 
+       aes(map_id = region)) + # the variable name to link our map and dataframe
+  geom_map(aes(fill = Murder), # variable we want to represent with an aesthetic
+           map = states_map) + # data frame that contains coordinates
+  expand_limits(x = states_map$long, 
+                y = states_map$lat) +
+  coord_map() +  # projection 
+  labs(x = "", y = "") # remove axis labels
 ```
 
 
@@ -467,60 +484,94 @@ ggplot(crimes, aes(map_id = state)) +
 
 A density plot shows the distribution of a numerical variable and it takes only set of numeric values as input.
 
-```{r, echo=TRUE, fig.width=5, fig.height=4.4}
-(peng.dens <- 
-   ggplot(penguins, 
-          aes(bill_length_mm)) +
+```{r, echo=TRUE, warning = FALSE, message = FALSE}
+(peng.dens <- ggplot(penguins, 
+                     aes(x = bill_length_mm)) +
    geom_density())
 ```
 
-```{r, echo=TRUE, fig.width=5, fig.height=4.4}
-(cars.dens <- 
-   ggplot(cars, aes(dist)) +
+```{r, echo=TRUE, warning = FALSE, message = FALSE}
+(cars.dens <- ggplot(cars, 
+                    aes(x = dist)) +
    geom_density())
 ```
 
 
 ## Dendogram: `ggdendrogram()`
 
+Which US states have similar arrest rates?
+
 ```{r}
 library(ggdendro)
-USArrests.short = USArrests[1:10,]
-hc <- hclust(dist(USArrests.short), "ave")
 
-ggdendrogram(hc, rotate = TRUE, theme_dendro = FALSE)
+USArrests.short <- USArrests[1:10,] # take a small sample for simplicity
+hc <- hclust(dist(USArrests.short), "average") # cluster by average distance (UPGMA)
+
+# plot the clustering dendrogram
+ggdendrogram(hc, rotate = TRUE)
 ```
+
+
 
 
 ## Arrange plots: `patchwork`
 
-**Add multiple graphs on the same plot**
+So far, we have used facets to split our plot into multiple windows. However, this is restricted to plotting the same variables from the same dataset. 
 
-```{r, fig.width=9, fig.height=5, message=FALSE, warning=FALSE}
+The `patchwork` package makes it easy to arrange separate ggplots together in one frame with `+` (arrange plots beside each other), `/` (arrange one plot on top of the other), `()` (group this arrangement of plots)  as though you are writing an equation.
+
+```{r, message=FALSE, warning=FALSE}
+# load patchwork to arrange our density plots
 library(patchwork)
+
+# adding them together means "place them beside each other"
 peng.dens + cars.dens +
-  plot_annotation(tag_levels = 'a')
+  plot_annotation(tag_levels = 'a') # adds a) and b) to your plots, to reference
+# in your figure captions.
 ```
 
-## Final Challenge
 
-Create your own graph and follow these recommendations:
+## Challenge 4
+
+Create your own ggplot and follow these recommendations:
   * Dataset: any (recommended: use your dataset)
-  * Explore a new geom_* and other plot elements
+  * Explore a new geom_* and other plot elements (recall Chapter @ref/(#gg-layers))
 
-Use the following links for tips:
-https://ggplot2.tidyverse.org/reference/index.html
-http://shinyapps.stat.ubc.ca/r-graph-catalog/
+Use the following links for tips and inspiration:  
+
+- [ggplot2 Reference](https://ggplot2.tidyverse.org/reference/index.html)  
+- [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)  
+- [Data to Viz](https://www.data-to-viz.com/)
+
+```{r, echo = FALSE, include = FALSE}
+# Challenge 4 ----
+
+# Create your own ggplot and follow these recommendations:
+#   * Dataset: any (recommended: use your dataset)
+#   * Explore a new geom_* and other plot elements (recall Chapter @ref/(#gg-layers))
+# 
+# Use the following links for tips and inspiration:  
+# 
+# - [ggplot2 Reference](https://ggplot2.tidyverse.org/reference/index.html)  
+# - [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)  
+# - [Data to Viz](https://www.data-to-viz.com/)
+
+
+
+
+# SOLUTION # -----
+```
 
 ---
 
-**Final Challenge: Solution**
+### Challenge 4: Solution example 1
 
-```{r, fig.align='center',fig.height=4}
+```{r, fig.align='center', warning = FALSE, message = FALSE}
 data(msleep)
-msleep.challenge4 <- ggplot(msleep, 
-                            aes(x = vore, y = log10(brainwt), fill = vore))
-msleep.challenge4 + 
+ggplot(msleep, 
+       aes(x = vore, 
+           y = log10(brainwt), 
+           fill = vore)) + 
   geom_violin() +
   geom_signif(comparisons = list(c("herbi", "insecti"))) +
   labs(main = "Brain weight among different vore", 
@@ -529,15 +580,16 @@ msleep.challenge4 +
   theme_classic()
 ```
 
-Solution example #2
+### Challenge 4: Solution example 2
 
-```{r, fig.align='center', fig.width=5, fig.height=4}
+```{r, fig.align='center', warning = FALSE, message = FALSE}
 data(mtcars)
+# let's do some clustering!
 mtcars.short <- mtcars[1:20,]
-mtcars.short.hc <- hclust(dist(mtcars.short), "complete")
-dendro.challenge4 <- ggdendrogram(mtcars.short.hc, 
-                                  rotate = TRUE, theme_dendro = FALSE)
-dendro.challenge4 + 
+mtcars.short.hc <- hclust(dist(mtcars.short), "average")
+
+ggdendrogram(mtcars.short.hc, rotate = TRUE) + 
+  # fine-tuning
   labs(title = "Car dendro from motor spec", y ="Cars") +
   theme(axis.title.y = element_text(size = 16),
         axis.text.y = element_text(size = 12),
@@ -548,15 +600,19 @@ dendro.challenge4 +
 
 ## Miscellaneous: interactive plots using `plotly()`
 
-**Select the species data to display directly from the legend**
+The `plotly()` library contains the function `ggplotly()`, which translates your `ggplot` code into an interactive `plotly` object in one line of code.
 
+:::explanation
 You can click on the species in the legend to add/remove species. You can also see values while hovering over points.
+:::
 
-```{r, echo = TRUE, fig.width=10, fig.height=5}
+```{r, echo = TRUE, fig.width=10, fig.height=5, warning = FALSE, message = FALSE}
 library(plotly)
 p <- ggplot(penguins,
-           aes(x = bill_length_mm, y = bill_depth_mm, 
-               colour = species, shape = species)) +
+           aes(x = bill_length_mm, 
+               y = bill_depth_mm, 
+               colour = species, 
+               shape = species)) +
     geom_point(size=6, alpha=0.6)
 # convert to a plotly object!
 ggplotly(p)

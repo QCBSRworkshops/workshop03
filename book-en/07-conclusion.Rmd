@@ -6,44 +6,38 @@ There are other useful packages that can be used with `ggplot2`!
 
 To name a few: `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` and `ggtree`. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) for other `ggplot2` extensions.
 
-Note that you can learn more about design and image manipulation with the QCBS workshop "Introduction to graphic design and image manipulation with open source tools": https://qcbs.ca/wiki/graphics
+Note that you can learn more about design and image manipulation with the QCBS workshop ["Introduction to graphic design and image manipulation with open source tools"](https://wiki.qcbs.ca/graphics).
 
 # Additional resources
 
+## Reference documents
+
+- `help(package = ggplot2)`
 - [Data Visualization with ggplot2 Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+- [ggplot2 Reference](http://ggplot2.tidyverse.org/reference/)
 
-- https://www.rstudio.com/resources/cheatsheets
+## Books
 
-* `help(package = ggplot2)`
-* http://ggplot2.tidyverse.org/reference/
-* Fundamentals of Data Visualization https://serialmentor.com/dataviz/
+- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)  
 
 ![](images/ggplot_book.png)
+
+## Inspiration and guides
+
+- [From Data to Viz](https://www.data-to-viz.com/)
+- [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base R)
+- [Graphics Principles](https://graphicsprinciples.github.io/) (design tips)
+- [The R Graph gallery](https://www.r-graph-gallery.com)
+
+## Lecture notes
 
 Lecture notes from Hadley's course Stat 405 (the other lessons are
 awesome too!)
 
 -   <http://stat405.had.co.nz/lectures/11-adv-data-manip.pdf>
 -   <http://stat405.had.co.nz/lectures/19-tables.pdf>
-
-**BONUS!** Check out R style guides to help format your scripts for easy
-reading:
-
--   <http://adv-r.had.co.nz/Style.html>
-
   
 # References {-}
-
-- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/) (ggplot)
-
-- [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base plot)
-
-- [Graphics Principles](https://graphicsprinciples.github.io/) (design tips)
-
-- [The R Graph gallery](https://www.r-graph-gallery.com)
-
-- [The R Graph Catalog](http://shinyapps.stat.ubc.ca/r-graph-catalog/)
-
 
 
 

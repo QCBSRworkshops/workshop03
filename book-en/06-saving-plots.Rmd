@@ -1,11 +1,8 @@
 # (PART\*) Saving your plots {-}
 
-# Saving your plots with `ggplot2`
-
-## Saving plots in code
+# Saving your plots in code
 
 In RStudio, there are many options available to you to save your figures. You could copy them to the clipboard, but it is preferable to export them as a file type of your choice (or export them as any file type (png, jpg, emf, tiff, pdf, metafile, etc).
-
 
 `ggsave()` is a useful command that saves directly to your working directory and allows you to specify the name of your new file, the dimensions of the plot, the resolution, etc.
 
@@ -22,10 +19,13 @@ ggsave(filename = "my1stPlot.pdf", # Name the file you want to save to, add exte
        width = 11, 
        units = "in") 
 
-## Tip:`quartz()` (mac) or `window()` (pc) functions make sizing easier before `ggsave()`!
+# Tip:`quartz()` (mac) or `window()` (pc) functions make sizing easier before `ggsave()`! 
+# Just plot your ggplot in quartz() or window(), adjust the size until it looks good, 
+# and run ggsave() with the filename to see which dimensions you used! You can 
+# then add this in your code with height = and width = as shown above.
 ```
 
-*Note*: Think about the margin of the document you are using. If you resize the image after saving it, the labels and text will change size as well which could be hard to read. Also not that vector format (e.g., pdf, svg) is more flexible than raster format (jpeg, png, ...) if the image needs modification afterwards. 
+Think about the margin of the document you are using. If you resize the image after saving it, the labels and text will change size as well which could be hard to read. Also note that vector format (e.g., pdf, svg) is more flexible than raster format (jpeg, png, ...) if the image needs modification afterwards. 
 
 If you prefer raster format, you can check out other methods to save image using `?pdf` `?jpeg`.
 
@@ -43,6 +43,3 @@ pdf("./graph_du_jour.pdf")
   print(my2ndPlot)
 graphics.off()
 ```
-
-
-

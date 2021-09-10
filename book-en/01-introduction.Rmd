@@ -13,6 +13,7 @@ You should also make sure you have downloaded, installed, and loaded these packa
 -    [maps](http://cran.r-project.org/web/packages/maps/index.html)
 -    [mapproj](http://cran.r-project.org/web/packages/mapproj/index.html)
 -    [RColorBrewer](http://cran.r-project.org/web/packages/RColorBrewer/index.html)
+-    [reshape2](http://cran.r-project.org/web/packages/reshape2/index.html)
 -    [GGally](http://cran.r-project.org/web/packages/GGally/index.html)
 -    [patchwork](http://cran.r-project.org/web/packages/patchwork/index.html)
 -    [plotly](http://cran.r-project.org/web/packages/plotly/index.html)
@@ -21,9 +22,12 @@ You should also make sure you have downloaded, installed, and loaded these packa
 To install them from CRAN, run:
 
 ```{r install_pkgs, message=FALSE, warning=FALSE, include=FALSE, results=0, purl = FALSE}
+# set CRAN mirror
+options(repos = list(CRAN="http://cran.rstudio.com/"))
+
 # Standard procedure to check and install packages and their dependencies, if needed.
 
-list.of.packages <- c('gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer','GGally', 'patchwork','plotly', 'palmerpenguins')
+list.of.packages <- c('gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'reshape2', 'GGally', 'patchwork','plotly', 'palmerpenguins')
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
@@ -48,6 +52,7 @@ install.packages("ggdendro")
 install.packages("maps")
 install.packages("mapproj")
 install.packages("RColorBrewer")
+install.packages("reshape2")
 install.packages("GGally")
 install.packages("patchwork")
 install.packages("plotly")
@@ -65,6 +70,7 @@ library(ggdendro)
 library(maps)
 library(mapproj)
 library(RColorBrewer)
+library(reshape2)
 library(GGally)
 library(patchwork)
 library(plotly)

@@ -24,7 +24,7 @@ knitr::include_graphics("images/ggplot_basics.png")
 ```
 :::
 
-## Grammar of Graphics layers
+## Grammar of Graphics layers {#gg-layers}
 
 ### A breakdown of common layers
 
@@ -89,7 +89,7 @@ Let's try it out! Here are the basic steps to build a plot. You can refer back t
 
 We will come back to this syntax in Chapter \@ref(working-through-layers), where we work through the layers in greater depth!
 
-# Plotting basics with data
+# The basics of visualizing data
 
 ## Today's dataset: `palmerpenguins`
 
@@ -109,7 +109,7 @@ knitr::include_graphics("images/penguins.png")
 
 This dataset is often used to replace the `iris` dataset, which has some problems for teaching data science, including its ties to eugenics (more on this at [armchairecology.blog/iris-dataset](https://armchairecology.blog/iris-dataset/)).
 
-This dataset was also used for a [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge, showing the many possibilities of visualising the dataset creatively. For example: [this](https://twitter.com/LauraNavarroSol/status/1289216490307063814?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1289216490307063814%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F), and [this](https://twitter.com/CedScherer/status/1288181995714093057?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1288181995714093057%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F).
+This dataset was also used for a [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge, showing the many possibilities of visualizing the dataset creatively. For example: [this](https://twitter.com/LauraNavarroSol/status/1289216490307063814?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1289216490307063814%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F), and [this](https://twitter.com/CedScherer/status/1288181995714093057?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1288181995714093057%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F).
 :::
 
 Let's take a look at the variables in the penguins dataset:
@@ -231,7 +231,7 @@ ggplot(data = penguins,
 
 Geometric objects, or `geoms`, determine the visual representation of your data. We can begin by plotting our data points as a scatter plot, to see how bill depth and bill length relate to each other.
 
-```{r, fig.height=5, fig.width=6}
+```{r, fig.height=5, fig.width=6, message = FALSE, warning = FALSE}
 # Next layer(s): geometric object(s)
 ggplot(data = penguins, 
        aes(x = bill_length_mm, 
@@ -246,7 +246,7 @@ Note that you can add several `geoms` in one plot. For example, we could add a l
 
 Now that the dataset is plotted, we can customize the plot to clarify the message, or to add more information. Facets are a popular way of dividing a plot into several windows according to some category in the data, to visually differentiate groupings. We can explore this plot differently if we use `facet_wrap()` to create separate "facets" according to our species groupings:
 
-```{r,fig.height=5, fig.width=6}
+```{r,fig.height=5, fig.width=6, warning = FALSE}
 # Next layer(s): customizations!
 # Facets split a plot into separate windows according to some category in the data.
 ggplot(data = penguins, 
@@ -262,7 +262,7 @@ Note: You could also use `facet_grid()` if you wanted to facet according to two 
 
 We can also adjust the scale of our axes in the plot itself, rather than transforming the data. Let us assume we are interested in looking at the relationship between the bill measurements on a $log_{10}$ scale.
 
-```{r,fig.height=5, fig.width=6}
+```{r,fig.height=5, fig.width=6, warning = FALSE}
 ggplot(data = penguins, 
        aes(x = bill_length_mm, 
            y = bill_depth_mm)) +
@@ -272,9 +272,9 @@ ggplot(data = penguins,
   coord_trans(x = "log10", y = "log10")
 ```
 
-As a final touch, we can also customise the plot's theme, which includes its background, gridlines, and other visual characteristics of the plot. Let us assume we do not like the default grey background from ggplot2 (we would not be alone in this!). We can use `theme_bw()` to produce a more visually appealing plot. We will discuss themes in Chapter @ref/(theme)!
+As a final touch, we can also customise the plot's theme, which includes its background, gridlines, and other visual characteristics of the plot. Let us assume we do not like the default grey background from ggplot2 (we would not be alone in this!). We can use `theme_bw()` to produce a more visually appealing plot. We will discuss themes in Chapter \@ref(theme)!
 
-```{r,fig.height=5, fig.width=6}
+```{r,fig.height=5, fig.width=6, warning = FALSE}
 ggplot(data = penguins, 
        aes(x = bill_length_mm, 
            y = bill_depth_mm)) +
@@ -327,7 +327,7 @@ penguins|geom_point|bill_length_mm|flipper_length_mm
 
 Let's create a scatter plot with bill length on the x-axis and flipper length on the y-axis, to visualize the relationship between these two variables.
 
-```{r, challenge-1-solution}
+```{r, warning = FALSE}
 # Make a scatter plot to visualize the variables
 ggplot(data = penguins, 
        aes(x = bill_length_mm,
@@ -338,7 +338,7 @@ ggplot(data = penguins,
 Aesthetics can either be in the `ggplot()` line, and will be inherited by every geom, or in the `geom_()` line to apply to that geom only. Here is an example.
 
 
-```{r, challenge-1-solution2}
+```{r, warning = FALSE}
 # Customize the points' shape and colour 
 ggplot(data = penguins,
        aes(x = bill_length_mm,
