@@ -38,9 +38,9 @@ pp + scale_colour_grey() +
 
 ### Setting the theme across all plots
 
-Use `theme_set()` to change theme for all your future plots, or `theme_update()` to edit aspects of a theme setting. 
+As you may have noticed, `ggplot` code can quickly become long when you constantly need to specify the characteristics of the theme you want to use. When you are making multiple plots and want them to all have the same theme, you can simple use `theme_set()` to set the theme for all plots that are generated afterwards, or `theme_update()` to edit elements of an existing theme setting without rewriting all the other theme elements.
 
-#### Set theme
+#### Setting a theme
 
 ```{r, fig.align='center'}
 # Set black & white theme as default
@@ -48,7 +48,11 @@ theme_set(theme_bw()) # Note the background is white with a black frame
 pp
 ```
 
-#### Update theme
+After using `theme_set()`, our `pp` plot is generated with the black & white theme `theme_bw()`. Any future plots generated in your R session would also be generated with this theme.
+
+#### Updating a theme
+
+Perhaps the minor gridlines are not necessary for this plot, though we like everything else about our theme. Rather than rewriting several lines of code to respecify the theme, we can simply use `theme_update()` to adjust a specific element of our theme.
 
 ```{r, fig.align='center'}
 # remove minor gridlines 
@@ -57,8 +61,10 @@ theme_update(
 pp
 ```
 
+There! Much better!
 
 ```{r, include=FALSE, purl = FALSE}
+# quickly reset the theme for the rest of the book
 theme_set(theme_bw())
 theme_update(panel.grid.minor = element_blank(),
              axis.text = element_text(size = 16),
@@ -68,84 +74,126 @@ theme_update(panel.grid.minor = element_blank(),
 
 ## Elements of a theme
 
-Here is a helpful infographic so you can customize your theme to your exact needs!
+Here is a helpful infographic to help you customize your theme to fit your exact needs!
 
 ```{r, echo=FALSE, fig.align="center", fig.cap = "ggplot2 theme reference sheet by Isabella Benabaye ([source](https://isabella-b.com/blog/ggplot2-theme-elements-reference/)).", purl = FALSE}
 knitr::include_graphics("images/ggthemes.png")
 ```
 
+## Building your own theme
 
-If you want, you can even build your own theme and then apply it to all your figures to make them match. Here is an example:
+Once you become more comfortable with customizing existing ggplot [themes](http://docs.ggplot2.org/dev/vignettes/themes.html), you might want to think about creating your own theme to add to your plots. This is a great way to make your plots stand out in a presentation, a publication, a website, or wherever else they find a home!
+
+Here is an example:
 
 ```{r, echo = TRUE, eval = FALSE}
-mytheme <- theme_bw() + # Create an object with all your theme settings
+mytheme <- theme_bw() + # You can start from an existing theme to get some of the basic elements set up
            theme(plot.title = element_text(colour = "red")) +
            theme(legend.position = c(0.9, 0.9))
 pp + mytheme # Apply it to your plot!
 ```
 
 
-## Using `facet_grid()` to change the arrangement of plots
+## More themes
 
-penguins dataset: per-species facets
-```{r, fig.align="center", fig.width=10, fig.height=5.5}
+The [ggthemes](https://github.com/jrnold/ggthemes) package is a great project developed by Jeffrey Arnold on GitHub and also hosted on the CRAN repository. The package contains many themes, geoms, and colour ramps for `ggplot2` which are based on the works of some of the most renown and influential names in the world of data visualization, from the classics such as [Edward Tufte](http://www.edwardtufte.com/tufte/) to the modern data journalists and programmers at [FiveThirtyEight](http://fivethirtyeight.com/) blog.
+
+The package can be installed as follows:
+
+```{r, message = FALSE, results='hide'}
+install.packages("ggthemes")
+library(ggthemes)
+```
+
+We can then apply some of these themes (and more) to our plot!
+
+```{r}
+# Let's use the FiveThirtyEight blog's theme, and Tableau's color palette
+pp + 
+  theme_fivethirtyeight() + 
+  scale_color_tableau()
+```
+
+```{r}
+# Let's use Tufte's "Maximal Data, Minimal Ink" theme
+pp + 
+  theme_tufte()
+```
+
+
+# Using facets to split up your plot
+
+## Facetting by one variable
+
+```{r}
 ggplot(data = penguins) +
   geom_point(mapping = aes(x = bill_length_mm, 
                            y = bill_depth_mm, 
                            colour = species)) +
-  facet_grid(~ species, scales = "free")
+  facet_grid(~ species, 
+             scales = "free") # the scale of the y axis can vary between facets.
+# do not do this if you are comparing facets via the y axis!
 ```
 
 
-CO2 dataset: per-type facets
-```{r, fig.align="center", fig.width=9, fig.height=5}
-ggplot(data = CO2) +
-  geom_point(mapping = aes(x = conc, 
-                           y = uptake, 
-                           colour = Treatment)) +
-  xlab("CO2 Concentration (mL/L)") + 
-  ylab("CO2 Uptake (umol/m^2 sec)") +
-  facet_grid(~ Type)
+## Facetting by two variables
+
+```{r}
+ggplot(data = penguins) +
+  geom_point(mapping = aes(x = bill_length_mm, 
+                           y = bill_depth_mm, 
+                           colour = species)) +
+  facet_grid(year ~ species, 
+             scales = "free")
 ```
 
 
 ## Title and axes components: size, colour and face
 
-.pull-left[
-**Default**
-<br><br>
-```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=7}
+Let us come back to our default plot that we have been building on.
+
+```{r}
+# our default plot from before
 pp
 ```
 
+We can tune the axes and titles to make the information clearer, so the plot can speak for itself.
 
-.pull-right[
-**Axes and title tuning**
-<br><br>
 ```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=7,message=FALSE}
+# Tuning axes and titles to make the plot speak for itself
 pp +
+  # Label the title, axes, and color legend
   labs(title = "Relationship between Bill Length & Depth",
        x = "Bill Length (mm)",
        y = "Bill Depth (mm)",
        col = "Species") +
+  # adjust the size of these labels
   theme(axis.title.x = element_text(size = 16),
         axis.title.y = element_text(size = 16),
         axis.text.x = element_text(size = 12),
         axis.text.y = element_text(size = 12),
-        plot.title = element_text(size = 16, face="bold"),
-        legend.title = element_text(size=14, face="bold"),
+        plot.title = element_text(size = 16, face="bold"), # bold the title
+        legend.title = element_text(size=14, face="bold"), # bold the legend title
         legend.text = element_text(size=12))
 ```
 
-]
 
-## Challenge #3
 
-Use the `tips` dataset found in `reshape2` &#x1F4E6; to reproduce the plot below.
+## Challenge 3
 
-Our tip: start from `theme_classic()` and add `theme()` to make your additional changes.
+Use the `tips` dataset found in `reshape2` &#x1F4E6; to reproduce the plot below. 
 
-```{r, echo=FALSE, fig.width=10, fig.height=5}
+```{r}
+# install and load the package
+install.packages("reshape2")
+library(reshape2)
+```
+
+:::puzzle
+Our tip: Go step by step! When fine-tuning your plot, start from `theme_classic()` and add `theme()` to make your additional changes.
+:::
+
+```{r, echo=FALSE, purl = FALSE}
 library(reshape2)
 tips.gg <- ggplot(tips, aes(x = total_bill,
                             y = tip/total_bill,
@@ -167,107 +215,67 @@ tips.gg <- ggplot(tips, aes(x = total_bill,
         strip.text.x = element_text(size = 14, face="bold"))
 tips.gg
 ```
+
+```{r, echo = FALSE, include = FALSE}
+# Challenge 3 ----
+# 
+# Use the tips dataset found in the package reshape2 to reproduce the plot in the slide or book.
+# Our tip: start from theme_classic() and add theme() to make your additional changes.
+
+
+
+
+# SOLUTION # -----
+```
+
 
 ---
 
-**Challenge #3: Solution**
+### Challenge 3: Solution
 
 ```{r, eval=FALSE}
-library(reshape2)
-tips.gg <- ggplot(tips, aes(x = total_bill,
-                            y = tip/total_bill,
-                            shape = smoker,
-                            colour = sex,
-                            size = size)) +
+# Build the plot
+tips.gg <- ggplot(tips, 
+                  
+                  # Step 1. Specify the aesthetic mapping from the axes and the legends
+                  aes(x = total_bill,
+                      y = tip/total_bill,
+                      shape = smoker,
+                      colour = sex,
+                      size = size)) +
+  # Step 2. Specify the geom used to represent the data
   geom_point() +
+  # Step 3. Specify the variable used to make facets
   facet_grid( ~ time) +
+  # Step 4. set the colour scale used to represent sex 
   scale_colour_grey() +
+  # Step 5. Label the plot title and axes
   labs(title = "Relation between total bill and tips during lunch and dinner",
-       x = "Total bill ($)", y = "Ratio between tips and total bill") +
+       x = "Total bill ($)", 
+       y = "Ratio between tips and total bill") +
+  # Step 6. Set the theme
   theme_classic() +
+  # Step 7. Customise the theme to match the sizing and colour of the plot labels
   theme(axis.title = element_text(size = 16,
                                   colour = "navy"),
         axis.text = element_text(size = 12),
         plot.title = element_text(size = 16,
                                   colour = "orange3",
                                   face = "bold"),
+        # this part adjusts the text in the facet labels (strips!)
         strip.text.x = element_text(size = 14, face="bold"))
+# print our beautiful plot!
 tips.gg
 ```
-
-Step-by-step solution
-
-`aes()`
-
-```{r, fig.width = 6, fig.height=4}
-tips.gg <- ggplot(tips) +
-  geom_point(mapping = aes(x = total_bill, 
-                           y = tip/total_bill,
-                           shape = smoker, 
-                           colour = sex, 
-                           size = size)) +
-  theme_classic()
-tips.gg
-```
-
-```{r, include=FALSE, eval = FALSE}
-theme_set(theme_classic())
-```
-
-
- `facet_grid()`
-
-```{r, fig.width=7, fig.height=5}
-tips.gg <- tips.gg +
-  facet_grid(~ time)
-tips.gg
-```
-
-
-Grey-scale palette
-
-```{r, fig.width=7,fig.height=5}
-tips.gg <- tips.gg +
-  scale_colour_grey()
-tips.gg
-```
-
-
-Adding plot title and labels
-
-```{r, fig.width=7,fig.height=5}
-tips.gg <- tips.gg +
-  labs(title = "Relation between total bill and tips during lunch and dinner",
-       x = "Total bill ($)", y = "Ratio between tips and total bill")
-tips.gg
-```
-
-
-Adding a theme and fine tuning it
-
-.small[
-```{r, fig.width=6, fig.height=4}
-tips.gg <- tips.gg +
-  theme_classic() +
-  theme(axis.title = element_text(size = 16, colour = "navy"),
-        axis.text = element_text(size = 12),
-        plot.title = element_text(size = 16, colour = "orange3", face = "bold"),
-        strip.text.x = element_text(size = 14, face = "bold"))
-tips.gg
-```
-]
 
 
 # Using `geom_*()` to create different plots
 
-## `ggplot2::geom_*()`
+Multiple geoms can be used together in a single plot! The order determines how they overlap.
 
-note: Multiple geoms can be used together! The order determines how they overlap.
-
-.center[
-![:scale 85%](images/plots_in_various_contexts.png)
-]
-
+```{r, echo=FALSE, fig.align="center", purl = FALSE}
+knitr::include_graphics("images/plots_in_various_contexts.png")
+```
 
 ```{r, include=FALSE}
 theme_set(theme_bw())
@@ -278,7 +286,7 @@ theme_update(panel.grid.minor = element_blank(),
 
 This is a blank plot, before we add any `geom_*` to represent variables in the dataset.
 
-```{r, fig.align="center",fig.height=5}
+```{r}
 ggplot(penguins)
 ```
 
@@ -286,7 +294,7 @@ ggplot(penguins)
 
 A **histogram** is an accurate graphical representation of the distribution of numeric data. There is only one aesthetic required: the `x` variable.
 
-```{r, fig.align="center", fig.height=5}
+```{r, fig.align="center"}
 ggplot(penguins, 
        aes(x = bill_length_mm)) +
   geom_histogram() +
@@ -295,54 +303,53 @@ ggplot(penguins,
 
 ## Scatterplot and linear-fit: `geom_point()` and `geom_smooth()`
 
-.small[
-.pull-left[
-```{r, fig.height=5}
-ggplot(mpg, aes(displ, hwy)) +
+A scatter plot is a great way to visualize data points for two variables. Two aesthetics are required in `geom_point()`: the `x` and `y` variables.
+
+```{r}
+ggplot(mpg, 
+       aes(x = displ, 
+           y = hwy)) +
   geom_point() +
   labs(title = "Scatterplot")
 ```
-]
 
-.pull-right[
-```{r, fig.height=4.5}
-ggplot(mpg, aes(displ, hwy)) +
+It can, however, be difficult to discern any potential relationship in a scatter plot. You can use `geom_smooth()` to fit a line through your data with a variety of methods. Here, we will add a linear fit to the scatter plot.
+
+```{r}
+ggplot(mpg, 
+       aes(x = displ, 
+           y = hwy)) +
   geom_point() +
-  labs(title = "Linear Regression") +
-  geom_smooth(method = lm)
+  geom_smooth(method = lm) +
+  labs(title = "Linear Regression") 
 ```
-]
-]
+
 ## Boxplot: `geom_boxplot()`
 
-```{r, fig.align="center", fig.height=5}
+Boxplots are a popular way to plot the distribution of data across some grouping variable, like species. You can specify this grouping variable in  `aes()` using `group =`, or the aesthetics used to represent the data (`fill =`, `col = `, `shape = `) to generate the boxplot.
+
+```{r, fig.align="center"}
 ggplot(data = penguins, 
        aes(x = species, 
            y = bill_length_mm,
-           fill = species)) +
+           fill = species)) + # specify species as a grouping variable
   geom_boxplot() +
   labs(title = "Boxplot")
 ```
 
+:::explanation
+Though boxplots are very popular to summarise data, someone looking at your plot may not intuitively grasp how this summary works and what it might be hiding. Using boxplots well requires an understanding of their anatomy, as seen below. More on the pitfalls of boxplots [here](https://www.data-to-viz.com/caveat/boxplot.html).
 
-```{r, echo=FALSE, fig.align="center", fig.width = 5, fig.height = 3.2}
-ggplot(data = penguins, 
-       aes(x = species, 
-           y = bill_length_mm,
-           fill = species)) +
-  geom_boxplot() +
-  labs(title = "Boxplot")
+```{r, echo=FALSE, fig.align="center", fig.cap = "Anatomy of a boxplot by [Denise Coleman](https://www.leansigmacorporation.com/box-plot-with-minitab/).", purl = FALSE}
+knitr::include_graphics("images/boxplot_explain.png")
 ```
+:::
 
-.center[
-![:scale 75%](images/boxplot_explain.png)
-]
 
 Boxplot with annotations: `geom_boxplot()` and `geom_signif()`
 
 geom_signif calculates the significance of a difference between groups and adds the annotation to the plot in a single line.
 
-.pull-left3[
 ```{r, fig.align="center",fig.height=5.5, eval = FALSE}
 library(ggsignif)
 ggplot(data = penguins, 
@@ -354,8 +361,8 @@ ggplot(data = penguins,
                 list(c("Adelie", "Gentoo")),
               map_signif_level=TRUE)
 ```
-]
-.pull-right3[
+
+
 ```{r, fig.align="center",fig.height=5.5, echo = FALSE}
 library(ggsignif)
 ggplot(data = penguins, 
@@ -368,7 +375,6 @@ ggplot(data = penguins,
                 list(c("Adelie", "Gentoo")),
               map_signif_level=TRUE)
 ```
-]
 
 
 ## Violin plot: `geom_violin()`
@@ -388,13 +394,12 @@ data <- data.frame(names,value)
 #Graph
 qplot(x=names ,y=value ,data=data ,geom=c("boxplot","jitter") ,fill=names)
 ```
-]
-.pull-right[
+
 ```{r, echo=FALSE, fig.height=4.5}
 ggplot(data = data, aes(names, value, fill=names)) + geom_violin()
 
 ```
-]
+
 
 ```{r, fig.align="center"}
 violin <- ggplot(data = penguins, 
@@ -415,7 +420,6 @@ violin +
 
 ## Summarise y values: `stat_summary()`
 
-.pull-left[
 ```{r, fig.height=5, fig.width=4}
 ggplot(mtcars, 
        aes(cyl, mpg)) +
@@ -426,9 +430,8 @@ ggplot(mtcars,
                size = 6) +
   labs(title = "Means")
 ```
-]
 
-.pull-right[
+
 ```{r, fig.height=5, fig.width=4}
 ggplot(mtcars, 
        aes(cyl, mpg)) +
@@ -438,14 +441,14 @@ ggplot(mtcars,
                size = 1.6) +
   labs(title = "Means and confidence intervals")
 ```
-]
+
 
 See also `geom_errorbar()`, `geom_pointrange()`, `geom_linerange()`, `geom_crossbar()` for geoms to display summarised data.
 
 
 ## Representing maps: `geom_map()`
 
-.small[
+
 ```{r}
 crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
 crimesm <- reshape2::melt(crimes, id = 1)
@@ -458,27 +461,25 @@ ggplot(crimes, aes(map_id = state)) +
   expand_limits(x = states_map$long, y = states_map$lat) +
   coord_map()
 ```
-]
+
 
 ## Density plots: `geom_density()`
 
-.small[A density plot shows the distribution of a numerical variable and it takes only set of numeric values as input.]
-.pull-left[
+A density plot shows the distribution of a numerical variable and it takes only set of numeric values as input.
+
 ```{r, echo=TRUE, fig.width=5, fig.height=4.4}
 (peng.dens <- 
    ggplot(penguins, 
           aes(bill_length_mm)) +
    geom_density())
 ```
-]
 
-.pull-right[
 ```{r, echo=TRUE, fig.width=5, fig.height=4.4}
 (cars.dens <- 
    ggplot(cars, aes(dist)) +
    geom_density())
 ```
-]
+
 
 ## Dendogram: `ggdendrogram()`
 
@@ -515,7 +516,6 @@ http://shinyapps.stat.ubc.ca/r-graph-catalog/
 
 **Final Challenge: Solution**
 
-.small[
 ```{r, fig.align='center',fig.height=4}
 data(msleep)
 msleep.challenge4 <- ggplot(msleep, 
@@ -528,11 +528,9 @@ msleep.challenge4 +
   scale_fill_grey() +
   theme_classic()
 ```
-]
 
 Solution example #2
 
-.small[
 ```{r, fig.align='center', fig.width=5, fig.height=4}
 data(mtcars)
 mtcars.short <- mtcars[1:20,]
@@ -546,25 +544,20 @@ dendro.challenge4 +
         axis.title.x = element_blank(), axis.text.x = element_blank(),
         plot.title = element_text(size = 14, face="bold"))
 ```
-]
+
 
 ## Miscellaneous: interactive plots using `plotly()`
 
-.small[
-.alert[**Select the species data to display directly from the legend**]
+**Select the species data to display directly from the legend**
 
 You can click on the species in the legend to add/remove species. You can also see values while hovering over points.
 
 ```{r, echo = TRUE, fig.width=10, fig.height=5}
+library(plotly)
 p <- ggplot(penguins,
            aes(x = bill_length_mm, y = bill_depth_mm, 
                colour = species, shape = species)) +
     geom_point(size=6, alpha=0.6)
 # convert to a plotly object!
-plotly::ggplotly(p)
+ggplotly(p)
 ```
-]
-
-
-
-
