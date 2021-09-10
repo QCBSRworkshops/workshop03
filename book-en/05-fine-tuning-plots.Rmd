@@ -606,7 +606,7 @@ The `plotly()` library contains the function `ggplotly()`, which translates your
 You can click on the species in the legend to add/remove species. You can also see values while hovering over points.
 :::
 
-```{r, echo = TRUE, fig.width=10, fig.height=5, warning = FALSE, message = FALSE}
+```{r, echo = TRUE, fig.width=10, fig.height=5, warning = FALSE, message = FALSE, eval = FALSE}
 library(plotly)
 p <- ggplot(penguins,
            aes(x = bill_length_mm, 
