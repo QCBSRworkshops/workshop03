@@ -21,7 +21,7 @@ You should also make sure you have downloaded, installed, and loaded these packa
 
 To install them from CRAN, run:
 
-```{r install_pkgs, message=FALSE, warning=FALSE, include=FALSE, results=0, purl = FALSE}
+```{r install_pkgs, message=FALSE, warning=FALSE, include=FALSE, results=0, purl = FALSE, eval = FALSE}
 # set CRAN mirror
 options(repos = list(CRAN="http://cran.rstudio.com/"))
 
@@ -43,7 +43,7 @@ invisible(lapply(list.of.packages, library, character.only = TRUE))
 ```
 
 
-```{r, echo = TRUE, eval = FALSE, message=FALSE, warning=FALSE, results = 'hide'}
+```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE, results = 'hide'}
 # Install the required packages
 install.packages("gridExtra")
 install.packages("ggplot2")
