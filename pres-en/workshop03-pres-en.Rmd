@@ -633,6 +633,7 @@ Remember: a graphic is made of different layers:
 # `ggplot()` dynamics: data layer
 
 ```{r, echo = FALSE, results=0}
+theme_set(theme_classic())
 theme_update(axis.text = element_text(size = 16),
              axis.title = element_text(size = 18))
 ```
@@ -755,7 +756,7 @@ class: inverse, center, middle
 
 **Use aesthetics (`aes()`) to distinguish classes, groups and structure**
 
-![](images/4plot_aesthetic.png) 
+![:scale 70%](images/4plot_aesthetic.png) 
 ---
 # Colours: make your points talk
 
@@ -1257,10 +1258,9 @@ note: _removed this slide to add theme image instead_
 ---
 # `theme()`
 
-Elements of a theme
+Elements of a theme ([by Isabella Benabaye](https://isabella-b.com/blog/ggplot2-theme-elements-reference/)).
 
 ![:scale 90%](images/ggthemes.png)
-
 
 ---
 class: inverse, center, middle

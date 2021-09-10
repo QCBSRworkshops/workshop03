@@ -70,7 +70,10 @@ theme_update(panel.grid.minor = element_blank(),
 
 Here is a helpful infographic so you can customize your theme to your exact needs!
 
-![:scale 90%](images/ggthemes.png)
+```{r, echo=FALSE, fig.align="center", fig.cap = "ggplot2 theme reference sheet by Isabella Benabaye ([source](https://isabella-b.com/blog/ggplot2-theme-elements-reference/)).", purl = FALSE}
+knitr::include_graphics("images/ggthemes.png")
+```
+
 
 If you want, you can even build your own theme and then apply it to all your figures to make them match. Here is an example:
 
