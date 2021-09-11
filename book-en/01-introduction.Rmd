@@ -55,7 +55,7 @@ install.packages("RColorBrewer")
 install.packages("reshape2")
 install.packages("GGally")
 install.packages("patchwork")
-install.packages("plotly")
+#install.packages("plotly")
 install.packages("palmerpenguins")
 ```
 
@@ -73,7 +73,7 @@ library(RColorBrewer)
 library(reshape2)
 library(GGally)
 library(patchwork)
-library(plotly)
+#library(plotly)
 library(palmerpenguins)
 ```
 
