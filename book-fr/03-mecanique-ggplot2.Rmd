@@ -1,30 +1,30 @@
 # (PART\*) La mécanique `ggplot2`: les bases {-}
 
-# Les bases de la grammaire des graphiques (GG)
+# La grammaire des graphiques (GG)
 
-## La grammaire des graphiques (GG)
+## Les bases de GG
 
-Commençons par les bases ! Le paquet `ggplot2` est basé sur la Grammaire des Graphiques (GG), qui est un cadre pour la visualisation de données qui décompose chaque élément d'un graphique en composants individuels, créant ainsi des couches distinctes. En utilisant le système GG, nous pouvons construire des graphiques étape par étape pour des résultats flexibles et personnalisables. 
+Commençons par les bases! La librairie `ggplot2` est basée sur la Grammaire des Graphiques (GG), qui est un cadre pour la visualisation de données qui décompose chaque élément d'un graphique en composants individuels, créant ainsi des couches distinctes. En utilisant le système GG, nous pouvons construire des graphiques étape par étape pour des résultats flexibles et personnalisables. 
 
-```{r, echo=FALSE, fig.align="center", purl = FALSE}
-knitr::include_graphics("images/Layers_ggplot.png")
+```{r, echo=FALSE, fig.align='center', purl = FALSE}
+knitr::include_graphics('images/Layers_ggplot.png')
 ```
 
 Les couches GG ont des noms spécifiques que vous verrez tout au long de l'atelier:
 
-```{r, echo=FALSE, fig.align="center", fig.cap = "Image adapted from [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447).", purl = FALSE}
-knitr::include_graphics("images/gglayers.png")
+```{r, echo=FALSE, fig.align='center', fig.cap = 'Image adaptée de [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447).', purl = FALSE}
+knitr::include_graphics('images/gglayers.png')
 ```
 
 :::explanation
-Pour créer un `ggplot`, les couches de données et de *mapping* sont des **exigences** de base, tandis que les autres couches sont destinées à une configuration supplémentaire. *Les couches "non requises" sont toujours importantes à considérer, mais vous serez en mesure de générer un graphique de base sans celles-ci.*
+Pour créer un `ggplot`, les couches de données et de *mapping* sont des **exigences** de base, tandis que les autres couches sont destinées à une configuration supplémentaire. *Les couches 'non requises' sont toujours importantes à considérer, mais vous serez en mesure de générer un graphique de base sans celles-ci.*
 
-```{r, echo=FALSE, fig.align="center", fig.cap = "Basic requirements to generate a `ggplot`.", purl = FALSE}
-knitr::include_graphics("images/ggplot_basics.png")
+```{r, echo=FALSE, fig.align='center', fig.cap = 'Conditions de base pour générer un `ggplot'..', purl = FALSE}
+knitr::include_graphics('images/ggplot_basics.png')
 ```
 :::
 
-## Les couches de la grammaire des graphiques (GG) {#gg-layers}
+## Les couches de GG {#gg-layers}
 
 ### Descriptions de couches courantes
 
@@ -95,14 +95,14 @@ Nous reviendrons sur cette syntaxe au chapitre \@ref(working-through-layers), o�
 
 Essayons maintenant de visualiser des données! Nous allons utiliser le jeu de données `palmerpenguins`.
 
-```{r, echo=FALSE, out.width = "30%", fig.align="center", fig.cap = "Art par [Allison Horst](https://twitter.com/allison_horst).", purl = FALSE}
-knitr::include_graphics("images/palmerpenguins.png")
+```{r, echo=FALSE, out.width = '30%', fig.align='center', fig.cap = 'Art par [Allison Horst](https://twitter.com/allison_horst).', purl = FALSE}
+knitr::include_graphics('images/palmerpenguins.png')
 ```
 
 Ce jeu de données contient des mesures morphologiques pour trois espèces de pingouins observées sur trois îles de l'archipel Palmer, en Antarctique. Ces données ont été recueillies de 2007 à 2009 par la Dre Kristen Gorman dans le cadre du programme de recherche écologique à long terme de la station Palmer, qui fait partie du réseau américain de recherche écologique à long terme.
 
-```{r, echo=FALSE, out.width = "100%", fig.align="center", fig.cap = "Artwork by [Allison Horst](https://twitter.com/allison_horst).", purl = FALSE}
-knitr::include_graphics("images/penguins.png")
+```{r, echo=FALSE, out.width = '100%', fig.align='center', fig.cap = 'Artwork by [Allison Horst](https://twitter.com/allison_horst).', purl = FALSE}
+knitr::include_graphics('images/penguins.png')
 ```
 
 :::explanation
@@ -118,13 +118,13 @@ Regardons les variables de l'ensemble de données des pingouins :
 str(penguins) # regardons les données des pingouins !
 ```
 
-```{r, echo=FALSE, out.width = "100%", fig.align="center", fig.cap = "Artwork by [Allison Horst](https://twitter.com/allison_horst).", purl = FALSE}
-knitr::include_graphics("images/culmen_depth.png")
+```{r, echo=FALSE, out.width = '100%', fig.align='center', fig.cap = 'Artwork by [Allison Horst](https://twitter.com/allison_horst).', purl = FALSE}
+knitr::include_graphics('images/culmen_depth.png')
 ```
 
 Notez que l'espèce, l'île et le sexe (`species`, `island`, et `sex`) sont des facteurs, qui seront importantes pour regrouper les données avec des couleurs, des formes, etc. dans `ggplot2`. Il y a ensuite 2 variables numériques (mesures du bec représentées dans l'image), et deux variables entières (longueur des nageoires et masse corporelle). Les données ont également une petite composante temporelle (`year`), s'étendant de 2007 à 2009.
 
-La librairie `ggplot2` requiert de préparer les données comme un objet de la classe "data.frame" ou "tibble" (commun dans l'univers `tidyverse`).
+La librairie `ggplot2` requiert de préparer les données comme un objet de la classe 'data.frame' ou 'tibble' (commun dans l'univers `tidyverse`).
 
 ```{r eval=TRUE, echo=TRUE}
 class(penguins) # vérifier la classe des données pour s'assurer qu'il s'agit d'un data.frame ou d'un tibble pour ggplot2
@@ -173,13 +173,13 @@ ggplot(data = penguins,               # Données
            y = bill_depth_mm,         # Valeurs Y
            col = species)) +          # Esthétique (mettre une couleur par espèce)
   geom_point(size = 5, alpha = 0.8) + # Points
-  geom_smooth(method = "lm") +        # Régression linéaire
-  labs(title = "Relationship between bill length and depth\nfor different penguin species", # Title
-       x = "Bill length (mm)", # titre de l'axe des X
-       y = "Bill depth (mm)", # titre de l'axe des Y
-       col = "Species") +  # Légende pour les couleurs dans aes(col = species)
+  geom_smooth(method = 'lm') +        # Régression linéaire
+  labs(title = 'Relationship between bill length and depth\nfor different penguin species', # Title
+       x = 'Bill length (mm)', # titre de l'axe des X
+       y = 'Bill depth (mm)', # titre de l'axe des Y
+       col = 'Species') +  # Légende pour les couleurs dans aes(col = species)
   theme_classic() + # Utiliser un thème propre
-  theme(title = element_text(size = 18, face = "bold"),
+  theme(title = element_text(size = 18, face = 'bold'),
       text = element_text(size = 16))
 ```
 
@@ -193,8 +193,8 @@ Comme nous l'avons vu, un graphique est constitué de différentes couches, comb
 
 Le code `ggplot2` est plus facile à lire si chaque ligne représente un nouvel élément. C'est ce style qui est généralement privilégié pour le code `ggplot2` dans la communauté R. Cela signifie que lorsque vous ajoutez chaque couche, vous devriez commencer une nouvelle ligne.
 
-```{r, echo=FALSE, fig.align="center", fig.cap = "Image adapted from [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447).", purl = FALSE}
-knitr::include_graphics("images/gglayers.png")
+```{r, echo=FALSE, fig.align='center', fig.cap = 'Image adapted from [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447).', purl = FALSE}
+knitr::include_graphics('images/gglayers.png')
 ```
 
 ### La couche de données
@@ -241,7 +241,7 @@ Notez que vous pouvez ajouter plusieurs `geoms` dans un seul graphique. Par exem
 
 ### Facettes, coordonnées, et thèmes
 
-Maintenant que le jeu de données est représenté graphiquement, nous pouvons personnaliser le graphique pour clarifier le message ou ajouter des informations supplémentaires. Les facettes sont un moyen populaire de diviser un graphique en plusieurs fenêtres selon une catégorie de données, afin de différencier visuellement les groupes. Nous pouvons explorer ce graphique différemment si nous utilisons `facet_wrap()` pour créer des "facettes" séparées en fonction de nos groupes d'espèces:
+Maintenant que le jeu de données est représenté graphiquement, nous pouvons personnaliser le graphique pour clarifier le message ou ajouter des informations supplémentaires. Les facettes sont un moyen populaire de diviser un graphique en plusieurs fenêtres selon une catégorie de données, afin de différencier visuellement les groupes. Nous pouvons explorer ce graphique différemment si nous utilisons `facet_wrap()` pour créer des 'facettes' séparées en fonction de nos groupes d'espèces:
 
 ```{r,fig.height=5, fig.width=6, warning = FALSE}
 # Prochaine couche(s): customizations!
@@ -266,7 +266,7 @@ ggplot(data = penguins,
   geom_point() + 
   facet_wrap(vars(species)) +
   # ceci transforme les coordonnées des axes avec log10()
-  coord_trans(x = "log10", y = "log10")
+  coord_trans(x = 'log10', y = 'log10')
 ```
 
 Pour terminer, nous pouvons également personnaliser le thème du graphique, qui comprend son arrière-plan, les quadrillages et d'autres caractéristiques visuelles du graphique. Supposons que nous n'aimons pas le fond gris par défaut de ggplot2 (nous ne serions pas les seuls!). Nous pouvons utiliser `theme_bw()` pour produire un rendu visuel plus attrayant. Nous discuterons des thèmes dans le chapitre \@ref(theme)!
@@ -277,7 +277,7 @@ ggplot(data = penguins,
            y = bill_depth_mm)) +
   geom_point() + 
   facet_wrap(vars(species)) +
-  coord_trans(x = "log10", y = "log10") +
+  coord_trans(x = 'log10', y = 'log10') +
   # ce thème produit un rendu visuel plus attrayant
   theme_bw()
 ```
@@ -339,7 +339,7 @@ L'esthétique peut être soit dans la ligne `ggplot()`, et sera héritée par to
 ggplot(data = penguins,
        aes(x = bill_length_mm,
            y = flipper_length_mm)) +
-  geom_point(shape = 2, color = "blue") 
+  geom_point(shape = 2, color = 'blue') 
 ```
 
 
