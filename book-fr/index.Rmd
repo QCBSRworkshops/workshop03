@@ -1,5 +1,5 @@
 --- 
-title: "Atelier 10: Analyses multivariées avancées en `R`"
+title: "Atelier 3: Introduction à `ggplot2`"
 subtitle: "Série d'ateliers R du CSBQ"
 author:
 - Développé et entretenu par les contributeurs et les contributrices de la Série d'ateliers R du CSBQ^[La Série d'ateliers R du CSBQ fait partie du [Centre de la science de la biodiversité du Québec](https://www.qcbs.ca), et est maintenue par les coordonnateurs et les coordonnatrices de la série, et les membres étudiants diplômés, postdoctoraux et professionnels de la recherche. **La liste des contributeurs et des contributrices de cet atelier sont accessibles[ici](lien)**].
@@ -10,14 +10,14 @@ bibliography: ["references.bib"]
 biblio-style: apalike
 link-citations: yes
 cover-image: assets/images/logo/csbq_logo_accueil.png
-github-repo: "qcbsRworkshops/workshop10"
-description: "Analyses multivariées avancées en `R`"
+github-repo: "qcbsRworkshops/workshop03"
+description: "Introduction à `ggplot2`"
 favicon: "assets/images/favicon.ico"
 always_allow_html: yes
 url: 'https\://github.com/qcbsRworkshops/'
 config:
   edit:
-    link: https://github.com/qcbsRworkshops/workshop10/edit/main/book-fr/%s
+    link: https://github.com/qcbsRworkshops/workshop03/edit/main/book-fr/%s
     text: "Suggest changes"
 ---
 # (PART\*) Série d'ateliers R du CSBQ {-}
@@ -74,21 +74,18 @@ Voici quelques exemples de comportements inacceptables de la part des participan
 CETTE SECTION NE DOIT ÊTRE ÉDITÉE QUE PAR LES COORDINATEURS DE LA SÉRIE D'ATELIERS R
 ```
 
-*Cette liste n'est pas finalisée. Si vous avez contribué à cet atelier et ne voyez pas votre nom, faites nous signe.*
+Cet atelier a été développé à l'origine par Xavier Giroux-Bougard, Maxwell Farrell, Amanda Winegardner, Étienne Low-Decarie et Monica Granados. 
 
 Depuis 2014, plusieurs membres du CSBQ ont contribué à développer et à mettre à jour cet atelier de manière régulière et collaborative, dans le cadre de la bourse d'apprentissage et de développement (*Learning and Development Award*) du Centre québécois des sciences de la biodiversité.
 
-**Développé à l'origine par:**
-Monica Granados, Emmanuelle Chrétien, Bérenger Bourgeois, Amanda Winegardner, Xavier Giroux-Bougard, et Vincent Fugère.
-
-**Contributions à la modification de la présentation :**
-Gabriel Muñoz, Katherine Hébert, Kevin Cazelles, Pedro Henrique P. Braga, Marie Hélène Brice
-
-**Contribution avec des changements à la documentation écrite :**
-Marie Hélène Brice, Katherine Hébert
-
-**Contribution en signalant des problèmes et en suggérant des modifications :**
-Pedro Henrique P. Braga, Marie Hélène Brice, Kevin Cazelles
+|      2022 - 2021 - 2020     |      2019 - 2018 - 2017     |      2016 - 2015 - 2014      |
+|:---------------------------:|:---------------------------:|:----------------------------:|
+| Linley Sherin  | Marie-Hélène Brice | Xavier Giroux-Bougard |
+| Katherine Hébert  | Willian Vieira  | Maxwell Farrell |
+| Jake Lawlor  |  Rémi Maglione | Amanda Winegardner |
+| Marie-Hélène Brice  | Pedro Henrique P. Braga | Étienne Low-Decarie |
+| Kevin Cazelles  | Alexis Carteron | Monica Granados |
+|   | Katherine Hébert |  |
 
 ## Contribuez à la série!
 
@@ -96,9 +93,12 @@ La série d'ateliers R du CSBQ dépend sur les contributions des membres étudia
 
 Si vous trouvez des erreurs ou des incohérences, ou si vous souhaitez faire une suggestion, que ce soit sur la forme ou le contenu de ce matériel, vous êtes invités à ouvrir un [numéro](https://help.github.com/articles/about-issues/). Vous pouvez suivre ces étapes simples pour créer un nouveau [numéro](https://help.github.com/articles/creating-an-issue/).
 
-```{r include=FALSE}
+```{r include=FALSE, results='hide'}
 library(knitr)
 opts_chunk$set(tidy.opts = list(width.cutoff = 60),
                tidy = TRUE)
 options(repos = list(CRAN="http://cran.rstudio.com/"))
+
+# install curl here as a dependency for plotly
+install.packages("curl")
 ```
