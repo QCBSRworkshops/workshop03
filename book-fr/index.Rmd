@@ -101,4 +101,5 @@ options(repos = list(CRAN="http://cran.rstudio.com/"))
 
 # install curl here as a dependency for plotly
 install.packages("curl")
+install.packages("httr")
 ```
