@@ -108,15 +108,13 @@ class: inverse, center, middle
 
 ##### To follow along:
 
-All workshop materials are found at [github.com/QCBSRworkshops/workshop03](https://github.com/QCBSRworkshops/workshop03). This includes an [R script](https://qcbsrworkshops.github.io/workshop03/book-en/workshop03-script-en.R) the code in this presentation.
+All workshop materials are found at [github.com/QCBSRworkshops/workshop03](https://github.com/QCBSRworkshops/workshop03). This includes an [R script](https://qcbsrworkshops.github.io/workshop03/book-en/workshop03-script-en.R) that contains the the code in this presentation.
 
 ##### Recommendations:
 
   1. create your own new script;
   2. refer to provided code only if needed;
   3. avoid copy-pasting or running the code directly from the script.
-
-###### [ggplot2](https://ggplot2.tidyverse.org/) is also on GitHub: https://github.com/tidyverse/ggplot2
 
 
 ---
@@ -125,11 +123,6 @@ All workshop materials are found at [github.com/QCBSRworkshops/workshop03](https
 ###### 1. Visualization in science
 
 ###### 2. `ggplot2` mechanics
-
-.center[
-![:scale 80%](images/Layers_ggplot.png)
-]
-
 
 ###### 3. Advanced visualization
 
@@ -200,19 +193,27 @@ Pie charts are also not recommended because they rely on angles to represent the
 - Who is your audience?
 - What is the best way to visualize your message?
 
+<br>
+
 .center[
 .alert[A rule of thumb: think simple! use less ink!]
 ]
 
 --
 
-#### Additional resources
+<br>
+#### Resources for visualisation principles
 
 - [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/) (ggplot)
 - [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base plot)
 - [Graphics Principles](https://graphicsprinciples.github.io/) (design tips)
 
+???
+This workshop is meant to show participants how to use ggplot2, but does not cover the principles of visualizing data or graphic design that can be essential to produce "good" figures. These resources do a great job of covering these principles.
+
 ---
+exclude: true
+
 # WARNING!
 
 <br>
@@ -444,7 +445,9 @@ GG layers:
   * `plot.object` or `print(plot.object)`
 
 ---
-# Today's dataset: palmerpenguins
+# # The basics of visualizing data
+
+## Today's dataset: palmerpenguins
 
 .pull-right2[
 ![:scale 80%](images/palmerpenguins.png)
@@ -461,9 +464,8 @@ library(palmerpenguins)
 .small[This dataset contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica:] 
 ]
 
-![:scale 60%](images/penguins.png)
+![:scale 50%](images/penguins.png)
 .center[.xsmall[Artwork by [@allison_horst](https://twitter.com/allison_horst).]]
-
 
 
 ???
@@ -632,19 +634,10 @@ Remember: a graphic is made of different layers:
 ---
 # `ggplot()` dynamics: data layer
 
-```{r, echo = FALSE, results=0}
-theme_set(theme_classic())
-theme_update(axis.text = element_text(size = 16),
-             axis.title = element_text(size = 18))
-```
-
 ```{r, fig.height=5, fig.width=6}
 ggplot(data = penguins)
 ```
 
-???
-
-theme_classic() was applied to all plots in the presentation to help with clarity using theme_set at the beginning of this slide deck, so these plots do not have the ggplot2 default grey background. There is a section about themes later in the presentation, but it is a good idea to mention that a theme has been applied to remove the default background, which the participants might see if they run the code chunks themselves as they follow along.
 
 ---
 # `ggplot()` dynamics: aesthetics layer
@@ -767,6 +760,11 @@ Change **colour** to
 &nbsp; ![:faic](arrow-right) represent data values
 
 &nbsp; ![:faic](arrow-right) highlight specific elements
+
+```{r, echo = FALSE}
+theme_set(theme_classic())
+```
+
 
 .pull-left[
 ```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
@@ -998,7 +996,8 @@ pp2 +
 ggplot(data = penguins) +
   geom_point(aes(x = bill_length_mm, 
                  y = bill_depth_mm, 
-                 shape = species)) +
+                 shape = species)
+             ) +
   labs(title = "Shapes for groups")
 ```
 ]
@@ -1141,7 +1140,8 @@ class: small-code
 x axis in regular scale
 ```{r,fig.height=4}
 ggplot(diamonds) +
-  geom_point(mapping = aes(x = carat, y = price)) +
+  geom_point(aes(x = carat, 
+                 y = price)) +
   labs(title = "Original scale")
 ```
 ]
@@ -1149,14 +1149,16 @@ ggplot(diamonds) +
 .pull-right[
 x-axis and y-axis in log10() scale
 ```{r,fig.height=4}
-ggplot(diamonds) + geom_point(mapping = aes(x = carat, y = price)) +
-  coord_trans(x = "log10",
+ggplot(diamonds) + 
+  geom_point(aes(x = carat, 
+                 y = price)) +
+  coord_trans(x = "log10", 
               y = "log10") +
   labs(title = "log10 scale")
 ```
 ]
 
-<br>
+
 .small[It is also possible to transform the coordinate system using `scale_x_log10()` and `scale_y_log10()`.]
 
 <!-- explain the difference -->
@@ -1267,11 +1269,11 @@ class: inverse, center, middle
 
 # Fine-tuning your plots
 
-# Using `facet_grid()` to change the arrangement of plots
+# Using facets to split up your plot
 
 ---
-# penguins dataset: per-species facets
-```{r, fig.align="center", fig.width=10, fig.height=5.5}
+Facetting by one variable
+```{r, fig.align="center"}
 ggplot(data = penguins) +
   geom_point(mapping = aes(x = bill_length_mm, 
                            y = bill_depth_mm, 
@@ -1280,15 +1282,14 @@ ggplot(data = penguins) +
 ```
 
 ---
-# CO2 dataset: per-type facets
+# Facetting by two variables
+
 ```{r, fig.align="center", fig.width=9, fig.height=5}
-ggplot(data = CO2) +
-  geom_point(mapping = aes(x = conc, 
-                           y = uptake, 
-                           colour = Treatment)) +
-  xlab("CO2 Concentration (mL/L)") + 
-  ylab("CO2 Uptake (umol/m^2 sec)") +
-  facet_grid(~ Type)
+ggplot(data = penguins) +
+  geom_point(mapping = aes(x = bill_length_mm, 
+                           y = bill_depth_mm, 
+                           colour = species)) +
+  facet_grid(year ~ species, scales = "free")
 ```
 
 <!-- relabeling ticks -->
@@ -1339,7 +1340,7 @@ pp +
 
 Use the `tips` dataset found in `reshape2` &#x1F4E6; to reproduce the plot below.
 
-Our tip: start from `theme_classic()` and add `theme()` to make your additional changes.
+Our tip: Go step by step! When fine-tuning your plot, start from `theme_classic()` and add `theme()` to make your additional changes.
 
 ```{r, echo=FALSE, fig.width=10, fig.height=5}
 library(reshape2)
@@ -1544,6 +1545,13 @@ ggplot(mpg, aes(displ, hwy)) +
 ```
 ]
 ]
+
+???
+
+A scatter plot is a great way to visualize data points for two variables. Two aesthetics are required in `geom_point()`: the `x` and `y` variables.
+
+It can, however, be difficult to discern any potential relationship in a scatter plot. You can use `geom_smooth()` to fit a line through your data with a variety of methods. Here, we will add a linear fit to the scatter plot.
+
 ---
 # Boxplot: `geom_boxplot()`
 
@@ -1572,8 +1580,14 @@ ggplot(data = penguins,
 ![:scale 75%](images/boxplot_explain.png)
 ]
 
+???
+
+Boxplots are a popular way to plot the distribution of data across some grouping variable, like species. You can specify this grouping variable in  `aes()` using `group =`, or the aesthetics used to represent the data (`fill =`, `col = `, `shape = `) to generate the boxplot.
+
+Though boxplots are very popular to summarise data, someone looking at your plot may not intuitively grasp how this summary works and what it might be hiding. Using boxplots well requires an understanding of their anatomy, as seen below. More on the pitfalls of boxplots [here](https://www.data-to-viz.com/caveat/boxplot.html).
+
 ---
-## Boxplot with annotations: `geom_boxplot()` and `geom_signif()`
+# Boxplot with annotations: `geom_boxplot()` and `geom_signif()`
 
 .pull-left3[
 ```{r, fig.align="center",fig.height=5.5, eval = FALSE}
@@ -1605,7 +1619,7 @@ ggplot(data = penguins,
 
 ???
 
-geom_signif calculates the significance of a difference between groups and adds the annotation to the plot in a single line.
+To help boxplots speak for themselves, we can add annotations with `geom_signif()`. The function `geom_signif()` calculates the significance of a difference between groups and adds the annotation to the plot in a single line.
 
 ---
 # Violin plot: `geom_violin()`
@@ -1633,6 +1647,12 @@ ggplot(data = data, aes(names, value, fill=names)) + geom_violin()
 ```
 ]
 
+???
+
+Like boxplots, violin plots visualise the distribution of a numeric variable for one or several groups. However, a violin's shape represents the distribution of points that is obscured in a boxplot's summarisation, allowing for a more accurate representation of the data ([Data-to-Viz)](https://www.data-to-viz.com/graph/violin.html)).
+
+Let us compare a boxplot and a violin plot on some generated data. Notice how the violin plot *shows* us the range **and** the variability in our data, while the boxplot cannot communicate these two things as intuitively.
+
 ---
 # Violin plot: `geom_violin()`
 
@@ -1655,7 +1675,8 @@ violin +
 ```
 
 ???
-note: Multiple geoms can be used together! The order determines how they overlap.
+Although we have a good idea of how the data is distributed, we can enhance the plot by visualising some summary statistics and the data points. Let us plot a boxplot and the data points *on top* of our violin plot with `geom_violin()` + `geom_boxplot()` + `geom_jitter()`.
+
 ---
 # Summarise y values: `stat_summary()`
 
@@ -1668,7 +1689,7 @@ ggplot(mtcars,
                geom = "point",
                colour = "red",
                size = 6) +
-  labs(title = "Means")
+  labs(title = "Medians")
 ```
 ]
 
@@ -1687,93 +1708,141 @@ ggplot(mtcars,
 ---
 # Summarise values
 
-See also `geom_errorbar()`, `geom_pointrange()`, `geom_linerange()`, `geom_crossbar()` for geoms to display summarised data.
+To display more summary statistics, see:
 
-
-
-
+- `geom_errorbar()`  
+- `geom_pointrange()`  
+- `geom_linerange()`  
+- `geom_crossbar()` 
+- and others!
 
 ---
 # Representing maps: `geom_map()`
+
 .small[
-```{r}
-crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
-crimesm <- reshape2::melt(crimes, id = 1)
-
+```{r, eval = FALSE, fig.height = 6, fig.width = 7}
+# load maps library
 library(maps)
-states_map <- map_data("state")
+states_map <- map_data("state") # get a state-level map of the US
 
-ggplot(crimes, aes(map_id = state)) +
-  geom_map(aes(fill = Murder), map = states_map) +
-  expand_limits(x = states_map$long, y = states_map$lat) +
-  coord_map()
+# State name is set as rownames. Let's make a new column for these
+# that matches the column of state names in our states_map
+USArrests$region <- tolower(rownames(USArrests))
+
+# Build our map
+ggplot(USArrests, 
+       aes(map_id = region)) + # the variable name to link our map and dataframe
+  geom_map(aes(fill = Murder), # variable we want to represent with an aesthetic
+           map = states_map) + # data frame that contains coordinates
+  expand_limits(x = states_map$long, 
+                y = states_map$lat) +
+  coord_map() +  # projection 
+  labs(x = "", y = "") # remove axis labels
 ```
 ]
+
+???
+USArrests: Violent Crime Rates by US State dataset, included in R. This data set contains statistics, in arrests per 100,000 residents for assault, murder, and rape in each of the 50 US states in 1973. Also given is the percent of the population living in urban areas. 
+
+The map is on the next slide. Feel free to flip between the slides to explain each element if there is interest in mapping. 
+
 ---
+# Representing maps: `geom_map()`
 
+```{r, echo = FALSE, fig.width = 10}
+# load maps library
+library(maps)
+states_map <- map_data("state") # get a state-level map of the US
 
+# State name is set as rownames. Let's make a new column for these
+# that matches the column of state names in our states_map
+USArrests$region <- tolower(rownames(USArrests))
+
+# Build our map
+ggplot(USArrests, 
+       aes(map_id = region)) +
+  geom_map(aes(fill = Murder), 
+           map = states_map) +
+  expand_limits(x = states_map$long, 
+                y = states_map$lat) +
+  coord_map() +  # projection 
+  labs(x = "", y = "") # remove axis labels
+```
+
+---
 ## Density plots: `geom_density()`
 
 .small[A density plot shows the distribution of a numerical variable and it takes only set of numeric values as input.]
 .pull-left[
 ```{r, echo=TRUE, fig.width=5, fig.height=4.4}
-(peng.dens <- 
-   ggplot(penguins, 
-          aes(bill_length_mm)) +
+(peng.dens <- ggplot(penguins, 
+                     aes(x = bill_length_mm)) +
    geom_density())
 ```
 ]
 
 .pull-right[
 ```{r, echo=TRUE, fig.width=5, fig.height=4.4}
-(cars.dens <- 
-   ggplot(cars, aes(dist)) +
+(cars.dens <- ggplot(cars, 
+                    aes(x = dist)) +
    geom_density())
 ```
 ]
 
+???
+
+Wrapping the plot objects in () prints them whenever these lines are run, rather than printing the plot object on another line as we have been doing.
+
 ---
 # Dendogram: `ggdendrogram()`
 
-```{r}
-library(ggdendro)
-USArrests.short = USArrests[1:10,]
-hc <- hclust(dist(USArrests.short), "ave")
+Which US states have similar arrest rates?
 
-ggdendrogram(hc, rotate = TRUE, theme_dendro = FALSE)
+```{r, fig.height = 4}
+library(ggdendro)
+USArrests.short <- USArrests[1:10,] # take a small sample for simplicity
+hc <- hclust(dist(USArrests.short), "average") # cluster by average distance (UPGMA)
+
+ggdendrogram(hc, rotate = TRUE) 
 ```
 
 
 ---
 # Arrange plots: `patchwork`
 
-**Add multiple graphs on the same plot**
-
 ```{r, fig.width=9, fig.height=5, message=FALSE, warning=FALSE}
 library(patchwork)
 peng.dens + cars.dens +
-  plot_annotation(tag_levels = 'a')
+  plot_annotation(tag_levels = 'a') # adds a) and b) to your plots, to reference
+# in your figure captions.
 ```
 
----
-# Final Challenge![:cube]()
+???
 
-Create your own graph and follow these recommendations:
+We have used facets to split our plot into multiple windows. However, this is restricted to plotting the same variables from the same dataset. The `patchwork` package makes it easy to arrange separate ggplots together in one frame with `+` (arrange plots beside each other), `/` (arrange one plot on top of the other), `()` (group this arrangement of plots)  as though you are writing an equation. You can demo variations of this arrangement live.
+
+---
+# Challenge 4![:cube]()
+
+Create your own ggplot and follow these recommendations:
   * Dataset: any (recommended: use your dataset)
   * Explore a new geom_* and other plot elements
 
-Use the following links for tips:
-https://ggplot2.tidyverse.org/reference/index.html
-http://shinyapps.stat.ubc.ca/r-graph-catalog/
+Use the following links for tips and inspiration:  
+
+- [ggplot2 Reference](https://ggplot2.tidyverse.org/reference/index.html)  
+- [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)  
+- [Data to Viz](https://www.data-to-viz.com/)
 
 ---
-# Final Challenge: Solution example #1
+# Challenge 4: Solution example #1
 .small[
 ```{r, fig.align='center',fig.height=4}
 data(msleep)
-msleep.challenge4 <- ggplot(msleep, 
-                            aes(x = vore, y = log10(brainwt), fill = vore))
-msleep.challenge4 + 
+ggplot(msleep, 
+       aes(x = vore, 
+           y = log10(brainwt), 
+           fill = vore)) + 
   geom_violin() +
   geom_signif(comparisons = list(c("herbi", "insecti"))) +
   labs(main = "Brain weight among different vore", 
@@ -1782,16 +1851,19 @@ msleep.challenge4 +
   theme_classic()
 ```
 ]
+
 ---
-# Final Challenge: Solution example #2
+# Challenge 4: Solution example #2
+
 .small[
-```{r, fig.align='center', fig.width=5, fig.height=4}
+```{r, fig.align='center', fig.height=3.5}
 data(mtcars)
+# let's do some clustering!
 mtcars.short <- mtcars[1:20,]
-mtcars.short.hc <- hclust(dist(mtcars.short), "complete")
-dendro.challenge4 <- ggdendrogram(mtcars.short.hc, 
-                                  rotate = TRUE, theme_dendro = FALSE)
-dendro.challenge4 + 
+mtcars.short.hc <- hclust(dist(mtcars.short), "average")
+
+ggdendrogram(mtcars.short.hc, rotate = TRUE) + 
+  # fine-tuning
   labs(title = "Car dendro from motor spec", y ="Cars") +
   theme(axis.title.y = element_text(size = 16),
         axis.text.y = element_text(size = 12),
@@ -1801,21 +1873,22 @@ dendro.challenge4 +
 ]
 
 ---
-## Miscellaneous: interactive plots using `plotly()`
+# Miscellaneous: interactive plots using `plotly()`
 .small[
-.alert[**Select the species data to display directly from the legend**]
 
 ```{r, echo = TRUE, fig.width=10, fig.height=5}
+library(plotly)
 p <- ggplot(penguins,
            aes(x = bill_length_mm, y = bill_depth_mm, 
                colour = species, shape = species)) +
     geom_point(size=6, alpha=0.6)
 # convert to a plotly object!
-plotly::ggplotly(p)
+ggplotly(p)
 ```
 ]
 
 ???
+The `plotly()` library contains the function `ggplotly()`, which translates your `ggplot` code into an interactive `plotly` object in one line of code.
 
 You can click on the species in the legend to add/remove species. You can also see values while hovering over points.
 
@@ -1853,6 +1926,13 @@ ggsave("my1stPlot.pdf",
 NB: Vectors (e.g., pdf, svg) format are more flexible than raster format (jpeg,
 png, ...) if the image needs modification afterwards.
 
+**Tip:** `quartz()` (mac) or `window()` (pc) functions make sizing easier before `ggsave()`!
+
+???
+
+Tip:`quartz()` (mac) or `window()` (pc) functions make sizing easier before `ggsave()`! Just plot your ggplot in quartz() or window(), adjust the size until it looks good, and run ggsave() with the filename to see which dimensions you used! You can then add this in your code with height = and width = as shown above. You can demo this.
+
+
 ---
 # Saving plots in code
 <br>
@@ -1867,39 +1947,32 @@ graphics.off()
 
 
 ---
-# Saving plots in code
-<br>
-
-**Tip:** `quartz()` (mac) or `window()` (pc) functions make sizing easier before `ggsave()`!
-
-???
-
-note: _this function allows to resize plot live, then use ggsave without specifying plot._
-```
-
-
----
 class: inverse, center, middle
 
 # Going further
 
-
----
-# Available elements
-
-
-[Data Visualization with ggplot2 Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
-
-.center[![:scale 55%](images/available_geom.png)]
-
-https://www.rstudio.com/resources/cheatsheets
-
 ---
 # Additional resources
 
-* `help(package = ggplot2)`
-* http://ggplot2.tidyverse.org/reference/
-* Fundamentals of Data Visualization https://serialmentor.com/dataviz/
+- `help(package = ggplot2)`
+- [Data Visualization with ggplot2 Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization.pdf)
+- [ggplot2 Reference](http://ggplot2.tidyverse.org/reference/)
+- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)  
+- [From Data to Viz](https://www.data-to-viz.com/)
+- [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base R)
+- [Graphics Principles](https://graphicsprinciples.github.io/) (design tips)
+- [The R Graph gallery](https://www.r-graph-gallery.com)
+-  Lecture notes from Hadley's course Stat 405 (the other lessons are
+awesome too!)
+  -   <http://stat405.had.co.nz/lectures/11-adv-data-manip.pdf>
+  -   <http://stat405.had.co.nz/lectures/19-tables.pdf>
+
+???
+
+Show the ggplot2 cheatsheet https://github.com/rstudio/cheatsheets/raw/master/data-visualization.pdf
+
+---
+# Additional resources
 
 .center[![:scale 65%](images/ggplot_book.png)]
 
@@ -1907,11 +1980,11 @@ https://www.rstudio.com/resources/cheatsheets
 # Concluding remarks
 <br>
 
-  1. There are other useful packages that can be used with `ggplot2`! To name a few: `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` and `ggtree`. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) for other `ggplot2` extensions.
+There are other useful packages that can be used with `ggplot2`! 
 
+To name a few: `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` and `ggtree`. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) for other `ggplot2` extensions.
 
-  2. Note that you can learn more about design and image manipulation with the "Introduction to graphic design and image manipulation with open source tools": https://qcbs.ca/wiki/graphics
-
+Note that you can learn more about design and image manipulation with the QCBS workshop ["Introduction to graphic design and image manipulation with open source tools"](https://wiki.qcbs.ca/graphics).
 
 
 ---
