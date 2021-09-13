@@ -686,7 +686,7 @@ ggplot(data = penguins,
 Noter que le code ggplot2 est plus facile à lire si chaque ligne représente un nouvel élément. Ce style est généralement favorisé pour le code ggplot2 dans la communauté R.
 
 ---
-# # La dynamique `ggplot()` : les couches extras - facette, stats, coordonnées
+## La dynamique `ggplot()` : les couches extras - facette, stats, coordonnées
 
 ```{r,fig.height=5, fig.width=6}
 ggplot(data = penguins, 
@@ -697,7 +697,7 @@ ggplot(data = penguins,
 ```
 
 ---
-# Défi #1 (5min) ![:cube]()
+# Défi 1 (5min) ![:cube]()
 
 #### Créer votre 1er graphique ggplot!
 
@@ -715,7 +715,7 @@ penguins | geom_point | bill_length_mm | flipper_length_mm
 
 
 ---
-# Défi 1#: Solution ![:cube]()
+# Défi 1: Solution ![:cube]()
 
 ```{r}
 ggplot(data = penguins, 
@@ -781,11 +781,11 @@ source(file="./scripts/4plot_aesthetic.R")
 ```
 
 ---
-# Les couleurs: faire parler vos données
+# Les couleurs: faites parler vos données
 
 Changez la **couleur** pour
 
-&nbsp; ![:faic](arrow-right) différencier les groupes
+&nbsp; ![:faic](arrow-right) différencier entre des groupes
 
 &nbsp; ![:faic](arrow-right) représenter les valeurs des données
 
@@ -800,7 +800,7 @@ ggplot(penguins,
   labs(title = "Couleurs qualitatives \npour des groupes",
        x = "Longueur du bec (mm)",
        y = "Profondeur du bec (mm)",
-       col = "Species") +
+       col = "Espèce") +
   theme(title = element_text(size = 16, face = "bold"),
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -1075,9 +1075,9 @@ mtcars |*wt* |*mpg* | *disp* et *hp*
 ```{r, fig.height=3.5, fig.width=6}
 data(mtcars)
 ggplot(data = mtcars) +
-  geom_point(mapping = aes(x = wt, y = mpg,
-                           colour = disp,
-                           alpha = hp))
+  geom_point(aes(x = wt, y = mpg,
+                 colour = disp,
+                 alpha = hp))
 ```
 
 .comment[Pourriez-vous utiliser `size` au lieu de `alpha`? Et `shape`?]
@@ -1096,10 +1096,10 @@ CO2 |*conc* |*uptake* | *Treatment* et *Type*
 ```{r, fig.height=3.5, fig.width=6}
 data(CO2)
 ggplot(data = CO2) +
-  geom_point(mapping = aes(x = conc, 
-                           y = uptake,
-                           colour = Treatment, 
-                           shape = Type))
+  geom_point(aes(x = conc, 
+                 y = uptake,
+                 colour = Treatment, 
+                 shape = Type))
 ```
 
 .comment[Pourquoi ne pas utiliser `size = Type`?]
@@ -1118,10 +1118,10 @@ msleep |log10(*bodywt*) |*awake* | *vore* et *conservation*
 ```{r, fig.height=3.5, fig.width=6}
 data(msleep)
 ggplot(data = msleep) +
-  geom_point(mapping = aes(x = log10(bodywt), 
-                           y = awake,
-                           colour = vore, 
-                           shape = conservation))
+  geom_point(aes(x = log10(bodywt), 
+                 y = awake,
+                 colour = vore, 
+                 shape = conservation))
 ```
 
 ---
