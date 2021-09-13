@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Workshop 3: Introduction to ggplot2</title>
+  <title>Chapter 9 Changing shape, size and alpha | Workshop 3: Introduction to ggplot2</title>
   <meta name="description" content="Introduction to ggplot2" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Workshop 3: Introduction to ggplot2" />
+  <meta property="og:title" content="Chapter 9 Changing shape, size and alpha | Workshop 3: Introduction to ggplot2" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop03" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Workshop 3: Introduction to ggplot2" />
+  <meta name="twitter:title" content="Chapter 9 Changing shape, size and alpha | Workshop 3: Introduction to ggplot2" />
   
   <meta name="twitter:description" content="Introduction to ggplot2" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-
-<link rel="next" href="preparing-for-the-workshop.html"/>
+<link rel="prev" href="colours-make-your-points-talk.html"/>
+<link rel="next" href="changing-the-scale-of-the-axes.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -281,112 +281,181 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="header">
-<h1 class="title">Workshop 3: Introduction to <code>ggplot2</code></h1>
-<h2 class="subtitle"><em>QCBS R Workshop Series</em></h2>
-<p class="author"><em>Developed and maintained by the contributors of the QCBS R Workshop Series<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></p>
-<p class="date"><em>2021-09-13 19:50:31</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>The <strong>QCBS R Workshop Series</strong> is a series of 10 workshops that walks participants through the steps required to use R for a wide array of statistical analyses relevant to research in biology and ecology. These open-access workshops were created by members of the QCBS both for members of the QCBS and the larger community.</p>
-<p>The content of this workshop has been peer-reviewed by several QCBS members. If you would like to suggest modifications, please contact the current series coordinators, listed on the main Github page.</p>
-<div id="code-of-conduct" class="section level2">
-<h2><span class="header-section-number">0.1</span> Code of conduct</h2>
-<p>The QCBS R Workshop Series and the QCBS R Symposium are venues dedicated to providing a welcoming and supportive environment for all people, regardless of background or identity.</p>
-<p>Participants, presenters and organizers of the workshop series and other related activities accept this Code of Conduct when being present at any workshop-related activities.</p>
-<p>We do not tolerate behaviour that is disrespectful or that excludes, intimidates, or causes discomfort to others.</p>
-<p>We do not tolerate discrimination or harassment based on characteristics that include, but are not limited to, gender identity and expression, sexual orientation, disability, physical appearance, body size, citizenship, nationality, ethnic or social origin, pregnancy, familial status, genetic information, religion or belief (or lack thereof), membership of a national minority, property, age, education, socio-economic status, technical choices, and experience level.</p>
-<p>It applies to all spaces managed by or affiliated with the workshop, including, but not limited to, workshops, email lists, and online forums such as GitHub, Slack and Twitter.</p>
-<div id="expected-behaviour" class="section level3">
-<h3><span class="header-section-number">0.1.1</span> Expected behaviour</h3>
-<p>All participants are expected to show respect and courtesy to others. All interactions should be professional regardless of platform: either online or in-person. In order to foster a positive and professional learning environment we encourage the following kinds of behaviours in all workshop events and platforms:</p>
+<div id="changing-shape-size-and-alpha" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> Changing <code>shape</code>, <code>size</code> and <code>alpha</code></h1>
+<p>Now let’s look beyond colour! If we want to change the shape of our data points, we can start by using the <code>shape</code> argument within the <code>aes()</code> layer just like we did with colour. This will group our data points by the variable we provide using different shapes (here we are using the variable species).</p>
+<p>If we want to adjust the size of the data points instead, we can use the <code>size</code> argument in the same spot. We can also use the <code>alpha</code> argument if we want to play with transparency. Both of these are good options for continuous data.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="changing-shape-size-and-alpha.html#cb40-1"></a><span class="co"># shape for groups</span></span>
+<span id="cb40-2"><a href="changing-shape-size-and-alpha.html#cb40-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins) <span class="op">+</span></span>
+<span id="cb40-3"><a href="changing-shape-size-and-alpha.html#cb40-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm,</span>
+<span id="cb40-4"><a href="changing-shape-size-and-alpha.html#cb40-4"></a>                 <span class="dt">y =</span> bill_depth_mm,</span>
+<span id="cb40-5"><a href="changing-shape-size-and-alpha.html#cb40-5"></a>                 <span class="dt">shape =</span> species)) <span class="op">+</span><span class="st"> </span><span class="co"># Group data with data point shape</span></span>
+<span id="cb40-6"><a href="changing-shape-size-and-alpha.html#cb40-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Shapes for groups&quot;</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="changing-shape-size-and-alpha.html#cb41-1"></a><span class="co"># size and alpha for continuous values</span></span>
+<span id="cb41-2"><a href="changing-shape-size-and-alpha.html#cb41-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins) <span class="op">+</span></span>
+<span id="cb41-3"><a href="changing-shape-size-and-alpha.html#cb41-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm,</span>
+<span id="cb41-4"><a href="changing-shape-size-and-alpha.html#cb41-4"></a>                 <span class="dt">y =</span> bill_depth_mm,</span>
+<span id="cb41-5"><a href="changing-shape-size-and-alpha.html#cb41-5"></a>                 <span class="dt">size =</span> body_mass_g,<span class="co"># Group data using point size</span></span>
+<span id="cb41-6"><a href="changing-shape-size-and-alpha.html#cb41-6"></a>                 <span class="dt">alpha =</span> flipper_length_mm)) <span class="op">+</span><span class="st"> </span><span class="co"># Group data using transparency</span></span>
+<span id="cb41-7"><a href="changing-shape-size-and-alpha.html#cb41-7"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Size and alpha for continuous values&quot;</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p>You may have noted in the second plot that you can even combine multiple of these options at once! But, setting many variables to visual cues like color, shape, size, and alpha at once tends to be overwhelming for the viewer. Adding 4 levels of complexity on top of the 2-dimensional representation of points can be too much to process properly. It is preferable to choose the visual cues and key variables for the desired message than to overload a plot with every possibility in the <code>aes()</code> function.</p>
+<div id="challenge-2" class="section level2">
+<h2><span class="header-section-number">9.1</span> Challenge 2</h2>
 <ul>
-<li>Use welcoming and inclusive language</li>
-<li>Be respectful of different viewpoints and experiences</li>
-<li>Gracefully accept constructive criticism</li>
-<li>Focus on what is best for the community</li>
-<li>Show courtesy and respect towards other community members</li>
+<li><p>Produce an <strong>informative plot</strong> from built-in datasets such as <code>mtcars</code>, <code>CO2</code> or <code>msleep</code>.</p></li>
+<li><p>Use appropriate aesthetic mappings for different data types!</p></li>
 </ul>
-</div>
-<div id="unacceptable-behaviour" class="section level3">
-<h3><span class="header-section-number">0.1.2</span> Unacceptable behaviour</h3>
-<p>Examples of unacceptable behaviour by participants at any workshop event/platform include:</p>
-<ul>
-<li>written or verbal comments which have the effect of excluding people on the - basis of membership of any specific group;</li>
-<li>causing someone to fear for their safety, such as through stalking or intimidation;</li>
-<li>violent threats or language directed against another person;</li>
-<li>the display of sexual or violent images;</li>
-<li>unwelcome sexual attention;</li>
-<li>nonconsensual or unwelcome physical contact;</li>
-<li>insults or put-downs;</li>
-<li>sexist, racist, homophobic, transphobic, ableist, or exclusionary jokes;</li>
-<li>incitement to violence, suicide, or self-harm;</li>
-<li>continuing to initiate interaction (including photography or recording) with - someone after being asked to stop;</li>
-<li>publication of private communication without consent.</li>
-</ul>
-</div>
-</div>
-<div id="contributors" class="section level2">
-<h2><span class="header-section-number">0.2</span> Contributors</h2>
-<p>This workshop was originally developed by Xavier Giroux-Bougard, Maxwell Farrell, Amanda Winegardner, Étienne Low-Decarie and Monica Granados.</p>
-<p>Since 2014, several QCBS members contributed to consistently and collaboratively develop and update this workshop, as part of the <em>Learning and Development Award</em> from the Québec Centre for Biodiversity Science. They were:</p>
 <table>
 <thead>
 <tr class="header">
-<th align="center">2022 - 2021 - 2020</th>
-<th align="center">2019 - 2018 - 2017</th>
-<th align="center">2016 - 2015 - 2014</th>
+<th align="center">Data</th>
+<th align="center">x</th>
+<th align="center">y</th>
+<th align="center">Aesthetics</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">Linley Sherin</td>
-<td align="center">Marie-Hélène Brice</td>
-<td align="center">Xavier Giroux-Bougard</td>
+<td align="center">mtcars</td>
+<td align="center"><em>wt</em></td>
+<td align="center"><em>mpg</em></td>
+<td align="center"><em>disp</em> and <em>hp</em></td>
 </tr>
 <tr class="even">
-<td align="center">Katherine Hébert</td>
-<td align="center">Willian Vieira</td>
-<td align="center">Maxwell Farrell</td>
+<td align="center">CO2</td>
+<td align="center"><em>conc</em></td>
+<td align="center"><em>uptake</em></td>
+<td align="center"><em>Treatment</em> and <em>Type</em></td>
 </tr>
 <tr class="odd">
-<td align="center">Jake Lawlor</td>
-<td align="center">Rémi Maglione</td>
-<td align="center">Amanda Winegardner</td>
+<td align="center">msleep</td>
+<td align="center">log10(<em>bodywt</em>)</td>
+<td align="center"><em>awake</em></td>
+<td align="center"><em>vore</em> and <em>conservation</em></td>
 </tr>
 <tr class="even">
-<td align="center">Marie-Hélène Brice</td>
-<td align="center">Pedro Henrique P. Braga</td>
-<td align="center">Étienne Low-Decarie</td>
-</tr>
-<tr class="odd">
-<td align="center">Kevin Cazelles</td>
-<td align="center">Alexis Carteron</td>
-<td align="center">Monica Granados</td>
-</tr>
-<tr class="even">
-<td align="center"></td>
-<td align="center">Katherine Hébert</td>
-<td align="center"></td>
+<td align="center">ToothGrowth</td>
+<td align="center"><em>dose</em></td>
+<td align="center"><em>len</em></td>
+<td align="center"><em>supp</em></td>
 </tr>
 </tbody>
 </table>
+<div class="explanation">
+<p>Pay attention to the data types!</p>
 </div>
-<div id="contributing" class="section level2">
-<h2><span class="header-section-number">0.3</span> Contributing</h2>
-<p>Under construction.</p>
-
-</div>
-</div>
-
-
-
-<div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>The QCBS R Workshop Series is part of the <a href="https://www.qcbs.ca">Québec Centre for Biodiversity Science</a>, and is maintained by the series coordinators and graduent student, postdoctoral, and research professional members. <strong>The contributors for this workshop can be accessed <a href="link">here</a></strong>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
+<div id="challenge-2-solution-mtcars" class="section level3">
+<h3><span class="header-section-number">9.1.1</span> Challenge 2: Solution (<code>mtcars</code>)</h3>
+<p>There are multiple ways to respond to this challenge. Here is one example using the <code>mtcars</code> dataset:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Data</th>
+<th align="center">x</th>
+<th align="center">y</th>
+<th align="center">Aesthetics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">mtcars</td>
+<td align="center"><em>wt</em></td>
+<td align="center"><em>mpg</em></td>
+<td align="center"><em>disp</em> and <em>hp</em></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="changing-shape-size-and-alpha.html#cb42-1"></a><span class="co"># One of many solutions: mtcars</span></span>
+<span id="cb42-2"><a href="changing-shape-size-and-alpha.html#cb42-2"></a><span class="kw">data</span>(mtcars)</span>
+<span id="cb42-3"><a href="changing-shape-size-and-alpha.html#cb42-3"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> mtcars) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> wt, <span class="dt">y =</span> mpg, <span class="dt">colour =</span> disp,</span>
+<span id="cb42-4"><a href="changing-shape-size-and-alpha.html#cb42-4"></a>    <span class="dt">alpha =</span> hp))</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p>Could you use <code>size</code> instead of <code>alpha</code>? What about <code>shape</code>?</p>
+</div>
+<div id="challenge-2-solution-co2" class="section level3">
+<h3><span class="header-section-number">9.1.2</span> Challenge 2: Solution (<code>CO2</code>)</h3>
+<p>Here is a second example using the <code>CO2</code> dataset:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Data</th>
+<th align="center">x</th>
+<th align="center">y</th>
+<th align="center">Aesthetics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">CO2</td>
+<td align="center"><em>conc</em></td>
+<td align="center"><em>uptake</em></td>
+<td align="center"><em>Treatment</em> and <em>Type</em></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="changing-shape-size-and-alpha.html#cb43-1"></a><span class="co"># Another possible solution</span></span>
+<span id="cb43-2"><a href="changing-shape-size-and-alpha.html#cb43-2"></a><span class="kw">data</span>(CO2)</span>
+<span id="cb43-3"><a href="changing-shape-size-and-alpha.html#cb43-3"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> CO2) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> conc, <span class="dt">y =</span> uptake, <span class="dt">colour =</span> Treatment,</span>
+<span id="cb43-4"><a href="changing-shape-size-and-alpha.html#cb43-4"></a>    <span class="dt">shape =</span> Type))</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+</div>
+<div id="challenge-2-solution-msleep" class="section level3">
+<h3><span class="header-section-number">9.1.3</span> Challenge 2: Solution (<code>msleep</code>)</h3>
+<p>Here is a third example using the <code>msleep</code> dataset:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Data</th>
+<th align="center">x</th>
+<th align="center">y</th>
+<th align="center">Aesthetics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">msleep</td>
+<td align="center">log10(<em>bodywt</em>)</td>
+<td align="center"><em>awake</em></td>
+<td align="center"><em>vore</em> and <em>conservation</em></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="changing-shape-size-and-alpha.html#cb44-1"></a><span class="co"># Another possible solution</span></span>
+<span id="cb44-2"><a href="changing-shape-size-and-alpha.html#cb44-2"></a><span class="kw">data</span>(msleep)</span>
+<span id="cb44-3"><a href="changing-shape-size-and-alpha.html#cb44-3"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> msleep) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">log10</span>(bodywt), <span class="dt">y =</span> awake,</span>
+<span id="cb44-4"><a href="changing-shape-size-and-alpha.html#cb44-4"></a>    <span class="dt">colour =</span> vore, <span class="dt">shape =</span> conservation))</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-57-1.png" width="576" /></p>
+</div>
+<div id="challenge-2-solution-toothgrowth" class="section level3">
+<h3><span class="header-section-number">9.1.4</span> Challenge 2: Solution (<code>ToothGrowth</code>)</h3>
+<p>Here is a final example using the <code>ToothGrowth</code> dataset:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Data</th>
+<th align="center">x</th>
+<th align="center">y</th>
+<th align="center">Aesthetics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">ToothGrowth</td>
+<td align="center"><em>dose</em></td>
+<td align="center"><em>len</em></td>
+<td align="center"><em>supp</em></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="changing-shape-size-and-alpha.html#cb45-1"></a><span class="kw">data</span>(ToothGrowth)</span>
+<span id="cb45-2"><a href="changing-shape-size-and-alpha.html#cb45-2"></a><span class="kw">ggplot</span>(ToothGrowth, <span class="kw">aes</span>(<span class="dt">x =</span> dose, <span class="dt">y =</span> len, <span class="dt">color =</span> supp)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb45-3"><a href="changing-shape-size-and-alpha.html#cb45-3"></a><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">formula =</span> <span class="st">&quot;y ~ x&quot;</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+</div>
+</div>
 </div>
 <hr>
 <center> 
@@ -399,8 +468,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="preparing-for-the-workshop.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="colours-make-your-points-talk.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="changing-the-scale-of-the-axes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

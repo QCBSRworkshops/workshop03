@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Workshop 3: Introduction to ggplot2</title>
+  <title>Chapter 8 Colours: make your points talk | Workshop 3: Introduction to ggplot2</title>
   <meta name="description" content="Introduction to ggplot2" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Workshop 3: Introduction to ggplot2" />
+  <meta property="og:title" content="Chapter 8 Colours: make your points talk | Workshop 3: Introduction to ggplot2" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop03" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Workshop 3: Introduction to ggplot2" />
+  <meta name="twitter:title" content="Chapter 8 Colours: make your points talk | Workshop 3: Introduction to ggplot2" />
   
   <meta name="twitter:description" content="Introduction to ggplot2" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-
-<link rel="next" href="preparing-for-the-workshop.html"/>
+<link rel="prev" href="aesthetics.html"/>
+<link rel="next" href="changing-shape-size-and-alpha.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -281,112 +281,158 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="header">
-<h1 class="title">Workshop 3: Introduction to <code>ggplot2</code></h1>
-<h2 class="subtitle"><em>QCBS R Workshop Series</em></h2>
-<p class="author"><em>Developed and maintained by the contributors of the QCBS R Workshop Series<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></p>
-<p class="date"><em>2021-09-13 19:50:31</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>The <strong>QCBS R Workshop Series</strong> is a series of 10 workshops that walks participants through the steps required to use R for a wide array of statistical analyses relevant to research in biology and ecology. These open-access workshops were created by members of the QCBS both for members of the QCBS and the larger community.</p>
-<p>The content of this workshop has been peer-reviewed by several QCBS members. If you would like to suggest modifications, please contact the current series coordinators, listed on the main Github page.</p>
-<div id="code-of-conduct" class="section level2">
-<h2><span class="header-section-number">0.1</span> Code of conduct</h2>
-<p>The QCBS R Workshop Series and the QCBS R Symposium are venues dedicated to providing a welcoming and supportive environment for all people, regardless of background or identity.</p>
-<p>Participants, presenters and organizers of the workshop series and other related activities accept this Code of Conduct when being present at any workshop-related activities.</p>
-<p>We do not tolerate behaviour that is disrespectful or that excludes, intimidates, or causes discomfort to others.</p>
-<p>We do not tolerate discrimination or harassment based on characteristics that include, but are not limited to, gender identity and expression, sexual orientation, disability, physical appearance, body size, citizenship, nationality, ethnic or social origin, pregnancy, familial status, genetic information, religion or belief (or lack thereof), membership of a national minority, property, age, education, socio-economic status, technical choices, and experience level.</p>
-<p>It applies to all spaces managed by or affiliated with the workshop, including, but not limited to, workshops, email lists, and online forums such as GitHub, Slack and Twitter.</p>
-<div id="expected-behaviour" class="section level3">
-<h3><span class="header-section-number">0.1.1</span> Expected behaviour</h3>
-<p>All participants are expected to show respect and courtesy to others. All interactions should be professional regardless of platform: either online or in-person. In order to foster a positive and professional learning environment we encourage the following kinds of behaviours in all workshop events and platforms:</p>
+<div id="colours-make-your-points-talk" class="section level1">
+<h1><span class="header-section-number">Chapter 8</span> Colours: make your points talk</h1>
+<p>When we are designed plots, we may want to change the colour of our data points in order to communicate different parts of the data. We may want to:</p>
 <ul>
-<li>Use welcoming and inclusive language</li>
-<li>Be respectful of different viewpoints and experiences</li>
-<li>Gracefully accept constructive criticism</li>
-<li>Focus on what is best for the community</li>
-<li>Show courtesy and respect towards other community members</li>
+<li>Differentiate between groups</li>
+<li>Represent data values</li>
+<li>Highlight specific elements of the data</li>
 </ul>
+<div class="split">
+<div class="split-left">
+<p><img src="book-en_files/figure-html/unnamed-chunk-33-1.png" width="480" /></p>
 </div>
-<div id="unacceptable-behaviour" class="section level3">
-<h3><span class="header-section-number">0.1.2</span> Unacceptable behaviour</h3>
-<p>Examples of unacceptable behaviour by participants at any workshop event/platform include:</p>
-<ul>
-<li>written or verbal comments which have the effect of excluding people on the - basis of membership of any specific group;</li>
-<li>causing someone to fear for their safety, such as through stalking or intimidation;</li>
-<li>violent threats or language directed against another person;</li>
-<li>the display of sexual or violent images;</li>
-<li>unwelcome sexual attention;</li>
-<li>nonconsensual or unwelcome physical contact;</li>
-<li>insults or put-downs;</li>
-<li>sexist, racist, homophobic, transphobic, ableist, or exclusionary jokes;</li>
-<li>incitement to violence, suicide, or self-harm;</li>
-<li>continuing to initiate interaction (including photography or recording) with - someone after being asked to stop;</li>
-<li>publication of private communication without consent.</li>
-</ul>
+<div class="split-right">
+<p><img src="book-en_files/figure-html/unnamed-chunk-34-1.png" width="480" /></p>
 </div>
 </div>
-<div id="contributors" class="section level2">
-<h2><span class="header-section-number">0.2</span> Contributors</h2>
-<p>This workshop was originally developed by Xavier Giroux-Bougard, Maxwell Farrell, Amanda Winegardner, Étienne Low-Decarie and Monica Granados.</p>
-<p>Since 2014, several QCBS members contributed to consistently and collaboratively develop and update this workshop, as part of the <em>Learning and Development Award</em> from the Québec Centre for Biodiversity Science. They were:</p>
-<table>
-<thead>
-<tr class="header">
-<th align="center">2022 - 2021 - 2020</th>
-<th align="center">2019 - 2018 - 2017</th>
-<th align="center">2016 - 2015 - 2014</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">Linley Sherin</td>
-<td align="center">Marie-Hélène Brice</td>
-<td align="center">Xavier Giroux-Bougard</td>
-</tr>
-<tr class="even">
-<td align="center">Katherine Hébert</td>
-<td align="center">Willian Vieira</td>
-<td align="center">Maxwell Farrell</td>
-</tr>
-<tr class="odd">
-<td align="center">Jake Lawlor</td>
-<td align="center">Rémi Maglione</td>
-<td align="center">Amanda Winegardner</td>
-</tr>
-<tr class="even">
-<td align="center">Marie-Hélène Brice</td>
-<td align="center">Pedro Henrique P. Braga</td>
-<td align="center">Étienne Low-Decarie</td>
-</tr>
-<tr class="odd">
-<td align="center">Kevin Cazelles</td>
-<td align="center">Alexis Carteron</td>
-<td align="center">Monica Granados</td>
-</tr>
-<tr class="even">
-<td align="center"></td>
-<td align="center">Katherine Hébert</td>
-<td align="center"></td>
-</tr>
-</tbody>
-</table>
+<p><em>Reference: Fundamentals of Data Visualization <span class="citation">(Wilke <a href="#ref-wilke2019fundamentals" role="doc-biblioref">2019</a>)</span>.</em></p>
+<div id="using-aes-use-to-change-colour" class="section level2">
+<h2><span class="header-section-number">8.1</span> Using <code>aes()</code> use to change colour</h2>
+<p>We can use the aesthetic layer <code>aes()</code> to map colours to our data in our plots. This will allow us to clearly communicate specific messages about our data. For instance, if we want to know whether bill length and flipper length vary differently across species, which of these plots allows us to answer that question?</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="colours-make-your-points-talk.html#cb21-1"></a><span class="co"># No colour mapping</span></span>
+<span id="cb21-2"><a href="colours-make-your-points-talk.html#cb21-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins, <span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm, <span class="dt">y =</span> flipper_length_mm)) <span class="op">+</span></span>
+<span id="cb21-3"><a href="colours-make-your-points-talk.html#cb21-3"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;No colour mapping&quot;</span>,</span>
+<span id="cb21-4"><a href="colours-make-your-points-talk.html#cb21-4"></a>    <span class="dt">x =</span> <span class="st">&quot;Bill length (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Bill depth (mm)&quot;</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="colours-make-your-points-talk.html#cb22-1"></a><span class="co"># With colour mapping</span></span>
+<span id="cb22-2"><a href="colours-make-your-points-talk.html#cb22-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins,</span>
+<span id="cb22-3"><a href="colours-make-your-points-talk.html#cb22-3"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm,</span>
+<span id="cb22-4"><a href="colours-make-your-points-talk.html#cb22-4"></a>           <span class="dt">y =</span> flipper_length_mm,</span>
+<span id="cb22-5"><a href="colours-make-your-points-talk.html#cb22-5"></a>           <span class="dt">col =</span> species)) <span class="op">+</span><span class="st"> </span><span class="co"># Using the col argument, we can colour by species</span></span>
+<span id="cb22-6"><a href="colours-make-your-points-talk.html#cb22-6"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb22-7"><a href="colours-make-your-points-talk.html#cb22-7"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span></span>
+<span id="cb22-8"><a href="colours-make-your-points-talk.html#cb22-8"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;With colour mapping&quot;</span>,</span>
+<span id="cb22-9"><a href="colours-make-your-points-talk.html#cb22-9"></a>       <span class="dt">x =</span> <span class="st">&quot;Bill length (mm)&quot;</span>,</span>
+<span id="cb22-10"><a href="colours-make-your-points-talk.html#cb22-10"></a>       <span class="dt">y =</span> <span class="st">&quot;Bill depth (mm)&quot;</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 </div>
-<div id="contributing" class="section level2">
-<h2><span class="header-section-number">0.3</span> Contributing</h2>
-<p>Under construction.</p>
-
+<div id="manual-colour-change" class="section level2">
+<h2><span class="header-section-number">8.2</span> Manual colour change</h2>
+<p>In the above example, we used the <code>col</code> argument within <code>aes()</code> in order to colour our data points by species automatically. This is possible because <code>aes()</code> can call our data variables. However, this method will use a default colour palette. If we want to add specific colours to our plots, we can do it manually using <code>scale_colour_manual()</code> or <code>scale_fill_manual()</code>.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="colours-make-your-points-talk.html#cb23-1"></a><span class="co"># Default</span></span>
+<span id="cb23-2"><a href="colours-make-your-points-talk.html#cb23-2"></a></span>
+<span id="cb23-3"><a href="colours-make-your-points-talk.html#cb23-3"></a><span class="co"># Let ggplot assign colours to species</span></span>
+<span id="cb23-4"><a href="colours-make-your-points-talk.html#cb23-4"></a>pp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm,</span>
+<span id="cb23-5"><a href="colours-make-your-points-talk.html#cb23-5"></a>    <span class="dt">y =</span> bill_depth_mm, <span class="dt">colour =</span> species)) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Default&quot;</span>,</span>
+<span id="cb23-6"><a href="colours-make-your-points-talk.html#cb23-6"></a>    <span class="dt">x =</span> <span class="st">&quot;Bill length (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Bill depth (mm)&quot;</span>)</span>
+<span id="cb23-7"><a href="colours-make-your-points-talk.html#cb23-7"></a>pp</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="colours-make-your-points-talk.html#cb24-1"></a><span class="co"># Manual colour change</span></span>
+<span id="cb24-2"><a href="colours-make-your-points-talk.html#cb24-2"></a></span>
+<span id="cb24-3"><a href="colours-make-your-points-talk.html#cb24-3"></a><span class="co"># By using scale_colour_manual(),</span></span>
+<span id="cb24-4"><a href="colours-make-your-points-talk.html#cb24-4"></a><span class="co"># we can specify the exact colours we want to use</span></span>
+<span id="cb24-5"><a href="colours-make-your-points-talk.html#cb24-5"></a>pp <span class="op">+</span></span>
+<span id="cb24-6"><a href="colours-make-your-points-talk.html#cb24-6"></a><span class="kw">scale_colour_manual</span>(</span>
+<span id="cb24-7"><a href="colours-make-your-points-talk.html#cb24-7"></a>  <span class="co"># Note that the colour order will correspond to</span></span>
+<span id="cb24-8"><a href="colours-make-your-points-talk.html#cb24-8"></a>  <span class="co"># the order of the species given in the legend</span></span>
+<span id="cb24-9"><a href="colours-make-your-points-talk.html#cb24-9"></a>  <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;grey55&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;skyblue&quot;</span>))</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<div class="explanation">
+<p>Here, we are saving our plot as an object (<code>pp</code>), and adding elements to this object with a <code>+</code> to change the scaling of the colour mapping. We do not need to rewrite the whole ggplot to customize it!</p>
 </div>
 </div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>The QCBS R Workshop Series is part of the <a href="https://www.qcbs.ca">Québec Centre for Biodiversity Science</a>, and is maintained by the series coordinators and graduent student, postdoctoral, and research professional members. <strong>The contributors for this workshop can be accessed <a href="link">here</a></strong>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
+<div id="gradients" class="section level2">
+<h2><span class="header-section-number">8.3</span> Gradients</h2>
+<p>We can do the same thing with colour gradients using <code>scale_colour_gradient()</code> if we want to communicate something different about our data. In this example, we are colouring our data points by body mass using a gradient.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="colours-make-your-points-talk.html#cb25-1"></a><span class="co"># Default</span></span>
+<span id="cb25-2"><a href="colours-make-your-points-talk.html#cb25-2"></a></span>
+<span id="cb25-3"><a href="colours-make-your-points-talk.html#cb25-3"></a><span class="co"># Using the colour argument within aes() will use a default</span></span>
+<span id="cb25-4"><a href="colours-make-your-points-talk.html#cb25-4"></a><span class="co"># colour palette to make our gradient</span></span>
+<span id="cb25-5"><a href="colours-make-your-points-talk.html#cb25-5"></a>pp2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm,</span>
+<span id="cb25-6"><a href="colours-make-your-points-talk.html#cb25-6"></a>    <span class="dt">y =</span> bill_depth_mm, <span class="dt">colour =</span> <span class="kw">log10</span>(body_mass_g))) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Default&quot;</span>,</span>
+<span id="cb25-7"><a href="colours-make-your-points-talk.html#cb25-7"></a>    <span class="dt">x =</span> <span class="st">&quot;Bill length (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Bill depth (mm)&quot;</span>)</span>
+<span id="cb25-8"><a href="colours-make-your-points-talk.html#cb25-8"></a>pp2</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="colours-make-your-points-talk.html#cb26-1"></a><span class="co"># Manual</span></span>
+<span id="cb26-2"><a href="colours-make-your-points-talk.html#cb26-2"></a></span>
+<span id="cb26-3"><a href="colours-make-your-points-talk.html#cb26-3"></a><span class="co"># By using scale_colour_graduent, we can set our colour</span></span>
+<span id="cb26-4"><a href="colours-make-your-points-talk.html#cb26-4"></a><span class="co"># gradient manually</span></span>
+<span id="cb26-5"><a href="colours-make-your-points-talk.html#cb26-5"></a>pp2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Manual&quot;</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="colours-make-your-points-talk.html#cb27-1"></a><span class="co"># Note: there is also scale_colour_gradient2() to create a</span></span>
+<span id="cb27-2"><a href="colours-make-your-points-talk.html#cb27-2"></a><span class="co"># gradient with a midpoint value for diverging palettes</span></span></code></pre></div>
+</div>
+<div id="use-a-new-colour-palette" class="section level2">
+<h2><span class="header-section-number">8.4</span> Use a new colour palette</h2>
+<p>If you prefer to use a pre-set colour palette rather than setting your colours manually, but you do not want to use the default palette - don’t worry! There are a lot of options for you.</p>
+<p>There are many <code>R</code> colour packages specifically designed to provide you with a range of colour palette options that all strike a different mood! For example, the <code>RColorBrewer</code> package have 35 palettes to choose from!</p>
+<p>Here you can see they are organized into different groups depending on whether the colours are sequential, diverging or a mixture of the two. You can imagine that different palettes are better for different data types.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="colours-make-your-points-talk.html#cb28-1"></a><span class="kw">require</span>(RColorBrewer)</span>
+<span id="cb28-2"><a href="colours-make-your-points-talk.html#cb28-2"></a><span class="kw">display.brewer.all</span>()</span></code></pre></div>
+<p><img src="images/rcolorbrewer_palette.png" style="display: block; margin: auto;" /></p>
+<p>Want to see these palettes in action? Here is an example of the Dark2 palette being used to group data points with the <code>scale_colour_brewer()</code> function and the <code>palette</code> arguemnt.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="colours-make-your-points-talk.html#cb29-1"></a><span class="co"># Palette for groups</span></span>
+<span id="cb29-2"><a href="colours-make-your-points-talk.html#cb29-2"></a>pp <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Palette for groups&quot;</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-43-1.png" width="624" style="display: block; margin: auto;" /></p>
+<p>There are other functions within the <code>RColorBrewer</code> package as well. By using <code>scale_color_viridis()</code>, we can use a default package that will translate from colour to gray scale without losing information. (Note that this is also an important consideration for colourblindness, which we will discuss soon).</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="colours-make-your-points-talk.html#cb30-1"></a><span class="co"># Palette for continuous values</span></span>
+<span id="cb30-2"><a href="colours-make-your-points-talk.html#cb30-2"></a>pp2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_viridis_c</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Palette for continuous values&quot;</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-44-1.png" width="624" style="display: block; margin: auto;" /></p>
+<p>Now what if we want to use just gray-scale palette for publication purposes? We can use the <code>scale_colour_grey()</code> function to colour our grouped data points.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="colours-make-your-points-talk.html#cb31-1"></a><span class="co"># Palette for groups</span></span>
+<span id="cb31-2"><a href="colours-make-your-points-talk.html#cb31-2"></a>pp <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_grey</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Palette for groups&quot;</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-45-1.png" width="624" style="display: block; margin: auto;" /></p>
+<p>Or we can use the <code>scale_colour_gradient()</code> function for continuous data, and set our low and high gradient points to black and light gray.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="colours-make-your-points-talk.html#cb32-1"></a><span class="co"># Palette for continuous values</span></span>
+<span id="cb32-2"><a href="colours-make-your-points-talk.html#cb32-2"></a>pp2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;grey85&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
+<span id="cb32-3"><a href="colours-make-your-points-talk.html#cb32-3"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Palette for continuous values&quot;</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-46-1.png" width="624" style="display: block; margin: auto;" /></p>
+</div>
+<div id="colourblind-friendly-palettes" class="section level2">
+<h2><span class="header-section-number">8.5</span> Colourblind-friendly palettes</h2>
+<p>Have you ever considered how your figure might appear under various forms of colourblindness?
+We can use the package <a href="https://github.com/clauswilke/colorblindr">colorblindr</a> to consider this. This package is not currently on CRAN, so we install it with the packages <a href="https://cran.r-project.org/web/packages/remotes/index.html">remotes</a>.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="colours-make-your-points-talk.html#cb33-1"></a><span class="co"># Let&#39;s install the colorblindr package from GitHub using</span></span>
+<span id="cb33-2"><a href="colours-make-your-points-talk.html#cb33-2"></a><span class="co"># remotes</span></span>
+<span id="cb33-3"><a href="colours-make-your-points-talk.html#cb33-3"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>, <span class="dt">quiet =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb33-4"><a href="colours-make-your-points-talk.html#cb33-4"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;clauswilke/colorblindr@cc54c8a35f8e7689ef4cc128b0da3af92f8cd540&quot;</span>,</span>
+<span id="cb33-5"><a href="colours-make-your-points-talk.html#cb33-5"></a>    <span class="dt">quiet =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb33-6"><a href="colours-make-your-points-talk.html#cb33-6"></a><span class="kw">library</span>(colorblindr)</span></code></pre></div>
+<p>Let’s start by testing out some colours using the <code>cvd_grid()</code> function. This will show us how our current plot looks for different forms of colourblindness.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="colours-make-your-points-talk.html#cb34-1"></a><span class="kw">cvd_grid</span>(pp)  <span class="co"># Let&#39;s check how our plot looks with different forms of colourblindness</span></span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-47-1.png" width="150%" /></p>
+<p>As you can see, our current colour palette is not accessible! By using <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><code>viridis</code></a> palettes, we can guarantee our plots always communicate the same information no matter who the audience is.</p>
+<div id="example-for-grouped-data" class="section level3">
+<h3><span class="header-section-number">8.5.1</span> Example for grouped data</h3>
+<p>Here is an example with grouped data points:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="colours-make-your-points-talk.html#cb35-1"></a><span class="co"># Let&#39;s use a viridis palette to make our plot more</span></span>
+<span id="cb35-2"><a href="colours-make-your-points-talk.html#cb35-2"></a><span class="co"># accessible</span></span>
+<span id="cb35-3"><a href="colours-make-your-points-talk.html#cb35-3"></a>pp_viridis &lt;-<span class="st"> </span>pp <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_viridis_d</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Viridis palette for groups&quot;</span>)</span>
+<span id="cb35-4"><a href="colours-make-your-points-talk.html#cb35-4"></a>pp_viridis</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="colours-make-your-points-talk.html#cb36-1"></a><span class="co"># Did we succeed? Let&#39;d use cvd_grid() to check again</span></span>
+<span id="cb36-2"><a href="colours-make-your-points-talk.html#cb36-2"></a><span class="kw">cvd_grid</span>(pp_viridis)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="colours-make-your-points-talk.html#cb37-1"></a><span class="co"># We succeeded!</span></span></code></pre></div>
+</div>
+<div id="example-for-continuous-data" class="section level3">
+<h3><span class="header-section-number">8.5.2</span> Example for continuous data</h3>
+<p>Note that we are using slightly different functions for different colours (ex. <code>scale_colour_viridis_c()</code>, <code>scale_colour_viridis_d()</code>)</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="colours-make-your-points-talk.html#cb38-1"></a>pp2_viridis &lt;-<span class="st"> </span>pp2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_viridis_c</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Viridis palette for continuous values&quot;</span>)</span>
+<span id="cb38-2"><a href="colours-make-your-points-talk.html#cb38-2"></a>pp2_viridis</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="colours-make-your-points-talk.html#cb39-1"></a><span class="kw">cvd_grid</span>(pp2_viridis)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-wilke2019fundamentals">
+<p>Wilke, Claus O. 2019. <em>Fundamentals of Data Visualization: A Primer on Making Informative and Compelling Figures</em>. O’Reilly Media.</p>
+</div>
 </div>
 <hr>
 <center> 
@@ -399,8 +445,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="preparing-for-the-workshop.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="aesthetics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="changing-shape-size-and-alpha.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

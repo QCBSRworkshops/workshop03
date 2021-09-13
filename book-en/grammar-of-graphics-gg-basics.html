@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Workshop 3: Introduction to ggplot2</title>
+  <title>Chapter 5 Grammar of Graphics (GG) basics | Workshop 3: Introduction to ggplot2</title>
   <meta name="description" content="Introduction to ggplot2" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Workshop 3: Introduction to ggplot2" />
+  <meta property="og:title" content="Chapter 5 Grammar of Graphics (GG) basics | Workshop 3: Introduction to ggplot2" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop03" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Workshop 3: Introduction to ggplot2" />
+  <meta name="twitter:title" content="Chapter 5 Grammar of Graphics (GG) basics | Workshop 3: Introduction to ggplot2" />
   
   <meta name="twitter:description" content="Introduction to ggplot2" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-
-<link rel="next" href="preparing-for-the-workshop.html"/>
+<link rel="prev" href="why-use-r.html"/>
+<link rel="next" href="the-basics-of-visualizing-data.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -281,112 +281,115 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="header">
-<h1 class="title">Workshop 3: Introduction to <code>ggplot2</code></h1>
-<h2 class="subtitle"><em>QCBS R Workshop Series</em></h2>
-<p class="author"><em>Developed and maintained by the contributors of the QCBS R Workshop Series<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></p>
-<p class="date"><em>2021-09-13 19:50:31</em></p>
+<div id="grammar-of-graphics-gg-basics" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Grammar of Graphics (GG) basics</h1>
+<div id="what-is-the-grammar-of-graphics" class="section level2">
+<h2><span class="header-section-number">5.1</span> What is the Grammar of Graphics?</h2>
+<p>Let’s start with the basics! The package <code>ggplot2</code> is based on the Grammar of Graphics (GG), which is a framework for data visualization that dissects each component of a graph into individual components, creating distinct layers. Using the GG system, we can build graphs step-by-step for flexible, customizable results.</p>
+<p><img src="images/Layers_ggplot.png" style="display: block; margin: auto;" /></p>
+<p>GG layers have specific names that you will see throughout the workshop:</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<img src="images/gglayers.png" alt="Image adapted from [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447)."  />
+<p class="caption">
+Figure 5.1: Image adapted from <a href="https://www.springer.com/gp/book/9780387245447">The Grammar of Graphics</a>.
+</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>The <strong>QCBS R Workshop Series</strong> is a series of 10 workshops that walks participants through the steps required to use R for a wide array of statistical analyses relevant to research in biology and ecology. These open-access workshops were created by members of the QCBS both for members of the QCBS and the larger community.</p>
-<p>The content of this workshop has been peer-reviewed by several QCBS members. If you would like to suggest modifications, please contact the current series coordinators, listed on the main Github page.</p>
-<div id="code-of-conduct" class="section level2">
-<h2><span class="header-section-number">0.1</span> Code of conduct</h2>
-<p>The QCBS R Workshop Series and the QCBS R Symposium are venues dedicated to providing a welcoming and supportive environment for all people, regardless of background or identity.</p>
-<p>Participants, presenters and organizers of the workshop series and other related activities accept this Code of Conduct when being present at any workshop-related activities.</p>
-<p>We do not tolerate behaviour that is disrespectful or that excludes, intimidates, or causes discomfort to others.</p>
-<p>We do not tolerate discrimination or harassment based on characteristics that include, but are not limited to, gender identity and expression, sexual orientation, disability, physical appearance, body size, citizenship, nationality, ethnic or social origin, pregnancy, familial status, genetic information, religion or belief (or lack thereof), membership of a national minority, property, age, education, socio-economic status, technical choices, and experience level.</p>
-<p>It applies to all spaces managed by or affiliated with the workshop, including, but not limited to, workshops, email lists, and online forums such as GitHub, Slack and Twitter.</p>
-<div id="expected-behaviour" class="section level3">
-<h3><span class="header-section-number">0.1.1</span> Expected behaviour</h3>
-<p>All participants are expected to show respect and courtesy to others. All interactions should be professional regardless of platform: either online or in-person. In order to foster a positive and professional learning environment we encourage the following kinds of behaviours in all workshop events and platforms:</p>
+<div class="explanation">
+<p>To make a <code>ggplot</code>, the data and mapping layers are basic <strong>requirements</strong>, while the other layers are for additional customization. <em>The layers that are “not required” are still important to think about, but you will be able to generate a basic plot without them.</em></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-12"></span>
+<img src="images/ggplot_basics.png" alt="Basic requirements to generate a `ggplot`."  />
+<p class="caption">
+Figure 5.2: Basic requirements to generate a <code>ggplot</code>.
+</p>
+</div>
+</div>
+</div>
+<div id="gg-layers" class="section level2">
+<h2><span class="header-section-number">5.2</span> Grammar of Graphics layers</h2>
+<div id="a-breakdown-of-common-layers" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> A breakdown of common layers</h3>
+<p>Here is a breakdown of each Grammar of Graphics layer and common arguments for each that can be used as a reference:</p>
 <ul>
-<li>Use welcoming and inclusive language</li>
-<li>Be respectful of different viewpoints and experiences</li>
-<li>Gracefully accept constructive criticism</li>
-<li>Focus on what is best for the community</li>
-<li>Show courtesy and respect towards other community members</li>
+<li><strong>Data</strong>:
+<ul>
+<li>your data, in tidy format, will provide ingredients for your plot</li>
+<li>use <code>dplyr</code> techniques to prepare data for optimal plotting format</li>
+<li>usually, this means you should have one row for every observation that you want to plot</li>
+</ul></li>
+<li><strong>Aesthetics</strong> (aes), to make data visible
+<ul>
+<li><code>x</code>, <code>y</code>: variable along the x and y axis</li>
+<li><code>colour</code>: color of geoms according to data</li>
+<li><code>fill</code>: the inside color of the geom</li>
+<li><code>group</code>: what group a geom belongs to</li>
+<li><code>shape</code>: the figure used to plot a point</li>
+<li><code>linetype</code>: the type of line used (solid, dashed, etc)</li>
+<li><code>size</code>: size scaling for an extra dimension</li>
+<li><code>alpha</code>: the transparency of the geom</li>
+</ul></li>
+<li><strong>Geometric objects</strong> (geoms - determines the type of plot)
+<ul>
+<li><code>geom_point()</code>: scatterplot</li>
+<li><code>geom_line()</code>: lines connecting points by increasing value of x</li>
+<li><code>geom_path()</code>: lines connecting points in sequence of appearance</li>
+<li><code>geom_boxplot()</code>: box and whiskers plot for categorical variables</li>
+<li><code>geom_bar()</code>: bar charts for categorical x axis</li>
+<li><code>geom_histogram()</code>: histogram for continuous x axis</li>
+<li><code>geom_violin()</code>: distribution kernel of data dispersion</li>
+<li><code>geom_smooth()</code>: function line based on data</li>
+</ul></li>
+<li><strong>Facets</strong>
+<ul>
+<li><code>facet_wrap()</code> or <code>facet_grid()</code> for small multiples</li>
+</ul></li>
+<li><strong>Statistics</strong>
+<ul>
+<li>similar to geoms, but computed</li>
+<li>show means, counts, and other statistical summaries of data</li>
+</ul></li>
+<li><strong>Coordinates</strong> - fitting data onto a page
+<ul>
+<li><code>coord_cartesian</code> to set limits</li>
+<li><code>coord_polar</code> for circular plots</li>
+<li><code>coord_map</code> for different map projections</li>
+</ul></li>
+<li><strong>Themes</strong>
+<ul>
+<li>overall visual defaults</li>
+<li>fonts, colors, shapes, outlines</li>
+</ul></li>
 </ul>
 </div>
-<div id="unacceptable-behaviour" class="section level3">
-<h3><span class="header-section-number">0.1.2</span> Unacceptable behaviour</h3>
-<p>Examples of unacceptable behaviour by participants at any workshop event/platform include:</p>
-<ul>
-<li>written or verbal comments which have the effect of excluding people on the - basis of membership of any specific group;</li>
-<li>causing someone to fear for their safety, such as through stalking or intimidation;</li>
-<li>violent threats or language directed against another person;</li>
-<li>the display of sexual or violent images;</li>
-<li>unwelcome sexual attention;</li>
-<li>nonconsensual or unwelcome physical contact;</li>
-<li>insults or put-downs;</li>
-<li>sexist, racist, homophobic, transphobic, ableist, or exclusionary jokes;</li>
-<li>incitement to violence, suicide, or self-harm;</li>
-<li>continuing to initiate interaction (including photography or recording) with - someone after being asked to stop;</li>
-<li>publication of private communication without consent.</li>
-</ul>
-</div>
-</div>
-<div id="contributors" class="section level2">
-<h2><span class="header-section-number">0.2</span> Contributors</h2>
-<p>This workshop was originally developed by Xavier Giroux-Bougard, Maxwell Farrell, Amanda Winegardner, Étienne Low-Decarie and Monica Granados.</p>
-<p>Since 2014, several QCBS members contributed to consistently and collaboratively develop and update this workshop, as part of the <em>Learning and Development Award</em> from the Québec Centre for Biodiversity Science. They were:</p>
-<table>
-<thead>
-<tr class="header">
-<th align="center">2022 - 2021 - 2020</th>
-<th align="center">2019 - 2018 - 2017</th>
-<th align="center">2016 - 2015 - 2014</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">Linley Sherin</td>
-<td align="center">Marie-Hélène Brice</td>
-<td align="center">Xavier Giroux-Bougard</td>
-</tr>
-<tr class="even">
-<td align="center">Katherine Hébert</td>
-<td align="center">Willian Vieira</td>
-<td align="center">Maxwell Farrell</td>
-</tr>
-<tr class="odd">
-<td align="center">Jake Lawlor</td>
-<td align="center">Rémi Maglione</td>
-<td align="center">Amanda Winegardner</td>
-</tr>
-<tr class="even">
-<td align="center">Marie-Hélène Brice</td>
-<td align="center">Pedro Henrique P. Braga</td>
-<td align="center">Étienne Low-Decarie</td>
-</tr>
-<tr class="odd">
-<td align="center">Kevin Cazelles</td>
-<td align="center">Alexis Carteron</td>
-<td align="center">Monica Granados</td>
-</tr>
-<tr class="even">
-<td align="center"></td>
-<td align="center">Katherine Hébert</td>
-<td align="center"></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="contributing" class="section level2">
-<h2><span class="header-section-number">0.3</span> Contributing</h2>
-<p>Under construction.</p>
-
-</div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>The QCBS R Workshop Series is part of the <a href="https://www.qcbs.ca">Québec Centre for Biodiversity Science</a>, and is maintained by the series coordinators and graduent student, postdoctoral, and research professional members. <strong>The contributors for this workshop can be accessed <a href="link">here</a></strong>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<div id="putting-these-layers-together" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Putting these layers together</h3>
+<p>Let’s try it out! Here are the basic steps to build a plot. You can refer back to these steps throughout the workshop if you need help!</p>
+<ol style="list-style-type: decimal">
+<li>Create a simple plot object:</li>
 </ol>
+<ul>
+<li><code>plot.object &lt;- ggplot()</code></li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Add geometric layers:</li>
+</ol>
+<ul>
+<li><code>plot.object &lt;- plot.object + geom_*()</code></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Add appearance layers:</li>
+</ol>
+<ul>
+<li><code>plot.object &lt;- plot.object + coord_*() + theme()</code></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Repeat step 2-3 until satisfied, then print:</li>
+</ol>
+<ul>
+<li><code>plot.object</code> or <code>print(plot.object)</code></li>
+</ul>
+<p>We will come back to this syntax in Chapter <a href="the-basics-of-visualizing-data.html#working-through-layers">6.4</a>, where we work through the layers in greater depth!</p>
+</div>
+</div>
 </div>
 <hr>
 <center> 
@@ -399,8 +402,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="preparing-for-the-workshop.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="why-use-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-basics-of-visualizing-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
