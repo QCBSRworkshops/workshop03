@@ -87,7 +87,15 @@ install.packages(c('grid', 'gridExtra', 'ggplot2', 'ggsignif', 'ggdendro', 'maps
 ---
 # Objectifs d'apprentissage
 
-##### 1. Utilisez R pour créer différents graphiques
+Dans cet atelier, nous allons :
+
+**1.** Apprendre les bases de la visualisation de données avec R.
+
+**2.** Apprendre comment trouver des paquets et des ressources pour répondre à vos besoins.
+
+**3.** Inspirer la créativité dans la science !
+
+**4.** Développer une compréhension du design pour une communication visuelle efficace.
 
 
 ---
@@ -108,9 +116,6 @@ Code et .HTML sont disponibles à l'adresse suivante: http://qcbs.ca/wiki/r/work
   1. créez votre propre script R ;
   2. référez-vous au script R fourni uniquement si nécessaire ;
   3. évitez de copier-coller ou d'exécuter le code directement à partir du script.
-
-
-###### [ggplot2](https://ggplot2.tidyverse.org/) est aussi sur GitHub: https://github.com/tidyverse/ggplot2
 
 
 ---

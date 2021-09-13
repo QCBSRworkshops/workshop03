@@ -1,4 +1,25 @@
-# Introduction
+# (PART\*) Introduction à `ggplot2` {-}
+
+# Préparez-vous pour cet atelier
+
+Tout le matériel de l'atelier se trouve sur [github.com/QCBSRworkshops/workshop03](https://github.com/QCBSRworkshops/workshop03). Cela inclut un [script R](https://qcbsrworkshops.github.io/workshop03/book-fr/workshop03-script-fr.R) qui rassemble tous les morceaux de code présentés dans ce livre.
+
+Vous devriez vous assurer que vous avez téléchargé, installé et chargé les paquets R suivants:
+
+-    [gridExtra](http://cran.r-project.org/web/packages/gridExtra/index.html)
+-    [ggplot2](http://cran.r-project.org/web/packages/ggplot2/index.html)
+-    [ggsignif](http://cran.r-project.org/web/packages/ggsignif/index.html)
+-    [ggdendro](http://cran.r-project.org/web/packages/ggdendro/index.html)
+-    [maps](http://cran.r-project.org/web/packages/maps/index.html)
+-    [mapproj](http://cran.r-project.org/web/packages/mapproj/index.html)
+-    [RColorBrewer](http://cran.r-project.org/web/packages/RColorBrewer/index.html)
+-    [reshape2](http://cran.r-project.org/web/packages/reshape2/index.html)
+-    [GGally](http://cran.r-project.org/web/packages/GGally/index.html)
+-    [patchwork](http://cran.r-project.org/web/packages/patchwork/index.html)
+-    [plotly](http://cran.r-project.org/web/packages/plotly/index.html)
+-    [palmerpenguins](http://cran.r-project.org/web/packages/palmerpenguins/index.html)
+
+Pour les installer du CRAN, roulez le code suivant:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE, results = 'hide'}
 # Install the required packages
@@ -15,3 +36,54 @@ install.packages("patchwork")
 install.packages("plotly")
 install.packages("palmerpenguins")
 ```
+
+Ensuite, on doit charger les pacquets avec le code suivant:
+
+```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
+# Load the required packages
+library(gridExtra)
+library(ggplot2)
+library(ggsignif)
+library(ggdendro)
+library(maps)
+library(mapproj)
+library(RColorBrewer)
+library(reshape2)
+library(GGally)
+library(patchwork)
+library(plotly)
+library(palmerpenguins)
+```
+
+# Objectifs d'apprentissage
+
+
+Dans cet atelier, nous allons :
+
+**1.** Apprendre les bases de la visualisation de données avec R.
+
+**2.** Apprendre comment trouver des paquets et des ressources pour répondre à vos besoins.
+
+**3.** Inspirer la créativité dans la science !
+
+**4.** Développer une compréhension du design pour une communication visuelle efficace.
+
+
+## Plan de l'atelier
+
+Today we will walk you through the basics of `ggplot2` so that you have the necessary tools to explore its use for your own projects. We will be covering the following topics:
+
+Aujourd'hui, nous allons vous présenter les bases de `ggplot2` afin que vous ayez les outils nécessaires pour l'utiliser dans vos propres projets. Nous allons aborder les sujets suivants :
+
+**1.** La visualisation en science
+
+**2.** Mécanique de `ggplot2` : les bases
+
+**3.** Le mapping esthétique
+
+**4.** Perfectionnement
+
+**5.** Sauvegarder vos graphiques
+
+**6.** Conclusion
+
