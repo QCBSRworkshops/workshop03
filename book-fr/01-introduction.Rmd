@@ -4,7 +4,7 @@
 
 Tout le matériel de l'atelier se trouve sur [github.com/QCBSRworkshops/workshop03](https://github.com/QCBSRworkshops/workshop03). Cela inclut un [script R](https://qcbsrworkshops.github.io/workshop03/book-fr/workshop03-script-fr.R) qui rassemble tous les morceaux de code présentés dans ce livre.
 
-Vous devriez vous assurer que vous avez téléchargé, installé et chargé les paquets R suivants:
+Vous devriez vous assurer que vous avez téléchargé, installé et chargé les librairies R suivantes:
 
 -    [gridExtra](http://cran.r-project.org/web/packages/gridExtra/index.html)
 -    [ggplot2](http://cran.r-project.org/web/packages/ggplot2/index.html)
@@ -22,7 +22,7 @@ Vous devriez vous assurer que vous avez téléchargé, installé et chargé les 
 Pour les installer du CRAN, roulez le code suivant:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE, results = 'hide'}
-# Install the required packages
+# Installez les librairies requises
 install.packages("gridExtra")
 install.packages("ggplot2")
 install.packages("ggsignif")
@@ -37,7 +37,7 @@ install.packages("plotly")
 install.packages("palmerpenguins")
 ```
 
-Ensuite, on doit charger les pacquets avec le code suivant:
+Ensuite, on doit charger les librairies avec le code suivant:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
 # Load the required packages
@@ -62,7 +62,7 @@ Dans cet atelier, nous allons :
 
 **1.** Apprendre les bases de la visualisation de données avec R.
 
-**2.** Apprendre comment trouver des paquets et des ressources pour répondre à vos besoins.
+**2.** Apprendre comment trouver des librairies et des ressources pour répondre à vos besoins.
 
 **3.** Inspirer la créativité dans la science !
 

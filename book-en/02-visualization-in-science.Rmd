@@ -20,7 +20,7 @@ knitr::include_graphics("images/piechart3d.png")
 
 What is wrong with this image? Try to answer for yourself what you think this figure is trying to communicate and whether it is successful. How could this image be improved?
 
-*Hints:* Why is this in [**3D**](https://www.data-to-viz.com/caveat/3d.html)? What do your eyes [**focus on**](https://www.data-to-viz.com/caveat/declutter.html) first? How does a [**pie chart**](https://www.data-to-viz.com/caveat/pie.html) visually communicate the information?
+*Hints:* Why is this in [**3D**](https://www.data-to-viz.com/caveat/3d.html)? Which elements do your eyes [**focus on**](https://www.data-to-viz.com/caveat/declutter.html) first? How does a [**pie chart**](https://www.data-to-viz.com/caveat/pie.html) visually communicate the information?
 :::
 
 To ensure you are communicating effectively, here are some important questions to ask yourself when visualizing your data:
