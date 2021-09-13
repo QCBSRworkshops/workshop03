@@ -262,7 +262,7 @@ Note: You could also use `facet_grid()` if you wanted to facet according to two 
 
 We can also adjust the scale of our axes in the plot itself, rather than transforming the data. Let us assume we are interested in looking at the relationship between the bill measurements on a $log_{10}$ scale.
 
-```{r,fig.height=5, fig.width=6, warning = FALSE}
+```{r,fig.height=5, fig.width=6, warning = FALSE, eval = FALSE}
 ggplot(data = penguins, 
        aes(x = bill_length_mm, 
            y = bill_depth_mm)) +
@@ -274,7 +274,7 @@ ggplot(data = penguins,
 
 As a final touch, we can also customize the plot's theme, which includes its background, grid lines, and other visual characteristics of the plot. Let us assume we do not like the default grey background from ggplot2 (we would not be alone in this!). We can use `theme_bw()` to produce a more visually appealing plot. We will discuss themes in Chapter \@ref(theme)!
 
-```{r,fig.height=5, fig.width=6, warning = FALSE}
+```{r,fig.height=5, fig.width=6, warning = FALSE,  eval = FALSE}
 ggplot(data = penguins, 
        aes(x = bill_length_mm, 
            y = bill_depth_mm)) +
