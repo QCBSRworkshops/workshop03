@@ -1,35 +1,46 @@
-##Section: 01-intro.R 
+##Section: 01-introduction.R 
 
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
-
-knitr::kable(
-  head(iris, 20), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
-
-
-##Section: 02-literature.R 
-
-
-
-
-##Section: 03-method.R 
+# Install the required packages
+install.packages("gridExtra")
+install.packages("ggplot2")
+install.packages("ggsignif")
+install.packages("ggdendro")
+install.packages("maps")
+install.packages("mapproj")
+install.packages("RColorBrewer")
+install.packages("reshape2")
+install.packages("GGally")
+install.packages("patchwork")
+install.packages("plotly")
+install.packages("palmerpenguins")
 
 
-
-
-##Section: 04-application.R 
+##Section: 02-visualization-en-science.R 
 
 
 
 
-##Section: 05-summary.R 
+##Section: 03-mecanique-ggplot2.R 
 
 
 
 
-##Section: 06-references.R 
+##Section: 04-esthetique.R 
+
+
+
+
+##Section: 05-perfectionner.R 
+
+
+
+
+##Section: 06-sauvegarder.R 
+
+
+
+
+##Section: 07-conclusion.R 
 
 
 
