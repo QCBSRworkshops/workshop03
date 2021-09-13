@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapitre 2 Visualisation en science | Atelier 10: Analyses multivariées avancées en R</title>
-  <meta name="description" content="Analyses multivariées avancées en R" />
+  <title>Chapitre 4 Pourquoi utiliser R? | Atelier 3: Introduction à ggplot2</title>
+  <meta name="description" content="Introduction à ggplot2" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapitre 2 Visualisation en science | Atelier 10: Analyses multivariées avancées en R" />
+  <meta property="og:title" content="Chapitre 4 Pourquoi utiliser R? | Atelier 3: Introduction à ggplot2" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
-  <meta property="og:description" content="Analyses multivariées avancées en R" />
-  <meta name="github-repo" content="qcbsRworkshops/workshop10" />
+  <meta property="og:description" content="Introduction à ggplot2" />
+  <meta name="github-repo" content="qcbsRworkshops/workshop03" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapitre 2 Visualisation en science | Atelier 10: Analyses multivariées avancées en R" />
+  <meta name="twitter:title" content="Chapitre 4 Pourquoi utiliser R? | Atelier 3: Introduction à ggplot2" />
   
-  <meta name="twitter:description" content="Analyses multivariées avancées en R" />
+  <meta name="twitter:description" content="Introduction à ggplot2" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
 
 <meta name="author" content="Développé et entretenu par les contributeurs et les contributrices de la Série d’ateliers R du CSBQ." />
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="introduction.html"/>
+<link rel="prev" href="pourquoi-visualiser-des-données.html"/>
 <link rel="next" href="mécanique-ggplot2.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -145,13 +145,22 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributeurs-et-contributrices"><i class="fa fa-check"></i><b>0.2</b> Contributeurs et contributrices</a></li>
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contribuez-à-la-série"><i class="fa fa-check"></i><b>0.3</b> Contribuez à la série!</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="visualisation.html"><a href="visualisation.html"><i class="fa fa-check"></i><b>2</b> Visualisation en science</a></li>
-<li class="chapter" data-level="3" data-path="mécanique-ggplot2.html"><a href="mécanique-ggplot2.html"><i class="fa fa-check"></i><b>3</b> Mécanique ggplot2</a></li>
-<li class="chapter" data-level="4" data-path="esthetique.html"><a href="esthetique.html"><i class="fa fa-check"></i><b>4</b> Esthetique</a></li>
-<li class="chapter" data-level="5" data-path="perfectionner.html"><a href="perfectionner.html"><i class="fa fa-check"></i><b>5</b> Perfectionner</a></li>
-<li class="chapter" data-level="6" data-path="sauvegarder.html"><a href="sauvegarder.html"><i class="fa fa-check"></i><b>6</b> Sauvegarder</a></li>
-<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
+<li class="part"><span><b>Introduction à <code>ggplot2</code></b></span></li>
+<li class="chapter" data-level="1" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>1</b> Préparez-vous pour cet atelier</a></li>
+<li class="chapter" data-level="2" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>2</b> Objectifs d’apprentissage</a><ul>
+<li class="chapter" data-level="2.1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html#plan-de-latelier"><i class="fa fa-check"></i><b>2.1</b> Plan de l’atelier</a></li>
+</ul></li>
+<li class="part"><span><b>Visualication en science</b></span></li>
+<li class="chapter" data-level="3" data-path="pourquoi-visualiser-des-données.html"><a href="pourquoi-visualiser-des-données.html"><i class="fa fa-check"></i><b>3</b> Pourquoi visualiser des données ?</a></li>
+<li class="chapter" data-level="4" data-path="pourquoi-utiliser-r.html"><a href="pourquoi-utiliser-r.html"><i class="fa fa-check"></i><b>4</b> Pourquoi utiliser <code>R</code>?</a><ul>
+<li class="chapter" data-level="4.1" data-path="pourquoi-utiliser-r.html"><a href="pourquoi-utiliser-r.html#reproductibilité"><i class="fa fa-check"></i><b>4.1</b> Reproductibilité</a></li>
+<li class="chapter" data-level="4.2" data-path="pourquoi-utiliser-r.html"><a href="pourquoi-utiliser-r.html#puissantes-fonctionnalités"><i class="fa fa-check"></i><b>4.2</b> Puissantes fonctionnalités</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mécanique-ggplot2.html"><a href="mécanique-ggplot2.html"><i class="fa fa-check"></i><b>5</b> Mécanique ggplot2</a></li>
+<li class="chapter" data-level="6" data-path="esthetique.html"><a href="esthetique.html"><i class="fa fa-check"></i><b>6</b> Esthetique</a></li>
+<li class="chapter" data-level="7" data-path="perfectionner.html"><a href="perfectionner.html"><i class="fa fa-check"></i><b>7</b> Perfectionner</a></li>
+<li class="chapter" data-level="8" data-path="sauvegarder.html"><a href="sauvegarder.html"><i class="fa fa-check"></i><b>8</b> Sauvegarder</a></li>
+<li class="chapter" data-level="9" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>9</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
 
@@ -164,7 +173,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Atelier 10: Analyses multivariées avancées en <code>R</code></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Atelier 3: Introduction à <code>ggplot2</code></a>
           </h1>
         </div>
 
@@ -186,9 +195,42 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="visualisation" class="section level1">
-<h1><span class="header-section-number">Chapitre 2</span> Visualisation en science</h1>
+<div id="pourquoi-utiliser-r" class="section level1">
+<h1><span class="header-section-number">Chapitre 4</span> Pourquoi utiliser <code>R</code>?</h1>
+<p>Que vous effectuiez des statistiques descriptives (e.g. Excel), des analyses plus avancées (e.g. SAS, JMP, SPSS) ou des graphiques et des tableaux (e.g. Sigmaplot, Excel), il est facile de se perdre dans le flux de travail lorsqu’on utilise plusieurs logiciels. Ceci s’avère particulièrement problématique lorsqu’on doit importer ou exporter des données pour effectuer une tâche en aval. À chaque opération, on augmente le risque d’introduire des erreurs dans les données ou de perdre de vue le “bon” fichier de données. Le langage statistique <code>R</code> fournit une solution à ce problème en regroupant tous les outils nécessaires pour manipuler des données, effectuer des analyses statistiques et produire des graphiques sous un seul logiciel. En regroupant notre flux de travail sous le même toit avec <code>R</code>, on réduit la probabilité de faire des erreurs et on rend notre flux de travail beaucoup plus compréhensible et reproductible. Tout ceci en vaut grandement l’effort!</p>
+<p>Au lieu d’utiliser une suite de logiciels…</p>
+<p><img src="images/Divided_reproducible%20workflow.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Vous pouvez utiliser <code>R</code> pour générer des visualisations de données reproductibles, le tout dans un seul programme, <code>R</code> Studio.</p>
+<p><img src="images/Divided_reproducible%20workflow2.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Quel est l’avantage d’utiliser <code>R</code> pour la visualisation des données?</p>
+<div id="reproductibilité" class="section level2">
+<h2><span class="header-section-number">4.1</span> Reproductibilité</h2>
+<p>L’une des principales raisons d’utiliser <code>R</code> pour la visualisation est qu’elle rend votre graphique entièrement reproductible. Vous pouvez annoter votre script, ajouter des informations supplémentaires (ex. titres, étiquettes, légendes, etc.) et maintenir le code pour toutes les versions de vos figures afin de toujours savoir comment elles ont été produites.</p>
+<p>La science reproductible demande des efforts, mais elle devient rapidement une <strong>norme de travail</strong> et constitue un investissement qui vous fera gagner beaucoup de temps, à vous et à vos collaborateurs, à long terme!</p>
+</div>
+<div id="puissantes-fonctionnalités" class="section level2">
+<h2><span class="header-section-number">4.2</span> Puissantes fonctionnalités</h2>
+<p>Une autre raison d’utiliser <code>R</code> concerne ses puissantes fonctionnalités, comme <code>ggplot2</code>.</p>
+<p><code>ggplot2</code> est la librairie la plus flexible et la plus complète disponible pour la visualisation avancée de données en <code>R</code>. Cette librairie a été créée pour <code>R</code> par Hadley Wickham sur la base de la Grammar of Graphics de Leland Wilkinson.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
+<img src="images/ggplot2_logo.png" alt="Le code source de la librairie `ggplot2` est hébergé sur GitHub: [github.com/hadley/ggplot2](https://github.com/hadley/ggplot2)." width="50%" />
+<p class="caption">
+Figure 4.1: Le code source de la librairie <code>ggplot2</code> est hébergé sur GitHub: <a href="https://github.com/hadley/ggplot2">github.com/hadley/ggplot2</a>.
+</p>
+</div>
+<p>Dans cet atelier, nous nous concentrons uniquement sur <code>ggplot2</code>, mais il y a beaucoup d’autres outils et fonctions (<a href="https://insileco.github.io/wiki/rgraphpkgs/" class="uri">https://insileco.github.io/wiki/rgraphpkgs/</a>) qui peuvent être utilisés pour la visualisation (par exemple, <a href="https://bookdown.org/rdpeng/exdata/the-base-plotting-system-1.html"><code>base R</code></a>, <a href="https://plot.ly/r/"><code>plotly</code></a>, <a href="http://www.strengejacke.de/sjPlot/"><code>sjPlot</code></a>, <a href="https://r-spatial.github.io/mapview/"><code>mapview</code></a>, <a href="https://igraph.org/r/"><code>igraph</code></a>). Voici quelques exemples de graphiques que vous pouvez faire avec la base <code>R</code>, ou avec <code>ggplot2</code>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
+<img src="images/multiExamplePlot.png" alt="Un petit aperçu de figures que vous pouvez réaliser avec `base R` (row 1) et `ggplot2` (row 2), basées sur la librairie de données [`palmerpenguins`](http://cran.r-project.org/web/packages/palmerpenguins/index.html)."  />
+<p class="caption">
+Figure 4.2: Un petit aperçu de figures que vous pouvez réaliser avec <code>base R</code> (row 1) et <code>ggplot2</code> (row 2), basées sur la librairie de données <a href="http://cran.r-project.org/web/packages/palmerpenguins/index.html"><code>palmerpenguins</code></a>.
+</p>
+</div>
+<p>Nous nous concentrons sur <code>ggplot2</code> en raison de sa <strong>versatilité</strong>.</p>
+<p><strong>1.</strong> <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> vous permet de créer de <em>beaux</em> graphiques personnalisables;</p>
+<p><strong>2.</strong> <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> implémente la grammaire des graphiques, qui est un système fiable pour construire des graphiques.</p>
+<p><strong>3.</strong> Il existe <a href="https://exts.ggplot2.tidyverse.org/gallery/">de nombreuses extensions</a> pour ajouter encore plus de fonctionnalités à <code>ggplot2</code>, ce qui permet une multitude d’applications.</p>
 
+</div>
 </div>
 <hr>
 <center> 
@@ -201,7 +243,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pourquoi-visualiser-des-données.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="mécanique-ggplot2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapitre 5 Perfectionner | Atelier 10: Analyses multivariées avancées en R</title>
-  <meta name="description" content="Analyses multivariées avancées en R" />
+  <title>Chapitre 7 Perfectionner | Atelier 3: Introduction à ggplot2</title>
+  <meta name="description" content="Introduction à ggplot2" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapitre 5 Perfectionner | Atelier 10: Analyses multivariées avancées en R" />
+  <meta property="og:title" content="Chapitre 7 Perfectionner | Atelier 3: Introduction à ggplot2" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
-  <meta property="og:description" content="Analyses multivariées avancées en R" />
-  <meta name="github-repo" content="qcbsRworkshops/workshop10" />
+  <meta property="og:description" content="Introduction à ggplot2" />
+  <meta name="github-repo" content="qcbsRworkshops/workshop03" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapitre 5 Perfectionner | Atelier 10: Analyses multivariées avancées en R" />
+  <meta name="twitter:title" content="Chapitre 7 Perfectionner | Atelier 3: Introduction à ggplot2" />
   
-  <meta name="twitter:description" content="Analyses multivariées avancées en R" />
+  <meta name="twitter:description" content="Introduction à ggplot2" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
 
 <meta name="author" content="Développé et entretenu par les contributeurs et les contributrices de la Série d’ateliers R du CSBQ." />
@@ -145,13 +145,22 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributeurs-et-contributrices"><i class="fa fa-check"></i><b>0.2</b> Contributeurs et contributrices</a></li>
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contribuez-à-la-série"><i class="fa fa-check"></i><b>0.3</b> Contribuez à la série!</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="visualisation.html"><a href="visualisation.html"><i class="fa fa-check"></i><b>2</b> Visualisation en science</a></li>
-<li class="chapter" data-level="3" data-path="mécanique-ggplot2.html"><a href="mécanique-ggplot2.html"><i class="fa fa-check"></i><b>3</b> Mécanique ggplot2</a></li>
-<li class="chapter" data-level="4" data-path="esthetique.html"><a href="esthetique.html"><i class="fa fa-check"></i><b>4</b> Esthetique</a></li>
-<li class="chapter" data-level="5" data-path="perfectionner.html"><a href="perfectionner.html"><i class="fa fa-check"></i><b>5</b> Perfectionner</a></li>
-<li class="chapter" data-level="6" data-path="sauvegarder.html"><a href="sauvegarder.html"><i class="fa fa-check"></i><b>6</b> Sauvegarder</a></li>
-<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
+<li class="part"><span><b>Introduction à <code>ggplot2</code></b></span></li>
+<li class="chapter" data-level="1" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>1</b> Préparez-vous pour cet atelier</a></li>
+<li class="chapter" data-level="2" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>2</b> Objectifs d’apprentissage</a><ul>
+<li class="chapter" data-level="2.1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html#plan-de-latelier"><i class="fa fa-check"></i><b>2.1</b> Plan de l’atelier</a></li>
+</ul></li>
+<li class="part"><span><b>Visualication en science</b></span></li>
+<li class="chapter" data-level="3" data-path="pourquoi-visualiser-des-données.html"><a href="pourquoi-visualiser-des-données.html"><i class="fa fa-check"></i><b>3</b> Pourquoi visualiser des données ?</a></li>
+<li class="chapter" data-level="4" data-path="pourquoi-utiliser-r.html"><a href="pourquoi-utiliser-r.html"><i class="fa fa-check"></i><b>4</b> Pourquoi utiliser <code>R</code>?</a><ul>
+<li class="chapter" data-level="4.1" data-path="pourquoi-utiliser-r.html"><a href="pourquoi-utiliser-r.html#reproductibilité"><i class="fa fa-check"></i><b>4.1</b> Reproductibilité</a></li>
+<li class="chapter" data-level="4.2" data-path="pourquoi-utiliser-r.html"><a href="pourquoi-utiliser-r.html#puissantes-fonctionnalités"><i class="fa fa-check"></i><b>4.2</b> Puissantes fonctionnalités</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mécanique-ggplot2.html"><a href="mécanique-ggplot2.html"><i class="fa fa-check"></i><b>5</b> Mécanique ggplot2</a></li>
+<li class="chapter" data-level="6" data-path="esthetique.html"><a href="esthetique.html"><i class="fa fa-check"></i><b>6</b> Esthetique</a></li>
+<li class="chapter" data-level="7" data-path="perfectionner.html"><a href="perfectionner.html"><i class="fa fa-check"></i><b>7</b> Perfectionner</a></li>
+<li class="chapter" data-level="8" data-path="sauvegarder.html"><a href="sauvegarder.html"><i class="fa fa-check"></i><b>8</b> Sauvegarder</a></li>
+<li class="chapter" data-level="9" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>9</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
 
@@ -164,7 +173,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Atelier 10: Analyses multivariées avancées en <code>R</code></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Atelier 3: Introduction à <code>ggplot2</code></a>
           </h1>
         </div>
 
@@ -187,7 +196,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
 <div id="perfectionner" class="section level1">
-<h1><span class="header-section-number">Chapitre 5</span> Perfectionner</h1>
+<h1><span class="header-section-number">Chapitre 7</span> Perfectionner</h1>
 
 </div>
 <hr>
