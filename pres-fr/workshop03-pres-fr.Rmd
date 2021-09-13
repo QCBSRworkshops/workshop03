@@ -184,9 +184,9 @@ Que pensez-vous de celle-ci ![:faic](arrow-up)?
 
 **Questions importantes** :
 
-- Que voulez-vous communiquer ?
-- Qui est votre public ?
-- Quelle est la meilleure façon de le faire ?
+- Que voulez-vous communiquer?
+- Qui est votre public?
+- Quelle est la meilleure façon de visualiser votre message?
 
 .center[
 .alert[Une règle générale : restez simple - utilisez moins d'encre !]
@@ -440,7 +440,7 @@ Un graphique est constitué d'éléments (couches):
 note: _descriptions of other layerss_
 
 ---
-# Comment fonctionnent les couches dans ggplot
+# Comment assembler ces couches
 
 1. Créer un objet graphique simple :
   * `plot.object <- ggplot()`
@@ -456,7 +456,7 @@ note: _descriptions of other layerss_
 
 
 ---
-# Le jeu de données: palmerpenguins
+# Le jeu de données: `palmerpenguins`
 
 .pull-right2[
 ![:scale 80%](images/palmerpenguins.png)
@@ -484,12 +484,12 @@ Ces données ont été recueillies de 2007 à 2009 par la Dre Kristen Gorman dan
 
 Cet ensemble de données est souvent utilisé pour remplacer l'ensemble de données iris, qui pose certains problèmes pour l'enseignement de la science des données, notamment ses liens avec l'eugénisme (plus d'informations à ce sujet sur https://armchairecology.blog/iris-dataset/).
 
-Cet ensemble de données a également été utilisé pour un défi TidyTuesday, montrant les nombreuses possibilités de visualisation créative de l'ensemble de données. Par exemple : [this](https://twitter.com/LauraNavarroSol/status/1289216490307063814?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1289216490307063814%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F), and [this](https://twitter.com/CedScherer/status/1288181995714093057?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1288181995714093057%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F).
+Cet ensemble de données a également été utilisé pour un défi TidyTuesday, montrant les nombreuses possibilités de visualisation créative de l'ensemble de données. Par exemple : [ceci](https://twitter.com/LauraNavarroSol/status/1289216490307063814?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1289216490307063814%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F), and [ceci](https://twitter.com/CedScherer/status/1288181995714093057?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1288181995714093057%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F).
 
 ---
 # Le jeu de données: palmerpenguins
 
-Regardons les variables de l'ensemble de données des pingouins :
+Regardons les variables du jeu de données des pingouins :
 
 ```{r}
 str(penguins)
@@ -556,17 +556,17 @@ On peut déjà voir certains regroupements d'espèces entre la longueur et la pr
 Explorons comment ces données sont structurées par espèce:
 
 ```{r, echo = TRUE, fig.height=6, fig.width=8, eval = FALSE}
-ggplot(data = penguins,               # Data
-       aes(x = bill_length_mm,        # Your X-value
-           y = bill_depth_mm,         # Your Y-value
-           col = species)) +          # Aesthetics
-  geom_point(size = 5, alpha = 0.8) + # Point
-  geom_smooth(method = "lm") +        # Linear regression
+ggplot(data = penguins,               # Données
+       aes(x = bill_length_mm,        # Valeurs X
+           y = bill_depth_mm,         # Valeurs Y
+           col = species)) +          # Esthétique (mettre une couleur par espèce)
+  geom_point(size = 5, alpha = 0.8) + # Points
+  geom_smooth(method = "lm") +        # Régression linéaire
   labs(title = "Relationship between bill length and depth\nfor different penguin species", # Title
-       x = "Bill length (mm)",
-       y = "Bill depth (mm)",
-       col = "Species") + 
-  theme_classic() + # apply a clean theme
+       x = "Bill length (mm)", # titre de l'axe des X
+       y = "Bill depth (mm)", # titre de l'axe des Y
+       col = "Species") +  # Légende pour les couleurs dans aes(col = species)
+  theme_classic() + # Utiliser un thème propre
   theme(title = element_text(size = 18, face = "bold"),
       text = element_text(size = 16))
 ```

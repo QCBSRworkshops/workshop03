@@ -1,2 +1,352 @@
-# Mécanique ggplot2 
+# (PART\*) La mécanique `ggplot2`: les bases {-}
 
+# Les bases de la grammaire des graphiques (GG)
+
+## La grammaire des graphiques (GG)
+
+Commençons par les bases ! Le paquet `ggplot2` est basé sur la Grammaire des Graphiques (GG), qui est un cadre pour la visualisation de données qui décompose chaque élément d'un graphique en composants individuels, créant ainsi des couches distinctes. En utilisant le système GG, nous pouvons construire des graphiques étape par étape pour des résultats flexibles et personnalisables. 
+
+```{r, echo=FALSE, fig.align="center", purl = FALSE}
+knitr::include_graphics("images/Layers_ggplot.png")
+```
+
+Les couches GG ont des noms spécifiques que vous verrez tout au long de l'atelier:
+
+```{r, echo=FALSE, fig.align="center", fig.cap = "Image adapted from [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447).", purl = FALSE}
+knitr::include_graphics("images/gglayers.png")
+```
+
+:::explanation
+Pour créer un `ggplot`, les couches de données et de *mapping* sont des **exigences** de base, tandis que les autres couches sont destinées à une configuration supplémentaire. *Les couches "non requises" sont toujours importantes à considérer, mais vous serez en mesure de générer un graphique de base sans celles-ci.*
+
+```{r, echo=FALSE, fig.align="center", fig.cap = "Basic requirements to generate a `ggplot`.", purl = FALSE}
+knitr::include_graphics("images/ggplot_basics.png")
+```
+:::
+
+## Les couches de la grammaire des graphiques (GG) {#gg-layers}
+
+### Descriptions de couches courantes
+
+Voici une décomposition de chaque couche Grammaire des Graphiques et des arguments courants pour chacune d'elles qui peut vous servir de référence:
+
+- **Données** :
+    - vos données, dans un format *tidy*, fourniront les ingrédients de votre graphique.
+    - utilisez les techniques `dplyr` pour préparer les données pour un format optimal pour la visualisation.
+    - En général, cela signifie que vous devez avoir une rangée pour chaque observation que vous voulez visualiser.
+    
+- **Esthétique** (aes), pour rendre les données visibles
+    - `x`, `y`: position le long des axes x et y
+    - `colour`: la couleur des géométries selon les données
+    - `fill`: la couleur intérieure des géométries
+    - `group`: à quel groupe appartient une géométrie
+    - `shape`: la forme des points
+    - `linetype`: le type de ligne utilisé (pleine, pointillée, etc.)
+    - `size`: la taille des points ou des lignes
+    - `alpha`: la transparence des géométries
+    
+- **Objets géométriques** (geoms)
+    * `geom_point()` : diagramme de dispersion
+    * `geom_line()` : lignes reliant des points par une valeur croissante de x
+    * `geom_path()` : lignes reliant des points dans l'ordre d'apparition
+    * `geom_boxplot()` : diagramme en boîte (boxplot) pour les variables catégoriques
+    * `geom_bar()` : diagrammes à barres pour un axe des x catégorique
+    * `geom_histogram()` : histogramme pour l'axe des x continu
+    * `geom_violin()` : kernel de distribution de la dispersion des données
+    * `geom_smooth()` : ligne de lissage en fonction des données
+    
+- **Facettes**
+    * `facet_wrap()` ou `facet_grid()` pour de petits multiples
+    
+- **Statistiques**
+    * similaire aux géométries, mais issue de calcul sur les données
+    * indique les moyennes, les comptages et autres résumés statistiques des données
+    
+- **Coordonnées** - ajustement des données sur une page
+    * `coord_cartesian` pour fixer des limites
+    * `coord_polar` pour les graphiques circulaires
+    * `coord_map` pour différentes projections cartographiques
+
+- **Thèmes**
+    * Effets visuels globaux par défaut
+    * polices, couleurs, formes, contours
+    
+### Comment assembler ces couches
+
+Essayons de mettre ces couches ensemble! Voici les étapes de base pour construire une figure. Vous pouvez vous référer à ces étapes tout au long de l'atelier si vous voulez de l'aide !
+
+1. Créer un objet graphique simple :
+  * `plot.object <- ggplot()`
+
+2. Ajouter des couches géométriques :
+  * `plot.object <- plot.object + geom_*()`
+
+3. Ajouter des couches d'apparence :
+  * `plot.object <- plot.object + coord_*() + theme()`
+
+3. Répétez l'étape 2-3 jusqu'à ce que vous soyez satisfait, puis imprimez :
+  * `plot.object` ou `print(plot.object)`.
+
+Nous reviendrons sur cette syntaxe au chapitre \@ref(working-through-layers), où nous aborderons les couches de manière plus approfondie!
+
+# Les bases de la visualisation de données
+
+## Le jeu de données: `palmerpenguins`
+
+Essayons maintenant de visualiser des données! Nous allons utiliser le jeu de données `palmerpenguins`.
+
+```{r, echo=FALSE, out.width = "30%", fig.align="center", fig.cap = "Art par [Allison Horst](https://twitter.com/allison_horst).", purl = FALSE}
+knitr::include_graphics("images/palmerpenguins.png")
+```
+
+Ce jeu de données contient des mesures morphologiques pour trois espèces de pingouins observées sur trois îles de l'archipel Palmer, en Antarctique. Ces données ont été recueillies de 2007 à 2009 par la Dre Kristen Gorman dans le cadre du programme de recherche écologique à long terme de la station Palmer, qui fait partie du réseau américain de recherche écologique à long terme.
+
+```{r, echo=FALSE, out.width = "100%", fig.align="center", fig.cap = "Artwork by [Allison Horst](https://twitter.com/allison_horst).", purl = FALSE}
+knitr::include_graphics("images/penguins.png")
+```
+
+:::explanation
+
+This dataset is often used to replace the `iris` dataset, which has some problems for teaching data science, including its ties to eugenics (more on this at [armchairecology.blog/iris-dataset](https://armchairecology.blog/iris-dataset/)).
+
+Cet ensemble de données a également été utilisé pour un défi TidyTuesday, montrant les nombreuses possibilités de visualisation créative de l'ensemble de données. Par exemple : [ceci](https://twitter.com/LauraNavarroSol/status/1289216490307063814?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1289216490307063814%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F), and [ceci](https://twitter.com/CedScherer/status/1288181995714093057?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1288181995714093057%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F).
+:::
+
+Regardons les variables de l'ensemble de données des pingouins :
+
+```{r}
+str(penguins) # regardons les données des pingouins !
+```
+
+```{r, echo=FALSE, out.width = "100%", fig.align="center", fig.cap = "Artwork by [Allison Horst](https://twitter.com/allison_horst).", purl = FALSE}
+knitr::include_graphics("images/culmen_depth.png")
+```
+
+Notez que l'espèce, l'île et le sexe (`species`, `island`, et `sex`) sont des facteurs, qui seront importantes pour regrouper les données avec des couleurs, des formes, etc. dans `ggplot2`. Il y a ensuite 2 variables numériques (mesures du bec représentées dans l'image), et deux variables entières (longueur des nageoires et masse corporelle). Les données ont également une petite composante temporelle (`year`), s'étendant de 2007 à 2009.
+
+La librairie `ggplot2` requiert de préparer les données comme un objet de la classe "data.frame" ou "tibble" (commun dans l'univers `tidyverse`).
+
+```{r eval=TRUE, echo=TRUE}
+class(penguins) # vérifier la classe des données pour s'assurer qu'il s'agit d'un data.frame ou d'un tibble pour ggplot2
+
+# vous pouvez transformer un ensemble de données en tibble via la fonction as_tibble() si nécessaire
+# peng <- tibble::as_tibble(penguins) 
+# class(peng)
+```
+
+**&#x267B; Rappel de l'atelier 2 - [*Charger et manipuler des données*](https://qcbsrworkshops.github.io/workshop02/book-fr/):**
+
+Les graphiques plus complexes dans les `ggplot2` nécessitent que les données soient en format long.
+
+## Questions scientifiques à propos des pingouins
+
+Quelles sont quelques questions scientifiques auxquelles nous pourrions vouloir répondre avec ce jeu de données? Voici quelques exemples:
+
+- Y a-t-il une relation entre la **longueur** et la **profondeur** des **becs** ?
+- Est-ce que la taille des **becs** et des **nageoires** varient ensemble ?
+- Comment ces mesures sont-elles réparties entre les **3 espèces** ?
+
+Comment pouvons-nous répondre graphiquement à ces questions avec `ggplot2`?
+
+## Explorer la structure des données
+
+Si nous voulons avoir un aperçu général de nos données, nous pouvons commencer par utiliser la fonction `ggpairs()` du paquet `GGally` (que nous avons chargé et installé au début de l'atelier). Cela nous permettra d'examiner les relations préliminaires, avant de les explorer plus en détail.
+
+```{r, fig.width = 10.25, fig.height = 6.5, results = 0, warning=FALSE, message=FALSE}
+## Voir un aperçu général de nos données avec plusieurs types de graphiques
+ggpairs(penguins, 
+        aes(colour = species),
+        progress = FALSE) + 
+  theme_bw() 
+```
+
+:::puzzle
+On peut déjà voir certains regroupements d'espèces entre la longueur et la profondeur du bec, la longueur des nageoires et la masse corporelle. Lors de la visualisation, il faudra garder à l'esprit que la différenciation des espèces peut être importante.
+:::
+
+Remarquez-vous ces regroupements? Nous devrions explorer comment certaines de ces données sont structurées par espèce!
+
+```{r, echo = TRUE, fig.height=7, fig.width=9, results='hide', message=FALSE, warning=FALSE}
+# Explorons comment nos données sont structurées par espèce
+ggplot(data = penguins,               # Données
+       aes(x = bill_length_mm,        # Valeurs X
+           y = bill_depth_mm,         # Valeurs Y
+           col = species)) +          # Esthétique (mettre une couleur par espèce)
+  geom_point(size = 5, alpha = 0.8) + # Points
+  geom_smooth(method = "lm") +        # Régression linéaire
+  labs(title = "Relationship between bill length and depth\nfor different penguin species", # Title
+       x = "Bill length (mm)", # titre de l'axe des X
+       y = "Bill depth (mm)", # titre de l'axe des Y
+       col = "Species") +  # Légende pour les couleurs dans aes(col = species)
+  theme_classic() + # Utiliser un thème propre
+  theme(title = element_text(size = 18, face = "bold"),
+      text = element_text(size = 16))
+```
+
+:::puzzle
+En différenciant les espèces, on peut voir qu'il existe une relation assez cohérente entre la longueur et la profondeur du bec entre les espèces (pentes similaires), mais que les gammes de ces variables sont différentes (les regroupements sont clairement indiqués par les couleurs). Les pingouins Adélie ont tendance à avoir une longueur de bec plus petite mais une profondeur de bec assez grande, alors que l'inverse est vrai pour les pingouins Gentoo.
+:::
+
+## La dynamique `ggplot()` par couches {#working-through-layers}
+
+Comme nous l'avons vu, un graphique est constitué de différentes couches, combinées ensemble pour communiquer visuellement des informations dans nos données. Construisons un graphique `ggplot` étape par étape en ajoutant une couche à la fois.
+
+Le code `ggplot2` est plus facile à lire si chaque ligne représente un nouvel élément. C'est ce style qui est généralement privilégié pour le code `ggplot2` dans la communauté R. Cela signifie que lorsque vous ajoutez chaque couche, vous devriez commencer une nouvelle ligne.
+
+```{r, echo=FALSE, fig.align="center", fig.cap = "Image adapted from [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447).", purl = FALSE}
+knitr::include_graphics("images/gglayers.png")
+```
+
+### La couche de données
+
+```{r, echo = FALSE, results=0, purl = FALSE}
+theme_set(theme_gray())
+```
+
+```{r, fig.height=5, fig.width=6}
+# Couche 1: Données
+ggplot(data = penguins) 
+# Sans autre information, vos données ne seront pas visualisées.
+```
+
+### La couche d'esthétiques
+
+Dans `ggplot2`, l'esthétique est un groupe de paramètres qui spécifie les données à afficher et la manière de les afficher. Ici, nous demandons à `R` de tracer `longueur_de_bill_mm` sur l'axe `x` et `profondeur_de_bill_mm` sur l'axe `y`. Nous n'avons pas encore dit à `R` *comment* nous voulons représenter les données, donc nos données ne seront pas encore tracées.
+
+```{r, fig.height=5, fig.width=6}
+# Prochaine couche: esthétiques
+# Ici, nous disons à R de tracer la longueur sur l'axe des x, et la profondeur sur l'axe des y.
+# mais nous n'avons toujours pas dit à R comment nous voulons que ces données soient représentées...
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) 
+# Vous voyez ? Nos variables sont maintenant assignées aux axes x et y, 
+# mais rien n'est encore tracé.
+```
+
+### La couche de géométries
+
+Les objets géométriques, ou `geoms`, déterminent la représentation visuelle de vos données. Nous pouvons commencer par représenter nos points de données sous la forme d'un nuage de points, pour voir comment la profondeur et la longueur du bec sont liées l'une à l'autre.
+
+```{r, fig.height=5, fig.width=6, message = FALSE, warning = FALSE}
+# Prochaine couche(s): géométries
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) + # Utilisez le signe + pour ajouter chaque couche
+  geom_point() # La couche geom détermine le type de tracé que nous utilisons.
+               # geom_point() trace les données sous forme de points !
+```
+
+Notez que vous pouvez ajouter plusieurs `geoms` dans un seul graphique. Par exemple, nous pouvons ajouter une ligne sur ce graphique pour montrer une valeur seuil, ou ajouter une régression linéaire. Pour l'instant, gardons la simplicité!
+
+### Facettes, coordonnées, et thèmes
+
+Maintenant que le jeu de données est représenté graphiquement, nous pouvons personnaliser le graphique pour clarifier le message ou ajouter des informations supplémentaires. Les facettes sont un moyen populaire de diviser un graphique en plusieurs fenêtres selon une catégorie de données, afin de différencier visuellement les groupes. Nous pouvons explorer ce graphique différemment si nous utilisons `facet_wrap()` pour créer des "facettes" séparées en fonction de nos groupes d'espèces:
+
+```{r,fig.height=5, fig.width=6, warning = FALSE}
+# Prochaine couche(s): customizations!
+# Les facettes divisent un graphique en fenêtres séparées selon une certaine catégorie dans les données.
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) +
+  geom_point() + 
+  facet_wrap(vars(species)) # Cela divise le graphique en trois fenêtres : une par espèce.
+```
+
+:::explanation
+Note: Vous pouvez aussi utiliser `facet_grid()` si vous voulez faire une facette selon deux variables.
+:::
+
+Nous pouvons également ajuster l'échelle de nos axes dans le graphique lui-même, plutôt que de transformer les données. Supposons que nous souhaitions étudier la relation entre les mesures du bec sur une échelle de $log_{10}$.
+
+```{r,fig.height=5, fig.width=6, warning = FALSE}
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) +
+  geom_point() + 
+  facet_wrap(vars(species)) +
+  # ceci transforme les coordonnées des axes avec log10()
+  coord_trans(x = "log10", y = "log10")
+```
+
+Pour terminer, nous pouvons également personnaliser le thème du graphique, qui comprend son arrière-plan, les quadrillages et d'autres caractéristiques visuelles du graphique. Supposons que nous n'aimons pas le fond gris par défaut de ggplot2 (nous ne serions pas les seuls!). Nous pouvons utiliser `theme_bw()` pour produire un rendu visuel plus attrayant. Nous discuterons des thèmes dans le chapitre \@ref(theme)!
+
+```{r,fig.height=5, fig.width=6, warning = FALSE}
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) +
+  geom_point() + 
+  facet_wrap(vars(species)) +
+  coord_trans(x = "log10", y = "log10") +
+  # ce thème produit un rendu visuel plus attrayant
+  theme_bw()
+```
+
+
+```{r, echo = FALSE, results=0, purl = FALSE}
+# reset the plot themes
+theme_set(theme_classic())
+theme_update(axis.text = element_text(size = 16),
+             axis.title = element_text(size = 18))
+```
+
+
+## Défi 1
+
+Il est maintenant temps d'essayer de construire votre propre graphique ! Créez un ggplot pour répondre aux questions suivantes:
+
+**1.** Y a-t-il une relation entre la **longueur des becs** et la **longueur des nageoires** des pingouins?
+
+**2.** La **longueur** des becs augmente-t-elle avec celle des **nageoires**?
+
+Paramètres à prendre en compte pour répondre à cette question:
+
+ données | géométrie | valeurs x | valeurs y
+:-------------:|:-------------:|:-------------:|:-------------:
+penguins | geom_point | bill_length_mm | flipper_length_mm
+
+---
+
+```{r, echo = FALSE, include = FALSE}
+# Défi 1 ----
+# 
+# Créez un ggplot pour répondre aux questions suivantes:
+# 1. Y a-t-il une relation entre la longueur des becs et la longueur des nageoires des pingouins?
+# 2. La longueur des becs augmente-t-elle avec celle des nageoires?
+
+
+
+
+# SOLUTION # -----
+```
+
+### Défi 1: Solution
+
+Créons un nuage de points avec la longueur du bec sur l'axe des x et la longueur de la nageoire sur l'axe des y, afin de visualiser la relation entre ces deux variables.
+
+```{r, warning = FALSE}
+# Faire un nuage de points pour visualiser la relation entre nos variables
+ggplot(data = penguins, 
+       aes(x = bill_length_mm,
+           y = flipper_length_mm)) +
+  geom_point()
+```
+
+L'esthétique peut être soit dans la ligne `ggplot()`, et sera héritée par tous les géomètres, soit dans la ligne `geom_()` pour ne s'appliquer qu'à ce géomètre. Voici un exemple.
+
+```{r, warning = FALSE}
+# Personnalisez la forme et la couleur des points 
+ggplot(data = penguins,
+       aes(x = bill_length_mm,
+           y = flipper_length_mm)) +
+  geom_point(shape = 2, color = "blue") 
+```
+
+
+:::explanation
+Les couleurs, l'alpha (transparence), la forme et la taille peuvent être définies en dehors des valeurs de `aes()`, et seront statiques, sans dépendre des données. Ici, le bleu ne transmet aucune information dans les données - c'est juste un choix que nous avons fait pour rendre le graphique plus joli.
+:::
+
+:::puzzle
+Ce graphique semble montrer une relation positive entre la longueur du bec et la longueur des nageoires pour tous les individus mesurés dans l'ensemble des données. Ainsi, les pingouins avec un bec plus long ont tendance à avoir des nageoires plus longues. Nous pouvons continuer à creuser cette relation en nous basant sur ce graphique!
+:::
