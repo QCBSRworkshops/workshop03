@@ -253,7 +253,7 @@ ggplot(data = penguins,
        aes(x = bill_length_mm, 
            y = bill_depth_mm)) +
   geom_point() + 
-  facet_wrap(species) # This splits the plot into three windows: one per species
+  facet_wrap(vars(species)) # This splits the plot into three windows: one per species
 ```
 
 :::explanation
@@ -267,7 +267,7 @@ ggplot(data = penguins,
        aes(x = bill_length_mm, 
            y = bill_depth_mm)) +
   geom_point() + 
-  facet_wrap(species) +
+  facet_wrap(vars(species)) +
   # this transforms the axes' coordinates using log10()
   coord_trans(x = "log10", y = "log10")
 ```
@@ -279,7 +279,7 @@ ggplot(data = penguins,
        aes(x = bill_length_mm, 
            y = bill_depth_mm)) +
   geom_point() + 
-  facet_wrap(species) +
+  facet_wrap(vars(species)) +
   coord_trans(x = "log10", y = "log10") +
   # this uses a nicer theme for our final plot
   theme_bw()
