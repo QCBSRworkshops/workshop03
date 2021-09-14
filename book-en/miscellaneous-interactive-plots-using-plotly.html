@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 17 Saving your plots in code | Workshop 3: Introduction to ggplot2</title>
+  <title>Chapter 16 Miscellaneous: interactive plots using plotly() | Workshop 3: Introduction to ggplot2</title>
   <meta name="description" content="Introduction to ggplot2" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 17 Saving your plots in code | Workshop 3: Introduction to ggplot2" />
+  <meta property="og:title" content="Chapter 16 Miscellaneous: interactive plots using plotly() | Workshop 3: Introduction to ggplot2" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop03" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 17 Saving your plots in code | Workshop 3: Introduction to ggplot2" />
+  <meta name="twitter:title" content="Chapter 16 Miscellaneous: interactive plots using plotly() | Workshop 3: Introduction to ggplot2" />
   
   <meta name="twitter:description" content="Introduction to ggplot2" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="miscellaneous-interactive-plots-using-plotly.html"/>
-<link rel="next" href="concluding-remarks.html"/>
+<link rel="prev" href="challenge-4.html"/>
+<link rel="next" href="saving-your-plots-in-code.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -281,39 +281,18 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="saving-your-plots-in-code" class="section level1">
-<h1><span class="header-section-number">Chapter 17</span> Saving your plots in code</h1>
-<p>In RStudio, there are many options available to you to save your figures. You could copy them to the clipboard, but it is preferable to export them as a file type of your choice (or export them as any file type (png, jpg, emf, tiff, pdf, metafile, etc).</p>
-<p><code>ggsave()</code> is a useful command that saves directly to your working directory and allows you to specify the name of your new file, the dimensions of the plot, the resolution, etc.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="saving-your-plots-in-code.html#cb87-1"></a>my1stPlot &lt;-<span class="st">  </span><span class="co"># Create a plot to practice saving</span></span>
-<span id="cb87-2"><a href="saving-your-plots-in-code.html#cb87-2"></a><span class="st">  </span><span class="kw">ggplot</span>(penguins, </span>
-<span id="cb87-3"><a href="saving-your-plots-in-code.html#cb87-3"></a>         <span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm, </span>
-<span id="cb87-4"><a href="saving-your-plots-in-code.html#cb87-4"></a>             <span class="dt">y =</span> bill_depth_mm)) <span class="op">+</span></span>
-<span id="cb87-5"><a href="saving-your-plots-in-code.html#cb87-5"></a><span class="st">  </span><span class="kw">geom_point</span>()</span>
-<span id="cb87-6"><a href="saving-your-plots-in-code.html#cb87-6"></a></span>
-<span id="cb87-7"><a href="saving-your-plots-in-code.html#cb87-7"></a><span class="kw">ggsave</span>(<span class="dt">filename =</span> <span class="st">&quot;my1stPlot.pdf&quot;</span>, <span class="co"># Name the file you want to save to, add extension of the file format you want to use (ex. pdf)</span></span>
-<span id="cb87-8"><a href="saving-your-plots-in-code.html#cb87-8"></a>       <span class="dt">plot =</span> my1stPlot, <span class="co"># Provide the name of the plot object in R</span></span>
-<span id="cb87-9"><a href="saving-your-plots-in-code.html#cb87-9"></a>       <span class="dt">height =</span> <span class="fl">8.5</span>, <span class="co"># Provide the desired dimensions</span></span>
-<span id="cb87-10"><a href="saving-your-plots-in-code.html#cb87-10"></a>       <span class="dt">width =</span> <span class="dv">11</span>, </span>
-<span id="cb87-11"><a href="saving-your-plots-in-code.html#cb87-11"></a>       <span class="dt">units =</span> <span class="st">&quot;in&quot;</span>) </span>
-<span id="cb87-12"><a href="saving-your-plots-in-code.html#cb87-12"></a></span>
-<span id="cb87-13"><a href="saving-your-plots-in-code.html#cb87-13"></a><span class="co"># Tip:`quartz()` (mac) or `window()` (pc) functions make sizing easier before `ggsave()`! </span></span>
-<span id="cb87-14"><a href="saving-your-plots-in-code.html#cb87-14"></a><span class="co"># Just plot your ggplot in quartz() or window(), adjust the size until it looks good, </span></span>
-<span id="cb87-15"><a href="saving-your-plots-in-code.html#cb87-15"></a><span class="co"># and run ggsave() with the filename to see which dimensions you used! You can </span></span>
-<span id="cb87-16"><a href="saving-your-plots-in-code.html#cb87-16"></a><span class="co"># then add this in your code with height = and width = as shown above.</span></span></code></pre></div>
-<p>Think about the margin of the document you are using. If you resize the image after saving it, the labels and text will change size as well which could be hard to read. Also note that vector format (e.g., pdf, svg) is more flexible than raster format (jpeg, png, …) if the image needs modification afterwards.</p>
-<p>If you prefer raster format, you can check out other methods to save image using <code>?pdf</code> <code>?jpeg</code>.</p>
-<p>In instances where you are producing many plots (e.g. during long programs that produces many plots automatically while performing analysis), it is useful to save many plots in one file as a pdf. This can be accomplished as follows:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="saving-your-plots-in-code.html#cb88-1"></a>my2ndPlot &lt;-<span class="st">  </span><span class="co"># Create a 2nd plot to practice saving</span></span>
-<span id="cb88-2"><a href="saving-your-plots-in-code.html#cb88-2"></a><span class="st">  </span><span class="kw">ggplot</span>(penguins, </span>
-<span id="cb88-3"><a href="saving-your-plots-in-code.html#cb88-3"></a>         <span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm, </span>
-<span id="cb88-4"><a href="saving-your-plots-in-code.html#cb88-4"></a>             <span class="dt">y =</span> bill_depth_mm)) <span class="op">+</span></span>
-<span id="cb88-5"><a href="saving-your-plots-in-code.html#cb88-5"></a><span class="st">  </span><span class="kw">geom_point</span>()</span>
-<span id="cb88-6"><a href="saving-your-plots-in-code.html#cb88-6"></a></span>
-<span id="cb88-7"><a href="saving-your-plots-in-code.html#cb88-7"></a><span class="kw">pdf</span>(<span class="st">&quot;./graph_du_jour.pdf&quot;</span>)</span>
-<span id="cb88-8"><a href="saving-your-plots-in-code.html#cb88-8"></a>  <span class="kw">print</span>(my1stPlot) <span class="co"># print function is necessary</span></span>
-<span id="cb88-9"><a href="saving-your-plots-in-code.html#cb88-9"></a>  <span class="kw">print</span>(my2ndPlot)</span>
-<span id="cb88-10"><a href="saving-your-plots-in-code.html#cb88-10"></a><span class="kw">graphics.off</span>()</span></code></pre></div>
+<div id="miscellaneous-interactive-plots-using-plotly" class="section level1">
+<h1><span class="header-section-number">Chapter 16</span> Miscellaneous: interactive plots using <code>plotly()</code></h1>
+<p>The <code>plotly()</code> library contains the function <code>ggplotly()</code>, which translates your <code>ggplot</code> code into an interactive <code>plotly</code> object in one line of code.</p>
+<div class="explanation">
+<p>You can click on the species in the legend to add/remove species. You can also see values while hovering over points.</p>
+</div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="miscellaneous-interactive-plots-using-plotly.html#cb86-1"></a><span class="kw">library</span>(plotly)</span>
+<span id="cb86-2"><a href="miscellaneous-interactive-plots-using-plotly.html#cb86-2"></a>p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(penguins, <span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm, <span class="dt">y =</span> bill_depth_mm,</span>
+<span id="cb86-3"><a href="miscellaneous-interactive-plots-using-plotly.html#cb86-3"></a>    <span class="dt">colour =</span> species, <span class="dt">shape =</span> species)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">6</span>,</span>
+<span id="cb86-4"><a href="miscellaneous-interactive-plots-using-plotly.html#cb86-4"></a>    <span class="dt">alpha =</span> <span class="fl">0.6</span>)</span>
+<span id="cb86-5"><a href="miscellaneous-interactive-plots-using-plotly.html#cb86-5"></a><span class="co"># convert to a plotly object!</span></span>
+<span id="cb86-6"><a href="miscellaneous-interactive-plots-using-plotly.html#cb86-6"></a><span class="kw">ggplotly</span>(p)</span></code></pre></div>
 
 </div>
 
@@ -330,8 +309,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="miscellaneous-interactive-plots-using-plotly.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="concluding-remarks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="challenge-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="saving-your-plots-in-code.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
