@@ -4,11 +4,11 @@
 
 ## Introduction to themes
 
-This presentation has been using theme_classic() for the plots, because the grey background can make certain colours harder to see. These are good options for publishing figures.
+This book has been using `theme_classic()` for the plots, because the default grey background can make certain colours harder to see.
 
 But, like every other part of the grammar of graphics, we can modify the theme of the plot to suit our needs, or higher sense of style! 
 
-There are way too many theme elements built into the ggplot2 package to mention here, but you can find a complete list in the ggplot [theme vignette](http://docs.ggplot2.org/dev/vignettes/themes.html). Instead of
+There are way too many theme elements built into the `ggplot2` package to mention here, but you can find a complete list in the [theme vignette](http://docs.ggplot2.org/dev/vignettes/themes.html). Instead of
 modifying the many elements contained in `theme()`, you can start from theme functions, which contain a specific set of elements from which to start. Here are some examples:
 
 ### Default: Grey
