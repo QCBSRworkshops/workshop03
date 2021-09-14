@@ -414,7 +414,7 @@ ggplot(data = penguins) +
   facet_grid(year ~ species, 
              scales = "free")
 
-# our default plot from before
+# Let's come back to our penguin plot from before
 pp
 
 # Tuning axes and titles to make the plot speak for itself
@@ -542,7 +542,7 @@ violin <- ggplot(data = penguins,
 violin
 
 violin + 
-  # this plots the data points with some additional (horizontal) noise
+  # this geom plots the data points with some additional (horizontal) noise
   # to see overlapping points
     geom_jitter(shape = 16, 
                 position = position_jitter(0.2),
@@ -611,20 +611,20 @@ peng.dens + cars.dens +
 # in your figure captions.
 
 # Challenge 4 ----
-
+# 
 # Create your own ggplot and follow these recommendations:
 #   * Dataset: any (recommended: use your dataset)
 #   * Explore a new geom_* and other plot elements (recall Chapter @ref/(#gg-layers))
-# 
-# Use the following links for tips and inspiration:  
-# 
-# - [ggplot2 Reference](https://ggplot2.tidyverse.org/reference/index.html)  
-# - [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)  
+#
+# Use the following links for tips and inspiration:
+#
+# - [ggplot2 Reference](https://ggplot2.tidyverse.org/reference/index.html)
+# - [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)
 # - [Data to Viz](https://www.data-to-viz.com/)
-
-
-
-
+# 
+# 
+# 
+# 
 # SOLUTION # -----
 
 data(msleep)
@@ -672,8 +672,8 @@ my1stPlot <-  # Create a plot to practice saving
   geom_point()
 
 ggsave(filename = "my1stPlot.pdf", # Name the file you want to save to, add extension of the file format you want to use (ex. pdf)
-       plot = my1stPlot, # Provide the name of the plot object in RStudio
-       height = 8.5, # Provide any addition information
+       plot = my1stPlot, # Provide the name of the plot object in R
+       height = 8.5, # Provide the desired dimensions
        width = 11,
        units = "in")
 
