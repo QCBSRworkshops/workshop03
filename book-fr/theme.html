@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapitre 16 Conclusion | Atelier 3: Introduction à ggplot2</title>
+  <title>Chapitre 11 Utiliser le theme() pour faire bonne figure! | Atelier 3: Introduction à ggplot2</title>
   <meta name="description" content="Introduction à ggplot2" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapitre 16 Conclusion | Atelier 3: Introduction à ggplot2" />
+  <meta property="og:title" content="Chapitre 11 Utiliser le theme() pour faire bonne figure! | Atelier 3: Introduction à ggplot2" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop03" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapitre 16 Conclusion | Atelier 3: Introduction à ggplot2" />
+  <meta name="twitter:title" content="Chapitre 11 Utiliser le theme() pour faire bonne figure! | Atelier 3: Introduction à ggplot2" />
   
   <meta name="twitter:description" content="Introduction à ggplot2" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="sauvegarder.html"/>
-
+<link rel="prev" href="changer-léchelle-des-axes.html"/>
+<link rel="next" href="utiliser-des-facettes-pour-diviser-votre-figure.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -273,16 +273,94 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="conclusion" class="section level1">
-<h1><span class="header-section-number">Chapitre 16</span> Conclusion</h1>
-
+<div id="theme" class="section level1">
+<h1><span class="header-section-number">Chapitre 11</span> Utiliser le <code>theme()</code> pour faire bonne figure!</h1>
+<div id="introduction-aux-thèmes" class="section level2">
+<h2><span class="header-section-number">11.1</span> Introduction aux thèmes</h2>
+<p>Dans ce livre, nous avons utilisé <code>theme_classic()</code> pour les figures, puisque le fond gris défini par défaut peut rendre certaines couleurs plus difficiles à voir.</p>
+<p>Mais, comme toute autre partie de la grammaire graphique, nous pouvons modifier le thème du graphique pour l’adapter à nos besoins, ou à notre goût !</p>
+<p>Il y a beaucoup trop d’éléments de thème intégrés à la librairie <code>ggplot2</code> pour les mentionner ici, mais vous pouvez trouver une liste complète dans la vignette <a href="http://docs.ggplot2.org/dev/vignettes/themes.html">theme</a>. Au lieu de
+modifier les nombreux éléments contenus dans <code>theme()</code>, vous pouvez partir des fonctions de thème, qui contiennent un ensemble spécifique d’éléments à partir desquels vous pouvez commencer. Voici quelques exemples :</p>
+<div id="thème-par-défaut-gris" class="section level3">
+<h3><span class="header-section-number">11.1.1</span> Thème par défaut: Gris</h3>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="theme.html#cb48-1"></a><span class="co"># Theme grey</span></span>
+<span id="cb48-2"><a href="theme.html#cb48-2"></a>pp <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_grey</span>() <span class="op">+</span><span class="st"> </span><span class="co"># Dessiner les points en gris</span></span>
+<span id="cb48-3"><a href="theme.html#cb48-3"></a><span class="st">  </span><span class="kw">theme_grey</span>() <span class="op">+</span><span class="st"> </span><span class="co"># Utiliser le fond gris</span></span>
+<span id="cb48-4"><a href="theme.html#cb48-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Défaut: Thème gris&quot;</span>) <span class="co"># Titre de la figure</span></span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-61-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-
-
-
-
-
-
+<div id="thème-classique" class="section level3">
+<h3><span class="header-section-number">11.1.2</span> Thème classique</h3>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="theme.html#cb49-1"></a>pp <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_grey</span>() <span class="op">+</span><span class="st"> </span><span class="co"># Dessiner les points en gris</span></span>
+<span id="cb49-2"><a href="theme.html#cb49-2"></a><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span><span class="co"># Utiliser un fond blac</span></span>
+<span id="cb49-3"><a href="theme.html#cb49-3"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Thème classique&quot;</span>) <span class="co"># Titre de la figure</span></span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-62-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="thème-minimal" class="section level3">
+<h3><span class="header-section-number">11.1.3</span> Thème minimal</h3>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="theme.html#cb50-1"></a>pp <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_grey</span>() <span class="op">+</span></span>
+<span id="cb50-2"><a href="theme.html#cb50-2"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span><span class="co"># Utiliser un fond blanc et un quadrillage</span></span>
+<span id="cb50-3"><a href="theme.html#cb50-3"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Thème minimal&quot;</span>) </span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-63-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="définir-le-thème-pour-plusieurs-graphiques" class="section level3">
+<h3><span class="header-section-number">11.1.4</span> Définir le thème pour plusieurs graphiques</h3>
+<p>Comme vous avez pu le remarquer, le code de <code>ggplot</code> peut rapidement devenir long lorsque vous devez constamment spécifier les caractéristiques du théme. Lorsque vous créez plusieurs graphes et que vous voulez qu’ils aient tous le même thème, vous pouvez simplement utiliser <code>theme_set()</code> pour définir un thème pour tous les figures qui sont générés par la suite, ou <code>theme_update()</code> pour modifier les éléments d’un thème existant sans réécrire tous les autres éléments du thème.</p>
+<div id="définir-le-thème" class="section level4">
+<h4><span class="header-section-number">11.1.4.1</span> Définir le thème</h4>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="theme.html#cb51-1"></a><span class="co"># Définir le thème noir et blanc pour tous les figures qui</span></span>
+<span id="cb51-2"><a href="theme.html#cb51-2"></a><span class="co"># suivent</span></span>
+<span id="cb51-3"><a href="theme.html#cb51-3"></a><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>())  <span class="co"># Note: le fond est blanc avec un cadre noir</span></span>
+<span id="cb51-4"><a href="theme.html#cb51-4"></a>pp</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-64-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Après avoir utilisé <code>theme_set()</code>, notre graphique <code>pp</code> est généré avec le thème noir et blanc <code>theme_bw()</code>. Tous les futurs figures produites dans votre session R seront également générées avec ce thème.</p>
+</div>
+<div id="mettre-le-thème-à-jour" class="section level4">
+<h4><span class="header-section-number">11.1.4.2</span> Mettre le thème à jour</h4>
+<p>Peut-être que les le quadrillage mineur n’est pas nécessaire pour cette figure, bien que nous aimons tout le reste de notre thème. Plutôt que de réécrire plusieurs lignes de code pour redéfinir le thème, nous pouvons simplement utiliser <code>theme_update()</code> pour ajuster un élément spécifique de notre thème.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="theme.html#cb52-1"></a><span class="kw">theme_update</span>(<span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>())  <span class="co"># Enlever le quadrillage &#39;minor&#39;</span></span>
+<span id="cb52-2"><a href="theme.html#cb52-2"></a>pp</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-65-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Voilà! C’est beaucoup mieux!</p>
+</div>
+</div>
+</div>
+<div id="les-élements-dun-thème" class="section level2">
+<h2><span class="header-section-number">11.2</span> Les élements d’un thème</h2>
+<p>Voici une infographie utile pour vous aider à personnaliser votre thème!</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-67"></span>
+<img src="images/ggthemes.png" alt="Fiche de référence du thème ggplot2 (EN) par Isabella Benabaye ([source](https://isabella-b.com/blog/ggplot2-theme-elements-reference/))."  />
+<p class="caption">
+Figure 11.1: Fiche de référence du thème ggplot2 (EN) par Isabella Benabaye (<a href="https://isabella-b.com/blog/ggplot2-theme-elements-reference/">source</a>).
+</p>
+</div>
+</div>
+<div id="créer-votre-propre-thème" class="section level2">
+<h2><span class="header-section-number">11.3</span> Créer votre propre thème</h2>
+<p>Une fois que vous aurez appris à personnaliser les <a href="http://docs.ggplot2.org/dev/vignettes/themes.html">thèmes</a> ggplot existants, vous pourrez créer votre propre thème pour vos graphiques. C’est un excellent moyen de faire ressortir vos figures dans une présentation, une publication, un site Web ou tout autre endroit!</p>
+<p>Voici un exemple:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="theme.html#cb53-1"></a>mytheme &lt;-<span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="co"># Vous pouvez partir d&#39;un thème existant pour mettre en place certains éléments de base.</span></span>
+<span id="cb53-2"><a href="theme.html#cb53-2"></a><span class="st">           </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)) <span class="op">+</span></span>
+<span id="cb53-3"><a href="theme.html#cb53-3"></a><span class="st">           </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="fl">0.9</span>, <span class="fl">0.9</span>))</span>
+<span id="cb53-4"><a href="theme.html#cb53-4"></a>pp <span class="op">+</span><span class="st"> </span>mytheme <span class="co"># A# Appliquez-le à votre figure!</span></span></code></pre></div>
+</div>
+<div id="plus-de-thèmes" class="section level2">
+<h2><span class="header-section-number">11.4</span> Plus de thèmes</h2>
+<p>La librairie <a href="https://github.com/jrnold/ggthemes">ggthemes</a> est un grand projet développé par Jeffrey Arnold sur GitHub et également hébergé sur le dépôt CRAN. Le paquet contient de nombreux thèmes, géomètres et rampes de couleurs pour <code>ggplot2</code> qui sont basés sur les travaux de certains des noms les plus renommés et les plus influents dans le monde de la visualisation de données, des classiques comme <a href="http://www.edwardtufte.com/tufte/">Edward Tufte</a> aux journalistes et programmeurs de données modernes du blog <a href="http://fivethirtyeight.com/">FiveThirtyEight</a>.</p>
+<p>La librairie peut être installée comme suit:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="theme.html#cb54-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;ggthemes&quot;</span>)</span>
+<span id="cb54-2"><a href="theme.html#cb54-2"></a><span class="kw">library</span>(ggthemes)</span></code></pre></div>
+<p>Nous pouvons ensuite appliquer certains de ces thèmes (et plus encore) à notre figure!</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="theme.html#cb55-1"></a><span class="co"># Utilisons le thème du blog FiveThirtyEight et la palette</span></span>
+<span id="cb55-2"><a href="theme.html#cb55-2"></a><span class="co"># de couleurs de Tableau.</span></span>
+<span id="cb55-3"><a href="theme.html#cb55-3"></a>pp <span class="op">+</span><span class="st"> </span><span class="kw">theme_fivethirtyeight</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_tableau</span>()</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="theme.html#cb56-1"></a><span class="co"># Utilisons le thème de Tufte &#39;Données maximales, encre</span></span>
+<span id="cb56-2"><a href="theme.html#cb56-2"></a><span class="co"># minimale&#39;.</span></span>
+<span id="cb56-3"><a href="theme.html#cb56-3"></a>pp <span class="op">+</span><span class="st"> </span><span class="kw">theme_tufte</span>()</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
+</div>
+</div>
 <hr>
 <center> 
   <div class="footer">
@@ -294,8 +372,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="sauvegarder.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="changer-léchelle-des-axes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="utiliser-des-facettes-pour-diviser-votre-figure.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

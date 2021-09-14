@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapitre 16 Conclusion | Atelier 3: Introduction à ggplot2</title>
+  <title>Chapitre 5 La grammaire des graphiques (GG) | Atelier 3: Introduction à ggplot2</title>
   <meta name="description" content="Introduction à ggplot2" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapitre 16 Conclusion | Atelier 3: Introduction à ggplot2" />
+  <meta property="og:title" content="Chapitre 5 La grammaire des graphiques (GG) | Atelier 3: Introduction à ggplot2" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop03" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapitre 16 Conclusion | Atelier 3: Introduction à ggplot2" />
+  <meta name="twitter:title" content="Chapitre 5 La grammaire des graphiques (GG) | Atelier 3: Introduction à ggplot2" />
   
   <meta name="twitter:description" content="Introduction à ggplot2" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="sauvegarder.html"/>
-
+<link rel="prev" href="pourquoi-utiliser-r.html"/>
+<link rel="next" href="les-bases-de-la-visualisation-de-données.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -273,16 +273,116 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="conclusion" class="section level1">
-<h1><span class="header-section-number">Chapitre 16</span> Conclusion</h1>
-
+<div id="la-grammaire-des-graphiques-gg" class="section level1">
+<h1><span class="header-section-number">Chapitre 5</span> La grammaire des graphiques (GG)</h1>
+<div id="les-bases-de-gg" class="section level2">
+<h2><span class="header-section-number">5.1</span> Les bases de GG</h2>
+<p>Commençons par les bases! La librairie <code>ggplot2</code> est basée sur la Grammaire des Graphiques (GG), qui est un cadre pour la visualisation de données qui décompose chaque élément d’un graphique en composants individuels, créant ainsi des couches distinctes. En utilisant le système GG, nous pouvons construire des graphiques étape par étape pour des résultats flexibles et personnalisables.</p>
+<p><img src="images/Layers_ggplot.png" style="display: block; margin: auto;" /></p>
+<p>Les couches GG ont des noms spécifiques que vous verrez tout au long de l’atelier:</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<img src="images/gglayers.png" alt="Image adaptée de [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447)."  />
+<p class="caption">
+Figure 5.1: Image adaptée de <a href="https://www.springer.com/gp/book/9780387245447">The Grammar of Graphics</a>.
+</p>
 </div>
-
-
-
-
-
-
+<div class="explanation">
+<p>Pour créer un <code>ggplot</code>, les couches de données et de <em>mapping</em> sont des <strong>exigences</strong> de base, tandis que les autres couches sont destinées à une configuration supplémentaire. <em>Les couches ‘non requises’ sont toujours importantes à considérer, mais vous serez en mesure de générer un graphique de base sans celles-ci.</em></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-12"></span>
+<img src="images/ggplot_basics.png" alt="Conditions de base pour générer un `ggplot'."  />
+<p class="caption">
+Figure 5.2: Conditions de base pour générer un `ggplot’.
+</p>
+</div>
+</div>
+</div>
+<div id="gg-layers" class="section level2">
+<h2><span class="header-section-number">5.2</span> Les couches de GG</h2>
+<div id="descriptions-de-couches-courantes" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Descriptions de couches courantes</h3>
+<p>Voici une décomposition de chaque couche Grammaire des Graphiques et des arguments courants pour chacune d’elles qui peut vous servir de référence:</p>
+<ul>
+<li><strong>Données</strong> :
+<ul>
+<li>vos données, dans un format <em>tidy</em>, fourniront les ingrédients de votre graphique.</li>
+<li>utilisez les techniques <code>dplyr</code> pour préparer les données pour un format optimal pour la visualisation.</li>
+<li>En général, cela signifie que vous devez avoir une rangée pour chaque observation que vous voulez visualiser.</li>
+</ul></li>
+<li><strong>Esthétique</strong> (aes), pour rendre les données visibles
+<ul>
+<li><code>x</code>, <code>y</code>: position le long des axes x et y</li>
+<li><code>colour</code>: la couleur des géométries selon les données</li>
+<li><code>fill</code>: la couleur intérieure des géométries</li>
+<li><code>group</code>: à quel groupe appartient une géométrie</li>
+<li><code>shape</code>: la forme des points</li>
+<li><code>linetype</code>: le type de ligne utilisé (pleine, pointillée, etc.)</li>
+<li><code>size</code>: la taille des points ou des lignes</li>
+<li><code>alpha</code>: la transparence des géométries</li>
+</ul></li>
+<li><strong>Objets géométriques</strong> (geoms)
+<ul>
+<li><code>geom_point()</code> : diagramme de dispersion</li>
+<li><code>geom_line()</code> : lignes reliant des points par une valeur croissante de x</li>
+<li><code>geom_path()</code> : lignes reliant des points dans l’ordre d’apparition</li>
+<li><code>geom_boxplot()</code> : diagramme en boîte (boxplot) pour les variables catégoriques</li>
+<li><code>geom_bar()</code> : diagrammes à barres pour un axe des x catégorique</li>
+<li><code>geom_histogram()</code> : histogramme pour l’axe des x continu</li>
+<li><code>geom_violin()</code> : kernel de distribution de la dispersion des données</li>
+<li><code>geom_smooth()</code> : ligne de lissage en fonction des données</li>
+</ul></li>
+<li><strong>Facettes</strong>
+<ul>
+<li><code>facet_wrap()</code> ou <code>facet_grid()</code> pour de petits multiples</li>
+</ul></li>
+<li><strong>Statistiques</strong>
+<ul>
+<li>similaire aux géométries, mais issue de calcul sur les données</li>
+<li>indique les moyennes, les comptages et autres résumés statistiques des données</li>
+</ul></li>
+<li><strong>Coordonnées</strong> - ajustement des données sur une page
+<ul>
+<li><code>coord_cartesian</code> pour fixer des limites</li>
+<li><code>coord_polar</code> pour les graphiques circulaires</li>
+<li><code>coord_map</code> pour différentes projections cartographiques</li>
+</ul></li>
+<li><strong>Thèmes</strong>
+<ul>
+<li>Effets visuels globaux par défaut</li>
+<li>polices, couleurs, formes, contours</li>
+</ul></li>
+</ul>
+</div>
+<div id="comment-assembler-ces-couches" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Comment assembler ces couches</h3>
+<p>Essayons de mettre ces couches ensemble! Voici les étapes de base pour construire une figure. Vous pouvez vous référer à ces étapes tout au long de l’atelier si vous voulez de l’aide !</p>
+<ol style="list-style-type: decimal">
+<li>Créer un objet graphique simple :</li>
+</ol>
+<ul>
+<li><code>plot.object &lt;- ggplot()</code></li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Ajouter des couches géométriques :</li>
+</ol>
+<ul>
+<li><code>plot.object &lt;- plot.object + geom_*()</code></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Ajouter des couches d’apparence :</li>
+</ol>
+<ul>
+<li><code>plot.object &lt;- plot.object + coord_*() + theme()</code></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Répétez l’étape 2-3 jusqu’à ce que vous soyez satisfait, puis imprimez :</li>
+</ol>
+<ul>
+<li><code>plot.object</code> ou <code>print(plot.object)</code>.</li>
+</ul>
+<p>Nous reviendrons sur cette syntaxe au chapitre <a href="les-bases-de-la-visualisation-de-données.html#working-through-layers">6.4</a>, où nous aborderons les couches de manière plus approfondie!</p>
+</div>
+</div>
+</div>
 <hr>
 <center> 
   <div class="footer">
@@ -294,8 +394,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="sauvegarder.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="pourquoi-utiliser-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="les-bases-de-la-visualisation-de-données.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

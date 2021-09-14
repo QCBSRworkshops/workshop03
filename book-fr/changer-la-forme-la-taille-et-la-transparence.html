@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapitre 16 Conclusion | Atelier 3: Introduction à ggplot2</title>
+  <title>Chapitre 9 Changer la forme, la taille et la transparence | Atelier 3: Introduction à ggplot2</title>
   <meta name="description" content="Introduction à ggplot2" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapitre 16 Conclusion | Atelier 3: Introduction à ggplot2" />
+  <meta property="og:title" content="Chapitre 9 Changer la forme, la taille et la transparence | Atelier 3: Introduction à ggplot2" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop03" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapitre 16 Conclusion | Atelier 3: Introduction à ggplot2" />
+  <meta name="twitter:title" content="Chapitre 9 Changer la forme, la taille et la transparence | Atelier 3: Introduction à ggplot2" />
   
   <meta name="twitter:description" content="Introduction à ggplot2" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="sauvegarder.html"/>
-
+<link rel="prev" href="les-couleurs-faites-parler-vos-données.html"/>
+<link rel="next" href="changer-léchelle-des-axes.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -273,16 +273,182 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="conclusion" class="section level1">
-<h1><span class="header-section-number">Chapitre 16</span> Conclusion</h1>
-
+<div id="changer-la-forme-la-taille-et-la-transparence" class="section level1">
+<h1><span class="header-section-number">Chapitre 9</span> Changer la forme, la taille et la transparence</h1>
+<p>Maintenant, regardons plus loin que la couleur ! Si nous voulons changer la forme de nos points de données, nous pouvons commencer par utiliser l’argument <code>shape</code> dans la couche <code>aes()</code> comme nous l’avons fait avec la couleur. Cela regroupera nos points de données par la variable que nous fournissons en utilisant différentes formes (ici nous utilisons la variable espèce).</p>
+<p>Si nous voulons ajuster la taille des points de données, nous pouvons utiliser l’argument <code>size</code> au même endroit. Nous pouvons également utiliser l’argument <code>alpha</code> si nous voulons jouer avec la transparence. Les deux sont de bonnes options pour les données continues.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb40-1"></a><span class="co"># changer la forme des points</span></span>
+<span id="cb40-2"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb40-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins) <span class="op">+</span></span>
+<span id="cb40-3"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb40-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm,</span>
+<span id="cb40-4"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb40-4"></a>                 <span class="dt">y =</span> bill_depth_mm,</span>
+<span id="cb40-5"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb40-5"></a>                 <span class="dt">shape =</span> species)) <span class="op">+</span><span class="st"> </span><span class="co"># regrouper les données par formes</span></span>
+<span id="cb40-6"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb40-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Formes pour des groupes&quot;</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb41-1"></a><span class="co"># size and alpha for continuous values</span></span>
+<span id="cb41-2"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb41-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins) <span class="op">+</span></span>
+<span id="cb41-3"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb41-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm,</span>
+<span id="cb41-4"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb41-4"></a>                 <span class="dt">y =</span> bill_depth_mm,</span>
+<span id="cb41-5"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb41-5"></a>                 <span class="dt">size =</span> body_mass_g, <span class="co"># regrouper les données par taille des points</span></span>
+<span id="cb41-6"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb41-6"></a>                 <span class="dt">alpha =</span> flipper_length_mm)) <span class="op">+</span><span class="st"> </span><span class="co"># code de transparence par longueur de nageoire</span></span>
+<span id="cb41-7"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb41-7"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Taille et transparence pour des variables continues&quot;</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p>Notez que le fait de définir simultanément de nombreuses variables pour les repères visuels tels que la couleur, la forme, la taille et l’alpha a tendance à être excessif pour le lecteur. L’ajout de quatre niveaux de complexité à la représentation en 2D des points peut être trop important pour être bien interprété. Il est préférable de choisir les indices visuels et les variables clés pour le message souhaité plutôt que de surcharger un graphique avec toutes les possibilités de la fonction <code>aes()</code>.</p>
+<div id="défi-2" class="section level2">
+<h2><span class="header-section-number">9.1</span> Défi 2</h2>
+<ul>
+<li><p>Créer un <strong>graphique informatif</strong> à partir de jeu de données disponible de R, comme <code>mtcars</code>, <code>CO2</code> ou <code>msleep</code>.</p></li>
+<li><p>Utiliser les esthétiques appropriés pour différents types de données</p></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Données</th>
+<th align="center">x</th>
+<th align="center">y</th>
+<th align="center">Esthétiques</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">mtcars</td>
+<td align="center"><em>wt</em></td>
+<td align="center"><em>mpg</em></td>
+<td align="center"><em>disp</em> et <em>hp</em></td>
+</tr>
+<tr class="even">
+<td align="center">CO2</td>
+<td align="center"><em>conc</em></td>
+<td align="center"><em>uptake</em></td>
+<td align="center"><em>Treatment</em> et <em>Type</em></td>
+</tr>
+<tr class="odd">
+<td align="center">msleep</td>
+<td align="center">log10(<em>bodywt</em>)</td>
+<td align="center"><em>awake</em></td>
+<td align="center"><em>vore</em> et <em>conservation</em></td>
+</tr>
+<tr class="even">
+<td align="center">ToothGrowth</td>
+<td align="center"><em>dose</em></td>
+<td align="center"><em>len</em></td>
+<td align="center"><em>supp</em></td>
+</tr>
+</tbody>
+</table>
+<div class="explanation">
+<p>Faites attention aux types de données !</p>
 </div>
-
-
-
-
-
-
+<hr />
+<div id="défi-2-solution-mtcars" class="section level3">
+<h3><span class="header-section-number">9.1.1</span> Défi 2: Solution (<code>mtcars</code>)</h3>
+<p>There are multiple ways to respond to this challenge. Here is one example using the <code>mtcars</code> dataset:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Données</th>
+<th align="center">x</th>
+<th align="center">y</th>
+<th align="center">Esthétiques</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">mtcars</td>
+<td align="center"><em>wt</em></td>
+<td align="center"><em>mpg</em></td>
+<td align="center"><em>disp</em> et <em>hp</em></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb42-1"></a><span class="co"># Une de plusieurs solutions: mtcars</span></span>
+<span id="cb42-2"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb42-2"></a><span class="kw">data</span>(mtcars)</span>
+<span id="cb42-3"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb42-3"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> mtcars) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> wt, <span class="dt">y =</span> mpg, <span class="dt">colour =</span> disp,</span>
+<span id="cb42-4"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb42-4"></a>    <span class="dt">alpha =</span> hp))</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p>Pourriez-vous utiliser <code>size</code> au lieu de <code>alpha</code>? Et <code>shape</code>?</p>
+</div>
+<div id="défi-2-solution-co2" class="section level3">
+<h3><span class="header-section-number">9.1.2</span> Défi 2: Solution (<code>CO2</code>)</h3>
+<p>Voici un autre exemple avec le jeu de données<code>CO2</code>:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Données</th>
+<th align="center">x</th>
+<th align="center">y</th>
+<th align="center">Esthétiques</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">CO2</td>
+<td align="center"><em>conc</em></td>
+<td align="center"><em>uptake</em></td>
+<td align="center"><em>Treatment</em> et <em>Type</em></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb43-1"></a><span class="co"># Another possible solution</span></span>
+<span id="cb43-2"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb43-2"></a><span class="kw">data</span>(CO2)</span>
+<span id="cb43-3"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb43-3"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> CO2) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> conc, <span class="dt">y =</span> uptake, <span class="dt">colour =</span> Treatment,</span>
+<span id="cb43-4"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb43-4"></a>    <span class="dt">shape =</span> Type))</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+</div>
+<div id="défi-2-solution-msleep" class="section level3">
+<h3><span class="header-section-number">9.1.3</span> Défi 2: Solution (<code>msleep</code>)</h3>
+<p>Voici un autre exemple avec le jeu de données <code>msleep</code>:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Données</th>
+<th align="center">x</th>
+<th align="center">y</th>
+<th align="center">Esthétiques</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">msleep</td>
+<td align="center">log10(<em>bodywt</em>)</td>
+<td align="center"><em>awake</em></td>
+<td align="center"><em>vore</em> et <em>conservation</em></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb44-1"></a><span class="co"># Une autre solution</span></span>
+<span id="cb44-2"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb44-2"></a><span class="kw">data</span>(msleep)</span>
+<span id="cb44-3"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb44-3"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> msleep) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">log10</span>(bodywt), <span class="dt">y =</span> awake,</span>
+<span id="cb44-4"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb44-4"></a>    <span class="dt">colour =</span> vore, <span class="dt">shape =</span> conservation))</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-57-1.png" width="576" /></p>
+</div>
+<div id="défi-2-solution-toothgrowth" class="section level3">
+<h3><span class="header-section-number">9.1.4</span> Défi 2: Solution (<code>ToothGrowth</code>)</h3>
+<p>Voici un dernier exemple avec le jeu de données <code>ToothGrowth</code>:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Données</th>
+<th align="center">x</th>
+<th align="center">y</th>
+<th align="center">Esthétiques</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">ToothGrowth</td>
+<td align="center"><em>dose</em></td>
+<td align="center"><em>len</em></td>
+<td align="center"><em>supp</em></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb45-1"></a><span class="kw">data</span>(ToothGrowth)</span>
+<span id="cb45-2"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb45-2"></a><span class="kw">ggplot</span>(ToothGrowth, <span class="kw">aes</span>(<span class="dt">x =</span> dose, <span class="dt">y =</span> len, <span class="dt">color =</span> supp)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb45-3"><a href="changer-la-forme-la-taille-et-la-transparence.html#cb45-3"></a><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">formula =</span> <span class="st">&quot;y ~ x&quot;</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+</div>
+</div>
+</div>
 <hr>
 <center> 
   <div class="footer">
@@ -294,8 +460,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="sauvegarder.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="les-couleurs-faites-parler-vos-données.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="changer-léchelle-des-axes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

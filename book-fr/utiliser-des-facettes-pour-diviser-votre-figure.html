@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapitre 16 Conclusion | Atelier 3: Introduction à ggplot2</title>
+  <title>Chapitre 12 Utiliser des facettes pour diviser votre figure | Atelier 3: Introduction à ggplot2</title>
   <meta name="description" content="Introduction à ggplot2" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapitre 16 Conclusion | Atelier 3: Introduction à ggplot2" />
+  <meta property="og:title" content="Chapitre 12 Utiliser des facettes pour diviser votre figure | Atelier 3: Introduction à ggplot2" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop03" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapitre 16 Conclusion | Atelier 3: Introduction à ggplot2" />
+  <meta name="twitter:title" content="Chapitre 12 Utiliser des facettes pour diviser votre figure | Atelier 3: Introduction à ggplot2" />
   
   <meta name="twitter:description" content="Introduction à ggplot2" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="sauvegarder.html"/>
-
+<link rel="prev" href="theme.html"/>
+<link rel="next" href="utiliser-geom_-pour-créer-différents-types-de-graphique.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -273,16 +273,82 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="conclusion" class="section level1">
-<h1><span class="header-section-number">Chapitre 16</span> Conclusion</h1>
-
+<div id="utiliser-des-facettes-pour-diviser-votre-figure" class="section level1">
+<h1><span class="header-section-number">Chapitre 12</span> Utiliser des facettes pour diviser votre figure</h1>
+<div id="facettes-selon-une-variable" class="section level2">
+<h2><span class="header-section-number">12.1</span> Facettes selon une variable</h2>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb57-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm,</span>
+<span id="cb57-2"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb57-2"></a>    <span class="dt">y =</span> bill_depth_mm, <span class="dt">colour =</span> species)) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(<span class="op">~</span>species,</span>
+<span id="cb57-3"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb57-3"></a>    <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)  <span class="co"># l&#39;échelle de l&#39;axe des y peut varier entre les facettes.</span></span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb58-1"></a><span class="co"># ne faites pas ceci si vous comparez des facettes via</span></span>
+<span id="cb58-2"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb58-2"></a><span class="co"># l&#39;axe des y !</span></span></code></pre></div>
 </div>
-
-
-
-
-
-
+<div id="facettes-selon-deux-variables" class="section level2">
+<h2><span class="header-section-number">12.2</span> Facettes selon deux variables</h2>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb59-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm,</span>
+<span id="cb59-2"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb59-2"></a>    <span class="dt">y =</span> bill_depth_mm, <span class="dt">colour =</span> species)) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(year <span class="op">~</span></span>
+<span id="cb59-3"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb59-3"></a><span class="st">    </span>species, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+</div>
+<div id="titre-et-axes-changer-la-taille-la-couleur-et-lapparence" class="section level2">
+<h2><span class="header-section-number">12.3</span> Titre et axes: changer la taille, la couleur et l’apparence</h2>
+<p>Revenons à notre visualisation des données de pingouins.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb60-1"></a><span class="co"># Revenons à notre visualisation des données de pingouins.</span></span>
+<span id="cb60-2"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb60-2"></a>pp</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<p>Nous pouvons ajuster les axes et les titres pour rendre les informations plus claires, afin que le graphique parle par lui-même.</p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-75-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="défi-3" class="section level2">
+<h2><span class="header-section-number">12.4</span> Défi 3</h2>
+<p>Utilisez les données <code>tips</code> qui se trouvent dans <code>reshape2</code> 📦 pour reproduire le graphique ci-dessous.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb61-1"></a><span class="co"># install and load the package</span></span>
+<span id="cb61-2"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb61-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;reshape2&quot;</span>)</span></code></pre></div>
+<pre><code>## Installing package into &#39;/home/runner/work/_temp/Library&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb63-1"></a><span class="kw">library</span>(reshape2)</span></code></pre></div>
+<div class="puzzle">
+<p>Notre conseil: Allez-y étape par étape! Commencez par <code>theme_classic()</code> et ajoutez <code>theme()</code> pour faire vos changements supplémentaires.</p>
+</div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+<hr />
+<div id="défi-3-solution" class="section level3">
+<h3><span class="header-section-number">12.4.1</span> Défi 3: Solution</h3>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-1"></a><span class="co"># Construire le graphique</span></span>
+<span id="cb64-2"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-2"></a>tips.gg &lt;-<span class="st"> </span><span class="kw">ggplot</span>(tips, </span>
+<span id="cb64-3"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-3"></a>                  <span class="co"># Étape 1. Spécifiez le mappage esthétique des axes et des légendes</span></span>
+<span id="cb64-4"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-4"></a>                  <span class="kw">aes</span>(<span class="dt">x =</span> facture_totale,</span>
+<span id="cb64-5"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-5"></a>                      <span class="dt">y =</span> pourboire<span class="op">/</span>facture totale,</span>
+<span id="cb64-6"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-6"></a>                      <span class="dt">shape =</span> fumeur,</span>
+<span id="cb64-7"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-7"></a>                      <span class="dt">couleur =</span> sexe,</span>
+<span id="cb64-8"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-8"></a>                      <span class="dt">size =</span> taille)) <span class="op">+</span></span>
+<span id="cb64-9"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-9"></a><span class="st">  </span><span class="co"># Étape 2. Spécifiez le geom utilisé pour représenter les données</span></span>
+<span id="cb64-10"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-10"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb64-11"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-11"></a><span class="st">  </span><span class="co"># Etape 3. Spécifiez la variable utilisée pour faire des facettes</span></span>
+<span id="cb64-12"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-12"></a><span class="st">  </span><span class="kw">facet_grid</span>( <span class="op">~</span><span class="st"> </span>time) <span class="op">+</span></span>
+<span id="cb64-13"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-13"></a><span class="st">  </span><span class="co"># Étape 4. Spécifiez l&#39;échelle de couleur utilisée pour représenter le sexe </span></span>
+<span id="cb64-14"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-14"></a><span class="st">  </span><span class="kw">scale_colour_grey</span>() <span class="op">+</span></span>
+<span id="cb64-15"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-15"></a><span class="st">  </span><span class="co"># Étape 5. Étiquettez le titre et les axes du graphique</span></span>
+<span id="cb64-16"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-16"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Relation entre l&#39;addition totale et les pourboires pendant le déjeuner et le dîner&quot;</span>,</span>
+<span id="cb64-17"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-17"></a>       <span class="dt">x =</span> <span class="st">&quot;Facture totale ($)&quot;</span>, </span>
+<span id="cb64-18"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-18"></a>       <span class="dt">y =</span> <span class="st">&quot;Rapport entre les pourboires et l&#39;addition totale&quot;</span>) <span class="op">+</span></span>
+<span id="cb64-19"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-19"></a><span class="st">  </span><span class="co"># Étape 6. Définissez le thème</span></span>
+<span id="cb64-20"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-20"></a><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span></span>
+<span id="cb64-21"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-21"></a><span class="st">  </span><span class="co"># Étape 7. Personnalisez le thème pour qu&#39;il corresponde à la taille et à la couleur des titres du graphique.</span></span>
+<span id="cb64-22"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-22"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>,</span>
+<span id="cb64-23"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-23"></a>                                  <span class="dt">couleur =</span> <span class="st">&quot;navy&quot;</span>),</span>
+<span id="cb64-24"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-24"></a>        <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>),</span>
+<span id="cb64-25"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-25"></a>        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>,</span>
+<span id="cb64-26"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-26"></a>                                  <span class="dt">couleur =</span> <span class="st">&quot;orange3&quot;</span>,</span>
+<span id="cb64-27"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-27"></a>                                  <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb64-28"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-28"></a>        <span class="co"># cette partie ajuste le texte dans les titres des facettes</span></span>
+<span id="cb64-29"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-29"></a>        <span class="dt">strip.text.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">14</span>, <span class="dt">face=</span><span class="st">&quot;bold&quot;</span>))</span>
+<span id="cb64-30"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-30"></a><span class="co"># générez notre beau graphique !</span></span>
+<span id="cb64-31"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#cb64-31"></a>tips.gg</span></code></pre></div>
+</div>
+</div>
+</div>
 <hr>
 <center> 
   <div class="footer">
@@ -294,8 +360,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="sauvegarder.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="theme.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
