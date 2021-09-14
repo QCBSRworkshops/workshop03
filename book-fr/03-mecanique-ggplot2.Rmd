@@ -259,7 +259,7 @@ Note: Vous pouvez aussi utiliser `facet_grid()` si vous voulez faire une facette
 
 Nous pouvons également ajuster l'échelle de nos axes dans le graphique lui-même, plutôt que de transformer les données. Supposons que nous souhaitions étudier la relation entre les mesures du bec sur une échelle de $log_{10}$.
 
-```{r,fig.height=5, fig.width=6, warning = FALSE}
+```{r,fig.height=5, fig.width=6, warning = FALSE, eval = FALSE}
 ggplot(data = penguins, 
        aes(x = bill_length_mm, 
            y = bill_depth_mm)) +
@@ -271,7 +271,7 @@ ggplot(data = penguins,
 
 Pour terminer, nous pouvons également personnaliser le thème du graphique, qui comprend son arrière-plan, les quadrillages et d'autres caractéristiques visuelles du graphique. Supposons que nous n'aimons pas le fond gris par défaut de ggplot2 (nous ne serions pas les seuls!). Nous pouvons utiliser `theme_bw()` pour produire un rendu visuel plus attrayant. Nous discuterons des thèmes dans le chapitre \@ref(theme)!
 
-```{r,fig.height=5, fig.width=6, warning = FALSE}
+```{r,fig.height=5, fig.width=6, warning = FALSE, eval = FALSE}
 ggplot(data = penguins, 
        aes(x = bill_length_mm, 
            y = bill_depth_mm)) +
