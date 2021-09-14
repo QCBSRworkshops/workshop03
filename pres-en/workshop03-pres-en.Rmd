@@ -124,7 +124,7 @@ All workshop materials are found at [github.com/QCBSRworkshops/workshop03](https
 
 ###### 2. `ggplot2` mechanics
 
-###### 3. Advanced visualization
+###### 3. Aesthetic mapping
 
 ###### 4. Fine-tuning
 
@@ -163,11 +163,11 @@ How could we improve this figure ![:faic](arrow-up)?
 
 ???
 
-Plotting this in 3D is not adding information, it is distorting the proportions of each category so the ones in the foreground look more important than those in the back. 
+La représentation graphique en 3D n'ajoute pas d'informations, elle déforme les proportions de chaque catégorie, de sorte que les catégories du premier plan semblent plus importantes que celles du second plan. 
 
-The text labels are also not clear enough to be useful: they are small, overlap with the pie chart, and also include a percentage that should be communicated by the plot itself. 
+Les étiquettes de texte ne sont pas non plus suffisamment claires pour être utiles : elles sont petites, empiètent sur le graphique et incluent un pourcentage qui devrait être communiqué par le graphique lui-même. 
 
-Pie charts are also not recommended because they rely on angles to represent the difference between parts, but the human eye is not very good at reading/interpreting angles. We are much better at reading differences in area! There is a good demonstration of the pie chart problem here: https://www.data-to-viz.com/caveat/pie.html.
+Les diagrammes circulaires ne sont pas non plus recommandés car ils s'appuient sur des angles pour représenter la différence entre les parties, mais l'œil humain n'est pas très doué pour lire/interpréter les angles. Nous sommes bien plus aptes à lire les différences d'aire ! Vous trouverez une bonne démonstration du problème des diagrammes circulaires à l'adresse suivante : https://www.data-to-viz.com/caveat/pie.html.
 
 
 ---
@@ -242,7 +242,7 @@ Other drawing softwares are probably better options such as [GIMP](https://www.g
 ---
 # Why use R for graphs?
 
-#### .alert[ Because of its powerful features!]
+#### .alert[Because of its powerful features!]
 
 In this workshop, we focus only on `ggplot2`, but [multiple packages and functions](https://insileco.github.io/wiki/rgraphpkgs/) can be used for great visualization (e.g., [`base R`](https://bookdown.org/rdpeng/exdata/the-base-plotting-system-1.html), [`plotly`](https://plot.ly/r/), [`sjPlot`](http://www.strengejacke.de/sjPlot/), [`mapview`](https://r-spatial.github.io/mapview/), [`igraph`](https://igraph.org/r/)).
 
@@ -292,10 +292,6 @@ GG layers have specific names that you will see throughout the presentation:
 ![:scale 70%](images/gglayers.png)
 
 .small[image adapted from [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447)]
-
-???
-
-note: _changed image to more intuitive layers_
 
 ---
 exclude: true
@@ -445,7 +441,7 @@ GG layers:
   * `plot.object` or `print(plot.object)`
 
 ---
-# # The basics of visualizing data
+# The basics of visualizing data
 
 ## Today's dataset: palmerpenguins
 
@@ -1018,7 +1014,7 @@ ggplot(data = penguins) +
 
 Note that setting many variables to visual cues like color, shape, size, and alpha at once tends to be overwhelming for the viewer. Adding 4 levels of complexity on top of the 2-dimensional representation of points can be too much to process properly. It is better to choose the visual cues and key variables for the desired message than to overload a plot with every possibility in the aes() function.
 ---
-# Challenge #2 ![:cube]()
+# Challenge 2 ![:cube]()
 
 - Produce an informative plot from built-in datasets such as `mtcars`, `CO2` or `msleep`.
 
@@ -1041,7 +1037,7 @@ ToothGrowth | *dose* | *len* | *supp*
 ]
 
 ---
-# Challenge #2 ![:cube]()
+# Challenge 2 ![:cube]()
 
 #### .alert[Breakout rooms! - 15 min]
 <br> make a plot to share with the group
@@ -1050,7 +1046,7 @@ ToothGrowth | *dose* | *len* | *supp*
 ???
 note: _assign each group a dataset to make a plot from: mtcars, CO2, msleep, and ToothGrowth to make exploratory plots_
 ---
-# Challenge #2 - Solution example #1
+# Challenge 2 - Solution example 1
 
 .small[
 
@@ -1071,7 +1067,7 @@ ggplot(data = mtcars) +
 .comment[Could you use `size` instead of `alpha`? What about `shape`?]
 
 ---
-# Challenge #2 - Solution example #2
+# Challenge 2 - Solution example 2
 
 .small[
 
@@ -1093,7 +1089,7 @@ ggplot(data = CO2) +
 .comment[Why not use `size = Type`?]
 
 ---
-# Challenge #2 - Solution example #3
+# Challenge 2 - Solution example 3
 
 .small[
 
@@ -1113,7 +1109,7 @@ ggplot(data = msleep) +
 ```
 
 ---
-# Challenge #2 - Solution example #4
+# Challenge 2 - Solution example 4
 
 .small[
 
@@ -1260,7 +1256,7 @@ note: _removed this slide to add theme image instead_
 ---
 # `theme()`
 
-Elements of a theme ([by Isabella Benabaye](https://isabella-b.com/blog/ggplot2-theme-elements-reference/)).
+Elements of a theme by ([Isabella Benabaye](https://isabella-b.com/blog/ggplot2-theme-elements-reference/)).
 
 ![:scale 90%](images/ggthemes.png)
 
@@ -1336,7 +1332,7 @@ pp +
 ]
 
 ---
-# Challenge #3 ![:cube]()
+# Challenge 3 ![:cube]()
 
 Use the `tips` dataset found in `reshape2` &#x1F4E6; to reproduce the plot below.
 
@@ -1366,7 +1362,7 @@ tips.gg
 ```
 
 ---
-# Challenge #3 ![:cube]()
+# Challenge 3 ![:cube]()
 
 #### .alert[Breakout rooms! - 15 min]
 
@@ -1374,7 +1370,7 @@ tips.gg
 note: _give teams time to work together to recreate this plot. Refer to theme elements slide_
 
 ---
-# Challenge #3: Solution![:cube]()
+# Challenge 3: Solution![:cube]()
 
 ```{r, eval=FALSE}
 library(reshape2)
@@ -1400,7 +1396,7 @@ tips.gg
 ```
 
 ---
-# Challenge #3: step-by-step solution
+# Challenge 3: step-by-step solution
 
 #### `aes()`
 
@@ -1420,7 +1416,7 @@ theme_set(theme_classic())
 ```
 
 ---
-# Challenge #3: step-by-step solution
+# Challenge 3: step-by-step solution
 
 #### `facet_grid()`
 
@@ -1432,7 +1428,7 @@ tips.gg
 
 
 ---
-# Challenge #3: step-by-step solution
+# Challenge 3: step-by-step solution
 
 #### Grey-scale palette
 
@@ -1443,7 +1439,7 @@ tips.gg
 ```
 
 ---
-# Challenge #3: step-by-step solution
+# Challenge 3: step-by-step solution
 
 #### Adding plot title and labels
 
@@ -1455,7 +1451,7 @@ tips.gg
 ```
 
 ---
-# Challenge #3: step-by-step solution
+# Challenge 3: step-by-step solution
 
 #### Adding a theme and fine tuning it
 
