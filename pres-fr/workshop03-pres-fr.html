@@ -31,8 +31,6 @@ class: center, middle, inverse, title-slide
 
 
 
-class: inverse, center, middle
-
 
 
 
@@ -46,9 +44,7 @@ class: inverse, center, middle
 
 ---
 
-# Packages requis
-
-* [grid](https://cran.r-project.org/package=grid)
+.pull-left4[
 * [gridExtra](https://cran.r-project.org/package=gridExtra)
 * [ggplot2](https://cran.r-project.org/package=ggplot2)
 * [ggsignif](https://cran.r-project.org/package=ggsignif)
@@ -60,21 +56,30 @@ class: inverse, center, middle
 * [patchwork](https://cran.r-project.org/package=patchwork)
 * [palmerpenguins](https://cran.r-project.org/package=palmerpenguins)
 * [plotly](https://cran.r-project.org/package=plotly)
+]
 
-&lt;br&gt;
+.pull-right4[
 
-```R
-install.packages(c('grid', 'gridExtra', 'ggplot2', 'ggsignif', 'ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'GGally', 'patchwork', 'plotly', 'palmerpenguins'))
+Installez les librairies requises:
+
+
+```r
+install.packages("gridExtra")
+install.packages("ggplot2")
+install.packages("ggsignif")
+install.packages("ggdendro")
+install.packages("maps")
+install.packages("mapproj")
+install.packages("RColorBrewer")
+install.packages("GGally")
+install.packages("patchwork")
+install.packages("plotly")
+install.packages("palmerpenguins")
 ```
 
----
-# Objectifs d'apprentissage
-
-##### 1. Utilisez R pour créer différents graphiques
-
+]
 
 ---
-
 class: inverse, center, middle
 
 # Introduction
@@ -84,7 +89,7 @@ class: inverse, center, middle
 
 ##### Pour suivre cet atelier:
 
-Code et .HTML sont disponibles à l'adresse suivante: http://qcbs.ca/wiki/r/workshop3
+Tous les matériaux de l'atelier se trouvent sur [github.com/QCBSRworkshops/workshop03](https://github.com/QCBSRworkshops/workshop03). Cela inclut un [script R](https://qcbsrworkshops.github.io/workshop03/book-fr/workshop03-script-fr.R) qui contient le code de cette présentation.
 
 ##### Recommandations:
 
@@ -93,36 +98,29 @@ Code et .HTML sont disponibles à l'adresse suivante: http://qcbs.ca/wiki/r/work
   3. évitez de copier-coller ou d'exécuter le code directement à partir du script.
 
 
-###### [ggplot2](https://ggplot2.tidyverse.org/) est aussi sur GitHub: https://github.com/tidyverse/ggplot2
-
-
 ---
 # Plan de l'atelier
 
-###### 1. La mécanique `ggplot2`
+###### 1. Visualization in science
 
-.center[
-![:scale 80%](images/Layers_ggplot.png)
-]
+###### 2. La mécanique `ggplot2`
 
+###### 3. L'esthétique (*aesthetic mapping*)
 
+###### 3. Peaufinage
 
-###### 2. Visualisation avancée
-
-###### 3. Ajustement et peaufinage
-
-###### 4. Enregistrer un graphique
+###### 4. Sauvegarder vos graphiques
 
 ###### 5. Conclusion
 
 ---
 # Objectifs d'apprentissage
 
-&lt;br&gt;
+Dans cet atelier, nous allons: 
 
-- Apprendre les bases de la visualisation des données à l'aide de R.
+- Apprendre les bases de la visualisation des données avec R.
 - Trouver des librairies et des ressources pour répondre à vos besoins.
-- Inspirer plus de créativité dans les domaines scientifiques !
+- Inspirer plus de créativité scientifique!
 - Développer votre compréhension de la conception pour une communication graphique efficace.
 
 ---
@@ -132,7 +130,6 @@ class: inverse, center, middle
 
 ---
 # Visualisation en science
-&lt;br&gt;
 
 #### Pourquoi utilisons-nous la visualisation de données ?
 
@@ -142,7 +139,7 @@ class: inverse, center, middle
 
 .center[![:scale 65%](images/piechart3d.png)]
 
-Que pensez-vous de celle-ci ![:faic](arrow-up)?
+Comment pourrions-nous améliorer cette figure ![:faic](arrow-up)?
 
 ---
 # Visualisation en science
@@ -160,25 +157,28 @@ Que pensez-vous de celle-ci ![:faic](arrow-up)?
 # Visualisation en science
 &lt;br&gt;
 
-**Questions importantes** :
+#### Questions importantes:
 
-- Que voulez-vous communiquer ?
-- Qui est votre public ?
-- Quelle est la meilleure façon de le faire ?
+- Que voulez-vous communiquer?
+- Qui est votre public?
+- Quelle est la meilleure façon de visualiser votre message?
+&lt;br&gt;
 
 .center[
-.alert[Une règle générale : restez simple - utilisez moins d'encre !]
+.alert[Règle générale: restez simple - utilisez moins d'encre!]
 ]
 
 --
 
-#### Ressources utiles
+#### Ressources pour les principes de visualisation
 
 - [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/) (ggplot)
 - [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base plot)
 - [Graphics Principles](https://graphicsprinciples.github.io/) (trucs et astuces de conception)
 
 ---
+exclude: true
+
 # AVERTISSEMENT!
 
 &lt;br&gt;
@@ -190,14 +190,12 @@ Que pensez-vous de celle-ci ![:faic](arrow-up)?
 D'autres logiciels de dessin sont probablement de meilleures options comme [GIMP](https://www.gimp.org/) ou [Inkscape](https://inkscape.org/). Il est important d'utiliser le bon outil pour la bonne tâche !
 
 ---
-# Pourquoi utiliser R pour les graphiques ?
+# Pourquoi utiliser R pour les graphiques?
 
 .center[![:scale 80%](images/Divided_reproducible workflow.png)]
 
 ---
-# Pourquoi utiliser R pour les graphiques ?
-
-#### .alert[Reproductibilité]
+# Pourquoi utiliser R pour les graphiques? La reproductibilité
 
 .center[![:scale 80%](images/Divided_reproducible workflow2.png)]
 
@@ -205,19 +203,15 @@ D'autres logiciels de dessin sont probablement de meilleures options comme [GIMP
 .alert[La science reproductible requiert un effort]:
 - commentez votre script
 - ajoutez des informations dans vos figures (titres, étiquettes, légendes, annotations)
-- ...
 
 ---
-# Pourquoi utiliser R pour les graphiques ?
+# Pourquoi utiliser R pour les graphiques?
 
 #### .alert[En raison de ses puissantes fonctionnalités !]
 
 Dans cet atelier, nous nous concentrons uniquement sur `ggplot2`, mais [plusieurs librairies et fonctions](https://insileco.github.io/wiki/rgraphpkgs/) peuvent être utilisées pour une excellente visualisation (par exemple, ["base R"](https://bookdown.org/rdpeng/exdata/the-base-plotting-system-1.html), [plotly](https://plot.ly/r/), [sjPlot](http://www.strengejacke.de/sjPlot/), [mapview](https://r-spatial.github.io/mapview/), [igraph](https://igraph.org/r/)).
 
-
-
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-2-1.png" width="648" style="display: block; margin: auto;" /&gt;
-
+.center[![:scale 80%](images/multiExamplePlot.png)]
 
 ---
 # `ggplot2` est polyvalent
@@ -240,13 +234,13 @@ class: inverse, center, middle
 
 
 ```r
-install.packages("ggplot2") # if not already installed
+install.packages("ggplot2") # si ce n'est pas déjà installé
 library(ggplot2)
 ```
 
 
 
-Un graphique est construit à partir de différente couches:
+Un graphique est construit de différente couches:
 
 .center[
 ![:scale 90%](images/Layers_ggplot.png)
@@ -257,15 +251,12 @@ En utilisant le système GG, nous pouvons construire des graphiques étape par �
 ---
 # Les bases de la grammaire des graphiques (GG)
 
-Ces couches ont des noms spécifiques que vous verrez tout au long de la présentation :
+Ces couches ont des noms spécifiques que vous verrez tout au long de la présentation:
 
 ![:scale 70%](images/gglayers.png)
 
 .small[image adaptée de [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447)]
 
-???
-
-note: _changed image to more intuitive layers_
 
 ---
 exclude: true
@@ -298,7 +289,7 @@ Un graphique est constitué d'éléments (couches):
 
 - Données
     - vos données, dans un format bien ordonné, fourniront les ingrédients de votre graphique
-    - utiliser les techniques `dplyr` pour préparer les données en vue d'un format de tracé optimal
+    - utiliser les techniques `dplyr` pour préparer les données en vue d'un format optimal (format long)
     - en général, une ligne pour chaque observation que vous voulez représenter
 
 
@@ -352,10 +343,6 @@ Un graphique est constitué d'éléments (couches):
 - Facettes
     * `facet_wrap()` ou `facet_grid()` pour de petits multiples
 
-???
-
-note: _descriptions of scales to talk about more layers_
-
 ---
 # La grammaire des graphiques (GG)
 
@@ -368,11 +355,6 @@ Un graphique est constitué d'éléments (couches):
 - Statistiques
     * similaire aux géométries, mais issue de calcul sur les données
     * indique les moyennes, les comptages et autres résumés statistiques des données
-
-
-???
-
-note: _descriptions of themes to talk about more  layers_
 
 ---
 # La grammaire des graphiques (GG)
@@ -389,12 +371,6 @@ Un graphique est constitué d'éléments (couches):
     * `coord_polar` pour les graphiques circulaires
     * `coord_map` pour différentes projections cartographiques
 
-
-???
-
-note: _descriptions of other layerss_
-
-
 ---
 # La grammaire des graphiques (GG)
 
@@ -410,12 +386,8 @@ Un graphique est constitué d'éléments (couches):
     * Effets visuels globaux par défaut
     * polices, couleurs, formes, contours
 
-???
-
-note: _descriptions of other layerss_
-
 ---
-# Comment fonctionnent les couches dans ggplot
+# Comment assembler ces couches
 
 1. Créer un objet graphique simple :
   * `plot.object &lt;- ggplot()`
@@ -431,7 +403,9 @@ note: _descriptions of other layerss_
 
 
 ---
-# Le jeu de données: palmerpenguins
+# Les bases de la visualisation de données
+
+## Le jeu de données: `palmerpenguins`
 
 .pull-right2[
 ![:scale 80%](images/palmerpenguins.png)
@@ -450,7 +424,7 @@ library(palmerpenguins)
 
 ]
 
-![:scale 55%](images/penguins.png)
+![:scale 50%](images/penguins.png)
 .center[.xsmall[Artwork by [@allison_horst](https://twitter.com/allison_horst).]]
 
 
@@ -460,12 +434,12 @@ Ces données ont été recueillies de 2007 à 2009 par la Dre Kristen Gorman dan
 
 Cet ensemble de données est souvent utilisé pour remplacer l'ensemble de données iris, qui pose certains problèmes pour l'enseignement de la science des données, notamment ses liens avec l'eugénisme (plus d'informations à ce sujet sur https://armchairecology.blog/iris-dataset/).
 
-Cet ensemble de données a également été utilisé pour un défi TidyTuesday, montrant les nombreuses possibilités de visualisation créative de l'ensemble de données. Par exemple : [this](https://twitter.com/LauraNavarroSol/status/1289216490307063814?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1289216490307063814%7Ctwgr%5E%7Ctwcon%5Es1_c10&amp;ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F), and [this](https://twitter.com/CedScherer/status/1288181995714093057?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1288181995714093057%7Ctwgr%5E%7Ctwcon%5Es1_c10&amp;ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F).
+Cet ensemble de données a également été utilisé pour un défi TidyTuesday, montrant les nombreuses possibilités de visualisation créative de l'ensemble de données. Par exemple : [ceci](https://twitter.com/LauraNavarroSol/status/1289216490307063814?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1289216490307063814%7Ctwgr%5E%7Ctwcon%5Es1_c10&amp;ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F), and [ceci](https://twitter.com/CedScherer/status/1288181995714093057?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1288181995714093057%7Ctwgr%5E%7Ctwcon%5Es1_c10&amp;ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F).
 
 ---
 # Le jeu de données: palmerpenguins
 
-Regardons les variables de l'ensemble de données des pingouins :
+Regardons les variables du jeu de données des pingouins :
 
 
 ```r
@@ -549,17 +523,17 @@ Explorons comment ces données sont structurées par espèce:
 
 
 ```r
-ggplot(data = penguins,               # Data
-       aes(x = bill_length_mm,        # Your X-value
-           y = bill_depth_mm,         # Your Y-value
-           col = species)) +          # Aesthetics
-  geom_point(size = 5, alpha = 0.8) + # Point
-  geom_smooth(method = "lm") +        # Linear regression
+ggplot(data = penguins,               # Données
+       aes(x = bill_length_mm,        # Valeurs X
+           y = bill_depth_mm,         # Valeurs Y
+           col = species)) +          # Esthétique (mettre une couleur par espèce)
+  geom_point(size = 5, alpha = 0.8) + # Points
+  geom_smooth(method = "lm") +        # Régression linéaire
   labs(title = "Relationship between bill length and depth\nfor different penguin species", # Title
-       x = "Bill length (mm)",
-       y = "Bill depth (mm)",
-       col = "Species") + 
-  theme_classic() + # apply a clean theme
+       x = "Bill length (mm)", # titre de l'axe des X
+       y = "Bill depth (mm)", # titre de l'axe des Y
+       col = "Species") +  # Légende pour les couleurs dans aes(col = species)
+  theme_classic() + # Utiliser un thème propre
   theme(title = element_text(size = 18, face = "bold"),
       text = element_text(size = 16))
 ```
@@ -677,7 +651,7 @@ ggplot(data = penguins,
 Noter que le code ggplot2 est plus facile à lire si chaque ligne représente un nouvel élément. Ce style est généralement favorisé pour le code ggplot2 dans la communauté R.
 
 ---
-# # La dynamique `ggplot()` : les couches extras - facette, stats, coordonnées
+## La dynamique `ggplot()` : les couches extras - facette, stats, coordonnées
 
 
 ```r
@@ -691,7 +665,7 @@ ggplot(data = penguins,
 &lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-17-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ---
-# Défi #1 (5min) ![:cube]()
+# Défi 1 (5min) ![:cube]()
 
 #### Créer votre 1er graphique ggplot!
 
@@ -709,7 +683,7 @@ penguins | geom_point | bill_length_mm | flipper_length_mm
 
 
 ---
-# Défi 1#: Solution ![:cube]()
+# Défi 1: Solution ![:cube]()
 
 
 ```r
@@ -723,7 +697,7 @@ ggplot(data = penguins,
 
 
 ---
-# Défi 1#: Solution ![:cube]()
+# Défi 1: Solution ![:cube]()
 
 .pull-left2[
 
@@ -742,7 +716,7 @@ ggplot(data = penguins,
 ]
 
 ---
-# Défi 1#: Solution ![:cube]()
+# Défi 1: Solution ![:cube]()
 
 .pull-left2[
 
@@ -777,26 +751,25 @@ class: inverse, center, middle
 
 **Utiliser l'esthétique (`aes()`) pour distinguer les classes, les groupes et la structure**
 
-
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;" /&gt;
+![:scale 70%](images/4plot_aesthetic.png) 
 
 ---
-# Les couleurs: faire parler vos données
+# Les couleurs: faites parler vos données
 
 Changez la **couleur** pour
 
-&amp;nbsp; ![:faic](arrow-right) différencier les groupes
+&amp;nbsp; ![:faic](arrow-right) différencier entre des groupes
 
 &amp;nbsp; ![:faic](arrow-right) représenter les valeurs des données
 
 &amp;nbsp; ![:faic](arrow-right) mettre en évidence des éléments spécifiques
 
 .pull-left[
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-22-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-21-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-23-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-22-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .footnote[Voir [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/colour-basics.html)]
@@ -805,6 +778,7 @@ Changez la **couleur** pour
 # Utiliser `aes()` pour changer les couleurs
 
 La longueur des becs et des nageoires varient-elles selon les espèces ?
+
 .pull-left[
 
 ```r
@@ -817,7 +791,7 @@ ggplot(data = penguins,
   labs(title = "Sans code de couleur")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-24-1.png" width="432" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-23-1.png" width="432" /&gt;
 ]
 
 .pull-right[
@@ -833,7 +807,7 @@ ggplot(data = penguins,
   labs(title = "Avec code de couleur")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-25-1.png" width="432" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-24-1.png" width="432" /&gt;
 ]
 
 ---
@@ -850,7 +824,7 @@ pp &lt;- ggplot(data = penguins) +
 pp + labs(title = "Défaut")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-26-1.png" width="432" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-25-1.png" width="432" /&gt;
 ]
 .pull-right[
 
@@ -863,7 +837,7 @@ scale_colour_manual(
   labs(title = "Personnalisé")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-27-1.png" width="432" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-26-1.png" width="432" /&gt;
 ]
 
 ???
@@ -882,7 +856,7 @@ pp2 &lt;- ggplot(data = penguins) +
 pp2 + labs(title = "Défaut")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-28-1.png" width="432" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-27-1.png" width="432" /&gt;
 ]
 .pull-right[
 
@@ -893,7 +867,7 @@ pp2 +
   labs(title = "Personnalisé")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-29-1.png" width="432" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-28-1.png" width="432" /&gt;
 ]
 
 ???
@@ -922,7 +896,7 @@ pp +
   labs(title = "Palette pour des groupes")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-31-1.png" width="468" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-30-1.png" width="468" style="display: block; margin: auto;" /&gt;
 
 ---
 # Utiliser une palette de couleurs prédéfinie
@@ -934,7 +908,7 @@ pp2 +
   labs(title = "Palette pour des variables continues")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-32-1.png" width="468" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-31-1.png" width="468" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -949,7 +923,7 @@ pp +
   labs(title = "Palette pour des groupes")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-33-1.png" width="468" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-32-1.png" width="468" style="display: block; margin: auto;" /&gt;
 
 ---
 # Utiliser une palette de couleurs prédéfinie
@@ -961,7 +935,7 @@ pp2 +
   labs(title = "Palette pour des variables continues")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-34-1.png" width="468" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-33-1.png" width="468" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -973,7 +947,7 @@ Nous pouvons utiliser [colorblindr](https://github.com/clauswilke/colorblindr) q
 
 ```r
 # install.packages("remotes")
-remotes::install_github("clauswilke/colorblindr", quiet = TRUE)
+remotes::install_github("clauswilke/colorblindr@cc54c8a35f8e7689ef4cc128b0da3af92f8cd540", quiet = TRUE)
 library(colorblindr)
 ```
 
@@ -985,7 +959,7 @@ library(colorblindr)
 cvd_grid(pp)
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-35-1.png" width="792" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-34-1.png" width="792" style="display: block; margin: auto;" /&gt;
 
 ---
 # Utiliser des palettes de couleurs visibles pour les daltoniens
@@ -999,7 +973,7 @@ pp +
   labs(title = "Palette viridis pour des groupes")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-36-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-35-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -1010,7 +984,7 @@ pp2 +
   labs(title = "Palette viridis pour des variables continues")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-37-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-36-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
 
@@ -1027,7 +1001,7 @@ ggplot(data = penguins) +
   labs(title = "Formes pour des groupes")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-38-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-37-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -1041,14 +1015,14 @@ ggplot(data = penguins) +
   labs(title = "Taille et transparence pour des variables continues")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-39-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-38-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
 ???
 Notez que le fait de définir simultanément de nombreuses variables pour les repères visuels tels que la couleur, la forme, la taille et l'alpha a tendance à être excessif pour le lecteur. L'ajout de quatre niveaux de complexité à la représentation en 2D des points peut être trop important pour être bien interprété. Il est préférable de choisir les indices visuels et les variables clés pour le message souhaité plutôt que de surcharger un graphique avec toutes les possibilités de la fonction aes().
 
 ---
-# Défi #2 ![:cube]()
+# Défi 2 ![:cube]()
 
 - Créer un graphique informatif à partir de jeu de données disponible de R, comme `mtcars`, `CO2` ou `msleep`.
 
@@ -1083,7 +1057,7 @@ Créez un graphique à partager avec le groupe
 note: _assign each group a dataset to make a plot from: mtcars, CO2, msleep, and ToothGrowth to make exploratory plots_
 
 ---
-# Défi #2 - Solution exemple #1
+# Défi 2 - Solution exemple 1
 
 .small[
 
@@ -1097,17 +1071,17 @@ mtcars |*wt* |*mpg* | *disp* et *hp*
 ```r
 data(mtcars)
 ggplot(data = mtcars) +
-  geom_point(mapping = aes(x = wt, y = mpg,
-                           colour = disp,
-                           alpha = hp))
+  geom_point(aes(x = wt, y = mpg,
+                 colour = disp,
+                 alpha = hp))
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-40-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-39-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 .comment[Pourriez-vous utiliser `size` au lieu de `alpha`? Et `shape`?]
 
 ---
-# Défi #2 - Solution exemple #2
+# Défi 2 - Solution exemple 2
 
 .small[
 
@@ -1121,18 +1095,18 @@ CO2 |*conc* |*uptake* | *Treatment* et *Type*
 ```r
 data(CO2)
 ggplot(data = CO2) +
-  geom_point(mapping = aes(x = conc, 
-                           y = uptake,
-                           colour = Treatment, 
-                           shape = Type))
+  geom_point(aes(x = conc, 
+                 y = uptake,
+                 colour = Treatment, 
+                 shape = Type))
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-41-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-40-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 .comment[Pourquoi ne pas utiliser `size = Type`?]
 
 ---
-# Défi #2 - Solution exemple #3
+# Défi 2 - Solution exemple 3
 
 .small[
 
@@ -1146,16 +1120,16 @@ msleep |log10(*bodywt*) |*awake* | *vore* et *conservation*
 ```r
 data(msleep)
 ggplot(data = msleep) +
-  geom_point(mapping = aes(x = log10(bodywt), 
-                           y = awake,
-                           colour = vore, 
-                           shape = conservation))
+  geom_point(aes(x = log10(bodywt), 
+                 y = awake,
+                 colour = vore, 
+                 shape = conservation))
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-42-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-41-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ---
-# Défi #2 - Solution exemple #4
+# Défi 2 - Solution exemple 4
 
 .small[
 
@@ -1175,7 +1149,7 @@ ggplot(ToothGrowth, aes(x = dose,
   geom_smooth(method = lm, formula = 'y~x')
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-43-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-42-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ---
 class: small-code
@@ -1190,7 +1164,7 @@ ggplot(diamonds) +
   labs(title = "Échelle originale")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-44-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-43-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 ]
 .pull-right[
@@ -1204,13 +1178,12 @@ ggplot(diamonds) +
   labs(title = "Échelle log10")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-45-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-44-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
 &lt;br&gt;
 .small[Il est également possible de transformer le système de coordonnées en utilisant `scale_x_log10()` et `scale_y_log10()`.]
 
-&lt;!-- explain the difference --&gt;
 
 ???
 Expliquer la différence et pourquoi la transformation peut être utile pour la visualisation. Par exemple, la masse corporelle est souvent transformée avec log10.
@@ -1218,14 +1191,14 @@ Expliquer la différence et pourquoi la transformation peut être utile pour la 
 ---
 class: inverse, center, middle
 
-# Perfectionner vos graphiques
+# Peaufinage
 
 # Utiliser le `theme()` pour faire bonne figure!
 
 ---
 # `theme()`
 
-**Default: theme_grey()**
+**Par défaut: theme_grey()**
 
 ```r
 # Theme grey
@@ -1234,13 +1207,14 @@ pp + scale_colour_grey() +
   labs(title = "Défaut: Thème gris")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-46-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-45-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ---
 # `theme()`
 
 
 .pull-left[
+**Thème classique**
 
 ```r
 pp + scale_colour_grey() +
@@ -1248,10 +1222,11 @@ pp + scale_colour_grey() +
   labs(title = "Thème classique")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-47-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-46-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
+**Thème minimal**
 
 ```r
 pp + scale_colour_grey() +
@@ -1259,7 +1234,7 @@ pp + scale_colour_grey() +
   labs(title = "Thème minimal")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-48-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-47-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
 .footnote[NB: De bons choix pour la publication !]
@@ -1277,7 +1252,7 @@ ou `theme_update()` pour modifier certains aspects d'un thème.
 
 
 .pull-left[
-**Choisir le thème**
+**Définir le thème**
 
 ```r
 # Choisir le thème par défaut
@@ -1285,7 +1260,7 @@ theme_set(theme_bw())
 pp
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-49-1.png" width="468" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-48-1.png" width="468" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -1297,7 +1272,7 @@ theme_update(panel.grid.minor = element_blank())
 pp
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-50-1.png" width="468" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-49-1.png" width="468" style="display: block; margin: auto;" /&gt;
 ]
 
 
@@ -1316,7 +1291,7 @@ note: _removed this slide to add theme image instead_
 ---
 # `theme()`
 
-Les élements d'un thème
+Les élements d'un thème par ([Isabella Benabaye](https://isabella-b.com/blog/ggplot2-theme-elements-reference/)).
 
 ![:scale 90%](images/ggthemes.png)
 
@@ -1324,12 +1299,12 @@ Les élements d'un thème
 ---
 class: inverse, center, middle
 
-# Perfectionner vos graphiques
+# Peaufiner vos graphiques
 
-# Utiliser `facet_grid()` pour changer la disposition des graphiques
+# Des facettes pour pour diviser votre graphique
 
 ---
-# penguins dataset: facettes par espèce
+# Facettes selon une variable
 
 
 ```r
@@ -1337,29 +1312,31 @@ ggplot(data = penguins) +
   geom_point(mapping = aes(x = bill_length_mm, 
                            y = bill_depth_mm, 
                            colour = species)) +
-  facet_grid(~ species, scales = "free")
+  facet_grid(~ species, 
+             scales = "free") # l'échelle de l'axe des y peut varier entre les facettes.
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-52-1.png" width="720" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-51-1.png" width="432" style="display: block; margin: auto;" /&gt;
+
+???
+
+Ne faites pas scales = 'free' si vous comparez des facettes via l'axe des y !
 
 
 ---
-# CO2: facettes par type
+# Facettes selon deux variables
 
 
 ```r
-ggplot(data = CO2) +
-  geom_point(mapping = aes(x = conc, 
-                           y = uptake, 
-                           colour = Treatment)) +
-  xlab("Concentration du CO2 (mL/L)") + 
-  ylab("Absorption du CO2 (umol/m^2 sec)") +
-  facet_grid(~ Type)
+ggplot(data = penguins) +
+  geom_point(mapping = aes(x = bill_length_mm, 
+                           y = bill_depth_mm, 
+                           colour = species)) +
+  facet_grid(year ~ species, 
+             scales = "free")
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-53-1.png" width="720" style="display: block; margin: auto;" /&gt;
-
-&lt;!-- relabeling ticks --&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-52-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ---
 exclude: true
@@ -1377,27 +1354,26 @@ This is redundant with the elements of a theme figure from slide 74, and now out
 .pull-left[
 **Défaut**
 &lt;br&gt;&lt;br&gt;
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-54-1.png" width="396" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-53-1.png" width="396" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 **Ajustement des axes et du titre**
 &lt;br&gt;&lt;br&gt;
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-55-1.png" width="396" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-54-1.png" width="396" style="display: block; margin: auto;" /&gt;
 
 ]
 
 ---
-# Défi #3 ![:cube]()
+# Défi 3 ![:cube]()
 
 Utilisez les données `tips` qui se trouvent dans `reshape2` &amp;#x1F4E6; pour reproduire le graphique ci-dessous.
 
+Notre conseil: Allez-y étape par étape! Commencez par `theme_classic()` et ajoutez `theme()` pour faire vos changements supplémentaires.
 
-Notre conseil: commencez par `theme_classic()` et ajoutez `theme()` pour faire vos changements supplémentaires.
-
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-56-1.png" width="720" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-55-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
 ---
-# Défi #3 ![:cube]()
+# Défi 3 ![:cube]()
 
 #### .alert[Salles de réunion! - 15 min]
 
@@ -1405,7 +1381,7 @@ Notre conseil: commencez par `theme_classic()` et ajoutez `theme()` pour faire v
 note: _give teams time to work together to recreate this plot. Refer to theme elements slide_
 
 ---
-# Défi #3: Solution![:cube]()
+# Défi 3: Solution![:cube]()
 
 
 ```r
@@ -1432,7 +1408,7 @@ tips.gg
 ```
 
 ---
-# Défi #3: solution par étapes
+# Défi 3: solution par étapes
 
 #### `aes()`
 
@@ -1445,12 +1421,12 @@ tips.gg &lt;- ggplot(tips) +
 tips.gg
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-58-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-57-1.png" width="504" style="display: block; margin: auto;" /&gt;
 
 
 
 ---
-# Défi #3: solution par étapes
+# Défi 3: solution par étapes
 
 #### `facet_grid()`
 
@@ -1461,11 +1437,11 @@ tips.gg &lt;- tips.gg +
 tips.gg
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-60-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-59-1.png" width="504" style="display: block; margin: auto;" /&gt;
 
 
 ---
-# Défi #3: solution par étapes
+# Défi 3: solution par étapes
 
 #### Palette de gris
 
@@ -1476,10 +1452,10 @@ tips.gg &lt;- tips.gg +
 tips.gg
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-61-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-60-1.png" width="504" style="display: block; margin: auto;" /&gt;
 
 ---
-# Défi #3: solution par étapes
+# Défi 3: solution par étapes
 
 #### Ajout du titre et des étiquettes du graphique
 
@@ -1491,10 +1467,10 @@ tips.gg &lt;- tips.gg +
 tips.gg
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-62-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-61-1.png" width="504" style="display: block; margin: auto;" /&gt;
 
 ---
-# Défi #3: solution par étapes
+# Défi 3: solution par étapes
 
 #### Ajout et ajustement du thème
 
@@ -1510,13 +1486,13 @@ tips.gg &lt;- tips.gg +
 tips.gg
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-63-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-62-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 class: inverse, center, middle
 
-# Perfectionner vos graphiques
+# Peaufiner vos graphiques
 
 # Utiliser `geom_*()` pour créer différents types de graphique
 
@@ -1540,6 +1516,8 @@ note: removed this slide. Not sure why it's here.
 
 ---
 # `ggplot2::ggplot()`
+
+
 
 Sans `geom_*` pour représenter des variables, on a une figure vide:
 
@@ -1594,8 +1572,15 @@ ggplot(mpg, aes(displ, hwy)) +
 &lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-67-1.png" width="396" style="display: block; margin: auto;" /&gt;
 ]
 ]
+
+???
+
+Un nuage de points est un excellent moyen de visualiser des points de données pour deux variables. Deux esthétiques sont requises dans `geom_point()` : les variables `x` et `y`.
+
+Il peut cependant être difficile de discerner toute relation potentielle dans un nuage de points. Vous pouvez utiliser `geom_smooth()` pour ajuster une ligne à travers vos données avec une variété de méthodes. Ici, nous allons ajouter un ajustement linéaire au nuage de points.
+
 ---
-# Boxplot: `geom_boxplot()`
+# Diagramme en boîte: `geom_boxplot()`
 
 
 ```r
@@ -1604,19 +1589,25 @@ ggplot(data = penguins,
            y = bill_length_mm,
            fill = species)) +
   geom_boxplot() +
-  labs(title = "Boxplot")
+  labs(title = "Diagramme en boîte")
 ```
 
 &lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-68-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ---
-# Boxplot: `geom_boxplot()`
+# Diagramme en boîte: `geom_boxplot()`
 
 &lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-69-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 .center[
 ![:scale 75%](images/boxplot_explain.png)
 ]
+
+???
+
+Les boxplots sont un moyen populaire de représenter la distribution des données en fonction d'une variable de regroupement, comme les espèces. Vous pouvez spécifier cette variable de regroupement dans `aes()` en utilisant `group =`, ou l'esthétique utilisée pour représenter les données (`fill =`, `col =`, `shape =`) pour générer le boxplot.
+
+Bien que les boxplots soient très populaires pour résumer des données, quelqu'un qui regarde votre graphique peut ne pas comprendre intuitivement comment fonctionne ce résumé et ce qu'il peut cacher. Pour bien utiliser les boxplots, il faut en comprendre l'anatomie, comme indiqué ci-dessous. Plus d'informations sur les pièges des boxplots [ici](https://www.data-to-viz.com/caveat/boxplot.html).
 
 ---
 # Diagramme en boîte avec annotations: `geom_boxplot()` et `geom_signif()`
@@ -1641,10 +1632,10 @@ ggplot(data = penguins,
 
 ???
 
-geom_signif calcule la significativité de la différence entre groupes et note le résultat sur la figure.
+Pour guider l'interprétation des boxplots, nous pouvons ajouter des annotations avec `geom_signif()`. La fonction `geom_signif()` calcule la signification d'une différence entre les groupes et ajoute l'annotation au graphique en une seule ligne.
 
 ---
-# Graphique en violon: `geom_violin()`
+# Diagramme en violon: `geom_violin()`
 
 Comme expliqué sur le site [from Data to Viz](https://www.data-to-viz.com/graph/violin.html)
 
@@ -1658,7 +1649,7 @@ Comme expliqué sur le site [from Data to Viz](https://www.data-to-viz.com/graph
 ]
 
 ---
-# Graphique en violon: `geom_violin()`
+# Diagramme en violon: `geom_violin()`
 
 
 ```r
@@ -1671,8 +1662,14 @@ violin
 
 &lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-74-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
+???
+
+Comme les boxplots, les diagrammes en violon visualisent la distribution d'une variable numérique pour un ou plusieurs groupes. Cependant, la forme d'un violon représente la distribution des points qui est masquée dans le résumé d'un boxplot, ce qui permet une représentation plus précise des données ([Data-to-Viz)](https://www.data-to-viz.com/graph/violin.html)).
+
+Comparons un boxplot et un violin plot sur des données générées. Remarquez que le diagramme en violon *montre* l'étendue **et** la variabilité de nos données, alors que le boxplot ne peut pas communiquer ces deux éléments de manière aussi intuitive.
+
 ---
-# Graphique en violon: `geom_violin()` + `_boxplot()` + `_jitter()`
+# Diagramme en violon: `geom_violin()` + `_boxplot()` + `_jitter()`
 
 
 ```r
@@ -1684,8 +1681,7 @@ violin +
 &lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-75-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ???
-
-Plusieurs geoms peuvent être utilisés en même temps! L'ordre des geoms dans le code détermine comment ils se superposent.
+Bien que nous ayons une bonne idée de la façon dont les données sont distribuées, nous pouvons améliorer le graphique en visualisant certaines statistiques sommaires et les points de données. Traçons un boxplot et les points de données *sur* notre graphique de violon avec `geom_violin()` + `geom_boxplot()` + `geom_jitter()`.
 
 ---
 # Résumer des valeurs: `stat_summary()`
@@ -1719,30 +1715,52 @@ ggplot(mtcars, aes(cyl, mpg)) +
 ---
 # Résumer des valeurs
 
-Voir aussi `geom_errorbar()`, `geom_pointrange()`, `geom_linerange()`, `geom_crossbar()` pour que les géométries puissent afficher des données résumées.
+Pour afficher d'autres statistiques, consultez:
 
-
-
+- `geom_errorbar()`  
+- `geom_pointrange()`  
+- `geom_linerange()`  
+- `geom_crossbar()` 
+- et autres!
 
 ---
 # Créer des cartes: `geom_map()`
+
 .small[
 
 ```r
-crimes &lt;- data.frame(state = tolower(rownames(USArrests)), USArrests)
-crimesm &lt;- reshape2::melt(crimes, id = 1)
-
+# charger la librairie maps
 library(maps)
-states_map &lt;- map_data("state")
+states_map &lt;- map_data("state") # obtient une carte des Etats-Unis à l'échelle des états
 
-ggplot(crimes, aes(map_id = state)) +
-  geom_map(aes(fill = Murder), map = states_map) +
-  expand_limits(x = states_map$long, y = states_map$lat) +
-  coord_map()
+# Le nom de l'état est défini comme rownames. Créons une nouvelle colonne pour ceux-ci
+# qui correspond à la colonne des noms d'états dans notre states_map.
+USArrests$region &lt;- tolower(rownames(USArrests))
+
+# Construisons notre carte
+ggplot(USArrests, 
+       aes(map_id = region)) + # le nom de la variable pour lier notre carte et notre dataframe
+  geom_map(aes(fill = Murder), # variable que nous voulons représenter avec une esthétique
+           map = states_map) + # cadre de données qui contient des coordonnées
+  expand_limits(x = states_map$long, 
+                y = states_map$lat) +
+  coord_map() + # projection 
+  labs(x = "", y = "") # suppression des titres des axes
 ```
-
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-78-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
+
+???
+
+USArrests : Violent Crime Rates by US State dataset, inclus dans R. Cet ensemble de données contient des statistiques, en arrestations pour 100 000 résidents pour agression, meurtre et viol dans chacun des 50 États américains en 1973. Le pourcentage de la population vivant dans des zones urbaines est également indiqué. 
+
+La carte se trouve sur la diapositive suivante. N'hésitez pas à passer d'une diapositive à l'autre pour expliquer chaque élément si la cartographie suscite de l'intérêt. 
+
+---
+
+---
+# Créer des cartes: `geom_map()`
+
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-79-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
 ---
 # Graphique de densité: `geom_density()`
@@ -1757,7 +1775,7 @@ ggplot(crimes, aes(map_id = state)) +
    geom_density())
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-79-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-80-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -1769,11 +1787,17 @@ ggplot(crimes, aes(map_id = state)) +
    geom_density())
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-80-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-81-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
+
+???
+
+Envelopper les objets de graphique dans () les imprime à chaque fois que ces lignes sont exécutées, plutôt que d'imprimer l'objet de graphique sur une autre ligne comme nous l'avons fait.
 
 ---
 # Dendogramme: `ggdendrogram()`
+
+Quels états américains ont des taux d'arrestation similaires ?
 
 
 ```r
@@ -1784,13 +1808,10 @@ hc &lt;- hclust(dist(USArrests.short), "ave")
 ggdendrogram(hc, rotate = TRUE, theme_dendro = FALSE)
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-81-1.png" width="432" style="display: block; margin: auto;" /&gt;
-
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-82-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ---
 # Disposition des graphiques: `patchwork`
-
-**Ajouter plusieurs graphiques sur une seule figure**
 
 
 ```r
@@ -1800,89 +1821,105 @@ peng.dens + cars.dens +
   plot_annotation(tag_levels = 'a')
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-82-1.png" width="648" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-83-1.png" width="648" style="display: block; margin: auto;" /&gt;
+
+???
+Jusqu'à présent, nous avons utilisé des facettes pour diviser notre graphique en plusieurs fenêtres. Cependant, ceci est limité au traçage des mêmes variables à partir du même ensemble de données. 
+
+Le paquet `patchwork` permet d'arranger facilement des ggplots distincts dans un même cadre avec `+` (arranger les graphes les uns à côté des autres), `/` (arranger un graphe par-dessus l'autre), `()` (grouper cet arrangement de graphes) comme si vous écriviez une équation.
 
 ---
-# Défi final ![:cube]()
+# Défi 4 ![:cube]()
 
 Créez votre propre graphique et suivez ces recommandations :
   * Jeu de données : n'importe lequel (recommandation : utilisez votre jeu de données)
-  * Explorez un nouveau `geom_*` et d'autres couches de graphqiues
+  * Explorez un nouveau `geom_*` et d'autres couches de graphiques
 
 
 Utilisez les liens suivants pour obtenir des conseils :
 
-- https://ggplot2.tidyverse.org/reference/index.html
-- http://shinyapps.stat.ubc.ca/r-graph-catalog/
+- [ggplot2 Reference](https://ggplot2.tidyverse.org/reference/index.html)  
+- [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)  
+- [Data to Viz](https://www.data-to-viz.com/)
 
 ---
-# Défi final: Solution exemple #1
+# Défi 4: Solution exemple 1
 
 .small[
 
 ```r
 data(msleep)
-msleep.defi4 &lt;- ggplot(data = msleep, 
-                       aes(x = vore, y = log10(brainwt), fill = vore))
-msleep.defi4 + 
+ggplot(msleep, 
+       aes(x = vore, 
+           y = log10(brainwt), 
+           fill = vore)) + 
   geom_violin() +
   geom_signif(comparisons = list(c("herbi", "insecti"))) +
-  labs(main = "Poids du cerveau pour les différents -vores", y = "log10(Poids du cerveau (Kg))") +
+  labs("Poids du cerveau pour les différents -vores", 
+       y = "log10(Poids du cerveau (Kg))") +
   scale_fill_grey() +
   theme_classic()
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-83-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-84-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
-#  Défi final: Solution exemple #2
+# Défi 4: Solution exemple 2
 .small[
 
 ```r
 data(mtcars)
+# let's do some clustering!
 mtcars.short &lt;- mtcars[1:20,]
-mtcars.short.hc &lt;- hclust(dist(mtcars.short), "complete")
-dendro.defi4 &lt;- ggdendrogram(mtcars.short.hc, rotate = TRUE, theme_dendro = FALSE)
-dendro.defi4 + ggtitle("Dendrogramme des voitures selon les spécifications du moteur") +
-  xlab("Voitures") +
-  theme(axis.title.y = element_text(size = 16), axis.title.x = element_blank(),
-        axis.text.x = element_blank(), axis.text.y = element_text(size = 12),
-        plot.title = element_text(size = 14, face = "bold"))
+mtcars.short.hc &lt;- hclust(dist(mtcars.short), "average")
+
+ggdendrogram(mtcars.short.hc, rotate = TRUE) + 
+  # fine-tuning
+  labs(title = "Dendrogramme des voitures selon les spécifications du moteur", y ="Voitures") +
+  theme(axis.title.y = element_text(size = 16),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(), axis.text.x = element_blank(),
+        plot.title = element_text(size = 14, face="bold"))
 ```
 
-&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-84-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop03-pres-fr_files/figure-html/unnamed-chunk-85-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
-## Divers : graphiques interactifs utilisant `plotly()`
+## Divers : graphiques interactifs avec `plotly()`
 
 .small[
-.alert[**Sélectionnez les données sur les espèces à afficher directement dans la légende**]
 
 
 ```r
+library(plotly)
 p &lt;- ggplot(penguins,
            aes(x = bill_length_mm, y = bill_depth_mm, 
                colour = species, shape = species)) +
     geom_point(size=6, alpha=0.6)
 # convertir en objet plotly
-plotly::ggplotly(p)
+ggplotly(p)
 ```
 
-<div id="htmlwidget-2589bd767d9be092e730" style="width:720px;height:324px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2589bd767d9be092e730">{"x":{"data":[{"x":[39.1,39.5,40.3,null,36.7,39.3,38.9,39.2,34.1,42,37.8,37.8,41.1,38.6,34.6,36.6,38.7,42.5,34.4,46,37.8,37.7,35.9,38.2,38.8,35.3,40.6,40.5,37.9,40.5,39.5,37.2,39.5,40.9,36.4,39.2,38.8,42.2,37.6,39.8,36.5,40.8,36,44.1,37,39.6,41.1,37.5,36,42.3,39.6,40.1,35,42,34.5,41.4,39,40.6,36.5,37.6,35.7,41.3,37.6,41.1,36.4,41.6,35.5,41.1,35.9,41.8,33.5,39.7,39.6,45.8,35.5,42.8,40.9,37.2,36.2,42.1,34.6,42.9,36.7,35.1,37.3,41.3,36.3,36.9,38.3,38.9,35.7,41.1,34,39.6,36.2,40.8,38.1,40.3,33.1,43.2,35,41,37.7,37.8,37.9,39.7,38.6,38.2,38.1,43.2,38.1,45.6,39.7,42.2,39.6,42.7,38.6,37.3,35.7,41.1,36.2,37.7,40.2,41.4,35.2,40.6,38.8,41.5,39,44.1,38.5,43.1,36.8,37.5,38.1,41.1,35.6,40.2,37,39.7,40.2,40.6,32.1,40.7,37.3,39,39.2,36.6,36,37.8,36,41.5],"y":[18.7,17.4,18,null,19.3,20.6,17.8,19.6,18.1,20.2,17.1,17.3,17.6,21.2,21.1,17.8,19,20.7,18.4,21.5,18.3,18.7,19.2,18.1,17.2,18.9,18.6,17.9,18.6,18.9,16.7,18.1,17.8,18.9,17,21.1,20,18.5,19.3,19.1,18,18.4,18.5,19.7,16.9,18.8,19,18.9,17.9,21.2,17.7,18.9,17.9,19.5,18.1,18.6,17.5,18.8,16.6,19.1,16.9,21.1,17,18.2,17.1,18,16.2,19.1,16.6,19.4,19,18.4,17.2,18.9,17.5,18.5,16.8,19.4,16.1,19.1,17.2,17.6,18.8,19.4,17.8,20.3,19.5,18.6,19.2,18.8,18,18.1,17.1,18.1,17.3,18.9,18.6,18.5,16.1,18.5,17.9,20,16,20,18.6,18.9,17.2,20,17,19,16.5,20.3,17.7,19.5,20.7,18.3,17,20.5,17,18.6,17.2,19.8,17,18.5,15.9,19,17.6,18.3,17.1,18,17.9,19.2,18.5,18.5,17.6,17.5,17.5,20.1,16.5,17.9,17.1,17.2,15.5,17,16.8,18.7,18.6,18.4,17.8,18.1,17.1,18.5],"text":["bill_length_mm: 39.1<br />bill_depth_mm: 18.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.5<br />bill_depth_mm: 17.4<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.3<br />bill_depth_mm: 18.0<br />species: Adelie<br />species: Adelie","bill_length_mm:   NA<br />bill_depth_mm:   NA<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.7<br />bill_depth_mm: 19.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.3<br />bill_depth_mm: 20.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.9<br />bill_depth_mm: 17.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.2<br />bill_depth_mm: 19.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 34.1<br />bill_depth_mm: 18.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.0<br />bill_depth_mm: 20.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.8<br />bill_depth_mm: 17.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.8<br />bill_depth_mm: 17.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.1<br />bill_depth_mm: 17.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.6<br />bill_depth_mm: 21.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 34.6<br />bill_depth_mm: 21.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.6<br />bill_depth_mm: 17.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.7<br />bill_depth_mm: 19.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.5<br />bill_depth_mm: 20.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 34.4<br />bill_depth_mm: 18.4<br />species: Adelie<br />species: Adelie","bill_length_mm: 46.0<br />bill_depth_mm: 21.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.8<br />bill_depth_mm: 18.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.7<br />bill_depth_mm: 18.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.9<br />bill_depth_mm: 19.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.2<br />bill_depth_mm: 18.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.8<br />bill_depth_mm: 17.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.3<br />bill_depth_mm: 18.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.6<br />bill_depth_mm: 18.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.5<br />bill_depth_mm: 17.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.9<br />bill_depth_mm: 18.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.5<br />bill_depth_mm: 18.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.5<br />bill_depth_mm: 16.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.2<br />bill_depth_mm: 18.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.5<br />bill_depth_mm: 17.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.9<br />bill_depth_mm: 18.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.4<br />bill_depth_mm: 17.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.2<br />bill_depth_mm: 21.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.8<br />bill_depth_mm: 20.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.2<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.6<br />bill_depth_mm: 19.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.8<br />bill_depth_mm: 19.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.5<br />bill_depth_mm: 18.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.8<br />bill_depth_mm: 18.4<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.0<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 44.1<br />bill_depth_mm: 19.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.0<br />bill_depth_mm: 16.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.6<br />bill_depth_mm: 18.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.1<br />bill_depth_mm: 19.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.5<br />bill_depth_mm: 18.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.0<br />bill_depth_mm: 17.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.3<br />bill_depth_mm: 21.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.6<br />bill_depth_mm: 17.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.1<br />bill_depth_mm: 18.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.0<br />bill_depth_mm: 17.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.0<br />bill_depth_mm: 19.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 34.5<br />bill_depth_mm: 18.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.4<br />bill_depth_mm: 18.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.0<br />bill_depth_mm: 17.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.6<br />bill_depth_mm: 18.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.5<br />bill_depth_mm: 16.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.6<br />bill_depth_mm: 19.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.7<br />bill_depth_mm: 16.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.3<br />bill_depth_mm: 21.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.6<br />bill_depth_mm: 17.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.1<br />bill_depth_mm: 18.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.4<br />bill_depth_mm: 17.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.6<br />bill_depth_mm: 18.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.5<br />bill_depth_mm: 16.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.1<br />bill_depth_mm: 19.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.9<br />bill_depth_mm: 16.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.8<br />bill_depth_mm: 19.4<br />species: Adelie<br />species: Adelie","bill_length_mm: 33.5<br />bill_depth_mm: 19.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.7<br />bill_depth_mm: 18.4<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.6<br />bill_depth_mm: 17.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 45.8<br />bill_depth_mm: 18.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.5<br />bill_depth_mm: 17.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.8<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.9<br />bill_depth_mm: 16.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.2<br />bill_depth_mm: 19.4<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.2<br />bill_depth_mm: 16.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.1<br />bill_depth_mm: 19.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 34.6<br />bill_depth_mm: 17.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.9<br />bill_depth_mm: 17.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.7<br />bill_depth_mm: 18.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.1<br />bill_depth_mm: 19.4<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.3<br />bill_depth_mm: 17.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.3<br />bill_depth_mm: 20.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.3<br />bill_depth_mm: 19.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.9<br />bill_depth_mm: 18.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.3<br />bill_depth_mm: 19.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.9<br />bill_depth_mm: 18.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.7<br />bill_depth_mm: 18.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.1<br />bill_depth_mm: 18.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 34.0<br />bill_depth_mm: 17.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.6<br />bill_depth_mm: 18.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.2<br />bill_depth_mm: 17.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.8<br />bill_depth_mm: 18.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.1<br />bill_depth_mm: 18.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.3<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 33.1<br />bill_depth_mm: 16.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 43.2<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.0<br />bill_depth_mm: 17.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.0<br />bill_depth_mm: 20.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.7<br />bill_depth_mm: 16.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.8<br />bill_depth_mm: 20.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.9<br />bill_depth_mm: 18.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.7<br />bill_depth_mm: 18.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.6<br />bill_depth_mm: 17.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.2<br />bill_depth_mm: 20.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.1<br />bill_depth_mm: 17.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 43.2<br />bill_depth_mm: 19.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.1<br />bill_depth_mm: 16.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 45.6<br />bill_depth_mm: 20.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.7<br />bill_depth_mm: 17.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.2<br />bill_depth_mm: 19.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.6<br />bill_depth_mm: 20.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.7<br />bill_depth_mm: 18.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.6<br />bill_depth_mm: 17.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.3<br />bill_depth_mm: 20.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.7<br />bill_depth_mm: 17.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.1<br />bill_depth_mm: 18.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.2<br />bill_depth_mm: 17.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.7<br />bill_depth_mm: 19.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.2<br />bill_depth_mm: 17.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.4<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.2<br />bill_depth_mm: 15.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.6<br />bill_depth_mm: 19.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.8<br />bill_depth_mm: 17.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.5<br />bill_depth_mm: 18.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.0<br />bill_depth_mm: 17.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 44.1<br />bill_depth_mm: 18.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.5<br />bill_depth_mm: 17.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 43.1<br />bill_depth_mm: 19.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.8<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.5<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.1<br />bill_depth_mm: 17.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.1<br />bill_depth_mm: 17.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.6<br />bill_depth_mm: 17.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.2<br />bill_depth_mm: 20.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.0<br />bill_depth_mm: 16.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.7<br />bill_depth_mm: 17.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.2<br />bill_depth_mm: 17.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.6<br />bill_depth_mm: 17.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 32.1<br />bill_depth_mm: 15.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.7<br />bill_depth_mm: 17.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.3<br />bill_depth_mm: 16.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.0<br />bill_depth_mm: 18.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.2<br />bill_depth_mm: 18.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.6<br />bill_depth_mm: 18.4<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.0<br />bill_depth_mm: 17.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.8<br />bill_depth_mm: 18.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.0<br />bill_depth_mm: 17.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.5<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":0.6,"size":22.6771653543307,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"Adelie","legendgroup":"Adelie","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[46.5,50,51.3,45.4,52.7,45.2,46.1,51.3,46,51.3,46.6,51.7,47,52,45.9,50.5,50.3,58,46.4,49.2,42.4,48.5,43.2,50.6,46.7,52,50.5,49.5,46.4,52.8,40.9,54.2,42.5,51,49.7,47.5,47.6,52,46.9,53.5,49,46.2,50.9,45.5,50.9,50.8,50.1,49,51.5,49.8,48.1,51.4,45.7,50.7,42.5,52.2,45.2,49.3,50.2,45.6,51.9,46.8,45.7,55.8,43.5,49.6,50.8,50.2],"y":[17.9,19.5,19.2,18.7,19.8,17.8,18.2,18.2,18.9,19.9,17.8,20.3,17.3,18.1,17.1,19.6,20,17.8,18.6,18.2,17.3,17.5,16.6,19.4,17.9,19,18.4,19,17.8,20,16.6,20.8,16.7,18.8,18.6,16.8,18.3,20.7,16.6,19.9,19.5,17.5,19.1,17,17.9,18.5,17.9,19.6,18.7,17.3,16.4,19,17.3,19.7,17.3,18.8,16.6,19.9,18.8,19.4,19.5,16.5,17,19.8,18.1,18.2,19,18.7],"text":["bill_length_mm: 46.5<br />bill_depth_mm: 17.9<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.0<br />bill_depth_mm: 19.5<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 51.3<br />bill_depth_mm: 19.2<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 45.4<br />bill_depth_mm: 18.7<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 52.7<br />bill_depth_mm: 19.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 45.2<br />bill_depth_mm: 17.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.1<br />bill_depth_mm: 18.2<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 51.3<br />bill_depth_mm: 18.2<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.0<br />bill_depth_mm: 18.9<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 51.3<br />bill_depth_mm: 19.9<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.6<br />bill_depth_mm: 17.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 51.7<br />bill_depth_mm: 20.3<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 47.0<br />bill_depth_mm: 17.3<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 52.0<br />bill_depth_mm: 18.1<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 45.9<br />bill_depth_mm: 17.1<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.5<br />bill_depth_mm: 19.6<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.3<br />bill_depth_mm: 20.0<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 58.0<br />bill_depth_mm: 17.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.4<br />bill_depth_mm: 18.6<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 49.2<br />bill_depth_mm: 18.2<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 42.4<br />bill_depth_mm: 17.3<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 48.5<br />bill_depth_mm: 17.5<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 43.2<br />bill_depth_mm: 16.6<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.6<br />bill_depth_mm: 19.4<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.7<br />bill_depth_mm: 17.9<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 52.0<br />bill_depth_mm: 19.0<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.5<br />bill_depth_mm: 18.4<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 49.5<br />bill_depth_mm: 19.0<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.4<br />bill_depth_mm: 17.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 52.8<br />bill_depth_mm: 20.0<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 40.9<br />bill_depth_mm: 16.6<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 54.2<br />bill_depth_mm: 20.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 42.5<br />bill_depth_mm: 16.7<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 51.0<br />bill_depth_mm: 18.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 49.7<br />bill_depth_mm: 18.6<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 47.5<br />bill_depth_mm: 16.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 47.6<br />bill_depth_mm: 18.3<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 52.0<br />bill_depth_mm: 20.7<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.9<br />bill_depth_mm: 16.6<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 53.5<br />bill_depth_mm: 19.9<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 49.0<br />bill_depth_mm: 19.5<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.2<br />bill_depth_mm: 17.5<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.9<br />bill_depth_mm: 19.1<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 45.5<br />bill_depth_mm: 17.0<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.9<br />bill_depth_mm: 17.9<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.8<br />bill_depth_mm: 18.5<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.1<br />bill_depth_mm: 17.9<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 49.0<br />bill_depth_mm: 19.6<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 51.5<br />bill_depth_mm: 18.7<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 49.8<br />bill_depth_mm: 17.3<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 48.1<br />bill_depth_mm: 16.4<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 51.4<br />bill_depth_mm: 19.0<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 45.7<br />bill_depth_mm: 17.3<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.7<br />bill_depth_mm: 19.7<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 42.5<br />bill_depth_mm: 17.3<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 52.2<br />bill_depth_mm: 18.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 45.2<br />bill_depth_mm: 16.6<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 49.3<br />bill_depth_mm: 19.9<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.2<br />bill_depth_mm: 18.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 45.6<br />bill_depth_mm: 19.4<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 51.9<br />bill_depth_mm: 19.5<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.8<br />bill_depth_mm: 16.5<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 45.7<br />bill_depth_mm: 17.0<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 55.8<br />bill_depth_mm: 19.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 43.5<br />bill_depth_mm: 18.1<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 49.6<br />bill_depth_mm: 18.2<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.8<br />bill_depth_mm: 19.0<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.2<br />bill_depth_mm: 18.7<br />species: Chinstrap<br />species: Chinstrap"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":0.6,"size":22.6771653543307,"symbol":"triangle-up","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"Chinstrap","legendgroup":"Chinstrap","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[46.1,50,48.7,50,47.6,46.5,45.4,46.7,43.3,46.8,40.9,49,45.5,48.4,45.8,49.3,42,49.2,46.2,48.7,50.2,45.1,46.5,46.3,42.9,46.1,44.5,47.8,48.2,50,47.3,42.8,45.1,59.6,49.1,48.4,42.6,44.4,44,48.7,42.7,49.6,45.3,49.6,50.5,43.6,45.5,50.5,44.9,45.2,46.6,48.5,45.1,50.1,46.5,45,43.8,45.5,43.2,50.4,45.3,46.2,45.7,54.3,45.8,49.8,46.2,49.5,43.5,50.7,47.7,46.4,48.2,46.5,46.4,48.6,47.5,51.1,45.2,45.2,49.1,52.5,47.4,50,44.9,50.8,43.4,51.3,47.5,52.1,47.5,52.2,45.5,49.5,44.5,50.8,49.4,46.9,48.4,51.1,48.5,55.9,47.2,49.1,47.3,46.8,41.7,53.4,43.3,48.1,50.5,49.8,43.5,51.5,46.2,55.1,44.5,48.8,47.2,null,46.8,50.4,45.2,49.9],"y":[13.2,16.3,14.1,15.2,14.5,13.5,14.6,15.3,13.4,15.4,13.7,16.1,13.7,14.6,14.6,15.7,13.5,15.2,14.5,15.1,14.3,14.5,14.5,15.8,13.1,15.1,14.3,15,14.3,15.3,15.3,14.2,14.5,17,14.8,16.3,13.7,17.3,13.6,15.7,13.7,16,13.7,15,15.9,13.9,13.9,15.9,13.3,15.8,14.2,14.1,14.4,15,14.4,15.4,13.9,15,14.5,15.3,13.8,14.9,13.9,15.7,14.2,16.8,14.4,16.2,14.2,15,15,15.6,15.6,14.8,15,16,14.2,16.3,13.8,16.4,14.5,15.6,14.6,15.9,13.8,17.3,14.4,14.2,14,17,15,17.1,14.5,16.1,14.7,15.7,15.8,14.6,14.4,16.5,15,17,15.5,15,13.8,16.1,14.7,15.8,14,15.1,15.2,15.9,15.2,16.3,14.1,16,15.7,16.2,13.7,null,14.3,15.7,14.8,16.1],"text":["bill_length_mm: 46.1<br />bill_depth_mm: 13.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.0<br />bill_depth_mm: 16.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.7<br />bill_depth_mm: 14.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.0<br />bill_depth_mm: 15.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.6<br />bill_depth_mm: 14.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.5<br />bill_depth_mm: 13.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.4<br />bill_depth_mm: 14.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.7<br />bill_depth_mm: 15.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 43.3<br />bill_depth_mm: 13.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.8<br />bill_depth_mm: 15.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 40.9<br />bill_depth_mm: 13.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.0<br />bill_depth_mm: 16.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.5<br />bill_depth_mm: 13.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.4<br />bill_depth_mm: 14.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.8<br />bill_depth_mm: 14.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.3<br />bill_depth_mm: 15.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 42.0<br />bill_depth_mm: 13.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.2<br />bill_depth_mm: 15.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.2<br />bill_depth_mm: 14.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.7<br />bill_depth_mm: 15.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.2<br />bill_depth_mm: 14.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.1<br />bill_depth_mm: 14.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.5<br />bill_depth_mm: 14.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.3<br />bill_depth_mm: 15.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 42.9<br />bill_depth_mm: 13.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.1<br />bill_depth_mm: 15.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 44.5<br />bill_depth_mm: 14.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.8<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.2<br />bill_depth_mm: 14.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.0<br />bill_depth_mm: 15.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.3<br />bill_depth_mm: 15.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 42.8<br />bill_depth_mm: 14.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.1<br />bill_depth_mm: 14.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 59.6<br />bill_depth_mm: 17.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.1<br />bill_depth_mm: 14.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.4<br />bill_depth_mm: 16.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 42.6<br />bill_depth_mm: 13.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 44.4<br />bill_depth_mm: 17.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 44.0<br />bill_depth_mm: 13.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.7<br />bill_depth_mm: 15.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 42.7<br />bill_depth_mm: 13.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.6<br />bill_depth_mm: 16.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.3<br />bill_depth_mm: 13.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.6<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.5<br />bill_depth_mm: 15.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 43.6<br />bill_depth_mm: 13.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.5<br />bill_depth_mm: 13.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.5<br />bill_depth_mm: 15.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 44.9<br />bill_depth_mm: 13.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.2<br />bill_depth_mm: 15.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.6<br />bill_depth_mm: 14.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.5<br />bill_depth_mm: 14.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.1<br />bill_depth_mm: 14.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.1<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.5<br />bill_depth_mm: 14.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.0<br />bill_depth_mm: 15.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 43.8<br />bill_depth_mm: 13.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.5<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 43.2<br />bill_depth_mm: 14.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.4<br />bill_depth_mm: 15.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.3<br />bill_depth_mm: 13.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.2<br />bill_depth_mm: 14.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.7<br />bill_depth_mm: 13.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 54.3<br />bill_depth_mm: 15.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.8<br />bill_depth_mm: 14.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.8<br />bill_depth_mm: 16.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.2<br />bill_depth_mm: 14.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.5<br />bill_depth_mm: 16.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 43.5<br />bill_depth_mm: 14.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.7<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.7<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.4<br />bill_depth_mm: 15.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.2<br />bill_depth_mm: 15.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.5<br />bill_depth_mm: 14.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.4<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.6<br />bill_depth_mm: 16.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.5<br />bill_depth_mm: 14.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 51.1<br />bill_depth_mm: 16.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.2<br />bill_depth_mm: 13.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.2<br />bill_depth_mm: 16.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.1<br />bill_depth_mm: 14.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 52.5<br />bill_depth_mm: 15.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.4<br />bill_depth_mm: 14.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.0<br />bill_depth_mm: 15.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 44.9<br />bill_depth_mm: 13.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.8<br />bill_depth_mm: 17.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 43.4<br />bill_depth_mm: 14.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 51.3<br />bill_depth_mm: 14.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.5<br />bill_depth_mm: 14.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 52.1<br />bill_depth_mm: 17.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.5<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 52.2<br />bill_depth_mm: 17.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.5<br />bill_depth_mm: 14.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.5<br />bill_depth_mm: 16.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 44.5<br />bill_depth_mm: 14.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.8<br />bill_depth_mm: 15.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.4<br />bill_depth_mm: 15.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.9<br />bill_depth_mm: 14.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.4<br />bill_depth_mm: 14.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 51.1<br />bill_depth_mm: 16.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.5<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 55.9<br />bill_depth_mm: 17.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.2<br />bill_depth_mm: 15.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.1<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.3<br />bill_depth_mm: 13.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.8<br />bill_depth_mm: 16.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 41.7<br />bill_depth_mm: 14.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 53.4<br />bill_depth_mm: 15.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 43.3<br />bill_depth_mm: 14.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.1<br />bill_depth_mm: 15.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.5<br />bill_depth_mm: 15.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.8<br />bill_depth_mm: 15.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 43.5<br />bill_depth_mm: 15.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 51.5<br />bill_depth_mm: 16.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.2<br />bill_depth_mm: 14.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 55.1<br />bill_depth_mm: 16.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 44.5<br />bill_depth_mm: 15.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.8<br />bill_depth_mm: 16.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.2<br />bill_depth_mm: 13.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm:   NA<br />bill_depth_mm:   NA<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.8<br />bill_depth_mm: 14.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.4<br />bill_depth_mm: 15.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.2<br />bill_depth_mm: 14.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.9<br />bill_depth_mm: 16.1<br />species: Gentoo<br />species: Gentoo"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":0.6,"size":22.6771653543307,"symbol":"square","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"Gentoo","legendgroup":"Gentoo","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":32.2354134956875,"r":7.30593607305936,"b":65.0523499838568,"l":77.376504773765},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[30.725,60.975],"tickmode":"array","ticktext":["40","50","60"],"tickvals":[40,50,60],"categoryorder":"array","categoryarray":["40","50","60"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":21.2536322125363},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"bill_length_mm","font":{"color":"rgba(0,0,0,1)","family":"","size":23.9103362391034}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[12.68,21.92],"tickmode":"array","ticktext":["15.0","17.5","20.0"],"tickvals":[15,17.5,20],"categoryorder":"array","categoryarray":["15.0","17.5","20.0"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":21.2536322125363},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"bill_depth_mm","font":{"color":"rgba(0,0,0,1)","family":"","size":23.9103362391034}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.967920676582094},"annotations":[{"text":"species","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"29c436214fc0":{"x":{},"y":{},"colour":{},"shape":{},"type":"scatter"}},"cur_data":"29c436214fc0","visdat":{"29c436214fc0":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d7700d506cb5736c59e8" style="width:720px;height:324px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d7700d506cb5736c59e8">{"x":{"data":[{"x":[39.1,39.5,40.3,null,36.7,39.3,38.9,39.2,34.1,42,37.8,37.8,41.1,38.6,34.6,36.6,38.7,42.5,34.4,46,37.8,37.7,35.9,38.2,38.8,35.3,40.6,40.5,37.9,40.5,39.5,37.2,39.5,40.9,36.4,39.2,38.8,42.2,37.6,39.8,36.5,40.8,36,44.1,37,39.6,41.1,37.5,36,42.3,39.6,40.1,35,42,34.5,41.4,39,40.6,36.5,37.6,35.7,41.3,37.6,41.1,36.4,41.6,35.5,41.1,35.9,41.8,33.5,39.7,39.6,45.8,35.5,42.8,40.9,37.2,36.2,42.1,34.6,42.9,36.7,35.1,37.3,41.3,36.3,36.9,38.3,38.9,35.7,41.1,34,39.6,36.2,40.8,38.1,40.3,33.1,43.2,35,41,37.7,37.8,37.9,39.7,38.6,38.2,38.1,43.2,38.1,45.6,39.7,42.2,39.6,42.7,38.6,37.3,35.7,41.1,36.2,37.7,40.2,41.4,35.2,40.6,38.8,41.5,39,44.1,38.5,43.1,36.8,37.5,38.1,41.1,35.6,40.2,37,39.7,40.2,40.6,32.1,40.7,37.3,39,39.2,36.6,36,37.8,36,41.5],"y":[18.7,17.4,18,null,19.3,20.6,17.8,19.6,18.1,20.2,17.1,17.3,17.6,21.2,21.1,17.8,19,20.7,18.4,21.5,18.3,18.7,19.2,18.1,17.2,18.9,18.6,17.9,18.6,18.9,16.7,18.1,17.8,18.9,17,21.1,20,18.5,19.3,19.1,18,18.4,18.5,19.7,16.9,18.8,19,18.9,17.9,21.2,17.7,18.9,17.9,19.5,18.1,18.6,17.5,18.8,16.6,19.1,16.9,21.1,17,18.2,17.1,18,16.2,19.1,16.6,19.4,19,18.4,17.2,18.9,17.5,18.5,16.8,19.4,16.1,19.1,17.2,17.6,18.8,19.4,17.8,20.3,19.5,18.6,19.2,18.8,18,18.1,17.1,18.1,17.3,18.9,18.6,18.5,16.1,18.5,17.9,20,16,20,18.6,18.9,17.2,20,17,19,16.5,20.3,17.7,19.5,20.7,18.3,17,20.5,17,18.6,17.2,19.8,17,18.5,15.9,19,17.6,18.3,17.1,18,17.9,19.2,18.5,18.5,17.6,17.5,17.5,20.1,16.5,17.9,17.1,17.2,15.5,17,16.8,18.7,18.6,18.4,17.8,18.1,17.1,18.5],"text":["bill_length_mm: 39.1<br />bill_depth_mm: 18.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.5<br />bill_depth_mm: 17.4<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.3<br />bill_depth_mm: 18.0<br />species: Adelie<br />species: Adelie","bill_length_mm:   NA<br />bill_depth_mm:   NA<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.7<br />bill_depth_mm: 19.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.3<br />bill_depth_mm: 20.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.9<br />bill_depth_mm: 17.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.2<br />bill_depth_mm: 19.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 34.1<br />bill_depth_mm: 18.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.0<br />bill_depth_mm: 20.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.8<br />bill_depth_mm: 17.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.8<br />bill_depth_mm: 17.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.1<br />bill_depth_mm: 17.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.6<br />bill_depth_mm: 21.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 34.6<br />bill_depth_mm: 21.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.6<br />bill_depth_mm: 17.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.7<br />bill_depth_mm: 19.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.5<br />bill_depth_mm: 20.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 34.4<br />bill_depth_mm: 18.4<br />species: Adelie<br />species: Adelie","bill_length_mm: 46.0<br />bill_depth_mm: 21.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.8<br />bill_depth_mm: 18.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.7<br />bill_depth_mm: 18.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.9<br />bill_depth_mm: 19.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.2<br />bill_depth_mm: 18.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.8<br />bill_depth_mm: 17.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.3<br />bill_depth_mm: 18.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.6<br />bill_depth_mm: 18.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.5<br />bill_depth_mm: 17.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.9<br />bill_depth_mm: 18.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.5<br />bill_depth_mm: 18.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.5<br />bill_depth_mm: 16.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.2<br />bill_depth_mm: 18.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.5<br />bill_depth_mm: 17.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.9<br />bill_depth_mm: 18.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.4<br />bill_depth_mm: 17.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.2<br />bill_depth_mm: 21.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.8<br />bill_depth_mm: 20.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.2<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.6<br />bill_depth_mm: 19.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.8<br />bill_depth_mm: 19.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.5<br />bill_depth_mm: 18.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.8<br />bill_depth_mm: 18.4<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.0<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 44.1<br />bill_depth_mm: 19.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.0<br />bill_depth_mm: 16.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.6<br />bill_depth_mm: 18.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.1<br />bill_depth_mm: 19.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.5<br />bill_depth_mm: 18.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.0<br />bill_depth_mm: 17.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.3<br />bill_depth_mm: 21.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.6<br />bill_depth_mm: 17.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.1<br />bill_depth_mm: 18.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.0<br />bill_depth_mm: 17.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.0<br />bill_depth_mm: 19.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 34.5<br />bill_depth_mm: 18.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.4<br />bill_depth_mm: 18.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.0<br />bill_depth_mm: 17.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.6<br />bill_depth_mm: 18.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.5<br />bill_depth_mm: 16.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.6<br />bill_depth_mm: 19.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.7<br />bill_depth_mm: 16.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.3<br />bill_depth_mm: 21.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.6<br />bill_depth_mm: 17.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.1<br />bill_depth_mm: 18.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.4<br />bill_depth_mm: 17.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.6<br />bill_depth_mm: 18.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.5<br />bill_depth_mm: 16.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.1<br />bill_depth_mm: 19.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.9<br />bill_depth_mm: 16.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.8<br />bill_depth_mm: 19.4<br />species: Adelie<br />species: Adelie","bill_length_mm: 33.5<br />bill_depth_mm: 19.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.7<br />bill_depth_mm: 18.4<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.6<br />bill_depth_mm: 17.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 45.8<br />bill_depth_mm: 18.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.5<br />bill_depth_mm: 17.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.8<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.9<br />bill_depth_mm: 16.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.2<br />bill_depth_mm: 19.4<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.2<br />bill_depth_mm: 16.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.1<br />bill_depth_mm: 19.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 34.6<br />bill_depth_mm: 17.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.9<br />bill_depth_mm: 17.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.7<br />bill_depth_mm: 18.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.1<br />bill_depth_mm: 19.4<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.3<br />bill_depth_mm: 17.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.3<br />bill_depth_mm: 20.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.3<br />bill_depth_mm: 19.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.9<br />bill_depth_mm: 18.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.3<br />bill_depth_mm: 19.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.9<br />bill_depth_mm: 18.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.7<br />bill_depth_mm: 18.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.1<br />bill_depth_mm: 18.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 34.0<br />bill_depth_mm: 17.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.6<br />bill_depth_mm: 18.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.2<br />bill_depth_mm: 17.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.8<br />bill_depth_mm: 18.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.1<br />bill_depth_mm: 18.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.3<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 33.1<br />bill_depth_mm: 16.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 43.2<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.0<br />bill_depth_mm: 17.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.0<br />bill_depth_mm: 20.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.7<br />bill_depth_mm: 16.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.8<br />bill_depth_mm: 20.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.9<br />bill_depth_mm: 18.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.7<br />bill_depth_mm: 18.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.6<br />bill_depth_mm: 17.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.2<br />bill_depth_mm: 20.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.1<br />bill_depth_mm: 17.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 43.2<br />bill_depth_mm: 19.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.1<br />bill_depth_mm: 16.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 45.6<br />bill_depth_mm: 20.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.7<br />bill_depth_mm: 17.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.2<br />bill_depth_mm: 19.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.6<br />bill_depth_mm: 20.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 42.7<br />bill_depth_mm: 18.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.6<br />bill_depth_mm: 17.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.3<br />bill_depth_mm: 20.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.7<br />bill_depth_mm: 17.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.1<br />bill_depth_mm: 18.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.2<br />bill_depth_mm: 17.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.7<br />bill_depth_mm: 19.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.2<br />bill_depth_mm: 17.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.4<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.2<br />bill_depth_mm: 15.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.6<br />bill_depth_mm: 19.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.8<br />bill_depth_mm: 17.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.5<br />bill_depth_mm: 18.3<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.0<br />bill_depth_mm: 17.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 44.1<br />bill_depth_mm: 18.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.5<br />bill_depth_mm: 17.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 43.1<br />bill_depth_mm: 19.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.8<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.5<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 38.1<br />bill_depth_mm: 17.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.1<br />bill_depth_mm: 17.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 35.6<br />bill_depth_mm: 17.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.2<br />bill_depth_mm: 20.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.0<br />bill_depth_mm: 16.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.7<br />bill_depth_mm: 17.9<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.2<br />bill_depth_mm: 17.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.6<br />bill_depth_mm: 17.2<br />species: Adelie<br />species: Adelie","bill_length_mm: 32.1<br />bill_depth_mm: 15.5<br />species: Adelie<br />species: Adelie","bill_length_mm: 40.7<br />bill_depth_mm: 17.0<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.3<br />bill_depth_mm: 16.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.0<br />bill_depth_mm: 18.7<br />species: Adelie<br />species: Adelie","bill_length_mm: 39.2<br />bill_depth_mm: 18.6<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.6<br />bill_depth_mm: 18.4<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.0<br />bill_depth_mm: 17.8<br />species: Adelie<br />species: Adelie","bill_length_mm: 37.8<br />bill_depth_mm: 18.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 36.0<br />bill_depth_mm: 17.1<br />species: Adelie<br />species: Adelie","bill_length_mm: 41.5<br />bill_depth_mm: 18.5<br />species: Adelie<br />species: Adelie"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":0.6,"size":22.6771653543307,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"Adelie","legendgroup":"Adelie","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[46.5,50,51.3,45.4,52.7,45.2,46.1,51.3,46,51.3,46.6,51.7,47,52,45.9,50.5,50.3,58,46.4,49.2,42.4,48.5,43.2,50.6,46.7,52,50.5,49.5,46.4,52.8,40.9,54.2,42.5,51,49.7,47.5,47.6,52,46.9,53.5,49,46.2,50.9,45.5,50.9,50.8,50.1,49,51.5,49.8,48.1,51.4,45.7,50.7,42.5,52.2,45.2,49.3,50.2,45.6,51.9,46.8,45.7,55.8,43.5,49.6,50.8,50.2],"y":[17.9,19.5,19.2,18.7,19.8,17.8,18.2,18.2,18.9,19.9,17.8,20.3,17.3,18.1,17.1,19.6,20,17.8,18.6,18.2,17.3,17.5,16.6,19.4,17.9,19,18.4,19,17.8,20,16.6,20.8,16.7,18.8,18.6,16.8,18.3,20.7,16.6,19.9,19.5,17.5,19.1,17,17.9,18.5,17.9,19.6,18.7,17.3,16.4,19,17.3,19.7,17.3,18.8,16.6,19.9,18.8,19.4,19.5,16.5,17,19.8,18.1,18.2,19,18.7],"text":["bill_length_mm: 46.5<br />bill_depth_mm: 17.9<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.0<br />bill_depth_mm: 19.5<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 51.3<br />bill_depth_mm: 19.2<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 45.4<br />bill_depth_mm: 18.7<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 52.7<br />bill_depth_mm: 19.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 45.2<br />bill_depth_mm: 17.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.1<br />bill_depth_mm: 18.2<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 51.3<br />bill_depth_mm: 18.2<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.0<br />bill_depth_mm: 18.9<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 51.3<br />bill_depth_mm: 19.9<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.6<br />bill_depth_mm: 17.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 51.7<br />bill_depth_mm: 20.3<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 47.0<br />bill_depth_mm: 17.3<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 52.0<br />bill_depth_mm: 18.1<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 45.9<br />bill_depth_mm: 17.1<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.5<br />bill_depth_mm: 19.6<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.3<br />bill_depth_mm: 20.0<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 58.0<br />bill_depth_mm: 17.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.4<br />bill_depth_mm: 18.6<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 49.2<br />bill_depth_mm: 18.2<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 42.4<br />bill_depth_mm: 17.3<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 48.5<br />bill_depth_mm: 17.5<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 43.2<br />bill_depth_mm: 16.6<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.6<br />bill_depth_mm: 19.4<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.7<br />bill_depth_mm: 17.9<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 52.0<br />bill_depth_mm: 19.0<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.5<br />bill_depth_mm: 18.4<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 49.5<br />bill_depth_mm: 19.0<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.4<br />bill_depth_mm: 17.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 52.8<br />bill_depth_mm: 20.0<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 40.9<br />bill_depth_mm: 16.6<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 54.2<br />bill_depth_mm: 20.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 42.5<br />bill_depth_mm: 16.7<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 51.0<br />bill_depth_mm: 18.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 49.7<br />bill_depth_mm: 18.6<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 47.5<br />bill_depth_mm: 16.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 47.6<br />bill_depth_mm: 18.3<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 52.0<br />bill_depth_mm: 20.7<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.9<br />bill_depth_mm: 16.6<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 53.5<br />bill_depth_mm: 19.9<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 49.0<br />bill_depth_mm: 19.5<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.2<br />bill_depth_mm: 17.5<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.9<br />bill_depth_mm: 19.1<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 45.5<br />bill_depth_mm: 17.0<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.9<br />bill_depth_mm: 17.9<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.8<br />bill_depth_mm: 18.5<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.1<br />bill_depth_mm: 17.9<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 49.0<br />bill_depth_mm: 19.6<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 51.5<br />bill_depth_mm: 18.7<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 49.8<br />bill_depth_mm: 17.3<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 48.1<br />bill_depth_mm: 16.4<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 51.4<br />bill_depth_mm: 19.0<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 45.7<br />bill_depth_mm: 17.3<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.7<br />bill_depth_mm: 19.7<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 42.5<br />bill_depth_mm: 17.3<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 52.2<br />bill_depth_mm: 18.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 45.2<br />bill_depth_mm: 16.6<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 49.3<br />bill_depth_mm: 19.9<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.2<br />bill_depth_mm: 18.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 45.6<br />bill_depth_mm: 19.4<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 51.9<br />bill_depth_mm: 19.5<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 46.8<br />bill_depth_mm: 16.5<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 45.7<br />bill_depth_mm: 17.0<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 55.8<br />bill_depth_mm: 19.8<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 43.5<br />bill_depth_mm: 18.1<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 49.6<br />bill_depth_mm: 18.2<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.8<br />bill_depth_mm: 19.0<br />species: Chinstrap<br />species: Chinstrap","bill_length_mm: 50.2<br />bill_depth_mm: 18.7<br />species: Chinstrap<br />species: Chinstrap"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":0.6,"size":22.6771653543307,"symbol":"triangle-up","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"Chinstrap","legendgroup":"Chinstrap","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[46.1,50,48.7,50,47.6,46.5,45.4,46.7,43.3,46.8,40.9,49,45.5,48.4,45.8,49.3,42,49.2,46.2,48.7,50.2,45.1,46.5,46.3,42.9,46.1,44.5,47.8,48.2,50,47.3,42.8,45.1,59.6,49.1,48.4,42.6,44.4,44,48.7,42.7,49.6,45.3,49.6,50.5,43.6,45.5,50.5,44.9,45.2,46.6,48.5,45.1,50.1,46.5,45,43.8,45.5,43.2,50.4,45.3,46.2,45.7,54.3,45.8,49.8,46.2,49.5,43.5,50.7,47.7,46.4,48.2,46.5,46.4,48.6,47.5,51.1,45.2,45.2,49.1,52.5,47.4,50,44.9,50.8,43.4,51.3,47.5,52.1,47.5,52.2,45.5,49.5,44.5,50.8,49.4,46.9,48.4,51.1,48.5,55.9,47.2,49.1,47.3,46.8,41.7,53.4,43.3,48.1,50.5,49.8,43.5,51.5,46.2,55.1,44.5,48.8,47.2,null,46.8,50.4,45.2,49.9],"y":[13.2,16.3,14.1,15.2,14.5,13.5,14.6,15.3,13.4,15.4,13.7,16.1,13.7,14.6,14.6,15.7,13.5,15.2,14.5,15.1,14.3,14.5,14.5,15.8,13.1,15.1,14.3,15,14.3,15.3,15.3,14.2,14.5,17,14.8,16.3,13.7,17.3,13.6,15.7,13.7,16,13.7,15,15.9,13.9,13.9,15.9,13.3,15.8,14.2,14.1,14.4,15,14.4,15.4,13.9,15,14.5,15.3,13.8,14.9,13.9,15.7,14.2,16.8,14.4,16.2,14.2,15,15,15.6,15.6,14.8,15,16,14.2,16.3,13.8,16.4,14.5,15.6,14.6,15.9,13.8,17.3,14.4,14.2,14,17,15,17.1,14.5,16.1,14.7,15.7,15.8,14.6,14.4,16.5,15,17,15.5,15,13.8,16.1,14.7,15.8,14,15.1,15.2,15.9,15.2,16.3,14.1,16,15.7,16.2,13.7,null,14.3,15.7,14.8,16.1],"text":["bill_length_mm: 46.1<br />bill_depth_mm: 13.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.0<br />bill_depth_mm: 16.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.7<br />bill_depth_mm: 14.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.0<br />bill_depth_mm: 15.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.6<br />bill_depth_mm: 14.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.5<br />bill_depth_mm: 13.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.4<br />bill_depth_mm: 14.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.7<br />bill_depth_mm: 15.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 43.3<br />bill_depth_mm: 13.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.8<br />bill_depth_mm: 15.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 40.9<br />bill_depth_mm: 13.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.0<br />bill_depth_mm: 16.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.5<br />bill_depth_mm: 13.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.4<br />bill_depth_mm: 14.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.8<br />bill_depth_mm: 14.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.3<br />bill_depth_mm: 15.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 42.0<br />bill_depth_mm: 13.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.2<br />bill_depth_mm: 15.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.2<br />bill_depth_mm: 14.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.7<br />bill_depth_mm: 15.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.2<br />bill_depth_mm: 14.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.1<br />bill_depth_mm: 14.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.5<br />bill_depth_mm: 14.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.3<br />bill_depth_mm: 15.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 42.9<br />bill_depth_mm: 13.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.1<br />bill_depth_mm: 15.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 44.5<br />bill_depth_mm: 14.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.8<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.2<br />bill_depth_mm: 14.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.0<br />bill_depth_mm: 15.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.3<br />bill_depth_mm: 15.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 42.8<br />bill_depth_mm: 14.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.1<br />bill_depth_mm: 14.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 59.6<br />bill_depth_mm: 17.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.1<br />bill_depth_mm: 14.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.4<br />bill_depth_mm: 16.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 42.6<br />bill_depth_mm: 13.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 44.4<br />bill_depth_mm: 17.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 44.0<br />bill_depth_mm: 13.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.7<br />bill_depth_mm: 15.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 42.7<br />bill_depth_mm: 13.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.6<br />bill_depth_mm: 16.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.3<br />bill_depth_mm: 13.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.6<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.5<br />bill_depth_mm: 15.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 43.6<br />bill_depth_mm: 13.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.5<br />bill_depth_mm: 13.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.5<br />bill_depth_mm: 15.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 44.9<br />bill_depth_mm: 13.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.2<br />bill_depth_mm: 15.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.6<br />bill_depth_mm: 14.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.5<br />bill_depth_mm: 14.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.1<br />bill_depth_mm: 14.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.1<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.5<br />bill_depth_mm: 14.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.0<br />bill_depth_mm: 15.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 43.8<br />bill_depth_mm: 13.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.5<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 43.2<br />bill_depth_mm: 14.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.4<br />bill_depth_mm: 15.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.3<br />bill_depth_mm: 13.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.2<br />bill_depth_mm: 14.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.7<br />bill_depth_mm: 13.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 54.3<br />bill_depth_mm: 15.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.8<br />bill_depth_mm: 14.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.8<br />bill_depth_mm: 16.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.2<br />bill_depth_mm: 14.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.5<br />bill_depth_mm: 16.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 43.5<br />bill_depth_mm: 14.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.7<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.7<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.4<br />bill_depth_mm: 15.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.2<br />bill_depth_mm: 15.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.5<br />bill_depth_mm: 14.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.4<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.6<br />bill_depth_mm: 16.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.5<br />bill_depth_mm: 14.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 51.1<br />bill_depth_mm: 16.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.2<br />bill_depth_mm: 13.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.2<br />bill_depth_mm: 16.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.1<br />bill_depth_mm: 14.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 52.5<br />bill_depth_mm: 15.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.4<br />bill_depth_mm: 14.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.0<br />bill_depth_mm: 15.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 44.9<br />bill_depth_mm: 13.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.8<br />bill_depth_mm: 17.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 43.4<br />bill_depth_mm: 14.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 51.3<br />bill_depth_mm: 14.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.5<br />bill_depth_mm: 14.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 52.1<br />bill_depth_mm: 17.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.5<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 52.2<br />bill_depth_mm: 17.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.5<br />bill_depth_mm: 14.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.5<br />bill_depth_mm: 16.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 44.5<br />bill_depth_mm: 14.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.8<br />bill_depth_mm: 15.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.4<br />bill_depth_mm: 15.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.9<br />bill_depth_mm: 14.6<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.4<br />bill_depth_mm: 14.4<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 51.1<br />bill_depth_mm: 16.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.5<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 55.9<br />bill_depth_mm: 17.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.2<br />bill_depth_mm: 15.5<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.1<br />bill_depth_mm: 15.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.3<br />bill_depth_mm: 13.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.8<br />bill_depth_mm: 16.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 41.7<br />bill_depth_mm: 14.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 53.4<br />bill_depth_mm: 15.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 43.3<br />bill_depth_mm: 14.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.1<br />bill_depth_mm: 15.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.5<br />bill_depth_mm: 15.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.8<br />bill_depth_mm: 15.9<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 43.5<br />bill_depth_mm: 15.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 51.5<br />bill_depth_mm: 16.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.2<br />bill_depth_mm: 14.1<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 55.1<br />bill_depth_mm: 16.0<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 44.5<br />bill_depth_mm: 15.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 48.8<br />bill_depth_mm: 16.2<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 47.2<br />bill_depth_mm: 13.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm:   NA<br />bill_depth_mm:   NA<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 46.8<br />bill_depth_mm: 14.3<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 50.4<br />bill_depth_mm: 15.7<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 45.2<br />bill_depth_mm: 14.8<br />species: Gentoo<br />species: Gentoo","bill_length_mm: 49.9<br />bill_depth_mm: 16.1<br />species: Gentoo<br />species: Gentoo"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":0.6,"size":22.6771653543307,"symbol":"square","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"Gentoo","legendgroup":"Gentoo","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":32.2354134956875,"r":7.30593607305936,"b":65.0523499838568,"l":77.376504773765},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[30.725,60.975],"tickmode":"array","ticktext":["40","50","60"],"tickvals":[40,50,60],"categoryorder":"array","categoryarray":["40","50","60"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":21.2536322125363},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"bill_length_mm","font":{"color":"rgba(0,0,0,1)","family":"","size":23.9103362391034}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[12.68,21.92],"tickmode":"array","ticktext":["15.0","17.5","20.0"],"tickvals":[15,17.5,20],"categoryorder":"array","categoryarray":["15.0","17.5","20.0"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":21.2536322125363},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"bill_depth_mm","font":{"color":"rgba(0,0,0,1)","family":"","size":23.9103362391034}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.967920676582094},"annotations":[{"text":"species","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"28f02f121210":{"x":{},"y":{},"colour":{},"shape":{},"type":"scatter"}},"cur_data":"28f02f121210","visdat":{"28f02f121210":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 ]
 
 ???
 
-On peut cliquer sur les espèces dans la légende pour ajouter/supprimer des espèces. On peut également voir les valeurs en passant la souris sur les points.
+La librairie `plotly()` contient la fonction `ggplotly()`, qui traduit votre code `ggplot` en un objet interactif `plotly` en une seule ligne de code.
+
+Vous pouvez cliquer sur les espèces dans la légende pour ajouter/supprimer des espèces. Vous pouvez également voir les valeurs en passant la souris sur les points.
+
 ---
 class: inverse, center, middle
 
-# Sauvegarder vos graphiques avec ggplot2
+# Sauvegarder vos graphiques
 
 ---
+exclude: true
+
 # Sauvegarder des graphiques en RStudio
 
 &lt;div style="text-align:center"&gt;
@@ -1912,6 +1949,12 @@ ggsave("mon_1er_graph.pdf",
 
 NB: Le format vectoriel (par exemple, pdf, svg) est plus flexible que le format raster (jpeg, png, ...) si l'image doit être modifiée par la suite.
 
+**Astuce:** Les fonctions `quartz()` (sur mac) ou `window()` (sur pc) facilitent la mise en forme avant de sauvegarder avec `ggsave()`!
+
+???
+
+Astuce : Les fonctions `quartz()` (mac) ou `window()` (pc) facilitent le dimensionnement avant `ggsave()` ! Tracez simplement votre ggplot dans quartz() ou window(), ajustez la taille jusqu'à ce qu'elle soit bonne, et lancez ggsave() avec le nom du fichier pour voir quelles dimensions vous avez utilisées ! Vous pouvez ensuite ajouter ceci dans votre code avec height = et width = comme indiqué ci-dessus.
+
 ---
 # Sauvegarder des graphiques à l'aide de fonction R
 
@@ -1928,49 +1971,45 @@ graphics.off()
 
 
 ---
-# Sauvegarder des graphiques à l'aide de fonction R
-&lt;br&gt;
-
-**Tip:** Les fonctions `quartz()` (sur mac) ou `window()` (sur pc) facilitent la mise en forme avant de sauvegarder avec `ggsave()`!
-
-???
-note: _this function allows to resize plot live, then use ggsave without specifying plot._
-```
-
-
----
 class: inverse, center, middle
 
-# Going further
+# Considérations finales
 
 
 ---
-# Available elements
+# Ressources additionelles
 
 
-[Data Visualization with ggplot2 Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+- `help(package = ggplot2)`
+- [Data Visualization with ggplot2 Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization.pdf)
+- [ggplot2 Reference](http://ggplot2.tidyverse.org/reference/)
+- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)  
+- [From Data to Viz](https://www.data-to-viz.com/)
+- [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base R)
+- [Graphics Principles](https://graphicsprinciples.github.io/) (design tips)
+- [The R Graph gallery](https://www.r-graph-gallery.com)
+-  Lecture notes from Hadley's course Stat 405 (the other lessons are
+awesome too!)
+  -   &lt;http://stat405.had.co.nz/lectures/11-adv-data-manip.pdf&gt;
+  -   &lt;http://stat405.had.co.nz/lectures/19-tables.pdf&gt;
 
-.center[![:scale 55%](images/available_geom.png)]
+???
 
-https://www.rstudio.com/resources/cheatsheets
+Montrer la fiche de référence pour ggplot2 https://github.com/rstudio/cheatsheets/raw/master/data-visualization.pdf
 
 ---
-# Additional resources
-
-* `help(package = ggplot2)`
-* http://ggplot2.tidyverse.org/reference/
-* Fundamentals of Data Visualization https://serialmentor.com/dataviz/
+# Ressources additionelles
 
 .center[![:scale 65%](images/ggplot_book.png)]
 
 ---
-# Concluding remarks
-&lt;br&gt;
+# Considérations finales
 
-  1. There are other useful packages that can be used with `ggplot2`! To name a few: `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` and `ggtree`. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) for other `ggplot2` extensions.
+Il y a d'autres librairies utiles qui peuvent être utilisés avec `ggplot2` ! 
 
+Pour en nommer quelques-uns : `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` et `ggtree`. Jetez un coup d'oeil à [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) pour d'autres extensions de `ggplot2`.
 
-  2. Note that you can learn more about design and image manipulation with the "Introduction to graphic design and image manipulation with open source tools": https://qcbs.ca/wiki/graphics
+Notez que vous pouvez en apprendre plus sur la conception et la manipulation d'images avec l'atelier QCBS ["Introduction à la conception graphique et à la manipulation d'images avec des outils open source"](https://wiki.qcbs.ca/graphics).
 
 
 
