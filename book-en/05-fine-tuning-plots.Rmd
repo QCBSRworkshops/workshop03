@@ -512,9 +512,7 @@ ggdendrogram(hc, rotate = TRUE)
 ```
 
 
-
-
-## Arrange plots: `patchwork`
+# Arrange plots: `patchwork`
 
 So far, we have used facets to split our plot into multiple windows. However, this is restricted to plotting the same variables from the same dataset. 
 
@@ -531,7 +529,7 @@ peng.dens + cars.dens +
 ```
 
 
-## Challenge 4
+# Challenge 4
 
 Create your own ggplot and follow these recommendations:
   * Dataset: any (recommended: use your dataset)
@@ -562,9 +560,8 @@ Use the following links for tips and inspiration:
 # SOLUTION # -----
 ```
 
----
 
-### Challenge 4: Solution example 1
+## Challenge 4: Solution example 1
 
 ```{r, fig.align='center', warning = FALSE, message = FALSE}
 data(msleep)
@@ -580,7 +577,7 @@ ggplot(msleep,
   theme_classic()
 ```
 
-### Challenge 4: Solution example 2
+## Challenge 4: Solution example 2
 
 ```{r, fig.align='center', warning = FALSE, message = FALSE}
 data(mtcars)
@@ -598,7 +595,7 @@ ggdendrogram(mtcars.short.hc, rotate = TRUE) +
 ```
 
 
-## Miscellaneous: interactive plots using `plotly()`
+# Miscellaneous: interactive plots using `plotly()`
 
 The `plotly()` library contains the function `ggplotly()`, which translates your `ggplot` code into an interactive `plotly` object in one line of code.
 
