@@ -14,8 +14,8 @@ my1stPlot <-  # Create a plot to practice saving
   geom_point()
 
 ggsave(filename = "my1stPlot.pdf", # Name the file you want to save to, add extension of the file format you want to use (ex. pdf)
-       plot = my1stPlot, # Provide the name of the plot object in RStudio
-       height = 8.5, # Provide any addition information
+       plot = my1stPlot, # Provide the name of the plot object in R
+       height = 8.5, # Provide the desired dimensions
        width = 11, 
        units = "in") 
 

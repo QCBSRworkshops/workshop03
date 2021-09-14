@@ -1,1 +1,40 @@
-# Conclusion
+# (PART\*) Conclusion {-}
+
+# Considérations finales
+
+Il y a d'autres librairies utiles qui peuvent être utilisés avec `ggplot2` ! 
+
+Pour en nommer quelques-uns : `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` et `ggtree`. Jetez un coup d'oeil à [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) pour d'autres extensions de `ggplot2`.
+
+Notez que vous pouvez en apprendre plus sur la conception et la manipulation d'images avec l'atelier QCBS ["Introduction à la conception graphique et à la manipulation d'images avec des outils open source"](https://wiki.qcbs.ca/graphics).
+
+# Ressources additionelles (EN)
+
+## Documents de référence
+
+- `help(package = ggplot2)`
+- [Data Visualization with ggplot2 Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+- [ggplot2 Reference](http://ggplot2.tidyverse.org/reference/)
+
+## Livres
+
+- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)  
+
+![](images/ggplot_book.png)
+
+## Inspiration et guides
+
+- [From Data to Viz](https://www.data-to-viz.com/)
+- [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base R)
+- [Graphics Principles](https://graphicsprinciples.github.io/) (design tips)
+- [The R Graph gallery](https://www.r-graph-gallery.com)
+
+## Notes de cours
+
+Notes de cours de Stat 405 par Hadley (les autres cours sont intéressants aussi!)
+
+-   <http://stat405.had.co.nz/lectures/11-adv-data-manip.pdf>
+-   <http://stat405.had.co.nz/lectures/19-tables.pdf>
+  
+# References {-}
+

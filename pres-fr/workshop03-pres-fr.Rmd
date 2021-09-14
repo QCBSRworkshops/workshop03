@@ -1831,9 +1831,11 @@ On peut cliquer sur les espèces dans la légende pour ajouter/supprimer des esp
 ---
 class: inverse, center, middle
 
-# Sauvegarder vos graphiques avec ggplot2
+# Sauvegarder vos graphiques
 
 ---
+exclude: true
+
 # Sauvegarder des graphiques en RStudio
 
 <div style="text-align:center">
@@ -1884,42 +1886,48 @@ graphics.off()
 
 ???
 note: _this function allows to resize plot live, then use ggsave without specifying plot._
-```
 
 
 ---
 class: inverse, center, middle
 
-# Going further
+# Considérations finales
 
 
 ---
-# Available elements
+# Ressources additionelles
 
 
-[Data Visualization with ggplot2 Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+- `help(package = ggplot2)`
+- [Data Visualization with ggplot2 Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization.pdf)
+- [ggplot2 Reference](http://ggplot2.tidyverse.org/reference/)
+- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)  
+- [From Data to Viz](https://www.data-to-viz.com/)
+- [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base R)
+- [Graphics Principles](https://graphicsprinciples.github.io/) (design tips)
+- [The R Graph gallery](https://www.r-graph-gallery.com)
+-  Lecture notes from Hadley's course Stat 405 (the other lessons are
+awesome too!)
+  -   <http://stat405.had.co.nz/lectures/11-adv-data-manip.pdf>
+  -   <http://stat405.had.co.nz/lectures/19-tables.pdf>
 
-.center[![:scale 55%](images/available_geom.png)]
+???
 
-https://www.rstudio.com/resources/cheatsheets
+Montrer la fiche de référence pour ggplot2 https://github.com/rstudio/cheatsheets/raw/master/data-visualization.pdf
 
 ---
-# Additional resources
-
-* `help(package = ggplot2)`
-* http://ggplot2.tidyverse.org/reference/
-* Fundamentals of Data Visualization https://serialmentor.com/dataviz/
+# Ressources additionelles
 
 .center[![:scale 65%](images/ggplot_book.png)]
 
 ---
-# Concluding remarks
-<br>
+# Considérations finales
 
-  1. There are other useful packages that can be used with `ggplot2`! To name a few: `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` and `ggtree`. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) for other `ggplot2` extensions.
+Il y a d'autres librairies utiles qui peuvent être utilisés avec `ggplot2` ! 
 
+Pour en nommer quelques-uns : `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` et `ggtree`. Jetez un coup d'oeil à [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) pour d'autres extensions de `ggplot2`.
 
-  2. Note that you can learn more about design and image manipulation with the "Introduction to graphic design and image manipulation with open source tools": https://qcbs.ca/wiki/graphics
+Notez que vous pouvez en apprendre plus sur la conception et la manipulation d'images avec l'atelier QCBS ["Introduction à la conception graphique et à la manipulation d'images avec des outils open source"](https://wiki.qcbs.ca/graphics).
 
 
 

@@ -300,7 +300,7 @@ ggplot(penguins,
   ggtitle("Histogramme de la longeur des becs")
 ```
 
-# Nuage de points et régression linéaire: `geom_point()` et `geom_smooth()`
+## Nuage de points et régression linéaire: `geom_point()` et `geom_smooth()`
 
 Un nuage de points est un excellent moyen de visualiser des points de données pour deux variables. Deux esthétiques sont requises dans `geom_point()`: les variables `x` et `y`.
 
@@ -324,9 +324,9 @@ ggplot(mpg,
   labs(title = "Régression linéaire") 
 ```
 
-## Diagramme en boîte: `geom_boxplot()`
+## Diagramme en boîte: `geom_boxplot()`: 
 
-Les Diagramme en boîte (ou *boxplot*) sont un moyen populaire de représenter la distribution des données en fonction d'une variable qualitative, comme les espèces. Vous pouvez spécifier cette variable dans `aes()` en utilisant `group =`, ou l'esthétique utilisée pour représenter les données (`fill =`, `col =`, `shape =`) dans le boxplot.
+Les diagrammes en boîte (ou *boxplot*) sont un moyen populaire de représenter la distribution des données en fonction d'une variable qualitative, comme les espèces. Vous pouvez spécifier cette variable dans `aes()` en utilisant `group =`, ou l'esthétique utilisée pour représenter les données (`fill =`, `col =`, `shape =`) dans le boxplot.
 
 ```{r, fig.align="center", warning = FALSE, message = FALSE}
 ggplot(data = penguins, 
@@ -338,7 +338,7 @@ ggplot(data = penguins,
 ```
 
 :::explanation
-Bien que les boxplots soient très populaires pour résumer les données, quelqu'un qui regarde votre graphique peut ne pas comprendre intuitivement comment fonctionne ce résumé et ce qu'il peut masquer. Pour bien utiliser les boxplots, il faut en comprendre la composition, comme illustré ci-dessous. Plus d'informations sur les inconvénients des boxplots se trouvent [ici](https://www.data-to-viz.com/caveat/boxplot.html).
+Bien que les diagrammes en boîte soient très populaires pour résumer les données, quelqu'un qui regarde votre graphique peut ne pas comprendre intuitivement comment fonctionne ce résumé et ce qu'il peut masquer. Pour bien utiliser les diagrammes en boîte, il faut en comprendre la composition, comme illustré ci-dessous. Plus d'informations sur les inconvénients des diagrammes en boîte se trouvent [ici](https://www.data-to-viz.com/caveat/boxplot.html).
 
 ```{r, echo=FALSE, fig.align="center", fig.cap = "Composition d'un diagramme en boîte by [Denise Coleman](https://www.leansigmacorporation.com/box-plot-with-minitab/).", purl = FALSE}
 knitr::include_graphics("images/boxplot_explain.png")
@@ -347,7 +347,7 @@ knitr::include_graphics("images/boxplot_explain.png")
 
 ## Diagramme en boîte avec annotations: `geom_boxplot()` and `geom_signif()`
 
-Pour aider les diagrammes en boîte à parler d'eux-mêmes, nous pouvons ajouter des annotations avec `geom_signif()`. La fonction `geom_signif()` calcule la significativité d'une différence entre les groupes et ajoute l'annotation au graphique en une seule ligne de code.
+Pour guider l'interprétation des diagrammes en boîte, nous pouvons ajouter des annotations avec `geom_signif()`. La fonction `geom_signif()` calcule la significativité d'une différence entre les groupes et ajoute l'annotation au graphique en une seule ligne de code.
 
 ```{r, fig.align="center", warning = FALSE, message = FALSE}
 library(ggsignif)
@@ -514,7 +514,7 @@ ggdendrogram(hc, rotate = TRUE)
 
 
 
-## Disposition des graphiques: `patchwork`
+# Disposition des graphiques: `patchwork`
 
 Jusqu'à présent, nous avons utilisé des facettes pour diviser notre graphique en plusieurs fenêtres. Cependant, ceci est limité au traçage des mêmes variables à partir du même ensemble de données. 
 
@@ -531,7 +531,7 @@ peng.dens + cars.dens +
 ```
 
 
-## Défi 4
+# Défi 4
 
 Créez votre propre graphique et suivez ces recommandations :
   * Jeu de données : n'importe lequel (recommandation : utilisez votre jeu de données)
@@ -562,9 +562,7 @@ Utilisez les liens suivants pour obtenir des conseils :
 # SOLUTION # -----
 ```
 
----
-
-### Défi 4: Solution exemple 1
+## Défi 4: Solution exemple 1
 
 ```{r, fig.align='center', warning = FALSE, message = FALSE}
 data(msleep)
@@ -580,7 +578,7 @@ ggplot(msleep,
   theme_classic()
 ```
 
-### Défi 4: Solution example 2
+## Défi 4: Solution example 2
 
 ```{r, fig.align='center', warning = FALSE, message = FALSE}
 data(mtcars)
@@ -599,7 +597,7 @@ ggdendrogram(mtcars.short.hc, rotate = TRUE) +
 ```
 
 
-## Divers : graphiques interactifs avec `plotly()`
+# Divers : graphiques interactifs avec `plotly()`
 
 La librairie `plotly()` contient la fonction `ggplotly()`, qui traduit votre code `ggplot` en un objet interactif `plotly` en une seule ligne de code.
 

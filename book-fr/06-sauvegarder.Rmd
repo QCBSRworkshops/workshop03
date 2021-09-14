@@ -1,1 +1,43 @@
-# Sauvegarder
+# 
+# (PART\*) Sauvegarder vos graphiques {-}
+
+# Sauvegarder des graphiques avec R
+
+In RStudio, there are many options available to you to save your figures. You could copy them to the clipboard, but it is preferable to export them as a file type of your choice (or export them as any file type (png, jpg, emf, tiff, pdf, metafile, etc).
+
+`ggsave()` is a useful command that saves directly to your working directory and allows you to specify the name of your new file, the dimensions of the plot, the resolution, etc.
+
+```{r, eval=FALSE}
+my1stPlot <-  # Créer une figure pour pratiquer comment sauvegarder
+  ggplot(penguins, 
+         aes(x = bill_length_mm, 
+             y = bill_depth_mm)) +
+  geom_point()
+
+ggsave(filename = "my1stPlot.pdf", # Nommez le fichier dans lequel vous voulez enregistrer, ajoutez l'extension du format de fichier que vous voulez utiliser (ex. pdf).
+       plot = my1stPlot, # Fournir le nom de l'objet plot dans R
+       height = 8.5, # Fournir les dimensions voulues
+       width = 11, 
+       units = "in") 
+
+# Astuce : Les fonctions `quartz()` (mac) ou `window()` (pc) facilitent le dimensionnement avant `ggsave()` ! Tracez simplement votre ggplot dans quartz() ou window(), ajustez la taille jusqu'à ce qu'elle soit bonne, et lancez ggsave() avec le nom du fichier pour voir quelles dimensions vous avez utilisées ! Vous pouvez ensuite ajouter ceci dans votre code avec height = et width = comme indiqué ci-dessus.
+```
+
+Pensez à la marge du document que vous utilisez. Si vous redimensionnez l'image après l'avoir enregistrée, les titres et le texte changeront également de taille, ce qui pourrait être difficile à lire. Notez également que le format vectoriel (par exemple, pdf, svg) est plus flexible que le format raster (jpeg, png, ...) si l'image doit être modifiée par la suite. 
+
+Si vous préférez le format raster, vous pouvez consulter d'autres méthodes pour enregistrer une image en utilisant `?pdf` `?jpeg`.
+
+Dans les cas où vous produisez de nombreux graphiques (par exemple, au cours de longs programmes qui produisent automatiquement de nombreux graphiques tout en effectuant des analyses), il est utile d'enregistrer de nombreux graphiques dans un fichier pdf. Ceci peut être réalisé comme suit:
+
+```{r, eval=FALSE}
+my2ndPlot <-  # Créer un 2eme graphique pour pratiquer pdf() 
+  ggplot(penguins, 
+         aes(x = bill_length_mm, 
+             y = bill_depth_mm)) +
+  geom_point()
+
+pdf("./graph_du_jour.pdf")
+  print(my1stPlot) # print() est nécessaire
+  print(my2ndPlot)
+graphics.off()
+```

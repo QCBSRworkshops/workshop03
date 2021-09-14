@@ -1898,6 +1898,8 @@ class: inverse, center, middle
 # Saving your plots with ggplot2
 
 ---
+exclude: true
+
 # Saving plots in RStudio
 
 <div style="text-align:center">
@@ -1949,7 +1951,7 @@ graphics.off()
 ---
 class: inverse, center, middle
 
-# Going further
+# Concluding remarks
 
 ---
 # Additional resources
