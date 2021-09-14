@@ -80,6 +80,8 @@ jobs:
   checkout-and-deploy:
    name: Checkout and deploy the presentation within the gh-pages repository
    runs-on: ubuntu-latest
+   env:
+     GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
    needs: presentation-en-job
    
    steps:
