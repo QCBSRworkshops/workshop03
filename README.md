@@ -21,12 +21,33 @@ Pendant cet atelier, vous perfectionnerez vos compétences en visualisation et m
 
 # Workshop materials
 
-Language | Slides | Bookdown | Wiki | Script | GitHub 
-:--------|:-------|:-----|:-----|:------ |:-------
-EN | [![badge](https://img.shields.io/static/v1?style=flat-square&label=Slides&message=03&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop03/pres-en/workshop03-pres-en.html) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=book&message=03&logo=github)](https://qcbsrworkshops.github.io/workshop03/book-en/index.html) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=wiki&message=03&logo=wikipedia)](https://wiki.qcbs.ca/r_workshop3) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=script&message=03&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop07/book-en/workshop07-script-en.R) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop03) 
-FR | [![badge](https://img.shields.io/static/v1?style=flat-square&label=Diapos&message=03&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop03/pres-fr/workshop03-pres-fr.html) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=livre&message=03&logo=github)](https://qcbsrworkshops.github.io/workshop03/book-fr/index.html) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=wiki&message=03&logo=wikipedia)](https://wiki.qcbs.ca/r_atelier3) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=script&message=03&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop03/book-fr/workshop03-script-fr.R)] | [![badge](https://img.shields.io/static/v1?style=flat-square&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop03) 
+Language | Slides | Bookdown | Script | GitHub 
+:--------|:-------|:-----|:-----|:------ 
+EN | [![badge](https://img.shields.io/static/v1?style=flat-square&label=Slides&message=03&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop03/pres-en/workshop03-pres-en.html) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=book&message=03&logo=github)](https://qcbsrworkshops.github.io/workshop03/book-en/index.html) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=script&message=03&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop07/book-en/workshop07-script-en.R) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop03) 
+FR | [![badge](https://img.shields.io/static/v1?style=flat-square&label=Diapos&message=03&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop03/pres-fr/workshop03-pres-fr.html) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=livre&message=03&logo=github)](https://qcbsrworkshops.github.io/workshop03/book-fr/index.html) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=script&message=03&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop03/book-fr/workshop03-script-fr.R) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop03) 
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+> *Note: The wiki for this workshop was converted to Bookdown in September 2021. <br> The wiki pages for this workshop will no longer be updated (Archive: [EN](https://wiki.qcbs.ca/r_workshop3), [FR](https://wiki.qcbs.ca/r_atelier3)).* 
+
+# License
+
+This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+
+[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
+
+# Contributors | Contributeurs et contributrices
+
+This workshop was originally developed by Xavier Giroux-Bougard, Maxwell Farrell, Amanda Winegardner, Étienne Low-Decarie and Monica Granados. 
+
+Since 2014, several QCBS members contributed to consistently and collaboratively develop and update this workshop, as part of the *Learning and Development Award* from the Québec Centre for Biodiversity Science. They were:
+
+|      2022 - 2021 - 2020     |      2019 - 2018 - 2017     |      2016 - 2015 - 2014      |
+|:---------------------------:|:---------------------------:|:----------------------------:|
+| Linley Sherin  | Marie-Hélène Brice | Xavier Giroux-Bougard |
+| Katherine Hébert  | Willian Vieira  | Maxwell Farrell |
+| Jake Lawlor  |  Rémi Maglione | Amanda Winegardner |
+| Marie-Hélène Brice  | Pedro Henrique P. Braga | Étienne Low-Decarie |
+| Kevin Cazelles  | Alexis Carteron | Monica Granados |
+|   | Katherine Hébert |  |
 
 # Development status
 
