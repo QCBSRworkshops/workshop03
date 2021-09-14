@@ -1,0 +1,620 @@
+# (PART\*) Peaufinage {-}
+
+# Utiliser le `theme()` pour faire bonne figure! {#theme}
+
+## Introduction aux thèmes
+
+Dans ce livre, nous avons utilisé `theme_classic()` pour les figures, puisque le fond gris défini par défaut peut rendre certaines couleurs plus difficiles à voir.
+
+Mais, comme toute autre partie de la grammaire graphique, nous pouvons modifier le thème du graphique pour l'adapter à nos besoins, ou à notre goût ! 
+
+Il y a beaucoup trop d'éléments de thème intégrés à la librairie `ggplot2` pour les mentionner ici, mais vous pouvez trouver une liste complète dans la vignette [theme](http://docs.ggplot2.org/dev/vignettes/themes.html). Au lieu de
+modifier les nombreux éléments contenus dans `theme()`, vous pouvez partir des fonctions de thème, qui contiennent un ensemble spécifique d'éléments à partir desquels vous pouvez commencer. Voici quelques exemples :
+
+### Thème par défaut: Gris
+
+```{r, fig.align='center', warning = FALSE, message = FALSE}
+# Theme grey
+pp + scale_colour_grey() + # Dessiner les points en gris
+  theme_grey() + # Utiliser le fond gris
+  labs(title = "Défaut: Thème gris") # Titre de la figure
+```
+
+
+### Thème classique
+
+```{r, fig.align='center', warning = FALSE, message = FALSE}
+pp + scale_colour_grey() + # Dessiner les points en gris
+  theme_classic() + # Utiliser un fond blac
+  labs(title = "Thème classique") # Titre de la figure
+```
+
+### Thème minimal
+
+```{r, fig.align='center', warning = FALSE, message = FALSE}
+pp + scale_colour_grey() +
+  theme_minimal() + # Utiliser un fond blanc et un quadrillage
+  labs(title = "Thème minimal") 
+```
+
+### Définir le thème pour plusieurs graphiques
+
+Comme vous avez pu le remarquer, le code de `ggplot` peut rapidement devenir long lorsque vous devez constamment spécifier les caractéristiques du théme. Lorsque vous créez plusieurs graphes et que vous voulez qu'ils aient tous le même thème, vous pouvez simplement utiliser `theme_set()` pour définir un thème pour tous les figures qui sont générés par la suite, ou `theme_update()` pour modifier les éléments d'un thème existant sans réécrire tous les autres éléments du thème.
+
+#### Définir le thème
+
+```{r, fig.align='center', warning = FALSE, message = FALSE}
+# Définir le thème noir et blanc pour tous les figures qui suivent
+theme_set(theme_bw()) # Note: le fond est blanc avec un cadre noir
+pp
+```
+
+Après avoir utilisé `theme_set()`, notre graphique `pp` est généré avec le thème noir et blanc `theme_bw()`. Tous les futurs figures produites dans votre session R seront également générées avec ce thème.
+
+#### Mettre le thème à jour
+
+Peut-être que les le quadrillage mineur n'est pas nécessaire pour cette figure, bien que nous aimons tout le reste de notre thème. Plutôt que de réécrire plusieurs lignes de code pour redéfinir le thème, nous pouvons simplement utiliser `theme_update()` pour ajuster un élément spécifique de notre thème.
+
+```{r, fig.align='center', warning = FALSE, message = FALSE}
+theme_update(
+  panel.grid.minor = element_blank()) # Enlever le quadrillage 'minor'
+pp
+```
+
+Voilà! C'est beaucoup mieux!
+
+```{r, include=FALSE, purl = FALSE}
+# définir le thème pour le reste du livre
+theme_set(theme_bw())
+theme_update(panel.grid.minor = element_blank(),
+             axis.text = element_text(size = 16),
+             axis.title = element_text(size = 18))
+```
+
+
+## Les élements d'un thème
+
+Voici une infographie utile pour vous aider à personnaliser votre thème!
+
+```{r, echo=FALSE, fig.align="center", fig.cap = "Fiche de référence du thème ggplot2 (EN) par Isabella Benabaye ([source](https://isabella-b.com/blog/ggplot2-theme-elements-reference/)).", purl = FALSE}
+knitr::include_graphics("images/ggthemes.png")
+```
+
+## Créer votre propre thème
+
+Une fois que vous aurez appris à personnaliser les [thèmes](http://docs.ggplot2.org/dev/vignettes/themes.html) ggplot existants, vous pourrez créer votre propre thème pour vos graphiques. C'est un excellent moyen de faire ressortir vos figures dans une présentation, une publication, un site Web ou tout autre endroit!
+
+Voici un exemple:
+
+```{r, echo = TRUE, eval = FALSE, warning = FALSE, message = FALSE}
+mytheme <- theme_bw() + # Vous pouvez partir d'un thème existant pour mettre en place certains éléments de base.
+           theme(plot.title = element_text(colour = "red")) +
+           theme(legend.position = c(0.9, 0.9))
+pp + mytheme # A# Appliquez-le à votre figure!
+```
+
+
+## Plus de thèmes
+
+La librairie [ggthemes](https://github.com/jrnold/ggthemes) est un grand projet développé par Jeffrey Arnold sur GitHub et également hébergé sur le dépôt CRAN. Le paquet contient de nombreux thèmes, géomètres et rampes de couleurs pour `ggplot2` qui sont basés sur les travaux de certains des noms les plus renommés et les plus influents dans le monde de la visualisation de données, des classiques comme [Edward Tufte](http://www.edwardtufte.com/tufte/) aux journalistes et programmeurs de données modernes du blog [FiveThirtyEight](http://fivethirtyeight.com/).
+
+La librairie peut être installée comme suit:
+
+```{r, message = FALSE, results='hide'}
+install.packages("ggthemes")
+library(ggthemes)
+```
+
+Nous pouvons ensuite appliquer certains de ces thèmes (et plus encore) à notre figure!
+
+```{r, warning = FALSE, message = FALSE}
+# Utilisons le thème du blog FiveThirtyEight et la palette de couleurs de Tableau.
+pp + 
+  theme_fivethirtyeight() + 
+  scale_color_tableau()
+```
+
+```{r, warning = FALSE, message = FALSE}
+# Utilisons le thème de Tufte "Données maximales, encre minimale".
+pp + 
+  theme_tufte()
+```
+
+
+# Utiliser des facettes pour diviser votre figure
+
+## Facettes selon une variable
+
+```{r, warning = FALSE, message = FALSE}
+ggplot(data = penguins) +
+  geom_point(mapping = aes(x = bill_length_mm, 
+                           y = bill_depth_mm, 
+                           colour = species)) +
+  facet_grid(~ species, 
+             scales = "free") # l'échelle de l'axe des y peut varier entre les facettes.
+# ne faites pas ceci si vous comparez des facettes via l'axe des y !
+```
+
+
+## Facettes selon deux variables
+
+```{r, warning = FALSE, message = FALSE}
+ggplot(data = penguins) +
+  geom_point(mapping = aes(x = bill_length_mm, 
+                           y = bill_depth_mm, 
+                           colour = species)) +
+  facet_grid(year ~ species, 
+             scales = "free")
+```
+
+
+## Titre et axes: changer la taille, la couleur et l'apparence
+
+Revenons à notre visualisation des données de pingouins. 
+
+```{r, warning = FALSE, message = FALSE}
+# Revenons à notre visualisation des données de pingouins. 
+pp
+```
+
+Nous pouvons ajuster les axes et les titres pour rendre les informations plus claires, afin que le graphique parle par lui-même.
+
+```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=7,warning = FALSE, message = FALSE}
+# Ajuster les axes et les titres pour que le graphique parle par lui-même.
+pp +
+  # Mettre un titre pour la figure, les axes, et la légende
+  labs(title = "Relationship between Bill Length & Depth",
+       x = "Bill Length (mm)",
+       y = "Bill Depth (mm)",
+       col = "Species") +
+  # adjuster la taille des titres
+  theme(axis.title.x = element_text(size = 16),
+        axis.title.y = element_text(size = 16),
+        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 12),
+        plot.title = element_text(size = 16, face="bold"), # mettre le titre en gras
+        legend.title = element_text(size=14, face="bold"), # mettre le titre en gras
+        legend.text = element_text(size=12))
+```
+
+
+
+## Défi 3
+
+Utilisez les données `tips` qui se trouvent dans `reshape2` &#x1F4E6; pour reproduire le graphique ci-dessous.
+
+```{r}
+# install and load the package
+install.packages("reshape2")
+library(reshape2)
+```
+
+:::puzzle
+Notre conseil: Allez-y étape par étape! Commencez par `theme_classic()` et ajoutez `theme()` pour faire vos changements supplémentaires.
+:::
+
+```{r, echo=FALSE, purl = FALSE}
+library(reshape2)
+tips.gg <- ggplot(tips, aes(x = total_bill,
+                            y = tip/total_bill,
+                            shape = smoker,
+                            colour = sex,
+                            size = size)) +
+  geom_point() +
+  facet_grid( ~ time) +
+  scale_colour_grey() +
+  labs(title = "Relation entre la facture totale et les pourboires pendant les repas",
+       x = "Facture totale ($)", y = "Ratio entre pourboires et facture totale") +
+  theme_classic() +
+  theme(axis.title = element_text(size = 16,
+                                  colour = "navy"),
+        axis.text = element_text(size = 12),
+        plot.title = element_text(size = 16,
+                                  colour = "orange3",
+                                  face = "bold"),
+        strip.text.x = element_text(size = 14, face ="bold"))
+tips.gg
+```
+
+```{r, echo = FALSE, include = FALSE}
+# Défi 3 ----
+# 
+# UUtilisez les données tips qui se trouvent dans reshape2 pour reproduire le graphique dans le livre ou dans la présentation.
+# Notre conseil: Allez-y étape par étape! Commencez par theme_classic() et ajoutez theme() pour faire vos changements supplémentaires.
+
+
+
+
+# SOLUTION # -----
+```
+
+
+---
+
+### Défi 3: Solution
+
+```{r, eval=FALSE}
+# Construire le graphique
+tips.gg <- ggplot(tips, 
+                  # Étape 1. Spécifiez le mappage esthétique des axes et des légendes
+                  aes(x = facture_totale,
+                      y = pourboire/facture totale,
+                      shape = fumeur,
+                      couleur = sexe,
+                      size = taille)) +
+  # Étape 2. Spécifiez le geom utilisé pour représenter les données
+  geom_point() +
+  # Etape 3. Spécifiez la variable utilisée pour faire des facettes
+  facet_grid( ~ time) +
+  # Étape 4. Spécifiez l'échelle de couleur utilisée pour représenter le sexe 
+  scale_colour_grey() +
+  # Étape 5. Étiquettez le titre et les axes du graphique
+  labs(title = "Relation entre l'addition totale et les pourboires pendant le déjeuner et le dîner",
+       x = "Facture totale ($)", 
+       y = "Rapport entre les pourboires et l'addition totale") +
+  # Étape 6. Définissez le thème
+  theme_classic() +
+  # Étape 7. Personnalisez le thème pour qu'il corresponde à la taille et à la couleur des titres du graphique.
+  theme(axis.title = element_text(size = 16,
+                                  couleur = "navy"),
+        axis.text = element_text(size = 12),
+        plot.title = element_text(size = 16,
+                                  couleur = "orange3",
+                                  face = "bold"),
+        # cette partie ajuste le texte dans les titres des facettes
+        strip.text.x = element_text(size = 14, face="bold"))
+# générez notre beau graphique !
+tips.gg
+```
+
+
+# Utiliser `geom_*()` pour créer différents types de graphique
+
+Plusieurs geoms peuvent être utilisés ensemble dans un seul graphique ! L'ordre détermine comment ils se superposent.
+
+```{r, echo=FALSE, fig.align="center", purl = FALSE}
+knitr::include_graphics("images/plots_in_various_contexts.png")
+```
+
+```{r, include=FALSE}
+theme_set(theme_bw())
+theme_update(panel.grid.minor = element_blank(),
+             axis.text = element_text(size = 16),
+             axis.title = element_text(size = 18))
+```
+
+Voici un graphique vide, avant que nous n'ajoutions des `geom_*` pour représenter les variables de notre jeu de données.
+
+```{r, warning = FALSE, message = FALSE}
+ggplot(penguins)
+```
+
+## Histogrammes: `geom_histogram()`
+
+Un **histogramme** est une représentation graphique précise de la distribution de données numériques. Il n'y a qu'une seule esthétique requise: la variable `x`.
+
+```{r, fig.align="center", warning = FALSE, message = FALSE}
+ggplot(penguins, 
+       aes(x = bill_length_mm)) +
+  geom_histogram() +
+  ggtitle("Histogramme de la longeur des becs")
+```
+
+# Nuage de points et régression linéaire: `geom_point()` et `geom_smooth()`
+
+Un nuage de points est un excellent moyen de visualiser des points de données pour deux variables. Deux esthétiques sont requises dans `geom_point()`: les variables `x` et `y`.
+
+```{r, warning = FALSE, message = FALSE}
+ggplot(mpg, 
+       aes(x = displ, 
+           y = hwy)) +
+  geom_point() +
+  labs(title = "Nuage de points")
+```
+
+Il peut cependant être difficile de discerner toute relation potentielle dans un nuage de points. Vous pouvez utiliser `geom_smooth()` pour ajuster une ligne à travers vos données avec une variété de méthodes. Ici, nous allons ajouter une régression linéaire au nuage de points.
+
+
+```{r, warning = FALSE, message = FALSE}
+ggplot(mpg, 
+       aes(x = displ, 
+           y = hwy)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  labs(title = "Régression linéaire") 
+```
+
+## Diagramme en boîte: `geom_boxplot()`
+
+Les Diagramme en boîte (ou *boxplot*) sont un moyen populaire de représenter la distribution des données en fonction d'une variable qualitative, comme les espèces. Vous pouvez spécifier cette variable dans `aes()` en utilisant `group =`, ou l'esthétique utilisée pour représenter les données (`fill =`, `col =`, `shape =`) dans le boxplot.
+
+```{r, fig.align="center", warning = FALSE, message = FALSE}
+ggplot(data = penguins, 
+       aes(x = species, 
+           y = bill_length_mm,
+           fill = species)) + # définir espèce comme variable de groupe (par couleur)
+  geom_boxplot() +
+  labs(title = "Boxplot")
+```
+
+:::explanation
+Bien que les boxplots soient très populaires pour résumer les données, quelqu'un qui regarde votre graphique peut ne pas comprendre intuitivement comment fonctionne ce résumé et ce qu'il peut masquer. Pour bien utiliser les boxplots, il faut en comprendre la composition, comme illustré ci-dessous. Plus d'informations sur les inconvénients des boxplots se trouvent [ici](https://www.data-to-viz.com/caveat/boxplot.html).
+
+```{r, echo=FALSE, fig.align="center", fig.cap = "Composition d'un diagramme en boîte by [Denise Coleman](https://www.leansigmacorporation.com/box-plot-with-minitab/).", purl = FALSE}
+knitr::include_graphics("images/boxplot_explain.png")
+```
+:::
+
+## Diagramme en boîte avec annotations: `geom_boxplot()` and `geom_signif()`
+
+Pour aider les diagrammes en boîte à parler d'eux-mêmes, nous pouvons ajouter des annotations avec `geom_signif()`. La fonction `geom_signif()` calcule la significativité d'une différence entre les groupes et ajoute l'annotation au graphique en une seule ligne de code.
+
+```{r, fig.align="center", warning = FALSE, message = FALSE}
+library(ggsignif)
+ggplot(data = penguins, 
+       aes(x = species, 
+           y= bill_length_mm,
+           fill = species)) +
+  geom_boxplot() +
+  geom_signif(
+    # which groups should be compared?
+    comparisons = list(c("Adelie", "Gentoo")), 
+    map_signif_level=TRUE)
+```
+
+
+## Diagramme en violon: `geom_violin()`
+
+Comme les diagrammes en boîte, les diagrammes en violon visualisent la distribution d'une variable numérique pour un ou plusieurs groupes. Cependant, la forme d'un violon représente la distribution des points qui est masquée dans le résumé d'un boxplot, ce qui permet une représentation plus précise des données ([Data-to-Viz)](https://www.data-to-viz.com/graph/violin.html)).
+
+:::explanation
+Comparons un diagramme en boîte et un diagramme en violon sur des données générées. Remarquez comment le diagramme en violon *montre* l'étendue **et** la variabilité de nos données, alors que le diagramme en boîte ne peut pas communiquer ces deux éléments de manière aussi intuitive.
+
+<div class = "split">
+<div class = "split-left">
+```{r, echo=FALSE, purl = FALSE}
+# Generate some data
+names <- c(rep("A", 80) , rep("B", 50) , rep("C", 70))
+value <- c(sample(2:5, 80 ,replace=TRUE), sample(4:10, 50 , replace=TRUE),
+       sample(1:7, 70 , replace=TRUE))
+data <- data.frame(names,value)
+
+# Plot it as a boxplot with the data points jittered on top
+qplot(x = names, y = value, data = data, geom = c("boxplot","jitter"), fill = names)
+```
+
+</div>
+<div class = "split-right">
+```{r, echo=FALSE, purl = FALSE}
+# plot the data as a violin plot
+ggplot(data = data, aes(names, value, fill=names)) + geom_violin()
+```
+</div>
+</div>
+:::
+
+On peut faire un diagramme en violin avec nos données `penguins`:
+
+```{r, fig.align="center", warning = FALSE, message = FALSE}
+violin <- ggplot(data = penguins, 
+                 aes(x = species, 
+                     y = bill_length_mm)) +
+  geom_violin(trim = FALSE, # ne pas tailler les extrémités des violons s'il y a des valeurs extrêmes
+              fill = "grey70", # mettre tous les violons en gris
+              alpha = .5) + # transparence de la couleur de remplissage
+  labs(title = "Violin plot")
+violin
+```
+
+
+Bien que nous ayons une bonne idée de la façon dont les données sont distribuées, nous pouvons améliorer le graphique en visualisant certaines statistiques sommaires et les points de données. Traçons un boxplot et les points de données *sur* notre graphique de violon avec `geom_violin()` + `geom_boxplot()` + `geom_jitter()`.
+
+```{r, fig.align="center", warning = FALSE, message = FALSE}
+violin + 
+  # ce geom trace les points de données avec un peu de bruit supplémentaire (horizontal)
+  # pour voir les points qui se chevauchent
+    geom_jitter(shape = 16, 
+                position = position_jitter(0.2),
+              alpha = .3) +
+  geom_boxplot(width = .05)
+```
+
+
+## Résumer des valeurs `y`: `stat_summary()`
+
+L'ajout de statistiques sommaires à votre tracé peut aider à mettre en évidence le message clé de votre graphique. La fonction `stat_summary()` peut exécuter la statistique de votre choix en utilisant l'argument `fun = `, et l'ajouter à votre graphique selon le `geom = ` que vous avez défini dans la fonction.
+
+Par exemple, si nous voulions tracer la médiane du nombre de cylindres (`cyl`) dans l'ensemble de données `mtcars`, nous utiliserions `stat_summary()` de la manière suivante :
+
+```{r}
+# tracer la médiane du nombre de cylindre
+ggplot(mtcars, 
+       aes(x = cyl, y = mpg)) +
+  geom_point() +
+  stat_summary(fun = "median", 
+               geom = "point",
+               colour = "red",
+               size = 6) +
+  labs(title = "Médiannes")
+```
+
+Though the median is a helpful summary statistics, it does not inform us about the uncertainty behind it. If we wanted to instead plot the mean of each group with bootstrapped confidence intervals, we could just switch the `fun.data = ` argument:
+
+```{r}
+# Tracez la moyenne de chaque groupe avec des intervalles de confiance (par bootstrapping)
+ggplot(mtcars, 
+       aes(cyl, mpg)) +
+  geom_point() +
+  stat_summary(fun.data = "mean_cl_boot",
+               colour = "red",
+               size = 1.6) +
+  labs(title = "Moyennes et intervalles de confiance")
+```
+
+
+Voir aussi `geom_errorbar()`, `geom_pointrange()`, `geom_linerange()`, `geom_crossbar()` afficher d'autres statistiques pour résumer vos données.
+
+
+## Créer des cartes: `geom_map()`
+
+Nous allons cartographier les arrestations pour meurtres pour 100 000 habitants dans chacun des 50 états américains en 1973 à partir de la base de données `USArrests` avec `geom_map()`.
+
+```{r}
+# charger la librairie maps
+library(maps)
+states_map <- map_data("state") # obtient une carte des Etats-Unis à l'échelle des états
+
+# Le nom de l'état est défini comme rownames. Créons une nouvelle colonne pour ceux-ci
+# qui correspond à la colonne des noms d'états dans notre states_map.
+USArrests$region <- tolower(rownames(USArrests))
+
+# Construisons notre carte
+ggplot(USArrests, 
+       aes(map_id = region)) + # le nom de la variable pour lier notre carte et notre dataframe
+  geom_map(aes(fill = Murder), # variable que nous voulons représenter avec une esthétique
+           map = states_map) + # cadre de données qui contient des coordonnées
+  expand_limits(x = states_map$long, 
+                y = states_map$lat) +
+  coord_map() + # projection 
+  labs(x = "", y = "") # suppression des titres des axes
+```
+
+
+## Graphique de densité: `geom_density()`
+
+Un graphique de densité montre la distribution d'une variable numérique et ne prend en entrée qu'un ensemble de valeurs numériques.
+
+```{r, echo=TRUE, warning = FALSE, message = FALSE}
+(peng.dens <- ggplot(penguins, 
+                     aes(x = bill_length_mm)) +
+   geom_density())
+```
+
+```{r, echo=TRUE, warning = FALSE, message = FALSE}
+(cars.dens <- ggplot(cars, 
+                    aes(x = dist)) +
+   geom_density())
+```
+
+
+## Dendogramme: `ggdendrogram()`
+
+Quels états américains ont des taux d'arrestation similaires ?
+
+```{r}
+library(ggdendro)
+
+USArrests.short <- USArrests[1:10,] # prendre un petit échantillon pour simplifier
+hc <- hclust(dist(USArrests.short), "average") # regroupement par distance moyenne (UPGMA)
+
+# visualiser le dendrogramme
+ggdendrogram(hc, rotate = TRUE)
+```
+
+
+
+
+## Disposition des graphiques: `patchwork`
+
+Jusqu'à présent, nous avons utilisé des facettes pour diviser notre graphique en plusieurs fenêtres. Cependant, ceci est limité au traçage des mêmes variables à partir du même ensemble de données. 
+
+Le paquet `patchwork` permet d'arranger facilement des ggplots distincts dans un même cadre avec `+` (arranger les graphes les uns à côté des autres), `/` (arranger un graphe par-dessus l'autre), `()` (grouper cet arrangement de graphes) comme si vous écriviez une équation.
+
+```{r, message=FALSE, warning=FALSE}
+# charger patchwork pour arranger nos graphiques de densité
+library(patchwork)
+
+# les ajouter ensemble signifie "les placer les uns à côté des autres".
+peng.dens + cars.dens +
+  plot_annotation(tag_levels = 'a') # ajoute a) et b) à vos figures, afin de 
+  # les mentionner ans les descriptions de vos figures.
+```
+
+
+## Défi 4
+
+Créez votre propre graphique et suivez ces recommandations :
+  * Jeu de données : n'importe lequel (recommandation : utilisez votre jeu de données)
+  * Explorez un nouveau `geom_*` et d'autres couches de graphiques
+
+Utilisez les liens suivants pour obtenir des conseils :
+
+- [ggplot2 Reference](https://ggplot2.tidyverse.org/reference/index.html)  
+- [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)  
+- [Data to Viz](https://www.data-to-viz.com/)
+
+```{r, echo = FALSE, include = FALSE}
+# Défi 4 ----
+# 
+# Créez votre propre graphique et suivez ces recommandations :
+#   * Jeu de données : n'importe lequel (recommandation : utilisez votre jeu de données)
+#   * Explorez un nouveau `geom_*` et d'autres couches de graphiques
+# 
+# Utilisez les liens suivants pour obtenir des conseils :
+# 
+# - [ggplot2 Reference](https://ggplot2.tidyverse.org/reference/index.html)  
+# - [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)  
+# - [Data to Viz](https://www.data-to-viz.com/)
+# 
+# 
+# 
+# 
+# SOLUTION # -----
+```
+
+---
+
+### Défi 4: Solution exemple 1
+
+```{r, fig.align='center', warning = FALSE, message = FALSE}
+data(msleep)
+ggplot(msleep, 
+       aes(x = vore, 
+           y = log10(brainwt), 
+           fill = vore)) + 
+  geom_violin() +
+  geom_signif(comparisons = list(c("herbi", "insecti"))) +
+  labs("Poids du cerveau pour les différents -vores", 
+       y = "log10(Poids du cerveau (Kg))") +
+  scale_fill_grey() +
+  theme_classic()
+```
+
+### Défi 4: Solution example 2
+
+```{r, fig.align='center', warning = FALSE, message = FALSE}
+data(mtcars)
+# let's do some clustering!
+mtcars.short <- mtcars[1:20,]
+mtcars.short.hc <- hclust(dist(mtcars.short), "average")
+
+ggdendrogram(mtcars.short.hc, rotate = TRUE) + 
+  # fine-tuning
+  labs(title = "Dendrogramme des voitures selon les spécifications du moteur", 
+       y ="Voitures") +
+  theme(axis.title.y = element_text(size = 16),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(), axis.text.x = element_blank(),
+        plot.title = element_text(size = 14, face="bold"))
+```
+
+
+## Divers : graphiques interactifs avec `plotly()`
+
+La librairie `plotly()` contient la fonction `ggplotly()`, qui traduit votre code `ggplot` en un objet interactif `plotly` en une seule ligne de code.
+
+:::explanation
+Vous pouvez cliquer sur les espèces dans la légende pour ajouter/supprimer des espèces. Vous pouvez également voir les valeurs en passant la souris sur les points.
+:::
+
+```{r, echo = TRUE, fig.width=10, fig.height=5, warning = FALSE, message = FALSE, eval = FALSE}
+library(plotly)
+p <- ggplot(penguins,
+           aes(x = bill_length_mm, 
+               y = bill_depth_mm, 
+               colour = species, 
+               shape = species)) +
+    geom_point(size=6, alpha=0.6)
+# convertir en objet plotly!
+ggplotly(p)
+```

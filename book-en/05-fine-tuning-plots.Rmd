@@ -153,7 +153,7 @@ ggplot(data = penguins) +
 Let us come back to our default plot that we have been building on.
 
 ```{r, warning = FALSE, message = FALSE}
-# our default plot from before
+# Let's come back to our penguin plot from before
 pp
 ```
 
@@ -346,7 +346,7 @@ knitr::include_graphics("images/boxplot_explain.png")
 
 ## Annotated boxplot: `geom_boxplot()` and `geom_signif()`
 
-To help boxplots speak for themselves, we can add annotations with `geom_signif()`. The function `geom_signif()` calculates the significance of a difference between groups and adds the annotation to the plot in a single line.
+To help boxplots speak for themselves, we can add annotations with `geom_signif()`. The function `geom_signif()` calculates the significance of a difference between groups and adds the annotation to the plot in a single line of code.
 
 ```{r, fig.align="center", warning = FALSE, message = FALSE}
 library(ggsignif)
@@ -411,7 +411,7 @@ Although we have a good idea of how the data is distributed, we can enhance the 
 
 ```{r, fig.align="center", warning = FALSE, message = FALSE}
 violin + 
-  # this plots the data points with some additional (horizontal) noise
+  # this geom plots the data points with some additional (horizontal) noise
   # to see overlapping points
     geom_jitter(shape = 16, 
                 position = position_jitter(0.2),
@@ -457,7 +457,7 @@ For more summary statistics, see `geom_errorbar()`, `geom_pointrange()`, `geom_l
 
 ## Representing maps: `geom_map()`
 
-We will visualize arrests per 100,000 residents for murder in each of the 50 US states in 1973 from the `USArrests` dataset as a map using `geom_map()`.
+We will map the arrests per 100,000 residents for murder in each of the 50 US states in 1973 from the `USArrests` dataset with `geom_map()`.
 
 ```{r}
 # load maps library
@@ -545,20 +545,20 @@ Use the following links for tips and inspiration:
 
 ```{r, echo = FALSE, include = FALSE}
 # Challenge 4 ----
-
+# 
 # Create your own ggplot and follow these recommendations:
 #   * Dataset: any (recommended: use your dataset)
 #   * Explore a new geom_* and other plot elements (recall Chapter @ref/(#gg-layers))
-# 
-# Use the following links for tips and inspiration:  
-# 
-# - [ggplot2 Reference](https://ggplot2.tidyverse.org/reference/index.html)  
-# - [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)  
+#
+# Use the following links for tips and inspiration:
+#
+# - [ggplot2 Reference](https://ggplot2.tidyverse.org/reference/index.html)
+# - [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)
 # - [Data to Viz](https://www.data-to-viz.com/)
-
-
-
-
+# 
+# 
+# 
+# 
 # SOLUTION # -----
 ```
 

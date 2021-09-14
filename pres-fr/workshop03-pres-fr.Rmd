@@ -1179,7 +1179,7 @@ Expliquer la différence et pourquoi la transformation peut être utile pour la 
 ---
 class: inverse, center, middle
 
-# Perfectionner vos graphiques
+# Peaufinage
 
 # Utiliser le `theme()` pour faire bonne figure!
 
@@ -1229,7 +1229,7 @@ ou `theme_update()` pour modifier certains aspects d'un thème.
 
 
 .pull-left[
-**Choisir le thème**
+**Définir le thème**
 ```{r, fig.height = 5, fig.width = 6.5}
 # Choisir le thème par défaut
 theme_set(theme_bw())
@@ -1275,36 +1275,38 @@ Les élements d'un thème
 ---
 class: inverse, center, middle
 
-# Perfectionner vos graphiques
+# Peaufiner vos graphiques
 
-# Utiliser `facet_grid()` pour changer la disposition des graphiques
+# Utiliser `facet_grid()` pour pour diviser un graphique
 
 ---
-# penguins dataset: facettes par espèce
+# Facettes selon une variable
 
-```{r, fig.align="center", fig.width=10, fig.height=5.5}
+```{r, warning = FALSE, message = FALSE}
 ggplot(data = penguins) +
   geom_point(mapping = aes(x = bill_length_mm, 
                            y = bill_depth_mm, 
                            colour = species)) +
-  facet_grid(~ species, scales = "free")
+  facet_grid(~ species, 
+             scales = "free") # l'échelle de l'axe des y peut varier entre les facettes.
 ```
+
+???
+
+Ne faites pas scales = 'free' si vous comparez des facettes via l'axe des y !
 
 
 ---
-# CO2: facettes par type
+# Facettes selon deux variables
 
-```{r, fig.align="center", fig.width=10, fig.height=5}
-ggplot(data = CO2) +
-  geom_point(mapping = aes(x = conc, 
-                           y = uptake, 
-                           colour = Treatment)) +
-  xlab("Concentration du CO2 (mL/L)") + 
-  ylab("Absorption du CO2 (umol/m^2 sec)") +
-  facet_grid(~ Type)
+```{r, warning = FALSE, message = FALSE}
+ggplot(data = penguins) +
+  geom_point(mapping = aes(x = bill_length_mm, 
+                           y = bill_depth_mm, 
+                           colour = species)) +
+  facet_grid(year ~ species, 
+             scales = "free")
 ```
-
-<!-- relabeling ticks -->
 
 ---
 exclude: true
@@ -1351,7 +1353,7 @@ pp +
 Utilisez les données `tips` qui se trouvent dans `reshape2` &#x1F4E6; pour reproduire le graphique ci-dessous.
 
 
-Notre conseil: commencez par `theme_classic()` et ajoutez `theme()` pour faire vos changements supplémentaires.
+Notre conseil: Allez-y étape par étape! Commencez par `theme_classic()` et ajoutez `theme()` pour faire vos changements supplémentaires.
 
 ```{r, echo=FALSE, fig.width=10, fig.height=5}
 library(reshape2)
@@ -1482,7 +1484,7 @@ tips.gg
 ---
 class: inverse, center, middle
 
-# Perfectionner vos graphiques
+# Peaufiner vos graphiques
 
 # Utiliser `geom_*()` pour créer différents types de graphique
 
@@ -1549,7 +1551,7 @@ ggplot(mpg, aes(displ, hwy)) +
 ]
 ]
 ---
-# Boxplot: `geom_boxplot()`
+# Diagramme en boîte: `geom_boxplot()`
 
 ```{r, fig.align="center", fig.height=5}
 ggplot(data = penguins, 
@@ -1557,11 +1559,11 @@ ggplot(data = penguins,
            y = bill_length_mm,
            fill = species)) +
   geom_boxplot() +
-  labs(title = "Boxplot")
+  labs(title = "Diagramme en boîte")
 ```
 
 ---
-# Boxplot: `geom_boxplot()`
+# Diagramme en boîte: `geom_boxplot()`
 
 ```{r, echo=FALSE, fig.align="center", fig.width = 5, fig.height = 3.2}
 ggplot(data = penguins, 
@@ -1569,7 +1571,7 @@ ggplot(data = penguins,
            y = bill_length_mm,
            fill = species)) +
   geom_boxplot() +
-  labs(title = "Boxplot")
+  labs(title = "Diagramme en boîte")
 ```
 
 .center[
@@ -1612,7 +1614,7 @@ ggplot(data = penguins,
 geom_signif calcule la significativité de la différence entre groupes et note le résultat sur la figure.
 
 ---
-# Graphique en violon: `geom_violin()`
+# Diagramme en violon: `geom_violin()`
 
 Comme expliqué sur le site [from Data to Viz](https://www.data-to-viz.com/graph/violin.html)
 
@@ -1638,7 +1640,7 @@ ggplot(data = data, aes(names, value, fill = names)) + geom_violin()
 ]
 
 ---
-# Graphique en violon: `geom_violin()`
+# Diagramme en violon: `geom_violin()`
 
 ```{r, fig.align="center"}
 violin <- ggplot(data = penguins, 
@@ -1649,7 +1651,7 @@ violin
 ```
 
 ---
-# Graphique en violon: `geom_violin()` + `_boxplot()` + `_jitter()`
+# Diagramme en violon: `geom_violin()` + `_boxplot()` + `_jitter()`
 
 ```{r, fig.align="center"}
 violin +
@@ -1687,7 +1689,7 @@ ggplot(mtcars, aes(cyl, mpg)) +
 ---
 # Résumer des valeurs
 
-Voir aussi `geom_errorbar()`, `geom_pointrange()`, `geom_linerange()`, `geom_crossbar()` pour que les géométries puissent afficher des données résumées.
+Voir aussi `geom_errorbar()`, `geom_pointrange()`, `geom_linerange()`, `geom_crossbar()` afficher d'autres statistiques pour résumer vos données.
 
 
 
@@ -1756,53 +1758,59 @@ peng.dens + cars.dens +
 ```
 
 ---
-# Défi final ![:cube]()
+# Défi 4 ![:cube]()
 
 Créez votre propre graphique et suivez ces recommandations :
   * Jeu de données : n'importe lequel (recommandation : utilisez votre jeu de données)
-  * Explorez un nouveau `geom_*` et d'autres couches de graphqiues
+  * Explorez un nouveau `geom_*` et d'autres couches de graphiques
 
 
 Utilisez les liens suivants pour obtenir des conseils :
 
-- https://ggplot2.tidyverse.org/reference/index.html
-- http://shinyapps.stat.ubc.ca/r-graph-catalog/
+- [ggplot2 Reference](https://ggplot2.tidyverse.org/reference/index.html)  
+- [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)  
+- [Data to Viz](https://www.data-to-viz.com/)
 
 ---
-# Défi final: Solution exemple #1
+# Défi 4: Solution exemple 1
 
 .small[
-```{r, fig.align='center',fig.height=4}
+```{r, fig.align='center',fig.height=4, warning = FALSE, message = FALSE}
 data(msleep)
-msleep.defi4 <- ggplot(data = msleep, 
-                       aes(x = vore, y = log10(brainwt), fill = vore))
-msleep.defi4 + 
+ggplot(msleep, 
+       aes(x = vore, 
+           y = log10(brainwt), 
+           fill = vore)) + 
   geom_violin() +
   geom_signif(comparisons = list(c("herbi", "insecti"))) +
-  labs(main = "Poids du cerveau pour les différents -vores", y = "log10(Poids du cerveau (Kg))") +
+  labs("Poids du cerveau pour les différents -vores", 
+       y = "log10(Poids du cerveau (Kg))") +
   scale_fill_grey() +
   theme_classic()
 ```
 ]
 
 ---
-#  Défi final: Solution exemple #2
+# Défi 4: Solution exemple 2
 .small[
 ```{r, fig.align='center', fig.width=5, fig.height=4}
 data(mtcars)
+# let's do some clustering!
 mtcars.short <- mtcars[1:20,]
-mtcars.short.hc <- hclust(dist(mtcars.short), "complete")
-dendro.defi4 <- ggdendrogram(mtcars.short.hc, rotate = TRUE, theme_dendro = FALSE)
-dendro.defi4 + ggtitle("Dendrogramme des voitures selon les spécifications du moteur") +
-  xlab("Voitures") +
-  theme(axis.title.y = element_text(size = 16), axis.title.x = element_blank(),
-        axis.text.x = element_blank(), axis.text.y = element_text(size = 12),
-        plot.title = element_text(size = 14, face = "bold"))
+mtcars.short.hc <- hclust(dist(mtcars.short), "average")
+
+ggdendrogram(mtcars.short.hc, rotate = TRUE) + 
+  # fine-tuning
+  labs(title = "Dendrogramme des voitures selon les spécifications du moteur", y ="Voitures") +
+  theme(axis.title.y = element_text(size = 16),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(), axis.text.x = element_blank(),
+        plot.title = element_text(size = 14, face="bold"))
 ```
 ]
 
 ---
-## Divers : graphiques interactifs utilisant `plotly()`
+## Divers : graphiques interactifs avec `plotly()`
 
 .small[
 .alert[**Sélectionnez les données sur les espèces à afficher directement dans la légende**]
