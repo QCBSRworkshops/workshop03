@@ -34,6 +34,21 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
+# Contributors | Contributeurs et contributrices
+
+This workshop was originally developed by Xavier Giroux-Bougard, Maxwell Farrell, Amanda Winegardner, Étienne Low-Decarie and Monica Granados. 
+
+Since 2014, several QCBS members contributed to consistently and collaboratively develop and update this workshop, as part of the *Learning and Development Award* from the Québec Centre for Biodiversity Science. They were:
+
+|      2022 - 2021 - 2020     |      2019 - 2018 - 2017     |      2016 - 2015 - 2014      |
+|:---------------------------:|:---------------------------:|:----------------------------:|
+| Linley Sherin  | Marie-Hélène Brice | Xavier Giroux-Bougard |
+| Katherine Hébert  | Willian Vieira  | Maxwell Farrell |
+| Jake Lawlor  |  Rémi Maglione | Amanda Winegardner |
+| Marie-Hélène Brice  | Pedro Henrique P. Braga | Étienne Low-Decarie |
+| Kevin Cazelles  | Alexis Carteron | Monica Granados |
+|   | Katherine Hébert |  |
+
 # Development status
 
 **Template** 
