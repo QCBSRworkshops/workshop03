@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapitre 8 Les couleurs: faites parler vos données | Atelier 3: Introduction à ggplot2</title>
+  <title>Chapitre 15 Défi 4 | Atelier 3: Introduction à ggplot2</title>
   <meta name="description" content="Introduction à ggplot2" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapitre 8 Les couleurs: faites parler vos données | Atelier 3: Introduction à ggplot2" />
+  <meta property="og:title" content="Chapitre 15 Défi 4 | Atelier 3: Introduction à ggplot2" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop03" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapitre 8 Les couleurs: faites parler vos données | Atelier 3: Introduction à ggplot2" />
+  <meta name="twitter:title" content="Chapitre 15 Défi 4 | Atelier 3: Introduction à ggplot2" />
   
   <meta name="twitter:description" content="Introduction à ggplot2" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="esthétiques.html"/>
-<link rel="next" href="changer-la-forme-la-taille-et-la-transparence.html"/>
+<link rel="prev" href="disposition-des-graphiques-patchwork.html"/>
+<link rel="next" href="divers-graphiques-interactifs-avec-plotly.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -282,155 +282,49 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="les-couleurs-faites-parler-vos-données" class="section level1">
-<h1><span class="header-section-number">Chapitre 8</span> Les couleurs: faites parler vos données</h1>
-<p>Lorsque nous concevons des graphiques, nous pouvons vouloir changer la couleur de nos points de données afin de communiquer différentes informations sur les données. Nous pouvons vouloir:</p>
+<div id="défi-4" class="section level1">
+<h1><span class="header-section-number">Chapitre 15</span> Défi 4</h1>
+<p>Créez votre propre graphique et suivez ces recommandations :
+* Jeu de données : n’importe lequel (recommandation : utilisez votre jeu de données)
+* Explorez un nouveau <code>geom_*</code> et d’autres couches de graphiques</p>
+<p>Utilisez les liens suivants pour obtenir des conseils :</p>
 <ul>
-<li>Différencier entre des groupes</li>
-<li>Représenter les valeurs des données</li>
-<li>Mettre en évidence des éléments spécifiques</li>
+<li><a href="https://ggplot2.tidyverse.org/reference/index.html">ggplot2 Reference</a><br />
+</li>
+<li><a href="https://www.r-graph-gallery.com/ggplot2-package.html">R Graph Gallery</a><br />
+</li>
+<li><a href="https://www.data-to-viz.com/">Data to Viz</a></li>
 </ul>
-<div class="split">
-<div class="split-left">
-<p><img src="book-fr_files/figure-html/unnamed-chunk-33-1.png" width="480" /></p>
+<div id="défi-4-solution-exemple-1" class="section level2">
+<h2><span class="header-section-number">15.1</span> Défi 4: Solution exemple 1</h2>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="défi-4.html#cb84-1"></a><span class="kw">data</span>(msleep)</span>
+<span id="cb84-2"><a href="défi-4.html#cb84-2"></a><span class="kw">ggplot</span>(msleep, <span class="kw">aes</span>(<span class="dt">x =</span> vore, <span class="dt">y =</span> <span class="kw">log10</span>(brainwt), <span class="dt">fill =</span> vore)) <span class="op">+</span></span>
+<span id="cb84-3"><a href="défi-4.html#cb84-3"></a><span class="st">    </span><span class="kw">geom_violin</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_signif</span>(<span class="dt">comparisons =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;herbi&quot;</span>,</span>
+<span id="cb84-4"><a href="défi-4.html#cb84-4"></a>    <span class="st">&quot;insecti&quot;</span>))) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="st">&quot;Poids du cerveau pour les différents -vores&quot;</span>,</span>
+<span id="cb84-5"><a href="défi-4.html#cb84-5"></a>    <span class="dt">y =</span> <span class="st">&quot;log10(Poids du cerveau (Kg))&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_grey</span>() <span class="op">+</span></span>
+<span id="cb84-6"><a href="défi-4.html#cb84-6"></a><span class="st">    </span><span class="kw">theme_classic</span>()</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-101-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div class="split-right">
-<p><img src="book-fr_files/figure-html/unnamed-chunk-34-1.png" width="480" /></p>
-</div>
-</div>
-<p><em>Référence: Fundamentals of Data Visualization <span class="citation">(<span class="citeproc-not-found" data-reference-id="wilke2019fundamentals"><strong>???</strong></span>)</span>.</em></p>
-<div id="utiliser-aes-pour-changer-les-couleurs" class="section level2">
-<h2><span class="header-section-number">8.1</span> Utiliser <code>aes()</code> pour changer les couleurs</h2>
-<p>Nous pouvons utiliser la couche esthétique <code>aes()</code> pour associer des couleurs à nos données dans nos graphiques. Cela nous permettra de communiquer clairement des messages spécifiques sur nos données. Par exemple, si nous voulons savoir si la longueur du bec et la longueur des nageoires varient différemment d’une espèce à l’autre, lequel de ces graphiques nous permet de répondre à cette question?</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="les-couleurs-faites-parler-vos-données.html#cb21-1"></a><span class="co"># No colour mapping</span></span>
-<span id="cb21-2"><a href="les-couleurs-faites-parler-vos-données.html#cb21-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins, <span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm, <span class="dt">y =</span> flipper_length_mm)) <span class="op">+</span></span>
-<span id="cb21-3"><a href="les-couleurs-faites-parler-vos-données.html#cb21-3"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Sans code de couleur&quot;</span>,</span>
-<span id="cb21-4"><a href="les-couleurs-faites-parler-vos-données.html#cb21-4"></a>    <span class="dt">x =</span> <span class="st">&quot;Longueur du bec (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Profondeur du bec (mm)&quot;</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="les-couleurs-faites-parler-vos-données.html#cb22-1"></a><span class="co"># Avec code de couleur</span></span>
-<span id="cb22-2"><a href="les-couleurs-faites-parler-vos-données.html#cb22-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins,</span>
-<span id="cb22-3"><a href="les-couleurs-faites-parler-vos-données.html#cb22-3"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm,</span>
-<span id="cb22-4"><a href="les-couleurs-faites-parler-vos-données.html#cb22-4"></a>           <span class="dt">y =</span> flipper_length_mm,</span>
-<span id="cb22-5"><a href="les-couleurs-faites-parler-vos-données.html#cb22-5"></a>           <span class="dt">col =</span> species)) <span class="op">+</span><span class="st"> </span><span class="co"># l&#39;argument col met une couleur par espèce</span></span>
-<span id="cb22-6"><a href="les-couleurs-faites-parler-vos-données.html#cb22-6"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb22-7"><a href="les-couleurs-faites-parler-vos-données.html#cb22-7"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span></span>
-<span id="cb22-8"><a href="les-couleurs-faites-parler-vos-données.html#cb22-8"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Avec code de couleur&quot;</span>,</span>
-<span id="cb22-9"><a href="les-couleurs-faites-parler-vos-données.html#cb22-9"></a>       <span class="dt">x =</span> <span class="st">&quot;Longueur du bec (mm)&quot;</span>,</span>
-<span id="cb22-10"><a href="les-couleurs-faites-parler-vos-données.html#cb22-10"></a>       <span class="dt">y =</span> <span class="st">&quot;Profondeur du bec (mm)&quot;</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
-</div>
-<div id="changer-les-couleurs-manuellement" class="section level2">
-<h2><span class="header-section-number">8.2</span> Changer les couleurs manuellement</h2>
-<p>Dans l’exemple ci-dessus, nous avons utilisé l’argument <code>col</code> dans <code>aes()</code> afin de colorer automatiquement nos points de données par espèce. Ceci est possible car <code>aes()</code> peut appeler nos variables de données. Cependant, cette méthode utilisera une palette de couleurs par défaut. Si nous voulons ajouter des couleurs spécifiques à nos graphiques, nous pouvons le faire manuellement en utilisant <code>scale_colour_manual()</code> ou <code>scale_fill_manual()</code>.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="les-couleurs-faites-parler-vos-données.html#cb23-1"></a><span class="co"># Défaut</span></span>
-<span id="cb23-2"><a href="les-couleurs-faites-parler-vos-données.html#cb23-2"></a></span>
-<span id="cb23-3"><a href="les-couleurs-faites-parler-vos-données.html#cb23-3"></a><span class="co"># Permettre à ggplot d&#39;assigner un code de couleurs aux</span></span>
-<span id="cb23-4"><a href="les-couleurs-faites-parler-vos-données.html#cb23-4"></a><span class="co"># espèces</span></span>
-<span id="cb23-5"><a href="les-couleurs-faites-parler-vos-données.html#cb23-5"></a>pp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm,</span>
-<span id="cb23-6"><a href="les-couleurs-faites-parler-vos-données.html#cb23-6"></a>    <span class="dt">y =</span> bill_depth_mm, <span class="dt">colour =</span> species)) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Default&quot;</span>,</span>
-<span id="cb23-7"><a href="les-couleurs-faites-parler-vos-données.html#cb23-7"></a>    <span class="dt">x =</span> <span class="st">&quot;Longueur du bec (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Profondeur du bec (mm)&quot;</span>)</span>
-<span id="cb23-8"><a href="les-couleurs-faites-parler-vos-données.html#cb23-8"></a>pp</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="les-couleurs-faites-parler-vos-données.html#cb24-1"></a><span class="co"># Créer un code de couleur manuellement</span></span>
-<span id="cb24-2"><a href="les-couleurs-faites-parler-vos-données.html#cb24-2"></a></span>
-<span id="cb24-3"><a href="les-couleurs-faites-parler-vos-données.html#cb24-3"></a><span class="co"># En utilisant scale_colour_manual(),</span></span>
-<span id="cb24-4"><a href="les-couleurs-faites-parler-vos-données.html#cb24-4"></a><span class="co"># nous pouvons spécifier les couleurs précises que nous voulons utiliser</span></span>
-<span id="cb24-5"><a href="les-couleurs-faites-parler-vos-données.html#cb24-5"></a>pp <span class="op">+</span></span>
-<span id="cb24-6"><a href="les-couleurs-faites-parler-vos-données.html#cb24-6"></a><span class="kw">scale_colour_manual</span>(</span>
-<span id="cb24-7"><a href="les-couleurs-faites-parler-vos-données.html#cb24-7"></a>  <span class="co"># Notez que l&#39;ordre des couleurs correspondra à</span></span>
-<span id="cb24-8"><a href="les-couleurs-faites-parler-vos-données.html#cb24-8"></a>  <span class="co"># l&#39;ordre des espèces indiqué dans la légende</span></span>
-<span id="cb24-9"><a href="les-couleurs-faites-parler-vos-données.html#cb24-9"></a>  <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;grey55&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;skyblue&quot;</span>))</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
-<div class="explanation">
-<p>Ici, nous enregistrons notre graphique en tant qu’objet (<code>pp</code>), et nous ajoutons des éléments à cet objet avec un <code>+</code> pour changer l’échelle de couleurs. Nous n’avons pas besoin de réécrire tout le ggplot pour le personnaliser!</p>
-</div>
-</div>
-<div id="gradients" class="section level2">
-<h2><span class="header-section-number">8.3</span> Gradients</h2>
-<p>Nous pouvons faire la même chose avec des gradients de couleur en utilisant <code>scale_colour_gradient()</code> si nous voulons communiquer quelque chose sur nos données continues. Dans cet exemple, nous colorons nos points de données par masse corporelle en utilisant un gradient.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="les-couleurs-faites-parler-vos-données.html#cb25-1"></a><span class="co"># Défaut</span></span>
-<span id="cb25-2"><a href="les-couleurs-faites-parler-vos-données.html#cb25-2"></a></span>
-<span id="cb25-3"><a href="les-couleurs-faites-parler-vos-données.html#cb25-3"></a><span class="co"># L&#39;utilisation de l&#39;argument couleur dans aes() va</span></span>
-<span id="cb25-4"><a href="les-couleurs-faites-parler-vos-données.html#cb25-4"></a><span class="co"># utiliser une palette de couleurs par défaut pour créer</span></span>
-<span id="cb25-5"><a href="les-couleurs-faites-parler-vos-données.html#cb25-5"></a><span class="co"># notre gradient.</span></span>
-<span id="cb25-6"><a href="les-couleurs-faites-parler-vos-données.html#cb25-6"></a>pp2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm,</span>
-<span id="cb25-7"><a href="les-couleurs-faites-parler-vos-données.html#cb25-7"></a>    <span class="dt">y =</span> bill_depth_mm, <span class="dt">colour =</span> <span class="kw">log10</span>(body_mass_g))) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Défaut&quot;</span>,</span>
-<span id="cb25-8"><a href="les-couleurs-faites-parler-vos-données.html#cb25-8"></a>    <span class="dt">x =</span> <span class="st">&quot;Longueur du bec (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Profondeur du bec (mm)&quot;</span>)</span>
-<span id="cb25-9"><a href="les-couleurs-faites-parler-vos-données.html#cb25-9"></a>pp2</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="les-couleurs-faites-parler-vos-données.html#cb26-1"></a><span class="co"># Manual</span></span>
-<span id="cb26-2"><a href="les-couleurs-faites-parler-vos-données.html#cb26-2"></a></span>
-<span id="cb26-3"><a href="les-couleurs-faites-parler-vos-données.html#cb26-3"></a><span class="co"># En utilisant scale_colour_graduent, nous pouvons définir</span></span>
-<span id="cb26-4"><a href="les-couleurs-faites-parler-vos-données.html#cb26-4"></a><span class="co"># manuellement notre gradient de couleur.</span></span>
-<span id="cb26-5"><a href="les-couleurs-faites-parler-vos-données.html#cb26-5"></a>pp2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Manuellement&quot;</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="les-couleurs-faites-parler-vos-données.html#cb27-1"></a><span class="co"># Note : il existe aussi scale_colour_gradient2() pour</span></span>
-<span id="cb27-2"><a href="les-couleurs-faites-parler-vos-données.html#cb27-2"></a><span class="co"># créer un # gradient avec une valeur médiane pour les</span></span>
-<span id="cb27-3"><a href="les-couleurs-faites-parler-vos-données.html#cb27-3"></a><span class="co"># palettes divergentes.</span></span></code></pre></div>
-</div>
-<div id="utiliser-une-palette-de-couleurs-prédéfinie" class="section level2">
-<h2><span class="header-section-number">8.4</span> Utiliser une palette de couleurs prédéfinie</h2>
-<p>Si vous préférez utiliser une palette de couleurs prédéfinie plutôt que de définir vos couleurs manuellement, mais que vous ne souhaitez pas utiliser la palette par défaut, ne vous inquiétez pas! De nombreuses options s’offrent à vous.</p>
-<p>Il existe de nombreuses librairies de couleurs <code>R</code> spécialement conçus pour vous fournir une gamme d’options de palette de couleurs! Par exemple, la librairie <code>RColorBrewer</code> propose 35 palettes!</p>
-<p>Vous pouvez voir ici qu’elles sont organisées en palettes séquentielles, divergentes ou un mélange des deux. Vous pouvez imaginer que différentes palettes sont plus pertinentes pour différents types de données.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="les-couleurs-faites-parler-vos-données.html#cb28-1"></a><span class="kw">require</span>(RColorBrewer)</span>
-<span id="cb28-2"><a href="les-couleurs-faites-parler-vos-données.html#cb28-2"></a><span class="kw">display.brewer.all</span>()</span></code></pre></div>
-<p><img src="images/rcolorbrewer_palette.png" style="display: block; margin: auto;" /></p>
-<p>Vous voulez voir ces palettes en action? Voici un exemple d’utilisation de la palette Dark2 pour grouper des points de données avec la fonction <code>scale_colour_brewer()</code> et l’argument <code>palette</code>.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="les-couleurs-faites-parler-vos-données.html#cb29-1"></a><span class="co"># Palette pour des groupes</span></span>
-<span id="cb29-2"><a href="les-couleurs-faites-parler-vos-données.html#cb29-2"></a>pp <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Palette pour des groupes&quot;</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-43-1.png" width="624" style="display: block; margin: auto;" /></p>
-<p>There are other functions within the <code>RColorBrewer</code> package as well. By using <code>scale_color_viridis()</code>, we can use a default package that will translate from colour to gray scale without losing information. (Note that this is also an important consideration for colourblindness, which we will discuss soon).</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="les-couleurs-faites-parler-vos-données.html#cb30-1"></a><span class="co"># Palette pour des variables continues</span></span>
-<span id="cb30-2"><a href="les-couleurs-faites-parler-vos-données.html#cb30-2"></a>pp2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_viridis_c</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Palette pour des variables continues&quot;</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-44-1.png" width="624" style="display: block; margin: auto;" /></p>
-<p>Maintenant, que faire si nous voulons utiliser uniquement la palette de gris à des fins de publication? Nous pouvons utiliser la fonction <code>scale_colour_grey()</code> pour colorer nos points de données.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="les-couleurs-faites-parler-vos-données.html#cb31-1"></a><span class="co"># Palette pour groupes</span></span>
-<span id="cb31-2"><a href="les-couleurs-faites-parler-vos-données.html#cb31-2"></a>pp <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_grey</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Palette pour des groups&quot;</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-45-1.png" width="624" style="display: block; margin: auto;" /></p>
-<p>Ou nous pouvons utiliser la fonction <code>scale_colour_gradient()</code> pour les données continues, et définir notre gradient du noir au gris clair.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="les-couleurs-faites-parler-vos-données.html#cb32-1"></a><span class="co"># Palette pour des variables continues</span></span>
-<span id="cb32-2"><a href="les-couleurs-faites-parler-vos-données.html#cb32-2"></a>pp2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;grey85&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
-<span id="cb32-3"><a href="les-couleurs-faites-parler-vos-données.html#cb32-3"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Palette for continuous values&quot;</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-46-1.png" width="624" style="display: block; margin: auto;" /></p>
-</div>
-<div id="utiliser-des-palettes-de-couleurs-visibles-pour-les-daltoniens" class="section level2">
-<h2><span class="header-section-number">8.5</span> Utiliser des palettes de couleurs visibles pour les daltoniens</h2>
-<p>Comment votre figure peut-elle apparaître sous différentes formes de daltonisme ?
-Nous pouvons utiliser <a href="https://github.com/clauswilke/colorblindr">colorblindr</a> qui n’est pas actuellement sur CRAN, donc nous l’installons avec la librairie <a href="https://cran.r-project.org/web/packages/remotes/index.html">remotes</a>.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="les-couleurs-faites-parler-vos-données.html#cb33-1"></a><span class="co"># Installons la librairie colorblindr de GitHub avec</span></span>
-<span id="cb33-2"><a href="les-couleurs-faites-parler-vos-données.html#cb33-2"></a><span class="co"># remotes</span></span>
-<span id="cb33-3"><a href="les-couleurs-faites-parler-vos-données.html#cb33-3"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>, <span class="dt">quiet =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb33-4"><a href="les-couleurs-faites-parler-vos-données.html#cb33-4"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;clauswilke/colorblindr@cc54c8a35f8e7689ef4cc128b0da3af92f8cd540&quot;</span>,</span>
-<span id="cb33-5"><a href="les-couleurs-faites-parler-vos-données.html#cb33-5"></a>    <span class="dt">quiet =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb33-6"><a href="les-couleurs-faites-parler-vos-données.html#cb33-6"></a><span class="kw">library</span>(colorblindr)</span></code></pre></div>
-<p>Commençons par tester quelques couleurs en utilisant la fonction <code>cvd_grid()</code>. Cela nous montrera comment notre graphique actuel se présente pour différentes formes de daltonisme.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="les-couleurs-faites-parler-vos-données.html#cb34-1"></a><span class="kw">cvd_grid</span>(pp)  <span class="co"># Vérifions le résultat de notre graphique selon les différentes formes de daltonisme.</span></span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-47-1.png" width="150%" /></p>
-<p>Comme vous pouvez le constater, notre palette de couleurs actuelle n’est pas accessible ! En utilisant les palettes <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><code>viridis</code></a>, nous pouvons garantir que nos graphiques communiquent toujours les mêmes informations, quel que soit le public.</p>
-<div id="example-pour-des-variables-qualitatives" class="section level3">
-<h3><span class="header-section-number">8.5.1</span> Example pour des variables qualitatives</h3>
-<p>Voici un exemple avec des variables qualitatives (en groupes)</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="les-couleurs-faites-parler-vos-données.html#cb35-1"></a><span class="co"># Utilisons une palette viridis pour rendre notre graphique</span></span>
-<span id="cb35-2"><a href="les-couleurs-faites-parler-vos-données.html#cb35-2"></a><span class="co"># plus accessible.</span></span>
-<span id="cb35-3"><a href="les-couleurs-faites-parler-vos-données.html#cb35-3"></a>pp_viridis &lt;-<span class="st"> </span>pp <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_viridis_d</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Palette viridis palette pour des groupes&quot;</span>)</span>
-<span id="cb35-4"><a href="les-couleurs-faites-parler-vos-données.html#cb35-4"></a>pp_viridis</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="les-couleurs-faites-parler-vos-données.html#cb36-1"></a><span class="co"># Avons-nous réussi ? Utilisons cvd_grid() pour vérifier à</span></span>
-<span id="cb36-2"><a href="les-couleurs-faites-parler-vos-données.html#cb36-2"></a><span class="co"># nouveau.</span></span>
-<span id="cb36-3"><a href="les-couleurs-faites-parler-vos-données.html#cb36-3"></a><span class="kw">cvd_grid</span>(pp_viridis)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="les-couleurs-faites-parler-vos-données.html#cb37-1"></a><span class="co"># On a réussi!</span></span></code></pre></div>
-</div>
-<div id="exemple-pour-variables-continues" class="section level3">
-<h3><span class="header-section-number">8.5.2</span> Exemple pour variables continues</h3>
-<p>Notez que nous utilisons des fonctions légèrement différentes pour les différentes types de données (ex. <code>scale_colour_viridis_c()</code>, <code>scale_colour_viridis_d()</code>).</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="les-couleurs-faites-parler-vos-données.html#cb38-1"></a>pp2_viridis &lt;-<span class="st"> </span>pp2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_viridis_c</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Palette viridis pour des variables continues&quot;</span>)</span>
-<span id="cb38-2"><a href="les-couleurs-faites-parler-vos-données.html#cb38-2"></a>pp2_viridis</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="les-couleurs-faites-parler-vos-données.html#cb39-1"></a><span class="kw">cvd_grid</span>(pp2_viridis)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
-</div>
+<div id="défi-4-solution-example-2" class="section level2">
+<h2><span class="header-section-number">15.2</span> Défi 4: Solution example 2</h2>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="défi-4.html#cb85-1"></a><span class="kw">data</span>(mtcars)</span>
+<span id="cb85-2"><a href="défi-4.html#cb85-2"></a><span class="co"># let&#39;s do some clustering!</span></span>
+<span id="cb85-3"><a href="défi-4.html#cb85-3"></a>mtcars.short &lt;-<span class="st"> </span>mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, ]</span>
+<span id="cb85-4"><a href="défi-4.html#cb85-4"></a>mtcars.short.hc &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(mtcars.short), <span class="st">&quot;average&quot;</span>)</span>
+<span id="cb85-5"><a href="défi-4.html#cb85-5"></a></span>
+<span id="cb85-6"><a href="défi-4.html#cb85-6"></a><span class="kw">ggdendrogram</span>(mtcars.short.hc, <span class="dt">rotate =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="co"># fine-tuning ggdendrogram(mtcars.short.hc,</span></span>
+<span id="cb85-7"><a href="défi-4.html#cb85-7"></a><span class="kw">ggdendrogram</span>(mtcars.short.hc, <span class="dt">rotate =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="co"># fine-tuning rotate</span></span>
+<span id="cb85-8"><a href="défi-4.html#cb85-8"></a><span class="kw">ggdendrogram</span>(mtcars.short.hc, <span class="dt">rotate =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="co"># fine-tuning =</span></span>
+<span id="cb85-9"><a href="défi-4.html#cb85-9"></a><span class="kw">ggdendrogram</span>(mtcars.short.hc, <span class="dt">rotate =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="co"># fine-tuning TRUE)</span></span>
+<span id="cb85-10"><a href="défi-4.html#cb85-10"></a><span class="kw">ggdendrogram</span>(mtcars.short.hc, <span class="dt">rotate =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="co"># fine-tuning +</span></span>
+<span id="cb85-11"><a href="défi-4.html#cb85-11"></a><span class="kw">ggdendrogram</span>(mtcars.short.hc, <span class="dt">rotate =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="co"># fine-tuning #</span></span>
+<span id="cb85-12"><a href="défi-4.html#cb85-12"></a><span class="kw">ggdendrogram</span>(mtcars.short.hc, <span class="dt">rotate =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="co"># fine-tuning fine-tuning</span></span>
+<span id="cb85-13"><a href="défi-4.html#cb85-13"></a><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Dendrogramme des voitures selon les spécifications du moteur&quot;</span>,</span>
+<span id="cb85-14"><a href="défi-4.html#cb85-14"></a>    <span class="dt">y =</span> <span class="st">&quot;Voitures&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>),</span>
+<span id="cb85-15"><a href="défi-4.html#cb85-15"></a>    <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>), <span class="dt">axis.title.x =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb85-16"><a href="défi-4.html#cb85-16"></a>    <span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>(), <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">14</span>,</span>
+<span id="cb85-17"><a href="défi-4.html#cb85-17"></a>        <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>))</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-102-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <hr>
@@ -444,8 +338,8 @@ Nous pouvons utiliser <a href="https://github.com/clauswilke/colorblindr">colorb
           </div>
         </div>
       </div>
-<a href="esthétiques.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="changer-la-forme-la-taille-et-la-transparence.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="disposition-des-graphiques-patchwork.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="divers-graphiques-interactifs-avec-plotly.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

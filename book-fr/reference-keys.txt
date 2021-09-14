@@ -86,5 +86,11 @@ défi-4
 défi-4-solution-exemple-1
 défi-4-solution-example-2
 divers-graphiques-interactifs-avec-plotly
-sauvegarder
-conclusion
+section
+sauvegarder-des-graphiques-avec-r
+considérations-finales
+ressources-additionelles-en
+documents-de-référence
+livres
+inspiration-et-guides
+notes-de-cours

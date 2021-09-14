@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapitre 16 Conclusion | Atelier 3: Introduction à ggplot2</title>
+  <title>Chapitre 17  | Atelier 3: Introduction à ggplot2</title>
   <meta name="description" content="Introduction à ggplot2" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapitre 16 Conclusion | Atelier 3: Introduction à ggplot2" />
+  <meta property="og:title" content="Chapitre 17  | Atelier 3: Introduction à ggplot2" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop03" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapitre 16 Conclusion | Atelier 3: Introduction à ggplot2" />
+  <meta name="twitter:title" content="Chapitre 17  | Atelier 3: Introduction à ggplot2" />
   
   <meta name="twitter:description" content="Introduction à ggplot2" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="sauvegarder.html"/>
-
+<link rel="prev" href="divers-graphiques-interactifs-avec-plotly.html"/>
+<link rel="next" href="sauvegarder-des-graphiques-avec-r.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -221,24 +221,33 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="13" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><i class="fa fa-check"></i><b>13</b> Utiliser <code>geom_*()</code> pour créer différents types de graphique</a><ul>
 <li class="chapter" data-level="13.1" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#histogrammes-geom_histogram"><i class="fa fa-check"></i><b>13.1</b> Histogrammes: <code>geom_histogram()</code></a></li>
+<li class="chapter" data-level="13.2" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth"><i class="fa fa-check"></i><b>13.2</b> Nuage de points et régression linéaire: <code>geom_point()</code> et <code>geom_smooth()</code></a></li>
+<li class="chapter" data-level="13.3" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#diagramme-en-boîte-geom_boxplot"><i class="fa fa-check"></i><b>13.3</b> Diagramme en boîte: <code>geom_boxplot()</code>:</a></li>
+<li class="chapter" data-level="13.4" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#diagramme-en-boîte-avec-annotations-geom_boxplot-and-geom_signif"><i class="fa fa-check"></i><b>13.4</b> Diagramme en boîte avec annotations: <code>geom_boxplot()</code> and <code>geom_signif()</code></a></li>
+<li class="chapter" data-level="13.5" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#diagramme-en-violon-geom_violin"><i class="fa fa-check"></i><b>13.5</b> Diagramme en violon: <code>geom_violin()</code></a></li>
+<li class="chapter" data-level="13.6" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#résumer-des-valeurs-y-stat_summary"><i class="fa fa-check"></i><b>13.6</b> Résumer des valeurs <code>y</code>: <code>stat_summary()</code></a></li>
+<li class="chapter" data-level="13.7" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#créer-des-cartes-geom_map"><i class="fa fa-check"></i><b>13.7</b> Créer des cartes: <code>geom_map()</code></a></li>
+<li class="chapter" data-level="13.8" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#graphique-de-densité-geom_density"><i class="fa fa-check"></i><b>13.8</b> Graphique de densité: <code>geom_density()</code></a></li>
+<li class="chapter" data-level="13.9" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#dendogramme-ggdendrogram"><i class="fa fa-check"></i><b>13.9</b> Dendogramme: <code>ggdendrogram()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html"><a href="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html"><i class="fa fa-check"></i><b>14</b> Nuage de points et régression linéaire: <code>geom_point()</code> et <code>geom_smooth()</code></a><ul>
-<li class="chapter" data-level="14.1" data-path="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html"><a href="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html#diagramme-en-boîte-geom_boxplot"><i class="fa fa-check"></i><b>14.1</b> Diagramme en boîte: <code>geom_boxplot()</code></a></li>
-<li class="chapter" data-level="14.2" data-path="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html"><a href="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html#diagramme-en-boîte-avec-annotations-geom_boxplot-and-geom_signif"><i class="fa fa-check"></i><b>14.2</b> Diagramme en boîte avec annotations: <code>geom_boxplot()</code> and <code>geom_signif()</code></a></li>
-<li class="chapter" data-level="14.3" data-path="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html"><a href="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html#diagramme-en-violon-geom_violin"><i class="fa fa-check"></i><b>14.3</b> Diagramme en violon: <code>geom_violin()</code></a></li>
-<li class="chapter" data-level="14.4" data-path="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html"><a href="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html#résumer-des-valeurs-y-stat_summary"><i class="fa fa-check"></i><b>14.4</b> Résumer des valeurs <code>y</code>: <code>stat_summary()</code></a></li>
-<li class="chapter" data-level="14.5" data-path="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html"><a href="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html#créer-des-cartes-geom_map"><i class="fa fa-check"></i><b>14.5</b> Créer des cartes: <code>geom_map()</code></a></li>
-<li class="chapter" data-level="14.6" data-path="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html"><a href="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html#graphique-de-densité-geom_density"><i class="fa fa-check"></i><b>14.6</b> Graphique de densité: <code>geom_density()</code></a></li>
-<li class="chapter" data-level="14.7" data-path="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html"><a href="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html#dendogramme-ggdendrogram"><i class="fa fa-check"></i><b>14.7</b> Dendogramme: <code>ggdendrogram()</code></a></li>
-<li class="chapter" data-level="14.8" data-path="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html"><a href="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html#disposition-des-graphiques-patchwork"><i class="fa fa-check"></i><b>14.8</b> Disposition des graphiques: <code>patchwork</code></a></li>
-<li class="chapter" data-level="14.9" data-path="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html"><a href="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html#défi-4"><i class="fa fa-check"></i><b>14.9</b> Défi 4</a><ul>
-<li class="chapter" data-level="14.9.1" data-path="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html"><a href="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html#défi-4-solution-exemple-1"><i class="fa fa-check"></i><b>14.9.1</b> Défi 4: Solution exemple 1</a></li>
-<li class="chapter" data-level="14.9.2" data-path="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html"><a href="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html#défi-4-solution-example-2"><i class="fa fa-check"></i><b>14.9.2</b> Défi 4: Solution example 2</a></li>
+<li class="chapter" data-level="14" data-path="disposition-des-graphiques-patchwork.html"><a href="disposition-des-graphiques-patchwork.html"><i class="fa fa-check"></i><b>14</b> Disposition des graphiques: <code>patchwork</code></a></li>
+<li class="chapter" data-level="15" data-path="défi-4.html"><a href="défi-4.html"><i class="fa fa-check"></i><b>15</b> Défi 4</a><ul>
+<li class="chapter" data-level="15.1" data-path="défi-4.html"><a href="défi-4.html#défi-4-solution-exemple-1"><i class="fa fa-check"></i><b>15.1</b> Défi 4: Solution exemple 1</a></li>
+<li class="chapter" data-level="15.2" data-path="défi-4.html"><a href="défi-4.html#défi-4-solution-example-2"><i class="fa fa-check"></i><b>15.2</b> Défi 4: Solution example 2</a></li>
 </ul></li>
-<li class="chapter" data-level="14.10" data-path="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html"><a href="nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth.html#divers-graphiques-interactifs-avec-plotly"><i class="fa fa-check"></i><b>14.10</b> Divers : graphiques interactifs avec <code>plotly()</code></a></li>
+<li class="chapter" data-level="16" data-path="divers-graphiques-interactifs-avec-plotly.html"><a href="divers-graphiques-interactifs-avec-plotly.html"><i class="fa fa-check"></i><b>16</b> Divers : graphiques interactifs avec <code>plotly()</code></a></li>
+<li class="chapter" data-level="17" data-path="section.html"><a href="section.html"><i class="fa fa-check"></i><b>17</b> </a></li>
+<li class="part"><span><b>Sauvegarder vos graphiques</b></span></li>
+<li class="chapter" data-level="18" data-path="sauvegarder-des-graphiques-avec-r.html"><a href="sauvegarder-des-graphiques-avec-r.html"><i class="fa fa-check"></i><b>18</b> Sauvegarder des graphiques avec R</a></li>
+<li class="part"><span><b>Conclusion</b></span></li>
+<li class="chapter" data-level="19" data-path="considérations-finales.html"><a href="considérations-finales.html"><i class="fa fa-check"></i><b>19</b> Considérations finales</a></li>
+<li class="chapter" data-level="20" data-path="ressources-additionelles-en.html"><a href="ressources-additionelles-en.html"><i class="fa fa-check"></i><b>20</b> Ressources additionelles (EN)</a><ul>
+<li class="chapter" data-level="20.1" data-path="ressources-additionelles-en.html"><a href="ressources-additionelles-en.html#documents-de-référence"><i class="fa fa-check"></i><b>20.1</b> Documents de référence</a></li>
+<li class="chapter" data-level="20.2" data-path="ressources-additionelles-en.html"><a href="ressources-additionelles-en.html#livres"><i class="fa fa-check"></i><b>20.2</b> Livres</a></li>
+<li class="chapter" data-level="20.3" data-path="ressources-additionelles-en.html"><a href="ressources-additionelles-en.html#inspiration-et-guides"><i class="fa fa-check"></i><b>20.3</b> Inspiration et guides</a></li>
+<li class="chapter" data-level="20.4" data-path="ressources-additionelles-en.html"><a href="ressources-additionelles-en.html#notes-de-cours"><i class="fa fa-check"></i><b>20.4</b> Notes de cours</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="sauvegarder.html"><a href="sauvegarder.html"><i class="fa fa-check"></i><b>15</b> Sauvegarder</a></li>
-<li class="chapter" data-level="16" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>16</b> Conclusion</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
 
@@ -273,13 +282,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="conclusion" class="section level1">
-<h1><span class="header-section-number">Chapitre 16</span> Conclusion</h1>
-
+<div id="section" class="section level1">
+<h1><span class="header-section-number">Chapitre 17</span> </h1>
 </div>
-
-
-
 
 
 
@@ -294,8 +299,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="sauvegarder.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="divers-graphiques-interactifs-avec-plotly.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sauvegarder-des-graphiques-avec-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

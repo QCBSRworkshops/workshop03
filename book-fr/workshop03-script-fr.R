@@ -665,7 +665,30 @@ ggplotly(p)
 
 ##Section: 06-sauvegarder.R 
 
+my1stPlot <-  # Créer une figure pour pratiquer comment sauvegarder
+  ggplot(penguins,
+         aes(x = bill_length_mm,
+             y = bill_depth_mm)) +
+  geom_point()
 
+ggsave(filename = "my1stPlot.pdf", # Nommez le fichier dans lequel vous voulez enregistrer, ajoutez l'extension du format de fichier que vous voulez utiliser (ex. pdf).
+       plot = my1stPlot, # Fournir le nom de l'objet plot dans R
+       height = 8.5, # Fournir les dimensions voulues
+       width = 11,
+       units = "in")
+
+# Astuce : Les fonctions `quartz()` (mac) ou `window()` (pc) facilitent le dimensionnement avant `ggsave()` ! Tracez simplement votre ggplot dans quartz() ou window(), ajustez la taille jusqu'à ce qu'elle soit bonne, et lancez ggsave() avec le nom du fichier pour voir quelles dimensions vous avez utilisées ! Vous pouvez ensuite ajouter ceci dans votre code avec height = et width = comme indiqué ci-dessus.
+
+my2ndPlot <-  # Créer un 2eme graphique pour pratiquer pdf()
+  ggplot(penguins,
+         aes(x = bill_length_mm,
+             y = bill_depth_mm)) +
+  geom_point()
+
+pdf("./graph_du_jour.pdf")
+  print(my1stPlot) # print() est nécessaire
+  print(my2ndPlot)
+graphics.off()
 
 
 ##Section: 07-conclusion.R 
