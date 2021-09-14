@@ -127,9 +127,9 @@ pp +
 
 ```{r, warning = FALSE, message = FALSE}
 ggplot(data = penguins) +
-  geom_point(mapping = aes(x = bill_length_mm, 
-                           y = bill_depth_mm, 
-                           colour = species)) +
+  geom_point(aes(x = bill_length_mm, 
+                 y = bill_depth_mm, 
+                 colour = species)) + 
   facet_grid(~ species, 
              scales = "free") # the scale of the y axis can vary between facets.
 # do not do this if you are comparing facets via the y axis!
@@ -140,9 +140,9 @@ ggplot(data = penguins) +
 
 ```{r, warning = FALSE, message = FALSE}
 ggplot(data = penguins) +
-  geom_point(mapping = aes(x = bill_length_mm, 
-                           y = bill_depth_mm, 
-                           colour = species)) +
+  geom_point(aes(x = bill_length_mm, 
+                 y = bill_depth_mm, 
+                 colour = species)) + 
   facet_grid(year ~ species, 
              scales = "free")
 ```
@@ -159,7 +159,7 @@ pp
 
 We can tune the axes and titles to make the information clearer, so the plot can speak for itself.
 
-```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=7,warning = FALSE, message = FALSE}
+```{r, echo=FALSE, fig.align="center", warning = FALSE, message = FALSE}
 # Tuning axes and titles to make the plot speak for itself
 pp +
   # Label the title, axes, and color legend
@@ -228,8 +228,6 @@ tips.gg
 # SOLUTION # -----
 ```
 
-
----
 
 ### Challenge 3: Solution
 
