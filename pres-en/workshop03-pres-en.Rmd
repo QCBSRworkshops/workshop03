@@ -943,7 +943,7 @@ Have you ever considered how your figure might appear under various forms of col
 We can use the package [colorblindr](https://github.com/clauswilke/colorblindr) to consider this. This package is not currently on CRAN, so we install it with the packages [remotes](https://cran.r-project.org/web/packages/remotes/index.html).
 
 ```{R colorblindr_install, message = FALSE}
-install.packages("remotes", quiet = TRUE)
+#install.packages("remotes", quiet = TRUE)
 remotes::install_github("clauswilke/colorblindr@cc54c8a35f8e7689ef4cc128b0da3af92f8cd540", quiet = TRUE)
 library(colorblindr)
 ```
