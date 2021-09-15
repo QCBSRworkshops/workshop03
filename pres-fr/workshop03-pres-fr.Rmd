@@ -14,6 +14,8 @@ output:
       highlightLines: true
 ---
 
+class: inverse, center, middle
+
 ```{r setup, echo = FALSE}
 knitr::opts_chunk$set(
   comment = "#",
@@ -53,6 +55,7 @@ theme_set(theme_classic())
 ```
 
 # À propos de cet atelier
+
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop03)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=wiki&message=03&logo=wikipedia)](https://wiki.qcbs.ca/r_atelier3)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Diapos&message=03&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop03/workshop03-fr/workshop03-fr.html)
@@ -60,6 +63,7 @@ theme_set(theme_classic())
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=script&message=03&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop03/workshop03-fr/workshop03-fr.R)
 
 ---
+# Librairies requises
 
 .pull-left4[
 * [gridExtra](https://cran.r-project.org/package=gridExtra)
