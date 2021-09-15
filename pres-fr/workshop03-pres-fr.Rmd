@@ -175,14 +175,13 @@ Comment pourrions-nous améliorer cette figure ![:faic](arrow-up)?
 
 ---
 # Visualisation en science
-<br>
 
 #### Questions importantes:
 
 - Que voulez-vous communiquer?
 - Qui est votre public?
 - Quelle est la meilleure façon de visualiser votre message?
-<br>
+<br><br>
 
 .center[
 .alert[Règle générale: restez simple - utilisez moins d'encre!]
@@ -742,7 +741,7 @@ class: inverse, center, middle
 ---
 # Esthétique
 
-**Utiliser l'esthétique (`aes()`) pour distinguer les classes, les groupes et la structure**
+**Utiliser l'esthétique `aes()` pour distinguer les classes, les groupes et la structure**
 
 ![:scale 70%](images/4plot_aesthetic.png) 
 
@@ -941,7 +940,7 @@ library(colorblindr)
 ---
 # Utiliser des palettes de couleurs visibles pour les daltoniens
 
-```{r, fig.width = 11, fig.height = 7}
+```{r, fig.width = 11, fig.height = 6.5}
 cvd_grid(pp)
 ```
 
@@ -1198,7 +1197,7 @@ ou `theme_update()` pour modifier certains aspects d'un thème.
 
 .pull-left[
 **Définir le thème**
-```{r, fig.height = 5, fig.width = 6.5}
+```{r, fig.height = 4.5, fig.width = 6.5}
 # Choisir le thème par défaut
 theme_set(theme_bw())
 pp
@@ -1219,7 +1218,10 @@ pp
 theme_set(theme_bw())
 theme_update(panel.grid.minor = element_blank(),
              axis.text = element_text(size = 16),
-             axis.title = element_text(size = 18))
+             axis.title = element_text(size = 18),
+             strip.text = element_text(size = 16),
+             legend.text = element_text(size = 14),
+             legend.title = element_text(size = 18))
 ```
 
 ---
@@ -1250,30 +1252,28 @@ class: inverse, center, middle
 ---
 # Facettes selon une variable
 
-```{r, warning = FALSE, message = FALSE}
+```{r, warning = FALSE, message = FALSE, fig.height = 5.5, fig.width = 8}
 ggplot(data = penguins) +
   geom_point(mapping = aes(x = bill_length_mm, 
                            y = bill_depth_mm, 
                            colour = species)) +
-  facet_grid(~ species, 
-             scales = "free") # l'échelle de l'axe des y peut varier entre les facettes.
+  facet_grid(~ species,  scales = "free") 
 ```
 
 ???
 
-Ne faites pas scales = 'free' si vous comparez des facettes via l'axe des y !
+L'échelle de l'axe des y peut varier entre les facettes. Ne faites pas scales = 'free' si vous comparez des facettes via l'axe des y !
 
 
 ---
 # Facettes selon deux variables
 
-```{r, warning = FALSE, message = FALSE}
+```{r, warning = FALSE, message = FALSE, fig.height = 5.5, fig.width = 8}
 ggplot(data = penguins) +
   geom_point(mapping = aes(x = bill_length_mm, 
                            y = bill_depth_mm, 
                            colour = species)) +
-  facet_grid(year ~ species, 
-             scales = "free")
+  facet_grid(year ~ species, scales = "free")
 ```
 
 ---
@@ -1437,7 +1437,7 @@ tips.gg
 #### Ajout et ajustement du thème
 
 .small[
-```{r, fig.width=6, fig.height=4}
+```{r, fig.width=10, fig.height=4}
 tips.gg <- tips.gg +
   theme_classic() +
   theme(axis.title = element_text(size = 16, colour = "navy"),
@@ -1721,8 +1721,6 @@ USArrests : Violent Crime Rates by US State dataset, inclus dans R. Cet ensemble
 La carte se trouve sur la diapositive suivante. N'hésitez pas à passer d'une diapositive à l'autre pour expliquer chaque élément si la cartographie suscite de l'intérêt. 
 
 ---
-
----
 # Créer des cartes: `geom_map()`
 
 ```{r, echo = FALSE, fig.width = 10}
@@ -1835,7 +1833,19 @@ ggplot(msleep,
 ---
 # Défi 4: Solution exemple 2
 .small[
-```{r, fig.align='center', fig.width=5, fig.height=4}
+```{r, fig.align='center', fig.width=5, fig.height=4, eval = FALSE}
+data(mtcars)
+# let's do some clustering!
+mtcars.short <- mtcars[1:20,]
+mtcars.short.hc <- hclust(dist(mtcars.short), "average")
+
+ggdendrogram(mtcars.short.hc, rotate = TRUE) + 
+  # fine-tuning
+  labs(title = "Dendrogramme des voitures selon les spécifications du moteur", 
+       y ="Voitures")
+```
+
+```{r, fig.align='center', fig.width=5, fig.height=4, echo = FALSE}
 data(mtcars)
 # let's do some clustering!
 mtcars.short <- mtcars[1:20,]
