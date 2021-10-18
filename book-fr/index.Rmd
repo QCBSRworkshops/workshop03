@@ -2,7 +2,7 @@
 title: "Atelier 3: Introduction à `ggplot2`"
 subtitle: "Série d'ateliers R du CSBQ"
 author:
-- Développé et entretenu par les contributeurs et les contributrices de la Série d'ateliers R du CSBQ^[La Série d'ateliers R du CSBQ fait partie du [Centre de la science de la biodiversité du Québec](https://www.qcbs.ca), et est maintenue par les coordonnateurs et les coordonnatrices de la série, et les membres étudiants diplômés, postdoctoraux et professionnels de la recherche. **La liste des contributeurs et des contributrices de cet atelier sont accessibles[ici](lien)**].
+- Développé et entretenu par les contributeurs et les contributrices de la Série d'ateliers R du CSBQ^[La Série d'ateliers R du CSBQ fait partie du [Centre de la science de la biodiversité du Québec](https://www.qcbs.ca), et est maintenue par les coordonnateurs et les coordonnatrices de la série, et les membres étudiants diplômés, postdoctoraux et professionnels de la recherche. **La liste des contributeurs et des contributrices de cet atelier sont accessibles[ici](https://r.qcbs.ca/fr/workshops/r-workshop-03/)**].
 date: "`r Sys.time()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -14,7 +14,7 @@ github-repo: "qcbsRworkshops/workshop03"
 description: "Introduction à `ggplot2`"
 favicon: "assets/images/favicon.ico"
 always_allow_html: yes
-url: 'https\://github.com/qcbsRworkshops/'
+url: 'https://r.qcbs.ca/fr/'
 config:
   edit:
     link: https://github.com/qcbsRworkshops/workshop03/edit/main/book-fr/%s
@@ -89,7 +89,7 @@ Depuis 2014, plusieurs membres du CSBQ ont contribué à développer et à mettr
 
 ## Contribuez à la série!
 
-La série d'ateliers R du CSBQ dépend sur les contributions des membres étudiants diplômés, postdoctoraux et professionnels de la recherche du CSBQ pour développer et présenter les ateliers. Nous sommes toujours à la recherche de contributeurs et contributrices pour amélorier le matériel et pour instruire les ateliers. Pour plus d'informations, nous vous invitons à consulter notre [Protocole pour la présentation et le development](https://qcbsrworkshops.github.io/presenter-developer-protocol/). Si vous êtes intéressé(e)s à contribuer à la série d'ateliers, contactez-nous!
+La série d'ateliers R du CSBQ dépend sur les contributions des membres étudiants diplômés, postdoctoraux et professionnels de la recherche du CSBQ pour développer et présenter les ateliers. Nous sommes toujours à la recherche de contributeurs et contributrices pour amélorier le matériel et pour instruire les ateliers. Pour plus d'informations, nous vous invitons à consulter notre [Protocole pour la présentation et le development](https://r.qcbs.ca/presenter-developer-protocol/). Si vous êtes intéressé(e)s à contribuer à la série d'ateliers, contactez-nous!
 
 Si vous trouvez des erreurs ou des incohérences, ou si vous souhaitez faire une suggestion, que ce soit sur la forme ou le contenu de ce matériel, vous êtes invités à ouvrir un [numéro](https://help.github.com/articles/about-issues/). Vous pouvez suivre ces étapes simples pour créer un nouveau [numéro](https://help.github.com/articles/creating-an-issue/).
 

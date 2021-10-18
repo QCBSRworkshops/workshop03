@@ -2,7 +2,7 @@
 title: "Workshop 3: Introduction to `ggplot2`"
 subtitle: "QCBS R Workshop Series"
 author:
-- Developed and maintained by the contributors of the QCBS R Workshop Series^[The QCBS R Workshop Series is part of the [Québec Centre for Biodiversity Science](https://www.qcbs.ca), and is maintained by the series coordinators and graduent student, postdoctoral, and research professional members. **The contributors for this workshop can be accessed [here](link)**.]
+- Developed and maintained by the contributors of the QCBS R Workshop Series^[The QCBS R Workshop Series is part of the [Québec Centre for Biodiversity Science](https://www.qcbs.ca), and is maintained by the series coordinators and graduent student, postdoctoral, and research professional members. **The contributors for this workshop can be accessed [here](https://r.qcbs.ca/workshops/r-workshop-03/)**.]
 date: "`r Sys.time()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -14,7 +14,7 @@ github-repo: "qcbsRworkshops/workshop03"
 description: "Introduction to `ggplot2`"
 favicon: "assets/images/favicon.ico"
 always_allow_html: yes
-url: 'https\://github.com/qcbsRworkshops/'
+url: 'https://r.qcbs.ca/'
 config:
   edit:
     link: https://github.com/qcbsRworkshops/workshop03/edit/main/book-en/%s
