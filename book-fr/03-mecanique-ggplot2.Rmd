@@ -134,7 +134,7 @@ class(penguins) # vérifier la classe des données pour s'assurer qu'il s'agit d
 # class(peng)
 ```
 
-**&#x267B; Rappel de l'atelier 2 - [*Charger et manipuler des données*](https://qcbsrworkshops.github.io/workshop02/book-fr/):**
+**&#x267B; Rappel de l'atelier 2 - [*Charger et manipuler des données*](https://r.qcbs.ca/fr/workshops/r-workshop-02/):**
 
 Les graphiques plus complexes dans les `ggplot2` nécessitent que les données soient en format long.
 

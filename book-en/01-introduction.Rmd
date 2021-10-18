@@ -2,7 +2,7 @@
 
 # Preparing for the workshop
 
-All workshop materials are found at [github.com/QCBSRworkshops/workshop03](https://github.com/QCBSRworkshops/workshop03). This includes an [R script](https://qcbsrworkshops.github.io/workshop03/book-en/workshop03-script-en.R) which contains all code chunks shown in this book.
+All workshop materials are found at [github.com/QCBSRworkshops/workshop03](https://github.com/QCBSRworkshops/workshop03). This includes an [R script](https://r.qcbs.ca//workshop03/book-en/workshop03-script-en.R) which contains all code chunks shown in this book.
 
 You should also make sure you have downloaded, installed, and loaded these packages:
 

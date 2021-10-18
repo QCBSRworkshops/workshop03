@@ -2,7 +2,7 @@
 
 # Préparez-vous pour cet atelier
 
-Tout le matériel de l'atelier se trouve sur [github.com/QCBSRworkshops/workshop03](https://github.com/QCBSRworkshops/workshop03). Cela inclut un [script R](https://qcbsrworkshops.github.io/workshop03/book-fr/workshop03-script-fr.R) qui rassemble tous les morceaux de code présentés dans ce livre.
+Tout le matériel de l'atelier se trouve sur [github.com/QCBSRworkshops/workshop03](https://github.com/QCBSRworkshops/workshop03). Cela inclut un [script R](https://r.qcbs.ca/workshop03/book-fr/workshop03-script-fr.R) qui rassemble tous les morceaux de code présentés dans ce livre.
 
 Vous devriez vous assurer que vous avez téléchargé, installé et chargé les librairies R suivantes:
 
@@ -70,8 +70,6 @@ Dans cet atelier, nous allons :
 
 
 ## Plan de l'atelier
-
-Today we will walk you through the basics of `ggplot2` so that you have the necessary tools to explore its use for your own projects. We will be covering the following topics:
 
 Aujourd'hui, nous allons vous présenter les bases de `ggplot2` afin que vous ayez les outils nécessaires pour l'utiliser dans vos propres projets. Nous allons aborder les sujets suivants :
 

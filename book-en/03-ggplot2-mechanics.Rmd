@@ -135,7 +135,7 @@ class(penguins) # check the class of the data to ensure it is either a data.fram
 # class(peng)
 ```
 
-**&#x267B; Recall from the [*Loading and manipulating data*](https://qcbsrworkshops.github.io/workshop02/book-en/) workshop:**
+**&#x267B; Recall from the [*Loading and manipulating data*](https://r.qcbs.ca/workshops/r-workshop-02/) workshop:**
 
 More complex plots in `ggplot2` require the long data frame format.
 
