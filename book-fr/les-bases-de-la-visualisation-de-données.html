@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 6 Les bases de la visualisation de données | Atelier 3: Introduction à ggplot2</title>
   <meta name="description" content="Introduction à ggplot2" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 6 Les bases de la visualisation de données | Atelier 3: Introduction à ggplot2" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
-  <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta property="og:url" content="https://r.qcbs.ca/fr/" />
+  <meta property="og:image" content="https://r.qcbs.ca/fr/assets/images/logo/csbq_logo_accueil.png" />
   <meta property="og:description" content="Introduction à ggplot2" />
   <meta name="github-repo" content="qcbsRworkshops/workshop03" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Chapitre 6 Les bases de la visualisation de données | Atelier 3: Introduction à ggplot2" />
   
   <meta name="twitter:description" content="Introduction à ggplot2" />
-  <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta name="twitter:image" content="https://r.qcbs.ca/fr/assets/images/logo/csbq_logo_accueil.png" />
 
 <meta name="author" content="Développé et entretenu par les contributeurs et les contributrices de la Série d’ateliers R du CSBQ." />
 
@@ -33,6 +33,7 @@
 <link rel="prev" href="la-grammaire-des-graphiques-gg.html"/>
 <link rel="next" href="esthétiques.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -329,7 +329,7 @@ Figure 6.3: Art par <a href="https://twitter.com/allison_horst">Allison Horst</a
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="les-bases-de-la-visualisation-de-données.html#cb7-1"></a><span class="co"># vous pouvez transformer un ensemble de données en tibble</span></span>
 <span id="cb7-2"><a href="les-bases-de-la-visualisation-de-données.html#cb7-2"></a><span class="co"># via la fonction as_tibble() si nécessaire peng &lt;-</span></span>
 <span id="cb7-3"><a href="les-bases-de-la-visualisation-de-données.html#cb7-3"></a><span class="co"># tibble::as_tibble(penguins) class(peng)</span></span></code></pre></div>
-<p><strong>♻ Rappel de l’atelier 2 - <a href="https://qcbsrworkshops.github.io/workshop02/book-fr/"><em>Charger et manipuler des données</em></a>:</strong></p>
+<p><strong>♻ Rappel de l’atelier 2 - <a href="https://r.qcbs.ca/fr/workshops/r-workshop-02/"><em>Charger et manipuler des données</em></a>:</strong></p>
 <p>Les graphiques plus complexes dans les <code>ggplot2</code> nécessitent que les données soient en format long.</p>
 </div>
 <div id="questions-scientifiques-à-propos-des-pingouins" class="section level2">
@@ -530,7 +530,6 @@ Figure 6.4: Image adapted from <a href="https://www.springer.com/gp/book/9780387
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -571,7 +570,7 @@ gitbook.start({
 },
 "download": null,
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {
