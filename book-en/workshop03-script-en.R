@@ -400,17 +400,17 @@ pp +
   theme_tufte()
 
 ggplot(data = penguins) +
-  geom_point(mapping = aes(x = bill_length_mm, 
-                           y = bill_depth_mm, 
-                           colour = species)) +
+  geom_point(aes(x = bill_length_mm, 
+                 y = bill_depth_mm, 
+                 colour = species)) + 
   facet_grid(~ species, 
              scales = "free") # the scale of the y axis can vary between facets.
 # do not do this if you are comparing facets via the y axis!
 
 ggplot(data = penguins) +
-  geom_point(mapping = aes(x = bill_length_mm, 
-                           y = bill_depth_mm, 
-                           colour = species)) +
+  geom_point(aes(x = bill_length_mm, 
+                 y = bill_depth_mm, 
+                 colour = species)) + 
   facet_grid(year ~ species, 
              scales = "free")
 

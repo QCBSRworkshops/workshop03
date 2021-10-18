@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Workshop 3: Introduction to ggplot2</title>
   <meta name="description" content="Introduction to ggplot2" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Workshop 3: Introduction to ggplot2" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
-  <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta property="og:url" content="https://r.qcbs.ca/" />
+  <meta property="og:image" content="https://r.qcbs.ca/assets/images/logo/csbq_logo_accueil.png" />
   <meta property="og:description" content="Introduction to ggplot2" />
   <meta name="github-repo" content="qcbsRworkshops/workshop03" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Workshop 3: Introduction to ggplot2" />
   
   <meta name="twitter:description" content="Introduction to ggplot2" />
-  <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta name="twitter:image" content="https://r.qcbs.ca/assets/images/logo/csbq_logo_accueil.png" />
 
 <meta name="author" content="Developed and maintained by the contributors of the QCBS R Workshop Series" />
 
@@ -33,6 +33,7 @@
 
 <link rel="next" href="preparing-for-the-workshop.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -286,7 +286,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title">Workshop 3: Introduction to <code>ggplot2</code></h1>
 <h2 class="subtitle"><em>QCBS R Workshop Series</em></h2>
 <p class="author"><em>Developed and maintained by the contributors of the QCBS R Workshop Series<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></p>
-<p class="date"><em>2021-09-14 20:37:19</em></p>
+<p class="date"><em>2021-10-18 21:30:10</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
@@ -386,7 +386,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p>The QCBS R Workshop Series is part of the <a href="https://www.qcbs.ca">Québec Centre for Biodiversity Science</a>, and is maintained by the series coordinators and graduent student, postdoctoral, and research professional members. <strong>The contributors for this workshop can be accessed <a href="link">here</a></strong>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>The QCBS R Workshop Series is part of the <a href="https://www.qcbs.ca">Québec Centre for Biodiversity Science</a>, and is maintained by the series coordinators and graduent student, postdoctoral, and research professional members. <strong>The contributors for this workshop can be accessed <a href="https://r.qcbs.ca/workshops/r-workshop-03/">here</a></strong>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 <hr>
@@ -405,7 +405,6 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -446,7 +445,7 @@ gitbook.start({
 },
 "download": null,
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {

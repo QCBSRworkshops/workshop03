@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 12 Using facets to split up your plot | Workshop 3: Introduction to ggplot2</title>
   <meta name="description" content="Introduction to ggplot2" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 12 Using facets to split up your plot | Workshop 3: Introduction to ggplot2" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
-  <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta property="og:url" content="https://r.qcbs.ca/" />
+  <meta property="og:image" content="https://r.qcbs.ca/assets/images/logo/csbq_logo_accueil.png" />
   <meta property="og:description" content="Introduction to ggplot2" />
   <meta name="github-repo" content="qcbsRworkshops/workshop03" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Chapter 12 Using facets to split up your plot | Workshop 3: Introduction to ggplot2" />
   
   <meta name="twitter:description" content="Introduction to ggplot2" />
-  <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta name="twitter:image" content="https://r.qcbs.ca/assets/images/logo/csbq_logo_accueil.png" />
 
 <meta name="author" content="Developed and maintained by the contributors of the QCBS R Workshop Series" />
 
@@ -33,6 +33,7 @@
 <link rel="prev" href="theme.html"/>
 <link rel="next" href="using-geom_-to-create-different-plots.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -286,7 +286,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 12</span> Using facets to split up your plot</h1>
 <div id="facetting-by-one-variable" class="section level2">
 <h2><span class="header-section-number">12.1</span> Facetting by one variable</h2>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="using-facets-to-split-up-your-plot.html#cb57-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm,</span>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="using-facets-to-split-up-your-plot.html#cb57-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm,</span>
 <span id="cb57-2"><a href="using-facets-to-split-up-your-plot.html#cb57-2"></a>    <span class="dt">y =</span> bill_depth_mm, <span class="dt">colour =</span> species)) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(<span class="op">~</span>species,</span>
 <span id="cb57-3"><a href="using-facets-to-split-up-your-plot.html#cb57-3"></a>    <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)  <span class="co"># the scale of the y axis can vary between facets.</span></span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
@@ -295,7 +295,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="facetting-by-two-variables" class="section level2">
 <h2><span class="header-section-number">12.2</span> Facetting by two variables</h2>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="using-facets-to-split-up-your-plot.html#cb59-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm,</span>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="using-facets-to-split-up-your-plot.html#cb59-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm,</span>
 <span id="cb59-2"><a href="using-facets-to-split-up-your-plot.html#cb59-2"></a>    <span class="dt">y =</span> bill_depth_mm, <span class="dt">colour =</span> species)) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(year <span class="op">~</span></span>
 <span id="cb59-3"><a href="using-facets-to-split-up-your-plot.html#cb59-3"></a><span class="st">    </span>species, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
@@ -307,7 +307,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb60-2"><a href="using-facets-to-split-up-your-plot.html#cb60-2"></a>pp</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
 <p>We can tune the axes and titles to make the information clearer, so the plot can speak for itself.</p>
-<p><img src="book-en_files/figure-html/unnamed-chunk-75-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-75-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="challenge-3" class="section level2">
 <h2><span class="header-section-number">12.4</span> Challenge 3</h2>
@@ -321,7 +321,6 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Our tip: Go step by step! When fine-tuning your plot, start from <code>theme_classic()</code> and add <code>theme()</code> to make your additional changes.</p>
 </div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
-<hr />
 <div id="challenge-3-solution" class="section level3">
 <h3><span class="header-section-number">12.4.1</span> Challenge 3: Solution</h3>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="using-facets-to-split-up-your-plot.html#cb64-1"></a><span class="co"># Build the plot</span></span>
@@ -374,7 +373,6 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -415,7 +413,7 @@ gitbook.start({
 },
 "download": null,
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {
