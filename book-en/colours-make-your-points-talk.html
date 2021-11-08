@@ -400,7 +400,7 @@ We can use the package <a href="https://cran.r-project.org/web/packages/colorBli
 <span id="cb33-3"><a href="colours-make-your-points-talk.html#cb33-3"></a><span class="kw">library</span>(colorBlindness)</span></code></pre></div>
 <p>Let’s start by testing out some colours using the <code>cvdPlot()</code> function. This will show us how our current plot looks for different forms of colourblindness.</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="colours-make-your-points-talk.html#cb34-1"></a><span class="kw">cvdPlot</span>(pp)  <span class="co"># Let&#39;s check how our plot looks with different forms of colour blindness</span></span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-47-1.png" width="150%" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-47-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>As you can see, our current colour palette is not accessible! By using <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><code>viridis</code></a> palettes, we can guarantee our plots always communicate the same information no matter who the audience is.</p>
 <div id="example-for-grouped-data" class="section level3">
 <h3><span class="header-section-number">8.5.1</span> Example for grouped data</h3>
@@ -412,7 +412,7 @@ We can use the package <a href="https://cran.r-project.org/web/packages/colorBli
 <p><img src="book-en_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="colours-make-your-points-talk.html#cb36-1"></a><span class="co"># Did we succeed? Let&#39;d use cvdPlot() to check again</span></span>
 <span id="cb36-2"><a href="colours-make-your-points-talk.html#cb36-2"></a><span class="kw">cvdPlot</span>(pp_viridis)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-49-1.png" width="768" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="colours-make-your-points-talk.html#cb37-1"></a><span class="co"># We succeeded!</span></span></code></pre></div>
 </div>
 <div id="example-for-continuous-data" class="section level3">
@@ -422,7 +422,7 @@ We can use the package <a href="https://cran.r-project.org/web/packages/colorBli
 <span id="cb38-2"><a href="colours-make-your-points-talk.html#cb38-2"></a>pp2_viridis</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="colours-make-your-points-talk.html#cb39-1"></a><span class="kw">cvdPlot</span>(pp2_viridis)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-51-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
