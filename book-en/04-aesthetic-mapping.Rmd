@@ -222,7 +222,7 @@ library(colorBlindness)
 
 Let's start by testing out some colours using the `cvdPlot()` function. This will show us how our current plot looks for different forms of colourblindness.
 
-```{r, warning = FALSE, message = FALSE, out.width="150%"}
+```{r, warning = FALSE, message = FALSE, fig.align = 'center', fig.height = 8, fig.width=8}
 cvdPlot(pp)  # Let's check how our plot looks with different forms of colour blindness
 ```
 
@@ -241,7 +241,7 @@ pp_viridis
 ```
 
 
-```{r, warning = FALSE, message = FALSE}
+```{r, warning = FALSE, message = FALSE, fig.align = 'center', fig.height = 8, fig.width=8}
 # Did we succeed? Let'd use cvdPlot() to check again
 cvdPlot(pp_viridis)
 # We succeeded!
@@ -261,7 +261,7 @@ pp2_viridis
 ```
 
 
-```{r, warning = FALSE, message = FALSE}
+```{r, warning = FALSE, message = FALSE, fig.align = 'center', fig.height = 8, fig.width=8}
 cvdPlot(pp2_viridis)
 ```
 

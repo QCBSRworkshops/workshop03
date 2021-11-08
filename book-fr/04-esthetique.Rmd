@@ -220,7 +220,7 @@ library(colorBlindness)
 
 Commençons par tester quelques couleurs en utilisant la fonction `cvdPlot()`. Cela nous montrera comment notre graphique actuel se présente pour différentes formes de daltonisme.
 
-```{r, warning = FALSE, message = FALSE, out.width="150%"}
+```{r, warning = FALSE, message = FALSE, fig.align = 'center', fig.height = 8, fig.width=8}
 cvdPlot(pp)  # Vérifions le résultat de notre graphique selon les différentes formes de daltonisme.
 ```
 
@@ -239,7 +239,7 @@ pp_viridis
 ```
 
 
-```{r, warning = FALSE, message = FALSE}
+```{r, warning = FALSE, message = FALSE, fig.align = 'center', fig.height = 8, fig.width=8}
 # Avons-nous réussi ? Utilisons cvdPlot() pour vérifier à nouveau.
 cvdPlot(pp_viridis)
 # On a réussi!
@@ -259,7 +259,7 @@ pp2_viridis
 ```
 
 
-```{r, warning = FALSE, message = FALSE}
+```{r, warning = FALSE, message = FALSE, fig.align = 'center', fig.height = 8, fig.width=8}
 cvdPlot(pp2_viridis)
 ```
 
