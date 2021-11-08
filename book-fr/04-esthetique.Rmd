@@ -147,7 +147,7 @@ pp2 +
   scale_colour_gradient(low = "blue",
                         high = "red") +
   labs(title = "Manuellement")
-# Note : il existe aussi scale_colour_gradient2() pour créer un # gradient avec 
+# Note : il existe aussi scale_colour_gradient2() pour créer un # gradient avec
 # une valeur médiane pour les palettes divergentes.
 ```
 
@@ -211,19 +211,17 @@ pp2 +
 ## Utiliser des palettes de couleurs visibles pour les daltoniens
 
 Comment votre figure peut-elle apparaître sous différentes formes de daltonisme ?
-Nous pouvons utiliser [colorblindr](https://github.com/clauswilke/colorblindr) qui n'est pas actuellement sur CRAN, donc nous l'installons avec la librairie [remotes](https://cran.r-project.org/web/packages/remotes/index.html).
+Nous pouvons utiliser la librairie [colorBlindness](https://cran.r-project.org/web/packages/colorBlindness/index.html).
 
-```{R colorblindr_install, message = FALSE}
-# Installons la librairie colorblindr de GitHub avec remotes
-install.packages("remotes", quiet = TRUE)
-remotes::install_github("clauswilke/colorblindr@cc54c8a35f8e7689ef4cc128b0da3af92f8cd540", quiet = TRUE)
-library(colorblindr)
+```{R colorBlindness_install, message = FALSE}
+install.packages("colorBlindness")
+library(colorBlindness)
 ```
 
-Commençons par tester quelques couleurs en utilisant la fonction `cvd_grid()`. Cela nous montrera comment notre graphique actuel se présente pour différentes formes de daltonisme.
+Commençons par tester quelques couleurs en utilisant la fonction `cvdPlot()`. Cela nous montrera comment notre graphique actuel se présente pour différentes formes de daltonisme.
 
 ```{r, warning = FALSE, message = FALSE, out.width="150%"}
-cvd_grid(pp)  # Vérifions le résultat de notre graphique selon les différentes formes de daltonisme.
+cvdPlot(pp)  # Vérifions le résultat de notre graphique selon les différentes formes de daltonisme.
 ```
 
 Comme vous pouvez le constater, notre palette de couleurs actuelle n'est pas accessible ! En utilisant les palettes [`viridis`](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html), nous pouvons garantir que nos graphiques communiquent toujours les mêmes informations, quel que soit le public.
@@ -242,8 +240,8 @@ pp_viridis
 
 
 ```{r, warning = FALSE, message = FALSE}
-# Avons-nous réussi ? Utilisons cvd_grid() pour vérifier à nouveau.
-cvd_grid(pp_viridis)
+# Avons-nous réussi ? Utilisons cvdPlot() pour vérifier à nouveau.
+cvdPlot(pp_viridis)
 # On a réussi!
 ```
 
@@ -262,7 +260,7 @@ pp2_viridis
 
 
 ```{r, warning = FALSE, message = FALSE}
-cvd_grid(pp2_viridis)
+cvdPlot(pp2_viridis)
 ```
 
 
@@ -401,7 +399,7 @@ ToothGrowth | *dose* | *len* | *supp*
 
 ```{r, message = FALSE, warning = FALSE}
 data(ToothGrowth)
-ggplot(ToothGrowth, 
+ggplot(ToothGrowth,
        aes(x = dose,
            y = len,
            color = supp)) +
@@ -422,7 +420,7 @@ Exemple A : axe des x à l'échelle originale (non transformée)
 
 ```{r,fig.height=4}
 ggplot(diamonds) +
-  geom_point(aes(x = carat, 
+  geom_point(aes(x = carat,
                            y = price)) +
   labs(title = "Original scale")
 ```

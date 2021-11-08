@@ -38,8 +38,8 @@ list.of.packages <- c('gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'ma
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
 if(length(new.packages) > 0) {
-  install.packages(new.packages, dependencies = TRUE) 
-  print(paste0("The following package was installed:", new.packages)) 
+  install.packages(new.packages, dependencies = TRUE)
+  print(paste0("The following package was installed:", new.packages))
 } else if(length(new.packages) == 0) {
     print("All packages were already installed previously")
 }
@@ -162,9 +162,9 @@ How could we improve this figure ![:faic](arrow-up)?
 
 ???
 
-La représentation graphique en 3D n'ajoute pas d'informations, elle déforme les proportions de chaque catégorie, de sorte que les catégories du premier plan semblent plus importantes que celles du second plan. 
+La représentation graphique en 3D n'ajoute pas d'informations, elle déforme les proportions de chaque catégorie, de sorte que les catégories du premier plan semblent plus importantes que celles du second plan.
 
-Les étiquettes de texte ne sont pas non plus suffisamment claires pour être utiles : elles sont petites, empiètent sur le graphique et incluent un pourcentage qui devrait être communiqué par le graphique lui-même. 
+Les étiquettes de texte ne sont pas non plus suffisamment claires pour être utiles : elles sont petites, empiètent sur le graphique et incluent un pourcentage qui devrait être communiqué par le graphique lui-même.
 
 Les diagrammes circulaires ne sont pas non plus recommandés car ils s'appuient sur des angles pour représenter la différence entre les parties, mais l'œil humain n'est pas très doué pour lire/interpréter les angles. Nous sommes bien plus aptes à lire les différences d'aire ! Vous trouverez une bonne démonstration du problème des diagrammes circulaires à l'adresse suivante : https://www.data-to-viz.com/caveat/pie.html.
 
@@ -281,7 +281,7 @@ A graphic is made of different layers:
 ![:scale 90%](images/Layers_ggplot.png)
 ]
 
-Using the GG system, we can build graphs step by step for customizable results. 
+Using the GG system, we can build graphs step by step for customizable results.
 
 ---
 # Grammar of Graphics (GG) basics
@@ -368,7 +368,7 @@ GG layers:
     * `geom_boxplot()`: box and whiskers plot for categorical variables
     * `geom_bar()`: bar charts for categorical x axis
     * `geom_histogram()`: histogram for continuous x axis
-    * `geom_violin()`: distribution kernel of data dispersion 
+    * `geom_violin()`: distribution kernel of data dispersion
     * `geom_smooth()`: function line based on data
 
 ---
@@ -380,7 +380,7 @@ GG layers:
 - Geometric objects (geoms)
 - Facets
     * `facet_wrap()` or `facet_grid()` for small multiples
-    
+
 ---
 # Grammar of Graphics (GG)
 
@@ -392,7 +392,7 @@ GG layers:
 - Statistics
     * similar to geoms, but computed
     * show means, counts, and other statistical summaries of data
-    
+
 
 ---
 # Grammar of Graphics (GG)
@@ -407,8 +407,8 @@ GG layers:
     * `coord_cartesian` to set limits
     * `coord_polar` for circular plots
     * `coord_map` for different map projections
-    
-    
+
+
 ---
 # Grammar of Graphics (GG)
 
@@ -418,11 +418,11 @@ GG layers:
 - Geometric objects (geoms)
 - Facets
 - Statistics
-- Coordinates 
+- Coordinates
 - Themes
     * overall visual defaults
     * fonts, colors, shapes, outlines
-    
+
 
 ---
 # How to assemble layers in `ggplot2`
@@ -432,7 +432,7 @@ GG layers:
 
 2. Add geometric layers:
   * `plot.object <- plot.object + geom_*()`
-  
+
 3. Add appearance layers:
   * `plot.object <- plot.object + coord_*() + theme()`
 
@@ -456,7 +456,7 @@ install.packages("palmerpenguins")
 library(palmerpenguins)
 ```
 
-.small[This dataset contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica:] 
+.small[This dataset contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica:]
 ]
 
 ![:scale 50%](images/penguins.png)
@@ -550,7 +550,7 @@ ggplot(data = penguins,               # Data
   labs(title = "Relationship between bill length and depth\nfor different penguin species", # Title
        x = "Bill length (mm)",
        y = "Bill depth (mm)",
-       col = "Species") + 
+       col = "Species") +
   theme_classic() + # apply a clean theme
   theme(title = element_text(size = 18, face = "bold"),
       text = element_text(size = 16))
@@ -576,7 +576,7 @@ ggplot(data = penguins,               # Data
   labs(title = "Relationship between bill length and depth\nfor different penguin species", # Title
        x = "Bill length (mm)",
        y = "Bill depth (mm)",
-       col = "Species") + 
+       col = "Species") +
   theme_classic() + # apply a clean theme
   theme(title = element_text(size = 18, face = "bold"),
       text = element_text(size = 16))
@@ -615,7 +615,7 @@ s # Print your final plot
 
 ]
 
-??? 
+???
 
 note: _removed this slide because it felt random, but is maybe worth going over at some point - edit. moved to challenge 1 answer_
 
@@ -638,15 +638,15 @@ ggplot(data = penguins)
 # `ggplot()` dynamics: aesthetics layer
 
 ```{r, fig.height=5, fig.width=6}
-ggplot(data = penguins, 
-       aes(x = bill_length_mm, y = bill_depth_mm)) 
+ggplot(data = penguins,
+       aes(x = bill_length_mm, y = bill_depth_mm))
 ```
 
 ---
 # `ggplot()` dynamics: geometric Layer
 
 ```{r, fig.height=5, fig.width=6}
-ggplot(data = penguins, 
+ggplot(data = penguins,
        aes(x = bill_length_mm, y = bill_depth_mm)) +
   geom_point()
 ```
@@ -659,9 +659,9 @@ Note that ggplot2 code is easier to read if each line represents a new element. 
 # `ggplot()` dynamics: extras- facet, stats, coord layers
 
 ```{r,fig.height=5, fig.width=6}
-ggplot(data = penguins, 
+ggplot(data = penguins,
        aes(x = bill_length_mm, y = bill_depth_mm)) +
-  geom_point() + 
+  geom_point() +
   facet_wrap(~species) +
   coord_trans(x = "log10", y = "log10")
 ```
@@ -688,7 +688,7 @@ penguins|geom_point|bill_length_mm|flipper_length_mm
 # Challenge 1: Solution ![:cube]()
 
 ```{r}
-ggplot(data = penguins, 
+ggplot(data = penguins,
        aes(x = bill_length_mm,
            y = flipper_length_mm)) +
   geom_point()
@@ -700,7 +700,7 @@ ggplot(data = penguins,
 
 .pull-left2[
 ```{r}
-ggplot(data = penguins, 
+ggplot(data = penguins,
        aes(x = bill_length_mm,
            y = flipper_length_mm)) +
   geom_point()
@@ -729,7 +729,7 @@ ggplot(data = penguins,
 <br>
 <br>
 
-**note 2**: colour, alpha, shape, and size commands can be set outside of `aes()` values, and will be static, not data-dependent. 
+**note 2**: colour, alpha, shape, and size commands can be set outside of `aes()` values, and will be static, not data-dependent.
 ]
 ---
 
@@ -744,7 +744,7 @@ class: inverse, center, middle
 
 **Use aesthetics (`aes()`) to distinguish classes, groups and structure**
 
-![:scale 70%](images/4plot_aesthetic.png) 
+![:scale 70%](images/4plot_aesthetic.png)
 ---
 # Colours: make your points talk
 
@@ -763,13 +763,13 @@ theme_set(theme_classic())
 
 .pull-left[
 ```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
-ggplot(penguins, 
-       aes(x = bill_length_mm, 
+ggplot(penguins,
+       aes(x = bill_length_mm,
            y = bill_depth_mm)) +
   geom_point(aes(colour = species)) +
-  labs(title = "Qualitative colour for groups", 
-       x = "Bill length (mm)", 
-       y = "Bill depth (mm)") +  
+  labs(title = "Qualitative colour for groups",
+       x = "Bill length (mm)",
+       y = "Bill depth (mm)") +
   theme(title = element_text(size = 16, face = "bold"),
         legend.title = element_text(size = 14),
         legend.position = 'bottom')
@@ -778,14 +778,14 @@ ggplot(penguins,
 
 .pull-right[
 ```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
-ggplot(penguins, 
-       aes(x = bill_length_mm, 
+ggplot(penguins,
+       aes(x = bill_length_mm,
            y = bill_depth_mm)) +
   geom_point(aes(colour = log10(body_mass_g))) +
-  labs(title = "Gradient colour for values", 
-       x = "Bill length (mm)", 
-       y = "Bill depth (mm)", 
-       col = "Body mass (log10 g)") + 
+  labs(title = "Gradient colour for values",
+       x = "Bill length (mm)",
+       y = "Bill depth (mm)",
+       col = "Body mass (log10 g)") +
   theme(title = element_text(size = 16, face = "bold"),
         legend.title = element_text(size = 14),
         legend.position = 'bottom')
@@ -802,8 +802,8 @@ Does bill length and flipper length vary differently across species?
 .pull-left[
 ```{r, fig.align = 'default', fig.asp=2/3}
 # No colour mapping
-ggplot(data = penguins, 
-       aes(x = bill_length_mm, 
+ggplot(data = penguins,
+       aes(x = bill_length_mm,
            y = flipper_length_mm)) +
   geom_point() +
   geom_smooth(method = lm)+
@@ -814,8 +814,8 @@ ggplot(data = penguins,
 .pull-right[
 ```{r,  fig.align = 'default', fig.asp=2/3}
 # With colour mapping
-ggplot(data = penguins, 
-       aes(x = bill_length_mm, 
+ggplot(data = penguins,
+       aes(x = bill_length_mm,
            y = flipper_length_mm,
            col = species)) +
   geom_point() +
@@ -830,8 +830,8 @@ ggplot(data = penguins,
 ```{r, fig.align = 'default', fig.asp=2/3}
 # Default
 pp <- ggplot(data = penguins) +
-  geom_point(aes(x = bill_length_mm, 
-                 y = bill_depth_mm, 
+  geom_point(aes(x = bill_length_mm,
+                 y = bill_depth_mm,
                  colour = species))
 pp + labs(title = "Default")
 ```
@@ -839,9 +839,9 @@ pp + labs(title = "Default")
 .pull-right[
 ```{r, fig.align = 'default', fig.asp=2/3}
 # Manual
-pp + 
+pp +
 scale_colour_manual(
-  values = c("grey55", "orange", 
+  values = c("grey55", "orange",
              "skyblue")) +
   labs(title = "Manual")
 ```
@@ -857,7 +857,7 @@ scale_colour_manual() and scale_fill_manual() allow you to choose your own colou
 ```{r, fig.align = 'default', fig.asp=2/3}
 # Default
 pp2 <- ggplot(data = penguins) +
-  geom_point(aes(x = bill_length_mm, 
+  geom_point(aes(x = bill_length_mm,
                  y = bill_depth_mm,
                  colour = body_mass_g))
 pp2 + labs(title = "Default")
@@ -866,8 +866,8 @@ pp2 + labs(title = "Default")
 .pull-right[
 ```{r, fig.align = 'default', fig.asp=2/3}
 # Manual
-pp2 + 
-  scale_colour_gradient(low = "blue", 
+pp2 +
+  scale_colour_gradient(low = "blue",
                         high = "red") +
   labs(title = "Manual")
 
@@ -894,7 +894,7 @@ display.brewer.all()
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
 # Palette for groups
-pp + 
+pp +
   scale_colour_brewer(palette = "Dark2") +
   labs(title = "Palette for groups")
 ```
@@ -904,7 +904,7 @@ pp +
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
 # Palette for continuous values
-pp2 + 
+pp2 +
   scale_color_viridis_c()+
   labs(title = "Palette for continuous values")
 ```
@@ -917,7 +917,7 @@ Grey-scale palette for publication purposes
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
 # Palette for groups
-pp + 
+pp +
   scale_colour_grey() +
   labs(title = "Palette for groups")
 ```
@@ -929,7 +929,7 @@ Grey-scale palette for publication purposes
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
 # Palette for continuous values
-pp2 + 
+pp2 +
   scale_colour_gradient(low = "grey85", high = "black") +
   labs(title = "Palette for continuous values")
 ```
@@ -939,25 +939,23 @@ pp2 +
 # Use colourblind-friendly palettes
 
 Have you ever considered how your figure might appear under various forms of colourblindness?
-We can use the package [colorblindr](https://github.com/clauswilke/colorblindr) to consider this. This package is not currently on CRAN, so we install it with the packages [remotes](https://cran.r-project.org/web/packages/remotes/index.html).
+We can use the package [colorBlindness](https://cran.r-project.org/web/packages/colorBlindness/index.html) to consider this.
 
-```{R colorblindr_install, message = FALSE}
-#install.packages("remotes", quiet = TRUE)
-remotes::install_github("clauswilke/colorblindr@cc54c8a35f8e7689ef4cc128b0da3af92f8cd540", quiet = TRUE)
-library(colorblindr)
+```{R colorBlindness_install, message = FALSE}
+install.packages("colorBlindness")
+library(colorBlindness)
 ```
-
-
-???
-
-The long string of numbers are letters are the GitHub SHA code for a specific version of this package, because recent commits have broken the installation. This is not important for the participants to know, but might be worth explaning briefly to avoid confusion about this installation.
 
 ---
 # Use colourblind-friendly palettes
 
 ```{r, fig.width = 11, fig.height = 7}
-cvd_grid(pp)
+cvdPlot(pp)
 ```
+
+???
+
+As you can see, our current colour palette is not accessible! By using [`viridis`](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html) palettes, we can guarantee our plots always communicate the same information no matter who the audience is.
 
 ---
 # Use colourblind-friendly palettes
@@ -966,7 +964,7 @@ cvd_grid(pp)
 .pull-left[
 ```{r, fig.height = 5}
 # Palette for groups
-pp + 
+pp +
   scale_colour_viridis_d() +
   labs(title = "Viridis palette for groups")
 ```
@@ -975,11 +973,15 @@ pp +
 .pull-right[
 ```{r, fig.height = 5}
 # Palette for continuous values
-pp2 + 
+pp2 +
   scale_colour_viridis_c() +
   labs(title = "Viridis palette for continuous values")
 ```
 ]
+
+???
+
+If you would like to demonstrate the difference, you can run cvdPlot() on these plots during the workshop.
 
 
 ---
@@ -989,8 +991,8 @@ pp2 +
 ```{r, fig.height = 5}
 # shape for groups
 ggplot(data = penguins) +
-  geom_point(aes(x = bill_length_mm, 
-                 y = bill_depth_mm, 
+  geom_point(aes(x = bill_length_mm,
+                 y = bill_depth_mm,
                  shape = species)
              ) +
   labs(title = "Shapes for groups")
@@ -1001,8 +1003,8 @@ ggplot(data = penguins) +
 ```{r, fig.height = 5}
 # size and alpha for continuous values
 ggplot(data = penguins) +
-  geom_point(aes(x = bill_length_mm, 
-                 y = bill_depth_mm, 
+  geom_point(aes(x = bill_length_mm,
+                 y = bill_depth_mm,
                  size = body_mass_g,
                  alpha = flipper_length_mm)) +
   labs(title = "Size and alpha for continuous values")
@@ -1027,7 +1029,7 @@ Data| x | y | Aesthetics
 mtcars |*wt* |*mpg* | *disp* and *hp*
 CO2 |*conc* |*uptake* | *Treatment* and *Type*
 msleep |log10(*bodywt*) |*awake* | *vore* and *conservation*
-ToothGrowth | *dose* | *len* | *supp* 
+ToothGrowth | *dose* | *len* | *supp*
 
 <br>
 .center[.alert[
@@ -1079,9 +1081,9 @@ CO2 |*conc* |*uptake* | *Treatment* and *Type*
 ```{r, fig.height=3.5, fig.width=6}
 data(CO2)
 ggplot(data = CO2) +
-    geom_point(mapping = aes(x = conc, 
+    geom_point(mapping = aes(x = conc,
                              y = uptake,
-                             colour = Treatment, 
+                             colour = Treatment,
                              shape = Type))
 ```
 
@@ -1101,9 +1103,9 @@ msleep |log10(*bodywt*) |*awake* | *vore* and *conservation*
 ```{r, fig.height=3.5, fig.width=6}
 data(msleep)
 ggplot(data = msleep) +
-    geom_point(mapping = aes(x = log10(bodywt), 
+    geom_point(mapping = aes(x = log10(bodywt),
                              y = awake,
-                             colour = vore, 
+                             colour = vore,
                              shape = conservation))
 ```
 
@@ -1114,7 +1116,7 @@ ggplot(data = msleep) +
 
 Data| x | y | Aesthetics
 :-------------:|:-------------:|:-------------:|:-------------:
-ToothGrowth | *dose* | *len* | *supp* 
+ToothGrowth | *dose* | *len* | *supp*
 
 ]
 
@@ -1123,7 +1125,7 @@ data(ToothGrowth)
 ggplot(ToothGrowth, aes(x = dose,
                         y = len,
                         color = supp)) +
-  geom_point() + 
+  geom_point() +
   geom_smooth(method = lm, formula = 'y~x')
 ```
 
@@ -1135,7 +1137,7 @@ class: small-code
 x axis in regular scale
 ```{r,fig.height=4}
 ggplot(diamonds) +
-  geom_point(aes(x = carat, 
+  geom_point(aes(x = carat,
                  y = price)) +
   labs(title = "Original scale")
 ```
@@ -1144,10 +1146,10 @@ ggplot(diamonds) +
 .pull-right[
 x-axis and y-axis in log10() scale
 ```{r,fig.height=4}
-ggplot(diamonds) + 
-  geom_point(aes(x = carat, 
+ggplot(diamonds) +
+  geom_point(aes(x = carat,
                  y = price)) +
-  coord_trans(x = "log10", 
+  coord_trans(x = "log10",
               y = "log10") +
   labs(title = "log10 scale")
 ```
@@ -1209,8 +1211,8 @@ This presentation has been using theme_classic() for the plots, because the grey
 ---
 # `theme()`
 
-Use `theme_set()` to change theme for all your future plots, 
-or `theme_update()` to edit aspects of a theme setting. 
+Use `theme_set()` to change theme for all your future plots,
+or `theme_update()` to edit aspects of a theme setting.
 
 
 
@@ -1226,7 +1228,7 @@ pp
 .pull-right[
 **Update theme**
 ```{r, fig.height = 4.5}
-# remove minor gridlines 
+# remove minor gridlines
 theme_update(
   panel.grid.minor = element_blank())
 pp
@@ -1270,8 +1272,8 @@ class: inverse, center, middle
 Facetting by one variable
 ```{r, fig.align="center"}
 ggplot(data = penguins) +
-  geom_point(mapping = aes(x = bill_length_mm, 
-                           y = bill_depth_mm, 
+  geom_point(mapping = aes(x = bill_length_mm,
+                           y = bill_depth_mm,
                            colour = species)) +
   facet_grid(~ species, scales = "free")
 ```
@@ -1281,8 +1283,8 @@ ggplot(data = penguins) +
 
 ```{r, fig.align="center", fig.width=9, fig.height=5}
 ggplot(data = penguins) +
-  geom_point(mapping = aes(x = bill_length_mm, 
-                           y = bill_depth_mm, 
+  geom_point(mapping = aes(x = bill_length_mm,
+                           y = bill_depth_mm,
                            colour = species)) +
   facet_grid(year ~ species, scales = "free")
 ```
@@ -1401,10 +1403,10 @@ tips.gg
 
 ```{r, fig.width = 6, fig.height=4}
 tips.gg <- ggplot(tips) +
-  geom_point(mapping = aes(x = total_bill, 
+  geom_point(mapping = aes(x = total_bill,
                            y = tip/total_bill,
-                           shape = smoker, 
-                           colour = sex, 
+                           shape = smoker,
+                           colour = sex,
                            size = size)) +
   theme_classic()
 tips.gg
@@ -1489,7 +1491,7 @@ exclude: true
 ]
 
 ???
-note: removed this slide. Not sure why it's here. 
+note: removed this slide. Not sure why it's here.
 
 ---
 # `ggplot2::ggplot()`
@@ -1514,7 +1516,7 @@ ggplot(penguins)
 A **histogram** is an accurate graphical representation of the distribution of numeric data. There is only one aesthetic required: the `x` variable.
 
 ```{r, fig.align="center", fig.height=5}
-ggplot(penguins, 
+ggplot(penguins,
        aes(x = bill_length_mm)) +
   geom_histogram() +
   ggtitle("Histogram of penguin bill length ")
@@ -1551,8 +1553,8 @@ It can, however, be difficult to discern any potential relationship in a scatter
 # Boxplot: `geom_boxplot()`
 
 ```{r, fig.align="center", fig.height=5}
-ggplot(data = penguins, 
-       aes(x = species, 
+ggplot(data = penguins,
+       aes(x = species,
            y = bill_length_mm,
            fill = species)) +
   geom_boxplot() +
@@ -1563,8 +1565,8 @@ ggplot(data = penguins,
 # Boxplot: `geom_boxplot()`
 
 ```{r, echo=FALSE, fig.align="center", fig.width = 5, fig.height = 3.2}
-ggplot(data = penguins, 
-       aes(x = species, 
+ggplot(data = penguins,
+       aes(x = species,
            y = bill_length_mm,
            fill = species)) +
   geom_boxplot() +
@@ -1587,12 +1589,12 @@ Though boxplots are very popular to summarise data, someone looking at your plot
 .pull-left3[
 ```{r, fig.align="center",fig.height=5.5, eval = FALSE}
 library(ggsignif)
-ggplot(data = penguins, 
-       aes(x = species, 
+ggplot(data = penguins,
+       aes(x = species,
            y= bill_length_mm,
            fill = species)) +
   geom_boxplot() +
-  geom_signif(comparisons = 
+  geom_signif(comparisons =
                 list(c("Adelie", "Gentoo")),
               map_signif_level=TRUE)
 ```
@@ -1600,13 +1602,13 @@ ggplot(data = penguins,
 .pull-right3[
 ```{r, fig.align="center",fig.height=5.5, echo = FALSE}
 library(ggsignif)
-ggplot(data = penguins, 
-       aes(x = species, 
+ggplot(data = penguins,
+       aes(x = species,
            y= bill_length_mm,
            fill = species)) +
   geom_boxplot() +
   # specify the comparison we are interested in
-  geom_signif(comparisons = 
+  geom_signif(comparisons =
                 list(c("Adelie", "Gentoo")),
               map_signif_level=TRUE)
 ```
@@ -1652,7 +1654,7 @@ Let us compare a boxplot and a violin plot on some generated data. Notice how th
 # Violin plot: `geom_violin()`
 
 ```{r, fig.align="center"}
-violin <- ggplot(data = penguins, 
+violin <- ggplot(data = penguins,
                  aes(x = species, y = bill_length_mm)) +
   geom_violin(trim = FALSE, fill = "grey70", alpha = .5) +
   labs(title = "Violin plot")
@@ -1663,7 +1665,7 @@ violin
 # Violin plot: `geom_violin()` + `_boxplot()` + `_jitter()`
 
 ```{r, fig.align="center"}
-violin + 
+violin +
     geom_jitter(shape = 16, position = position_jitter(0.2),
               alpha = .3)+
   geom_boxplot(width = .05)
@@ -1677,10 +1679,10 @@ Although we have a good idea of how the data is distributed, we can enhance the 
 
 .pull-left[
 ```{r, fig.height=5, fig.width=4}
-ggplot(mtcars, 
+ggplot(mtcars,
        aes(cyl, mpg)) +
   geom_point() +
-  stat_summary(fun.y = "median", 
+  stat_summary(fun.y = "median",
                geom = "point",
                colour = "red",
                size = 6) +
@@ -1690,7 +1692,7 @@ ggplot(mtcars,
 
 .pull-right[
 ```{r, fig.height=5, fig.width=4}
-ggplot(mtcars, 
+ggplot(mtcars,
        aes(cyl, mpg)) +
   geom_point() +
   stat_summary(fun.data = "mean_cl_boot",
@@ -1705,10 +1707,10 @@ ggplot(mtcars,
 
 To display more summary statistics, see:
 
-- `geom_errorbar()`  
-- `geom_pointrange()`  
-- `geom_linerange()`  
-- `geom_crossbar()` 
+- `geom_errorbar()`
+- `geom_pointrange()`
+- `geom_linerange()`
+- `geom_crossbar()`
 - and others!
 
 ---
@@ -1725,21 +1727,21 @@ states_map <- map_data("state") # get a state-level map of the US
 USArrests$region <- tolower(rownames(USArrests))
 
 # Build our map
-ggplot(USArrests, 
+ggplot(USArrests,
        aes(map_id = region)) + # the variable name to link our map and dataframe
   geom_map(aes(fill = Murder), # variable we want to represent with an aesthetic
            map = states_map) + # data frame that contains coordinates
-  expand_limits(x = states_map$long, 
+  expand_limits(x = states_map$long,
                 y = states_map$lat) +
-  coord_map() +  # projection 
+  coord_map() +  # projection
   labs(x = "", y = "") # remove axis labels
 ```
 ]
 
 ???
-USArrests: Violent Crime Rates by US State dataset, included in R. This data set contains statistics, in arrests per 100,000 residents for assault, murder, and rape in each of the 50 US states in 1973. Also given is the percent of the population living in urban areas. 
+USArrests: Violent Crime Rates by US State dataset, included in R. This data set contains statistics, in arrests per 100,000 residents for assault, murder, and rape in each of the 50 US states in 1973. Also given is the percent of the population living in urban areas.
 
-The map is on the next slide. Feel free to flip between the slides to explain each element if there is interest in mapping. 
+The map is on the next slide. Feel free to flip between the slides to explain each element if there is interest in mapping.
 
 ---
 # Representing maps: `geom_map()`
@@ -1754,13 +1756,13 @@ states_map <- map_data("state") # get a state-level map of the US
 USArrests$region <- tolower(rownames(USArrests))
 
 # Build our map
-ggplot(USArrests, 
+ggplot(USArrests,
        aes(map_id = region)) +
-  geom_map(aes(fill = Murder), 
+  geom_map(aes(fill = Murder),
            map = states_map) +
-  expand_limits(x = states_map$long, 
+  expand_limits(x = states_map$long,
                 y = states_map$lat) +
-  coord_map() +  # projection 
+  coord_map() +  # projection
   labs(x = "", y = "") # remove axis labels
 ```
 
@@ -1770,7 +1772,7 @@ ggplot(USArrests,
 .small[A density plot shows the distribution of a numerical variable and it takes only set of numeric values as input.]
 .pull-left[
 ```{r, echo=TRUE, fig.width=5, fig.height=4.4}
-(peng.dens <- ggplot(penguins, 
+(peng.dens <- ggplot(penguins,
                      aes(x = bill_length_mm)) +
    geom_density())
 ```
@@ -1778,7 +1780,7 @@ ggplot(USArrests,
 
 .pull-right[
 ```{r, echo=TRUE, fig.width=5, fig.height=4.4}
-(cars.dens <- ggplot(cars, 
+(cars.dens <- ggplot(cars,
                     aes(x = dist)) +
    geom_density())
 ```
@@ -1798,7 +1800,7 @@ library(ggdendro)
 USArrests.short <- USArrests[1:10,] # take a small sample for simplicity
 hc <- hclust(dist(USArrests.short), "average") # cluster by average distance (UPGMA)
 
-ggdendrogram(hc, rotate = TRUE) 
+ggdendrogram(hc, rotate = TRUE)
 ```
 
 
@@ -1823,10 +1825,10 @@ Create your own ggplot and follow these recommendations:
   * Dataset: any (recommended: use your dataset)
   * Explore a new geom_* and other plot elements
 
-Use the following links for tips and inspiration:  
+Use the following links for tips and inspiration:
 
-- [ggplot2 Reference](https://ggplot2.tidyverse.org/reference/index.html)  
-- [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)  
+- [ggplot2 Reference](https://ggplot2.tidyverse.org/reference/index.html)
+- [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)
 - [Data to Viz](https://www.data-to-viz.com/)
 
 ---
@@ -1834,13 +1836,13 @@ Use the following links for tips and inspiration:
 .small[
 ```{r, fig.align='center',fig.height=4}
 data(msleep)
-ggplot(msleep, 
-       aes(x = vore, 
-           y = log10(brainwt), 
-           fill = vore)) + 
+ggplot(msleep,
+       aes(x = vore,
+           y = log10(brainwt),
+           fill = vore)) +
   geom_violin() +
   geom_signif(comparisons = list(c("herbi", "insecti"))) +
-  labs(main = "Brain weight among different vore", 
+  labs(main = "Brain weight among different vore",
        y = "log10(Brain weight (Kg))") +
   scale_fill_grey() +
   theme_classic()
@@ -1857,7 +1859,7 @@ data(mtcars)
 mtcars.short <- mtcars[1:20,]
 mtcars.short.hc <- hclust(dist(mtcars.short), "average")
 
-ggdendrogram(mtcars.short.hc, rotate = TRUE) + 
+ggdendrogram(mtcars.short.hc, rotate = TRUE) +
   # fine-tuning
   labs(title = "Car dendro from motor spec", y ="Cars") +
   theme(axis.title.y = element_text(size = 16),
@@ -1874,7 +1876,7 @@ ggdendrogram(mtcars.short.hc, rotate = TRUE) +
 ```{r, echo = TRUE, fig.width=10, fig.height=5}
 library(plotly)
 p <- ggplot(penguins,
-           aes(x = bill_length_mm, y = bill_depth_mm, 
+           aes(x = bill_length_mm, y = bill_depth_mm,
                colour = species, shape = species)) +
     geom_point(size=6, alpha=0.6)
 # convert to a plotly object!
@@ -1909,9 +1911,9 @@ exclude: true
 `ggsave()` writes directly to your working directory and allows you to specify the name of the file, the dimensions of the plot, the resolution, etc.
 
 ```{r, eval=FALSE}
-my1rstPlot <- 
-  ggplot(penguins, 
-         aes(x = bill_length_mm, 
+my1rstPlot <-
+  ggplot(penguins,
+         aes(x = bill_length_mm,
              y = bill_depth_mm)) +
   geom_point()
 
@@ -1954,7 +1956,7 @@ class: inverse, center, middle
 - `help(package = ggplot2)`
 - [Data Visualization with ggplot2 Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization.pdf)
 - [ggplot2 Reference](http://ggplot2.tidyverse.org/reference/)
-- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)  
+- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)
 - [From Data to Viz](https://www.data-to-viz.com/)
 - [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base R)
 - [Graphics Principles](https://graphicsprinciples.github.io/) (design tips)
@@ -1977,7 +1979,7 @@ Show the ggplot2 cheatsheet https://github.com/rstudio/cheatsheets/raw/master/da
 # Concluding remarks
 <br>
 
-There are other useful packages that can be used with `ggplot2`! 
+There are other useful packages that can be used with `ggplot2`!
 
 To name a few: `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` and `ggtree`. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) for other `ggplot2` extensions.
 
