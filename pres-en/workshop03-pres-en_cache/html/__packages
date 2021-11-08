@@ -9,8 +9,7 @@ RColorBrewer
 GGally
 patchwork
 plotly
-reshape2
 palmerpenguins
 tibble
-colorspace
-colorblindr
+colorBlindness
+reshape2

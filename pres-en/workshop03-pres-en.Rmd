@@ -13,6 +13,7 @@ output:
       beforeInit: "qcbsR-macros.js"
       highlightLines: true
 ---
+
 class: inverse, center, middle
 
 ```{r setup, echo = FALSE}
@@ -32,13 +33,13 @@ options(repos=structure(c(CRAN="http://cran.r-project.org")))
 ```{r install_pkgs, message=FALSE, warning=FALSE, include=FALSE, results=0}
 # Standard procedure to check and install packages and their dependencies, if needed.
 
-list.of.packages <- c('grid', 'gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer','GGally','patchwork','plotly', 'reshape2', 'palmerpenguins')
+list.of.packages <- c('gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer','GGally','patchwork','plotly', 'palmerpenguins')
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
 if(length(new.packages) > 0) {
-  install.packages(new.packages, dependencies = TRUE) 
-  print(paste0("The following package was installed:", new.packages)) 
+  install.packages(new.packages, dependencies = TRUE)
+  print(paste0("The following package was installed:", new.packages))
 } else if(length(new.packages) == 0) {
     print("All packages were already installed previously")
 }
@@ -54,16 +55,15 @@ theme_set(theme_classic())
 
 # About this workshop
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop03)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=wiki&message=03&logo=wikipedia)](https://wiki.qcbs.ca/r_workshop3)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Slides&message=03&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop03/workshop03-en/workshop03-en.html)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Slides&message=03&color=red&logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop03/workshop03-en/workshop03-en.pdf)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=script&message=03&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop03/workshop03-en/workshop03-en.R)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Slides&message=03&color=red&logo=html5)](https://r.qcbs.ca.github.io/workshop03/workshop03-en/workshop03-en.html)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Slides&message=03&color=red&logo=adobe-acrobat-reader)](https://r.qcbs.ca/workshop03/workshop03-en/workshop03-en.pdf)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=script&message=03&color=2a50b8&logo=r)](https://r.qcbs.ca//workshop03/book-en/workshop03-script-en.R)
 
 ---
 
 # Required packages
 
-* [grid](https://cran.r-project.org/package=grid)
+.pull-left4[
 * [gridExtra](https://cran.r-project.org/package=gridExtra)
 * [ggplot2](https://cran.r-project.org/package=ggplot2)
 * [ggsignif](https://cran.r-project.org/package=ggsignif)
@@ -75,29 +75,39 @@ theme_set(theme_classic())
 * [patchwork](https://cran.r-project.org/package=patchwork)
 * [palmerpenguins](https://cran.r-project.org/package=palmerpenguins)
 * [plotly](https://cran.r-project.org/package=plotly)
+]
 
-<br>
+.pull-right4[
 
-```r
-install.packages(c('grid', 'gridExtra', 'ggplot2', 'ggsignif', 'ggdendro', 'maps', 'mapproj', 'RColorBrewer', 'GGally', 'patchwork', 'plotly', 'palmerpenguins'))
+Install the required packages:
+
+```{r, eval = FALSE}
+install.packages("gridExtra")
+install.packages("ggplot2")
+install.packages("ggsignif")
+install.packages("ggdendro")
+install.packages("maps")
+install.packages("mapproj")
+install.packages("RColorBrewer")
+install.packages("GGally")
+install.packages("patchwork")
+install.packages("plotly")
+install.packages("palmerpenguins")
 ```
 
----
-# Leaning objectives
-
-##### 1. Use R to create various plots
+]
 
 ---
 class: inverse, center, middle
 
 # Introduction
 
---
+---
 # Introduction
 
 ##### To follow along:
 
-Code and .HTML available at http://qcbs.ca/wiki/r/workshop3
+All workshop materials are found at [github.com/QCBSRworkshops/workshop03](https://github.com/QCBSRworkshops/workshop03). This includes an [R script](https://r.qcbs.ca//workshop03/book-en/workshop03-script-en.R) that contains the the code in this presentation.
 
 ##### Recommendations:
 
@@ -105,36 +115,31 @@ Code and .HTML available at http://qcbs.ca/wiki/r/workshop3
   2. refer to provided code only if needed;
   3. avoid copy-pasting or running the code directly from the script.
 
-###### [ggplot2](https://ggplot2.tidyverse.org/) is also on GitHub: https://github.com/tidyverse/ggplot2
-
 
 ---
 # Outline
 
-###### 1. `ggplot2` mechanics
+###### 1. Visualization in science
 
-.center[
-![:scale 80%](images/Layers_ggplot.png)
-]
+###### 2. `ggplot2` mechanics
 
+###### 3. Aesthetic mapping
 
-###### 2. Advanced visualization
+###### 4. Fine-tuning
 
-###### 3. Fine-tuning
+###### 5. Saving plots
 
-###### 4. Saving plots
-
-###### 5. Conclusion
+###### 6. Conclusion
 
 ---
 # Learning objectives
 
-<br>
+In this workshop, we will:
 
-- Teach the basics of data visualization using R.
-- Find packages and resources to meet your needs.
+- Learn the basics of data visualization using R.
+- Learn how to find packages and resources to meet your needs.
 - Inspire creativity in science!
-- Develop understanding of design for effective graphical communication.
+- Develop an understanding of design for effective visual communication.
 
 ---
 class: inverse, center, middle
@@ -143,7 +148,6 @@ class: inverse, center, middle
 
 ---
 # Visualization in science
-<br>
 
 #### Why are we using data visualization?
 
@@ -153,31 +157,42 @@ class: inverse, center, middle
 
 .center[![:scale 65%](images/piechart3d.png)]
 
-What do you think about this one ![:faic](arrow-up)?
+How could we improve this figure ![:faic](arrow-up)?
+
+
+???
+
+La représentation graphique en 3D n'ajoute pas d'informations, elle déforme les proportions de chaque catégorie, de sorte que les catégories du premier plan semblent plus importantes que celles du second plan.
+
+Les étiquettes de texte ne sont pas non plus suffisamment claires pour être utiles : elles sont petites, empiètent sur le graphique et incluent un pourcentage qui devrait être communiqué par le graphique lui-même.
+
+Les diagrammes circulaires ne sont pas non plus recommandés car ils s'appuient sur des angles pour représenter la différence entre les parties, mais l'œil humain n'est pas très doué pour lire/interpréter les angles. Nous sommes bien plus aptes à lire les différences d'aire ! Vous trouverez une bonne démonstration du problème des diagrammes circulaires à l'adresse suivante : https://www.data-to-viz.com/caveat/pie.html.
+
 
 ---
 # Visualization in science
 <br>
 
 1. To represent results of statistical analyses
-2. To formulate hypotheses and understand summarize theory
+2. To formulate hypotheses and summarize theory
 3. To explore your own data (exploratory analysis, outlier detection)
 4. To communicate and report
   - Clearly (using good design principles)
   - Precisely and accurately (a plot is worth 1000 words)
   - Effectively and efficiently
 
-???
 
-note: _changed points here as answers from previous slide question_
 ---
 # Visualization in science
 <br>
 
-Important questions:
+#### Important questions:
+
 - What do you want to communicate?
 - Who is your audience?
-- What is the best way to do it?
+- What is the best way to visualize your message?
+
+<br>
 
 .center[
 .alert[A rule of thumb: think simple! use less ink!]
@@ -185,13 +200,19 @@ Important questions:
 
 --
 
-#### Additional resources
+<br>
+#### Resources for visualisation principles
 
 - [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/) (ggplot)
 - [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base plot)
 - [Graphics Principles](https://graphicsprinciples.github.io/) (design tips)
 
+???
+This workshop is meant to show participants how to use ggplot2, but does not cover the principles of visualizing data or graphic design that can be essential to produce "good" figures. These resources do a great job of covering these principles.
+
 ---
+exclude: true
+
 # WARNING!
 
 <br>
@@ -218,23 +239,20 @@ Other drawing softwares are probably better options such as [GIMP](https://www.g
 - add information in the figures (titles, labels, captions, annotations)
 
 ---
-# Why R for graphs?
+# Why use R for graphs?
 
-#### .alert[ Because of its powerful features!]
+#### .alert[Because of its powerful features!]
 
 In this workshop, we focus only on `ggplot2`, but [multiple packages and functions](https://insileco.github.io/wiki/rgraphpkgs/) can be used for great visualization (e.g., [`base R`](https://bookdown.org/rdpeng/exdata/the-base-plotting-system-1.html), [`plotly`](https://plot.ly/r/), [`sjPlot`](http://www.strengejacke.de/sjPlot/), [`mapview`](https://r-spatial.github.io/mapview/), [`igraph`](https://igraph.org/r/)).
 
-```{r, echo=FALSE, fig.width=9, fig.height=5.7}
-source(file="./scripts/multiExamplePlot.R")
-```
-
+.center[![:scale 80%](images/multiExamplePlot.png)]
 
 ---
 # `ggplot2` is versatile
 
 1. [`ggplot2`](https://ggplot2.tidyverse.org/) package lets you make *beautiful* and customizable plots;
-2. it implements the grammar of graphics, an reliable system for building plots.
-3. it [has many extensions](https://exts.ggplot2.tidyverse.org/gallery/).
+2. it implements the grammar of graphics, a reliable system for building plots.
+3. there are [many extensions](https://exts.ggplot2.tidyverse.org/gallery/).
 
 
 .center[![:scale 35%](images/ggplot2_logo.png)]
@@ -263,7 +281,7 @@ A graphic is made of different layers:
 ![:scale 90%](images/Layers_ggplot.png)
 ]
 
-Using the GG system, we can build graphs step by step for customizable results. 
+Using the GG system, we can build graphs step by step for customizable results.
 
 ---
 # Grammar of Graphics (GG) basics
@@ -273,10 +291,6 @@ GG layers have specific names that you will see throughout the presentation:
 ![:scale 70%](images/gglayers.png)
 
 .small[image adapted from [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447)]
-
-???
-
-note: _changed image to more intuitive layers_
 
 ---
 exclude: true
@@ -340,7 +354,7 @@ GG layers:
     - `size`: size scaling for an extra dimension
     - `alpha`: the transparency of the geom
 
-.alert[note: aesthetics are based on quantities in your data, but plots may have some of these qualities not based in data as well. (ie, colouring based on a data group is an aesthetic, but points will always have a colour even if not based on data.)]
+.alert[note: aesthetics are based on qualities in your data, but plots may have some of these qualities not based in data as well. (ie, colouring based on a data group is an aesthetic, but points will always have a colour even if not based on data).]
 ---
 # Grammar of Graphics (GG)
 
@@ -354,7 +368,7 @@ GG layers:
     * `geom_boxplot()`: box and whiskers plot for categorical variables
     * `geom_bar()`: bar charts for categorical x axis
     * `geom_histogram()`: histogram for continuous x axis
-    * `geom_violin()`: distribution kernel of data dispersion 
+    * `geom_violin()`: distribution kernel of data dispersion
     * `geom_smooth()`: function line based on data
 
 ---
@@ -366,10 +380,6 @@ GG layers:
 - Geometric objects (geoms)
 - Facets
     * `facet_wrap()` or `facet_grid()` for small multiples
-    
-???
-
-note: _descriptions of scales to talk about more layers_
 
 ---
 # Grammar of Graphics (GG)
@@ -382,11 +392,7 @@ GG layers:
 - Statistics
     * similar to geoms, but computed
     * show means, counts, and other statistical summaries of data
-    
-    
-???
 
-note: _descriptions of themes to talk about more  layers_
 
 ---
 # Grammar of Graphics (GG)
@@ -401,11 +407,6 @@ GG layers:
     * `coord_cartesian` to set limits
     * `coord_polar` for circular plots
     * `coord_map` for different map projections
-    
-    
-???
-
-note: _descriptions of other layerss_
 
 
 ---
@@ -417,36 +418,31 @@ GG layers:
 - Geometric objects (geoms)
 - Facets
 - Statistics
-- Coordinates 
+- Coordinates
 - Themes
     * overall visual defaults
     * fonts, colors, shapes, outlines
-    
-???
 
-note: _descriptions of other layerss_
 
 ---
-# How layer in ggplot works
+# How to assemble layers in `ggplot2`
 
 1. Create a simple plot object:
   * `plot.object <- ggplot()`
 
 2. Add geometric layers:
   * `plot.object <- plot.object + geom_*()`
-  
+
 3. Add appearance layers:
   * `plot.object <- plot.object + coord_*() + theme()`
 
 3. Repeat step 2-3 until satisfied, then print:
   * `plot.object` or `print(plot.object)`
 
-???
-
-note: _changed to +geom because it implied that layer() was a function to be used_
-
 ---
-# Today's dataset: palmerpenguins
+# The basics of visualizing data
+
+## Today's dataset: palmerpenguins
 
 .pull-right2[
 ![:scale 80%](images/palmerpenguins.png)
@@ -460,19 +456,18 @@ install.packages("palmerpenguins")
 library(palmerpenguins)
 ```
 
-.small[This dataset contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica:] 
+.small[This dataset contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica:]
 ]
 
-![:scale 60%](images/penguins.png)
+![:scale 50%](images/penguins.png)
 .center[.xsmall[Artwork by [@allison_horst](https://twitter.com/allison_horst).]]
-
 
 
 ???
 
 These data were collected from 2007 - 2009 by Dr. Kristen Gorman with the Palmer Station Long Term Ecological Research Program, part of the US Long Term Ecological Research Network.
 
-This dataset is often being used to replace the iris dataset, which has some problems for teaching data science, including its ties to eugenics (more on this at https://armchairecology.blog/iris-dataset/).
+This dataset is often used to replace the iris dataset, which has some problems for teaching data science, including its ties to eugenics (more on this at https://armchairecology.blog/iris-dataset/).
 
 This dataset was also used for a TidyTuesday challenge, showing the many possibilities of visualising the dataset creatively. For example: [this](https://twitter.com/LauraNavarroSol/status/1289216490307063814?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1289216490307063814%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F), and [this](https://twitter.com/CedScherer/status/1288181995714093057?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1288181995714093057%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F).
 
@@ -555,13 +550,13 @@ ggplot(data = penguins,               # Data
   labs(title = "Relationship between bill length and depth\nfor different penguin species", # Title
        x = "Bill length (mm)",
        y = "Bill depth (mm)",
-       col = "Species") + 
+       col = "Species") +
   theme_classic() + # apply a clean theme
   theme(title = element_text(size = 18, face = "bold"),
       text = element_text(size = 16))
 ```
 
-.small[&#x267B; See [*Loading and manipulating data workshop*](https://qcbsrworkshops.github.io/workshop02/pres-en/workshop02-pres-en.html#1) to learn how to clean your dataset.]
+.small[&#x267B; See [*Loading and manipulating data workshop*](https://r.qcbs.ca/workshops/r-workshop-02/) to learn how to clean your dataset.]
 
 ???
 
@@ -581,13 +576,13 @@ ggplot(data = penguins,               # Data
   labs(title = "Relationship between bill length and depth\nfor different penguin species", # Title
        x = "Bill length (mm)",
        y = "Bill depth (mm)",
-       col = "Species") + 
+       col = "Species") +
   theme_classic() + # apply a clean theme
   theme(title = element_text(size = 18, face = "bold"),
       text = element_text(size = 16))
 ```
 
-.small[&#x267B; See [*Loading and manipulating data workshop*](http://qcbs.ca/wiki/r_workshop2) to learn how to clean your dataset.]
+.small[&#x267B; See [*Loading and manipulating data workshop*](https://r.qcbs.ca/workshops/r-workshop-02/) to learn how to clean your dataset.]
 
 
 ---
@@ -620,7 +615,7 @@ s # Print your final plot
 
 ]
 
-??? 
+???
 
 note: _removed this slide because it felt random, but is maybe worth going over at some point - edit. moved to challenge 1 answer_
 
@@ -634,32 +629,24 @@ Remember: a graphic is made of different layers:
 ---
 # `ggplot()` dynamics: data layer
 
-```{r, echo = FALSE, results=0}
-theme_update(axis.text = element_text(size = 16),
-             axis.title = element_text(size = 18))
-```
-
 ```{r, fig.height=5, fig.width=6}
 ggplot(data = penguins)
 ```
 
-???
-
-theme_classic() was applied to all plots in the presentation to help with clarity using theme_set at the beginning of this slide deck, so these plots do not have the ggplot2 default grey background. There is a section about themes later in the presentation, but it is a good idea to mention that a theme has been applied to remove the default background, which the participants might see if they run the code chunks themselves as they follow along.
 
 ---
 # `ggplot()` dynamics: aesthetics layer
 
 ```{r, fig.height=5, fig.width=6}
-ggplot(data = penguins, 
-       aes(x = bill_length_mm, y = bill_depth_mm)) 
+ggplot(data = penguins,
+       aes(x = bill_length_mm, y = bill_depth_mm))
 ```
 
 ---
 # `ggplot()` dynamics: geometric Layer
 
 ```{r, fig.height=5, fig.width=6}
-ggplot(data = penguins, 
+ggplot(data = penguins,
        aes(x = bill_length_mm, y = bill_depth_mm)) +
   geom_point()
 ```
@@ -672,15 +659,15 @@ Note that ggplot2 code is easier to read if each line represents a new element. 
 # `ggplot()` dynamics: extras- facet, stats, coord layers
 
 ```{r,fig.height=5, fig.width=6}
-ggplot(data = penguins, 
+ggplot(data = penguins,
        aes(x = bill_length_mm, y = bill_depth_mm)) +
-  geom_point() + 
+  geom_point() +
   facet_wrap(~species) +
   coord_trans(x = "log10", y = "log10")
 ```
 
 ---
-# Challenge #1 (5min) ![:cube]()
+# Challenge 1 (5min) ![:cube]()
 
 #### Draw your 1st ggplot!
 
@@ -698,10 +685,10 @@ penguins|geom_point|bill_length_mm|flipper_length_mm
 
 
 ---
-# Challenge 1#: Solution ![:cube]()
+# Challenge 1: Solution ![:cube]()
 
 ```{r}
-ggplot(data = penguins, 
+ggplot(data = penguins,
        aes(x = bill_length_mm,
            y = flipper_length_mm)) +
   geom_point()
@@ -709,11 +696,11 @@ ggplot(data = penguins,
 
 
 ---
-# Challenge 1#: Solution ![:cube]()
+# Challenge 1: Solution ![:cube]()
 
 .pull-left2[
 ```{r}
-ggplot(data = penguins, 
+ggplot(data = penguins,
        aes(x = bill_length_mm,
            y = flipper_length_mm)) +
   geom_point()
@@ -725,7 +712,7 @@ ggplot(data = penguins,
 ]
 
 ---
-# Challenge 1#: Solution ![:cube]()
+# Challenge 1: Solution ![:cube]()
 
 .pull-left2[
 ```{r}
@@ -742,7 +729,7 @@ ggplot(data = penguins,
 <br>
 <br>
 
-**note 2**: colour, alpha, shape, and size commands can be set outside of `aes()` values, and will be static, not data-dependent. 
+**note 2**: colour, alpha, shape, and size commands can be set outside of `aes()` values, and will be static, not data-dependent.
 ]
 ---
 
@@ -757,12 +744,7 @@ class: inverse, center, middle
 
 **Use aesthetics (`aes()`) to distinguish classes, groups and structure**
 
-
-```{r echo = FALSE, fig.width = 8, fig.height = 6.5}
-library(gridExtra)
-source(file="./scripts/4plot_aesthetic.R")
-```
-
+![:scale 70%](images/4plot_aesthetic.png)
 ---
 # Colours: make your points talk
 
@@ -774,13 +756,20 @@ Change **colour** to
 
 &nbsp; ![:faic](arrow-right) highlight specific elements
 
+```{r, echo = FALSE}
+theme_set(theme_classic())
+```
+
+
 .pull-left[
 ```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
-ggplot(penguins, 
-       aes(x = bill_length_mm, 
+ggplot(penguins,
+       aes(x = bill_length_mm,
            y = bill_depth_mm)) +
   geom_point(aes(colour = species)) +
-  labs(title = "Qualitative colour for groups") +
+  labs(title = "Qualitative colour for groups",
+       x = "Bill length (mm)",
+       y = "Bill depth (mm)") +
   theme(title = element_text(size = 16, face = "bold"),
         legend.title = element_text(size = 14),
         legend.position = 'bottom')
@@ -789,20 +778,21 @@ ggplot(penguins,
 
 .pull-right[
 ```{r, echo = FALSE, fig.height=4.8, fig.width = 5}
-ggplot(penguins, 
-       aes(x = bill_length_mm, 
+ggplot(penguins,
+       aes(x = bill_length_mm,
            y = bill_depth_mm)) +
-  geom_point(aes(colour = body_mass_g)) +
-  labs(title = "Gradient colour for values") +
+  geom_point(aes(colour = log10(body_mass_g))) +
+  labs(title = "Gradient colour for values",
+       x = "Bill length (mm)",
+       y = "Bill depth (mm)",
+       col = "Body mass (log10 g)") +
   theme(title = element_text(size = 16, face = "bold"),
         legend.title = element_text(size = 14),
         legend.position = 'bottom')
 ```
 ]
 
-.right[
 .footnote[See [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/colour-basics.html)]
-]
 
 ---
 # Using `aes()` use to change colour
@@ -812,8 +802,8 @@ Does bill length and flipper length vary differently across species?
 .pull-left[
 ```{r, fig.align = 'default', fig.asp=2/3}
 # No colour mapping
-ggplot(data = penguins, 
-       aes(x = bill_length_mm, 
+ggplot(data = penguins,
+       aes(x = bill_length_mm,
            y = flipper_length_mm)) +
   geom_point() +
   geom_smooth(method = lm)+
@@ -824,8 +814,8 @@ ggplot(data = penguins,
 .pull-right[
 ```{r,  fig.align = 'default', fig.asp=2/3}
 # With colour mapping
-ggplot(data = penguins, 
-       aes(x = bill_length_mm, 
+ggplot(data = penguins,
+       aes(x = bill_length_mm,
            y = flipper_length_mm,
            col = species)) +
   geom_point() +
@@ -840,8 +830,8 @@ ggplot(data = penguins,
 ```{r, fig.align = 'default', fig.asp=2/3}
 # Default
 pp <- ggplot(data = penguins) +
-  geom_point(aes(x = bill_length_mm, 
-                 y = bill_depth_mm, 
+  geom_point(aes(x = bill_length_mm,
+                 y = bill_depth_mm,
                  colour = species))
 pp + labs(title = "Default")
 ```
@@ -849,9 +839,9 @@ pp + labs(title = "Default")
 .pull-right[
 ```{r, fig.align = 'default', fig.asp=2/3}
 # Manual
-pp + 
+pp +
 scale_colour_manual(
-  values = c("grey55", "orange", 
+  values = c("grey55", "orange",
              "skyblue")) +
   labs(title = "Manual")
 ```
@@ -867,7 +857,7 @@ scale_colour_manual() and scale_fill_manual() allow you to choose your own colou
 ```{r, fig.align = 'default', fig.asp=2/3}
 # Default
 pp2 <- ggplot(data = penguins) +
-  geom_point(aes(x = bill_length_mm, 
+  geom_point(aes(x = bill_length_mm,
                  y = bill_depth_mm,
                  colour = body_mass_g))
 pp2 + labs(title = "Default")
@@ -876,8 +866,8 @@ pp2 + labs(title = "Default")
 .pull-right[
 ```{r, fig.align = 'default', fig.asp=2/3}
 # Manual
-pp2 + 
-  scale_colour_gradient(low = "blue", 
+pp2 +
+  scale_colour_gradient(low = "blue",
                         high = "red") +
   labs(title = "Manual")
 
@@ -904,7 +894,7 @@ display.brewer.all()
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
 # Palette for groups
-pp + 
+pp +
   scale_colour_brewer(palette = "Dark2") +
   labs(title = "Palette for groups")
 ```
@@ -914,7 +904,7 @@ pp +
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
 # Palette for continuous values
-pp2 + 
+pp2 +
   scale_color_viridis_c()+
   labs(title = "Palette for continuous values")
 ```
@@ -927,7 +917,7 @@ Grey-scale palette for publication purposes
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
 # Palette for groups
-pp + 
+pp +
   scale_colour_grey() +
   labs(title = "Palette for groups")
 ```
@@ -939,7 +929,7 @@ Grey-scale palette for publication purposes
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
 # Palette for continuous values
-pp2 + 
+pp2 +
   scale_colour_gradient(low = "grey85", high = "black") +
   labs(title = "Palette for continuous values")
 ```
@@ -948,20 +938,24 @@ pp2 +
 ---
 # Use colourblind-friendly palettes
 
-How your figure might appear under various forms of colourblindness?
-We can use [colorblindr](https://github.com/clauswilke/colorblindr) that is not currently on CRAN, so we install it with the packages [remotes](https://cran.r-project.org/web/packages/remotes/index.html).
+Have you ever considered how your figure might appear under various forms of colourblindness?
+We can use the package [colorBlindness](https://cran.r-project.org/web/packages/colorBlindness/index.html) to consider this.
 
-```{R colorblindr_install, message = FALSE}
-remotes::install_github("clauswilke/colorblindr", quiet = TRUE)
-library(colorblindr)
+```{R colorBlindness_install, message = FALSE}
+install.packages("colorBlindness")
+library(colorBlindness)
 ```
 
 ---
 # Use colourblind-friendly palettes
 
 ```{r, fig.width = 11, fig.height = 7}
-cvd_grid(pp)
+cvdPlot(pp)
 ```
+
+???
+
+As you can see, our current colour palette is not accessible! By using [`viridis`](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html) palettes, we can guarantee our plots always communicate the same information no matter who the audience is.
 
 ---
 # Use colourblind-friendly palettes
@@ -970,7 +964,7 @@ cvd_grid(pp)
 .pull-left[
 ```{r, fig.height = 5}
 # Palette for groups
-pp + 
+pp +
   scale_colour_viridis_d() +
   labs(title = "Viridis palette for groups")
 ```
@@ -979,11 +973,15 @@ pp +
 .pull-right[
 ```{r, fig.height = 5}
 # Palette for continuous values
-pp2 + 
+pp2 +
   scale_colour_viridis_c() +
   labs(title = "Viridis palette for continuous values")
 ```
 ]
+
+???
+
+If you would like to demonstrate the difference, you can run cvdPlot() on these plots during the workshop.
 
 
 ---
@@ -993,9 +991,10 @@ pp2 +
 ```{r, fig.height = 5}
 # shape for groups
 ggplot(data = penguins) +
-  geom_point(aes(x = bill_length_mm, 
-                 y = bill_depth_mm, 
-                 shape = species)) +
+  geom_point(aes(x = bill_length_mm,
+                 y = bill_depth_mm,
+                 shape = species)
+             ) +
   labs(title = "Shapes for groups")
 ```
 ]
@@ -1004,8 +1003,8 @@ ggplot(data = penguins) +
 ```{r, fig.height = 5}
 # size and alpha for continuous values
 ggplot(data = penguins) +
-  geom_point(aes(x = bill_length_mm, 
-                 y = bill_depth_mm, 
+  geom_point(aes(x = bill_length_mm,
+                 y = bill_depth_mm,
                  size = body_mass_g,
                  alpha = flipper_length_mm)) +
   labs(title = "Size and alpha for continuous values")
@@ -1016,7 +1015,7 @@ ggplot(data = penguins) +
 
 Note that setting many variables to visual cues like color, shape, size, and alpha at once tends to be overwhelming for the viewer. Adding 4 levels of complexity on top of the 2-dimensional representation of points can be too much to process properly. It is better to choose the visual cues and key variables for the desired message than to overload a plot with every possibility in the aes() function.
 ---
-# Challenge #2 ![:cube]()
+# Challenge 2 ![:cube]()
 
 - Produce an informative plot from built-in datasets such as `mtcars`, `CO2` or `msleep`.
 
@@ -1030,7 +1029,7 @@ Data| x | y | Aesthetics
 mtcars |*wt* |*mpg* | *disp* and *hp*
 CO2 |*conc* |*uptake* | *Treatment* and *Type*
 msleep |log10(*bodywt*) |*awake* | *vore* and *conservation*
-ToothGrowth | *dose* | *len* | *supp* 
+ToothGrowth | *dose* | *len* | *supp*
 
 <br>
 .center[.alert[
@@ -1039,7 +1038,7 @@ ToothGrowth | *dose* | *len* | *supp*
 ]
 
 ---
-# Challenge #2 ![:cube]()
+# Challenge 2 ![:cube]()
 
 #### .alert[Breakout rooms! - 15 min]
 <br> make a plot to share with the group
@@ -1048,7 +1047,7 @@ ToothGrowth | *dose* | *len* | *supp*
 ???
 note: _assign each group a dataset to make a plot from: mtcars, CO2, msleep, and ToothGrowth to make exploratory plots_
 ---
-# Challenge #2 - Solution example #1
+# Challenge 2 - Solution example 1
 
 .small[
 
@@ -1069,7 +1068,7 @@ ggplot(data = mtcars) +
 .comment[Could you use `size` instead of `alpha`? What about `shape`?]
 
 ---
-# Challenge #2 - Solution example #2
+# Challenge 2 - Solution example 2
 
 .small[
 
@@ -1082,16 +1081,16 @@ CO2 |*conc* |*uptake* | *Treatment* and *Type*
 ```{r, fig.height=3.5, fig.width=6}
 data(CO2)
 ggplot(data = CO2) +
-    geom_point(mapping = aes(x = conc, 
+    geom_point(mapping = aes(x = conc,
                              y = uptake,
-                             colour = Treatment, 
+                             colour = Treatment,
                              shape = Type))
 ```
 
 .comment[Why not use `size = Type`?]
 
 ---
-# Challenge #2 - Solution example #3
+# Challenge 2 - Solution example 3
 
 .small[
 
@@ -1104,20 +1103,20 @@ msleep |log10(*bodywt*) |*awake* | *vore* and *conservation*
 ```{r, fig.height=3.5, fig.width=6}
 data(msleep)
 ggplot(data = msleep) +
-    geom_point(mapping = aes(x = log10(bodywt), 
+    geom_point(mapping = aes(x = log10(bodywt),
                              y = awake,
-                             colour = vore, 
+                             colour = vore,
                              shape = conservation))
 ```
 
 ---
-# Challenge #2 - Solution example #4
+# Challenge 2 - Solution example 4
 
 .small[
 
 Data| x | y | Aesthetics
 :-------------:|:-------------:|:-------------:|:-------------:
-ToothGrowth | *dose* | *len* | *supp* 
+ToothGrowth | *dose* | *len* | *supp*
 
 ]
 
@@ -1126,7 +1125,7 @@ data(ToothGrowth)
 ggplot(ToothGrowth, aes(x = dose,
                         y = len,
                         color = supp)) +
-  geom_point() + 
+  geom_point() +
   geom_smooth(method = lm, formula = 'y~x')
 ```
 
@@ -1138,7 +1137,8 @@ class: small-code
 x axis in regular scale
 ```{r,fig.height=4}
 ggplot(diamonds) +
-  geom_point(mapping = aes(x = carat, y = price)) +
+  geom_point(aes(x = carat,
+                 y = price)) +
   labs(title = "Original scale")
 ```
 ]
@@ -1146,14 +1146,16 @@ ggplot(diamonds) +
 .pull-right[
 x-axis and y-axis in log10() scale
 ```{r,fig.height=4}
-ggplot(diamonds) + geom_point(mapping = aes(x = carat, y = price)) +
+ggplot(diamonds) +
+  geom_point(aes(x = carat,
+                 y = price)) +
   coord_trans(x = "log10",
               y = "log10") +
   labs(title = "log10 scale")
 ```
 ]
 
-<br>
+
 .small[It is also possible to transform the coordinate system using `scale_x_log10()` and `scale_y_log10()`.]
 
 <!-- explain the difference -->
@@ -1209,8 +1211,8 @@ This presentation has been using theme_classic() for the plots, because the grey
 ---
 # `theme()`
 
-Use `theme_set()` to change theme for all your future plots, 
-or `theme_update()` to edit aspects of a theme setting. 
+Use `theme_set()` to change theme for all your future plots,
+or `theme_update()` to edit aspects of a theme setting.
 
 
 
@@ -1226,7 +1228,7 @@ pp
 .pull-right[
 **Update theme**
 ```{r, fig.height = 4.5}
-# remove minor gridlines 
+# remove minor gridlines
 theme_update(
   panel.grid.minor = element_blank())
 pp
@@ -1255,38 +1257,36 @@ note: _removed this slide to add theme image instead_
 ---
 # `theme()`
 
-Elements of a theme
+Elements of a theme by ([Isabella Benabaye](https://isabella-b.com/blog/ggplot2-theme-elements-reference/)).
 
 ![:scale 90%](images/ggthemes.png)
-
 
 ---
 class: inverse, center, middle
 
 # Fine-tuning your plots
 
-# Using `facet_grid()` to change the arrangement of plots
+# Using facets to split up your plot
 
 ---
-# penguins dataset: per-species facets
-```{r, fig.align="center", fig.width=10, fig.height=5.5}
+Facetting by one variable
+```{r, fig.align="center"}
 ggplot(data = penguins) +
-  geom_point(mapping = aes(x = bill_length_mm, 
-                           y = bill_depth_mm, 
+  geom_point(mapping = aes(x = bill_length_mm,
+                           y = bill_depth_mm,
                            colour = species)) +
   facet_grid(~ species, scales = "free")
 ```
 
 ---
-# CO2 dataset: per-type facets
+# Facetting by two variables
+
 ```{r, fig.align="center", fig.width=9, fig.height=5}
-ggplot(data = CO2) +
-  geom_point(mapping = aes(x = conc, 
-                           y = uptake, 
-                           colour = Treatment)) +
-  xlab("CO2 Concentration (mL/L)") + 
-  ylab("CO2 Uptake (umol/m^2 sec)") +
-  facet_grid(~ Type)
+ggplot(data = penguins) +
+  geom_point(mapping = aes(x = bill_length_mm,
+                           y = bill_depth_mm,
+                           colour = species)) +
+  facet_grid(year ~ species, scales = "free")
 ```
 
 <!-- relabeling ticks -->
@@ -1333,11 +1333,11 @@ pp +
 ]
 
 ---
-# Challenge #3 ![:cube]()
+# Challenge 3 ![:cube]()
 
 Use the `tips` dataset found in `reshape2` &#x1F4E6; to reproduce the plot below.
 
-Our tip: start from `theme_classic()` and add `theme()` to make your additional changes.
+Our tip: Go step by step! When fine-tuning your plot, start from `theme_classic()` and add `theme()` to make your additional changes.
 
 ```{r, echo=FALSE, fig.width=10, fig.height=5}
 library(reshape2)
@@ -1363,7 +1363,7 @@ tips.gg
 ```
 
 ---
-# Challenge #3 ![:cube]()
+# Challenge 3 ![:cube]()
 
 #### .alert[Breakout rooms! - 15 min]
 
@@ -1371,7 +1371,7 @@ tips.gg
 note: _give teams time to work together to recreate this plot. Refer to theme elements slide_
 
 ---
-# Challenge #3: Solution![:cube]()
+# Challenge 3: Solution![:cube]()
 
 ```{r, eval=FALSE}
 library(reshape2)
@@ -1397,16 +1397,16 @@ tips.gg
 ```
 
 ---
-# Challenge #3: step-by-step solution
+# Challenge 3: step-by-step solution
 
 #### `aes()`
 
 ```{r, fig.width = 6, fig.height=4}
 tips.gg <- ggplot(tips) +
-  geom_point(mapping = aes(x = total_bill, 
+  geom_point(mapping = aes(x = total_bill,
                            y = tip/total_bill,
-                           shape = smoker, 
-                           colour = sex, 
+                           shape = smoker,
+                           colour = sex,
                            size = size)) +
   theme_classic()
 tips.gg
@@ -1417,7 +1417,7 @@ theme_set(theme_classic())
 ```
 
 ---
-# Challenge #3: step-by-step solution
+# Challenge 3: step-by-step solution
 
 #### `facet_grid()`
 
@@ -1429,7 +1429,7 @@ tips.gg
 
 
 ---
-# Challenge #3: step-by-step solution
+# Challenge 3: step-by-step solution
 
 #### Grey-scale palette
 
@@ -1440,7 +1440,7 @@ tips.gg
 ```
 
 ---
-# Challenge #3: step-by-step solution
+# Challenge 3: step-by-step solution
 
 #### Adding plot title and labels
 
@@ -1452,7 +1452,7 @@ tips.gg
 ```
 
 ---
-# Challenge #3: step-by-step solution
+# Challenge 3: step-by-step solution
 
 #### Adding a theme and fine tuning it
 
@@ -1491,7 +1491,7 @@ exclude: true
 ]
 
 ???
-note: removed this slide. Not sure why it's here. 
+note: removed this slide. Not sure why it's here.
 
 ---
 # `ggplot2::ggplot()`
@@ -1516,7 +1516,7 @@ ggplot(penguins)
 A **histogram** is an accurate graphical representation of the distribution of numeric data. There is only one aesthetic required: the `x` variable.
 
 ```{r, fig.align="center", fig.height=5}
-ggplot(penguins, 
+ggplot(penguins,
        aes(x = bill_length_mm)) +
   geom_histogram() +
   ggtitle("Histogram of penguin bill length ")
@@ -1542,12 +1542,19 @@ ggplot(mpg, aes(displ, hwy)) +
 ```
 ]
 ]
+
+???
+
+A scatter plot is a great way to visualize data points for two variables. Two aesthetics are required in `geom_point()`: the `x` and `y` variables.
+
+It can, however, be difficult to discern any potential relationship in a scatter plot. You can use `geom_smooth()` to fit a line through your data with a variety of methods. Here, we will add a linear fit to the scatter plot.
+
 ---
 # Boxplot: `geom_boxplot()`
 
 ```{r, fig.align="center", fig.height=5}
-ggplot(data = penguins, 
-       aes(x = species, 
+ggplot(data = penguins,
+       aes(x = species,
            y = bill_length_mm,
            fill = species)) +
   geom_boxplot() +
@@ -1558,8 +1565,8 @@ ggplot(data = penguins,
 # Boxplot: `geom_boxplot()`
 
 ```{r, echo=FALSE, fig.align="center", fig.width = 5, fig.height = 3.2}
-ggplot(data = penguins, 
-       aes(x = species, 
+ggplot(data = penguins,
+       aes(x = species,
            y = bill_length_mm,
            fill = species)) +
   geom_boxplot() +
@@ -1570,18 +1577,24 @@ ggplot(data = penguins,
 ![:scale 75%](images/boxplot_explain.png)
 ]
 
+???
+
+Boxplots are a popular way to plot the distribution of data across some grouping variable, like species. You can specify this grouping variable in  `aes()` using `group =`, or the aesthetics used to represent the data (`fill =`, `col = `, `shape = `) to generate the boxplot.
+
+Though boxplots are very popular to summarise data, someone looking at your plot may not intuitively grasp how this summary works and what it might be hiding. Using boxplots well requires an understanding of their anatomy, as seen below. More on the pitfalls of boxplots [here](https://www.data-to-viz.com/caveat/boxplot.html).
+
 ---
-## Boxplot with annotations: `geom_boxplot()` and `geom_signif()`
+# Boxplot with annotations: `geom_boxplot()` and `geom_signif()`
 
 .pull-left3[
 ```{r, fig.align="center",fig.height=5.5, eval = FALSE}
 library(ggsignif)
-ggplot(data = penguins, 
-       aes(x = species, 
+ggplot(data = penguins,
+       aes(x = species,
            y= bill_length_mm,
            fill = species)) +
   geom_boxplot() +
-  geom_signif(comparisons = 
+  geom_signif(comparisons =
                 list(c("Adelie", "Gentoo")),
               map_signif_level=TRUE)
 ```
@@ -1589,13 +1602,13 @@ ggplot(data = penguins,
 .pull-right3[
 ```{r, fig.align="center",fig.height=5.5, echo = FALSE}
 library(ggsignif)
-ggplot(data = penguins, 
-       aes(x = species, 
+ggplot(data = penguins,
+       aes(x = species,
            y= bill_length_mm,
            fill = species)) +
   geom_boxplot() +
   # specify the comparison we are interested in
-  geom_signif(comparisons = 
+  geom_signif(comparisons =
                 list(c("Adelie", "Gentoo")),
               map_signif_level=TRUE)
 ```
@@ -1603,7 +1616,7 @@ ggplot(data = penguins,
 
 ???
 
-geom_signif calculates the significance of a difference between groups and adds the annotation to the plot in a single line.
+To help boxplots speak for themselves, we can add annotations with `geom_signif()`. The function `geom_signif()` calculates the significance of a difference between groups and adds the annotation to the plot in a single line.
 
 ---
 # Violin plot: `geom_violin()`
@@ -1631,11 +1644,17 @@ ggplot(data = data, aes(names, value, fill=names)) + geom_violin()
 ```
 ]
 
+???
+
+Like boxplots, violin plots visualise the distribution of a numeric variable for one or several groups. However, a violin's shape represents the distribution of points that is obscured in a boxplot's summarisation, allowing for a more accurate representation of the data ([Data-to-Viz)](https://www.data-to-viz.com/graph/violin.html)).
+
+Let us compare a boxplot and a violin plot on some generated data. Notice how the violin plot *shows* us the range **and** the variability in our data, while the boxplot cannot communicate these two things as intuitively.
+
 ---
 # Violin plot: `geom_violin()`
 
 ```{r, fig.align="center"}
-violin <- ggplot(data = penguins, 
+violin <- ggplot(data = penguins,
                  aes(x = species, y = bill_length_mm)) +
   geom_violin(trim = FALSE, fill = "grey70", alpha = .5) +
   labs(title = "Violin plot")
@@ -1646,33 +1665,34 @@ violin
 # Violin plot: `geom_violin()` + `_boxplot()` + `_jitter()`
 
 ```{r, fig.align="center"}
-violin + 
+violin +
     geom_jitter(shape = 16, position = position_jitter(0.2),
               alpha = .3)+
   geom_boxplot(width = .05)
 ```
 
 ???
-note: Multiple geoms can be used together! The order determines how they overlap.
+Although we have a good idea of how the data is distributed, we can enhance the plot by visualising some summary statistics and the data points. Let us plot a boxplot and the data points *on top* of our violin plot with `geom_violin()` + `geom_boxplot()` + `geom_jitter()`.
+
 ---
 # Summarise y values: `stat_summary()`
 
 .pull-left[
 ```{r, fig.height=5, fig.width=4}
-ggplot(mtcars, 
+ggplot(mtcars,
        aes(cyl, mpg)) +
   geom_point() +
-  stat_summary(fun.y = "median", 
+  stat_summary(fun.y = "median",
                geom = "point",
                colour = "red",
                size = 6) +
-  labs(title = "Means")
+  labs(title = "Medians")
 ```
 ]
 
 .pull-right[
 ```{r, fig.height=5, fig.width=4}
-ggplot(mtcars, 
+ggplot(mtcars,
        aes(cyl, mpg)) +
   geom_point() +
   stat_summary(fun.data = "mean_cl_boot",
@@ -1685,111 +1705,162 @@ ggplot(mtcars,
 ---
 # Summarise values
 
-See also `geom_errorbar()`, `geom_pointrange()`, `geom_linerange()`, `geom_crossbar()` for geoms to display summarised data.
+To display more summary statistics, see:
 
-
-
-
+- `geom_errorbar()`
+- `geom_pointrange()`
+- `geom_linerange()`
+- `geom_crossbar()`
+- and others!
 
 ---
 # Representing maps: `geom_map()`
+
 .small[
-```{r}
-crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
-crimesm <- reshape2::melt(crimes, id = 1)
-
+```{r, eval = FALSE, fig.height = 6, fig.width = 7}
+# load maps library
 library(maps)
-states_map <- map_data("state")
+states_map <- map_data("state") # get a state-level map of the US
 
-ggplot(crimes, aes(map_id = state)) +
-  geom_map(aes(fill = Murder), map = states_map) +
-  expand_limits(x = states_map$long, y = states_map$lat) +
-  coord_map()
+# State name is set as rownames. Let's make a new column for these
+# that matches the column of state names in our states_map
+USArrests$region <- tolower(rownames(USArrests))
+
+# Build our map
+ggplot(USArrests,
+       aes(map_id = region)) + # the variable name to link our map and dataframe
+  geom_map(aes(fill = Murder), # variable we want to represent with an aesthetic
+           map = states_map) + # data frame that contains coordinates
+  expand_limits(x = states_map$long,
+                y = states_map$lat) +
+  coord_map() +  # projection
+  labs(x = "", y = "") # remove axis labels
 ```
 ]
+
+???
+USArrests: Violent Crime Rates by US State dataset, included in R. This data set contains statistics, in arrests per 100,000 residents for assault, murder, and rape in each of the 50 US states in 1973. Also given is the percent of the population living in urban areas.
+
+The map is on the next slide. Feel free to flip between the slides to explain each element if there is interest in mapping.
+
 ---
+# Representing maps: `geom_map()`
 
+```{r, echo = FALSE, fig.width = 10}
+# load maps library
+library(maps)
+states_map <- map_data("state") # get a state-level map of the US
 
+# State name is set as rownames. Let's make a new column for these
+# that matches the column of state names in our states_map
+USArrests$region <- tolower(rownames(USArrests))
+
+# Build our map
+ggplot(USArrests,
+       aes(map_id = region)) +
+  geom_map(aes(fill = Murder),
+           map = states_map) +
+  expand_limits(x = states_map$long,
+                y = states_map$lat) +
+  coord_map() +  # projection
+  labs(x = "", y = "") # remove axis labels
+```
+
+---
 ## Density plots: `geom_density()`
 
 .small[A density plot shows the distribution of a numerical variable and it takes only set of numeric values as input.]
 .pull-left[
 ```{r, echo=TRUE, fig.width=5, fig.height=4.4}
-(peng.dens <- 
-   ggplot(penguins, 
-          aes(bill_length_mm)) +
+(peng.dens <- ggplot(penguins,
+                     aes(x = bill_length_mm)) +
    geom_density())
 ```
 ]
 
 .pull-right[
 ```{r, echo=TRUE, fig.width=5, fig.height=4.4}
-(cars.dens <- 
-   ggplot(cars, aes(dist)) +
+(cars.dens <- ggplot(cars,
+                    aes(x = dist)) +
    geom_density())
 ```
 ]
 
+???
+
+Wrapping the plot objects in () prints them whenever these lines are run, rather than printing the plot object on another line as we have been doing.
+
 ---
 # Dendogram: `ggdendrogram()`
 
-```{r}
-library(ggdendro)
-USArrests.short = USArrests[1:10,]
-hc <- hclust(dist(USArrests.short), "ave")
+Which US states have similar arrest rates?
 
-ggdendrogram(hc, rotate = TRUE, theme_dendro = FALSE)
+```{r, fig.height = 4}
+library(ggdendro)
+USArrests.short <- USArrests[1:10,] # take a small sample for simplicity
+hc <- hclust(dist(USArrests.short), "average") # cluster by average distance (UPGMA)
+
+ggdendrogram(hc, rotate = TRUE)
 ```
 
 
 ---
 # Arrange plots: `patchwork`
 
-**Add multiple graphs on the same plot**
-
 ```{r, fig.width=9, fig.height=5, message=FALSE, warning=FALSE}
 library(patchwork)
 peng.dens + cars.dens +
-  plot_annotation(tag_levels = 'a')
+  plot_annotation(tag_levels = 'a') # adds a) and b) to your plots, to reference
+# in your figure captions.
 ```
 
----
-# Final Challenge![:cube]()
+???
 
-Create your own graph and follow these recommendations:
+We have used facets to split our plot into multiple windows. However, this is restricted to plotting the same variables from the same dataset. The `patchwork` package makes it easy to arrange separate ggplots together in one frame with `+` (arrange plots beside each other), `/` (arrange one plot on top of the other), `()` (group this arrangement of plots)  as though you are writing an equation. You can demo variations of this arrangement live.
+
+---
+# Challenge 4![:cube]()
+
+Create your own ggplot and follow these recommendations:
   * Dataset: any (recommended: use your dataset)
   * Explore a new geom_* and other plot elements
 
-Use the following links for tips:
-https://ggplot2.tidyverse.org/reference/index.html
-http://shinyapps.stat.ubc.ca/r-graph-catalog/
+Use the following links for tips and inspiration:
+
+- [ggplot2 Reference](https://ggplot2.tidyverse.org/reference/index.html)
+- [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)
+- [Data to Viz](https://www.data-to-viz.com/)
 
 ---
-# Final Challenge: Solution example #1
+# Challenge 4: Solution example #1
 .small[
 ```{r, fig.align='center',fig.height=4}
 data(msleep)
-msleep.challenge4 <- ggplot(msleep, 
-                            aes(x = vore, y = log10(brainwt), fill = vore))
-msleep.challenge4 + 
+ggplot(msleep,
+       aes(x = vore,
+           y = log10(brainwt),
+           fill = vore)) +
   geom_violin() +
   geom_signif(comparisons = list(c("herbi", "insecti"))) +
-  labs(main = "Brain weight among different vore", 
+  labs(main = "Brain weight among different vore",
        y = "log10(Brain weight (Kg))") +
   scale_fill_grey() +
   theme_classic()
 ```
 ]
+
 ---
-# Final Challenge: Solution example #2
+# Challenge 4: Solution example #2
+
 .small[
-```{r, fig.align='center', fig.width=5, fig.height=4}
+```{r, fig.align='center', fig.height=3.5}
 data(mtcars)
+# let's do some clustering!
 mtcars.short <- mtcars[1:20,]
-mtcars.short.hc <- hclust(dist(mtcars.short), "complete")
-dendro.challenge4 <- ggdendrogram(mtcars.short.hc, 
-                                  rotate = TRUE, theme_dendro = FALSE)
-dendro.challenge4 + 
+mtcars.short.hc <- hclust(dist(mtcars.short), "average")
+
+ggdendrogram(mtcars.short.hc, rotate = TRUE) +
+  # fine-tuning
   labs(title = "Car dendro from motor spec", y ="Cars") +
   theme(axis.title.y = element_text(size = 16),
         axis.text.y = element_text(size = 12),
@@ -1799,21 +1870,22 @@ dendro.challenge4 +
 ]
 
 ---
-## Miscellaneous: interactive plots using `plotly()`
+# Miscellaneous: interactive plots using `plotly()`
 .small[
-.alert[**Select the species data to display directly from the legend**]
 
 ```{r, echo = TRUE, fig.width=10, fig.height=5}
+library(plotly)
 p <- ggplot(penguins,
-           aes(x = bill_length_mm, y = bill_depth_mm, 
+           aes(x = bill_length_mm, y = bill_depth_mm,
                colour = species, shape = species)) +
     geom_point(size=6, alpha=0.6)
 # convert to a plotly object!
-plotly::ggplotly(p)
+ggplotly(p)
 ```
 ]
 
 ???
+The `plotly()` library contains the function `ggplotly()`, which translates your `ggplot` code into an interactive `plotly` object in one line of code.
 
 You can click on the species in the legend to add/remove species. You can also see values while hovering over points.
 
@@ -1823,6 +1895,8 @@ class: inverse, center, middle
 # Saving your plots with ggplot2
 
 ---
+exclude: true
+
 # Saving plots in RStudio
 
 <div style="text-align:center">
@@ -1837,9 +1911,9 @@ class: inverse, center, middle
 `ggsave()` writes directly to your working directory and allows you to specify the name of the file, the dimensions of the plot, the resolution, etc.
 
 ```{r, eval=FALSE}
-my1rstPlot <- 
-  ggplot(penguins, 
-         aes(x = bill_length_mm, 
+my1rstPlot <-
+  ggplot(penguins,
+         aes(x = bill_length_mm,
              y = bill_depth_mm)) +
   geom_point()
 
@@ -1850,6 +1924,13 @@ ggsave("my1stPlot.pdf",
 
 NB: Vectors (e.g., pdf, svg) format are more flexible than raster format (jpeg,
 png, ...) if the image needs modification afterwards.
+
+**Tip:** `quartz()` (mac) or `window()` (pc) functions make sizing easier before `ggsave()`!
+
+???
+
+Tip:`quartz()` (mac) or `window()` (pc) functions make sizing easier before `ggsave()`! Just plot your ggplot in quartz() or window(), adjust the size until it looks good, and run ggsave() with the filename to see which dimensions you used! You can then add this in your code with height = and width = as shown above. You can demo this.
+
 
 ---
 # Saving plots in code
@@ -1865,39 +1946,32 @@ graphics.off()
 
 
 ---
-# Saving plots in code
-<br>
-
-**Tip:** `quartz()` (mac) or `window()` (pc) functions make sizing easier before `ggsave()`!
-
-???
-
-note: _this function allows to resize plot live, then use ggsave without specifying plot._
-```
-
-
----
 class: inverse, center, middle
 
-# Going further
-
-
----
-# Available elements
-
-
-[Data Visualization with ggplot2 Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
-
-.center[![:scale 55%](images/available_geom.png)]
-
-https://www.rstudio.com/resources/cheatsheets
+# Concluding remarks
 
 ---
 # Additional resources
 
-* `help(package = ggplot2)`
-* http://ggplot2.tidyverse.org/reference/
-* Fundamentals of Data Visualization https://serialmentor.com/dataviz/
+- `help(package = ggplot2)`
+- [Data Visualization with ggplot2 Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization.pdf)
+- [ggplot2 Reference](http://ggplot2.tidyverse.org/reference/)
+- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)
+- [From Data to Viz](https://www.data-to-viz.com/)
+- [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base R)
+- [Graphics Principles](https://graphicsprinciples.github.io/) (design tips)
+- [The R Graph gallery](https://www.r-graph-gallery.com)
+-  Lecture notes from Hadley's course Stat 405 (the other lessons are
+awesome too!)
+  -   <http://stat405.had.co.nz/lectures/11-adv-data-manip.pdf>
+  -   <http://stat405.had.co.nz/lectures/19-tables.pdf>
+
+???
+
+Show the ggplot2 cheatsheet https://github.com/rstudio/cheatsheets/raw/master/data-visualization.pdf
+
+---
+# Additional resources
 
 .center[![:scale 65%](images/ggplot_book.png)]
 
@@ -1905,11 +1979,11 @@ https://www.rstudio.com/resources/cheatsheets
 # Concluding remarks
 <br>
 
-  1. There are other useful packages that can be used with `ggplot2`! To name a few: `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` and `ggtree`. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) for other `ggplot2` extensions.
+There are other useful packages that can be used with `ggplot2`!
 
+To name a few: `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` and `ggtree`. Have a look at [www.ggplot2-exts.org](https://www.ggplot2-exts.org/) for other `ggplot2` extensions.
 
-  2. Note that you can learn more about design and image manipulation with the "Introduction to graphic design and image manipulation with open source tools": https://qcbs.ca/wiki/graphics
-
+Note that you can learn more about design and image manipulation with the QCBS workshop ["Introduction to graphic design and image manipulation with open source tools"](https://wiki.qcbs.ca/graphics).
 
 
 ---
