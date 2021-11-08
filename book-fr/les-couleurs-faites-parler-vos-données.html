@@ -398,15 +398,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="utiliser-des-palettes-de-couleurs-visibles-pour-les-daltoniens" class="section level2">
 <h2><span class="header-section-number">8.5</span> Utiliser des palettes de couleurs visibles pour les daltoniens</h2>
 <p>Comment votre figure peut-elle apparaître sous différentes formes de daltonisme ?
-Nous pouvons utiliser <a href="https://github.com/clauswilke/colorblindr">colorblindr</a> qui n’est pas actuellement sur CRAN, donc nous l’installons avec la librairie <a href="https://cran.r-project.org/web/packages/remotes/index.html">remotes</a>.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="les-couleurs-faites-parler-vos-données.html#cb33-1"></a><span class="co"># Installons la librairie colorblindr de GitHub avec</span></span>
-<span id="cb33-2"><a href="les-couleurs-faites-parler-vos-données.html#cb33-2"></a><span class="co"># remotes</span></span>
-<span id="cb33-3"><a href="les-couleurs-faites-parler-vos-données.html#cb33-3"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>, <span class="dt">quiet =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb33-4"><a href="les-couleurs-faites-parler-vos-données.html#cb33-4"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;clauswilke/colorblindr@cc54c8a35f8e7689ef4cc128b0da3af92f8cd540&quot;</span>,</span>
-<span id="cb33-5"><a href="les-couleurs-faites-parler-vos-données.html#cb33-5"></a>    <span class="dt">quiet =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb33-6"><a href="les-couleurs-faites-parler-vos-données.html#cb33-6"></a><span class="kw">library</span>(colorblindr)</span></code></pre></div>
-<p>Commençons par tester quelques couleurs en utilisant la fonction <code>cvd_grid()</code>. Cela nous montrera comment notre graphique actuel se présente pour différentes formes de daltonisme.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="les-couleurs-faites-parler-vos-données.html#cb34-1"></a><span class="kw">cvd_grid</span>(pp)  <span class="co"># Vérifions le résultat de notre graphique selon les différentes formes de daltonisme.</span></span></code></pre></div>
+Nous pouvons utiliser la librairie <a href="https://cran.r-project.org/web/packages/colorBlindness/index.html">colorBlindness</a>.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="les-couleurs-faites-parler-vos-données.html#cb33-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;colorBlindness&quot;</span>)</span>
+<span id="cb33-2"><a href="les-couleurs-faites-parler-vos-données.html#cb33-2"></a><span class="kw">library</span>(colorBlindness)</span></code></pre></div>
+<p>Commençons par tester quelques couleurs en utilisant la fonction <code>cvdPlot()</code>. Cela nous montrera comment notre graphique actuel se présente pour différentes formes de daltonisme.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="les-couleurs-faites-parler-vos-données.html#cb34-1"></a><span class="kw">cvdPlot</span>(pp)  <span class="co"># Vérifions le résultat de notre graphique selon les différentes formes de daltonisme.</span></span></code></pre></div>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-47-1.png" width="150%" /></p>
 <p>Comme vous pouvez le constater, notre palette de couleurs actuelle n’est pas accessible ! En utilisant les palettes <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><code>viridis</code></a>, nous pouvons garantir que nos graphiques communiquent toujours les mêmes informations, quel que soit le public.</p>
 <div id="example-pour-des-variables-qualitatives" class="section level3">
@@ -417,9 +413,9 @@ Nous pouvons utiliser <a href="https://github.com/clauswilke/colorblindr">colorb
 <span id="cb35-3"><a href="les-couleurs-faites-parler-vos-données.html#cb35-3"></a>pp_viridis &lt;-<span class="st"> </span>pp <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_viridis_d</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Palette viridis palette pour des groupes&quot;</span>)</span>
 <span id="cb35-4"><a href="les-couleurs-faites-parler-vos-données.html#cb35-4"></a>pp_viridis</span></code></pre></div>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="les-couleurs-faites-parler-vos-données.html#cb36-1"></a><span class="co"># Avons-nous réussi ? Utilisons cvd_grid() pour vérifier à</span></span>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="les-couleurs-faites-parler-vos-données.html#cb36-1"></a><span class="co"># Avons-nous réussi ? Utilisons cvdPlot() pour vérifier à</span></span>
 <span id="cb36-2"><a href="les-couleurs-faites-parler-vos-données.html#cb36-2"></a><span class="co"># nouveau.</span></span>
-<span id="cb36-3"><a href="les-couleurs-faites-parler-vos-données.html#cb36-3"></a><span class="kw">cvd_grid</span>(pp_viridis)</span></code></pre></div>
+<span id="cb36-3"><a href="les-couleurs-faites-parler-vos-données.html#cb36-3"></a><span class="kw">cvdPlot</span>(pp_viridis)</span></code></pre></div>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="les-couleurs-faites-parler-vos-données.html#cb37-1"></a><span class="co"># On a réussi!</span></span></code></pre></div>
 </div>
@@ -429,7 +425,7 @@ Nous pouvons utiliser <a href="https://github.com/clauswilke/colorblindr">colorb
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="les-couleurs-faites-parler-vos-données.html#cb38-1"></a>pp2_viridis &lt;-<span class="st"> </span>pp2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_viridis_c</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Palette viridis pour des variables continues&quot;</span>)</span>
 <span id="cb38-2"><a href="les-couleurs-faites-parler-vos-données.html#cb38-2"></a>pp2_viridis</span></code></pre></div>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="les-couleurs-faites-parler-vos-données.html#cb39-1"></a><span class="kw">cvd_grid</span>(pp2_viridis)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="les-couleurs-faites-parler-vos-données.html#cb39-1"></a><span class="kw">cvdPlot</span>(pp2_viridis)</span></code></pre></div>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 </div>
 </div>

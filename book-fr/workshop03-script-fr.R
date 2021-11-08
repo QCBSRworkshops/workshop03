@@ -232,7 +232,7 @@ pp2 +
   scale_colour_gradient(low = "blue",
                         high = "red") +
   labs(title = "Manuellement")
-# Note : il existe aussi scale_colour_gradient2() pour créer un # gradient avec 
+# Note : il existe aussi scale_colour_gradient2() pour créer un # gradient avec
 # une valeur médiane pour les palettes divergentes.
 
 require(RColorBrewer)
@@ -260,12 +260,10 @@ pp2 +
   scale_colour_gradient(low = "grey85", high = "black") +
   labs(title = "Palette for continuous values")
 
-# Installons la librairie colorblindr de GitHub avec remotes
-install.packages("remotes", quiet = TRUE)
-remotes::install_github("clauswilke/colorblindr@cc54c8a35f8e7689ef4cc128b0da3af92f8cd540", quiet = TRUE)
-library(colorblindr)
+install.packages("colorBlindness")
+library(colorBlindness)
 
-cvd_grid(pp)  # Vérifions le résultat de notre graphique selon les différentes formes de daltonisme.
+cvdPlot(pp)  # Vérifions le résultat de notre graphique selon les différentes formes de daltonisme.
 
 # Utilisons une palette viridis pour rendre notre graphique plus accessible.
 pp_viridis <- pp +
@@ -273,8 +271,8 @@ pp_viridis <- pp +
       labs(title = "Palette viridis palette pour des groupes")
 pp_viridis
 
-# Avons-nous réussi ? Utilisons cvd_grid() pour vérifier à nouveau.
-cvd_grid(pp_viridis)
+# Avons-nous réussi ? Utilisons cvdPlot() pour vérifier à nouveau.
+cvdPlot(pp_viridis)
 # On a réussi!
 
 pp2_viridis <- pp2 +
@@ -282,7 +280,7 @@ pp2_viridis <- pp2 +
         labs(title = "Palette viridis pour des variables continues")
 pp2_viridis
 
-cvd_grid(pp2_viridis)
+cvdPlot(pp2_viridis)
 
 # changer la forme des points
 ggplot(data = penguins) +
@@ -336,7 +334,7 @@ ggplot(data = msleep) +
         shape = conservation))
 
 data(ToothGrowth)
-ggplot(ToothGrowth, 
+ggplot(ToothGrowth,
        aes(x = dose,
            y = len,
            color = supp)) +
@@ -344,7 +342,7 @@ ggplot(ToothGrowth,
   geom_smooth(method = lm, formula = 'y ~ x')
 
 ggplot(diamonds) +
-  geom_point(aes(x = carat, 
+  geom_point(aes(x = carat,
                            y = price)) +
   labs(title = "Original scale")
 
