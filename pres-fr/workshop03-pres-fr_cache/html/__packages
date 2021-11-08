@@ -12,5 +12,4 @@ plotly
 reshape2
 palmerpenguins
 tibble
-colorspace
-colorblindr
+colorBlindness
