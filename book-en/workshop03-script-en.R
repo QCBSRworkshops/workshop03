@@ -260,12 +260,11 @@ pp2 +
   scale_colour_gradient(low = "grey85", high = "black") +
   labs(title = "Palette for continuous values")
 
-# Let's install the colorblindr package from GitHub using remotes
-install.packages("remotes", quiet = TRUE)
-remotes::install_github("clauswilke/colorblindr@cc54c8a35f8e7689ef4cc128b0da3af92f8cd540", quiet = TRUE)
-library(colorblindr)
+# Let's install the colorBlindness package
+install.packages("colorBlindness")
+library(colorBlindness)
 
-cvd_grid(pp)  # Let's check how our plot looks with different forms of colourblindness
+cvdPlot(pp)  # Let's check how our plot looks with different forms of colour blindness
 
 # Let's use a viridis palette to make our plot more accessible
 pp_viridis <- pp +
@@ -273,8 +272,8 @@ pp_viridis <- pp +
       labs(title = "Viridis palette for groups")
 pp_viridis
 
-# Did we succeed? Let'd use cvd_grid() to check again
-cvd_grid(pp_viridis)
+# Did we succeed? Let'd use cvdPlot() to check again
+cvdPlot(pp_viridis)
 # We succeeded!
 
 pp2_viridis <- pp2 +
@@ -282,7 +281,7 @@ pp2_viridis <- pp2 +
         labs(title = "Viridis palette for continuous values")
 pp2_viridis
 
-cvd_grid(pp2_viridis)
+cvdPlot(pp2_viridis)
 
 # shape for groups
 ggplot(data = penguins) +
@@ -336,7 +335,7 @@ ggplot(data = msleep) +
         shape = conservation))
 
 data(ToothGrowth)
-ggplot(ToothGrowth, 
+ggplot(ToothGrowth,
        aes(x = dose,
            y = len,
            color = supp)) +
@@ -344,7 +343,7 @@ ggplot(ToothGrowth,
   geom_smooth(method = lm, formula = 'y ~ x')
 
 ggplot(diamonds) +
-  geom_point(aes(x = carat, 
+  geom_point(aes(x = carat,
                            y = price)) +
   labs(title = "Original scale")
 

@@ -394,15 +394,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="colourblind-friendly-palettes" class="section level2">
 <h2><span class="header-section-number">8.5</span> Colourblind-friendly palettes</h2>
 <p>Have you ever considered how your figure might appear under various forms of colourblindness?
-We can use the package <a href="https://github.com/clauswilke/colorblindr">colorblindr</a> to consider this. This package is not currently on CRAN, so we install it with the packages <a href="https://cran.r-project.org/web/packages/remotes/index.html">remotes</a>.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="colours-make-your-points-talk.html#cb33-1"></a><span class="co"># Let&#39;s install the colorblindr package from GitHub using</span></span>
-<span id="cb33-2"><a href="colours-make-your-points-talk.html#cb33-2"></a><span class="co"># remotes</span></span>
-<span id="cb33-3"><a href="colours-make-your-points-talk.html#cb33-3"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>, <span class="dt">quiet =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb33-4"><a href="colours-make-your-points-talk.html#cb33-4"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;clauswilke/colorblindr@cc54c8a35f8e7689ef4cc128b0da3af92f8cd540&quot;</span>,</span>
-<span id="cb33-5"><a href="colours-make-your-points-talk.html#cb33-5"></a>    <span class="dt">quiet =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb33-6"><a href="colours-make-your-points-talk.html#cb33-6"></a><span class="kw">library</span>(colorblindr)</span></code></pre></div>
-<p>Let’s start by testing out some colours using the <code>cvd_grid()</code> function. This will show us how our current plot looks for different forms of colourblindness.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="colours-make-your-points-talk.html#cb34-1"></a><span class="kw">cvd_grid</span>(pp)  <span class="co"># Let&#39;s check how our plot looks with different forms of colourblindness</span></span></code></pre></div>
+We can use the package <a href="https://cran.r-project.org/web/packages/colorBlindness/index.html">colorBlindness</a> to consider this.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="colours-make-your-points-talk.html#cb33-1"></a><span class="co"># Let&#39;s install the colorBlindness package</span></span>
+<span id="cb33-2"><a href="colours-make-your-points-talk.html#cb33-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;colorBlindness&quot;</span>)</span>
+<span id="cb33-3"><a href="colours-make-your-points-talk.html#cb33-3"></a><span class="kw">library</span>(colorBlindness)</span></code></pre></div>
+<p>Let’s start by testing out some colours using the <code>cvdPlot()</code> function. This will show us how our current plot looks for different forms of colourblindness.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="colours-make-your-points-talk.html#cb34-1"></a><span class="kw">cvdPlot</span>(pp)  <span class="co"># Let&#39;s check how our plot looks with different forms of colour blindness</span></span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-47-1.png" width="150%" /></p>
 <p>As you can see, our current colour palette is not accessible! By using <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><code>viridis</code></a> palettes, we can guarantee our plots always communicate the same information no matter who the audience is.</p>
 <div id="example-for-grouped-data" class="section level3">
@@ -413,8 +410,8 @@ We can use the package <a href="https://github.com/clauswilke/colorblindr">color
 <span id="cb35-3"><a href="colours-make-your-points-talk.html#cb35-3"></a>pp_viridis &lt;-<span class="st"> </span>pp <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_viridis_d</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Viridis palette for groups&quot;</span>)</span>
 <span id="cb35-4"><a href="colours-make-your-points-talk.html#cb35-4"></a>pp_viridis</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="colours-make-your-points-talk.html#cb36-1"></a><span class="co"># Did we succeed? Let&#39;d use cvd_grid() to check again</span></span>
-<span id="cb36-2"><a href="colours-make-your-points-talk.html#cb36-2"></a><span class="kw">cvd_grid</span>(pp_viridis)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="colours-make-your-points-talk.html#cb36-1"></a><span class="co"># Did we succeed? Let&#39;d use cvdPlot() to check again</span></span>
+<span id="cb36-2"><a href="colours-make-your-points-talk.html#cb36-2"></a><span class="kw">cvdPlot</span>(pp_viridis)</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="colours-make-your-points-talk.html#cb37-1"></a><span class="co"># We succeeded!</span></span></code></pre></div>
 </div>
@@ -424,7 +421,7 @@ We can use the package <a href="https://github.com/clauswilke/colorblindr">color
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="colours-make-your-points-talk.html#cb38-1"></a>pp2_viridis &lt;-<span class="st"> </span>pp2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_viridis_c</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Viridis palette for continuous values&quot;</span>)</span>
 <span id="cb38-2"><a href="colours-make-your-points-talk.html#cb38-2"></a>pp2_viridis</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="colours-make-your-points-talk.html#cb39-1"></a><span class="kw">cvd_grid</span>(pp2_viridis)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="colours-make-your-points-talk.html#cb39-1"></a><span class="kw">cvdPlot</span>(pp2_viridis)</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 </div>
 </div>
