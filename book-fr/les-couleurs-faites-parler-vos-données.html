@@ -403,7 +403,7 @@ Nous pouvons utiliser la librairie <a href="https://cran.r-project.org/web/packa
 <span id="cb33-2"><a href="les-couleurs-faites-parler-vos-données.html#cb33-2"></a><span class="kw">library</span>(colorBlindness)</span></code></pre></div>
 <p>Commençons par tester quelques couleurs en utilisant la fonction <code>cvdPlot()</code>. Cela nous montrera comment notre graphique actuel se présente pour différentes formes de daltonisme.</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="les-couleurs-faites-parler-vos-données.html#cb34-1"></a><span class="kw">cvdPlot</span>(pp)  <span class="co"># Vérifions le résultat de notre graphique selon les différentes formes de daltonisme.</span></span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-47-1.png" width="150%" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-47-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>Comme vous pouvez le constater, notre palette de couleurs actuelle n’est pas accessible ! En utilisant les palettes <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><code>viridis</code></a>, nous pouvons garantir que nos graphiques communiquent toujours les mêmes informations, quel que soit le public.</p>
 <div id="example-pour-des-variables-qualitatives" class="section level3">
 <h3><span class="header-section-number">8.5.1</span> Example pour des variables qualitatives</h3>
@@ -416,7 +416,7 @@ Nous pouvons utiliser la librairie <a href="https://cran.r-project.org/web/packa
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="les-couleurs-faites-parler-vos-données.html#cb36-1"></a><span class="co"># Avons-nous réussi ? Utilisons cvdPlot() pour vérifier à</span></span>
 <span id="cb36-2"><a href="les-couleurs-faites-parler-vos-données.html#cb36-2"></a><span class="co"># nouveau.</span></span>
 <span id="cb36-3"><a href="les-couleurs-faites-parler-vos-données.html#cb36-3"></a><span class="kw">cvdPlot</span>(pp_viridis)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-49-1.png" width="768" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="les-couleurs-faites-parler-vos-données.html#cb37-1"></a><span class="co"># On a réussi!</span></span></code></pre></div>
 </div>
 <div id="exemple-pour-variables-continues" class="section level3">
@@ -426,7 +426,7 @@ Nous pouvons utiliser la librairie <a href="https://cran.r-project.org/web/packa
 <span id="cb38-2"><a href="les-couleurs-faites-parler-vos-données.html#cb38-2"></a>pp2_viridis</span></code></pre></div>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="les-couleurs-faites-parler-vos-données.html#cb39-1"></a><span class="kw">cvdPlot</span>(pp2_viridis)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-51-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
