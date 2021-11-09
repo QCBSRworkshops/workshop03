@@ -10,12 +10,12 @@ Cette série de 10 ateliers guide les participants à travers les étapes requis
 
 Le contenu de cet atelier a été révisé par plusieurs membres du CSBQ. Si vous souhaitez y apporter des modifications, veuillez SVP contacter les coordonnateurs actuels de la série, listés [ici](https://r.qcbs.ca/fr/about) ou ouvrez un pull request (voir les instructions <https://r.qcbs.ca//presenter-developer-protocol/developper-fr.html>).
 
-# Workshop 3: Introduction to `ggplot2`
+# Workshop 3: Introduction to data visualisation with `ggplot2`
 
 In this workshop, you will improve your data manipulation and visualization skills using `ggplot2`. We will explore the richness of `ggplot2`, which can be used as an alternative to base R. We will learn how to exploit this package for both diagnostic and publication quality plots.
 
 
-# Atelier 3: Introduction à `ggplot2`
+# Atelier 3: Introduction à la visualisation des données avec `ggplot2`
 
 Pendant cet atelier, vous perfectionnerez vos compétences en visualisation et manipulation de jeux de données à l'aide de la bibliothèque `ggplot2`. Nous explorerons toute la richesse de `ggplot2`, qui peut être utilisé comme alternative aux outils graphiques de base dans R. Nous apprendrons comment exploiter cette bibliothèque à la fois pour explorer des données visuellement et pour produire des figures dignes de publications scientifiques.
 
