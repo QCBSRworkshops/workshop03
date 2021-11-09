@@ -1,5 +1,5 @@
 ---
-title: "Atelier 3: Introduction à `ggplot2`"
+title: "Atelier 3: Introduction à la visualisation des données avec `ggplot2`"
 subtitle: "Série d'ateliers R du CSBQ"
 author: "Centre de la Science de la Biodiversité du Québec"
 output:
