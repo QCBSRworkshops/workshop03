@@ -1,5 +1,5 @@
 --- 
-title: "Workshop 3: Introduction to `ggplot2`"
+title: "Workshop 3: Introduction to data visualisation with `ggplot2`"
 subtitle: "QCBS R Workshop Series"
 author:
 - Developed and maintained by the contributors of the QCBS R Workshop Series^[The QCBS R Workshop Series is part of the [Québec Centre for Biodiversity Science](https://www.qcbs.ca), and is maintained by the series coordinators and graduent student, postdoctoral, and research professional members. **The contributors for this workshop can be accessed [here](https://r.qcbs.ca/workshops/r-workshop-03/)**.]
