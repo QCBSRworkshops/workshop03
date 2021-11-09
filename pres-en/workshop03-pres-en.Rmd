@@ -1,5 +1,5 @@
 ---
-title: "Workshop 3: Introduction to `ggplot2`"
+title: "Workshop 3: Introduction to data visualisation with `ggplot2`"
 subtitle: "QCBS R Workshop Series"
 author: "Québec Centre for Biodiversity Science"
 output:
