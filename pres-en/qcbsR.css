@@ -258,6 +258,7 @@ a:hover {
 .inverse h1 {
   font-size: 2.8rem;
 }
+
 .inverse h2 {
   font-size: 2.4rem;
 }
@@ -268,7 +269,36 @@ a:hover {
 
 .inverse code {
   overflow-x: auto;
-  padding: .4em;
+  padding: .2em;
+  background: rgba(53, 80, 111, 0.75);
+  border: 0.5px solid #25374c;
+  margin: 0 2px
+}
+
+.darkerinverse {
+  background-color: #333333;
+  color: #f3f3f3;
+}
+
+.darkerinverse h1, .darkerinverse h2, .darkerinverse h3 {
+  color: #f3f3f3;
+  background-color: transparent;
+}
+
+.darkerinverse h1 {
+  font-size: 2.8rem;
+}
+.darkerinverse h2 {
+  font-size: 2.4rem;
+}
+
+.darkerinverse h3 {
+  font-size: 2rem;
+}
+
+.darkerinverse code {
+  overflow-x: auto;
+  padding: .2em;
   background: rgba(53, 80, 111, 0.75);
   border: 0.5px solid #25374c;
   margin: 0 2px
@@ -400,3 +430,13 @@ table, td, th {
 
 .red { color: red; }
 .lightgray  { color: lightgray; }
+
+/* */
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-20%);
+  transform: translateY(-20%);
+}

@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
   fig.retina = 3,
   fig.align = 'center'
 )
-options(repos=structure(c(CRAN="http://cran.r-project.org")))
+options(repos = structure(c(CRAN = "http://cran.r-project.org")))
 ```
 
 ```{r install_pkgs, message=FALSE, warning=FALSE, include=FALSE, results=0}
@@ -51,7 +51,9 @@ list.of.packages <- c('gridExtra',
                       "DiagrammeR",
                       "DiagrammeRsvg",
                       "rsvg",
-                      "sjPlot")
+                      "sjPlot",
+                      "countdown",
+                      "xaringanExtra")
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
@@ -100,6 +102,11 @@ by modifying and improving its content as part of the <br> *Le*arning *a*nd *D*e
 
 [Linley Sherin]()
 
+[Jake Lawlor]()
+
+[Marie-Hélène Brice]()
+
+[Kevin Cazelles]()
 ]
 ]
 
@@ -107,11 +114,29 @@ by modifying and improving its content as part of the <br> *Le*arning *a*nd *D*e
 .left[
 **2019** - **2018** - **2017**
 
+[Willian Vieira]()
+
+[Rémi Maglione]()
+
+[Alexis Carteron]()
+
+[Pedro Henrique P. Braga]()
+
+[Katherine Hébert]()
 
 <br>
 
 **2016** - **2015** - **2014**
 
+[Xavier Giroux-Bougard]()
+
+[Maxwell Farrell]()
+
+[Amanda Winegardner]()
+
+[Étienne Low-Decarie]()
+
+[Monica Granados]()
 
 
 ]
@@ -166,10 +191,9 @@ install.packages(
 
 ]
 
-
 ---
 
-## Learning objectives
+### Learning objectives
 
 **1.** Learn the basics of data visualisation using `R`;
 
@@ -183,12 +207,25 @@ install.packages(
 
 <br>
 
-#### Recommendations:
+.pull-left[
+**Recommendations**
 
 1. Create and manage your own new script;
 2. Refrain from always referring to the pre-built code; *i.e. get your hands dirty!*
 3. Avoid copy-pasting or running the code directly from the script;
 4. Interact with the presenters!
+]
+
+--
+
+.pull-left[
+**Disclaimer**
+
+While we will discuss about principles on data visualisation throughout this workshop, our main objective is to show you how to produce figures with `ggplot2`. 
+
+We are time-constrained, but we recommend you to interrupt us to discuss about these princples as well as to consult other resources. 
+
+]
 
 ---
 class: inverse, center, middle
@@ -197,9 +234,11 @@ class: inverse, center, middle
 
 ---
 
-# Outline
+class: middle
 
-###### 1. Data visualisation;
+## Outline
+
+###### 1. Tiny discussion on data visualisation;
 
 ###### 2. `ggplot2` mechanics;
 
@@ -258,9 +297,9 @@ It became apparent that there was a link between cholera and the contaminated dr
 xaringanExtra::use_panelset()
 ```
 
-.small[
+.xsmall[
 
-While John Snow had to handdraw his map, we have computational resources that we can use to quickly represent our or _his_ data!
+While John Snow had to hand draw his map, we have computational resources that we can use to quickly represent our or _his_ data!
 
 ]
 
@@ -268,11 +307,10 @@ While John Snow had to handdraw his map, we have computational resources that we
 
 .panelset[
 
-.small[
-
 .panel[.panel-name[Figure]
+.xsmall[
 
-```{r echo=FALSE, message = FALSE, warning = FALSE, fig.cap = "Recreation of John Snow’s original map of the 1854 cholera outbreak. The size of each black dot is proportional to the number of people who died from cholera at that location. The red dots indicate the location of public water pumps."}
+```{r echo=FALSE, message = FALSE, warning = FALSE}
 library(tidyverse)
 library(mdsr)
 library(sf)
@@ -308,42 +346,33 @@ ggplot(cholera_latlong) +
 
 ```
 
+Recreation of John Snow’s original map of the 1854 cholera outbreak. The size of each black dot is proportional to the number of people who died from cholera at that location. The red dots indicate the location of public water pumps.
+
 ]
 ]
 
-.small[
 .panel[.panel-name[R Code]
-
+.xsmall[ 
 ```{r panel-chunk, echo = TRUE, eval = FALSE, fig.show='hide', message=FALSE, warning=FALSE}
-library(tidyverse)
-library(mdsr)
-library(sf)
-library(ggspatial)
+library(tidyverse); library(mdsr)
+library(sf); library(ggspatial)
 
 dsn <- fs::path("data", 
                 "SnowGIS_SHP")
 
-CholeraDeaths <- st_read(dsn, 
-                         layer = "Cholera_Deaths")
-
-cholera_latlong <- CholeraDeaths %>%
-  st_set_crs(27700) %>%
-  st_transform(4326)
-
-pumps <- st_read(dsn, layer = "Pumps")
-
-pumps_latlong <- pumps %>% 
-  st_set_crs(27700) %>%
-  st_transform(4326)
-
-ggplot(cholera_latlong) + 
+ggplot(st_read(dsn, 
+               layer = "Cholera_Deaths") %>%
+         st_set_crs(27700) %>%
+         st_transform(4326)) + 
   annotation_map_tile(type = "osm", 
                       zoomin = 0) + 
   geom_sf(aes(size = Count,
               alpha = 0.7)) +
-  geom_sf(data = pumps_latlong, 
-          size = 3,
-          color = "red")
+  geom_sf(data = st_read(dsn, 
+                         layer = "Pumps") %>% 
+            st_set_crs(27700) %>%
+            st_transform(4326), 
+          size = 3, colour = "red")
 
 ```
 
@@ -369,13 +398,15 @@ Source: [Modern Data Science with R](https://mdsr-book.github.io/mdsr2e/ch-spati
 ---
 class: middle, center
 
-### Everyone has done a figure like this before !
+#### Everyone has done a figure like this before !
 
 <br>
 
 .center[![:scale 65%](images/piechart3d.png)]
-
+<br>
 **What issues exist with it, and what can be improved?** 
+
+<br>
 
 _Time to discuss!_ <br>
 _(If there are no volunteers, a random name will be chosen!)_
@@ -391,31 +422,16 @@ Pie charts are not recommended anymore because they rely on angles to represent 
 ---
 class: middle
 
-##### The effectiveness of data visualisation can be relative to the public
+##### The effectiveness of data visualisation depends on several factors
 
 - What would you like to communicate?
 - Who is your audience? 
-   - _Researchers? Journalists? General public? Grant reviewers?_
-- What is the best way to visualize your message?
-
+  - _Researchers? Journalists? General public? Grant reviewers?_
+- What is the best way to represent your data and your message?
+  - _Is it through a box plot?_ 
+  - _Should you use blue or red?_
+  - _What scale should you use?_
 <br>
-
-.center[
-.alert[A general rule of thumb: Less is more!]
-]
-
---
-
-<br>
-**Disclaimer**: While we will discuss about principles on data visualisation throughout this workshop, our main objective is to show you how to produce figures with `ggplot2`. 
-
-We are limited in time, but we recommend you to interrupt us to discuss about these princples, and to consult other resources: 
-- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/) (ggplot)
-- [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base plot)
-- [Graphics Principles](https://graphicsprinciples.github.io/) (design tips)
-
-???
-This workshop is meant to show participants how to use ggplot2, but does not cover the principles of visualizing data or graphic design that can be essential to produce "good" figures. These resources do a great job of covering these principles.
 
 ---
 # Why use `R` to represent figures?
@@ -479,9 +495,9 @@ knitr::include_graphics("images/workflow-without-R-flow.svg")
 grViz("
       digraph {
 
-      node [shape = oval, fillcolor = PaleTurquoise]
+      node [shape = oval, fillcolor = Red]
       'Data \n (Excel, SQL)'; 
-      Graphs; 
+      Graphs;
       Tables; 
       Statistics
 
@@ -549,7 +565,7 @@ plot_model(fit,
 
 <br>
 
-```{r echo=FALSE, fig.cap = "Using ggplot2::ggplot()"}
+```{r echo=FALSE, fig.cap = "Figures generated using ggplot2::ggplot()"}
 # libraries
 library(ggplot2)
 library(gridExtra)
@@ -584,14 +600,14 @@ We will focus on [`ggplot2`](https://ggplot2.tidyverse.org/) because:
 ]
 
 .pull-right[
-```{r echo=FALSE, fig.caption = "Using ggplot2::ggplot()"}
+```{r echo=FALSE, fig.cap = "Figures generated using ggplot2::ggplot()"}
 # libraries
 library(ggplot2)
 library(gridExtra)
  
 # Make 3 simple graphics:
 g1 <- ggplot(mtcars, aes(x=qsec)) + geom_density(fill="slateblue")
-g2 <- ggplot(mtcars, aes(x=drat, y=qsec, color=cyl)) + geom_point(size=5) + theme(legend.position="none")
+g2 <- ggplot(mtcars, aes(x=drat, y=qsec, colour=cyl)) + geom_point(size=5) + theme(legend.position="none")
 g3 <- ggplot(mtcars, aes(x=factor(cyl), y=qsec, fill=cyl)) + geom_boxplot() + theme(legend.position="none")
 g4 <- ggplot(mtcars , aes(x=factor(cyl), fill=factor(cyl))) +  geom_bar()
  
@@ -606,168 +622,218 @@ class: inverse, center, middle
 # `ggplot2` mechanics: the basics
 
 ---
-# Grammar of Graphics (GG) basics
+class: middle, darkerinverse
 
-```{r, eval = FALSE}
-install.packages("ggplot2") # if not already installed
-library(ggplot2)
-```
+## `ggplot2` and the grammar of graphics
 
-```{r, echo = FALSE}
-library(ggplot2)
-```
+.pull-left[
 
-A graphic is made of different layers:
+`ggplot2` was created by [Hadley Wickham](), and published as _A Layered Grammar of Graphics_ (2005). The inspiration comes from the _The Grammar of Graphics_ book (1999), from Leland Wilkinson.
 
-.center[
-![:scale 90%](images/Layers_ggplot.png)
+It proposes **a layered approach to build visualizations** or graphics in a structured manner.
 ]
 
-Using the GG system, we can build graphs step by step for customizable results.
+.pull-right[
 
----
-# Grammar of Graphics (GG) basics
-
-GG layers have specific names that you will see throughout the presentation:
-
-![:scale 70%](images/gglayers.png)
-
-.small[image adapted from [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447)]
-
----
-exclude: true
-# Grammar of Graphics (GG) basics
-
-.center[
-![:scale 40%](images/ggplot_scale_geoms.png)
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
 ]
 
-???
-
-note: _removed this slide becase it felt random_
-
 ---
-# Grammar of Graphics (GG) basics
+class: middle, darkerinverse
 
-Here are the basic requirements to draw the simplest `ggplot`:
+## `ggplot2` and the grammar of graphics
 
-.center[
-![:scale 80%](images/ggplot_basics.png)
+.pull-left[
+
+**Data**
+  - Provides the essential ingredients for the figure;
+  - Usually, one row for every observation that you want to plot.
+
+Tip: Use `tidyverse` techniques to prepare data.
+
 ]
 
+.pull-right[
 
-
----
-# Grammar of Graphics (GG)
-
-GG layers:
-- Data
-    - your data, in tidy format, will provide ingredients for your plot
-    - use `dplyr` techniques to prep data for optimal plotting format
-    - usually, one row for every observation that you want to plot
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
+]
 
 ---
-# Grammar of Graphics (GG)
+class: middle, darkerinverse
 
-GG layers:
-- Data
-- Aesthetics (aes), to make data visible
-    - `x`, `y`: variable along the x and y axis
-    - `colour`: color of geoms according to data
-    - `fill`: the inside color of the geom
-    - `group`: what group a geom belongs to
-    - `shape`: the figure used to plot a point
-    - `linetype`: the type of line used (solid, dashed, etc)
-    - `size`: size scaling for an extra dimension
-    - `alpha`: the transparency of the geom
+## `ggplot2` and the grammar of graphics
 
----
-# Grammar of Graphics (GG)
+.pull-left[
 
-GG layers:
-- Data
-- Aesthetics (aes), to make data visible
-    - `x`, `y`: variable along the x and y axis
-    - `colour`: color of geoms according to data
-    - `fill`: the inside color of the geom
-    - `group`: what group a geom belongs to
-    - `shape`: the figure used to plot a point
-    - `linetype`: the type of line used (solid, dashed, etc)
-    - `size`: size scaling for an extra dimension
-    - `alpha`: the transparency of the geom
+**Data**
+  - Provides the essential ingredients for the figure;
+  - Usually, one row for every observation that you want to plot.
 
-.alert[note: aesthetics are based on qualities in your data, but plots may have some of these qualities not based in data as well. (ie, colouring based on a data group is an aesthetic, but points will always have a colour even if not based on data).]
----
-# Grammar of Graphics (GG)
+Tip: Use `tidyverse` techniques to prepare data.
 
-GG layers:
-- Data
-- Aesthetics (aes)
-- Geometric objects (geoms)
-    * `geom_point()`: scatterplot
-    * `geom_line()`: lines connecting points by increasing value of x
-    * `geom_path()`: lines connecting points in sequence of appearance
-    * `geom_boxplot()`: box and whiskers plot for categorical variables
-    * `geom_bar()`: bar charts for categorical x axis
-    * `geom_histogram()`: histogram for continuous x axis
-    * `geom_violin()`: distribution kernel of data dispersion
-    * `geom_smooth()`: function line based on data
+]
+
+.pull-right[
+
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
+]
 
 ---
-# Grammar of Graphics (GG)
+class: middle, darkerinverse
 
-GG layers:
-- Data
-- Aesthetics (aes)
-- Geometric objects (geoms)
-- Facets
-    * `facet_wrap()` or `facet_grid()` for small multiples
+## `ggplot2` and the grammar of graphics
 
----
-# Grammar of Graphics (GG)
+.pull-left2[
 
-GG layers:
-- Data
-- Aesthetics (aes)
-- Geometric objects (geoms)
-- Facets
-- Statistics
-    * similar to geoms, but computed
-    * show means, counts, and other statistical summaries of data
+**Aesthetics** (`aes()`) make data visible:
+  - `x`, `y`: variables
+  - `colour`: colours the lines of geometries
+  - `fill`: fill geometries
+  - `group`: groups based on the data
+  - `shape`: defines the shape (point, triangles)
+  - `linetype`: defines the type of line (solid, dashed)
+  - `size`: define sizes of elements
+  - `alpha`: changes the transparency
+]
 
+.pull-right2[
 
----
-# Grammar of Graphics (GG)
+.vertical-center[
 
-GG layers:
-- Data
-- Aesthetics (aes)
-- Geometric objects (geoms)
-- Facets
-- Statistics
-- Coordinates - fitting data onto a page
-    * `coord_cartesian` to set limits
-    * `coord_polar` for circular plots
-    * `coord_map` for different map projections
+.center[
 
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
+
+]
+]
+]
 
 ---
-# Grammar of Graphics (GG)
+class: middle, darkerinverse
 
-GG layers:
-- Data
-- Aesthetics (aes)
-- Geometric objects (geoms)
-- Facets
-- Statistics
-- Coordinates
-- Themes
-    * overall visual defaults
-    * fonts, colors, shapes, outlines
+## `ggplot2` and the grammar of graphics
 
+.pull-left2[
+
+**Geometries** (`geom_*()`)
+ - `geom_point()`: scatter-plot
+ - `geom_line()`: lines connecting points
+ - `geom_path()`: lines connecting points in sequence of appearance
+ - `geom_boxplot()`: box plot for categorical variables
+ - `geom_bar()`: bar charts for categorical `x` axis
+ - `geom_histogram()`: histogram for continuous `x` axis
+ - `geom_violin()`: distribution kernel of data dispersion
+ - `geom_smooth()`: function line based on data
+]
+
+.pull-right2[
+.vertical-center[
+
+.center[
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
+
+]
+]
+]
 
 ---
-# How to assemble layers in `ggplot2`
+class: middle, darkerinverse
+
+## `ggplot2` and the grammar of graphics
+
+.pull-left2[
+
+**Facets** divides figures across panels:
+ - `facet_wrap()` strings together plots in different frames (facets) based in a single variable;
+ - `facet_grid()` does the as above, but can take different variables.
+ 
+]
+
+.pull-right2[
+.vertical-center[
+
+.center[
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
+
+]
+]
+]
+
+---
+class: middle, darkerinverse
+
+## `ggplot2` and the grammar of graphics
+
+.pull-left2[
+
+**Statistics** (`stat_*()`) computed on the data.
+ - `stat_*()`-like functions perform computations such as means, counts, linear models, and other statistical summaries of data.
+ 
+]
+
+.pull-right2[
+.vertical-center[
+
+.center[
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
+
+]
+]
+]
+
+---
+class: middle, darkerinverse
+
+## `ggplot2` and the grammar of graphics
+
+.pull-left2[
+
+**Coordinates** (`coord_*()`) establish representation rules to print the data
+ - `coord_cartesian()` for the Cartesian plane;
+ - `coord_polar()` for circular plots;
+ - `coord_map()` for different map projections.
+ 
+]
+
+.pull-right2[
+.vertical-center[
+
+.center[
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
+
+]
+]
+]
+
+---
+class: middle, darkerinverse
+
+## `ggplot2` and the grammar of graphics
+
+.pull-left2[
+
+Themes (`theme_*()`) allows for the fine-tuning of visuals
+  - Fonts; 
+  - Background colour;
+  - Line width;
+  - Axis label sizes and colours;
+  - Tick label sizes and colours;
+  - and, many, many other properties.
+]
+
+.pull-right2[
+.vertical-center[
+
+.center[
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
+
+]
+]
+]
+
+---
+
+## How to assemble layers in `ggplot2`?
 
 1. Create a simple plot object:
   * `plot.object <- ggplot()`
@@ -778,27 +844,29 @@ GG layers:
 3. Add appearance layers:
   * `plot.object <- plot.object + coord_*() + theme()`
 
-3. Repeat step 2-3 until satisfied, then print:
+4. Repeat steps 2 and 3 until satisfied, then print:
   * `plot.object` or `print(plot.object)`
 
----
-# The basics of visualizing data
+.center[
+![:scale 80%](images/ggplot_basics.png)
+]
 
-## Today's dataset: palmerpenguins
+---
+## Today's dataset: `palmerpenguins`
 
 .pull-right2[
 ![:scale 80%](images/palmerpenguins.png)
 ]
 
 .pull-left2[
-We will be using the `palmerpenguins` dataset.
+We will use the `palmerpenguins` data set:
 
 ```{r, eval=FALSE}
 install.packages("palmerpenguins")
 library(palmerpenguins)
 ```
 
-.small[This dataset contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica:]
+.small[This data set contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica:]
 ]
 
 ![:scale 50%](images/penguins.png)
@@ -814,9 +882,9 @@ This dataset is often used to replace the iris dataset, which has some problems 
 This dataset was also used for a TidyTuesday challenge, showing the many possibilities of visualising the dataset creatively. For example: [this](https://twitter.com/LauraNavarroSol/status/1289216490307063814?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1289216490307063814%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F), and [this](https://twitter.com/CedScherer/status/1288181995714093057?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1288181995714093057%7Ctwgr%5E%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fnsgrantham.shinyapps.io%2Ftidytuesdayrocks%2F).
 
 ---
-# Today's dataset: palmerpenguins
+## Today's dataset: `palmerpenguins`
 
-Let's take a look at the variables in the penguins dataset:
+Let us take a look at the variables in the penguins dataset:
 
 ```{r}
 str(penguins)
@@ -835,15 +903,17 @@ Note that species, island, and sex are factor variables, which will be important
 
 `ggplot2` requires you to prepare the data as an object of class `data.frame` or `tibble` (common in the `tidyverse`).
 
-```{r eval=TRUE, echo=TRUE}
+```{r eval = TRUE, echo = TRUE}
 library(tibble)
 class(penguins) # all set!
 
 peng <- as_tibble(penguins) # acceptable
 class(peng)
 ```
+<br>
 
 **&#x267B; Recall from the [*Loading and manipulating data*](https://qcbsrworkshops.github.io/workshop02/pres-en/workshop02-pres-en.html#1) workshop**:
+
 
 More complex plots in `ggplot` require the long data frame format.
 
@@ -860,15 +930,17 @@ More complex plots in `ggplot` require the long data frame format.
 - Does the size of the **bill & flipper** vary together ?
 - How are these measures distributed among the **3 penguin species** ?
 
+<br>
+
 .center[.alert[How can we graphically address these questions with `ggplot`?]]
 
 ---
-# Exploring data structure
+# Exploring data structure: `GGally::ggpairs()`
 
 <!-- Explain the databases before the examples  -->
 
 ```{r, fig.width = 10.25, fig.height = 6.5}
-ggpairs(penguins, aes(colour = species)) + theme_bw()
+GGally::ggpairs(penguins, aes(colour = species)) + theme_bw()
 ```
 
 ???
@@ -878,15 +950,79 @@ note: _ggpairs (ggplot version of psych package) allows us to explore correlatio
 We can already see some species groupings between bill length and bill depth, flipper length, and body mass. When plotting, it will be important to keep in mind that differentiating species might be important.
 
 ---
-# Exploring data structure
+# `ggplot()` layers: data
 
-Let's explore how some of this data is structured by species:
+```{r, fig.height = 5, fig.width = 6, echo = TRUE, eval = FALSE}
+ggplot(data = penguins)
+#
+#
+#
+#
+```
+
+```{r echo=FALSE, fig.height=5, fig.width=6}
+ggplot(data = penguins)
+```
+
+---
+# `ggplot()` layers: aesthetics
+
+```{r, fig.height = 5, fig.width = 6, echo = TRUE, eval = FALSE}
+ggplot(data = penguins,
+       aes(x = bill_length_mm, y = bill_depth_mm))
+#
+#
+#
+```
+
+```{r echo=FALSE, fig.height=5, fig.width=6}
+ggplot(data = penguins,
+       aes(x = bill_length_mm, y = bill_depth_mm))
+```
+
+---
+# `ggplot()` layers: geometries
+
+```{r, fig.height = 5, fig.width = 6, echo = TRUE, eval = FALSE}
+ggplot(data = penguins,
+       aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point()
+#
+#
+```
+
+```{r echo=FALSE, fig.height=5, fig.width=6}
+ggplot(data = penguins,
+       aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point()
+```
+
+???
+
+Note that ggplot2 code is easier to read if each line represents a new element. This style is generally favored for ggplot2 code in the R community.
+
+---
+# `ggplot()` layers: facets and coordinates 
+
+```{r, fig.height=5, fig.width=6}
+ggplot(data = penguins,
+       aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point() +
+  facet_wrap(~species) +
+  coord_trans(x = "log10", y = "log10")
+```
+
+---
+# Putting everything together, in a single code
+
+Let us explore how some of this data is structured by species:
 
 ```{r, echo = TRUE, fig.height=7, fig.width=9, eval = FALSE}
 ggplot(data = penguins,               # Data
        aes(x = bill_length_mm,        # Your X-value
            y = bill_depth_mm,         # Your Y-value
-           col = species)) +          # Aesthetics
+           col = species)
+       ) +                            # Aesthetics
   geom_point(size = 5, alpha = 0.8) + # Point
   geom_smooth(method = "lm") +        # Linear regression
   labs(title = "Relationship between bill length and depth\nfor different penguin species", # Title
@@ -906,7 +1042,7 @@ Take the time to explain each line of this plot code (especially the aesthetics 
 For example, by differentiating species, we can see that there is a pretty consistent relationship between bill length and depth across species (similar slopes), but that the ranges of these variables is different (the groupings are clearly shown by the colours). Adelie penguins tend to have smaller bill length but fairly large bill depth, while the inverse is true for Gentoo penguins.
 
 ---
-# Exploring data structure
+# Putting everything together, in a single plot
 
 ```{r, echo = FALSE, fig.height=7, fig.width=9}
 ggplot(data = penguins,               # Data
@@ -925,7 +1061,6 @@ ggplot(data = penguins,               # Data
 ```
 
 .small[&#x267B; See [*Loading and manipulating data workshop*](https://r.qcbs.ca/workshops/r-workshop-02/) to learn how to clean your dataset.]
-
 
 ---
 exclude: true
@@ -961,70 +1096,32 @@ s # Print your final plot
 
 note: _removed this slide because it felt random, but is maybe worth going over at some point - edit. moved to challenge 1 answer_
 
----
-# Grammar of Graphics: *recall*
-
-Remember: a graphic is made of different layers:
-
-![:scale 75%](images/gglayers.png)
 
 ---
-# `ggplot()` dynamics: data layer
+# Challenge 1 (5-min) ![:cube]()
 
-```{r, fig.height=5, fig.width=6}
-ggplot(data = penguins)
-```
+**Code and print your first `ggplot()` object!**
 
+**Your mission**: visually represent and answer whether:
 
----
-# `ggplot()` dynamics: aesthetics layer
+1. There is an apparent relationship between **bill length** and **flipper length**?
 
-```{r, fig.height=5, fig.width=6}
-ggplot(data = penguins,
-       aes(x = bill_length_mm, y = bill_depth_mm))
-```
+2. **Bill length** *increases* with **flipper length** ?
 
----
-# `ggplot()` dynamics: geometric Layer
-
-```{r, fig.height=5, fig.width=6}
-ggplot(data = penguins,
-       aes(x = bill_length_mm, y = bill_depth_mm)) +
-  geom_point()
-```
-
-???
-
-Note that ggplot2 code is easier to read if each line represents a new element. This style is generally favored for ggplot2 code in the R community.
-
----
-# `ggplot()` dynamics: extras- facet, stats, coord layers
-
-```{r,fig.height=5, fig.width=6}
-ggplot(data = penguins,
-       aes(x = bill_length_mm, y = bill_depth_mm)) +
-  geom_point() +
-  facet_wrap(~species) +
-  coord_trans(x = "log10", y = "log10")
-```
-
----
-# Challenge 1 (5min) ![:cube]()
-
-#### Draw your 1st ggplot!
-
-.alert[Question]
-
-> Is there a relationship between **bill length** & **flipper length**?
-
-> Does *bill length* increase with flipper *length* ?
+<br>
 
 .center[Parameters to consider when addressing this question:]
 
- data | geom | x value | y value
+ data | geom_*() | x-value | y-value
 :-------------:|:-------------:|:-------------:|:-------------:
-penguins|geom_point|bill_length_mm|flipper_length_mm
+`penguins`|`geom_point()`|`bill_length_mm`|`flipper_length_mm`
 
+
+```{r echo=FALSE}
+library(countdown)
+
+countdown(minutes = 5, seconds = 0, bottom = 0)
+```
 
 ---
 # Challenge 1: Solution ![:cube]()
@@ -1050,7 +1147,7 @@ ggplot(data = penguins,
 ]
 
 .pull-right2[
-**note**: aesthetics can either be in the `ggplot()` line, and will be inherited by every geom, or in the `geom_*()` line to apply to that geom only!
+**Note**: aesthetics can either be in the `ggplot()` line, and will be inherited by every `geom_*()`, or in the `geom_*()` line to apply to that `geom_*()` only!
 ]
 
 ---
@@ -1061,17 +1158,17 @@ ggplot(data = penguins,
 ggplot(data = penguins,
        aes(x = bill_length_mm,
            y = flipper_length_mm)) +
-  geom_point(shape = 2, color = "blue")
+  geom_point(shape = 2, colour = "blue")
 ```
 ]
 
 .pull-right2[
-**note**: aesthetics can either be in the `ggplot()` line, and will be inherited by every geom, or in the `geom_*()` line to apply to that geom only!
+**Note**: aesthetics can either be in the `ggplot()` line, and will be inherited by every `geom_*()`, or in the `geom_*()` line to apply to that `geom_*()` only!
 
 <br>
 <br>
 
-**note 2**: colour, alpha, shape, and size commands can be set outside of `aes()` values, and will be static, not data-dependent.
+**Note 2**: `colour`, `alpha`, `shape`, and `size` commands can be set outside of `aes()` values, and will be static, not data-dependent.
 ]
 ---
 
@@ -1079,7 +1176,7 @@ class: inverse, center, middle
 
 # Aesthetic mapping
 
-## colour, shape, size, labels and transparency
+## `colour`, `shape`, `size`, `labels` and `alpha`
 
 ---
 # Aesthetic
@@ -1247,7 +1344,7 @@ pp +
 ```{r, fig.align = 'center', fig.height = 5, fig.width=6.5}
 # Palette for continuous values
 pp2 +
-  scale_color_viridis_c()+
+  scale_colour_viridis_c()+
   labs(title = "Palette for continuous values")
 ```
 
@@ -2327,6 +2424,9 @@ To name a few: `ggbio`, `ggpmisc`, `geomnet`, `gganimate`, `ggnetwork` and `ggtr
 
 Note that you can learn more about design and image manipulation with the QCBS workshop ["Introduction to graphic design and image manipulation with open source tools"](https://wiki.qcbs.ca/graphics).
 
+- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/) (ggplot)
+- [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base plot)
+- [Graphics Principles](https://graphicsprinciples.github.io/) (design tips)
 
 ---
 class: inverse, center, bottom
