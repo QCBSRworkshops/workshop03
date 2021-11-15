@@ -33,7 +33,25 @@ options(repos=structure(c(CRAN="http://cran.r-project.org")))
 ```{r install_pkgs, message=FALSE, warning=FALSE, include=FALSE, results=0}
 # Standard procedure to check and install packages and their dependencies, if needed.
 
-list.of.packages <- c('gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj', 'RColorBrewer','GGally','patchwork','plotly', 'palmerpenguins')
+list.of.packages <- c('gridExtra', 
+                      'ggplot2', 
+                      'ggsignif',
+                      'ggdendro', 
+                      'maps',
+                      'mapproj',
+                      'RColorBrewer',
+                      'GGally',
+                      'patchwork',
+                      'plotly',
+                      'palmerpenguins',
+                      'sf',
+                      'mdsr',
+                      'tidyverse',
+                      'ggspatial',
+                      "DiagrammeR",
+                      "DiagrammeRsvg",
+                      "rsvg",
+                      "sjPlot")
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
@@ -59,11 +77,56 @@ theme_set(theme_classic())
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Slides&message=03&color=red&logo=adobe-acrobat-reader)](https://r.qcbs.ca/workshop03/workshop03-en/workshop03-en.pdf)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=script&message=03&color=2a50b8&logo=r)](https://r.qcbs.ca//workshop03/book-en/workshop03-script-en.R)
 
+
 ---
 
-# Required packages
+<p style="font-size:75%">
 
-.pull-left4[
+.center[
+**Contributors to the development of this workshop**
+
+by modifying and improving its content as part of the <br> *Le*arning *a*nd *D*evelopment *A*ward
+]
+
+
+.pull-left[
+.right[
+
+ **2022** - **2021** - **2020**
+
+[Pedro Henrique P. Braga]()
+
+[Katherine Hébert]()
+
+[Linley Sherin]()
+
+]
+]
+
+.pull-right[
+.left[
+**2019** - **2018** - **2017**
+
+
+<br>
+
+**2016** - **2015** - **2014**
+
+
+
+]
+]
+</p>
+
+---
+
+# Required material
+
+To follow this workshop, you are required to have downloaded and installed the earliest [RStudio](https://rstudio.com/products/rstudio/download/#download) and [R](https://cran.rstudio.com/) versions.
+
+.pull-left3[
+You must also use these packages:
+
 * [gridExtra](https://cran.r-project.org/package=gridExtra)
 * [ggplot2](https://cran.r-project.org/package=ggplot2)
 * [ggsignif](https://cran.r-project.org/package=ggsignif)
@@ -75,134 +138,278 @@ theme_set(theme_classic())
 * [patchwork](https://cran.r-project.org/package=patchwork)
 * [palmerpenguins](https://cran.r-project.org/package=palmerpenguins)
 * [plotly](https://cran.r-project.org/package=plotly)
+
+All workshop materials are found at [r.qcbs.ca/workshops/r-workshop-03/](https://r.qcbs.ca/workshops/r-workshop-03/).
 ]
 
-.pull-right4[
+.pull-right3[
 
-Install the required packages:
+To install them from CRAN, run:
 
-```{r, eval = FALSE}
-install.packages("gridExtra")
-install.packages("ggplot2")
-install.packages("ggsignif")
-install.packages("ggdendro")
-install.packages("maps")
-install.packages("mapproj")
-install.packages("RColorBrewer")
-install.packages("GGally")
-install.packages("patchwork")
-install.packages("plotly")
-install.packages("palmerpenguins")
+```{r, echo = TRUE, eval = FALSE}
+install.packages(
+  c('grid', 
+    'gridExtra', 
+    'ggplot2', 
+    'ggsignif', 
+    'ggdendro', 
+    'maps', 
+    'mapproj',
+    'RColorBrewer', 
+    'GGally', 
+    'patchwork', 
+    'plotly',
+    'palmerpenguins'
+    )
+)
 ```
 
 ]
 
+
+---
+
+## Learning objectives
+
+**1.** Learn the basics of data visualisation using `R`;
+
+**2.** Learn and identify the basic dynamics on building figures following the *grammar of graphics* method; 
+
+**3.** Use `R` and the `ggplot2` package to create and modify figures;
+
+**4.** Critically think and discuss about data representation and visualisation.
+
+--
+
+<br>
+
+#### Recommendations:
+
+1. Create and manage your own new script;
+2. Refrain from always referring to the pre-built code; *i.e. get your hands dirty!*
+3. Avoid copy-pasting or running the code directly from the script;
+4. Interact with the presenters!
+
 ---
 class: inverse, center, middle
 
 # Introduction
 
 ---
-# Introduction
 
-##### To follow along:
-
-All workshop materials are found at [github.com/QCBSRworkshops/workshop03](https://github.com/QCBSRworkshops/workshop03). This includes an [R script](https://r.qcbs.ca//workshop03/book-en/workshop03-script-en.R) that contains the the code in this presentation.
-
-##### Recommendations:
-
-  1. create your own new script;
-  2. refer to provided code only if needed;
-  3. avoid copy-pasting or running the code directly from the script.
-
-
----
 # Outline
 
-###### 1. Visualization in science
+###### 1. Data visualisation;
 
-###### 2. `ggplot2` mechanics
+###### 2. `ggplot2` mechanics;
 
-###### 3. Aesthetic mapping
+###### 3. Aesthetic mapping;
 
-###### 4. Fine-tuning
+###### 4. Fine-tuning;
 
-###### 5. Saving plots
+###### 5. Saving plots;
 
-###### 6. Conclusion
-
----
-# Learning objectives
-
-In this workshop, we will:
-
-- Learn the basics of data visualization using R.
-- Learn how to find packages and resources to meet your needs.
-- Inspire creativity in science!
-- Develop an understanding of design for effective visual communication.
+###### 6. Extra resources and tips.
 
 ---
 class: inverse, center, middle
 
-# Visualization in science
+# Data visualization
 
 ---
-# Visualization in science
 
-#### Why are we using data visualization?
+class: middle
 
-#### What makes an effective visualization?
+## What is data visualization?
+
+**_Data visualization_ is the presentation of data in a pictorial or graphical format**, and a _data visualization tool_ is the software that generates this presentation.
+
+It provides users with intuitive means to **interactively explore and analyze data**, enabling them to effectively **identify interesting patterns**, **infer correlations and causalities**, and **supports sense-making activities** (Bikakis, [2018](http://arxiv.org/abs/1801.08336)). 
+
+---
+
+class: middle
+
+##### A quick, historical example: have you ever heard of John Snow?
+
+.pull-left3[
+In the 1850s, it was believed that cholera was transmitted and spread by a ‘bad air’ or ‘bad smells’ from rotting organic matter, and the sudden and serious outbreak of cholera in London's Soho was a mystery.
+
+So, the physician John Snow decided to interview residents and **map the deaths from cholera**.
+
+It became apparent that there was a link between cholera and the contaminated drinking water: most deaths were from people whose nearest access to water was the Broad Street pump, which was later found to be drawing fecal bacteria from a nearby cesspit.
+
+]
+
+.pull-right3[
+
+![](https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2013/3/14/1363276161917/Dr-John-Snow-009.jpg?width=620&quality=85&auto=format&fit=max&s=f5c377f1983fb41c72ab679101d05986)
+
+![John Snow's cholera map of Soho](https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2013/3/14/1363276040034/John-Snows-cholera-map-of-008.jpg?width=700&quality=85&auto=format&fit=max&s=b92a9f9ec6b720307778b9205bda1396)
+
+]
+
+---
+
+
+##### A quick, historical example: have you ever heard of John Snow?
+
+```{r xaringan-panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+.small[
+
+While John Snow had to handdraw his map, we have computational resources that we can use to quickly represent our or _his_ data!
+
+]
+
+.pull-left3[
+
+.panelset[
+
+.small[
+
+.panel[.panel-name[Figure]
+
+```{r echo=FALSE, message = FALSE, warning = FALSE, fig.cap = "Recreation of John Snow’s original map of the 1854 cholera outbreak. The size of each black dot is proportional to the number of people who died from cholera at that location. The red dots indicate the location of public water pumps."}
+library(tidyverse)
+library(mdsr)
+library(sf)
+library(ggspatial)
+
+dsn <- fs::path("data", 
+                "SnowGIS_SHP")
+
+CholeraDeaths <- st_read(dsn, 
+                         layer = "Cholera_Deaths",
+                         quiet = TRUE)
+
+cholera_latlong <- CholeraDeaths %>%
+  st_set_crs(27700) %>%
+  st_transform(4326)
+
+pumps <- st_read(dsn, 
+                 layer = "Pumps",
+                 quiet = TRUE)
+
+pumps_latlong <- pumps %>% 
+  st_set_crs(27700) %>%
+  st_transform(4326)
+
+ggplot(cholera_latlong) + 
+  annotation_map_tile(type = "osm", 
+                      zoomin = 0) + 
+  geom_sf(aes(size = Count,
+              alpha = 0.7)) +
+  geom_sf(data = pumps_latlong, 
+          size = 3,
+          color = "red")
+
+```
+
+]
+]
+
+.small[
+.panel[.panel-name[R Code]
+
+```{r panel-chunk, echo = TRUE, eval = FALSE, fig.show='hide', message=FALSE, warning=FALSE}
+library(tidyverse)
+library(mdsr)
+library(sf)
+library(ggspatial)
+
+dsn <- fs::path("data", 
+                "SnowGIS_SHP")
+
+CholeraDeaths <- st_read(dsn, 
+                         layer = "Cholera_Deaths")
+
+cholera_latlong <- CholeraDeaths %>%
+  st_set_crs(27700) %>%
+  st_transform(4326)
+
+pumps <- st_read(dsn, layer = "Pumps")
+
+pumps_latlong <- pumps %>% 
+  st_set_crs(27700) %>%
+  st_transform(4326)
+
+ggplot(cholera_latlong) + 
+  annotation_map_tile(type = "osm", 
+                      zoomin = 0) + 
+  geom_sf(aes(size = Count,
+              alpha = 0.7)) +
+  geom_sf(data = pumps_latlong, 
+          size = 3,
+          color = "red")
+
+```
+
+
+Source: [Modern Data Science with R](https://mdsr-book.github.io/mdsr2e/ch-spatial.html)
+
+]
+
+]
+
+]
+
+]
+
+.pull-right3[
+
+![](https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2013/3/14/1363276161917/Dr-John-Snow-009.jpg?width=620&quality=85&auto=format&fit=max&s=f5c377f1983fb41c72ab679101d05986)
+
+![John Snow's cholera map of Soho](https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2013/3/14/1363276040034/John-Snows-cholera-map-of-008.jpg?width=700&quality=85&auto=format&fit=max&s=b92a9f9ec6b720307778b9205bda1396)
+
+]
+
+---
+class: middle, center
+
+### Everyone has done a figure like this before !
 
 <br>
 
 .center[![:scale 65%](images/piechart3d.png)]
 
-How could we improve this figure ![:faic](arrow-up)?
+**What issues exist with it, and what can be improved?** 
 
+_Time to discuss!_ <br>
+_(If there are no volunteers, a random name will be chosen!)_
 
 ???
 
-La représentation graphique en 3D n'ajoute pas d'informations, elle déforme les proportions de chaque catégorie, de sorte que les catégories du premier plan semblent plus importantes que celles du second plan.
+The 3D graphical representation does not add any information, it distorts the proportions of each category, so that the categories in the foreground appear more important than those in the second plan.
 
-Les étiquettes de texte ne sont pas non plus suffisamment claires pour être utiles : elles sont petites, empiètent sur le graphique et incluent un pourcentage qui devrait être communiqué par le graphique lui-même.
+Text labels aren't clear enough to be useful: they're small, intrude on the chart, and include a percentage that should be communicated by the chart itself.
 
-Les diagrammes circulaires ne sont pas non plus recommandés car ils s'appuient sur des angles pour représenter la différence entre les parties, mais l'œil humain n'est pas très doué pour lire/interpréter les angles. Nous sommes bien plus aptes à lire les différences d'aire ! Vous trouverez une bonne démonstration du problème des diagrammes circulaires à l'adresse suivante : https://www.data-to-viz.com/caveat/pie.html.
-
-
----
-# Visualization in science
-<br>
-
-1. To represent results of statistical analyses
-2. To formulate hypotheses and summarize theory
-3. To explore your own data (exploratory analysis, outlier detection)
-4. To communicate and report
-  - Clearly (using good design principles)
-  - Precisely and accurately (a plot is worth 1000 words)
-  - Effectively and efficiently
-
+Pie charts are not recommended anymore because they rely on angles to represent the difference between parts, but the human eye is not very good at reading / interpreting angles. We are much better at reading area differences! You can find a good demonstration of the pie chart problem at: https://www.data-to-viz.com/caveat/pie.html.
 
 ---
-# Visualization in science
-<br>
+class: middle
 
-#### Important questions:
+##### The effectiveness of data visualisation can be relative to the public
 
-- What do you want to communicate?
-- Who is your audience?
+- What would you like to communicate?
+- Who is your audience? 
+   - _Researchers? Journalists? General public? Grant reviewers?_
 - What is the best way to visualize your message?
 
 <br>
 
 .center[
-.alert[A rule of thumb: think simple! use less ink!]
+.alert[A general rule of thumb: Less is more!]
 ]
 
 --
 
 <br>
-#### Resources for visualisation principles
+**Disclaimer**: While we will discuss about principles on data visualisation throughout this workshop, our main objective is to show you how to produce figures with `ggplot2`. 
 
+We are limited in time, but we recommend you to interrupt us to discuss about these princples, and to consult other resources: 
 - [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/) (ggplot)
 - [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base plot)
 - [Graphics Principles](https://graphicsprinciples.github.io/) (design tips)
@@ -211,52 +418,187 @@ Les diagrammes circulaires ne sont pas non plus recommandés car ils s'appuient 
 This workshop is meant to show participants how to use ggplot2, but does not cover the principles of visualizing data or graphic design that can be essential to produce "good" figures. These resources do a great job of covering these principles.
 
 ---
-exclude: true
+# Why use `R` to represent figures?
 
-# WARNING!
+.pull-left[
+
+.center[An example of a workflow to analyze data _without_ `R`.]
 
 <br>
 
-.alert[
- `R` is not made for drawings.
+```{r workflow-without-R-flow, echo = FALSE, out.width = '90%'}
+grViz("
+      digraph {
+
+      node [shape = oval, fillcolor = PaleTurquoise]
+      'Data \n (Excel, SQL)'; 
+      Graphs; 
+      Tables; 
+      Statistics
+
+      node [shape = box]
+      Sigmaplot; Excel; SAS
+
+      ##add arrows
+      edge [arrowhead = none]
+      'Data \n (Excel, SQL)' -> Sigmaplot; 
+      'Data \n (Excel, SQL)' -> Excel; 
+      'Data \n (Excel, SQL)' -> SAS; 
+      Graphs -> Word; Tables -> Word; 
+      Statistics -> Word;  
+      Graphs -> Powerpoint; 
+      Tables -> Powerpoint; 
+      Statistics -> Powerpoint
+
+      edge [arrowhead = normal]
+      Sigmaplot -> Graphs; 
+      Excel -> Tables; 
+      SAS -> Statistics; 
+      Word -> Report; 
+      Powerpoint -> Report
+
+      }
+    ") %>%
+  export_svg() %>%
+  charToRaw() %>%
+  rsvg_svg("images/workflow-without-R-flow.svg")
+
+knitr::include_graphics("images/workflow-without-R-flow.svg")
+```
 ]
 
-Other drawing softwares are probably better options such as [GIMP](https://www.gimp.org/) or [Inkscape](https://inkscape.org/). It is important to get the right tool for the right task!
+--
+
+.pull-right[
+
+.center[`R` allows you to converge many tasks without using other programs.]
+
+<br>
+
+```{r workflow-with-R-flow, echo = FALSE, out.width = '90%'}
+grViz("
+      digraph {
+
+      node [shape = oval, fillcolor = PaleTurquoise]
+      'Data \n (Excel, SQL)'; 
+      Graphs; 
+      Tables; 
+      Statistics
+
+      node [shape = box]
+      R
+
+      ##add arrows
+      edge [arrowhead = none]
+      'Data \n (Excel, SQL)' -> R;
+
+      edge [arrowhead = normal]
+      R -> Graphs; 
+      R -> Tables; 
+      R -> Statistics; 
+      Graphs -> Report; 
+      Tables -> Report; 
+      Statistics -> Report;
+      R -> Report
+
+      }") %>%
+  export_svg() %>%
+  charToRaw() %>%
+  rsvg_svg("images/workflow-with-R-flow.svg")
+
+knitr::include_graphics("images/workflow-with-R-flow.svg")
+
+```
+
+]
 
 ---
-# Why use R for plotting?
+### Many `R` packages can help us create figures
 
-.center[![:scale 80%](images/Divided_reproducible workflow.png)]
+[Multiple packages and functions](https://insileco.github.io/wiki/rgraphpkgs/) can be used for great visualization (*e.g.*, [`base R`](https://bookdown.org/rdpeng/exdata/the-base-plotting-system-1.html), [`plotly`](https://plot.ly/r/), [`sjPlot`](http://www.strengejacke.de/sjPlot/), [`mapview`](https://r-spatial.github.io/mapview/), [`igraph`](https://igraph.org/r/)).
+
+.pull-left3[
+```{r echo=FALSE, out.width = "40%", fig.cap = "Using base::plot()"}
+plot(DNase$conc, DNase$density,
+  ylab = attr(DNase, "labels")$y,
+  xlab = paste(attr(DNase, "labels")$x, attr(DNase, "units")$x),
+  pch = 3,
+  col = "blue")
+```
+
+```{r echo=FALSE,  out.width = "40%", fig.cap = "Using sjPlot::plot_model()"}
+library(sjPlot)
+library(sjmisc)
+library(ggplot2)
+data(efc)
+theme_set(theme_sjplot())
+
+# make categorical
+efc$c161sex <- to_factor(efc$c161sex)
+
+# fit model with interaction
+fit <- lm(neg_c_7 ~ c12hour + barthtot * c161sex, data = efc)
+
+plot_model(fit, 
+           type = "pred", 
+           terms = c("barthtot", "c161sex"))
+```
+]
+
+.pull-right3[
+
+<br>
+
+```{r echo=FALSE, fig.cap = "Using ggplot2::ggplot()"}
+# libraries
+library(ggplot2)
+library(gridExtra)
+ 
+# Make 3 simple graphics:
+g1 <- ggplot(mtcars, aes(x=qsec)) + geom_density(fill="slateblue")
+g2 <- ggplot(mtcars, aes(x=drat, y=qsec, color=cyl)) + geom_point(size=5) + theme(legend.position="none")
+g3 <- ggplot(mtcars, aes(x=factor(cyl), y=qsec, fill=cyl)) + geom_boxplot() + theme(legend.position="none")
+g4 <- ggplot(mtcars , aes(x=factor(cyl), fill=factor(cyl))) +  geom_bar()
+ 
+# Plots
+grid.arrange(g2, arrangeGrob(g3, g4, ncol=2), nrow = 2)
+
+```
+
+]
 
 ---
-# Why use R for plotting? Reproducibility
+### Many `R` packages can help us create figures, but...
 
-.center[![:scale 80%](images/Divided_reproducible workflow2.png)]
+.pull-left[
+We will focus on [`ggplot2`](https://ggplot2.tidyverse.org/) because:
 
+1. It allows one to easily make *beautiful* and customizable plots;
+2. It implements the Grammar of Graphics: a standardized, reliable system for building plots;
+3. There are [many extensions](https://exts.ggplot2.tidyverse.org/gallery/).
 
-.alert[Reproducible science comes with effort]:
-- comment your script
-- add information in the figures (titles, labels, captions, annotations)
-
----
-# Why use R for graphs?
-
-#### .alert[Because of its powerful features!]
-
-In this workshop, we focus only on `ggplot2`, but [multiple packages and functions](https://insileco.github.io/wiki/rgraphpkgs/) can be used for great visualization (e.g., [`base R`](https://bookdown.org/rdpeng/exdata/the-base-plotting-system-1.html), [`plotly`](https://plot.ly/r/), [`sjPlot`](http://www.strengejacke.de/sjPlot/), [`mapview`](https://r-spatial.github.io/mapview/), [`igraph`](https://igraph.org/r/)).
-
-.center[![:scale 80%](images/multiExamplePlot.png)]
-
----
-# `ggplot2` is versatile
-
-1. [`ggplot2`](https://ggplot2.tidyverse.org/) package lets you make *beautiful* and customizable plots;
-2. it implements the grammar of graphics, a reliable system for building plots.
-3. there are [many extensions](https://exts.ggplot2.tidyverse.org/gallery/).
-
+<br>
 
 .center[![:scale 35%](images/ggplot2_logo.png)]
 
+]
+
+.pull-right[
+```{r echo=FALSE, fig.caption = "Using ggplot2::ggplot()"}
+# libraries
+library(ggplot2)
+library(gridExtra)
+ 
+# Make 3 simple graphics:
+g1 <- ggplot(mtcars, aes(x=qsec)) + geom_density(fill="slateblue")
+g2 <- ggplot(mtcars, aes(x=drat, y=qsec, color=cyl)) + geom_point(size=5) + theme(legend.position="none")
+g3 <- ggplot(mtcars, aes(x=factor(cyl), y=qsec, fill=cyl)) + geom_boxplot() + theme(legend.position="none")
+g4 <- ggplot(mtcars , aes(x=factor(cyl), fill=factor(cyl))) +  geom_bar()
+ 
+# Plots
+grid.arrange(g1, g2, g3, nrow = 3)
+```
+]
 
 ---
 class: inverse, center, middle
