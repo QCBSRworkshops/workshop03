@@ -54,6 +54,12 @@ if(nzchar(system.file(package = "gganimate")) == FALSE) {
                           quiet = TRUE)
   }
 
+if(nzchar(system.file(package = "gifski")) == FALSE) {
+  remotes::install_github("r-rust/gifski", 
+                          upgrade = "always", 
+                          quiet = TRUE)
+  }
+
 # Install other packages
 
 list.of.packages <- c('gridExtra', 
