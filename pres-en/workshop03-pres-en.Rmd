@@ -35,7 +35,11 @@ options(repos = structure(c(CRAN = "http://cran.r-project.org")))
 # Standard procedure to check and install packages and their dependencies, if needed.
 
 # Install xaringanExtra
-if(nzchar(system.file(package = "xaringanExtra")) == FALSE) {remotes::install_github("gadenbuie/xaringanExtra", upgrade = "always", quiet = TRUE)}
+if(nzchar(system.file(package = "xaringanExtra")) == FALSE) {
+  remotes::install_github("gadenbuie/xaringanExtra", 
+                          upgrade = "always", 
+                          quiet = TRUE)
+  }
 
 # Install other packages
 
