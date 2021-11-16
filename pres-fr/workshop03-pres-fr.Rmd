@@ -120,7 +120,7 @@ theme_set(theme_classic())
 .center[
 **Contributeurs et contributrices au développement de cet atelier**
 
-en modifiant et en améliorant son contenu dans le cadre du <br>*Le*arning *a*nd *D*evelopment *A*ward*.
+en modifiant et en améliorant son contenu dans le cadre du <br>_**Le**arning **a**nd **D**evelopment **A**ward_ du **CSBQ**:
 ]
 
 
@@ -239,7 +239,6 @@ install.packages(
 
 --
 
-<br>
 
 .pull-left[
 **Recommandations**
@@ -304,15 +303,15 @@ class: middle
 
 ---
 
-class: middle
-
-##### Un exemple court et historique : avez-vous déjà entendu parler de John Snow ?
+**Un exemple court et historique : avez-vous déjà entendu parler de John Snow ?**
 
 .pull-left3[
-Dans les années 1850, on pensait que le choléra était transmis et propagé par un "mauvais air" ou de "mauvaises odeurs" provenant de matières organiques en décomposition, et l'épidémie soudaine et grave de choléra dans le quartier londonien de Soho était un mystère.
+Dans les années 1850, on pensait que le choléra était transmis et propagé par du "mauvais air" ou de "mauvaises odeurs" provenant de matières organiques en décomposition, et l'épidémie soudaine et grave de choléra dans le quartier londonien de Soho était un mystère.
 
+<br>
 Le médecin John Snow a donc décidé d'interroger les habitants et de **cartographier les décès dus au choléra**.
 
+<br>
 Il a pu constater qu'il y avait un lien entre le choléra et l'eau potable contaminée : la plupart des décès étaient dus à des personnes dont l'accès le plus proche à l'eau était la pompe de Broad Street, où l'on a découvert par la suite que des bactéries fécales provenaient d'une fosse d'aisance voisine.
 
 ]
@@ -327,17 +326,13 @@ Il a pu constater qu'il y avait un lien entre le choléra et l'eau potable conta
 
 ---
 
-##### A short, historical example: have you ever heard of John Snow?
+**Un exemple court et historique : avez-vous déjà entendu parler de John Snow ?**
 
 ```{r xaringan-panelset, echo=FALSE}
 xaringanExtra::use_panelset()
 ```
 
-.xsmall[
-
-Alors que John Snow a dû dessiner sa carte à la main, nous avons l'avantage de disposer de ressources informatiques pour représenter des données rapidement !
-
-]
+.small[Alors que John Snow a dû dessiner sa carte à la main, nous avons l'avantage de disposer de ressources informatiques pour représenter des données rapidement !]
 
 .pull-left3[
 
@@ -345,8 +340,7 @@ Alors que John Snow a dû dessiner sa carte à la main, nous avons l'avantage de
 
 .panel[.panel-name[Figure]
 .xsmall[
-
-```{r echo=FALSE, message = FALSE, warning = FALSE}
+```{r echo = FALSE, message = FALSE, warning = FALSE}
 library(tidyverse)
 library(mdsr)
 library(sf)
@@ -379,10 +373,8 @@ ggplot(cholera_latlong) +
   geom_sf(data = pumps_latlong, 
           size = 3,
           color = "red")
-
 ```
-
-.xsmall[Reconstitution de la carte originale de John Snow sur l'épidémie de choléra de 1854.]
+.center[.xsmall[Reconstitution de la carte originale de John Snow sur l'épidémie de choléra de 1854.]]
 
 ]
 ]
@@ -411,7 +403,6 @@ ggplot(st_read(dsn,
           size = 3, colour = "red")
 
 ```
-
 
 Source: [Modern Data Science with R](https://mdsr-book.github.io/mdsr2e/ch-spatial.html)
 
@@ -444,11 +435,11 @@ class: middle, center
 
 .center[ ![:scale 65%](images/piechart3d.png)]
 <br>
-**Quels sont les problèmes qu'elle pose, et qu'est-ce qui peut être amélioré ? 
+**Quels sont les problèmes qu'elle pose, et qu'est-ce qui peut être amélioré ?** 
 
 <br>
 
-_Temps pour discuter!_ <br>
+_Il est temps de discuter !_ <br>
 _(S'il n'y a pas de volontaires, un nom sera choisi au hasard !)_
 
 ???
