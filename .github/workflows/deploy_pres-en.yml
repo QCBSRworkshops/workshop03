@@ -52,9 +52,9 @@ jobs:
       - name: 💻 Install pandoc and pandoc citeproc
         uses: r-lib/actions/setup-pandoc@v1
         
-      - name: Install cURL Headers, UNITS, SSL, SSH2, PQ, 1g, GDAL, PROJ, Units
+      - name: Install cURL Headers, UNITS, SSL, SSH2, PQ, 1g, GDAL, PROJ, Units, Magick
         run: |
-          sudo apt-get install -y libssl-dev libcurl4-openssl-dev zlib1g-dev libproj-dev libgdal-dev gdal-bin libssh2-1-dev libpq-dev libudunits2-0 libudunits2-dev
+          sudo apt-get install -y libssl-dev libcurl4-openssl-dev zlib1g-dev libproj-dev libgdal-dev gdal-bin libssh2-1-dev libpq-dev libudunits2-0 libudunits2-dev libmagick++-dev
 
       - name: 💻 Install R packages and dependencies if needed
         run: |

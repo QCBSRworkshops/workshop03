@@ -34,9 +34,16 @@ options(repos = structure(c(CRAN = "http://cran.r-project.org")))
 ```{r install_pkgs, message=FALSE, warning=FALSE, include=FALSE, results=0}
 # Standard procedure to check and install packages and their dependencies, if needed.
 
-# Install xaringanExtra
+# Install xaringanExtra and countdown
+
 if(nzchar(system.file(package = "xaringanExtra")) == FALSE) {
   remotes::install_github("gadenbuie/xaringanExtra", 
+                          upgrade = "always", 
+                          quiet = TRUE)
+  }
+
+if(nzchar(system.file(package = "countdown")) == FALSE) {
+  remotes::install_github("gadenbuie/countdown", 
                           upgrade = "always", 
                           quiet = TRUE)
   }
@@ -207,7 +214,7 @@ install.packages(
 
 **1.** Learn the basics of data visualisation using `R`;
 
-**2.** Learn and identify the basic dynamics on building figures following the *grammar of graphics* method; 
+**2.** Learn and identify the basic dynamics on building figures following the layered *grammar of graphics*; 
 
 **3.** Use `R` and the `ggplot2` package to create and modify figures;
 
