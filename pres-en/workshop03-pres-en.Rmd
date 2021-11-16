@@ -959,7 +959,7 @@ str(penguins)
 ```
 
 .center[
-![:scale 50%](images/culmen_depth.png)
+![:scale 45%](images/culmen_depth.png)
 ]
 
 ???
