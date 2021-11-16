@@ -48,6 +48,18 @@ if(nzchar(system.file(package = "countdown")) == FALSE) {
                           quiet = TRUE)
   }
 
+if(nzchar(system.file(package = "gganimate")) == FALSE) {
+  remotes::install_github("thomasp85/gganimate", 
+                          upgrade = "always", 
+                          quiet = TRUE)
+  }
+
+if(nzchar(system.file(package = "gifski")) == FALSE) {
+  remotes::install_github("r-rust/gifski", 
+                          upgrade = "always", 
+                          quiet = TRUE)
+  }
+
 # Install other packages
 
 list.of.packages <- c('gridExtra', 
@@ -71,7 +83,9 @@ list.of.packages <- c('gridExtra',
                       "sjPlot",
                       "countdown",
                       "xaringanExtra",
-                      "colorBlindness")
+                      "colorBlindness",
+                      "gganimate",
+                      "gapminder")
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
@@ -283,13 +297,22 @@ class: middle
 
 **_Data visualization_ is the presentation of data in a pictorial or graphical format**, and a _data visualization tool_ is the software that generates this presentation.
 
-It provides users with intuitive means to **interactively explore and analyze data**, enabling them to effectively **identify interesting patterns**, **infer correlations and causalities**, and **supports sense-making activities** (Bikakis, [2018](http://arxiv.org/abs/1801.08336)). 
+<br>
+
+**_Effective data visualization_** provides users with intuitive means to: 
+- **interactively explore and analyze data**, enabling them to 
+- effectively **identify interesting patterns**, 
+- **infer correlations and causalities**, and 
+- **supports sense-making activities**.
+
+<br>
+.xsmall[Bikakis, Nikos. "Big data visualization tools." arXiv preprint arXiv:1801.08336 ([2018](http://arxiv.org/abs/1801.08336)).]
 
 ---
 
 class: middle
 
-##### A quick, historical example: have you ever heard of John Snow?
+##### A short, historical example: have you ever heard of John Snow?
 
 .pull-left3[
 In the 1850s, it was believed that cholera was transmitted and spread by a ‘bad air’ or ‘bad smells’ from rotting organic matter, and the sudden and serious outbreak of cholera in London's Soho was a mystery.
@@ -311,7 +334,7 @@ It became apparent that there was a link between cholera and the contaminated dr
 ---
 
 
-##### A quick, historical example: have you ever heard of John Snow?
+##### A short, historical example: have you ever heard of John Snow?
 
 ```{r xaringan-panelset, echo=FALSE}
 xaringanExtra::use_panelset()
@@ -319,7 +342,7 @@ xaringanExtra::use_panelset()
 
 .xsmall[
 
-While John Snow had to hand draw his map, we have computational resources that we can use to quickly represent our or _his_ data!
+While John Snow had to hand draw his map, we have the advantage of possessing computational resources to quickly represent (_his_) data!
 
 ]
 
@@ -366,7 +389,7 @@ ggplot(cholera_latlong) +
 
 ```
 
-Recreation of John Snow’s original map of the 1854 cholera outbreak. The size of each black dot is proportional to the number of people who died from cholera at that location. The red dots indicate the location of public water pumps.
+.xsmall[Recreation of John Snow’s original map of the 1854 cholera outbreak.]
 
 ]
 ]
@@ -415,6 +438,10 @@ Source: [Modern Data Science with R](https://mdsr-book.github.io/mdsr2e/ch-spati
 
 ]
 
+???
+
+The size of each black dot is proportional to the number of people who died from cholera at that location. The red dots indicate the location of public water pumps.
+
 ---
 class: middle, center
 
@@ -451,6 +478,7 @@ class: middle
   - _Is it through a box plot?_ 
   - _Should you use blue or red?_
   - _What scale should you use?_
+  - _Should you add or should you remove information?_
 <br>
 
 ---
@@ -610,8 +638,8 @@ grid.arrange(g2, arrangeGrob(g3, g4, ncol=2), nrow = 2)
 We will focus on [`ggplot2`](https://ggplot2.tidyverse.org/) because:
 
 1. It allows one to easily make *beautiful* and customizable plots;
-2. It implements the Grammar of Graphics: a standardized, reliable system for building plots;
-3. There are [many extensions](https://exts.ggplot2.tidyverse.org/gallery/).
+2. It implements a standardized, layered system for building plots (*i.e.* the Grammar of Graphics, which we will discuss in a bit!);
+3. [Many extensions](https://exts.ggplot2.tidyverse.org/gallery/) have been developed and are easily accessible (*e.g.* `gganimate`).
 
 <br>
 
@@ -620,7 +648,7 @@ We will focus on [`ggplot2`](https://ggplot2.tidyverse.org/) because:
 ]
 
 .pull-right[
-```{r echo=FALSE, fig.cap = "Figures generated using ggplot2::ggplot()"}
+```{r echo=FALSE, fig.height = 2}
 # libraries
 library(ggplot2)
 library(gridExtra)
@@ -632,8 +660,25 @@ g3 <- ggplot(mtcars, aes(x=factor(cyl), y=qsec, fill=cyl)) + geom_boxplot() + th
 g4 <- ggplot(mtcars , aes(x=factor(cyl), fill=factor(cyl))) +  geom_bar()
  
 # Plots
-grid.arrange(g1, g2, g3, nrow = 3)
+grid.arrange(g2, nrow = 1)
 ```
+
+```{r echo=FALSE, fig.cap = "Figures generated using ggplot2::ggplot()"}
+library(gapminder)
+
+ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  facet_wrap(~continent) +
+  # Here comes the gganimate specific bits
+  labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +
+  transition_time(year) +
+  ease_aes('linear')
+```
+
+
 ]
 
 ---
@@ -648,29 +693,9 @@ class: middle, darkerinverse
 
 .pull-left[
 
-`ggplot2` was created by [Hadley Wickham](), and published as _A Layered Grammar of Graphics_ (2005). The inspiration comes from the _The Grammar of Graphics_ book (1999), from Leland Wilkinson.
+`ggplot2` was created by [Hadley Wickham](http://hadley.nz/), and published as _A Layered Grammar of Graphics_ ([2005](https://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf)). The inspiration comes from the _The Grammar of Graphics_ book ([1999](https://www.google.ca/books/edition/The_Grammar_of_Graphics/NRyGnjeNKJIC?hl=en&gbpv=1&printsec=frontcover)), from Leland Wilkinson.
 
 It proposes **a layered approach to build visualizations** or graphics in a structured manner.
-]
-
-.pull-right[
-
-!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
-]
-
----
-class: middle, darkerinverse
-
-## `ggplot2` and the grammar of graphics
-
-.pull-left[
-
-**Data**
-  - Provides the essential ingredients for the figure;
-  - Usually, one row for every observation that you want to plot.
-
-Tip: Use `tidyverse` techniques to prepare data.
-
 ]
 
 .pull-right[
@@ -728,6 +753,11 @@ class: middle, darkerinverse
 ]
 ]
 
+???
+
+The presenter does not need to spend time to make participants memorize the commands. They are here just to illustrate some of the possibiltiies.
+
+
 ---
 class: middle, darkerinverse
 
@@ -756,6 +786,10 @@ class: middle, darkerinverse
 ]
 ]
 
+???
+
+The presenter does not need to spend time to make participants memorize the commands. They are here just to illustrate some of the possibiltiies.
+
 ---
 class: middle, darkerinverse
 
@@ -765,7 +799,7 @@ class: middle, darkerinverse
 
 **Facets** divides figures across panels:
  - `facet_wrap()` strings together plots in different frames (facets) based in a single variable;
- - `facet_grid()` does the as above, but can take different variables.
+ - `facet_grid()` does the same as above, but can take different variables.
  
 ]
 
@@ -911,7 +945,7 @@ str(penguins)
 ```
 
 .center[
-![:scale 50%](images/culmen_depth.png)
+![:scale 45%](images/culmen_depth.png)
 ]
 
 ???
@@ -935,7 +969,7 @@ class(peng)
 **&#x267B; Recall from the [*Loading and manipulating data*](https://qcbsrworkshops.github.io/workshop02/pres-en/workshop02-pres-en.html#1) workshop**:
 
 
-More complex plots in `ggplot` require the long data frame format.
+More complex plots in `ggplot2` require the long data frame format.
 
 ---
 # Scientific questions about penguins

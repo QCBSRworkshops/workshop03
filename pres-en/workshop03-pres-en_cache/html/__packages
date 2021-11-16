@@ -28,5 +28,7 @@ sjPlot
 countdown
 xaringanExtra
 colorBlindness
+gganimate
+gapminder
 sjmisc
 reshape2
