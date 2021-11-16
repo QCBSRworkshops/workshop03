@@ -722,26 +722,6 @@ class: middle, darkerinverse
 
 ## `ggplot2` and the grammar of graphics
 
-.pull-left[
-
-**Data**
-  - Provides the essential ingredients for the figure;
-  - Usually, one row for every observation that you want to plot.
-
-Tip: Use `tidyverse` techniques to prepare data.
-
-]
-
-.pull-right[
-
-!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
-]
-
----
-class: middle, darkerinverse
-
-## `ggplot2` and the grammar of graphics
-
 .pull-left2[
 
 **Aesthetics** (`aes()`) make data visible:
@@ -813,7 +793,7 @@ class: middle, darkerinverse
 
 **Facets** divides figures across panels:
  - `facet_wrap()` strings together plots in different frames (facets) based in a single variable;
- - `facet_grid()` does the as above, but can take different variables.
+ - `facet_grid()` does the same as above, but can take different variables.
  
 ]
 
