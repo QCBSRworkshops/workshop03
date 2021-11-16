@@ -27,6 +27,6 @@ rsvg
 sjPlot
 countdown
 xaringanExtra
-sjmisc
 colorBlindness
+sjmisc
 reshape2

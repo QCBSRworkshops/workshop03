@@ -70,7 +70,8 @@ list.of.packages <- c('gridExtra',
                       "rsvg",
                       "sjPlot",
                       "countdown",
-                      "xaringanExtra")
+                      "xaringanExtra",
+                      "colorBlindness")
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
@@ -180,6 +181,7 @@ You must also use these packages:
 * [patchwork](https://cran.r-project.org/package=patchwork)
 * [palmerpenguins](https://cran.r-project.org/package=palmerpenguins)
 * [plotly](https://cran.r-project.org/package=plotly)
+* [colorBlindness](https://cran.r-project.org/package=colorBlindness)
 
 All workshop materials are found at [r.qcbs.ca/workshops/r-workshop-03/](https://r.qcbs.ca/workshops/r-workshop-03/).
 ]
@@ -201,7 +203,8 @@ install.packages(
     'GGally', 
     'patchwork', 
     'plotly',
-    'palmerpenguins'
+    'palmerpenguins',
+    'colorBlindness'
     )
 )
 ```
@@ -214,7 +217,7 @@ install.packages(
 
 **1.** Learn the basics of data visualisation using `R`;
 
-**2.** Learn and identify the basic dynamics on building figures following the layered *grammar of graphics*; 
+**2.** Learn and identify the basic dynamics on building figures following the layered *grammar of graphics* approach; 
 
 **3.** Use `R` and the `ggplot2` package to create and modify figures;
 
@@ -1397,8 +1400,7 @@ pp2 +
 Have you ever considered how your figure might appear under various forms of colourblindness?
 We can use the package [colorBlindness](https://cran.r-project.org/web/packages/colorBlindness/index.html) to consider this.
 
-```{R colorBlindness_install, message = FALSE}
-install.packages("colorBlindness")
+```{R colorBlindness_load, message = FALSE}
 library(colorBlindness)
 ```
 
@@ -1473,7 +1475,7 @@ Note that setting many variables to visual cues like color, shape, size, and alp
 ---
 # Challenge 2 ![:cube]()
 
-- Produce an informative plot from built-in datasets such as `mtcars`, `CO2` or `msleep`.
+- Produce an informative plot from built-in data sets such as `mtcars`, `CO2` or `msleep`.
 
 - Use appropriate aesthetic mappings for different data types
 
