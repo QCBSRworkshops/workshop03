@@ -16,6 +16,7 @@ output:
 
 class: inverse, center, middle
 
+
 ```{r setup, echo = FALSE}
 knitr::opts_chunk$set(
   comment = "#",
@@ -23,18 +24,69 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE,
   cache = TRUE,
-  fig.width = 6, fig.height = 6,
+  fig.width = 6, 
+  fig.height = 6,
   fig.retina = 3,
   fig.align = 'center'
 )
-options(repos=structure(c(CRAN="http://cran.r-project.org")))
+options(repos = structure(c(CRAN = "http://cran.r-project.org")))
 ```
 
 ```{r install_pkgs, message=FALSE, warning=FALSE, include=FALSE, results=0}
 # Standard procedure to check and install packages and their dependencies, if needed.
 
-list.of.packages <- c('grid', 'gridExtra', 'ggplot2', 'ggsignif','ggdendro', 'maps', 'mapproj',
-                      'RColorBrewer','GGally','patchwork','plotly', 'reshape2', 'palmerpenguins')
+# Install xaringanExtra and countdown
+
+if(nzchar(system.file(package = "xaringanExtra")) == FALSE) {
+  remotes::install_github("gadenbuie/xaringanExtra", 
+                          upgrade = "always", 
+                          quiet = TRUE)
+  }
+
+if(nzchar(system.file(package = "countdown")) == FALSE) {
+  remotes::install_github("gadenbuie/countdown", 
+                          upgrade = "always", 
+                          quiet = TRUE)
+  }
+
+if(nzchar(system.file(package = "gganimate")) == FALSE) {
+  remotes::install_github("thomasp85/gganimate", 
+                          upgrade = "always", 
+                          quiet = TRUE)
+  }
+
+if(nzchar(system.file(package = "gifski")) == FALSE) {
+  remotes::install_github("r-rust/gifski", 
+                          upgrade = "always", 
+                          quiet = TRUE)
+  }
+
+# Install other packages
+
+list.of.packages <- c('gridExtra', 
+                      'ggplot2', 
+                      'ggsignif',
+                      'ggdendro', 
+                      'maps',
+                      'mapproj',
+                      'RColorBrewer',
+                      'GGally',
+                      'patchwork',
+                      'plotly',
+                      'palmerpenguins',
+                      'sf',
+                      'mdsr',
+                      'tidyverse',
+                      'ggspatial',
+                      "DiagrammeR",
+                      "DiagrammeRsvg",
+                      "rsvg",
+                      "sjPlot",
+                      "countdown",
+                      "xaringanExtra",
+                      "colorBlindness",
+                      "gganimate",
+                      "gapminder")
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
@@ -62,9 +114,77 @@ theme_set(theme_classic())
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=script&message=03&color=2a50b8&logo=r)](https://r.qcbs.ca//workshop03/book-fr/workshop03-script-fr.R)
 
 ---
-# Librairies requises
 
-.pull-left4[
+<p style="font-size:75%">
+
+.center[
+**Contributeurs et contributrices au développement de cet atelier**
+
+en modifiant et en améliorant son contenu dans le cadre du <br>*Le*arning *a*nd *D*evelopment *A*ward*.
+]
+
+
+.pull-left[
+.right[
+
+ **2022** - **2021** - **2020**
+
+[Pedro Henrique P. Braga]()
+
+[Katherine Hébert]()
+
+[Linley Sherin]()
+
+[Jake Lawlor]()
+
+[Marie-Hélène Brice]()
+
+[Kevin Cazelles]()
+]
+]
+
+.pull-right[
+.left[
+**2019** - **2018** - **2017**
+
+[Willian Vieira]()
+
+[Rémi Maglione]()
+
+[Alexis Carteron]()
+
+[Pedro Henrique P. Braga]()
+
+[Katherine Hébert]()
+
+<br>
+
+**2016** - **2015** - **2014**
+
+[Xavier Giroux-Bougard]()
+
+[Maxwell Farrell]()
+
+[Amanda Winegardner]()
+
+[Étienne Low-Decarie]()
+
+[Monica Granados]()
+
+
+]
+]
+</p>
+
+---
+
+# Matériel requis
+
+Pour suivre cet atelier, vous devez avoir téléchargé et installé les dernières versions de [RStudio](https://rstudio.com/products/rstudio/download/#download) et de [R](https://cran.rstudio.com/).
+
+.pull-left3[
+Vous devez également utiliser les paquets suivants :
+
 * [gridExtra](https://cran.r-project.org/package=gridExtra)
 * [ggplot2](https://cran.r-project.org/package=ggplot2)
 * [ggsignif](https://cran.r-project.org/package=ggsignif)
@@ -76,170 +196,485 @@ theme_set(theme_classic())
 * [patchwork](https://cran.r-project.org/package=patchwork)
 * [palmerpenguins](https://cran.r-project.org/package=palmerpenguins)
 * [plotly](https://cran.r-project.org/package=plotly)
+* [colorBlindness](https://cran.r-project.org/package=colorBlindness)
+
+Tout le matériel de l'atelier se trouve sur le site [r.qcbs.ca/workshops/r-workshop-03/](https://r.qcbs.ca/workshops/r-workshop-03/).
 ]
 
-.pull-right4[
+.pull-right3[
 
-Installez les librairies requises:
+Pour les installer depuis CRAN, exécutez :
 
-```{r, eval = FALSE}
-install.packages("gridExtra")
-install.packages("ggplot2")
-install.packages("ggsignif")
-install.packages("ggdendro")
-install.packages("maps")
-install.packages("mapproj")
-install.packages("RColorBrewer")
-install.packages("GGally")
-install.packages("patchwork")
-install.packages("plotly")
-install.packages("palmerpenguins")
+```{r, echo = TRUE, eval = FALSE}
+install.packages(
+  c('grid', 
+    'gridExtra', 
+    'ggplot2', 
+    'ggsignif', 
+    'ggdendro', 
+    'maps', 
+    'mapproj',
+    'RColorBrewer', 
+    'GGally', 
+    'patchwork', 
+    'plotly',
+    'palmerpenguins',
+    'colorBlindness'
+    )
+)
+```
+
+]
+---
+
+### Objectifs d'apprentissage
+
+**1.** Apprendre les bases de la visualisation de données en utilisant `R` ;
+
+**2.** Apprendre et identifier les dynamiques de base pour construire des figures en suivant l'approche de la *grammaire des graphiques* en couches ; 
+
+**3.** Utiliser `R` et le paquet `ggplot2` pour créer et modifier des figures ;
+
+**4.** Réfléchir de manière critique et discuter sur la représentation et sur la visualisation des données.
+
+--
+
+<br>
+
+.pull-left[
+**Recommandations**
+
+1. Créez et gérez votre propre nouveau script ;
+2. Abstenez-vous de toujours vous référer au code préconstruit ; *c'est-à-dire, sortir des sentiers battus !*.
+3. Évitez de copier-coller ou d'exécuter le code directement à partir du script ;
+4. Interagissez avec les présentateurs !
+]
+
+--
+
+.pull-left[
+**Disclaimer**
+
+Bien que nous discuterons des principes de la visualisation de données tout au long de cet atelier, notre objectif principal est de vous montrer comment produire des figures avec `ggplot2`. 
+
+Nous sommes limités par le temps, mais nous vous recommandons de nous interrompre pour discuter de ces principes ainsi que pour consulter d'autres ressources. 
+
+]
+
+
+---
+class: inverse, center, middle
+
+# Introduction
+
+---
+class: middle
+
+## Outline
+
+###### 1. Petite discussion sur la visualisation des données ;
+
+###### 2. Mécanique de `ggplot2` ;
+
+###### 3. Cartographie esthétique ;
+
+###### 4. Ajustement fin ;
+
+###### 5. Enregistrement des tracés ;
+
+###### 6. Ressources et conseils supplémentaires.
+
+---
+class: middle
+
+## Qu'est-ce que la visualisation de données ?
+
+**_La visualisation de données_ est la présentation de données dans un format pictural ou graphique**, et un _outil de visualisation de données_ est le logiciel qui génère cette présentation.
+
+<br>
+
+**_Une visualisation efficace des données_** fournit aux utilisateurs et utilisatrices des moyens intuitifs pour : 
+- **explorer et analyser les données de manière interactive**, ce qui leur permet de 
+- **identifier efficacement des patrons d'intérêt**, 
+- **inférer des corrélations et des causalités**, et 
+- **soutenir les opérations de prise de décisions**
+
+<br>
+.xsmall[Bikakis, Nikos. "Big data visualization tools." arXiv preprint arXiv:1801.08336 ([2018](http://arxiv.org/abs/1801.08336)).]
+
+---
+
+class: middle
+
+##### Un exemple court et historique : avez-vous déjà entendu parler de John Snow ?
+
+.pull-left3[
+Dans les années 1850, on pensait que le choléra était transmis et propagé par un "mauvais air" ou de "mauvaises odeurs" provenant de matières organiques en décomposition, et l'épidémie soudaine et grave de choléra dans le quartier londonien de Soho était un mystère.
+
+Le médecin John Snow a donc décidé d'interroger les habitants et de **cartographier les décès dus au choléra**.
+
+Il a pu constater qu'il y avait un lien entre le choléra et l'eau potable contaminée : la plupart des décès étaient dus à des personnes dont l'accès le plus proche à l'eau était la pompe de Broad Street, où l'on a découvert par la suite que des bactéries fécales provenaient d'une fosse d'aisance voisine.
+
+]
+
+.pull-right3[
+
+![](https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2013/3/14/1363276161917/Dr-John-Snow-009.jpg?width=620&quality=85&auto=format&fit=max&s=f5c377f1983fb41c72ab679101d05986)
+
+![John Snow's cholera map of Soho](https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2013/3/14/1363276040034/John-Snows-cholera-map-of-008.jpg?width=700&quality=85&auto=format&fit=max&s=b92a9f9ec6b720307778b9205bda1396)
+
+]
+
+---
+
+##### A short, historical example: have you ever heard of John Snow?
+
+```{r xaringan-panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+.xsmall[
+
+Alors que John Snow a dû dessiner sa carte à la main, nous avons l'avantage de disposer de ressources informatiques pour représenter des données rapidement !
+
+]
+
+.pull-left3[
+
+.panelset[
+
+.panel[.panel-name[Figure]
+.xsmall[
+
+```{r echo=FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(mdsr)
+library(sf)
+library(ggspatial)
+
+dsn <- fs::path("data", 
+                "SnowGIS_SHP")
+
+CholeraDeaths <- st_read(dsn, 
+                         layer = "Cholera_Deaths",
+                         quiet = TRUE)
+
+cholera_latlong <- CholeraDeaths %>%
+  st_set_crs(27700) %>%
+  st_transform(4326)
+
+pumps <- st_read(dsn, 
+                 layer = "Pumps",
+                 quiet = TRUE)
+
+pumps_latlong <- pumps %>% 
+  st_set_crs(27700) %>%
+  st_transform(4326)
+
+ggplot(cholera_latlong) + 
+  annotation_map_tile(type = "osm", 
+                      zoomin = 0) + 
+  geom_sf(aes(size = Count,
+              alpha = 0.7)) +
+  geom_sf(data = pumps_latlong, 
+          size = 3,
+          color = "red")
+
+```
+
+.xsmall[Reconstitution de la carte originale de John Snow sur l'épidémie de choléra de 1854.]
+
+]
+]
+
+.panel[.panel-name[R Code]
+.xsmall[ 
+```{r panel-chunk, echo = TRUE, eval = FALSE, fig.show='hide', message=FALSE, warning=FALSE}
+library(tidyverse); library(mdsr)
+library(sf); library(ggspatial)
+
+dsn <- fs::path("data", 
+                "SnowGIS_SHP")
+
+ggplot(st_read(dsn, 
+               layer = "Cholera_Deaths") %>%
+         st_set_crs(27700) %>%
+         st_transform(4326)) + 
+  annotation_map_tile(type = "osm", 
+                      zoomin = 0) + 
+  geom_sf(aes(size = Count,
+              alpha = 0.7)) +
+  geom_sf(data = st_read(dsn, 
+                         layer = "Pumps") %>% 
+            st_set_crs(27700) %>%
+            st_transform(4326), 
+          size = 3, colour = "red")
+
+```
+
+
+Source: [Modern Data Science with R](https://mdsr-book.github.io/mdsr2e/ch-spatial.html)
+
+]
+
+]
+
+]
+
+]
+
+.pull-right3[
+
+![](https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2013/3/14/1363276161917/Dr-John-Snow-009.jpg?width=620&quality=85&auto=format&fit=max&s=f5c377f1983fb41c72ab679101d05986)
+
+![John Snow's cholera map of Soho](https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2013/3/14/1363276040034/John-Snows-cholera-map-of-008.jpg?width=700&quality=85&auto=format&fit=max&s=b92a9f9ec6b720307778b9205bda1396)
+
+]
+
+???
+
+La taille de chaque point noir est proportionnelle au nombre de personnes qui sont mortes du choléra à cet endroit. Les points rouges indiquent l'emplacement des pompes à eau publiques.
+
+---
+class: middle, center
+
+#### Tout le monde a déjà fait une figure comme celle-ci !
+
+<br>
+
+.center[ ![:scale 65%](images/piechart3d.png)]
+<br>
+**Quels sont les problèmes qu'elle pose, et qu'est-ce qui peut être amélioré ? 
+
+<br>
+
+_Temps pour discuter!_ <br>
+_(S'il n'y a pas de volontaires, un nom sera choisi au hasard !)_
+
+???
+
+La représentation graphique en 3D n'ajoute aucune information, elle déforme les proportions de chaque catégorie, de sorte que les catégories au premier plan semblent plus importantes que celles du second plan.
+
+Les étiquettes de texte ne sont pas assez claires pour être utiles : elles sont petites, empiètent sur le graphique et incluent un pourcentage qui devrait être communiqué par le graphique lui-même.
+
+Les diagrammes circulaires ne sont plus recommandés car ils s'appuient sur des angles pour représenter la différence entre les parties, mais l'œil humain n'est pas très doué pour lire/interpréter les angles. Nous sommes bien meilleurs pour lire les différences de surface ! Vous trouverez une bonne démonstration du problème des diagrammes circulaires à l'adresse suivante : https://www.data-to-viz.com/caveat/pie.html.
+
+
+---
+class: middle
+
+##### L'efficacité de la visualisation des données dépend de plusieurs facteurs
+
+- Que voulez-vous communiquer ?
+- Qui est votre public ? 
+  - Des chercheurs ? Des journalistes ? Le grand public ? Les évaluateurs de subventions ?
+- Quelle est la meilleure façon de représenter vos données et votre message ?
+  - Est-ce par un _box plot_ ? 
+  - Devriez-vous utiliser du bleu ou du rouge ?
+  - Quelle échelle devriez-vous utiliser ?
+  - Devriez-vous ajouter ou supprimer des informations ?
+<br>
+
+---
+# Pourquoi utiliser `R` pour représenter des figures ?
+
+.pull-left[
+
+.center[Un exemple de flux de travail pour analyser les données _sans_ `R`.]
+
+<br>
+
+```{r workflow-without-R-flow, echo = FALSE, out.width = '90%'}
+grViz("
+      digraph {
+
+      node [shape = oval, fillcolor = PaleTurquoise]
+      'Données \n (Excel, SQL)'; 
+      Graphiques; 
+      Tableaux; 
+      Statistiques
+
+      node [shape = box]
+      Sigmaplot; Excel; SAS
+
+      ##add arrows
+      edge [arrowhead = none]
+      'Données \n (Excel, SQL)' -> Sigmaplot; 
+      'Données \n (Excel, SQL)' -> Excel; 
+      'Données \n (Excel, SQL)' -> SAS; 
+      Graphiques -> Word; Tableaux -> Word; 
+      Statistiques -> Word;  
+      Graphiques -> Powerpoint; 
+      Tableaux -> Powerpoint; 
+      Statistiques -> Powerpoint
+
+      edge [arrowhead = normal]
+      Sigmaplot -> Graphiques; 
+      Excel -> Tableaux; 
+      SAS -> Statistiques; 
+      Word -> Rapport; 
+      Powerpoint -> Rapport
+
+      }
+    ") %>%
+  export_svg() %>%
+  charToRaw() %>%
+  rsvg_svg("images/workflow-without-R-flow.svg")
+
+knitr::include_graphics("images/workflow-without-R-flow.svg")
+```
+]
+
+--
+
+.pull-right[
+
+.center[`R` allows you to converge many tasks without using other programs.]
+
+<br>
+
+```{r workflow-with-R-flow, echo = FALSE, out.width = '90%'}
+grViz("
+      digraph {
+
+      node [shape = oval, fillcolor = Red]
+      'Données \n (Excel, SQL)'; 
+      Graphiques ;
+      Tableaux ; 
+      Statistiques
+
+      node [shape = box]
+      R
+
+      ##add arrows
+      edge [arrowhead = none]
+      'Données \n (Excel, SQL)' -> R;
+
+      edge [arrowhead = normal]
+      R -> Graphiques ; 
+      R -> Tableaux ; 
+      R -> Statistiques ; 
+      Graphiques -> Rapport ; 
+      Tableaux -> Rapport ; 
+      Statistiques -> Rapport ;
+      R -> Rapport
+      
+      }") %>%
+  export_svg() %>%
+  charToRaw() %>%
+  rsvg_svg("images/workflow-with-R-flow.svg")
+
+knitr::include_graphics("images/workflow-with-R-flow.svg")
+
 ```
 
 ]
 
 ---
-class: inverse, center, middle
+###### De nombreux paquets `R` peuvent nous aider à créer des figures
 
-# Introduction
+[De nombreux paquets et fonctions](https://insileco.github.io/wiki/rgraphpkgs/) peuvent être utilisés pour une visualisation de haute qualité (*e.g.*, [`base R`](https://bookdown.org/rdpeng/exdata/the-base-plotting-system-1.html), [`plotly`](https://plot.ly/r/), [`sjPlot`](http://www.strengejacke.de/sjPlot/), [`mapview`](https://r-spatial.github.io/mapview/), [`igraph`](https://igraph.org/r/)).
 
----
-# Introduction
+.pull-left3[
+```{r echo=FALSE, out.width = "40%", fig.cap = "Using base::plot()"}
+plot(DNase$conc, DNase$density,
+  ylab = attr(DNase, "labels")$y,
+  xlab = paste(attr(DNase, "labels")$x, attr(DNase, "units")$x),
+  pch = 3,
+  col = "blue")
+```
 
-##### Pour suivre cet atelier:
+```{r echo=FALSE,  out.width = "40%", fig.cap = "Using sjPlot::plot_model()"}
+library(sjPlot)
+library(sjmisc)
+library(ggplot2)
+data(efc)
+theme_set(theme_sjplot())
 
-Tous les matériaux de l'atelier se trouvent sur [github.com/QCBSRworkshops/workshop03](https://github.com/QCBSRworkshops/workshop03). Cela inclut un [script R](https://r.qcbs.ca//workshop03/book-fr/workshop03-script-fr.R) qui contient le code de cette présentation.
+# make categorical
+efc$c161sex <- to_factor(efc$c161sex)
 
-##### Recommandations:
+# fit model with interaction
+fit <- lm(neg_c_7 ~ c12hour + barthtot * c161sex, data = efc)
 
-  1. créez votre propre script R ;
-  2. référez-vous au script R fourni uniquement si nécessaire ;
-  3. évitez de copier-coller ou d'exécuter le code directement à partir du script.
-
-
----
-# Plan de l'atelier
-
-###### 1. Visualization in science
-
-###### 2. La mécanique `ggplot2`
-
-###### 3. L'esthétique (*aesthetic mapping*)
-
-###### 3. Peaufinage
-
-###### 4. Sauvegarder vos graphiques
-
-###### 5. Conclusion
-
----
-# Objectifs d'apprentissage
-
-Dans cet atelier, nous allons:
-
-- Apprendre les bases de la visualisation des données avec R.
-- Trouver des librairies et des ressources pour répondre à vos besoins.
-- Inspirer plus de créativité scientifique!
-- Développer votre compréhension de la conception pour une communication graphique efficace.
-
----
-class: inverse, center, middle
-
-# Visualisation en science
-
----
-# Visualisation en science
-
-#### Pourquoi utilisons-nous la visualisation de données ?
-
-#### Qu'est-ce qui rend une visualisation efficace ?
-
-<br>
-
-.center[![:scale 65%](images/piechart3d.png)]
-
-Comment pourrions-nous améliorer cette figure ![:faic](arrow-up)?
-
----
-# Visualisation en science
-<br>
-
-1. Représenter les résultats des analyses statistiques
-2. Formuler des hypothèses et comprendre/résumer des théories
-3. Explorer vos propres données (analyse exploratoire, détection des valeurs aberrantes)
-4. Communiquer et rendre compte
-  - Clairement (en utilisant de bons principes de conception)
-  - De manière précise et exacte (un bon graphique vaut 1000 mots)
-  - De manière effective et efficace
-
----
-# Visualisation en science
-
-#### Questions importantes:
-
-- Que voulez-vous communiquer?
-- Qui est votre public?
-- Quelle est la meilleure façon de visualiser votre message?
-<br><br>
-
-.center[
-.alert[Règle générale: restez simple - utilisez moins d'encre!]
+plot_model(fit, 
+           type = "pred", 
+           terms = c("barthtot", "c161sex"))
+```
 ]
 
---
-
-#### Ressources pour les principes de visualisation
-
-- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/) (ggplot)
-- [A Compendium of Clean Graphs in R](https://www.shinyapps.org/apps/RGraphCompendium/index.php#line-plots) (base plot)
-- [Graphics Principles](https://graphicsprinciples.github.io/) (trucs et astuces de conception)
-
----
-exclude: true
-
-# AVERTISSEMENT!
+.pull-right3[
 
 <br>
 
-.alert[
- `R` n'est pas fait pour le dessin.
+```{r echo=FALSE, fig.cap = "Figures generated using ggplot2::ggplot()"}
+# libraries
+library(ggplot2)
+library(gridExtra)
+ 
+# Make 3 simple graphics:
+g1 <- ggplot(mtcars, aes(x=qsec)) + geom_density(fill="slateblue")
+g2 <- ggplot(mtcars, aes(x=drat, y=qsec, color=cyl)) + geom_point(size=5) + theme(legend.position="none")
+g3 <- ggplot(mtcars, aes(x=factor(cyl), y=qsec, fill=cyl)) + geom_boxplot() + theme(legend.position="none")
+g4 <- ggplot(mtcars , aes(x=factor(cyl), fill=factor(cyl))) +  geom_bar()
+ 
+# Plots
+grid.arrange(g2, arrangeGrob(g3, g4, ncol=2), nrow = 2)
+
+```
+
 ]
 
-D'autres logiciels de dessin sont probablement de meilleures options comme [GIMP](https://www.gimp.org/) ou [Inkscape](https://inkscape.org/). Il est important d'utiliser le bon outil pour la bonne tâche !
-
 ---
-# Pourquoi utiliser R pour les graphiques?
+###### De nombreux paquets `R` peuvent nous aider à créer des figures, mais...
 
-.center[![:scale 80%](images/Divided_reproducible workflow.png)]
+.small[
+.pull-left[
+Nous allons nous concentrer sur [`ggplot2`](https://ggplot2.tidyverse.org/) car :
 
----
-# Pourquoi utiliser R pour les graphiques? La reproductibilité
+1. Il permet de créer facilement de très beaux graphiques personnalisables ;
+2. Il implémente un système standardisé, en _couches_, pour la construction de graphiques (*c'est-à-dire* la _Grammaire des Graphiques_ ou _Grammar of Graphics_, dont nous parlerons plus tard !) ;
+3. De [nombreuses extensions](https://exts.ggplot2.tidyverse.org/gallery/) ont été développées et sont facilement accessibles (*e.g.* `gganimate`).
 
-.center[![:scale 80%](images/Divided_reproducible workflow2.png)]
+<br>
 
+.center[![:scale 25%](images/ggplot2_logo.png)]
 
-.alert[La science reproductible requiert un effort]:
-- commentez votre script
-- ajoutez des informations dans vos figures (titres, étiquettes, légendes, annotations)
+]
+]
 
----
-# Pourquoi utiliser R pour les graphiques?
+.pull-right[
+```{r echo=FALSE, fig.height = 2}
+# libraries
+library(ggplot2)
+library(gridExtra)
+ 
+# Make 3 simple graphics:
+g1 <- ggplot(mtcars, aes(x=qsec)) + geom_density(fill="slateblue")
+g2 <- ggplot(mtcars, aes(x=drat, y=qsec, colour=cyl)) + geom_point(size=5) + theme(legend.position="none")
+g3 <- ggplot(mtcars, aes(x=factor(cyl), y=qsec, fill=cyl)) + geom_boxplot() + theme(legend.position="none")
+g4 <- ggplot(mtcars , aes(x=factor(cyl), fill=factor(cyl))) +  geom_bar()
+ 
+# Plots
+grid.arrange(g2, nrow = 1)
+```
 
-#### .alert[En raison de ses puissantes fonctionnalités !]
+```{r echo=FALSE, fig.cap = "Figures generated using ggplot2::ggplot()"}
+library(gapminder)
 
-Dans cet atelier, nous nous concentrons uniquement sur `ggplot2`, mais [plusieurs librairies et fonctions](https://insileco.github.io/wiki/rgraphpkgs/) peuvent être utilisées pour une excellente visualisation (par exemple, ["base R"](https://bookdown.org/rdpeng/exdata/the-base-plotting-system-1.html), [plotly](https://plot.ly/r/), [sjPlot](http://www.strengejacke.de/sjPlot/), [mapview](https://r-spatial.github.io/mapview/), [igraph](https://igraph.org/r/)).
+ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  facet_wrap(~continent) +
+  # Here comes the gganimate specific bits
+  labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +
+  transition_time(year) +
+  ease_aes('linear')
+```
 
-.center[![:scale 80%](images/multiExamplePlot.bmp)]
-
----
-# `ggplot2` est polyvalent
-
-1. La librairie [`ggplot2`](https://ggplot2.tidyverse.org/) vous permet de réaliser de *beaux* graphiques personnalisables;
-2. `ggplot2` met en œuvre la grammaire des graphiques, un système fiable pour construire des graphiques;
-3. `ggplot2` a de [nombreuses extensions](https://exts.ggplot2.tidyverse.org/gallery/).
-
-
-.center[![:scale 35%](images/ggplot2_logo.png)]
+]
 
 
 ---
@@ -248,167 +683,207 @@ class: inverse, center, middle
 # La mécanique `ggplot2`: les bases
 
 ---
-# Les bases de la grammaire des graphiques (GG)
+class: middle, darkerinverse
 
-```{r, eval = FALSE}
-install.packages("ggplot2") # si ce n'est pas déjà installé
-library(ggplot2)
-```
+## `ggplot2` et la grammaire des graphiques
 
-```{r, echo = FALSE}
-library(ggplot2)
-```
+.pull-left[
 
-Un graphique est construit de différente couches:
+`ggplot2` a été créé par [Hadley Wickham](http://hadley.nz/), et publié sous le titre _A Layered Grammar of Graphics_ ([2005](https://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf)). L'inspiration vient du livre _The Grammar of Graphics_ ([1999](https://www.google.ca/books/edition/The_Grammar_of_Graphics/NRyGnjeNKJIC?hl=en&gbpv=1&printsec=frontcover)), de Leland Wilkinson.
 
-.center[
-![:scale 90%](images/Layers_ggplot.png)
+Il propose **une approche structurée en couches pour construire des visualisations** ou des graphiques.
 ]
 
-En utilisant le système GG, nous pouvons construire des graphiques étape par étape pour des résultats personnalisables.
+.pull-right[
+
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
+]
 
 ---
-# Les bases de la grammaire des graphiques (GG)
+class: middle, darkerinverse
 
-Ces couches ont des noms spécifiques que vous verrez tout au long de la présentation:
+## `ggplot2` et la grammaire des graphiques
 
-![:scale 70%](images/gglayers.png)
+.pull-left[
 
-.small[image adaptée de [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447)]
+**Données** ou **_data_** fournit les ingrédients essentiels pour la figure :
+  - Habituellement, une ligne pour chaque observation que vous voulez tracer.
 
+Conseil : Utilisez les outils `tidyverse` pour préparer les données.
+]
+
+.pull-right[
+
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
+]
 
 ---
-exclude: true
-# Les bases de la grammaire des graphiques (GG)
+class: middle, darkerinverse
+
+## `ggplot2` et la grammaire des graphiques
+
+.pull-left2[
+
+**Asthétique** ou **_aesthetics_** (`aes()`) rend les données visibles :
+  - `x`, `y` : variables
+  - `colour` : colore les lignes des géométries
+  - `fill` : remplit les géométries
+  - `group` : regroupe les données en fonction des groupes.
+  - `shape` : définit la forme (point, triangles)
+  - `linetype` : Définit le type de ligne (solide, pointillé)
+  - `size` : Définit la taille des éléments.
+  - `alpha` : Modifie la transparence.
+]
+
+.pull-right2[
+
+.vertical-center[
 
 .center[
-![:scale 40%](images/ggplot_scale_geoms.png)
+
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
+
+]
+]
 ]
 
 ???
 
-note: _removed this slide becase it felt random_
+Le présentateur n'a pas besoin de passer du temps à faire mémoriser les commandes aux participants. Elles ne sont là que pour illustrer certaines des possibilités.
 
 ---
-# Les bases de la grammaire des graphiques (GG)
+class: middle, darkerinverse
 
-Voici les éléments de base pour dessiner le plus simple des `ggplot`:
+## `ggplot2` et la grammaire des graphiques
 
+.pull-left2[
 
-.center[
-![:scale 80%](images/ggplot_basics.png)
+**Géométries** (`geom_*()`) fournit des formes aux données :
+ - `geom_point()` : nuage de points
+ - `geom_line()` : lignes reliant des points
+ - `geom_path()` : lignes reliant les points dans la séquence d'apparition
+ - `geom_boxplot()` : diagramme en boîte pour les variables catégoriques
+ - `geom_bar()` : diagrammes à barres pour l'axe `x` catégorique
+ - `geom_histogram()` : histogramme pour l'axe `x` continu
+ - `geom_violin()` : noyau de distribution de la dispersion des données
+ - `geom_smooth()` : ligne de fonction basée sur les données
 ]
 
+.pull-right2[
+.vertical-center[
 
+.center[
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
 
----
-# La grammaire des graphiques (GG)
+]
+]
+]
 
-Un graphique est constitué d'éléments (couches):
+???
 
-- Données
-    - vos données, dans un format bien ordonné, fourniront les ingrédients de votre graphique
-    - utiliser les techniques `dplyr` pour préparer les données en vue d'un format optimal (format long)
-    - en général, une ligne pour chaque observation que vous voulez représenter
-
-
----
-# La grammaire des graphiques (GG)
-
-Un graphique est constitué d'éléments (couches):
-
-- Données
-- Esthétique (aes), pour rendre les données visibles
-    - `x`, `y`: position le long des axes x et y
-    - `colour`: la couleur des géométries selon les données
-    - `fill`: la couleur intérieure des géométries
-    - `group`: à quel groupe appartient une géométrie
-    - `shape`: la forme des points
-    - `linetype`: le type de ligne utilisé (pleine, pointillée, etc.)
-    - `size`: la taille des points ou des lignes
-    - `alpha`: la transparence des géométries
-
---
-
-.alert[note: l'esthétique est basée sur les quantités dans vos données, mais les graphiques peuvent également avoir certaines de ces qualités qui ne sont pas fonction des données (p. ex. la coloration basée sur un groupe de données est une esthétique, mais les points peuvent avoir une couleur qui n'est pas fonction des données)].
+Le présentateur n'a pas besoin de passer du temps à faire mémoriser les commandes aux participants. Elles ne sont là que pour illustrer certaines des possibilités.
 
 ---
-# La grammaire des graphiques (GG)
+class: middle, darkerinverse
 
-Un graphique est constitué d'éléments (couches):
+## `ggplot2` et la grammaire des graphiques
 
-- Données
-- Esthétique (aes)
-- Objets géométriques (geoms)
-    * `geom_point()` : diagramme de dispersion
-    * `geom_line()` : lignes reliant des points par une valeur croissante de x
-    * `geom_path()` : lignes reliant des points dans l'ordre d'apparition
-    * `geom_boxplot()` : diagramme en boîte (boxplot) pour les variables catégoriques
-    * `geom_bar()` : diagrammes à barres pour un axe des x catégorique
-    * `geom_histogram()` : histogramme pour l'axe des x continu
-    * `geom_violin()` : kernel de distribution de la dispersion des données
-    * `geom_smooth()` : ligne de lissage en fonction des données
+.pull-left2[
 
+**_Facets_** divise les figures entre les panneaux :
+ - `facet_wrap()` enchaîne des graphiques dans différents cadres (facettes) basés sur une seule variable ;
+ - `facet_grid()` fait la même chose que ci-dessus, mais peut prendre différentes variables.
+ 
+]
 
+.pull-right2[
+.vertical-center[
 
----
-# La grammaire des graphiques (GG)
+.center[
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
 
-Un graphique est constitué d'éléments (couches):
-
-- Données
-- Esthétique (aes)
-- Objets géométriques (geoms)
-- Facettes
-    * `facet_wrap()` ou `facet_grid()` pour de petits multiples
+]
+]
+]
 
 ---
-# La grammaire des graphiques (GG)
+class: middle, darkerinverse
 
-Un graphique est constitué d'éléments (couches):
+## `ggplot2` et la grammaire des graphiques
 
-- Données
-- Esthétique (aes)
-- Objets géométriques (geoms)
-- Facettes
-- Statistiques
-    * similaire aux géométries, mais issue de calcul sur les données
-    * indique les moyennes, les comptages et autres résumés statistiques des données
+.pull-left2[
 
----
-# La grammaire des graphiques (GG)
+**Statistiques** (`stat_*()`) qui sont calculées sur les données.
+ - Les fonctions de type `stat_*()` effectuent des calculs tels que des moyennes, des comptages, des modèles linéaires et d'autres résumés statistiques de données.
+ 
+]
 
-Un graphique est constitué d'éléments (couches):
+.pull-right2[
+.vertical-center[
 
-- Données
-- Esthétique (aes)
-- Objets géométriques (geoms)
-- Facettes
-- Statistiques
-- Coordonnées - ajustement des données sur une page
-    * `coord_cartesian` pour fixer des limites
-    * `coord_polar` pour les graphiques circulaires
-    * `coord_map` pour différentes projections cartographiques
+.center[
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
+
+]
+]
+]
 
 ---
-# La grammaire des graphiques (GG)
+class: middle, darkerinverse
 
-Un graphique est constitué d'éléments (couches):
+## `ggplot2` et la grammaire des graphiques
 
-- Données
-- Esthétique (aes)
-- Objets géométriques (geoms)
-- Facettes
-- Statistiques
-- Coordonnées
-- Thèmes
-    * Effets visuels globaux par défaut
-    * polices, couleurs, formes, contours
+.pull-left2[
+
+**Coordonnées** (`coord_*()`) établissent des règles de représentation pour afficher les données
+ - `coord_cartesian()` pour le plan cartésien ;
+ - `coord_polar()` pour les tracés circulaires ;
+ - `coord_map()` pour les différentes projections cartographiques.
+ 
+]
+
+.pull-right2[
+.vertical-center[
+
+.center[
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
+
+]
+]
+]
 
 ---
-# Comment assembler ces couches
+class: middle, darkerinverse
 
-1. Créer un objet graphique simple :
+## `ggplot2` et la grammaire des graphiques
+
+.pull-left2[
+
+Les **thèmes** (`theme_*()`) permettent d'ajuster les visuels avec précision.
+  - Polices de caractères ; 
+  - Couleur de fond ;
+  - La largeur des lignes ;
+  - Taille et couleur des étiquettes d'axe ;
+  - la taille et la couleur des étiquettes de coche ;
+  - et beaucoup, beaucoup d'autres propriétés.
+]
+
+.pull-right2[
+.vertical-center[
+
+.center[
+!["Source: BloggoType"](images/ggplot-grammar-of-graphics-stack-1.png)
+
+]
+]
+]
+
+---
+
+
+## Comment assembler des couches dans `ggplot2` ?
+
+1. Créez un objet de graphique simple :
   * `plot.object <- ggplot()`
 
 2. Ajouter des couches géométriques :
@@ -417,12 +892,14 @@ Un graphique est constitué d'éléments (couches):
 3. Ajouter des couches d'apparence :
   * `plot.object <- plot.object + coord_*() + theme()`
 
-3. Répétez l'étape 2-3 jusqu'à ce que vous soyez satisfait, puis imprimez :
-  * `plot.object` ou `print(plot.object)`.
+4. Répétez les étapes 2 et 3 jusqu'à ce que vous soyez satisfait, puis affichez :
+  * `plot.object` ou `print(plot.object)`
 
+.center[
+![:scale 80%](images/ggplot_basics.png)
+]
 
 ---
-# Les bases de la visualisation de données
 
 ## Le jeu de données: `palmerpenguins`
 
@@ -464,7 +941,7 @@ str(penguins)
 ```
 
 .center[
-![:scale 50%](images/culmen_depth.png)
+![:scale 45%](images/culmen_depth.png)
 ]
 
 ???
@@ -484,6 +961,8 @@ peng <- as_tibble(penguins) # acceptable
 class(peng)
 ```
 
+<br>
+
 **&#x267B; Rappel de l'atelier [*Charger et manipuler des données*](https://r.qcbs.ca/fr/workshops/r-workshop-03/)**:
 
 Les graphiques plus complexes dans les `ggplot2` nécessitent que les données soient en format long.
@@ -497,14 +976,14 @@ Les graphiques plus complexes dans les `ggplot2` nécessitent que les données s
 
 .center[**Questions scientifiques**]
 <br>
-- Y a-t-il une relation entre la **longueur** et la **profondeur** des **becs** ?
-- Est-ce que la taille des **becs** et des **nageoires** varient ensemble ?
-- Comment ces mesures sont-elles réparties entre les **3 espèces** ?
+- Existe-t-il une relation entre la **longueur** et la **profondeur** des becs ?
+- Est-ce que la taille du **bâton et de la nageoire** varient ensemble ?
+- Comment ces mesures sont-elles réparties parmi les **3 espèces de manchots** ?
 
 .center[.alert[Comment pouvons-nous répondre graphiquement à ces questions avec `ggplot2`?]]
 
 ---
-# Explorer la structure des données
+#### Explorer la structure des données: `GGally::ggpairs()`
 
 <!-- Explain the databases before the examples  -->
 
@@ -519,9 +998,71 @@ ggpairs est dans la librairie GGally (chargée et installée au début de l'atel
 On peut déjà voir certains regroupements d'espèces entre la longueur et la profondeur du bec, la longueur des nageoires et la masse corporelle. Lors de la visualisation, il faudra garder à l'esprit que la différenciation des espèces peut être importante.
 
 ---
-# Explorer la structure des données
+# `ggplot()` : couche "données" ou "_Data_"
 
-Explorons comment ces données sont structurées par espèce:
+```{r, fig.height = 5, fig.width = 6, echo = TRUE, eval = FALSE}
+ggplot(data = penguins)
+#
+#
+#
+#
+```
+
+---
+# `ggplot()` : couche "esthétique" ou "_aesthetics_"
+
+```{r, fig.height = 5, fig.width = 6, echo = TRUE, eval = FALSE}
+ggplot(data = penguins,
+       aes(x = bill_length_mm, y = bill_depth_mm))
+#
+#
+#
+```
+
+```{r echo=FALSE, fig.height=5, fig.width=6}
+ggplot(data = penguins,
+       aes(x = bill_length_mm, y = bill_depth_mm))
+```
+
+---
+# `ggplot()` : couche "géométries" ou "_geometries_"
+
+```{r, fig.height = 5, fig.width = 6, echo = TRUE, eval = FALSE}
+ggplot(data = penguins,
+       aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point()
+#
+#
+```
+
+```{r echo=FALSE, fig.height=5, fig.width=6}
+ggplot(data = penguins,
+       aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point()
+```
+
+???
+
+Notez que le code ggplot2 est plus facile à lire si chaque ligne représente un nouvel élément. Ce style est généralement privilégié pour le code ggplot2 dans la communauté R.
+
+---
+# `ggplot()`: couches "facettes" et "coordonnées" *
+
+```{r, fig.height=5, fig.width=6}
+ggplot(data = penguins,
+       aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point() +
+  facet_wrap(~species) +
+  coord_trans(x = "log10", y = "log10")
+```
+
+.xsmall[*"coordinates" ou "_facets_"]
+
+---
+
+# Tout mettre ensemble, en un seul code
+
+Explorons comment certaines de ces données sont structurées par espèce :
 
 ```{r, echo = TRUE, fig.height=6, fig.width=8, eval = FALSE}
 ggplot(data = penguins,               # Données
@@ -530,16 +1071,16 @@ ggplot(data = penguins,               # Données
            col = species)) +          # Esthétique (mettre une couleur par espèce)
   geom_point(size = 5, alpha = 0.8) + # Points
   geom_smooth(method = "lm") +        # Régression linéaire
-  labs(title = "Relationship between bill length and depth\nfor different penguin species", # Title
-       x = "Bill length (mm)", # titre de l'axe des X
-       y = "Bill depth (mm)", # titre de l'axe des Y
-       col = "Species") +  # Légende pour les couleurs dans aes(col = species)
+  labs(title = "Relation entre la longueur et la profondeur du bec\ndes différentes espèces de pingouins.", # Title
+       x = "Longueur du bec (mm)", # titre de l'axe des X
+       y = "Profondeur du bec (mm)", # titre de l'axe des Y
+       col = "Espèces") +  # Légende pour les couleurs dans aes(col = species)
   theme_classic() + # Utiliser un thème propre
   theme(title = element_text(size = 18, face = "bold"),
       text = element_text(size = 16))
 ```
 
-.small[&#x267B; Voir l'atelier [*Charger et manipuler des données*](https://r.qcbs.ca/fr/workshops/r-workshop-02/) pour apprendre comment nettoyer vos données.]
+.small[&#x267B; Voir l'atelier [*Charger et manipuler des données*](https://r.qcbs.ca/fr/workshops/r-workshop-02/) pour apprendre comment nettoyer et manipuler vos données.]
 
 ???
 
@@ -547,27 +1088,27 @@ Prenez le temps d'expliquer chaque ligne de code (surtout l'esthétique et les g
 Par exemple, en différenciant les espèces, on peut voir qu'il existe une relation assez cohérente entre la longueur et la profondeur du bec entre les espèces (pentes similaires), mais que les gammes de ces variables sont différentes (les regroupements sont clairement indiqués par les couleurs). Les pingouins Adélie ont tendance à avoir une longueur de bec plus petite mais une profondeur de bec assez grande, alors que l'inverse est vrai pour les pingouins Gentoo.
 
 ---
-# Explorer la structure des données
+# Tout mettre ensemble, en une seule figure
 
 Explorons comment ces données sont structurées par espèce:
 
 ```{r, echo = FALSE, fig.height=6, fig.width=8}
-ggplot(data = penguins,               # Data
-       aes(x = bill_length_mm,        # Your X-value
-           y = bill_depth_mm,         # Your Y-value
-           col = species)) +          # Aesthetics
-  geom_point(size = 5, alpha = 0.8) + # Point
-  geom_smooth(method = "lm") +        # Linear regression
-  labs(title = "Relationship between bill length and depth\nfor different penguin species", # Title
-       x = "Bill length (mm)",
-       y = "Bill depth (mm)",
-       col = "Species") +
-  theme_classic() + # apply a clean theme
+ggplot(data = penguins,               # Données
+       aes(x = bill_length_mm,        # Valeurs X
+           y = bill_depth_mm,         # Valeurs Y
+           col = species)) +          # Esthétique (mettre une couleur par espèce)
+  geom_point(size = 5, alpha = 0.8) + # Points
+  geom_smooth(method = "lm") +        # Régression linéaire
+  labs(title = "Relation entre la longueur et la profondeur du bec\ndes différentes espèces de pingouins.", # Title
+       x = "Longueur du bec (mm)", # titre de l'axe des X
+       y = "Profondeur du bec (mm)", # titre de l'axe des Y
+       col = "Espèces") +  # Légende pour les couleurs dans aes(col = species)
+  theme_classic() + # Utiliser un thème propre
   theme(title = element_text(size = 18, face = "bold"),
       text = element_text(size = 16))
 ```
 
-.small[&#x267B; Voir l'atelier [*Charger et manipuler des données*](https://r.qcbs.ca/fr/workshops/r-workshop-02/) pour apprendre comment nettoyer vos données.]
+.small[&#x267B; Voir l'atelier [*Charger et manipuler des données*](https://r.qcbs.ca/fr/workshops/r-workshop-02/) pour apprendre comment  nettoyer et manipuler vos données.]
 
 ???
 
@@ -575,112 +1116,31 @@ Prenez le temps d'expliquer chaque ligne de code (surtout l'esthétique et les g
 Par exemple, en différenciant les espèces, on peut voir qu'il existe une relation assez cohérente entre la longueur et la profondeur du bec entre les espèces (pentes similaires), mais que les gammes de ces variables sont différentes (les regroupements sont clairement indiqués par les couleurs). Les pingouins Adélie ont tendance à avoir une longueur de bec plus petite mais une profondeur de bec assez grande, alors que l'inverse est vrai pour les pingouins Gentoo.
 
 ---
-exclude: true
-# L'héritage dans  `ggplot2`
 
-.small[
+# Défi 1 (5-min) ![:cube]()
 
-.pull-left[
-**avec héritage**
-```{r, fig.height = 5}
-p <- ggplot(data = penguins,
-            aes(x = bill_length_mm,
-                y = bill_depth_mm))
-p <- p + geom_point()
-p
-```
-]
+**Codez et représentez votre premier objet `ggplot()` !**.
 
-.pull-right[
-**sans héritage**
-```{r, fig.height = 5}
-s <- ggplot()
-s <- s + geom_point(data = penguins,
-                    aes(x = bill_length_mm,
-                        y = bill_depth_mm))
-s # Print your final plot
-```
-]
+**Votre mission** : représenter visuellement et répondre si :
 
-]
+1. Il existe une relation apparente entre la **longueur du bec** et la **longueur de la nageoire**.
 
-???
+2. **La longueur du bec** *augmente* avec la **longueur de la nageoire**.
 
-note: _removed this slide because it felt random, but is maybe worth going over at some point - edit. moved to challenge 1 answer_
-
----
-# La grammaire des graphiques: *rappel*
-
-Un graphique est constitué de différentes couches :
-
-![:scale 75%](images/gglayers.png)
-
----
-# La dynamique `ggplot()` : la couche de données
-
-```{r, echo = FALSE, results=0}
-theme_update(axis.text = element_text(size = 16),
-             axis.title = element_text(size = 18))
-```
-
-
-```{r, fig.height=5, fig.width=6}
-ggplot(data = penguins)
-```
-
-???
-
-theme_classic() a été appliqué à tous les graphiques de la présentation pour aider à la clarté en utilisant theme_set au début de ce diaporama, donc ces graphiques n'ont pas le fond gris de base de ggplot2. Il y a une section sur les thèmes plus loin dans la présentation, mais c'est une bonne idée de mentionner qu'un thème a été appliqué pour supprimer le fond gris par défaut, ce que les participants pourraient voir s'ils exécutent les morceaux de code eux-mêmes en suivant la présentation.
-
----
-# La dynamique `ggplot()` : la couche d'esthétiques
-
-```{r, fig.height=5, fig.width=6}
-ggplot(data = penguins,
-       aes(x = bill_length_mm, y = bill_depth_mm))
-```
-
----
-# La dynamique `ggplot()` : la couche de géométries
-
-```{r, fig.height=5, fig.width=6}
-ggplot(data = penguins,
-       aes(x = bill_length_mm, y = bill_depth_mm)) +
-  geom_point()
-```
-
-???
-
-Noter que le code ggplot2 est plus facile à lire si chaque ligne représente un nouvel élément. Ce style est généralement favorisé pour le code ggplot2 dans la communauté R.
-
----
-## La dynamique `ggplot()` : les couches extras - facette, stats, coordonnées
-
-```{r,fig.height=5, fig.width=6}
-ggplot(data = penguins,
-       aes(x = bill_length_mm, y = bill_depth_mm)) +
-  geom_point() +
-  facet_wrap(~species) +
-  coord_trans(x = "log10", y = "log10")
-```
-
----
-# Défi 1 (5min) ![:cube]()
-
-#### Créer votre 1er graphique ggplot!
-
-.alert[Question]
-
-> Y a-t-il une relation entre la **longueur des becs** et la **longueur des nageoires** des pingouins?
-
-> La **longueur** des becs augmente-t-elle avec celle des **nageoires**?
+<br>
 
 .center[Paramètres à prendre en compte pour répondre à cette question :]
 
  données | géométrie | valeurs x | valeurs y
 :-------------:|:-------------:|:-------------:|:-------------:
-penguins | geom_point | bill_length_mm | flipper_length_mm
+`penguins`|`geom_point()`|`bill_length_mm`|`flipper_length_mm`
 
+
+```{r echo=FALSE}
+library(countdown)
+
+countdown(minutes = 5, seconds = 0, bottom = 0)
+```
 
 ---
 # Défi 1: Solution ![:cube]()
@@ -691,7 +1151,6 @@ ggplot(data = penguins,
            y = flipper_length_mm)) +
   geom_point()
 ```
-
 
 ---
 # Défi 1: Solution ![:cube]()
@@ -706,7 +1165,7 @@ ggplot(data = penguins,
 ]
 
 .pull-right2[
-**note**: L'esthétique peut être soit dans la ligne `ggplot()`, et sera héritée par chaque géométrie, soit dans la ligne `geom_*()` à appliquer à cette géométrie seulement !
+**Note** : l'esthétique peut être soit dans la ligne `ggplot()`, et sera héritée par chaque `geom_*()`, soit dans la ligne `geom_*()` pour s'appliquer à ce `geom_*()` seulement !
 ]
 
 ---
@@ -722,12 +1181,11 @@ ggplot(data = penguins,
 ]
 
 .pull-right2[
-**note**: L'esthétique peut être soit dans la ligne `ggplot()`, et sera héritée par chaque géométrie, soit dans la ligne `geom_*()` à appliquer à cette géométrie seulement !
+**Note** : l'esthétique peut être soit dans la ligne `ggplot()`, et sera héritée par chaque `geom_*()`, soit dans la ligne `geom_*()` pour s'appliquer à ce `geom_*()` seulement !
 
 <br>
-<br>
 
-**note 2**: les commandes `colour`, `alpha`, `shape`, et `size` peuvent être définies en dehors des valeurs de `aes()`, et seront alors statiques, non dépendantes des données.
+**Note 2**: les commandes `colour`, `alpha`, `shape`, et `size` peuvent être définies en dehors des valeurs de `aes()`, et seront alors statiques, non dépendantes des données.
 ]
 ---
 
