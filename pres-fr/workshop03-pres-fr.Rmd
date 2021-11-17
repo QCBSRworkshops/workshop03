@@ -657,7 +657,7 @@ ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
   scale_x_log10() +
   facet_wrap(~continent) +
   # Here comes the gganimate specific bits
-  labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +
+  labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'Life expectancy') +
   transition_time(year) +
   ease_aes('linear')
 ```
@@ -903,7 +903,7 @@ install.packages("palmerpenguins")
 library(palmerpenguins)
 ```
 
-.small[Ce jeu de données contient des mesures morphologiques pour trois espèces de pingouins observées sur trois îles de l'archipel Palmer, en Antarctique: ]
+.small[Ce jeu de données contient des mesures morphologiques pour trois espèces de manchots observées sur trois îles de l'archipel Palmer, en Antarctique: ]
 
 ]
 
@@ -922,7 +922,7 @@ Cet ensemble de données a également été utilisé pour un défi TidyTuesday, 
 ---
 # Le jeu de données: palmerpenguins
 
-Regardons les variables du jeu de données des pingouins :
+Regardons les variables du jeu de données des manchots :
 
 ```{r}
 str(penguins)
@@ -956,7 +956,7 @@ class(peng)
 Les graphiques plus complexes dans les `ggplot2` nécessitent que les données soient en format long.
 
 ---
-# Questions scientifiques à propos des pingouins
+# Questions scientifiques à propos des manchots
 
 .center[
 ![:scale 50%](images/culmen_depth.png)
@@ -1059,7 +1059,7 @@ ggplot(data = penguins,               # Données
            col = species)) +          # Esthétique (mettre une couleur par espèce)
   geom_point(size = 5, alpha = 0.8) + # Points
   geom_smooth(method = "lm") +        # Régression linéaire
-  labs(title = "Relation entre la longueur et la profondeur du bec\ndes différentes espèces de pingouins.", # Title
+  labs(title = "Relation entre la longueur et la profondeur du bec\ndes différentes espèces de manchots.", # Title
        x = "Longueur du bec (mm)", # titre de l'axe des X
        y = "Profondeur du bec (mm)", # titre de l'axe des Y
        col = "Espèces") +  # Légende pour les couleurs dans aes(col = species)
@@ -1073,7 +1073,7 @@ ggplot(data = penguins,               # Données
 ???
 
 Prenez le temps d'expliquer chaque ligne de code (surtout l'esthétique et les géomètres), et ce qu'elle nous dit.
-Par exemple, en différenciant les espèces, on peut voir qu'il existe une relation assez cohérente entre la longueur et la profondeur du bec entre les espèces (pentes similaires), mais que les gammes de ces variables sont différentes (les regroupements sont clairement indiqués par les couleurs). Les pingouins Adélie ont tendance à avoir une longueur de bec plus petite mais une profondeur de bec assez grande, alors que l'inverse est vrai pour les pingouins Gentoo.
+Par exemple, en différenciant les espèces, on peut voir qu'il existe une relation assez cohérente entre la longueur et la profondeur du bec entre les espèces (pentes similaires), mais que les gammes de ces variables sont différentes (les regroupements sont clairement indiqués par les couleurs). Les manchots Adélie ont tendance à avoir une longueur de bec plus petite mais une profondeur de bec assez grande, alors que l'inverse est vrai pour les manchots Gentoo.
 
 ---
 # Tout mettre ensemble, en une seule figure
@@ -1087,7 +1087,7 @@ ggplot(data = penguins,               # Données
            col = species)) +          # Esthétique (mettre une couleur par espèce)
   geom_point(size = 5, alpha = 0.8) + # Points
   geom_smooth(method = "lm") +        # Régression linéaire
-  labs(title = "Relation entre la longueur et la profondeur du bec\ndes différentes espèces de pingouins.", # Title
+  labs(title = "Relation entre la longueur et la profondeur du bec\ndes différentes espèces de manchots.", # Title
        x = "Longueur du bec (mm)", # titre de l'axe des X
        y = "Profondeur du bec (mm)", # titre de l'axe des Y
        col = "Espèces") +  # Légende pour les couleurs dans aes(col = species)
@@ -1101,7 +1101,7 @@ ggplot(data = penguins,               # Données
 ???
 
 Prenez le temps d'expliquer chaque ligne de code (surtout l'esthétique et les géomètres), et ce qu'elle nous dit.
-Par exemple, en différenciant les espèces, on peut voir qu'il existe une relation assez cohérente entre la longueur et la profondeur du bec entre les espèces (pentes similaires), mais que les gammes de ces variables sont différentes (les regroupements sont clairement indiqués par les couleurs). Les pingouins Adélie ont tendance à avoir une longueur de bec plus petite mais une profondeur de bec assez grande, alors que l'inverse est vrai pour les pingouins Gentoo.
+Par exemple, en différenciant les espèces, on peut voir qu'il existe une relation assez cohérente entre la longueur et la profondeur du bec entre les espèces (pentes similaires), mais que les gammes de ces variables sont différentes (les regroupements sont clairement indiqués par les couleurs). Les manchots Adélie ont tendance à avoir une longueur de bec plus petite mais une profondeur de bec assez grande, alors que l'inverse est vrai pour les manchots Gentoo.
 
 ---
 
