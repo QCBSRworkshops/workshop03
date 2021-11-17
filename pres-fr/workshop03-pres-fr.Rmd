@@ -180,10 +180,10 @@ en modifiant et en améliorant son contenu dans le cadre du <br>_**Le**arning **
 
 # Matériel requis
 
-Pour suivre cet atelier, vous devez avoir téléchargé et installé les dernières versions de [RStudio](https://rstudio.com/products/rstudio/download/#download) et de [R](https://cran.rstudio.com/).
+.small[Pour suivre cet atelier, vous devez avoir téléchargé et installé les dernières versions de [RStudio](https://rstudio.com/products/rstudio/download/#download) et de [R](https://cran.rstudio.com/).]
 
 .pull-left3[
-Vous devez également utiliser les paquets suivants :
+.small[Vous devez également utiliser les paquets suivants :]
 
 * [gridExtra](https://cran.r-project.org/package=gridExtra)
 * [ggplot2](https://cran.r-project.org/package=ggplot2)
@@ -198,13 +198,12 @@ Vous devez également utiliser les paquets suivants :
 * [plotly](https://cran.r-project.org/package=plotly)
 * [colorBlindness](https://cran.r-project.org/package=colorBlindness)
 
-Tout le matériel de l'atelier se trouve sur le site [r.qcbs.ca/workshops/r-workshop-03/](https://r.qcbs.ca/workshops/r-workshop-03/).
+.small[Tout le matériel de l'atelier se trouve sur le site [r.qcbs.ca/workshops/r-workshop-03/](https://r.qcbs.ca/workshops/r-workshop-03/).]
 ]
 
 .pull-right3[
 
-Pour les installer depuis CRAN, exécutez :
-
+.small[Pour les installer depuis CRAN, exécutez :]
 ```{r, echo = TRUE, eval = FALSE}
 install.packages(
   c('grid', 
