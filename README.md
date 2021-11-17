@@ -47,7 +47,7 @@ Since 2014, several QCBS members contributed to consistently and collaboratively
 | Jake Lawlor  |  Rémi Maglione | Amanda Winegardner |
 | Marie-Hélène Brice  | Pedro Henrique P. Braga | Étienne Low-Decarie |
 | Kevin Cazelles  | Alexis Carteron | Monica Granados |
-|   | Katherine Hébert |  |
+| Pedro Henrique P. Braga | Katherine Hébert |  |
 
 # Development status
 
