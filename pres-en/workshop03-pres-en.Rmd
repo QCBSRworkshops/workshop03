@@ -179,7 +179,7 @@ by modifying and improving its content as part of the <br> *Le*arning *a*nd *D*e
 
 # Required material
 
-To follow this workshop, you are required to have downloaded and installed the earliest [RStudio](https://rstudio.com/products/rstudio/download/#download) and [R](https://cran.rstudio.com/) versions.
+To follow this workshop, you are required to have downloaded and installed the latest [RStudio](https://rstudio.com/products/rstudio/download/#download) and [R](https://cran.rstudio.com/) versions.
 
 .pull-left3[
 You must also use these packages:
@@ -710,8 +710,7 @@ class: middle, darkerinverse
 
 .pull-left[
 
-**Data**
-  - Provides the essential ingredients for the figure;
+**Data** provides the essential ingredients for the figure:
   - Usually, one row for every observation that you want to plot.
 
 Tip: Use `tidyverse` techniques to prepare data.
@@ -765,7 +764,7 @@ class: middle, darkerinverse
 
 .pull-left2[
 
-**Geometries** (`geom_*()`)
+**Geometries** (`geom_*()`) provides shapes to the data:
  - `geom_point()`: scatter-plot
  - `geom_line()`: lines connecting points
  - `geom_path()`: lines connecting points in sequence of appearance
@@ -797,7 +796,7 @@ class: middle, darkerinverse
 
 .pull-left2[
 
-**Facets** divides figures across panels:
+**Facets** divide figures across panels:
  - `facet_wrap()` strings together plots in different frames (facets) based in a single variable;
  - `facet_grid()` does the same as above, but can take different variables.
  
@@ -866,7 +865,7 @@ class: middle, darkerinverse
 
 .pull-left2[
 
-Themes (`theme_*()`) allows for the fine-tuning of visuals
+**Themes** (`theme_*()`) allows for the fine-tuning of visuals
   - Fonts; 
   - Background colour;
   - Line width;
@@ -938,7 +937,7 @@ This dataset was also used for a TidyTuesday challenge, showing the many possibi
 ---
 ## Today's dataset: `palmerpenguins`
 
-Let us take a look at the variables in the penguins dataset:
+Let us take a look at the variables in the penguins data set:
 
 ```{r}
 str(penguins)
@@ -986,7 +985,7 @@ More complex plots in `ggplot2` require the long data frame format.
 
 <br>
 
-.center[.alert[How can we graphically address these questions with `ggplot`?]]
+.center[.alert[How can we graphically address these questions with `ggplot2`?]]
 
 ---
 # Exploring data structure: `GGally::ggpairs()`
