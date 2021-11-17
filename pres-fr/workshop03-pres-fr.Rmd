@@ -626,8 +626,6 @@ Nous allons nous concentrer sur [`ggplot2`](https://ggplot2.tidyverse.org/) car 
 2. Il implémente un système standardisé, en _couches_, pour la construction de graphiques (*c'est-à-dire* la _Grammaire des Graphiques_ ou _Grammar of Graphics_, dont nous parlerons plus tard !) ;
 3. De [nombreuses extensions](https://exts.ggplot2.tidyverse.org/gallery/) ont été développées et sont facilement accessibles (*e.g.* `gganimate`).
 
-<br>
-
 .center[![:scale 25%](images/ggplot2_logo.png)]
 
 ]
@@ -649,7 +647,7 @@ g4 <- ggplot(mtcars , aes(x=factor(cyl), fill=factor(cyl))) +  geom_bar()
 grid.arrange(g2, nrow = 1)
 ```
 
-```{r echo=FALSE, fig.cap = "Figures generated using ggplot2::ggplot()"}
+```{r echo=FALSE}
 library(gapminder)
 
 ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
