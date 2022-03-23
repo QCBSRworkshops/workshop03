@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 6 Les bases de la visualisation de données | Atelier 3: Introduction à la visualisation de données avec ggplot2</title>
   <meta name="description" content="Introduction à ggplot2" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 6 Les bases de la visualisation de données | Atelier 3: Introduction à la visualisation de données avec ggplot2" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://r.qcbs.ca/fr/" />
   <meta property="og:image" content="https://r.qcbs.ca/fr/assets/images/logo/csbq_logo_accueil.png" />
   <meta property="og:description" content="Introduction à ggplot2" />
   <meta name="github-repo" content="qcbsRworkshops/workshop03" />
@@ -50,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -136,118 +136,118 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <link rel="icon" type="image/png" href="assets/images/favicon.ico"/>
 
 <li class="divider"></li>
-<li class="part"><span><b>Série d’ateliers R du CSBQ</b></span></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Préface</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#code-de-conduite"><i class="fa fa-check"></i><b>0.1</b> Code de conduite</a><ul>
-<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#comportement-attendu"><i class="fa fa-check"></i><b>0.1.1</b> Comportement attendu</a></li>
-<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#comportements-inacceptables"><i class="fa fa-check"></i><b>0.1.2</b> Comportements inacceptables</a></li>
+<li class="part"><span><b>Série d’ateliers R du CSBQ<span></span></b></span></li>
+<li><a href="index.html#préface">Préface<span></span></a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>0.1</b> Code de conduite<span></span></a><ul>
+<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#comportement-attendu"><i class="fa fa-check"></i><b>0.1.1</b> Comportement attendu<span></span></a></li>
+<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#comportements-inacceptables"><i class="fa fa-check"></i><b>0.1.2</b> Comportements inacceptables<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributeurs-et-contributrices"><i class="fa fa-check"></i><b>0.2</b> Contributeurs et contributrices</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contribuez-à-la-série"><i class="fa fa-check"></i><b>0.3</b> Contribuez à la série!</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributeurs-et-contributrices"><i class="fa fa-check"></i><b>0.2</b> Contributeurs et contributrices<span></span></a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contribuez-à-la-série"><i class="fa fa-check"></i><b>0.3</b> Contribuez à la série!<span></span></a></li>
 </ul></li>
-<li class="part"><span><b>Introduction à <code>ggplot2</code></b></span></li>
-<li class="chapter" data-level="1" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>1</b> Préparez-vous pour cet atelier</a></li>
-<li class="chapter" data-level="2" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>2</b> Objectifs d’apprentissage</a><ul>
-<li class="chapter" data-level="2.1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html#plan-de-latelier"><i class="fa fa-check"></i><b>2.1</b> Plan de l’atelier</a></li>
+<li class="part"><span><b>Introduction à <code>ggplot2</code><span></span></b></span></li>
+<li class="chapter" data-level="1" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>1</b> Préparez-vous pour cet atelier<span></span></a></li>
+<li class="chapter" data-level="2" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>2</b> Objectifs d’apprentissage<span></span></a><ul>
+<li class="chapter" data-level="2.1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html#plan-de-latelier"><i class="fa fa-check"></i><b>2.1</b> Plan de l’atelier<span></span></a></li>
 </ul></li>
-<li class="part"><span><b>Visualication en science</b></span></li>
-<li class="chapter" data-level="3" data-path="pourquoi-visualiser-des-données.html"><a href="pourquoi-visualiser-des-données.html"><i class="fa fa-check"></i><b>3</b> Pourquoi visualiser des données ?</a></li>
-<li class="chapter" data-level="4" data-path="pourquoi-utiliser-r.html"><a href="pourquoi-utiliser-r.html"><i class="fa fa-check"></i><b>4</b> Pourquoi utiliser <code>R</code>?</a><ul>
-<li class="chapter" data-level="4.1" data-path="pourquoi-utiliser-r.html"><a href="pourquoi-utiliser-r.html#reproductibilité"><i class="fa fa-check"></i><b>4.1</b> Reproductibilité</a></li>
-<li class="chapter" data-level="4.2" data-path="pourquoi-utiliser-r.html"><a href="pourquoi-utiliser-r.html#puissantes-fonctionnalités"><i class="fa fa-check"></i><b>4.2</b> Puissantes fonctionnalités</a></li>
+<li class="part"><span><b>Visualication en science<span></span></b></span></li>
+<li class="chapter" data-level="3" data-path="pourquoi-visualiser-des-données.html"><a href="pourquoi-visualiser-des-données.html"><i class="fa fa-check"></i><b>3</b> Pourquoi visualiser des données ?<span></span></a></li>
+<li class="chapter" data-level="4" data-path="pourquoi-utiliser-r.html"><a href="pourquoi-utiliser-r.html"><i class="fa fa-check"></i><b>4</b> Pourquoi utiliser <code>R</code>?<span></span></a><ul>
+<li class="chapter" data-level="4.1" data-path="pourquoi-utiliser-r.html"><a href="pourquoi-utiliser-r.html#reproductibilité"><i class="fa fa-check"></i><b>4.1</b> Reproductibilité<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="pourquoi-utiliser-r.html"><a href="pourquoi-utiliser-r.html#puissantes-fonctionnalités"><i class="fa fa-check"></i><b>4.2</b> Puissantes fonctionnalités<span></span></a></li>
 </ul></li>
-<li class="part"><span><b>La mécanique <code>ggplot2</code>: les bases</b></span></li>
-<li class="chapter" data-level="5" data-path="la-grammaire-des-graphiques-gg.html"><a href="la-grammaire-des-graphiques-gg.html"><i class="fa fa-check"></i><b>5</b> La grammaire des graphiques (GG)</a><ul>
-<li class="chapter" data-level="5.1" data-path="la-grammaire-des-graphiques-gg.html"><a href="la-grammaire-des-graphiques-gg.html#les-bases-de-gg"><i class="fa fa-check"></i><b>5.1</b> Les bases de GG</a></li>
-<li class="chapter" data-level="5.2" data-path="la-grammaire-des-graphiques-gg.html"><a href="la-grammaire-des-graphiques-gg.html#gg-layers"><i class="fa fa-check"></i><b>5.2</b> Les couches de GG</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="la-grammaire-des-graphiques-gg.html"><a href="la-grammaire-des-graphiques-gg.html#descriptions-de-couches-courantes"><i class="fa fa-check"></i><b>5.2.1</b> Descriptions de couches courantes</a></li>
-<li class="chapter" data-level="5.2.2" data-path="la-grammaire-des-graphiques-gg.html"><a href="la-grammaire-des-graphiques-gg.html#comment-assembler-ces-couches"><i class="fa fa-check"></i><b>5.2.2</b> Comment assembler ces couches</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html"><i class="fa fa-check"></i><b>6</b> Les bases de la visualisation de données</a><ul>
-<li class="chapter" data-level="6.1" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#le-jeu-de-données-palmerpenguins"><i class="fa fa-check"></i><b>6.1</b> Le jeu de données: <code>palmerpenguins</code></a></li>
-<li class="chapter" data-level="6.2" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#questions-scientifiques-à-propos-des-pingouins"><i class="fa fa-check"></i><b>6.2</b> Questions scientifiques à propos des pingouins</a></li>
-<li class="chapter" data-level="6.3" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#explorer-la-structure-des-données"><i class="fa fa-check"></i><b>6.3</b> Explorer la structure des données</a></li>
-<li class="chapter" data-level="6.4" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#working-through-layers"><i class="fa fa-check"></i><b>6.4</b> La dynamique <code>ggplot()</code> par couches</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#la-couche-de-données"><i class="fa fa-check"></i><b>6.4.1</b> La couche de données</a></li>
-<li class="chapter" data-level="6.4.2" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#la-couche-desthétiques"><i class="fa fa-check"></i><b>6.4.2</b> La couche d’esthétiques</a></li>
-<li class="chapter" data-level="6.4.3" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#la-couche-de-géométries"><i class="fa fa-check"></i><b>6.4.3</b> La couche de géométries</a></li>
-<li class="chapter" data-level="6.4.4" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#facettes-coordonnées-et-thèmes"><i class="fa fa-check"></i><b>6.4.4</b> Facettes, coordonnées, et thèmes</a></li>
-</ul></li>
-<li class="chapter" data-level="6.5" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#défi-1"><i class="fa fa-check"></i><b>6.5</b> Défi 1</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#défi-1-solution"><i class="fa fa-check"></i><b>6.5.1</b> Défi 1: Solution</a></li>
+<li class="part"><span><b>La mécanique <code>ggplot2</code>: les bases<span></span></b></span></li>
+<li class="chapter" data-level="5" data-path="la-grammaire-des-graphiques-gg.html"><a href="la-grammaire-des-graphiques-gg.html"><i class="fa fa-check"></i><b>5</b> La grammaire des graphiques (GG)<span></span></a><ul>
+<li class="chapter" data-level="5.1" data-path="la-grammaire-des-graphiques-gg.html"><a href="la-grammaire-des-graphiques-gg.html#les-bases-de-gg"><i class="fa fa-check"></i><b>5.1</b> Les bases de GG<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="la-grammaire-des-graphiques-gg.html"><a href="la-grammaire-des-graphiques-gg.html#gg-layers"><i class="fa fa-check"></i><b>5.2</b> Les couches de GG<span></span></a><ul>
+<li class="chapter" data-level="5.2.1" data-path="la-grammaire-des-graphiques-gg.html"><a href="la-grammaire-des-graphiques-gg.html#descriptions-de-couches-courantes"><i class="fa fa-check"></i><b>5.2.1</b> Descriptions de couches courantes<span></span></a></li>
+<li class="chapter" data-level="5.2.2" data-path="la-grammaire-des-graphiques-gg.html"><a href="la-grammaire-des-graphiques-gg.html#comment-assembler-ces-couches"><i class="fa fa-check"></i><b>5.2.2</b> Comment assembler ces couches<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="part"><span><b>Esthétique ou <em>Aesthetic mappings</em></b></span></li>
-<li class="chapter" data-level="7" data-path="esthétiques.html"><a href="esthétiques.html"><i class="fa fa-check"></i><b>7</b> Esthétiques</a></li>
-<li class="chapter" data-level="8" data-path="les-couleurs-faites-parler-vos-données.html"><a href="les-couleurs-faites-parler-vos-données.html"><i class="fa fa-check"></i><b>8</b> Les couleurs: faites parler vos données</a><ul>
-<li class="chapter" data-level="8.1" data-path="les-couleurs-faites-parler-vos-données.html"><a href="les-couleurs-faites-parler-vos-données.html#utiliser-aes-pour-changer-les-couleurs"><i class="fa fa-check"></i><b>8.1</b> Utiliser <code>aes()</code> pour changer les couleurs</a></li>
-<li class="chapter" data-level="8.2" data-path="les-couleurs-faites-parler-vos-données.html"><a href="les-couleurs-faites-parler-vos-données.html#changer-les-couleurs-manuellement"><i class="fa fa-check"></i><b>8.2</b> Changer les couleurs manuellement</a></li>
-<li class="chapter" data-level="8.3" data-path="les-couleurs-faites-parler-vos-données.html"><a href="les-couleurs-faites-parler-vos-données.html#gradients"><i class="fa fa-check"></i><b>8.3</b> Gradients</a></li>
-<li class="chapter" data-level="8.4" data-path="les-couleurs-faites-parler-vos-données.html"><a href="les-couleurs-faites-parler-vos-données.html#utiliser-une-palette-de-couleurs-prédéfinie"><i class="fa fa-check"></i><b>8.4</b> Utiliser une palette de couleurs prédéfinie</a></li>
-<li class="chapter" data-level="8.5" data-path="les-couleurs-faites-parler-vos-données.html"><a href="les-couleurs-faites-parler-vos-données.html#utiliser-des-palettes-de-couleurs-visibles-pour-les-daltoniens"><i class="fa fa-check"></i><b>8.5</b> Utiliser des palettes de couleurs visibles pour les daltoniens</a><ul>
-<li class="chapter" data-level="8.5.1" data-path="les-couleurs-faites-parler-vos-données.html"><a href="les-couleurs-faites-parler-vos-données.html#example-pour-des-variables-qualitatives"><i class="fa fa-check"></i><b>8.5.1</b> Example pour des variables qualitatives</a></li>
-<li class="chapter" data-level="8.5.2" data-path="les-couleurs-faites-parler-vos-données.html"><a href="les-couleurs-faites-parler-vos-données.html#exemple-pour-variables-continues"><i class="fa fa-check"></i><b>8.5.2</b> Exemple pour variables continues</a></li>
+<li class="chapter" data-level="6" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html"><i class="fa fa-check"></i><b>6</b> Les bases de la visualisation de données<span></span></a><ul>
+<li class="chapter" data-level="6.1" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#le-jeu-de-données-palmerpenguins"><i class="fa fa-check"></i><b>6.1</b> Le jeu de données: <code>palmerpenguins</code><span></span></a></li>
+<li class="chapter" data-level="6.2" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#questions-scientifiques-à-propos-des-pingouins"><i class="fa fa-check"></i><b>6.2</b> Questions scientifiques à propos des pingouins<span></span></a></li>
+<li class="chapter" data-level="6.3" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#explorer-la-structure-des-données"><i class="fa fa-check"></i><b>6.3</b> Explorer la structure des données<span></span></a></li>
+<li class="chapter" data-level="6.4" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#working-through-layers"><i class="fa fa-check"></i><b>6.4</b> La dynamique <code>ggplot()</code> par couches<span></span></a><ul>
+<li class="chapter" data-level="6.4.1" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#la-couche-de-données"><i class="fa fa-check"></i><b>6.4.1</b> La couche de données<span></span></a></li>
+<li class="chapter" data-level="6.4.2" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#la-couche-desthétiques"><i class="fa fa-check"></i><b>6.4.2</b> La couche d’esthétiques<span></span></a></li>
+<li class="chapter" data-level="6.4.3" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#la-couche-de-géométries"><i class="fa fa-check"></i><b>6.4.3</b> La couche de géométries<span></span></a></li>
+<li class="chapter" data-level="6.4.4" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#facettes-coordonnées-et-thèmes"><i class="fa fa-check"></i><b>6.4.4</b> Facettes, coordonnées, et thèmes<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#défi-1"><i class="fa fa-check"></i><b>6.5</b> Défi 1<span></span></a><ul>
+<li class="chapter" data-level="6.5.1" data-path="les-bases-de-la-visualisation-de-données.html"><a href="les-bases-de-la-visualisation-de-données.html#défi-1-solution"><i class="fa fa-check"></i><b>6.5.1</b> Défi 1: Solution<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="changer-la-forme-la-taille-et-la-transparence.html"><a href="changer-la-forme-la-taille-et-la-transparence.html"><i class="fa fa-check"></i><b>9</b> Changer la forme, la taille et la transparence</a><ul>
-<li class="chapter" data-level="9.1" data-path="changer-la-forme-la-taille-et-la-transparence.html"><a href="changer-la-forme-la-taille-et-la-transparence.html#défi-2"><i class="fa fa-check"></i><b>9.1</b> Défi 2</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="changer-la-forme-la-taille-et-la-transparence.html"><a href="changer-la-forme-la-taille-et-la-transparence.html#défi-2-solution-mtcars"><i class="fa fa-check"></i><b>9.1.1</b> Défi 2: Solution (<code>mtcars</code>)</a></li>
-<li class="chapter" data-level="9.1.2" data-path="changer-la-forme-la-taille-et-la-transparence.html"><a href="changer-la-forme-la-taille-et-la-transparence.html#défi-2-solution-co2"><i class="fa fa-check"></i><b>9.1.2</b> Défi 2: Solution (<code>CO2</code>)</a></li>
-<li class="chapter" data-level="9.1.3" data-path="changer-la-forme-la-taille-et-la-transparence.html"><a href="changer-la-forme-la-taille-et-la-transparence.html#défi-2-solution-msleep"><i class="fa fa-check"></i><b>9.1.3</b> Défi 2: Solution (<code>msleep</code>)</a></li>
-<li class="chapter" data-level="9.1.4" data-path="changer-la-forme-la-taille-et-la-transparence.html"><a href="changer-la-forme-la-taille-et-la-transparence.html#défi-2-solution-toothgrowth"><i class="fa fa-check"></i><b>9.1.4</b> Défi 2: Solution (<code>ToothGrowth</code>)</a></li>
+<li class="part"><span><b>Esthétique ou <em>Aesthetic mappings</em><span></span></b></span></li>
+<li class="chapter" data-level="7" data-path="esthétiques.html"><a href="esthétiques.html"><i class="fa fa-check"></i><b>7</b> Esthétiques<span></span></a></li>
+<li class="chapter" data-level="8" data-path="les-couleurs-faites-parler-vos-données.html"><a href="les-couleurs-faites-parler-vos-données.html"><i class="fa fa-check"></i><b>8</b> Les couleurs: faites parler vos données<span></span></a><ul>
+<li class="chapter" data-level="8.1" data-path="les-couleurs-faites-parler-vos-données.html"><a href="les-couleurs-faites-parler-vos-données.html#utiliser-aes-pour-changer-les-couleurs"><i class="fa fa-check"></i><b>8.1</b> Utiliser <code>aes()</code> pour changer les couleurs<span></span></a></li>
+<li class="chapter" data-level="8.2" data-path="les-couleurs-faites-parler-vos-données.html"><a href="les-couleurs-faites-parler-vos-données.html#changer-les-couleurs-manuellement"><i class="fa fa-check"></i><b>8.2</b> Changer les couleurs manuellement<span></span></a></li>
+<li class="chapter" data-level="8.3" data-path="les-couleurs-faites-parler-vos-données.html"><a href="les-couleurs-faites-parler-vos-données.html#gradients"><i class="fa fa-check"></i><b>8.3</b> Gradients<span></span></a></li>
+<li class="chapter" data-level="8.4" data-path="les-couleurs-faites-parler-vos-données.html"><a href="les-couleurs-faites-parler-vos-données.html#utiliser-une-palette-de-couleurs-prédéfinie"><i class="fa fa-check"></i><b>8.4</b> Utiliser une palette de couleurs prédéfinie<span></span></a></li>
+<li class="chapter" data-level="8.5" data-path="les-couleurs-faites-parler-vos-données.html"><a href="les-couleurs-faites-parler-vos-données.html#utiliser-des-palettes-de-couleurs-visibles-pour-les-daltoniens"><i class="fa fa-check"></i><b>8.5</b> Utiliser des palettes de couleurs visibles pour les daltoniens<span></span></a><ul>
+<li class="chapter" data-level="8.5.1" data-path="les-couleurs-faites-parler-vos-données.html"><a href="les-couleurs-faites-parler-vos-données.html#example-pour-des-variables-qualitatives"><i class="fa fa-check"></i><b>8.5.1</b> Example pour des variables qualitatives<span></span></a></li>
+<li class="chapter" data-level="8.5.2" data-path="les-couleurs-faites-parler-vos-données.html"><a href="les-couleurs-faites-parler-vos-données.html#exemple-pour-variables-continues"><i class="fa fa-check"></i><b>8.5.2</b> Exemple pour variables continues<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="changer-léchelle-des-axes.html"><a href="changer-léchelle-des-axes.html"><i class="fa fa-check"></i><b>10</b> Changer l’échelle des axes</a></li>
-<li class="part"><span><b>Peaufinage</b></span></li>
-<li class="chapter" data-level="11" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>11</b> Utiliser le <code>theme()</code> pour faire bonne figure!</a><ul>
-<li class="chapter" data-level="11.1" data-path="theme.html"><a href="theme.html#introduction-aux-thèmes"><i class="fa fa-check"></i><b>11.1</b> Introduction aux thèmes</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="theme.html"><a href="theme.html#thème-par-défaut-gris"><i class="fa fa-check"></i><b>11.1.1</b> Thème par défaut: Gris</a></li>
-<li class="chapter" data-level="11.1.2" data-path="theme.html"><a href="theme.html#thème-classique"><i class="fa fa-check"></i><b>11.1.2</b> Thème classique</a></li>
-<li class="chapter" data-level="11.1.3" data-path="theme.html"><a href="theme.html#thème-minimal"><i class="fa fa-check"></i><b>11.1.3</b> Thème minimal</a></li>
-<li class="chapter" data-level="11.1.4" data-path="theme.html"><a href="theme.html#définir-le-thème-pour-plusieurs-graphiques"><i class="fa fa-check"></i><b>11.1.4</b> Définir le thème pour plusieurs graphiques</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="theme.html"><a href="theme.html#les-élements-dun-thème"><i class="fa fa-check"></i><b>11.2</b> Les élements d’un thème</a></li>
-<li class="chapter" data-level="11.3" data-path="theme.html"><a href="theme.html#créer-votre-propre-thème"><i class="fa fa-check"></i><b>11.3</b> Créer votre propre thème</a></li>
-<li class="chapter" data-level="11.4" data-path="theme.html"><a href="theme.html#plus-de-thèmes"><i class="fa fa-check"></i><b>11.4</b> Plus de thèmes</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="utiliser-des-facettes-pour-diviser-votre-figure.html"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html"><i class="fa fa-check"></i><b>12</b> Utiliser des facettes pour diviser votre figure</a><ul>
-<li class="chapter" data-level="12.1" data-path="utiliser-des-facettes-pour-diviser-votre-figure.html"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#facettes-selon-une-variable"><i class="fa fa-check"></i><b>12.1</b> Facettes selon une variable</a></li>
-<li class="chapter" data-level="12.2" data-path="utiliser-des-facettes-pour-diviser-votre-figure.html"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#facettes-selon-deux-variables"><i class="fa fa-check"></i><b>12.2</b> Facettes selon deux variables</a></li>
-<li class="chapter" data-level="12.3" data-path="utiliser-des-facettes-pour-diviser-votre-figure.html"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#titre-et-axes-changer-la-taille-la-couleur-et-lapparence"><i class="fa fa-check"></i><b>12.3</b> Titre et axes: changer la taille, la couleur et l’apparence</a></li>
-<li class="chapter" data-level="12.4" data-path="utiliser-des-facettes-pour-diviser-votre-figure.html"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#défi-3"><i class="fa fa-check"></i><b>12.4</b> Défi 3</a><ul>
-<li class="chapter" data-level="12.4.1" data-path="utiliser-des-facettes-pour-diviser-votre-figure.html"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#défi-3-solution"><i class="fa fa-check"></i><b>12.4.1</b> Défi 3: Solution</a></li>
+<li class="chapter" data-level="9" data-path="changer-la-forme-la-taille-et-la-transparence.html"><a href="changer-la-forme-la-taille-et-la-transparence.html"><i class="fa fa-check"></i><b>9</b> Changer la forme, la taille et la transparence<span></span></a><ul>
+<li class="chapter" data-level="9.1" data-path="changer-la-forme-la-taille-et-la-transparence.html"><a href="changer-la-forme-la-taille-et-la-transparence.html#défi-2"><i class="fa fa-check"></i><b>9.1</b> Défi 2<span></span></a><ul>
+<li class="chapter" data-level="9.1.1" data-path="changer-la-forme-la-taille-et-la-transparence.html"><a href="changer-la-forme-la-taille-et-la-transparence.html#défi-2-solution-mtcars"><i class="fa fa-check"></i><b>9.1.1</b> Défi 2: Solution (<code>mtcars</code>)<span></span></a></li>
+<li class="chapter" data-level="9.1.2" data-path="changer-la-forme-la-taille-et-la-transparence.html"><a href="changer-la-forme-la-taille-et-la-transparence.html#défi-2-solution-co2"><i class="fa fa-check"></i><b>9.1.2</b> Défi 2: Solution (<code>CO2</code>)<span></span></a></li>
+<li class="chapter" data-level="9.1.3" data-path="changer-la-forme-la-taille-et-la-transparence.html"><a href="changer-la-forme-la-taille-et-la-transparence.html#défi-2-solution-msleep"><i class="fa fa-check"></i><b>9.1.3</b> Défi 2: Solution (<code>msleep</code>)<span></span></a></li>
+<li class="chapter" data-level="9.1.4" data-path="changer-la-forme-la-taille-et-la-transparence.html"><a href="changer-la-forme-la-taille-et-la-transparence.html#défi-2-solution-toothgrowth"><i class="fa fa-check"></i><b>9.1.4</b> Défi 2: Solution (<code>ToothGrowth</code>)<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><i class="fa fa-check"></i><b>13</b> Utiliser <code>geom_*()</code> pour créer différents types de graphique</a><ul>
-<li class="chapter" data-level="13.1" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#histogrammes-geom_histogram"><i class="fa fa-check"></i><b>13.1</b> Histogrammes: <code>geom_histogram()</code></a></li>
-<li class="chapter" data-level="13.2" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth"><i class="fa fa-check"></i><b>13.2</b> Nuage de points et régression linéaire: <code>geom_point()</code> et <code>geom_smooth()</code></a></li>
-<li class="chapter" data-level="13.3" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#diagramme-en-boîte-geom_boxplot"><i class="fa fa-check"></i><b>13.3</b> Diagramme en boîte: <code>geom_boxplot()</code>:</a></li>
-<li class="chapter" data-level="13.4" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#diagramme-en-boîte-avec-annotations-geom_boxplot-and-geom_signif"><i class="fa fa-check"></i><b>13.4</b> Diagramme en boîte avec annotations: <code>geom_boxplot()</code> and <code>geom_signif()</code></a></li>
-<li class="chapter" data-level="13.5" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#diagramme-en-violon-geom_violin"><i class="fa fa-check"></i><b>13.5</b> Diagramme en violon: <code>geom_violin()</code></a></li>
-<li class="chapter" data-level="13.6" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#résumer-des-valeurs-y-stat_summary"><i class="fa fa-check"></i><b>13.6</b> Résumer des valeurs <code>y</code>: <code>stat_summary()</code></a></li>
-<li class="chapter" data-level="13.7" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#créer-des-cartes-geom_map"><i class="fa fa-check"></i><b>13.7</b> Créer des cartes: <code>geom_map()</code></a></li>
-<li class="chapter" data-level="13.8" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#graphique-de-densité-geom_density"><i class="fa fa-check"></i><b>13.8</b> Graphique de densité: <code>geom_density()</code></a></li>
-<li class="chapter" data-level="13.9" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#dendogramme-ggdendrogram"><i class="fa fa-check"></i><b>13.9</b> Dendogramme: <code>ggdendrogram()</code></a></li>
+<li class="chapter" data-level="10" data-path="changer-léchelle-des-axes.html"><a href="changer-léchelle-des-axes.html"><i class="fa fa-check"></i><b>10</b> Changer l’échelle des axes<span></span></a></li>
+<li class="part"><span><b>Peaufinage<span></span></b></span></li>
+<li class="chapter" data-level="11" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>11</b> Utiliser le <code>theme()</code> pour faire bonne figure!<span></span></a><ul>
+<li class="chapter" data-level="11.1" data-path="theme.html"><a href="theme.html#introduction-aux-thèmes"><i class="fa fa-check"></i><b>11.1</b> Introduction aux thèmes<span></span></a><ul>
+<li class="chapter" data-level="11.1.1" data-path="theme.html"><a href="theme.html#thème-par-défaut-gris"><i class="fa fa-check"></i><b>11.1.1</b> Thème par défaut: Gris<span></span></a></li>
+<li class="chapter" data-level="11.1.2" data-path="theme.html"><a href="theme.html#thème-classique"><i class="fa fa-check"></i><b>11.1.2</b> Thème classique<span></span></a></li>
+<li class="chapter" data-level="11.1.3" data-path="theme.html"><a href="theme.html#thème-minimal"><i class="fa fa-check"></i><b>11.1.3</b> Thème minimal<span></span></a></li>
+<li class="chapter" data-level="11.1.4" data-path="theme.html"><a href="theme.html#définir-le-thème-pour-plusieurs-graphiques"><i class="fa fa-check"></i><b>11.1.4</b> Définir le thème pour plusieurs graphiques<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="disposition-des-graphiques-patchwork.html"><a href="disposition-des-graphiques-patchwork.html"><i class="fa fa-check"></i><b>14</b> Disposition des graphiques: <code>patchwork</code></a></li>
-<li class="chapter" data-level="15" data-path="défi-4.html"><a href="défi-4.html"><i class="fa fa-check"></i><b>15</b> Défi 4</a><ul>
-<li class="chapter" data-level="15.1" data-path="défi-4.html"><a href="défi-4.html#défi-4-solution-exemple-1"><i class="fa fa-check"></i><b>15.1</b> Défi 4: Solution exemple 1</a></li>
-<li class="chapter" data-level="15.2" data-path="défi-4.html"><a href="défi-4.html#défi-4-solution-example-2"><i class="fa fa-check"></i><b>15.2</b> Défi 4: Solution example 2</a></li>
+<li class="chapter" data-level="11.2" data-path="theme.html"><a href="theme.html#les-élements-dun-thème"><i class="fa fa-check"></i><b>11.2</b> Les élements d’un thème<span></span></a></li>
+<li class="chapter" data-level="11.3" data-path="theme.html"><a href="theme.html#créer-votre-propre-thème"><i class="fa fa-check"></i><b>11.3</b> Créer votre propre thème<span></span></a></li>
+<li class="chapter" data-level="11.4" data-path="theme.html"><a href="theme.html#plus-de-thèmes"><i class="fa fa-check"></i><b>11.4</b> Plus de thèmes<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="divers-graphiques-interactifs-avec-plotly.html"><a href="divers-graphiques-interactifs-avec-plotly.html"><i class="fa fa-check"></i><b>16</b> Divers : graphiques interactifs avec <code>plotly()</code></a></li>
+<li class="chapter" data-level="12" data-path="utiliser-des-facettes-pour-diviser-votre-figure.html"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html"><i class="fa fa-check"></i><b>12</b> Utiliser des facettes pour diviser votre figure<span></span></a><ul>
+<li class="chapter" data-level="12.1" data-path="utiliser-des-facettes-pour-diviser-votre-figure.html"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#facettes-selon-une-variable"><i class="fa fa-check"></i><b>12.1</b> Facettes selon une variable<span></span></a></li>
+<li class="chapter" data-level="12.2" data-path="utiliser-des-facettes-pour-diviser-votre-figure.html"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#facettes-selon-deux-variables"><i class="fa fa-check"></i><b>12.2</b> Facettes selon deux variables<span></span></a></li>
+<li class="chapter" data-level="12.3" data-path="utiliser-des-facettes-pour-diviser-votre-figure.html"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#titre-et-axes-changer-la-taille-la-couleur-et-lapparence"><i class="fa fa-check"></i><b>12.3</b> Titre et axes: changer la taille, la couleur et l’apparence<span></span></a></li>
+<li class="chapter" data-level="12.4" data-path="utiliser-des-facettes-pour-diviser-votre-figure.html"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#défi-3"><i class="fa fa-check"></i><b>12.4</b> Défi 3<span></span></a><ul>
+<li class="chapter" data-level="12.4.1" data-path="utiliser-des-facettes-pour-diviser-votre-figure.html"><a href="utiliser-des-facettes-pour-diviser-votre-figure.html#défi-3-solution"><i class="fa fa-check"></i><b>12.4.1</b> Défi 3: Solution<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><i class="fa fa-check"></i><b>13</b> Utiliser <code>geom_*()</code> pour créer différents types de graphique<span></span></a><ul>
+<li class="chapter" data-level="13.1" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#histogrammes-geom_histogram"><i class="fa fa-check"></i><b>13.1</b> Histogrammes: <code>geom_histogram()</code><span></span></a></li>
+<li class="chapter" data-level="13.2" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#nuage-de-points-et-régression-linéaire-geom_point-et-geom_smooth"><i class="fa fa-check"></i><b>13.2</b> Nuage de points et régression linéaire: <code>geom_point()</code> et <code>geom_smooth()</code><span></span></a></li>
+<li class="chapter" data-level="13.3" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#diagramme-en-boîte-geom_boxplot"><i class="fa fa-check"></i><b>13.3</b> Diagramme en boîte: <code>geom_boxplot()</code>:<span></span></a></li>
+<li class="chapter" data-level="13.4" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#diagramme-en-boîte-avec-annotations-geom_boxplot-and-geom_signif"><i class="fa fa-check"></i><b>13.4</b> Diagramme en boîte avec annotations: <code>geom_boxplot()</code> and <code>geom_signif()</code><span></span></a></li>
+<li class="chapter" data-level="13.5" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#diagramme-en-violon-geom_violin"><i class="fa fa-check"></i><b>13.5</b> Diagramme en violon: <code>geom_violin()</code><span></span></a></li>
+<li class="chapter" data-level="13.6" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#résumer-des-valeurs-y-stat_summary"><i class="fa fa-check"></i><b>13.6</b> Résumer des valeurs <code>y</code>: <code>stat_summary()</code><span></span></a></li>
+<li class="chapter" data-level="13.7" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#créer-des-cartes-geom_map"><i class="fa fa-check"></i><b>13.7</b> Créer des cartes: <code>geom_map()</code><span></span></a></li>
+<li class="chapter" data-level="13.8" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#graphique-de-densité-geom_density"><i class="fa fa-check"></i><b>13.8</b> Graphique de densité: <code>geom_density()</code><span></span></a></li>
+<li class="chapter" data-level="13.9" data-path="utiliser-geom_-pour-créer-différents-types-de-graphique.html"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#dendogramme-ggdendrogram"><i class="fa fa-check"></i><b>13.9</b> Dendogramme: <code>ggdendrogram()</code><span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="disposition-des-graphiques-patchwork.html"><a href="disposition-des-graphiques-patchwork.html"><i class="fa fa-check"></i><b>14</b> Disposition des graphiques: <code>patchwork</code><span></span></a></li>
+<li class="chapter" data-level="15" data-path="défi-4.html"><a href="défi-4.html"><i class="fa fa-check"></i><b>15</b> Défi 4<span></span></a><ul>
+<li class="chapter" data-level="15.1" data-path="défi-4.html"><a href="défi-4.html#défi-4-solution-exemple-1"><i class="fa fa-check"></i><b>15.1</b> Défi 4: Solution exemple 1<span></span></a></li>
+<li class="chapter" data-level="15.2" data-path="défi-4.html"><a href="défi-4.html#défi-4-solution-example-2"><i class="fa fa-check"></i><b>15.2</b> Défi 4: Solution example 2<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="divers-graphiques-interactifs-avec-plotly.html"><a href="divers-graphiques-interactifs-avec-plotly.html"><i class="fa fa-check"></i><b>16</b> Divers : graphiques interactifs avec <code>plotly()</code><span></span></a></li>
 <li class="chapter" data-level="17" data-path="section.html"><a href="section.html"><i class="fa fa-check"></i><b>17</b> </a></li>
-<li class="part"><span><b>Sauvegarder vos graphiques</b></span></li>
-<li class="chapter" data-level="18" data-path="sauvegarder-des-graphiques-avec-r.html"><a href="sauvegarder-des-graphiques-avec-r.html"><i class="fa fa-check"></i><b>18</b> Sauvegarder des graphiques avec R</a></li>
-<li class="part"><span><b>Conclusion</b></span></li>
-<li class="chapter" data-level="19" data-path="considérations-finales.html"><a href="considérations-finales.html"><i class="fa fa-check"></i><b>19</b> Considérations finales</a></li>
-<li class="chapter" data-level="20" data-path="ressources-additionelles-en.html"><a href="ressources-additionelles-en.html"><i class="fa fa-check"></i><b>20</b> Ressources additionelles (EN)</a><ul>
-<li class="chapter" data-level="20.1" data-path="ressources-additionelles-en.html"><a href="ressources-additionelles-en.html#documents-de-référence"><i class="fa fa-check"></i><b>20.1</b> Documents de référence</a></li>
-<li class="chapter" data-level="20.2" data-path="ressources-additionelles-en.html"><a href="ressources-additionelles-en.html#livres"><i class="fa fa-check"></i><b>20.2</b> Livres</a></li>
-<li class="chapter" data-level="20.3" data-path="ressources-additionelles-en.html"><a href="ressources-additionelles-en.html#inspiration-et-guides"><i class="fa fa-check"></i><b>20.3</b> Inspiration et guides</a></li>
-<li class="chapter" data-level="20.4" data-path="ressources-additionelles-en.html"><a href="ressources-additionelles-en.html#notes-de-cours"><i class="fa fa-check"></i><b>20.4</b> Notes de cours</a></li>
+<li class="part"><span><b>Sauvegarder vos graphiques<span></span></b></span></li>
+<li class="chapter" data-level="18" data-path="sauvegarder-des-graphiques-avec-r.html"><a href="sauvegarder-des-graphiques-avec-r.html"><i class="fa fa-check"></i><b>18</b> Sauvegarder des graphiques avec R<span></span></a></li>
+<li class="part"><span><b>Conclusion<span></span></b></span></li>
+<li class="chapter" data-level="19" data-path="considérations-finales.html"><a href="considérations-finales.html"><i class="fa fa-check"></i><b>19</b> Considérations finales<span></span></a></li>
+<li class="chapter" data-level="20" data-path="ressources-additionelles-en.html"><a href="ressources-additionelles-en.html"><i class="fa fa-check"></i><b>20</b> Ressources additionelles (EN)<span></span></a><ul>
+<li class="chapter" data-level="20.1" data-path="ressources-additionelles-en.html"><a href="ressources-additionelles-en.html#documents-de-référence"><i class="fa fa-check"></i><b>20.1</b> Documents de référence<span></span></a></li>
+<li class="chapter" data-level="20.2" data-path="ressources-additionelles-en.html"><a href="ressources-additionelles-en.html#livres"><i class="fa fa-check"></i><b>20.2</b> Livres<span></span></a></li>
+<li class="chapter" data-level="20.3" data-path="ressources-additionelles-en.html"><a href="ressources-additionelles-en.html#inspiration-et-guides"><i class="fa fa-check"></i><b>20.3</b> Inspiration et guides<span></span></a></li>
+<li class="chapter" data-level="20.4" data-path="ressources-additionelles-en.html"><a href="ressources-additionelles-en.html#notes-de-cours"><i class="fa fa-check"></i><b>20.4</b> Notes de cours<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li><a href="references.html#references">References<span></span></a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
 
@@ -283,19 +283,19 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
 --!>
-<div id="les-bases-de-la-visualisation-de-données" class="section level1">
-<h1><span class="header-section-number">Chapitre 6</span> Les bases de la visualisation de données</h1>
-<div id="le-jeu-de-données-palmerpenguins" class="section level2">
-<h2><span class="header-section-number">6.1</span> Le jeu de données: <code>palmerpenguins</code></h2>
+<div id="les-bases-de-la-visualisation-de-données" class="section level1 hasAnchor">
+<h1><span class="header-section-number">Chapitre 6</span> Les bases de la visualisation de données<a href="les-bases-de-la-visualisation-de-données.html#les-bases-de-la-visualisation-de-données" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="le-jeu-de-données-palmerpenguins" class="section level2 hasAnchor">
+<h2><span class="header-section-number">6.1</span> Le jeu de données: <code>palmerpenguins</code><a href="les-bases-de-la-visualisation-de-données.html#le-jeu-de-données-palmerpenguins" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Essayons maintenant de visualiser des données! Nous allons utiliser le jeu de données <code>palmerpenguins</code>.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-13"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-14"></span>
 <img src="images/palmerpenguins.png" alt="Art par [Allison Horst](https://twitter.com/allison_horst)." width="30%" />
 <p class="caption">
 Figure 6.1: Art par <a href="https://twitter.com/allison_horst">Allison Horst</a>.
 </p>
 </div>
 <p>Ce jeu de données contient des mesures morphologiques pour trois espèces de pingouins observées sur trois îles de l’archipel Palmer, en Antarctique. Ces données ont été recueillies de 2007 à 2009 par la Dre Kristen Gorman dans le cadre du programme de recherche écologique à long terme de la station Palmer, qui fait partie du réseau américain de recherche écologique à long terme.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-14"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-15"></span>
 <img src="images/penguins.png" alt="Artwork by [Allison Horst](https://twitter.com/allison_horst)." width="100%" />
 <p class="caption">
 Figure 6.2: Artwork by <a href="https://twitter.com/allison_horst">Allison Horst</a>.
@@ -316,7 +316,7 @@ Figure 6.2: Artwork by <a href="https://twitter.com/allison_horst">Allison Horst
 ##  $ body_mass_g      : int [1:344] 3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
 ##  $ sex              : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 2 1 1 NA 1 2 1 2 NA NA ...
 ##  $ year             : int [1:344] 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</code></pre>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-16"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-17"></span>
 <img src="images/culmen_depth.png" alt="Art par [Allison Horst](https://twitter.com/allison_horst)." width="100%" />
 <p class="caption">
 Figure 6.3: Art par <a href="https://twitter.com/allison_horst">Allison Horst</a>.
@@ -332,8 +332,8 @@ Figure 6.3: Art par <a href="https://twitter.com/allison_horst">Allison Horst</a
 <p><strong>♻ Rappel de l’atelier 2 - <a href="https://r.qcbs.ca/fr/workshops/r-workshop-02/"><em>Charger et manipuler des données</em></a>:</strong></p>
 <p>Les graphiques plus complexes dans les <code>ggplot2</code> nécessitent que les données soient en format long.</p>
 </div>
-<div id="questions-scientifiques-à-propos-des-pingouins" class="section level2">
-<h2><span class="header-section-number">6.2</span> Questions scientifiques à propos des pingouins</h2>
+<div id="questions-scientifiques-à-propos-des-pingouins" class="section level2 hasAnchor">
+<h2><span class="header-section-number">6.2</span> Questions scientifiques à propos des pingouins<a href="les-bases-de-la-visualisation-de-données.html#questions-scientifiques-à-propos-des-pingouins" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Quelles sont quelques questions scientifiques auxquelles nous pourrions vouloir répondre avec ce jeu de données? Voici quelques exemples:</p>
 <ul>
 <li>Y a-t-il une relation entre la <strong>longueur</strong> et la <strong>profondeur</strong> des <strong>becs</strong> ?</li>
@@ -342,14 +342,14 @@ Figure 6.3: Art par <a href="https://twitter.com/allison_horst">Allison Horst</a
 </ul>
 <p>Comment pouvons-nous répondre graphiquement à ces questions avec <code>ggplot2</code>?</p>
 </div>
-<div id="explorer-la-structure-des-données" class="section level2">
-<h2><span class="header-section-number">6.3</span> Explorer la structure des données</h2>
+<div id="explorer-la-structure-des-données" class="section level2 hasAnchor">
+<h2><span class="header-section-number">6.3</span> Explorer la structure des données<a href="les-bases-de-la-visualisation-de-données.html#explorer-la-structure-des-données" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Si nous voulons avoir un aperçu général de nos données, nous pouvons commencer par utiliser la fonction <code>ggpairs()</code> du paquet <code>GGally</code> (que nous avons chargé et installé au début de l’atelier). Cela nous permettra d’examiner les relations préliminaires, avant de les explorer plus en détail.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="les-bases-de-la-visualisation-de-données.html#cb8-1"></a><span class="co">## Voir un aperçu général de nos données avec plusieurs</span></span>
 <span id="cb8-2"><a href="les-bases-de-la-visualisation-de-données.html#cb8-2"></a><span class="co">## types de graphiques</span></span>
 <span id="cb8-3"><a href="les-bases-de-la-visualisation-de-données.html#cb8-3"></a><span class="kw">ggpairs</span>(penguins, <span class="kw">aes</span>(<span class="dt">colour =</span> species), <span class="dt">progress =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
 <span id="cb8-4"><a href="les-bases-de-la-visualisation-de-données.html#cb8-4"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-18-1.png" width="984" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-19-1.png" width="984" /></p>
 <div class="puzzle">
 <p>On peut déjà voir certains regroupements d’espèces entre la longueur et la profondeur du bec, la longueur des nageoires et la masse corporelle. Lors de la visualisation, il faudra garder à l’esprit que la différenciation des espèces peut être importante.</p>
 </div>
@@ -368,31 +368,31 @@ Figure 6.3: Art par <a href="https://twitter.com/allison_horst">Allison Horst</a
 <span id="cb9-12"><a href="les-bases-de-la-visualisation-de-données.html#cb9-12"></a><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span><span class="co"># Utiliser un thème propre</span></span>
 <span id="cb9-13"><a href="les-bases-de-la-visualisation-de-données.html#cb9-13"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">18</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
 <span id="cb9-14"><a href="les-bases-de-la-visualisation-de-données.html#cb9-14"></a>      <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>))</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-19-1.png" width="864" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-20-1.png" width="864" /></p>
 <div class="puzzle">
 <p>En différenciant les espèces, on peut voir qu’il existe une relation assez cohérente entre la longueur et la profondeur du bec entre les espèces (pentes similaires), mais que les gammes de ces variables sont différentes (les regroupements sont clairement indiqués par les couleurs). Les pingouins Adélie ont tendance à avoir une longueur de bec plus petite mais une profondeur de bec assez grande, alors que l’inverse est vrai pour les pingouins Gentoo.</p>
 </div>
 </div>
-<div id="working-through-layers" class="section level2">
-<h2><span class="header-section-number">6.4</span> La dynamique <code>ggplot()</code> par couches</h2>
+<div id="working-through-layers" class="section level2 hasAnchor">
+<h2><span class="header-section-number">6.4</span> La dynamique <code>ggplot()</code> par couches<a href="les-bases-de-la-visualisation-de-données.html#working-through-layers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Comme nous l’avons vu, un graphique est constitué de différentes couches, combinées ensemble pour communiquer visuellement des informations dans nos données. Construisons un graphique <code>ggplot</code> étape par étape en ajoutant une couche à la fois.</p>
 <p>Le code <code>ggplot2</code> est plus facile à lire si chaque ligne représente un nouvel élément. C’est ce style qui est généralement privilégié pour le code <code>ggplot2</code> dans la communauté R. Cela signifie que lorsque vous ajoutez chaque couche, vous devriez commencer une nouvelle ligne.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-20"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-21"></span>
 <img src="images/gglayers.png" alt="Image adapted from [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447)."  />
 <p class="caption">
 Figure 6.4: Image adapted from <a href="https://www.springer.com/gp/book/9780387245447">The Grammar of Graphics</a>.
 </p>
 </div>
-<div id="la-couche-de-données" class="section level3">
-<h3><span class="header-section-number">6.4.1</span> La couche de données</h3>
+<div id="la-couche-de-données" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.4.1</span> La couche de données<a href="les-bases-de-la-visualisation-de-données.html#la-couche-de-données" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="les-bases-de-la-visualisation-de-données.html#cb10-1"></a><span class="co"># Couche 1: Données</span></span>
 <span id="cb10-2"><a href="les-bases-de-la-visualisation-de-données.html#cb10-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-22-1.png" width="576" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-23-1.png" width="576" /></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="les-bases-de-la-visualisation-de-données.html#cb11-1"></a><span class="co"># Sans autre information, vos données ne seront pas</span></span>
 <span id="cb11-2"><a href="les-bases-de-la-visualisation-de-données.html#cb11-2"></a><span class="co"># visualisées.</span></span></code></pre></div>
 </div>
-<div id="la-couche-desthétiques" class="section level3">
-<h3><span class="header-section-number">6.4.2</span> La couche d’esthétiques</h3>
+<div id="la-couche-desthétiques" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.4.2</span> La couche d’esthétiques<a href="les-bases-de-la-visualisation-de-données.html#la-couche-desthétiques" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Dans <code>ggplot2</code>, l’esthétique est un groupe de paramètres qui spécifie les données à afficher et la manière de les afficher. Ici, nous demandons à <code>R</code> de tracer <code>longueur_de_bill_mm</code> sur l’axe <code>x</code> et <code>profondeur_de_bill_mm</code> sur l’axe <code>y</code>. Nous n’avons pas encore dit à <code>R</code> <em>comment</em> nous voulons représenter les données, donc nos données ne seront pas encore tracées.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="les-bases-de-la-visualisation-de-données.html#cb12-1"></a><span class="co"># Prochaine couche: esthétiques Ici, nous disons à R de</span></span>
 <span id="cb12-2"><a href="les-bases-de-la-visualisation-de-données.html#cb12-2"></a><span class="co"># tracer la longueur sur l&#39;axe des x, et la profondeur sur</span></span>
@@ -400,31 +400,31 @@ Figure 6.4: Image adapted from <a href="https://www.springer.com/gp/book/9780387
 <span id="cb12-4"><a href="les-bases-de-la-visualisation-de-données.html#cb12-4"></a><span class="co"># comment nous voulons que ces données soient</span></span>
 <span id="cb12-5"><a href="les-bases-de-la-visualisation-de-données.html#cb12-5"></a><span class="co"># représentées...</span></span>
 <span id="cb12-6"><a href="les-bases-de-la-visualisation-de-données.html#cb12-6"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins, <span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm, <span class="dt">y =</span> bill_depth_mm))</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-23-1.png" width="576" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-24-1.png" width="576" /></p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="les-bases-de-la-visualisation-de-données.html#cb13-1"></a><span class="co"># Vous voyez ? Nos variables sont maintenant assignées aux</span></span>
 <span id="cb13-2"><a href="les-bases-de-la-visualisation-de-données.html#cb13-2"></a><span class="co"># axes x et y, mais rien n&#39;est encore tracé.</span></span></code></pre></div>
 </div>
-<div id="la-couche-de-géométries" class="section level3">
-<h3><span class="header-section-number">6.4.3</span> La couche de géométries</h3>
+<div id="la-couche-de-géométries" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.4.3</span> La couche de géométries<a href="les-bases-de-la-visualisation-de-données.html#la-couche-de-géométries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Les objets géométriques, ou <code>geoms</code>, déterminent la représentation visuelle de vos données. Nous pouvons commencer par représenter nos points de données sous la forme d’un nuage de points, pour voir comment la profondeur et la longueur du bec sont liées l’une à l’autre.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="les-bases-de-la-visualisation-de-données.html#cb14-1"></a><span class="co"># Prochaine couche(s): géométries</span></span>
 <span id="cb14-2"><a href="les-bases-de-la-visualisation-de-données.html#cb14-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins, </span>
 <span id="cb14-3"><a href="les-bases-de-la-visualisation-de-données.html#cb14-3"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm, </span>
 <span id="cb14-4"><a href="les-bases-de-la-visualisation-de-données.html#cb14-4"></a>           <span class="dt">y =</span> bill_depth_mm)) <span class="op">+</span><span class="st"> </span><span class="co"># Utilisez le signe + pour ajouter chaque couche</span></span>
 <span id="cb14-5"><a href="les-bases-de-la-visualisation-de-données.html#cb14-5"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="co"># La couche geom détermine le type de tracé que nous utilisons.</span></span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-24-1.png" width="576" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-25-1.png" width="576" /></p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="les-bases-de-la-visualisation-de-données.html#cb15-1"></a>               <span class="co"># geom_point() trace les données sous forme de points !</span></span></code></pre></div>
 <p>Notez que vous pouvez ajouter plusieurs <code>geoms</code> dans un seul graphique. Par exemple, nous pouvons ajouter une ligne sur ce graphique pour montrer une valeur seuil, ou ajouter une régression linéaire. Pour l’instant, gardons la simplicité!</p>
 </div>
-<div id="facettes-coordonnées-et-thèmes" class="section level3">
-<h3><span class="header-section-number">6.4.4</span> Facettes, coordonnées, et thèmes</h3>
+<div id="facettes-coordonnées-et-thèmes" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.4.4</span> Facettes, coordonnées, et thèmes<a href="les-bases-de-la-visualisation-de-données.html#facettes-coordonnées-et-thèmes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Maintenant que le jeu de données est représenté graphiquement, nous pouvons personnaliser le graphique pour clarifier le message ou ajouter des informations supplémentaires. Les facettes sont un moyen populaire de diviser un graphique en plusieurs fenêtres selon une catégorie de données, afin de différencier visuellement les groupes. Nous pouvons explorer ce graphique différemment si nous utilisons <code>facet_wrap()</code> pour créer des ‘facettes’ séparées en fonction de nos groupes d’espèces:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="les-bases-de-la-visualisation-de-données.html#cb16-1"></a><span class="co"># Prochaine couche(s): customizations!  Les facettes</span></span>
 <span id="cb16-2"><a href="les-bases-de-la-visualisation-de-données.html#cb16-2"></a><span class="co"># divisent un graphique en fenêtres séparées selon une</span></span>
 <span id="cb16-3"><a href="les-bases-de-la-visualisation-de-données.html#cb16-3"></a><span class="co"># certaine catégorie dans les données.</span></span>
 <span id="cb16-4"><a href="les-bases-de-la-visualisation-de-données.html#cb16-4"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins, <span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm, <span class="dt">y =</span> bill_depth_mm)) <span class="op">+</span></span>
 <span id="cb16-5"><a href="les-bases-de-la-visualisation-de-données.html#cb16-5"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(species))  <span class="co"># Cela divise le graphique en trois fenêtres : une par espèce.</span></span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-25-1.png" width="576" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-26-1.png" width="576" /></p>
 <div class="explanation">
 <p>Note: Vous pouvez aussi utiliser <code>facet_grid()</code> si vous voulez faire une facette selon deux variables.</p>
 </div>
@@ -463,8 +463,8 @@ Figure 6.4: Image adapted from <a href="https://www.springer.com/gp/book/9780387
 <span id="cb18-16"><a href="les-bases-de-la-visualisation-de-données.html#cb18-16"></a><span class="kw">theme_bw</span>()</span></code></pre></div>
 </div>
 </div>
-<div id="défi-1" class="section level2">
-<h2><span class="header-section-number">6.5</span> Défi 1</h2>
+<div id="défi-1" class="section level2 hasAnchor">
+<h2><span class="header-section-number">6.5</span> Défi 1<a href="les-bases-de-la-visualisation-de-données.html#défi-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Il est maintenant temps d’essayer de construire votre propre graphique ! Créez un ggplot pour répondre aux questions suivantes:</p>
 <p><strong>1.</strong> Y a-t-il une relation entre la <strong>longueur des becs</strong> et la <strong>longueur des nageoires</strong> des pingouins?</p>
 <p><strong>2.</strong> La <strong>longueur</strong> des becs augmente-t-elle avec celle des <strong>nageoires</strong>?</p>
@@ -488,19 +488,19 @@ Figure 6.4: Image adapted from <a href="https://www.springer.com/gp/book/9780387
 </tbody>
 </table>
 <hr />
-<div id="défi-1-solution" class="section level3">
-<h3><span class="header-section-number">6.5.1</span> Défi 1: Solution</h3>
+<div id="défi-1-solution" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.5.1</span> Défi 1: Solution<a href="les-bases-de-la-visualisation-de-données.html#défi-1-solution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Créons un nuage de points avec la longueur du bec sur l’axe des x et la longueur de la nageoire sur l’axe des y, afin de visualiser la relation entre ces deux variables.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="les-bases-de-la-visualisation-de-données.html#cb19-1"></a><span class="co"># Faire un nuage de points pour visualiser la relation</span></span>
 <span id="cb19-2"><a href="les-bases-de-la-visualisation-de-données.html#cb19-2"></a><span class="co"># entre nos variables</span></span>
 <span id="cb19-3"><a href="les-bases-de-la-visualisation-de-données.html#cb19-3"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins, <span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm, <span class="dt">y =</span> flipper_length_mm)) <span class="op">+</span></span>
 <span id="cb19-4"><a href="les-bases-de-la-visualisation-de-données.html#cb19-4"></a><span class="st">    </span><span class="kw">geom_point</span>()</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <p>L’esthétique peut être soit dans la ligne <code>ggplot()</code>, et sera héritée par tous les géomètres, soit dans la ligne <code>geom_()</code> pour ne s’appliquer qu’à ce géomètre. Voici un exemple.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="les-bases-de-la-visualisation-de-données.html#cb20-1"></a><span class="co"># Personnalisez la forme et la couleur des points</span></span>
 <span id="cb20-2"><a href="les-bases-de-la-visualisation-de-données.html#cb20-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> penguins, <span class="kw">aes</span>(<span class="dt">x =</span> bill_length_mm, <span class="dt">y =</span> flipper_length_mm)) <span class="op">+</span></span>
 <span id="cb20-3"><a href="les-bases-de-la-visualisation-de-données.html#cb20-3"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">2</span>, <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <div class="explanation">
 <p>Les couleurs, l’alpha (transparence), la forme et la taille peuvent être définies en dehors des valeurs de <code>aes()</code>, et seront statiques, sans dépendre des données. Ici, le bleu ne transmet aucune information dans les données - c’est juste un choix que nous avons fait pour rendre le graphique plus joli.</p>
 </div>
