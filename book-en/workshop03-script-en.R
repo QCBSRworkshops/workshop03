@@ -1,5 +1,22 @@
 ##Section: 01-introduction.R 
 
+###Notice ###
+#                                                                            #
+#This is an automatically generated script based on the code chunks from the #
+#book for this workshop.                                                     #
+#                                                                            #
+#It is minimally annotated to allow participants to provide their comments:  #
+#a practice that we highly encourage.                                        #
+#                                                                            #
+#Note that the solutions to the challenges are also included in this script. #
+#When solving the challenges by yourself, attempt to not scroll and peek at  #
+#the solutions.                                                              #
+#                                                                            #
+#Happy coding!                                                               #
+
+
+
+
 # Install the required packages
 install.packages("gridExtra")
 install.packages("ggplot2")
