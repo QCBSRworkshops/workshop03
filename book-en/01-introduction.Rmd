@@ -2,6 +2,23 @@
 
 # Preparing for the workshop
 
+```{r eval=FALSE, echo=FALSE, purl=TRUE}
+##### Notice ###
+###                                                                             #
+### This is an automatically generated script based on the code chunks from the #
+### book for this workshop.                                                     #
+###                                                                             #
+### It is minimally annotated to allow participants to provide their comments:  # 
+### a practice that we highly encourage.                                        #
+###                                                                             #
+### Note that the solutions to the challenges are also included in this script. #
+### When solving the challenges by yourself, attempt to not scroll and peek at  #
+### the solutions.                                                              #
+###                                                                             #
+### Happy coding!                                                               #
+
+```
+
 All workshop materials are found at [github.com/QCBSRworkshops/workshop03](https://github.com/QCBSRworkshops/workshop03). This includes an [R script](https://r.qcbs.ca//workshop03/book-en/workshop03-script-en.R) which contains all code chunks shown in this book.
 
 You should also make sure you have downloaded, installed, and loaded these packages:
