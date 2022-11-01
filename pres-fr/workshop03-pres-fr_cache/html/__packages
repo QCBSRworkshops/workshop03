@@ -10,7 +10,6 @@ patchwork
 plotly
 palmerpenguins
 sf
-mdsr
 tidyverse
 tibble
 tidyr
@@ -29,5 +28,6 @@ xaringanExtra
 colorBlindness
 gganimate
 gapminder
+mdsr
 sjmisc
 reshape2

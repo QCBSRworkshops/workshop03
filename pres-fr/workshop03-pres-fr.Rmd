@@ -59,6 +59,12 @@ if(nzchar(system.file(package = "gifski")) == FALSE) {
   remotes::install_github("r-rust/gifski", 
                           upgrade = "always", 
                           quiet = TRUE)
+}
+
+if(nzchar(system.file(package = "mdsr")) == FALSE) {
+  remotes::install_github("mdsr-book/mdsr", 
+                          upgrade = "always", 
+                          quiet = TRUE)
   }
 
 # Install other packages
@@ -75,7 +81,6 @@ list.of.packages <- c('gridExtra',
                       'plotly',
                       'palmerpenguins',
                       'sf',
-                      'mdsr',
                       'tidyverse',
                       'ggspatial',
                       "DiagrammeR",
@@ -198,7 +203,6 @@ en modifiant et en améliorant son contenu dans le cadre du <br>_**Le**arning **
 * [plotly](https://cran.r-project.org/package=plotly)
 * [colorBlindness](https://cran.r-project.org/package=colorBlindness)
 
-.small[Tout le matériel de l'atelier se trouve sur le site [r.qcbs.ca/workshops/r-workshop-03/](https://r.qcbs.ca/workshops/r-workshop-03/).]
 ]
 
 .pull-right3[
@@ -206,27 +210,22 @@ en modifiant et en améliorant son contenu dans le cadre du <br>_**Le**arning **
 .small[Pour les installer depuis CRAN, exécutez :]
 ```{r, echo = TRUE, eval = FALSE}
 install.packages(
-  c('grid', 
-    'gridExtra', 
-    'ggplot2', 
-    'ggsignif', 
-    'ggdendro', 
-    'maps', 
-    'mapproj',
-    'RColorBrewer', 
-    'GGally', 
-    'patchwork', 
-    'plotly',
-    'palmerpenguins',
-    'colorBlindness'
-    )
+  c('grid', 'gridExtra', 
+    'ggplot2', 'ggsignif', 
+    'ggdendro', 'maps',    
+    'mapproj', 'RColorBrewer', 
+    'GGally', 'patchwork', 
+    'plotly','palmerpenguins',
+    'colorBlindness')
 )
 ```
 
 ]
+
+.small[Tout le matériel de l'atelier se trouve sur le site [r.qcbs.ca/workshops/r-workshop-03/](https://r.qcbs.ca/workshops/r-workshop-03/).]
 ---
 
-### Objectifs d'apprentissage
+# Objectifs d'apprentissage
 
 **1.** Apprendre les bases de la visualisation de données en utilisant `R` ;
 
@@ -266,9 +265,7 @@ class: inverse, center, middle
 # Introduction
 
 ---
-class: middle
-
-## Outline
+# Outline
 
 ###### 1. Petite discussion sur la visualisation des données ;
 
@@ -283,9 +280,8 @@ class: middle
 ###### 6. Ressources et conseils supplémentaires.
 
 ---
-class: middle
 
-## Qu'est-ce que la visualisation de données ?
+# Qu'est-ce que la visualisation de données ?
 
 **_La visualisation de données_ est la présentation de données dans un format pictural ou graphique**, et un _outil de visualisation de données_ est le logiciel qui génère cette présentation.
 
@@ -302,16 +298,17 @@ class: middle
 
 ---
 
-**Un exemple court et historique : avez-vous déjà entendu parler de John Snow ?**
+# Un exemple court et historique : 
+
+**Avez-vous déjà entendu parler de John Snow ?**
 
 .pull-left3[
-Dans les années 1850, on pensait que le choléra était transmis et propagé par du "mauvais air" ou de "mauvaises odeurs" provenant de matières organiques en décomposition, et l'épidémie soudaine et grave de choléra dans le quartier londonien de Soho était un mystère.
+Dans les années 1850, on pensait que le choléra était transmis et propagé par du "mauvais air" provenant de matières organiques en décomposition. L'épidémie soudaine et grave de choléra dans le quartier londonien de Soho était un mystère.
 
-<br>
-Le médecin John Snow a donc décidé d'interroger les habitants et de **cartographier les décès dus au choléra**.
 
-<br>
-Il a pu constater qu'il y avait un lien entre le choléra et l'eau potable contaminée : la plupart des décès étaient dus à des personnes dont l'accès le plus proche à l'eau était la pompe de Broad Street, où l'on a découvert par la suite que des bactéries fécales provenaient d'une fosse d'aisance voisine.
+Le médecin John Snow a décidé d'interroger les habitants et de **cartographier les décès dus au choléra**.
+
+Il a  constaté qu'il y avait un lien entre le choléra et l'eau potable contaminée : la plupart des décès étaient dus à des personnes dont l'accès le plus proche à l'eau était la pompe de Broad Street, où l'on a découvert que des bactéries fécales provenaient d'une fosse d'aisance voisine.
 
 ]
 
@@ -325,7 +322,9 @@ Il a pu constater qu'il y avait un lien entre le choléra et l'eau potable conta
 
 ---
 
-**Un exemple court et historique : avez-vous déjà entendu parler de John Snow ?**
+# Un exemple court et historique : 
+
+**Avez-vous déjà entendu parler de John Snow ?**
 
 ```{r xaringan-panelset, echo=FALSE}
 xaringanExtra::use_panelset()
@@ -439,7 +438,6 @@ class: middle, center
 <br>
 
 _Il est temps de discuter !_ <br>
-_(S'il n'y a pas de volontaires, un nom sera choisi au hasard !)_
 
 ???
 
@@ -451,13 +449,15 @@ Les diagrammes circulaires ne sont plus recommandés car ils s'appuient sur des 
 
 
 ---
-class: middle
-
-##### L'efficacité de la visualisation des données dépend de plusieurs facteurs
+# L'efficacité de la visualisation des données dépend de plusieurs facteurs
 
 - Que voulez-vous communiquer ?
+<br>
+
 - Qui est votre public ? 
   - Des chercheurs ? Des journalistes ? Le grand public ? Les évaluateurs de subventions ?
+  <br>
+  
 - Quelle est la meilleure façon de représenter vos données et votre message ?
   - Est-ce par un _box plot_ ? 
   - Devriez-vous utiliser du bleu ou du rouge ?
@@ -843,7 +843,7 @@ class: middle, darkerinverse
 ---
 class: middle, darkerinverse
 
-## `ggplot2` et la grammaire des graphiques
+# `ggplot2` et la grammaire des graphiques
 
 .pull-left2[
 
@@ -869,7 +869,7 @@ Les **thèmes** (`theme_*()`) permettent d'ajuster les visuels avec précision.
 ---
 
 
-## Comment assembler des couches dans `ggplot2` ?
+# Comment assembler des couches dans `ggplot2` ?
 
 1. Créez un objet de graphique simple :
   * `plot.object <- ggplot()`
@@ -889,7 +889,7 @@ Les **thèmes** (`theme_*()`) permettent d'ajuster les visuels avec précision.
 
 ---
 
-## Le jeu de données: `palmerpenguins`
+# Le jeu de données: `palmerpenguins`
 
 .pull-right2[
 ![:scale 80%](images/palmerpenguins.png)
@@ -971,7 +971,7 @@ Les graphiques plus complexes dans les `ggplot2` nécessitent que les données s
 .center[.alert[Comment pouvons-nous répondre graphiquement à ces questions avec `ggplot2`?]]
 
 ---
-#### Explorer la structure des données: `GGally::ggpairs()`
+# Explorer la structure des données: 
 
 <!-- Explain the databases before the examples  -->
 
@@ -2313,7 +2313,7 @@ ggdendrogram(mtcars.short.hc, rotate = TRUE) +
 ]
 
 ---
-## Divers : graphiques interactifs avec `plotly()`
+# Divers : graphiques interactifs avec `plotly()`
 
 .small[
 
