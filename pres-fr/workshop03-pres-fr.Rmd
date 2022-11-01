@@ -59,6 +59,12 @@ if(nzchar(system.file(package = "gifski")) == FALSE) {
   remotes::install_github("r-rust/gifski", 
                           upgrade = "always", 
                           quiet = TRUE)
+}
+
+if(nzchar(system.file(package = "mdsr")) == FALSE) {
+  remotes::install_github("mdsr-book/mdsr", 
+                          upgrade = "always", 
+                          quiet = TRUE)
   }
 
 # Install other packages
@@ -75,7 +81,6 @@ list.of.packages <- c('gridExtra',
                       'plotly',
                       'palmerpenguins',
                       'sf',
-                      'mdsr',
                       'tidyverse',
                       'ggspatial',
                       "DiagrammeR",
