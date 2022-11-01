@@ -154,7 +154,7 @@ How can we graphically address these questions with `ggplot2`?
 If we want a general overview of our data, we can start by using the `ggpairs()` function from the `GGally` package (which we loaded and installed in the beginning of the workshop). This will allow us to look at initial relationships and then explore them in more detail.
 
 ```{r, fig.width = 10.25, fig.height = 6.5, results = 0, warning=FALSE, message=FALSE}
-## Get a general overview of the data with multiple plot types
+# Get a general overview of the data with multiple plot types
 ggpairs(penguins, 
         aes(colour = species),
         progress = FALSE) + 

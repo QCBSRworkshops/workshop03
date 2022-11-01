@@ -153,7 +153,7 @@ Comment pouvons-nous répondre graphiquement à ces questions avec `ggplot2`?
 Si nous voulons avoir un aperçu général de nos données, nous pouvons commencer par utiliser la fonction `ggpairs()` du paquet `GGally` (que nous avons chargé et installé au début de l'atelier). Cela nous permettra d'examiner les relations préliminaires, avant de les explorer plus en détail.
 
 ```{r, fig.width = 10.25, fig.height = 6.5, results = 0, warning=FALSE, message=FALSE}
-## Voir un aperçu général de nos données avec plusieurs types de graphiques
+# Voir un aperçu général de nos données avec plusieurs types de graphiques
 ggpairs(penguins, 
         aes(colour = species),
         progress = FALSE) + 

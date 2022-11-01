@@ -238,7 +238,7 @@ tips.gg
 tips.gg <- ggplot(tips, 
                   # Étape 1. Spécifiez le mappage esthétique des axes et des légendes
                   aes(x = facture_totale,
-                      y = pourboire/facture totale,
+                      y = pourboire/facture_totale,
                       shape = fumeur,
                       couleur = sexe,
                       size = taille)) +
