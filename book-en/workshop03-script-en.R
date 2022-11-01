@@ -63,7 +63,7 @@ class(penguins) # check the class of the data to ensure it is either a data.fram
 # peng <- tibble::as_tibble(penguins) 
 # class(peng)
 
-Get a general overview of the data with multiple plot types
+# Get a general overview of the data with multiple plot types
 ggpairs(penguins, 
         aes(colour = species),
         progress = FALSE) + 
