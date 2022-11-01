@@ -61,7 +61,7 @@ class(penguins) # vérifier la classe des données pour s'assurer qu'il s'agit d
 # peng <- tibble::as_tibble(penguins) 
 # class(peng)
 
-Voir un aperçu général de nos données avec plusieurs types de graphiques
+# Voir un aperçu général de nos données avec plusieurs types de graphiques
 ggpairs(penguins, 
         aes(colour = species),
         progress = FALSE) + 
@@ -465,7 +465,7 @@ library(reshape2)
 tips.gg <- ggplot(tips,
                   # Étape 1. Spécifiez le mappage esthétique des axes et des légendes
                   aes(x = facture_totale,
-                      y = pourboire/facture totale,
+                      y = pourboire/facture_totale,
                       shape = fumeur,
                       couleur = sexe,
                       size = taille)) +
