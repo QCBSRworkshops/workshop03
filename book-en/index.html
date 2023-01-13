@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Workshop 3: Introduction to data visualisation with ggplot2</title>
   <meta name="description" content="Introduction to ggplot2" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Workshop 3: Introduction to data visualisation with ggplot2" />
   <meta property="og:type" content="book" />
@@ -48,25 +48,24 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -86,7 +85,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {  background-color: #f8f8f8; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -118,6 +117,28 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="assets/qcbs-style.css" type="text/css" />
 </head>
@@ -137,8 +158,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="part"><span><b>QCBS R Workshop Series</b></span></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#code-of-conduct"><i class="fa fa-check"></i><b>0.1</b> Code of conduct</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#code-of-conduct"><i class="fa fa-check"></i><b>0.1</b> Code of conduct</a>
+<ul>
 <li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#expected-behaviour"><i class="fa fa-check"></i><b>0.1.1</b> Expected behaviour</a></li>
 <li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#unacceptable-behaviour"><i class="fa fa-check"></i><b>0.1.2</b> Unacceptable behaviour</a></li>
 </ul></li>
@@ -147,51 +170,62 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>Introduction to <code>ggplot2</code></b></span></li>
 <li class="chapter" data-level="1" data-path="preparing-for-the-workshop.html"><a href="preparing-for-the-workshop.html"><i class="fa fa-check"></i><b>1</b> Preparing for the workshop</a></li>
-<li class="chapter" data-level="2" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i><b>2</b> Learning objectives</a><ul>
+<li class="chapter" data-level="2" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i><b>2</b> Learning objectives</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="learning-objectives.html"><a href="learning-objectives.html#workshop-outline"><i class="fa fa-check"></i><b>2.1</b> Workshop outline</a></li>
 </ul></li>
 <li class="part"><span><b>Visualization in science</b></span></li>
 <li class="chapter" data-level="3" data-path="why-do-we-visualize-data.html"><a href="why-do-we-visualize-data.html"><i class="fa fa-check"></i><b>3</b> Why do we visualize data?</a></li>
-<li class="chapter" data-level="4" data-path="why-use-r.html"><a href="why-use-r.html"><i class="fa fa-check"></i><b>4</b> Why use <code>R</code>?</a><ul>
+<li class="chapter" data-level="4" data-path="why-use-r.html"><a href="why-use-r.html"><i class="fa fa-check"></i><b>4</b> Why use <code>R</code>?</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="why-use-r.html"><a href="why-use-r.html#reproducibility"><i class="fa fa-check"></i><b>4.1</b> Reproducibility</a></li>
 <li class="chapter" data-level="4.2" data-path="why-use-r.html"><a href="why-use-r.html#powerful-features"><i class="fa fa-check"></i><b>4.2</b> Powerful features</a></li>
 </ul></li>
 <li class="part"><span><b><code>ggplot2</code> mechanics: the basics</b></span></li>
-<li class="chapter" data-level="5" data-path="grammar-of-graphics-gg-basics.html"><a href="grammar-of-graphics-gg-basics.html"><i class="fa fa-check"></i><b>5</b> Grammar of Graphics (GG) basics</a><ul>
+<li class="chapter" data-level="5" data-path="grammar-of-graphics-gg-basics.html"><a href="grammar-of-graphics-gg-basics.html"><i class="fa fa-check"></i><b>5</b> Grammar of Graphics (GG) basics</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="grammar-of-graphics-gg-basics.html"><a href="grammar-of-graphics-gg-basics.html#what-is-the-grammar-of-graphics"><i class="fa fa-check"></i><b>5.1</b> What is the Grammar of Graphics?</a></li>
-<li class="chapter" data-level="5.2" data-path="grammar-of-graphics-gg-basics.html"><a href="grammar-of-graphics-gg-basics.html#gg-layers"><i class="fa fa-check"></i><b>5.2</b> Grammar of Graphics layers</a><ul>
+<li class="chapter" data-level="5.2" data-path="grammar-of-graphics-gg-basics.html"><a href="grammar-of-graphics-gg-basics.html#gg-layers"><i class="fa fa-check"></i><b>5.2</b> Grammar of Graphics layers</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="grammar-of-graphics-gg-basics.html"><a href="grammar-of-graphics-gg-basics.html#a-breakdown-of-common-layers"><i class="fa fa-check"></i><b>5.2.1</b> A breakdown of common layers</a></li>
 <li class="chapter" data-level="5.2.2" data-path="grammar-of-graphics-gg-basics.html"><a href="grammar-of-graphics-gg-basics.html#putting-these-layers-together"><i class="fa fa-check"></i><b>5.2.2</b> Putting these layers together</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="the-basics-of-visualizing-data.html"><a href="the-basics-of-visualizing-data.html"><i class="fa fa-check"></i><b>6</b> The basics of visualizing data</a><ul>
+<li class="chapter" data-level="6" data-path="the-basics-of-visualizing-data.html"><a href="the-basics-of-visualizing-data.html"><i class="fa fa-check"></i><b>6</b> The basics of visualizing data</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="the-basics-of-visualizing-data.html"><a href="the-basics-of-visualizing-data.html#todays-dataset-palmerpenguins"><i class="fa fa-check"></i><b>6.1</b> Today’s dataset: <code>palmerpenguins</code></a></li>
 <li class="chapter" data-level="6.2" data-path="the-basics-of-visualizing-data.html"><a href="the-basics-of-visualizing-data.html#asking-questions"><i class="fa fa-check"></i><b>6.2</b> Asking questions</a></li>
 <li class="chapter" data-level="6.3" data-path="the-basics-of-visualizing-data.html"><a href="the-basics-of-visualizing-data.html#exploring-data-structure"><i class="fa fa-check"></i><b>6.3</b> Exploring data structure</a></li>
-<li class="chapter" data-level="6.4" data-path="the-basics-of-visualizing-data.html"><a href="the-basics-of-visualizing-data.html#working-through-layers"><i class="fa fa-check"></i><b>6.4</b> Working through the layers</a><ul>
+<li class="chapter" data-level="6.4" data-path="the-basics-of-visualizing-data.html"><a href="the-basics-of-visualizing-data.html#working-through-layers"><i class="fa fa-check"></i><b>6.4</b> Working through the layers</a>
+<ul>
 <li class="chapter" data-level="6.4.1" data-path="the-basics-of-visualizing-data.html"><a href="the-basics-of-visualizing-data.html#data-layer"><i class="fa fa-check"></i><b>6.4.1</b> Data layer</a></li>
 <li class="chapter" data-level="6.4.2" data-path="the-basics-of-visualizing-data.html"><a href="the-basics-of-visualizing-data.html#aesthetics-layer"><i class="fa fa-check"></i><b>6.4.2</b> Aesthetics layer</a></li>
 <li class="chapter" data-level="6.4.3" data-path="the-basics-of-visualizing-data.html"><a href="the-basics-of-visualizing-data.html#geometric-layer"><i class="fa fa-check"></i><b>6.4.3</b> Geometric layer</a></li>
 <li class="chapter" data-level="6.4.4" data-path="the-basics-of-visualizing-data.html"><a href="the-basics-of-visualizing-data.html#facets-coordinates-and-themes"><i class="fa fa-check"></i><b>6.4.4</b> Facets, coordinates, and themes</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="the-basics-of-visualizing-data.html"><a href="the-basics-of-visualizing-data.html#challenge-1"><i class="fa fa-check"></i><b>6.5</b> Challenge 1</a><ul>
+<li class="chapter" data-level="6.5" data-path="the-basics-of-visualizing-data.html"><a href="the-basics-of-visualizing-data.html#challenge-1"><i class="fa fa-check"></i><b>6.5</b> Challenge 1</a>
+<ul>
 <li class="chapter" data-level="6.5.1" data-path="the-basics-of-visualizing-data.html"><a href="the-basics-of-visualizing-data.html#challenge-1-solution"><i class="fa fa-check"></i><b>6.5.1</b> Challenge 1: Solution</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>Aesthetic mapping</b></span></li>
 <li class="chapter" data-level="7" data-path="aesthetics.html"><a href="aesthetics.html"><i class="fa fa-check"></i><b>7</b> Aesthetics</a></li>
-<li class="chapter" data-level="8" data-path="colours-make-your-points-talk.html"><a href="colours-make-your-points-talk.html"><i class="fa fa-check"></i><b>8</b> Colours: make your points talk</a><ul>
+<li class="chapter" data-level="8" data-path="colours-make-your-points-talk.html"><a href="colours-make-your-points-talk.html"><i class="fa fa-check"></i><b>8</b> Colours: make your points talk</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="colours-make-your-points-talk.html"><a href="colours-make-your-points-talk.html#using-aes-use-to-change-colour"><i class="fa fa-check"></i><b>8.1</b> Using <code>aes()</code> use to change colour</a></li>
 <li class="chapter" data-level="8.2" data-path="colours-make-your-points-talk.html"><a href="colours-make-your-points-talk.html#manual-colour-change"><i class="fa fa-check"></i><b>8.2</b> Manual colour change</a></li>
 <li class="chapter" data-level="8.3" data-path="colours-make-your-points-talk.html"><a href="colours-make-your-points-talk.html#gradients"><i class="fa fa-check"></i><b>8.3</b> Gradients</a></li>
 <li class="chapter" data-level="8.4" data-path="colours-make-your-points-talk.html"><a href="colours-make-your-points-talk.html#use-a-new-colour-palette"><i class="fa fa-check"></i><b>8.4</b> Use a new colour palette</a></li>
-<li class="chapter" data-level="8.5" data-path="colours-make-your-points-talk.html"><a href="colours-make-your-points-talk.html#colourblind-friendly-palettes"><i class="fa fa-check"></i><b>8.5</b> Colourblind-friendly palettes</a><ul>
+<li class="chapter" data-level="8.5" data-path="colours-make-your-points-talk.html"><a href="colours-make-your-points-talk.html#colourblind-friendly-palettes"><i class="fa fa-check"></i><b>8.5</b> Colourblind-friendly palettes</a>
+<ul>
 <li class="chapter" data-level="8.5.1" data-path="colours-make-your-points-talk.html"><a href="colours-make-your-points-talk.html#example-for-grouped-data"><i class="fa fa-check"></i><b>8.5.1</b> Example for grouped data</a></li>
 <li class="chapter" data-level="8.5.2" data-path="colours-make-your-points-talk.html"><a href="colours-make-your-points-talk.html#example-for-continuous-data"><i class="fa fa-check"></i><b>8.5.2</b> Example for continuous data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="changing-shape-size-and-alpha.html"><a href="changing-shape-size-and-alpha.html"><i class="fa fa-check"></i><b>9</b> Changing <code>shape</code>, <code>size</code> and <code>alpha</code></a><ul>
-<li class="chapter" data-level="9.1" data-path="changing-shape-size-and-alpha.html"><a href="changing-shape-size-and-alpha.html#challenge-2"><i class="fa fa-check"></i><b>9.1</b> Challenge 2</a><ul>
+<li class="chapter" data-level="9" data-path="changing-shape-size-and-alpha.html"><a href="changing-shape-size-and-alpha.html"><i class="fa fa-check"></i><b>9</b> Changing <code>shape</code>, <code>size</code> and <code>alpha</code></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="changing-shape-size-and-alpha.html"><a href="changing-shape-size-and-alpha.html#challenge-2"><i class="fa fa-check"></i><b>9.1</b> Challenge 2</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="changing-shape-size-and-alpha.html"><a href="changing-shape-size-and-alpha.html#challenge-2-solution-mtcars"><i class="fa fa-check"></i><b>9.1.1</b> Challenge 2: Solution (<code>mtcars</code>)</a></li>
 <li class="chapter" data-level="9.1.2" data-path="changing-shape-size-and-alpha.html"><a href="changing-shape-size-and-alpha.html#challenge-2-solution-co2"><i class="fa fa-check"></i><b>9.1.2</b> Challenge 2: Solution (<code>CO2</code>)</a></li>
 <li class="chapter" data-level="9.1.3" data-path="changing-shape-size-and-alpha.html"><a href="changing-shape-size-and-alpha.html#challenge-2-solution-msleep"><i class="fa fa-check"></i><b>9.1.3</b> Challenge 2: Solution (<code>msleep</code>)</a></li>
@@ -200,8 +234,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10" data-path="changing-the-scale-of-the-axes.html"><a href="changing-the-scale-of-the-axes.html"><i class="fa fa-check"></i><b>10</b> Changing the scale of the axes</a></li>
 <li class="part"><span><b>Fine-tuning your plots</b></span></li>
-<li class="chapter" data-level="11" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>11</b> Using <code>theme()</code> to make it look good!</a><ul>
-<li class="chapter" data-level="11.1" data-path="theme.html"><a href="theme.html#introduction-to-themes"><i class="fa fa-check"></i><b>11.1</b> Introduction to themes</a><ul>
+<li class="chapter" data-level="11" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>11</b> Using <code>theme()</code> to make it look good!</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="theme.html"><a href="theme.html#introduction-to-themes"><i class="fa fa-check"></i><b>11.1</b> Introduction to themes</a>
+<ul>
 <li class="chapter" data-level="11.1.1" data-path="theme.html"><a href="theme.html#default-grey"><i class="fa fa-check"></i><b>11.1.1</b> Default: Grey</a></li>
 <li class="chapter" data-level="11.1.2" data-path="theme.html"><a href="theme.html#theme-classic"><i class="fa fa-check"></i><b>11.1.2</b> Theme Classic</a></li>
 <li class="chapter" data-level="11.1.3" data-path="theme.html"><a href="theme.html#theme-minimal"><i class="fa fa-check"></i><b>11.1.3</b> Theme Minimal</a></li>
@@ -211,15 +247,18 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.3" data-path="theme.html"><a href="theme.html#building-your-own-theme"><i class="fa fa-check"></i><b>11.3</b> Building your own theme</a></li>
 <li class="chapter" data-level="11.4" data-path="theme.html"><a href="theme.html#more-themes"><i class="fa fa-check"></i><b>11.4</b> More themes</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="using-facets-to-split-up-your-plot.html"><a href="using-facets-to-split-up-your-plot.html"><i class="fa fa-check"></i><b>12</b> Using facets to split up your plot</a><ul>
+<li class="chapter" data-level="12" data-path="using-facets-to-split-up-your-plot.html"><a href="using-facets-to-split-up-your-plot.html"><i class="fa fa-check"></i><b>12</b> Using facets to split up your plot</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="using-facets-to-split-up-your-plot.html"><a href="using-facets-to-split-up-your-plot.html#facetting-by-one-variable"><i class="fa fa-check"></i><b>12.1</b> Facetting by one variable</a></li>
 <li class="chapter" data-level="12.2" data-path="using-facets-to-split-up-your-plot.html"><a href="using-facets-to-split-up-your-plot.html#facetting-by-two-variables"><i class="fa fa-check"></i><b>12.2</b> Facetting by two variables</a></li>
 <li class="chapter" data-level="12.3" data-path="using-facets-to-split-up-your-plot.html"><a href="using-facets-to-split-up-your-plot.html#title-and-axes-components-size-colour-and-face"><i class="fa fa-check"></i><b>12.3</b> Title and axes components: size, colour and face</a></li>
-<li class="chapter" data-level="12.4" data-path="using-facets-to-split-up-your-plot.html"><a href="using-facets-to-split-up-your-plot.html#challenge-3"><i class="fa fa-check"></i><b>12.4</b> Challenge 3</a><ul>
+<li class="chapter" data-level="12.4" data-path="using-facets-to-split-up-your-plot.html"><a href="using-facets-to-split-up-your-plot.html#challenge-3"><i class="fa fa-check"></i><b>12.4</b> Challenge 3</a>
+<ul>
 <li class="chapter" data-level="12.4.1" data-path="using-facets-to-split-up-your-plot.html"><a href="using-facets-to-split-up-your-plot.html#challenge-3-solution"><i class="fa fa-check"></i><b>12.4.1</b> Challenge 3: Solution</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="using-geom_-to-create-different-plots.html"><a href="using-geom_-to-create-different-plots.html"><i class="fa fa-check"></i><b>13</b> Using <code>geom_*()</code> to create different plots</a><ul>
+<li class="chapter" data-level="13" data-path="using-geom_-to-create-different-plots.html"><a href="using-geom_-to-create-different-plots.html"><i class="fa fa-check"></i><b>13</b> Using <code>geom_*()</code> to create different plots</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="using-geom_-to-create-different-plots.html"><a href="using-geom_-to-create-different-plots.html#histograms-geom_histogram"><i class="fa fa-check"></i><b>13.1</b> Histograms: <code>geom_histogram()</code></a></li>
 <li class="chapter" data-level="13.2" data-path="using-geom_-to-create-different-plots.html"><a href="using-geom_-to-create-different-plots.html#scatterplot-and-linear-fit-geom_point-and-geom_smooth"><i class="fa fa-check"></i><b>13.2</b> Scatterplot and linear-fit: <code>geom_point()</code> and <code>geom_smooth()</code></a></li>
 <li class="chapter" data-level="13.3" data-path="using-geom_-to-create-different-plots.html"><a href="using-geom_-to-create-different-plots.html#boxplot-geom_boxplot"><i class="fa fa-check"></i><b>13.3</b> Boxplot: <code>geom_boxplot()</code></a></li>
@@ -231,7 +270,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.9" data-path="using-geom_-to-create-different-plots.html"><a href="using-geom_-to-create-different-plots.html#dendogram-ggdendrogram"><i class="fa fa-check"></i><b>13.9</b> Dendogram: <code>ggdendrogram()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="arrange-plots-patchwork.html"><a href="arrange-plots-patchwork.html"><i class="fa fa-check"></i><b>14</b> Arrange plots: <code>patchwork</code></a></li>
-<li class="chapter" data-level="15" data-path="challenge-4.html"><a href="challenge-4.html"><i class="fa fa-check"></i><b>15</b> Challenge 4</a><ul>
+<li class="chapter" data-level="15" data-path="challenge-4.html"><a href="challenge-4.html"><i class="fa fa-check"></i><b>15</b> Challenge 4</a>
+<ul>
 <li class="chapter" data-level="15.1" data-path="challenge-4.html"><a href="challenge-4.html#challenge-4-solution-example-1"><i class="fa fa-check"></i><b>15.1</b> Challenge 4: Solution example 1</a></li>
 <li class="chapter" data-level="15.2" data-path="challenge-4.html"><a href="challenge-4.html#challenge-4-solution-example-2"><i class="fa fa-check"></i><b>15.2</b> Challenge 4: Solution example 2</a></li>
 </ul></li>
@@ -240,7 +280,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path="saving-your-plots-in-code.html"><a href="saving-your-plots-in-code.html"><i class="fa fa-check"></i><b>17</b> Saving your plots in code</a></li>
 <li class="part"><span><b>Conclusion</b></span></li>
 <li class="chapter" data-level="18" data-path="concluding-remarks.html"><a href="concluding-remarks.html"><i class="fa fa-check"></i><b>18</b> Concluding remarks</a></li>
-<li class="chapter" data-level="19" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>19</b> Additional resources</a><ul>
+<li class="chapter" data-level="19" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>19</b> Additional resources</a>
+<ul>
 <li class="chapter" data-level="19.1" data-path="additional-resources.html"><a href="additional-resources.html#reference-documents"><i class="fa fa-check"></i><b>19.1</b> Reference documents</a></li>
 <li class="chapter" data-level="19.2" data-path="additional-resources.html"><a href="additional-resources.html#books"><i class="fa fa-check"></i><b>19.2</b> Books</a></li>
 <li class="chapter" data-level="19.3" data-path="additional-resources.html"><a href="additional-resources.html#inspiration-and-guides"><i class="fa fa-check"></i><b>19.3</b> Inspiration and guides</a></li>
@@ -286,20 +327,20 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title">Workshop 3: Introduction to data visualisation with <code>ggplot2</code></h1>
 <h2 class="subtitle"><em>QCBS R Workshop Series</em></h2>
 <p class="author"><em>Developed and maintained by the contributors of the QCBS R Workshop Series<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></p>
-<p class="date"><em>2022-11-01 17:19:15</em></p>
+<p class="date"><em>2023-01-13 16:31:26</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered hasAnchor">
 <h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>The <strong>QCBS R Workshop Series</strong> is a series of 10 workshops that walks participants through the steps required to use R for a wide array of statistical analyses relevant to research in biology and ecology. These open-access workshops were created by members of the QCBS both for members of the QCBS and the larger community.</p>
 <p>The content of this workshop has been peer-reviewed by several QCBS members. If you would like to suggest modifications, please contact the current series coordinators, listed on the main Github page.</p>
-<div id="code-of-conduct" class="section level2 hasAnchor">
+<div id="code-of-conduct" class="section level2 hasAnchor" number="0.1">
 <h2><span class="header-section-number">0.1</span> Code of conduct<a href="index.html#code-of-conduct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The QCBS R Workshop Series and the QCBS R Symposium are venues dedicated to providing a welcoming and supportive environment for all people, regardless of background or identity.</p>
 <p>Participants, presenters and organizers of the workshop series and other related activities accept this Code of Conduct when being present at any workshop-related activities.</p>
 <p>We do not tolerate behaviour that is disrespectful or that excludes, intimidates, or causes discomfort to others.</p>
 <p>We do not tolerate discrimination or harassment based on characteristics that include, but are not limited to, gender identity and expression, sexual orientation, disability, physical appearance, body size, citizenship, nationality, ethnic or social origin, pregnancy, familial status, genetic information, religion or belief (or lack thereof), membership of a national minority, property, age, education, socio-economic status, technical choices, and experience level.</p>
 <p>It applies to all spaces managed by or affiliated with the workshop, including, but not limited to, workshops, email lists, and online forums such as GitHub, Slack and Twitter.</p>
-<div id="expected-behaviour" class="section level3 hasAnchor">
+<div id="expected-behaviour" class="section level3 hasAnchor" number="0.1.1">
 <h3><span class="header-section-number">0.1.1</span> Expected behaviour<a href="index.html#expected-behaviour" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>All participants are expected to show respect and courtesy to others. All interactions should be professional regardless of platform: either online or in-person. In order to foster a positive and professional learning environment we encourage the following kinds of behaviours in all workshop events and platforms:</p>
 <ul>
@@ -310,7 +351,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Show courtesy and respect towards other community members</li>
 </ul>
 </div>
-<div id="unacceptable-behaviour" class="section level3 hasAnchor">
+<div id="unacceptable-behaviour" class="section level3 hasAnchor" number="0.1.2">
 <h3><span class="header-section-number">0.1.2</span> Unacceptable behaviour<a href="index.html#unacceptable-behaviour" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Examples of unacceptable behaviour by participants at any workshop event/platform include:</p>
 <ul>
@@ -328,11 +369,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 </div>
-<div id="contributors" class="section level2 hasAnchor">
+<div id="contributors" class="section level2 hasAnchor" number="0.2">
 <h2><span class="header-section-number">0.2</span> Contributors<a href="index.html#contributors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This workshop was originally developed by Xavier Giroux-Bougard, Maxwell Farrell, Amanda Winegardner, Étienne Low-Decarie and Monica Granados.</p>
 <p>Since 2014, several QCBS members contributed to consistently and collaboratively develop and update this workshop, as part of the <em>Learning and Development Award</em> from the Québec Centre for Biodiversity Science. They were:</p>
 <table>
+<colgroup>
+<col width="32%" />
+<col width="32%" />
+<col width="34%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="center">2022 - 2021 - 2020</th>
@@ -374,7 +420,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 </div>
-<div id="contributing" class="section level2 hasAnchor">
+<div id="contributing" class="section level2 hasAnchor" number="0.3">
 <h2><span class="header-section-number">0.3</span> Contributing<a href="index.html#contributing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Under construction.</p>
 
