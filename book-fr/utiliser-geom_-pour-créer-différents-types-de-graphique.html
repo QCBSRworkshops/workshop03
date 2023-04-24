@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 13 Utiliser geom_*() pour créer différents types de graphique | Atelier 3: Introduction à la visualisation de données avec ggplot2</title>
   <meta name="description" content="Introduction à ggplot2" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 13 Utiliser geom_*() pour créer différents types de graphique | Atelier 3: Introduction à la visualisation de données avec ggplot2" />
   <meta property="og:type" content="book" />
@@ -368,7 +368,10 @@ Figure 13.1: Composition d’un diagramme en boîte by <a href="https://www.lean
 <p>Comparons un diagramme en boîte et un diagramme en violon sur des données générées. Remarquez comment le diagramme en violon <em>montre</em> l’étendue <strong>et</strong> la variabilité de nos données, alors que le diagramme en boîte ne peut pas communiquer ces deux éléments de manière aussi intuitive.</p>
 <div class="split">
 <div class="split-left">
-<pre><code>## Warning: `qplot()` was deprecated in ggplot2 3.4.0.</code></pre>
+<pre><code>## Warning: `qplot()` was deprecated in ggplot2 3.4.0.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
 </div>
 <div class="split-right">
@@ -430,7 +433,7 @@ Figure 13.1: Composition d’un diagramme en boîte by <a href="https://www.lean
 <span id="cb75-4"><a href="utiliser-geom_-pour-créer-différents-types-de-graphique.html#cb75-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="fl">1.6</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Moyennes et intervalles de confiance&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning: Computation failed in `stat_summary()`
 ## Caused by error in `fun.data()`:
-## ! The package `Hmisc` is required.</code></pre>
+## ! The package &quot;Hmisc&quot; is required.</code></pre>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
 <p>Voir aussi <code>geom_errorbar()</code>, <code>geom_pointrange()</code>, <code>geom_linerange()</code>, <code>geom_crossbar()</code> afficher d’autres statistiques pour résumer vos données.</p>
 </div>
